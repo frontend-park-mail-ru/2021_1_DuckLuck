@@ -2,8 +2,7 @@ import {ProfilePage} from './views/ProfilePage/ProfilePage.js';
 import {LoginPage} from "./views/LoginPage/LoginPage.js";
 import {SignupPage} from "./views/SignupPage/SignupPage.js";
 import {HomePage} from "./views/HomePage/HomePage.js";
-
-const {ajaxPutUsingFetch, ajaxDeleteUsingFetch, ajaxPostUsingFetch, ajaxGetUsingFetch} = globalThis.AjaxModule;
+import {AjaxModule} from "./modules/Ajax/Ajax.js";
 
 const application = document.getElementById('app');
 
@@ -51,7 +50,7 @@ function signupPage() {
         const password = passwordInput.value.trim();
         const age = +ageInput.value;
 
-        ajaxPostUsingFetch({
+        AjaxModule.ajaxPostUsingFetch({
             url: '/signup',
             body: {email, password, age},
         })
@@ -77,7 +76,7 @@ function loginPage() {
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
 
-        ajaxPostUsingFetch({
+        AjaxModule.ajaxPostUsingFetch({
             url: '/login',
             body: {email, password},
         })
@@ -98,7 +97,7 @@ function loginPage() {
 function profilePage() {
     application.innerHTML = '';
 
-    ajaxGetUsingFetch({
+    AjaxModule.ajaxGetUsingFetch({
         url: '/me',
         body: null
     })
