@@ -1,21 +1,21 @@
 export class AjaxModule {
-    ajaxGetUsingFetch = (ajaxArgs) => {
-        return this.#ajaxUsingFetch({method: 'GET', ...ajaxArgs});
+    getUsingFetch = (ajaxArgs) => {
+        return this.#usingFetch({method: 'GET', ...ajaxArgs});
     }
 
-    ajaxPostUsingFetch = (ajaxArgs) => {
-        return this.#ajaxUsingFetch({method: 'POST', ...ajaxArgs});
+    postUsingFetch = (ajaxArgs) => {
+        return this.#usingFetch({method: 'POST', ...ajaxArgs});
     }
 
-    ajaxDeleteUsingFetch = (ajaxArgs) => {
-        return this.#ajaxUsingFetch({method: 'DELETE', ...ajaxArgs});
+    deleteUsingFetch = (ajaxArgs) => {
+        return this.#usingFetch({method: 'DELETE', ...ajaxArgs});
     }
 
-    ajaxPutUsingFetch = (ajaxArgs) => {
-        return this.#ajaxUsingFetch({method: 'PUT', ...ajaxArgs});
+    putUsingFetch = (ajaxArgs) => {
+        return this.#usingFetch({method: 'PUT', ...ajaxArgs});
     }
 
-    #ajaxUsingFetch = async (ajaxArgs) => {
+    #usingFetch = async (ajaxArgs) => {
         const response = await fetch (ajaxArgs.url, {
             method: ajaxArgs.method,
             body: (ajaxArgs.body) ? JSON.stringify(ajaxArgs.body) : null,

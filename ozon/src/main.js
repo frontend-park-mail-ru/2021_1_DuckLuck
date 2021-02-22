@@ -50,7 +50,7 @@ function signupPage() {
         const password = passwordInput.value.trim();
         const age = +ageInput.value;
 
-        AjaxModule.ajaxPostUsingFetch({
+        AjaxModule.postUsingFetch({
             url: '/signup',
             body: {email, password, age},
         })
@@ -76,7 +76,7 @@ function loginPage() {
         const email = emailInput.value.trim();
         const password = passwordInput.value.trim();
 
-        AjaxModule.ajaxPostUsingFetch({
+        AjaxModule.postUsingFetch({
             url: '/login',
             body: {email, password},
         })
@@ -97,7 +97,7 @@ function loginPage() {
 function profilePage() {
     application.innerHTML = '';
 
-    AjaxModule.ajaxGetUsingFetch({
+    AjaxModule.getUsingFetch({
         url: '/me',
         body: null
     })
