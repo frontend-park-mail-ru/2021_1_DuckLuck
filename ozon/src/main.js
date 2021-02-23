@@ -10,33 +10,29 @@ const config = {
     menu: {
         href: '/',
         text: 'Главная',
-        open: homePage,
     },
     signup: {
         href: '/signup',
         text: 'Зарегистрироваться',
-        open: signupPage,
     },
     login: {
         href: '/login',
         text: 'Авторизоваться',
-        open: loginPage,
     },
     profile: {
         href: '/profile',
         text: 'Профиль',
-        open: profilePage,
     },
 };
 
-function homePage() {
+config.menu.open = () => {
     application.innerHTML = '';
 
     const page = new HomePage(application);
     page.render(config);
 }
 
-function signupPage() {
+config.signup.open = () => {
     application.innerHTML = '';
     const page = new SignupPage(application);
     const form = page.render();
@@ -56,7 +52,7 @@ function signupPage() {
         })
             .then(({statusCode, responseObject}) => {
                 if (statusCode === 201) {
-                    profilePage();
+                    config.profile.open();
                 } else {
                     const {error} = responseObject;
                     alert(error);
@@ -65,7 +61,7 @@ function signupPage() {
     });
 }
 
-function loginPage() {
+config.signup.open = () => {
     application.innerHTML = '';
     const page = new LoginPage(application);
     const form = page.render();
@@ -82,7 +78,7 @@ function loginPage() {
         })
             .then(({statusCode, responseObject}) => {
                 if (statusCode === 200) {
-                    profilePage();
+                    config.profile.open();
                 } else {
                     const {error} = responseObject;
                     alert(error);
@@ -94,7 +90,7 @@ function loginPage() {
     application.appendChild(form);
 }
 
-function profilePage() {
+config.profile.open = () => {
     application.innerHTML = '';
 
     AjaxModule.getUsingFetch({
@@ -112,7 +108,7 @@ function profilePage() {
             }
             const {statusCode, responseObject} = err;
             alert(`Нет авторизации ${JSON.stringify({status, responseObject})}`);
-            loginPage();
+            config.login.open();
         });
 }
 
@@ -125,4 +121,4 @@ application.addEventListener('click', (evt) => {
     }
 });
 
-homePage();
+config.menu.open();
