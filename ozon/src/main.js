@@ -53,7 +53,7 @@ config.signup.open = () => {
                     config.profile.open();
                 } else {
                     const {error} = responseObject;
-                    alert(error);
+                    console.log(error);
                 }
             });
     });
@@ -79,7 +79,7 @@ config.login.open = () => {
                     config.profile.open();
                 } else {
                     const {error} = responseObject;
-                    alert(error);
+                    console.log(error);
                 }
             })
     });
@@ -100,11 +100,11 @@ config.me.open = () => {
             profile.data = responseObject;
             profile.render();
         })
-        .catch((err) => {
-            if (err instanceof Error) {
-                // handle JSON.parse error
+        .catch((error) => {
+            if (error instanceof Error) {
+                console.log(error);
             }
-            const {statusCode, responseObject} = err;
+            const {statusCode, responseObject} = error;
             alert(`Нет авторизации ${JSON.stringify({status, responseObject})}`);
             config.login.open();
         });
