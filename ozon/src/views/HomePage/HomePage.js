@@ -1,21 +1,8 @@
 import {BasePage} from "../BasePage.js";
 
 export class HomePage extends BasePage {
-    #parent;
-    #data;
-
     constructor(parent) {
-        super ();
-        this.#parent = parent;
-        this.#data = {};
-    }
-
-    get data() {
-        return this.#data;
-    }
-
-    set data(data) {
-        this.#data = data;
+        super(parent);
     }
 
     render = (config) => {
@@ -32,7 +19,7 @@ export class HomePage extends BasePage {
                 return menuItem;
             })
             .forEach((element) => {
-                this.#parent.appendChild(element);
+                this._parent.appendChild(element);
             })
         ;
     }

@@ -1,21 +1,8 @@
 import {BasePage} from "../BasePage.js";
 
 export class SignupPage extends BasePage {
-    #parent;
-    #data;
-
     constructor(parent) {
-        super ();
-        this.#parent = parent;
-        this.#data = {};
-    }
-
-    get data() {
-        return this.#data;
-    }
-
-    set data(data) {
-        this.#data = data;
+        super(parent);
     }
 
     render = () => {
@@ -41,9 +28,9 @@ export class SignupPage extends BasePage {
         submitBtn.value = 'Зарегистрироваться!';
 
         const back = document.createElement('a');
-        back.href = '/menu';
-        back.textContent = 'Назад';
-        back.dataset.section = 'menu';
+        back.href = '/home';
+        back.textContent = 'Главная страница';
+        back.dataset.section = 'home';
 
         form.appendChild(emailInput);
         form.appendChild(passwordInput);
