@@ -1,21 +1,21 @@
 export class AjaxModule {
-    getUsingFetch = (ajaxArgs) => {
+    static getUsingFetch = (ajaxArgs) => {
         return this.#usingFetch({method: 'GET', ...ajaxArgs});
     }
 
-    postUsingFetch = (ajaxArgs) => {
+    static postUsingFetch = (ajaxArgs) => {
         return this.#usingFetch({method: 'POST', ...ajaxArgs});
     }
 
-    deleteUsingFetch = (ajaxArgs) => {
+    static deleteUsingFetch = (ajaxArgs) => {
         return this.#usingFetch({method: 'DELETE', ...ajaxArgs});
     }
 
-    putUsingFetch = (ajaxArgs) => {
+    static putUsingFetch = (ajaxArgs) => {
         return this.#usingFetch({method: 'PUT', ...ajaxArgs});
     }
 
-    #usingFetch = async (ajaxArgs) => {
+    static #usingFetch = async (ajaxArgs) => {
         const response = await fetch (ajaxArgs.url, {
             method: ajaxArgs.method,
             body: (ajaxArgs.body) ? JSON.stringify(ajaxArgs.body) : null,
