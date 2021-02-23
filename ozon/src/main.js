@@ -40,19 +40,19 @@ config.signup.open = () => {
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
-        const age = +ageInput.value;
+        const email = form.elements['Емайл'].value.trim();
+        const password = form.elements['Пароль'].value.trim();
+        const age = form.elements['Возраст'].valueAsNumber;
 
         AjaxModule.postUsingFetch({
             url: '/signup',
             body: {email, password, age},
         })
-            .then(({statusCode, responseObject}) => {
-                if (statusCode === 201) {
-                    config.profile.open();
+            .then((response) => {
+                if (response.status === 201) {
+                    config.me.open();
                 } else {
-                    const {error} = responseObject;
+                    const {error} = response;
                     console.log(error);
                 }
             });
@@ -67,18 +67,18 @@ config.login.open = () => {
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
+        const email = form.elements['Емайл'].value.trim();
+        const password = form.elements['Пароль'].value.trim();
 
         AjaxModule.postUsingFetch({
             url: '/login',
             body: {email, password},
         })
-            .then(({statusCode, responseObject}) => {
-                if (statusCode === 200) {
-                    config.profile.open();
+            .then((response) => {
+                if (response.status === 200) {
+                    config.me.open();
                 } else {
-                    const {error} = responseObject;
+                    const {error} = response;
                     console.log(error);
                 }
             })
@@ -91,14 +91,19 @@ config.login.open = () => {
 config.me.open = () => {
     application.innerHTML = '';
 
+    let profile = null;
     AjaxModule.getUsingFetch({
         url: '/me',
         body: null
     })
-        .then(({statusCode, responseObject}) => {
-            const profile = new ProfilePage(application);
-            profile.data = responseObject;
+        .then((response) => {
+            profile = new ProfilePage(application);
             profile.render();
+            return response.json();
+        })
+        .then((data) => {
+            profile.data = data;
+            profile.renderData();
         })
         .catch((error) => {
             if (error instanceof Error) {

@@ -16,20 +16,14 @@ export class AjaxModule {
     }
 
     static #usingFetch = async (ajaxArgs) => {
-        const response = await fetch (ajaxArgs.url, {
+        return await fetch (ajaxArgs.url, {
             method: ajaxArgs.method,
-            body: (ajaxArgs.body) ? JSON.stringify(ajaxArgs.body) : null,
+            body: (ajaxArgs.body) ? JSON.stringify (ajaxArgs.body) : null,
             credentials: 'include',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
             }
         });
-
-        const parsedJsonObject = await response.json();
-        return {
-            statusCode: response.status,
-            responseObject: parsedJsonObject,
-        };
     }
 }

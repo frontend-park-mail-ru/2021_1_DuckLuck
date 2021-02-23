@@ -6,10 +6,9 @@ export class ProfilePage extends BasePage {
     }
 
     render = () => {
-        const {age, score, images} = this.data;
         const span = document.createElement('span');
-        span.textContent = `Мне ${age} и я крутой на ${score} очков`;
         span.classList.add('profile_text');
+        span.id = 'user_data';
         this._parent.appendChild(span);
 
         const back = document.createElement('a');
@@ -18,14 +17,11 @@ export class ProfilePage extends BasePage {
         back.dataset.section = 'home';
 
         this._parent.appendChild(back);
+    }
 
-        if (images && Array.isArray(images)) {
-            const div = document.createElement('div');
-            this._parent.appendChild(div);
-
-            images.forEach((imageSrc) => {
-                div.innerHTML += `<img src="${imageSrc}" />`;
-            });
-        }
+    renderData = () => {
+        const {age, score, images} = this.data;
+        const span = document.getElementById('user_data');
+        span.textContent = `Мне ${age} и я крутой на ${score} очков`;
     }
 }
