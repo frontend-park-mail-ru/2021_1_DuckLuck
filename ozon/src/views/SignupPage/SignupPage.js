@@ -37,6 +37,7 @@ export class SignupPage extends BasePage {
         form.appendChild(ageInput);
         form.appendChild(submitBtn);
         form.appendChild(back);
+        this._parent.appendChild(form);
 
         return form;
     }

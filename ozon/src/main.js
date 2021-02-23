@@ -7,8 +7,8 @@ import {AjaxModule} from "./modules/Ajax/Ajax.js";
 const application = document.getElementById('app');
 
 const config = {
-    menu: {
-        href: '/',
+    home: {
+        href: '/home',
         text: 'Главная',
     },
     signup: {
@@ -19,13 +19,13 @@ const config = {
         href: '/login',
         text: 'Авторизоваться',
     },
-    profile: {
-        href: '/profile',
+    me: {
+        href: '/me',
         text: 'Профиль',
     },
 };
 
-config.menu.open = () => {
+config.home.open = () => {
     application.innerHTML = '';
 
     const page = new HomePage(application);
@@ -36,8 +36,6 @@ config.signup.open = () => {
     application.innerHTML = '';
     const page = new SignupPage(application);
     const form = page.render();
-
-    application.appendChild(form);
 
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
@@ -61,7 +59,7 @@ config.signup.open = () => {
     });
 }
 
-config.signup.open = () => {
+config.login.open = () => {
     application.innerHTML = '';
     const page = new LoginPage(application);
     const form = page.render();
@@ -90,7 +88,7 @@ config.signup.open = () => {
     application.appendChild(form);
 }
 
-config.profile.open = () => {
+config.me.open = () => {
     application.innerHTML = '';
 
     AjaxModule.getUsingFetch({
@@ -121,4 +119,4 @@ application.addEventListener('click', (evt) => {
     }
 });
 
-config.menu.open();
+config.home.open();
