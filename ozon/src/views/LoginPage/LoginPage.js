@@ -31,6 +31,7 @@ export class LoginPage extends BasePage {
         form.appendChild(passwordInput);
         form.appendChild(submitBtn);
         form.appendChild(back);
+        this._parent.appendChild(form);
 
         return form;
     }
