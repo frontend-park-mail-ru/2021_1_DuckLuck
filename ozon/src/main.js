@@ -91,18 +91,14 @@ config.login.open = () => {
 config.me.open = () => {
     application.innerHTML = '';
 
-    let profile = null;
+	profile = new ProfilePage(application);
+	profile.render();
     AjaxModule.getUsingFetch({
         url: '/me',
         body: null
     })
         .then((response) => {
-            profile = new ProfilePage(application);
-            profile.render();
-            return response.json();
-        })
-        .then((data) => {
-            profile.data = data;
+            profile.data = response.json();
             profile.renderData();
         })
         .catch((error) => {
