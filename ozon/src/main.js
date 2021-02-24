@@ -91,8 +91,8 @@ config.login.open = () => {
 config.me.open = () => {
     application.innerHTML = '';
 
-	profile = new ProfilePage(application);
-	profile.render();
+    const profile = new ProfilePage(application);
+    profile.render();
     AjaxModule.getUsingFetch({
         url: '/me',
         body: null
