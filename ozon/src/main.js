@@ -40,9 +40,13 @@ config.signup.open = () => {
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = form.elements['Емайл'].value.trim();
-        const password = form.elements['Пароль'].value.trim();
-        const age = form.elements['Возраст'].valueAsNumber;
+        console.log(document.getElementsByName('Pass'))
+        console.log(document.getElementsByName('Age'))
+
+        // TODO: Can i get values here by another way?
+        const email = document.getElementsByName('Email')[0].value.trim();
+        const password = document.getElementsByName('Pass')[0].value.trim();
+        const age = document.getElementsByName('Age')[0].value.valueAsNumber;
 
         AjaxModule.postUsingFetch({
             url: '/signup',
