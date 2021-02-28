@@ -1,8 +1,11 @@
- export class Link {
+import {Base} from "./Base.js"
+
+export class Link extends Base {
     constructor({href = '/home',
-                textContent = '',
-                dataset = '',
-                } = {}) {
+            textContent = '',
+            dataset = '',
+            } = {}) {
+        super({})
         this.href = href;
         this.textContent = textContent;
         this.section = dataset;
