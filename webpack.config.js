@@ -1,7 +1,5 @@
 const path = require('path')
-            // loader: __dirname + "/../../?helperDirs[]=" + __dirname + "/helpers",
 
-console.log("DIR IS" + __dirname)
 module.exports = {
     entry: ["regenerator-runtime/runtime.js", "./ozon/src/main.js"],
     output: {

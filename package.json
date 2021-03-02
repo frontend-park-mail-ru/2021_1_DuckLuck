@@ -5,7 +5,8 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "./node_modules/.bin/webpack --watch & node --experimental-modules ozon/server/index.mjs"
+    "start": "node --experimental-modules ozon/server/index.mjs",
+    "start-dev": "webpack-cli --watch & node --experimental-modules ozon/server/index.mjs"
   },
   "keywords": [],
   "author": "",
