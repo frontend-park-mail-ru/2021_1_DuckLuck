@@ -1,6 +1,7 @@
 const path = require('path')
             // loader: __dirname + "/../../?helperDirs[]=" + __dirname + "/helpers",
 
+console.log("DIR IS" + __dirname)
 module.exports = {
     entry: ["regenerator-runtime/runtime.js", "./ozon/src/main.js"],
     output: {
@@ -11,6 +12,9 @@ module.exports = {
         rules: [ {
             test: /\.hbs$/,
             loader: 'handlebars-loader',
+            options: {
+                helperDirs: [path.join(__dirname, '/ozon/src/utils/hbs-helpers')],
+            },
             exclude: /(node_modules)/
         },
         {
@@ -28,6 +32,6 @@ module.exports = {
                 }
             }
         }
-        ]
+        ],
     }
 }
