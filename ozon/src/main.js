@@ -40,9 +40,9 @@ config.signup.open = () => {
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = form.elements['Емайл'].value.trim();
-        const password = form.elements['Пароль'].value.trim();
-        const age = form.elements['Возраст'].valueAsNumber;
+        const email = document.getElementsByName('Email')[0].value.trim();
+        const password = document.getElementsByName('Pass')[0].value.trim();
+        const age = document.getElementsByName('Age')[0].value.valueAsNumber;
 
         AjaxModule.postUsingFetch({
             url: '/signup',
