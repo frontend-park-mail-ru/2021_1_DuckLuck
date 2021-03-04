@@ -2,6 +2,7 @@ const path = require('path')
 
 module.exports = {
     entry: ["regenerator-runtime/runtime.js", "./ozon/src/main.js"],
+    mode: "development",
     output: {
         filename: "bundle.js",
         path: path.resolve(__dirname, './ozon/src/dist'),

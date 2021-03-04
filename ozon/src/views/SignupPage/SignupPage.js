@@ -2,7 +2,7 @@ import {BasePage} from "../BasePage.js";
 import {Input} from "../Common/Input.js";
 import {Link} from "../Common/Link.js";
 
-import SignupT from "./SignupPage.hbs"
+import SignupTemplate from "./SignupPage.hbs"
 
 export class SignupPage extends BasePage {
     constructor(parent) {
@@ -20,7 +20,7 @@ export class SignupPage extends BasePage {
             new Link({href: '/home', textContent: 'Главная страница', dataset: 'home'})
         ]
 
-        form.innerHTML = SignupT({objects: objectsToRender})
+        form.innerHTML = SignupTemplate({objects: objectsToRender})
 
         this._parent.appendChild(form);
 

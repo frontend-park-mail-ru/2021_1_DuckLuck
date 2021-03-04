@@ -3,10 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
-  "type": "module",
   "scripts": {
-    "start": "webpack-cli & node ozon/server/index.js",
-    "start-dev": "webpack-cli --watch & node ozon/server/index.js"
+    "start": "webpack && node ozon/server/index.mjs",
+    "start-dev": "webpack --watch && node ozon/server/index.mjs"
   },
   "keywords": [],
   "author": "",
