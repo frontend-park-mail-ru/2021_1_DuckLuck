@@ -1,4 +1,9 @@
 import {BasePage} from "../BasePage.js";
+import {Input} from "../Common/Input/Input.js";
+import {Button} from "../Common/Button/Button.js";
+import {Link} from "../Common/Link/Link.js";
+
+import LoginTemplate from "./LoginPage.hbs"
 
 export class LoginPage extends BasePage {
     constructor(parent) {
@@ -6,33 +11,23 @@ export class LoginPage extends BasePage {
     }
 
     render = () => {
-        const form = document.createElement('form');
+        const div = document.createElement('div');
+        div.className = 'login-block';
+        const inputFields = [
+            new Input({type: 'text', name: "email", placeholder: 'Email address'}),
+            new Input({type: 'password', name: 'password', placeholder: 'Password'}),
+        ]
+        const forgotPassLink = new Link();
+        const loginButton = new Button();
 
-        const emailInput = document.createElement('input');
-        emailInput.type = 'email';
-        emailInput.name = 'Емайл';
-        emailInput.placeholder = 'email';
+        div.innerHTML = LoginTemplate({
+            inputFields: inputFields,
+            forgotPassLink: forgotPassLink,
+            loginButton: loginButton
+        });
 
-        const passwordInput = document.createElement('input');
-        passwordInput.type = 'password';
-        passwordInput.name = 'Пароль';
-        passwordInput.placeholder = 'password';
+        this._parent.appendChild(div);
 
-        const submitBtn = document.createElement('input');
-        submitBtn.type = 'submit';
-        submitBtn.value = 'Авторизироваться!';
-
-        const back = document.createElement('a');
-        back.href = '/home';
-        back.textContent = 'Главная страница';
-        back.dataset.section = 'home';
-
-        form.appendChild(emailInput);
-        form.appendChild(passwordInput);
-        form.appendChild(submitBtn);
-        form.appendChild(back);
-        this._parent.appendChild(form);
-
-        return form;
+        return div;
     }
 }

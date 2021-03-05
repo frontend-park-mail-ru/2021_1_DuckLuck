@@ -1,0 +1,15 @@
+.form-body__input-block {
+    width: 383px;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 20px;
+    padding-left: 14px;
+
+    border-radius: 10px;
+    border: 0 none;
+
+    font-family: Nunito;
+    font-size: 16px;
+    color: gray;
+    background: rgba(223,222,222,1);
+}

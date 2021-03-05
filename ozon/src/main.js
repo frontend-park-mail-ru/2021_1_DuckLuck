@@ -60,15 +60,15 @@ config.signup.open = () => {
 }
 
 config.login.open = () => {
-    application.innerHTML = '';
+    // application.innerHTML = '';
     const page = new LoginPage(application);
     const form = page.render();
 
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = form.elements['Емайл'].value.trim();
-        const password = form.elements['Пароль'].value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
             url: '/login',
