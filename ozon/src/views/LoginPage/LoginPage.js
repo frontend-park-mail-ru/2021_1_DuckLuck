@@ -11,10 +11,6 @@ export class LoginPage extends BasePage {
     }
 
     render = () => {
-        const blind = document.createElement('div');
-        blind.className = 'blind';
-        this._parent.appendChild(blind);
-
         const div = document.createElement('div');
         div.className = 'login-block';
         const inputFields = [
@@ -29,6 +25,14 @@ export class LoginPage extends BasePage {
             forgotPassLink: forgotPassLink,
             loginButton: loginButton
         });
+
+        const blind = document.createElement('div');
+        blind.className = 'blind';
+        blind.addEventListener('click', (evt) => {
+            this._parent.removeChild(div);
+            this._parent.removeChild(blind);
+        });
+        this._parent.appendChild(blind);
 
         this._parent.appendChild(div);
 
