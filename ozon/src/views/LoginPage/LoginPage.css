@@ -1,5 +1,5 @@
 .login-block {
-    z-index: 5;
+    z-index: 1003;
     left: 50%;
     top: 50%;
     margin-left: -279px;
@@ -7,9 +7,9 @@
     position: absolute;
     width: 557px;
     height: 602px;
-    border: 5px dashed black;
     border-radius: 10px;
     background: white;
+    opacity: 1;
 }
 
 .form-header {

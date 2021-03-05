@@ -11,6 +11,10 @@ export class LoginPage extends BasePage {
     }
 
     render = () => {
+        const blind = document.createElement('div');
+        blind.className = 'blind';
+        this._parent.appendChild(blind);
+
         const div = document.createElement('div');
         div.className = 'login-block';
         const inputFields = [
