@@ -22,7 +22,7 @@ export class LoginPage extends BasePage {
             forgotPassLink: forgotPassLink,
             loginButton: loginButton
         });
-        let html = new DOMParser().parseFromString(template, 'text/html').getElementById('login-block');
+        const html = new DOMParser().parseFromString(template, 'text/html').getElementById('login-block');
 
         const blind = document.createElement('div');
         blind.className = 'blind';
