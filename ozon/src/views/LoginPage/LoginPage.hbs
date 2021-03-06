@@ -1,30 +1,32 @@
-<div class="form-header">
-    <h1 class="form-header__head-item">
-        <a href="" class="link link_weight-h1">
-            <span class="text">Registration</span>
-        </a>
-    </h1>
-    <h1 class="form-header__head-item">
-        <a href="" class="link link_weight-h1">
-            <span class="text">Log in</span>
-        </a>
-    </h1>
-    <div class="line line_form-header"></div>
-</div>
+<div class="login-block" id="login-block">
+    <div class="form-header">
+        <h1 class="form-header__head-item">
+            <a href="" class="link link_weight-h1">
+                <span class="text">Registration</span>
+            </a>
+        </h1>
+        <h1 class="form-header__head-item">
+            <a href="" class="link link_weight-h1">
+                <span class="text">Log in</span>
+            </a>
+        </h1>
+        <div class="line line_form-header"></div>
+    </div>
 
-<div class="form-body">
-    <form action="">
-        {{#each inputFields}}
-            <input type={{this.type}} class="form-body__input-block" id={{this.name}} placeholder={{this.placeholder}}>
-            {{#ifEquals this.type "password"}}
-                <label for="password">
-                    <a href="{{forgotPassLink.href}}" class="link form-body__link">Forgot password?</a>
-                </label>
-            {{/ifEquals}}
-        {{/each}}
-        <br>
-        <button class="button button_login" type="submit">
-            <span class="text">Log in</span>
-        </button>
-    </form>
+    <div class="form-body">
+        <form action="">
+            {{#each inputFields}}
+                <input type={{this.type}} class="form-body__input-block" id={{this.name}} placeholder={{this.placeholder}}>
+                {{#ifEquals this.type "password"}}
+                    <label for="password">
+                        <a href="{{forgotPassLink.href}}" class="link form-body__link">Forgot password?</a>
+                    </label>
+                {{/ifEquals}}
+            {{/each}}
+            <br>
+            <button class="button button_login" type="submit">
+                <span class="text">Log in</span>
+            </button>
+        </form>
+    </div>
 </div>
