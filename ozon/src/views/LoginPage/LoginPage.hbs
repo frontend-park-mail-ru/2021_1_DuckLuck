@@ -16,10 +16,12 @@
     <form action="">
         {{#each inputFields}}
             <input type={{this.type}} class="form-body__input-block" id={{this.name}} placeholder={{this.placeholder}}>
+            {{#ifEquals this.type "password"}}
+                <label for="password">
+                    <a href="{{forgotPassLink.href}}" class="link form-body__link">Forgot password?</a>
+                </label>
+            {{/ifEquals}}
         {{/each}}
-        <label for="password">
-            <a href="{{forgotPassLink.href}}" class="link form-body__link">Forgot password?</a>
-        </label>
         <br>
         <button class="button button_login" type="submit">
             <span class="text">Log in</span>
