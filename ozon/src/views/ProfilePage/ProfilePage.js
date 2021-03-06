@@ -1,4 +1,10 @@
 import {BasePage} from "../BasePage.js";
+import {Input} from "../Common/Input/Input.js";
+import {Button} from "../Common/Button/Button.js";
+import {Link} from "../Common/Link.js";
+import {TextArea} from "../Common/TextArea/TextArea.js";
+import ProfileTemplate from "./ProfilePage.hbs"
+import SignupTemplate from "../SignupPage/SignupPage.hbs";
 
 export class ProfilePage extends BasePage {
     constructor(parent) {
@@ -6,22 +12,52 @@ export class ProfilePage extends BasePage {
     }
 
     render = () => {
-        const span = document.createElement('span');
-        span.classList.add('profile_text');
-        span.id = 'user_data';
-        this._parent.appendChild(span);
+        const form = document.createElement('form');
 
-        const back = document.createElement('a');
-        back.href = '/home';
-        back.textContent = 'Главная страница';
-        back.dataset.section = 'home';
+        const inputFields = [
+            new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
+            new Input({type: 'email', name: 'email', placeholder: 'Email address'}),
+            new Input({type: 'text', name: 'lastName', placeholder: 'Last name'}),
+            new Input({type: 'tel', name: 'mobilePhone', placeholder: 'Mobile phone'}),
+        ];
 
-        this._parent.appendChild(back);
+        const addressField = new TextArea({name: 'address', cols: 47, rows: 10});
+
+        const forgotPassLink = new Link();
+        const saveButton = new Button();
+
+        // const html = new DOMParser().parseFromString(template, 'text/html').getElementById('login-block');
+
+        // const blind = document.createElement('div');
+        // blind.className = 'blind';
+        // blind.addEventListener('click', (evt) => {
+        //     this._parent.removeChild(html);
+        //     this._parent.removeChild(blind);
+        // });
+        // this._parent.appendChild(blind);
+
+        form.innerHTML = ProfileTemplate({
+            inputFields: inputFields,
+            forgotPassLink: forgotPassLink,
+            saveButton: saveButton,
+            backLink: new Link({href: '/home', textContent: '<', dataset: 'home'}),
+            addressField: addressField,
+        });
+        this._parent.appendChild(form);
+
+        return form;
     }
 
+
     renderData = () => {
-        const {age, score, images} = this.data;
-        const span = document.getElementById('user_data');
-        span.textContent = `Мне ${age} и я крутой на ${score} очков`;
+        const {firstName, email, lastName, mobilePhone} = this.data;
+        const firstNameInput = document.getElementsByName('firstName')[0];
+        firstNameInput.placeholder = firstName;
+        const emailInput = document.getElementsByName('email')[0];
+        emailInput.placeholder = email;
+        const lastNameInput = document.getElementsByName('lastName')[0];
+        lastNameInput.placeholder = lastName;
+        const mobilePhoneInput = document.getElementsByName('mobilePhone')[0];
+        mobilePhoneInput.placeholder = mobilePhone;
     }
 }

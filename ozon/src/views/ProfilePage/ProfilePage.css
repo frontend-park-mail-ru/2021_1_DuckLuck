@@ -1,3 +1,126 @@
 .profile_text {
     color: #008b5f;
 }
+
+.profile-page {
+    position: absolute;
+    width: 700px;
+    height: 1000px;
+
+    background: #FFFFFF;
+    border-radius: 10px;
+}
+
+.footer-link {
+    position: absolute;
+    width: 250px;
+    height: 50px;
+
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+    display: flex;
+    align-items: flex-end;
+    text-transform: capitalize;
+    color: rgba(64, 191, 255, 1);
+}
+
+.footer-text {
+    position: absolute;
+    left: 250px;
+    width: 250px;
+    height: 50px;
+
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 32px;
+    line-height: 38px;
+    display: flex;
+    align-items: flex-end;
+    text-transform: capitalize;
+    color: rgba(64, 191, 255, 1);
+}
+
+.profile-header {
+    display: flex;
+    width: 549px;
+    height: 70px;
+    padding-left: 110px;
+    padding-top: 1px;
+}
+
+.profile-header__head-item {
+    margin-right: 100px;
+}
+
+.profile-body {
+    width: 557px;
+    height: 318px;
+}
+
+.profile-body__input-block {
+    width: 187px;
+    height: 52px;
+    cursor: pointer;
+    font-family: Raleway;
+    font-weight: 600;
+    font-size: 32px;
+    opacity: 1;
+    text-align: left;
+}
+
+.profile-body__input-text {
+    width: 100px;
+    display: inline-block;
+
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    align-items: center;
+    letter-spacing: -0.02em;
+
+    /* gray */
+
+    color: #999999;
+}
+
+.profile-page-body__textarea-block {
+    margin-left: 100px;
+    background: #DFDEDE;
+    opacity: 0.3;
+    border-radius: 10px;
+    resize: none;
+}
+
+.profile-body__text-delivery {
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    /* identical to box height */
+
+    align-items: center;
+    letter-spacing: -0.02em;
+
+    /* gray */
+
+    color: #999999;
+
+    margin-left: 100px;
+}
+
+.profile-body__img-avatar {
+    margin-left: 100px;
+    width: 184px;
+    height: 184px;
+
+    border-radius: 5px;
+}

@@ -42,7 +42,8 @@ config.signup.open = () => {
 
         const email = document.getElementsByName('Email')[0].value.trim();
         const password = document.getElementsByName('Pass')[0].value.trim();
-        const age = document.getElementsByName('Age')[0].value.valueAsNumber;
+        const age = document.getElementsByName('Age')[0].value;
+
 
         AjaxModule.postUsingFetch({
             url: '/signup',
@@ -93,6 +94,7 @@ config.me.open = () => {
 
     const profile = new ProfilePage(application);
     profile.render();
+
     AjaxModule.getUsingFetch({
         url: '/me',
         body: null
