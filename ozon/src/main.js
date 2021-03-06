@@ -61,8 +61,8 @@ config.signup.open = () => {
 
 config.login.open = () => {
     // application.innerHTML = '';
-    const page = new LoginPage(application);
-    const form = page.render();
+    const blind = new LoginPage(application).render();
+    const form = blind.getElementsByClassName('form-body')[0];
 
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
@@ -84,8 +84,7 @@ config.login.open = () => {
             })
     });
 
-
-    application.appendChild(form);
+    application.appendChild(blind);
 }
 
 config.me.open = () => {

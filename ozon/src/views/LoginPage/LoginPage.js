@@ -22,16 +22,6 @@ export class LoginPage extends BasePage {
             forgotPassLink: forgotPassLink,
             loginButton: loginButton
         });
-        const html = new DOMParser().parseFromString(template, 'text/html').getElementById('login-block');
-
-        const blind = document.createElement('div');
-        blind.className = 'blind';
-        blind.addEventListener('click', (evt) => {
-            this._parent.removeChild(html);
-            this._parent.removeChild(blind);
-        });
-        this._parent.appendChild(blind);
-
-        return html;
+        return new DOMParser().parseFromString(template, 'text/html').getElementById('blind');
     }
 }
