@@ -1,26 +1,26 @@
 <div class="profile-page" id="profile-page">
     <div class="profile-header">
-        <h1 class="profile-header__head-item">
-            <a class='footer-link' href={{this.backLink.href}} data-section={{this.backLink.section}}>{{this.backLink.textContent}}</a>
+        <h1 class="profile-header__item">
+            <a class='profile-header__footer-link' href={{this.backLink.href}} data-section={{this.backLink.section}}>{{this.backLink.textContent}}</a>
         </h1>
-        <h1 class="profile-header__head-item">
-            <span class="footer-text">Profile</span>
+        <h1 class="profile-header__item">
+            <span class="profile-header__footer-text">Profile</span>
         </h1>
     </div>
 
     <div class="profile-body">
         <form action="">
             {{#each inputFields}}
-                <span class="profile-body__input-text">{{this.placeholder}}</span>
-                <input type={{this.type}} class="profile-page-body__input-block" id={{this.name}}>
+                <span class="profile-body__input-description">{{this.placeholder}}</span>
+                <input type={{this.type}} class="profile-body__input-block" name={{this.name}}>
             {{/each}}
             <span class="profile-body__text-delivery">Delivery address</span>
             <br>
-            <textarea class="profile-page-body__textarea-block" rows={{this.addressField.rows}} cols={{this.addressField.cols}} name={{this.addressField.name}}></textarea>
+            <textarea class="profile-body__textarea-block" rows={{this.addressField.rows}} cols={{this.addressField.cols}} name={{this.addressField.name}}></textarea>
             <br>
-            <img class="profile-body__img-avatar" src="https://i.siteapi.org/29Wb-jJYdDEpGt_HadpOxodGW5k=/0x0:672x346/fit-in/250x190/center/top/filters:fill(transparent):format(webp)/10c9666bec25d55.s.siteapi.org/img/mr9200inqtc0c8s00s8c8ok4csss00" alt="Users avatar">
-            <button class="button button_login" type="submit">
-                <span class="text">Save</span>
+            <img class="profile-body__user-avatar" src="https://i.siteapi.org/29Wb-jJYdDEpGt_HadpOxodGW5k=/0x0:672x346/fit-in/250x190/center/top/filters:fill(transparent):format(webp)/10c9666bec25d55.s.siteapi.org/img/mr9200inqtc0c8s00s8c8ok4csss00" alt="Users avatar">
+            <button class="profile-body__button button_login" type="submit">
+                <span class="profile-body text">Save</span>
             </button>
         </form>
     </div>

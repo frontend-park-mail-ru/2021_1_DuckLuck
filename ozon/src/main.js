@@ -77,6 +77,7 @@ config.login.open = () => {
         })
             .then((response) => {
                 if (response.status === 200) {
+                    console.log('SUCCESS!');
                     config.me.open();
                 } else {
                     const {error} = response;

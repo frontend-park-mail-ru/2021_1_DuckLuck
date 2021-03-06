@@ -25,7 +25,7 @@ app.use(cookie());
 const users = {
     'test@mail.ru': {
         email: 'test@mail.ru',
-        password: '123',
+        password: 'qweasd',
         age: 21,
         score: 3,
     },
@@ -82,12 +82,13 @@ app.post('/login', function (req, res) {
 app.get('/me', function (req, res) {
     const id = req.cookies['session'];
     const email = ids[id];
+    console.log(id, email)
     if (!email || !users[email]) {
         return res.status(401).end();
     }
 
     users[email].score += 1;
-    res.status(200).json(users[email]);
+    return res.status(200).json(users[email]);
 });
 
 const port = process.env.PORT || 3000;

@@ -26,16 +26,6 @@ export class ProfilePage extends BasePage {
         const forgotPassLink = new Link();
         const saveButton = new Button();
 
-        // const html = new DOMParser().parseFromString(template, 'text/html').getElementById('login-block');
-
-        // const blind = document.createElement('div');
-        // blind.className = 'blind';
-        // blind.addEventListener('click', (evt) => {
-        //     this._parent.removeChild(html);
-        //     this._parent.removeChild(blind);
-        // });
-        // this._parent.appendChild(blind);
-
         form.innerHTML = ProfileTemplate({
             inputFields: inputFields,
             forgotPassLink: forgotPassLink,
@@ -50,7 +40,10 @@ export class ProfilePage extends BasePage {
 
 
     renderData = () => {
-        const {firstName, email, lastName, mobilePhone} = this.data;
+        const {firstName = '',
+               email = '',
+               lastName = '',
+               mobilePhone = ''} = this.data;
         const firstNameInput = document.getElementsByName('firstName')[0];
         firstNameInput.placeholder = firstName;
         const emailInput = document.getElementsByName('email')[0];

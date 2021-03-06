@@ -4,14 +4,22 @@
 
 .profile-page {
     position: absolute;
-    width: 700px;
+    width: 1000px;
     height: 1000px;
 
     background: #FFFFFF;
     border-radius: 10px;
 }
 
-.footer-link {
+.profile-header {
+    display: flex;
+    width: 549px;
+    height: 70px;
+    padding-left: 110px;
+    padding-top: 1px;
+}
+
+.profile-header__footer-link {
     position: absolute;
     width: 250px;
     height: 50px;
@@ -27,7 +35,7 @@
     color: rgba(64, 191, 255, 1);
 }
 
-.footer-text {
+.profile-header__footer-text {
     position: absolute;
     left: 250px;
     width: 250px;
@@ -44,15 +52,7 @@
     color: rgba(64, 191, 255, 1);
 }
 
-.profile-header {
-    display: flex;
-    width: 549px;
-    height: 70px;
-    padding-left: 110px;
-    padding-top: 1px;
-}
-
-.profile-header__head-item {
+.profile-header__item {
     margin-right: 100px;
 }
 
@@ -62,17 +62,23 @@
 }
 
 .profile-body__input-block {
-    width: 187px;
-    height: 52px;
-    cursor: pointer;
-    font-family: Raleway;
-    font-weight: 600;
-    font-size: 32px;
-    opacity: 1;
-    text-align: left;
+    display: inline-block;
+    width: 383px;
+    height: 50px;
+    margin: auto;
+    margin-bottom: 20px;
+    padding-left: 14px;
+
+    border-radius: 10px;
+    border: 0 none;
+
+    font-family: Nunito;
+    font-size: 16px;
+    color: gray;
+    background: rgba(223,222,222,1);
 }
 
-.profile-body__input-text {
+.profile-body__input-description {
     width: 100px;
     display: inline-block;
 
@@ -91,7 +97,7 @@
     color: #999999;
 }
 
-.profile-page-body__textarea-block {
+.profile-body__textarea-block {
     margin-left: 100px;
     background: #DFDEDE;
     opacity: 0.3;
@@ -117,7 +123,7 @@
     margin-left: 100px;
 }
 
-.profile-body__img-avatar {
+.profile-body__user-avatar {
     margin-left: 100px;
     width: 184px;
     height: 184px;
