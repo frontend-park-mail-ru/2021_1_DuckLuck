@@ -108,12 +108,12 @@ config.me.open = () => {
                 evt.preventDefault();
                 const formData = new FormData();
                 formData.append('avatar', application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
-                let response = fetch('http://localhost:8080/api/v1/user/profile/avatar', {
-                    method: 'PUT',
-                    mode: 'cors',
-                    credentials: 'include',
-                    body: formData,
-                });
+
+                AjaxModule.putUsingFetch({
+                    data: true,
+                    url: 'http://localhost:8080/api/v1/user/profile/avatar',
+                    body: formData
+                }).then(() => console.log('success'));
 
             });
 
