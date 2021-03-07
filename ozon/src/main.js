@@ -77,7 +77,6 @@ config.login.open = () => {
         })
             .then((response) => {
                 if (response.status === 200) {
-                    console.log('SUCCESS!');
                     config.me.open();
                 } else {
                     const {error} = response;
@@ -97,7 +96,8 @@ config.me.open = () => {
     profile.render();
 
     AjaxModule.getUsingFetch({
-        url: '/me',
+        // url: 'http://localhost:7777/api/v1/user/profile',
+        url: 'me/',
         body: null
     })
         .then((response) => {

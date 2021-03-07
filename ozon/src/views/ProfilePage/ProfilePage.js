@@ -15,23 +15,16 @@ export class ProfilePage extends BasePage {
         const form = document.createElement('form');
 
         const inputFields = [
+            new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
             new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
-            new Input({type: 'email', name: 'email', placeholder: 'Email address'}),
             new Input({type: 'text', name: 'lastName', placeholder: 'Last name'}),
-            new Input({type: 'tel', name: 'mobilePhone', placeholder: 'Mobile phone'}),
         ];
 
-        const addressField = new TextArea({name: 'address', cols: 47, rows: 10});
 
-        const forgotPassLink = new Link();
-        const saveButton = new Button();
-
+        const backLink = new Link({href: '/home', textContent: '<', dataset: 'home'});
         form.innerHTML = ProfileTemplate({
             inputFields: inputFields,
-            forgotPassLink: forgotPassLink,
-            saveButton: saveButton,
-            backLink: new Link({href: '/home', textContent: '<', dataset: 'home'}),
-            addressField: addressField,
+            backLink: backLink,
         });
         this._parent.appendChild(form);
 
@@ -44,13 +37,13 @@ export class ProfilePage extends BasePage {
                email = '',
                lastName = '',
                mobilePhone = ''} = this.data;
-        const firstNameInput = document.getElementsByName('firstName')[0];
-        firstNameInput.placeholder = firstName;
-        const emailInput = document.getElementsByName('email')[0];
-        emailInput.placeholder = email;
-        const lastNameInput = document.getElementsByName('lastName')[0];
-        lastNameInput.placeholder = lastName;
-        const mobilePhoneInput = document.getElementsByName('mobilePhone')[0];
-        mobilePhoneInput.placeholder = mobilePhone;
+        // const firstNameInput = document.getElementsByName('firstName')[0];
+        // firstNameInput.placeholder = firstName;
+        // const emailInput = document.getElementsByName('email')[0];
+        // emailInput.placeholder = email;
+        // const lastNameInput = document.getElementsByName('lastName')[0];
+        // lastNameInput.placeholder = lastName;
+        // const mobilePhoneInput = document.getElementsByName('mobilePhone')[0];
+        // mobilePhoneInput.placeholder = mobilePhone;
     }
 }

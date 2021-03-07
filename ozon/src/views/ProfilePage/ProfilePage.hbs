@@ -9,19 +9,24 @@
     </div>
 
     <div class="profile-body">
-        <form action="">
-            {{#each inputFields}}
-                <span class="profile-body__input-description">{{this.placeholder}}</span>
-                <input type={{this.type}} class="profile-body__input-block" name={{this.name}}>
-            {{/each}}
-            <span class="profile-body__text-delivery">Delivery address</span>
-            <br>
-            <textarea class="profile-body__textarea-block" rows={{this.addressField.rows}} cols={{this.addressField.cols}} name={{this.addressField.name}}></textarea>
-            <br>
-            <img class="profile-body__user-avatar" src="https://i.siteapi.org/29Wb-jJYdDEpGt_HadpOxodGW5k=/0x0:672x346/fit-in/250x190/center/top/filters:fill(transparent):format(webp)/10c9666bec25d55.s.siteapi.org/img/mr9200inqtc0c8s00s8c8ok4csss00" alt="Users avatar">
-            <button class="profile-body__button button_login" type="submit">
-                <span class="profile-body text">Save</span>
-            </button>
-        </form>
+        <div class="profile-info">
+            <img class="profile-info__user-avatar" src="https://stockx-360.imgix.net/Air-Jordan-1-Retro-High-Dior/Images/Air-Jordan-1-Retro-High-Dior/Lv2/img03.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1607043976" alt="Users avatar">
+            <div class="profile-info__user_firstname">Nikita Suvorov</div>
+        </div>
+        <div class="profile-credentials">
+            <div class="profile-credentials__text">Credentials</div>
+            <form class="profile-credentials__form">
+                {{#each this.inputFields}}
+                    <div class="profile-credentials__input_description">{{this.placeholder}}</div>
+                    {{#if this.isDisabled}}
+                        <input disabled class="profile-credentials__input_line" type="{{this.type}}" placeholder="">
+                    {{else}}
+                        <input class="profile-credentials__input_line" type="{{this.type}}" placeholder="">
+                    {{/if}}
+                {{/each}}
+
+                <button type="submit" class="button_update">Update</button>
+            </form>
+        </div>
     </div>
 </div>
