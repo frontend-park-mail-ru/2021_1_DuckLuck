@@ -27,6 +27,8 @@
     "child_process": "^1.0.2",
     "cookie-parser": "^1.4.4",
     "debug": "^4.1.1",
+    "eslint": "^7.21.0",
+    "eslint-config-google": "^0.14.0",
     "handlebars-loader": "^1.7.1",
     "path": "^0.12.7",
     "regenerator-runtime": "^0.13.7",
