@@ -106,31 +106,14 @@ config.me.open = () => {
             const avatar = application.getElementsByClassName('profile-info__user-avatar-input')[0];
             application.addEventListener('submit', (evt) => {
                 evt.preventDefault();
-
-                        let reader = new FileReader();
-
-                        // Closure to capture the file information.
-                        reader.onload = (function(theFile) {
-                            return function(e) {
-                                let avatar = e.target.result;
-                                // https://developer.mozilla.org/en/JavaScript_typed_arrays
-                                // let avatar = new Uint8Array(raw);
-                                AjaxModule.putUsingFetch({
-                                    url: 'http://localhost:8080/api/v1/user/profile/avatar',
-                                    body: {avatar},
-                                }).then(({status, parsedJson}) => {
-                                        console.log(status, parsedJson);
-                                    }
-                                )
-
-                                console.log(avatar);
-                            };
-                        })(application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
-
-
-                        // console.log(application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
-                        // Read in the image file as a data URL.
-                        reader.readAsBinaryString(application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
+                const formData = new FormData();
+                formData.append('avatar', application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
+                let response = fetch('http://localhost:8080/api/v1/user/profile/avatar', {
+                    method: 'PUT',
+                    mode: 'cors',
+                    credentials: 'include',
+                    body: formData,
+                });
 
             });
 
