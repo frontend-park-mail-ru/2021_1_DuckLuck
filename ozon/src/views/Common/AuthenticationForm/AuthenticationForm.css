@@ -1,15 +1,5 @@
-.login-block {
-    z-index: 1003;
-    left: 50%;
-    top: 50%;
-    margin-left: -279px;
-    margin-top: -301px;
-    position: absolute;
-    width: 557px;
-    height: 602px;
-    border-radius: 10px;
-    background: white;
-}
+@import '../Blind/Blind.css';
+@import '../Popup/Popup.css';
 
 .form-header {
     display: flex;
@@ -40,8 +30,17 @@
 
 .line_form-header {
     position: absolute;
+    border-bottom: 3px solid rgba(64,191,255,1);
+}
+
+.line_form-header_login {
     margin-top: 60px;
     margin-left: 270px;
     width: 65px;
-    border-bottom: 3px solid rgba(64,191,255,1);
+}
+
+.line_form-header_signup {
+    margin-top: 60px;
+    margin-left: 10px;
+    width: 150px;
 }

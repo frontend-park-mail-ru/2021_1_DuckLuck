@@ -2,8 +2,7 @@
 @import 'views/Common/Input/Input.css';
 @import 'views/Common/Button/Button.css';
 @import 'views/Common/Link/Link.css';
-@import 'views/LoginPage/LoginPage.css';
-@import 'views/SignupPage/SignupPage.css';
+@import 'views/Common/AuthenticationForm/AuthenticationForm.css';
 
 a, input {
     display: block;
@@ -12,16 +11,4 @@ a, input {
 img {
     width: 300px;
     display: block;
-}
-
-.blind {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #1c1c1c;
-    z-index: 1002;
-    opacity: 0.8;
 }
