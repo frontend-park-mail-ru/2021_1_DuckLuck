@@ -62,8 +62,12 @@ config.signup.open = () => {
 config.login.open = () => {
     // application.innerHTML = '';
     const blind = new LoginPage(application).render();
-    const form = blind.getElementsByClassName('form-body')[0];
+    blind.addEventListener('click', (evt) => {
+       if (evt.target === evt.currentTarget)
+           application.removeChild(blind);
+    });
 
+    const form = blind.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
