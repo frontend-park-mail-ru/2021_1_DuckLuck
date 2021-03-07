@@ -33,20 +33,25 @@ config.home.open = () => {
 }
 
 config.signup.open = () => {
-    application.innerHTML = '';
-    const page = new SignupPage(application);
-    const form = page.render();
+    const page = new SignupPage(application).render();
+    const blind = page.getElementsByClassName('blind')[0];
+    blind.addEventListener('click', (evt) => {
+        if (evt.target === evt.currentTarget)
+            application.removeChild(page);
+    });
 
+    const form = page.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = document.getElementsByName('Email')[0].value.trim();
-        const password = document.getElementsByName('Pass')[0].value.trim();
-        const age = document.getElementsByName('Age')[0].value.valueAsNumber;
+        const firstName = document.getElementById('first-name').value.trim();
+        const lastName = document.getElementById('last-name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
             url: '/signup',
-            body: {email, password, age},
+            body: {firstName, lastName, email, password},
         })
             .then((response) => {
                 if (response.status === 201) {
@@ -57,10 +62,11 @@ config.signup.open = () => {
                 }
             });
     });
+
+    application.appendChild(page);
 }
 
 config.login.open = () => {
-    // application.innerHTML = '';
     const page = new LoginPage(application).render();
     const blind = page.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {

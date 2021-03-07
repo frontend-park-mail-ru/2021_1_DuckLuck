@@ -3,6 +3,7 @@
 @import 'views/Common/Button/Button.css';
 @import 'views/Common/Link/Link.css';
 @import 'views/LoginPage/LoginPage.css';
+@import 'views/SignupPage/SignupPage.css';
 
 a, input {
     display: block;

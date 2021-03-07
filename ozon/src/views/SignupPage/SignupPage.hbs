@@ -1,11 +1,30 @@
-<form>
-    {{#each objects}}
-        {{#ifEquals this.objectType "input"}}
-            <input type={{this.type}} name={{this.name}} placeholder={{this.placeholder}} value={{this.value}}>
-        {{/ifEquals}}
+<div class="signup-block-wrapper" id="signup-block-wrapper">
+    <div class="blind"></div>
+    <div class="signup-block" id="signup-block">
+        <div class="form-header">
+            <h1 class="form-header__head-item">
+                <a href="" class="link link_weight-h1">
+                    <span class="text">Registration</span>
+                </a>
+            </h1>
+            <h1 class="form-header__head-item">
+                <a href="" class="link link_weight-h1">
+                    <span class="text">Log in</span>
+                </a>
+            </h1>
+            <div class="line line_form-header"></div>
+        </div>
 
-        {{#ifEquals this.objectType "link"}}
-            <a href={{this.href}} data-section={{this.section}}>{{this.textContent}}</a>
-        {{/ifEquals}}
-    {{/each}}
-</form>
+        <div class="form-body">
+            <form action="">
+                {{#each inputFields}}
+                    <input type={{this.type}} class="form-body__input-block" id={{this.name}} placeholder={{this.placeholder}}>
+                {{/each}}
+                <br>
+                <button class="button button_auth_submit" type="submit">
+                    <span class="text">Register</span>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
