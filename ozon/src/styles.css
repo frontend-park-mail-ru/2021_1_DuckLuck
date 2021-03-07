@@ -21,6 +21,6 @@ img {
     height: 100%;
     overflow: hidden;
     background: #1c1c1c;
-    opacity: 1;
     z-index: 1002;
+    opacity: 0.8;
 }

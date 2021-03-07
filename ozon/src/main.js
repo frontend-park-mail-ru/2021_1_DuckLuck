@@ -61,13 +61,14 @@ config.signup.open = () => {
 
 config.login.open = () => {
     // application.innerHTML = '';
-    const blind = new LoginPage(application).render();
+    const page = new LoginPage(application).render();
+    const blind = page.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
        if (evt.target === evt.currentTarget)
-           application.removeChild(blind);
+           application.removeChild(page);
     });
 
-    const form = blind.getElementsByClassName('form-body')[0];
+    const form = page.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
@@ -88,7 +89,7 @@ config.login.open = () => {
             })
     });
 
-    application.appendChild(blind);
+    application.appendChild(page);
 }
 
 config.me.open = () => {

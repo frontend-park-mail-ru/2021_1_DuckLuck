@@ -22,6 +22,6 @@ export class LoginPage extends BasePage {
             forgotPassLink: forgotPassLink,
             loginButton: loginButton
         });
-        return new DOMParser().parseFromString(template, 'text/html').getElementById('blind');
+        return new DOMParser().parseFromString(template, 'text/html').getElementById('login-block-wrapper');
     }
 }
