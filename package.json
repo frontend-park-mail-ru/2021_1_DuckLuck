@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint .",
     "start": "webpack && node ozon/server/index.mjs",
     "start-dev": "webpack --watch && node ozon/server/index.mjs"
   },
