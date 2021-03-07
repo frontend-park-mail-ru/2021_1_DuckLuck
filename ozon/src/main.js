@@ -46,7 +46,7 @@ config.signup.open = () => {
 
 
         AjaxModule.postUsingFetch({
-            url: 'http://localhost:7777/api/v1/user/signup',
+            url: 'http://localhost:8080/api/v1/user/signup',
             // url: '/signup',
             body: {email, password, age},
         })
@@ -62,6 +62,17 @@ config.signup.open = () => {
 }
 
 config.login.open = () => {
+
+    AjaxModule.getUsingFetch({
+        url: 'http://localhost:8080/api/v1/product/1',
+        body: null
+    })
+        .then(({status, parsedJson}) => {
+            console.log(status, parsedJson);
+        }).catch(({status, parsedJson}) => {
+        console.log(status, parsedJson);
+        });
+
     application.innerHTML = '';
     const page = new LoginPage(application);
     const form = page.render();
@@ -73,7 +84,7 @@ config.login.open = () => {
         const password = form.elements['Пароль'].value.trim();
 
         AjaxModule.postUsingFetch({
-            url: 'http://localhost:7777/api/v1/user/login',
+            url: 'http://localhost:8080/api/v1/user/login',
             body: {email, password},
         })
             .then(({status, parsedJson}) => {
@@ -97,8 +108,7 @@ config.me.open = () => {
     profile.render();
 
     AjaxModule.getUsingFetch({
-        url: 'http://localhost:7777/api/v1/user/profile',
-        // url: 'me/',
+        url: 'http://localhost:8080/api/v1/user/profile',
         body: null
     })
         .then(({status, parsedJson}) => {
