@@ -36,15 +36,18 @@ export class ProfilePage extends BasePage {
 
 
     renderData = () => {
-        const {firstName = '',
+        const {first_name = '',
                email = '',
-               lastName = '',
-               mobilePhone = ''} = this.data;
+               last_name = '',
+               avatar = ''} = this.data;
         const firstNameInput = document.getElementsByName('firstName')[0];
-        firstNameInput.placeholder = firstName;
+        firstNameInput.placeholder = first_name;
         const emailInput = document.getElementsByName('email')[0];
         emailInput.placeholder = email;
         const lastNameInput = document.getElementsByName('lastName')[0];
-        lastNameInput.placeholder = lastName;
+        lastNameInput.placeholder = last_name;
+        const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
+        console.log(avatar);
+        // avatarImage.src = avatar;
     }
 }

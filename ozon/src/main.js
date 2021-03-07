@@ -62,17 +62,6 @@ config.signup.open = () => {
 }
 
 config.login.open = () => {
-
-    AjaxModule.getUsingFetch({
-        url: 'http://localhost:8080/api/v1/product/1',
-        body: null
-    })
-        .then(({status, parsedJson}) => {
-            console.log(status, parsedJson);
-        }).catch(({status, parsedJson}) => {
-        console.log(status, parsedJson);
-        });
-
     application.innerHTML = '';
     const page = new LoginPage(application);
     const form = page.render();
@@ -103,18 +92,23 @@ config.login.open = () => {
 
 config.me.open = () => {
     application.innerHTML = '';
-
     const profile = new ProfilePage(application);
-    profile.render();
 
     AjaxModule.getUsingFetch({
         url: 'http://localhost:8080/api/v1/user/profile',
         body: null
     })
         .then(({status, parsedJson}) => {
-            console.log(status);
+            profile.render();
             profile.data = parsedJson;
             profile.renderData();
+
+            const avatar = application.getElementsByClassName('profile-info__user-avatar-input')[0];
+            application.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+                console.log(avatar.files[0]);
+            });
+
         })
         .catch((error) => {
             if (error instanceof Error) {
@@ -124,6 +118,7 @@ config.me.open = () => {
             alert(`Нет авторизации ${JSON.stringify({status, responseObject})}`);
             config.login.open();
         });
+
 }
 
 application.addEventListener('click', (evt) => {
