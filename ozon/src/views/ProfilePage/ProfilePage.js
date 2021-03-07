@@ -12,7 +12,7 @@ export class ProfilePage extends BasePage {
     }
 
     render = () => {
-        const form = document.createElement('form');
+        const page = document.createElement('div');
 
         const inputFields = [
             new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
@@ -20,15 +20,18 @@ export class ProfilePage extends BasePage {
             new Input({type: 'text', name: 'lastName', placeholder: 'Last name'}),
         ];
 
+        const avatarUpload = new Input({type: 'file', name: 'avatar', placeholder: 'Uplad new Avatar'})
+
 
         const backLink = new Link({href: '/home', textContent: '<', dataset: 'home'});
-        form.innerHTML = ProfileTemplate({
+        page.innerHTML = ProfileTemplate({
             inputFields: inputFields,
             backLink: backLink,
+            avatarUpload: avatarUpload
         });
-        this._parent.appendChild(form);
+        this._parent.appendChild(page);
 
-        return form;
+        return page;
     }
 
 
@@ -37,13 +40,11 @@ export class ProfilePage extends BasePage {
                email = '',
                lastName = '',
                mobilePhone = ''} = this.data;
-        // const firstNameInput = document.getElementsByName('firstName')[0];
-        // firstNameInput.placeholder = firstName;
-        // const emailInput = document.getElementsByName('email')[0];
-        // emailInput.placeholder = email;
-        // const lastNameInput = document.getElementsByName('lastName')[0];
-        // lastNameInput.placeholder = lastName;
-        // const mobilePhoneInput = document.getElementsByName('mobilePhone')[0];
-        // mobilePhoneInput.placeholder = mobilePhone;
+        const firstNameInput = document.getElementsByName('firstName')[0];
+        firstNameInput.placeholder = firstName;
+        const emailInput = document.getElementsByName('email')[0];
+        emailInput.placeholder = email;
+        const lastNameInput = document.getElementsByName('lastName')[0];
+        lastNameInput.placeholder = lastName;
     }
 }

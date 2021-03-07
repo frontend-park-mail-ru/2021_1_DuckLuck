@@ -231,3 +231,23 @@
     background: #33A0FF;
     border-radius: 10px;
 }
+
+.profile-info__user-avatar-input {
+    display: inline-block;
+
+    background: #FFFFFF;
+    opacity: 0.9;
+    border-radius: 10px;
+
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 37px;
+    /* identical to box height */
+
+    align-items: center;
+    letter-spacing: -0.02em;
+
+    color: #262626;
+}

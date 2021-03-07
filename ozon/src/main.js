@@ -46,14 +46,15 @@ config.signup.open = () => {
 
 
         AjaxModule.postUsingFetch({
-            url: '/signup',
+            url: 'http://localhost:7777/api/v1/user/signup',
+            // url: '/signup',
             body: {email, password, age},
         })
-            .then((response) => {
-                if (response.status === 201) {
+            .then(({status, parsedJson}) => {
+                if (status === 201) {
                     config.me.open();
                 } else {
-                    const {error} = response;
+                    const {error} = parsedJson;
                     console.log(error);
                 }
             });
@@ -72,14 +73,14 @@ config.login.open = () => {
         const password = form.elements['Пароль'].value.trim();
 
         AjaxModule.postUsingFetch({
-            url: '/login',
+            url: 'http://localhost:7777/api/v1/user/login',
             body: {email, password},
         })
-            .then((response) => {
-                if (response.status === 200) {
+            .then(({status, parsedJson}) => {
+                if (status === 200) {
                     config.me.open();
                 } else {
-                    const {error} = response;
+                    const {error} = parsedJson;
                     console.log(error);
                 }
             })
@@ -96,12 +97,13 @@ config.me.open = () => {
     profile.render();
 
     AjaxModule.getUsingFetch({
-        // url: 'http://localhost:7777/api/v1/user/profile',
-        url: 'me/',
+        url: 'http://localhost:7777/api/v1/user/profile',
+        // url: 'me/',
         body: null
     })
-        .then((response) => {
-            profile.data = response.json();
+        .then(({status, parsedJson}) => {
+            console.log(status);
+            profile.data = parsedJson;
             profile.renderData();
         })
         .catch((error) => {
