@@ -1,9 +1,4 @@
-.button_auth_submit {
-    width: 338px;
-    height: 70px;
-    margin-left: 110px;
-    margin-top: 43px;
-
+.button {
     background: rgba(51, 160, 255, 1);
     border-radius: 10px;
     border: 0 none;
@@ -12,23 +7,47 @@
     font-size: 24px;
     font-weight: bold;
     font-family: Nunito;
-
     cursor: pointer;
+}
+
+.button_auth_submit {
+    width: 399px;
+    height: 60px;
+    margin-left: 79px;
+    margin-top: 60px;
 }
 
 .button_update {
     width: 150px;
     height: 70px;
     margin-top: 20px;
+}
 
-    background: rgba(51, 160, 255, 1);
-    border-radius: 10px;
-    border: 0 none;
+.button_dec {
+    height: 50px;
+    width: 50px;
+    background: #F6F7F8;
+    color: #33A0FF;
+}
 
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-    font-family: Nunito;
+.button_inc {
+    height: 50px;
+    width: 50px;
+    background: #F6F7F8;
+    color: #33A0FF;
+}
 
-    cursor: pointer;
+.button_add-to-cart {
+    width: 160px;
+    height: 50px;
+    font-weight: normal;
+    background: rgb(204, 219, 228);
+    color: #33A0FF;
+}
+
+.button_add-to-favorites {
+    width: 50px;
+    height: 50px;
+    background: rgb(204, 219, 228);
+    color: #33A0FF;
 }

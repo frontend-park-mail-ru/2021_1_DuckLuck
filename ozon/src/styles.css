@@ -1,7 +1,12 @@
 @import 'views/Common/Input/Input.css';
 @import 'views/Common/Button/Button.css';
 @import 'views/Common/Link/Link.css';
+@import 'views/Common/Blind/Blind.css';
 @import 'views/Common/AuthenticationForm/AuthenticationForm.css';
+@import 'views/Common/Pagination/Pagination.css';
+@import 'views/Common/ListOfProducts/ListOfProducts.css';
+@import 'views/Common/Img/Img.css';
+@import 'views/ProductPage/ProductPage.css';
 @import 'views/ProfilePage/ProfilePage.css';
 
 a, input {
@@ -11,16 +16,4 @@ a, input {
 img {
     width: 300px;
     display: block;
-}
-
-.blind {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #1c1c1c;
-    opacity: .50;
-    z-index: 1002;
 }
