@@ -5,6 +5,8 @@ import {HomePage} from "./views/HomePage/HomePage.js";
 import {AjaxModule} from "./modules/Ajax/Ajax.js";
 
 const application = document.getElementById('app');
+const fileServerURL = 'http://localhost:8100'
+const mainServerURL = 'http://localhost:8080/api/v1/user/'
 
 const config = {
     home: {
@@ -51,7 +53,7 @@ config.signup.open = () => {
         const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
-            url: '/signup',
+            url: mainServerURL + 'signup',
             body: {firstName, lastName, email, password},
         })
             .then(({status, parsedJson}) => {
@@ -107,23 +109,40 @@ config.me.open = () => {
     AjaxModule.getUsingFetch({
         url: 'http://localhost:8080/api/v1/user/profile',
         body: null
-    })
-        .then(({status, parsedJson}) => {
-            profile.data = parsedJson;
-            profile.renderData();
+    }).then((response) => {
+        return response.json();
+    }).then((response) => {
+        console.log(response);
+        profile.data = response
+        profile.data.avatar = fileServerURL + response.avatar;
+        profile.renderData();
 
-            const avatar = application.getElementsByClassName('profile-info__user-avatar-input')[0];
             application.addEventListener('submit', (evt) => {
                 evt.preventDefault();
-                const formData = new FormData();
-                formData.append('avatar', application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
+                const avatarFile = application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0];
+                const first_name = document.getElementsByName('firstName')[0].value.trim();
+                const last_name = document.getElementsByName('lastName')[0].value.trim();
 
                 AjaxModule.putUsingFetch({
-                    data: true,
-                    url: 'http://localhost:8080/api/v1/user/profile/avatar',
-                    body: formData
-                }).then(() => console.log('success'));
+                    url: mainServerURL + 'profile',
+                    body: {first_name, last_name}
+                }).catch((err) => {
+                    console.error(err);
+                })
 
+                // if (avatarFile) {
+                //     const formData = new FormData();
+                //     formData.append('avatar', avatarFile);
+                //     AjaxModule.putUsingFetch({
+                //         data: true,
+                //         url: mainServerURL + 'profile/avatar',
+                //         body: formData
+                //     }).catch((err) => {
+                //         console.error(err);
+                //     })
+                // }
+
+                // config.me.open();
             });
 
         })

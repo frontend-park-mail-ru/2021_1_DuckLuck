@@ -4,7 +4,7 @@
     margin-left: 110px;
     margin-top: 43px;
 
-    background: rgba(51,160,255,1);
+    background: rgba(51, 160, 255, 1);
     border-radius: 10px;
     border: 0 none;
 
@@ -14,13 +14,14 @@
     font-family: Nunito;
 
     cursor: pointer;
+}
 
 .button_update {
     width: 150px;
     height: 70px;
     margin-top: 20px;
 
-    background: rgba(51,160,255,1);
+    background: rgba(51, 160, 255, 1);
     border-radius: 10px;
     border: 0 none;
 
@@ -30,3 +31,4 @@
     font-family: Nunito;
 
     cursor: pointer;
+}

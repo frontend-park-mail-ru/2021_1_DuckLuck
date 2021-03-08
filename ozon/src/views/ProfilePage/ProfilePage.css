@@ -3,7 +3,8 @@
 }
 
 .profile-page {
-    width: 896px;
+    margin: auto;
+    width: 400px;
     height: 820px;
 
     background: #FFFFFF;

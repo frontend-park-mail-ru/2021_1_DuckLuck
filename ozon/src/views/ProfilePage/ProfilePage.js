@@ -9,7 +9,6 @@ export class ProfilePage extends BasePage {
     }
 
     render = () => {
-
         const htmlTemplate = ProfileTemplate({
                     inputFields: [new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
                                   new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
