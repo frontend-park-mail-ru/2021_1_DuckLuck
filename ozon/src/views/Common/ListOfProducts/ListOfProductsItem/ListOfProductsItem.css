@@ -19,9 +19,7 @@
     font-size: 18px;
     font-weight: bold;
     color: #223263;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5px;
+    margin: 5px auto 10px;
 }
 
 .item-price-block {
@@ -31,15 +29,22 @@
 
 .item-price {
     margin: auto;
+    font-size: 18px;
+    font-family: Poppins;
+}
+
+.item-discount-price {
     color: #40bfff;
     font-weight: bold;
-    font-size: 18px;
 }
 
 .item-base-price {
-    text-decoration: line-through;
     color: #9098b1;
     font-weight: normal;
+}
+
+.discount-active .item-base-price {
+    text-decoration: line-through;
     font-size: 14px;
 }
 
@@ -47,7 +52,6 @@
     color: #fb7181;
     font-weight: bold;
     font-size: 14px;
-    font-family: Poppins;
 }
 
 .item-rating {

@@ -2,7 +2,7 @@ import ListOFProductsItemTemplate from "./ListOFProductsItem.hbs"
 
 export class ListOfProductsItem {
     constructor({ itemImage, itemName = '', itemRating = 0,
-                    itemPrice= {discountPrice: '0', base: '0', discount: '0'}} = {}) {
+                    itemPrice= {discountPrice: '', base: '', discount: ''}} = {}) {
         this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemRating = itemRating;
