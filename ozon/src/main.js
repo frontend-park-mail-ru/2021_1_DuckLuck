@@ -34,7 +34,7 @@ config.home.open = () => {
 
     const page = new HomePage(application);
     page.render(config);
-}
+};
 
 config.signup.open = () => {
     const page = new SignupPage(application).render();
@@ -106,7 +106,7 @@ config.login.open = () => {
                     const {error} = parsedJson;
                     console.error(error);
                 }
-            })
+            });
     });
 
     application.appendChild(page);
@@ -202,8 +202,9 @@ config.me.open = () => {
             if (error instanceof Error) {
                 console.error(error);
             }
-            const {statusCode, responseObject} = error;
-            alert(`Нет авторизации ${JSON.stringify({status, responseObject})}`);
+            const {responseObject} = error;
+            alert(`Нет авторизации
+                   ${JSON.stringify({status, responseObject})}`);
             config.login.open();
         });
 

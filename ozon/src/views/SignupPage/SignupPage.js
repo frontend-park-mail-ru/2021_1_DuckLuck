@@ -6,7 +6,16 @@ import {Popup} from "../Common/Popup/Popup.js";
 import {Blind} from "../Common/Blind/Blind.js";
 import {AuthenticationForm} from "../Common/AuthenticationForm/AuthenticationForm.js";
 
+/**
+ * This is a description of the MyClass constructor function.
+ * @class
+ * @classdesc This is a description of the MyClass class.
+ */
 export class SignupPage extends BasePage {
+    /**
+     *
+     * @param {Object} parent parents object
+     */
     constructor(parent) {
         super(parent);
     }
@@ -49,5 +58,4 @@ export class SignupPage extends BasePage {
         return new DOMParser().parseFromString(template, 'text/html')
             .getElementById('popup-wrapper');
     }
-
 }

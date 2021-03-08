@@ -4,12 +4,19 @@ import {Link} from "../Common/Link.js";
 import ProfileTemplate from "./ProfilePage.hbs"
 import {isValidForm} from "../../utils/validator.js"
 
-const defaultAvatarSRC = 'https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/c6d31d43-e06d-40f9-822c-77c13996c7f6/%D0%BA%D1%80%D0%BE%D1%81%D1%81%D0%BE%D0%B2%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-%D1%88%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2-air-force-1-cQp5rP.jpg';
+const defaultAvatarSRC = '|s://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/c6d31d43-e06d-40f9-822c-77c13996c7f6/%D0%BA%D1%80%D0%BE%D1%81%D1%81%D0%BE%D0%B2%D0%BA%D0%B8-%D0%B4%D0%BB%D1%8F-%D1%88%D0%BA%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA%D0%BE%D0%B2-air-force-1-cQp5rP.jpg';
 export class ProfilePage extends BasePage {
+    /**
+     *
+     * @param {Object} parent parents object
+     */
     constructor(parent) {
         super(parent);
     }
 
+    /**
+     *
+     */
     render = () => {
         const htmlTemplate = ProfileTemplate({
                     inputFields: [new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),

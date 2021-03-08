@@ -6,11 +6,24 @@ import {Popup} from "../Common/Popup/Popup.js";
 import {Blind} from "../Common/Blind/Blind.js";
 import {AuthenticationForm} from "../Common/AuthenticationForm/AuthenticationForm.js";
 
+/**
+ * This is a description of the MyClass constructor function.
+ * @class
+ * @classdesc This is a description of the MyClass class.
+ */
 export class LoginPage extends BasePage {
+    /**
+     *
+     * @param {Object} parent parents object
+     */
     constructor(parent) {
         super(parent);
     }
 
+    /**
+     *
+     * @return {HTMLFormElement} html form
+     */
     render = () => {
         const template = new Popup().getHtmlString({
             popupBody:
