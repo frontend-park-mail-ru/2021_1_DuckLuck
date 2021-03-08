@@ -65,10 +65,10 @@
     height: 15px;
 }
 
-.item-rating-star_gray {
+.item-rating-star_yellowgreen {
     background: yellowgreen;
 }
 
-.item-rating-star_yellow {
+.item-rating-star_gray {
     background: gray;
 }
