@@ -7,6 +7,7 @@ import {AjaxModule} from "./modules/Ajax/Ajax.js";
 const application = document.getElementById('app');
 const fileServerURL = 'http://localhost:8100'
 const mainServerURL = 'http://localhost:8080/api/v1/user/'
+const defaultAvatarURL = 'http://localhost:8100/avatar/default.png'
 
 const config = {
     home: {
@@ -110,13 +111,10 @@ config.me.open = () => {
     if (!isPageWasOpened) {
         isPageWasOpened = true;
         application.addEventListener('submit', (evt) => {
-            console.log("INSIDE")
             evt.preventDefault();
             const avatarFile = application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0];
             const first_name = document.getElementsByName('firstName')[0].value.trim();
-            // const email = document.getElementsByName('email')[0].value.trim();
             const last_name = document.getElementsByName('lastName')[0].value.trim();
-            // profile.data.email = email;
 
             if (first_name !== '' && last_name !== '') {
                 AjaxModule.putUsingFetch({
@@ -129,8 +127,12 @@ config.me.open = () => {
                     }).then((response) => {
                         return response.json();
                     }).then((response) => {
-                        console.log(response);
                         profile.data = response;
+                        if (response.avatar === '') {
+                            profile.data.avatar = defaultAvatarURL
+                        } else {
+                            profile.data.avatar = fileServerURL + response.avatar;
+                        }
                         profile.renderData();
                     })
                 }).catch((err) => {
@@ -139,7 +141,6 @@ config.me.open = () => {
             }
 
             if (typeof avatarFile !== "undefined") {
-                console.log("CORRECT!")
                 const formData = new FormData();
                 formData.append('avatar', avatarFile);
                 AjaxModule.putUsingFetch({
@@ -154,7 +155,7 @@ config.me.open = () => {
                         return response.json();
                     }).then((response) => {
                         profile.data.avatar = fileServerURL + response.result;
-                        profile.renderData();
+                        profile.renderAvatar();
                     })
                 }).catch((err) => {
                     console.error(err);
@@ -169,9 +170,12 @@ config.me.open = () => {
     }).then((response) => {
         return response.json();
     }).then((response) => {
-        console.log(response);
         profile.data = response;
-        profile.data.avatar = fileServerURL + response.avatar;
+        if (response.avatar === '') {
+            profile.data.avatar = defaultAvatarURL
+        } else {
+            profile.data.avatar = fileServerURL + response.avatar;
+        }
         profile.renderData();
         }).catch((error) => {
             if (error instanceof Error) {
