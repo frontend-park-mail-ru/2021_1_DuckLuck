@@ -31,6 +31,7 @@ export class ProfilePage extends BasePage {
         const lastNameInput = document.getElementsByName('lastName')[0];
         const emailInput = document.getElementsByName('email')[0];
         const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
+        const nameLabel = document.getElementsByClassName('profile-info__user_name')[0];
 
         firstNameInput.value = '';
         firstNameInput.placeholder = first_name;
@@ -38,6 +39,8 @@ export class ProfilePage extends BasePage {
         emailInput.placeholder = email;
         lastNameInput.value = '';
         lastNameInput.placeholder = last_name;
+        nameLabel.innerHTML = first_name + ' ' + last_name;
+
         if (avatar === '') {
             avatarImage.src = defaultAvatarSRC;
         } else {
