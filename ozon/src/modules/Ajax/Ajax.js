@@ -16,14 +16,29 @@ export class AjaxModule {
     }
 
     static #usingFetch = async (ajaxArgs) => {
-        return await fetch (ajaxArgs.url, {
+        // TODO: make beauty
+        if (!ajaxArgs.data) {
+            if (ajaxArgs.body) {
+                ajaxArgs.body = JSON.stringify(ajaxArgs.body)
+            }
+        }  else {
+            console.log("IMG!");
+        }
+        const response =  await fetch (ajaxArgs.url, {
             method: ajaxArgs.method,
-            body: (ajaxArgs.body) ? JSON.stringify (ajaxArgs.body) : null,
+            body: (ajaxArgs.body) ? ajaxArgs.body : null,
             credentials: 'include',
             mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            }
+            // TODO: Uncomment and make multipart/data and boundary (doesnt work right now)
+            // headers: {
+            //     'Content-Type': 'application/json;charset=utf-8',
+            // }
         });
+        const parsedJson = await response.json();
+
+        return {
+            status: response.status,
+            parsedJson,
+        };
     }
 }

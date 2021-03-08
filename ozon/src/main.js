@@ -44,6 +44,7 @@ config.signup.open = () => {
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
+
         const firstName = document.getElementById('first-name').value.trim();
         const lastName = document.getElementById('last-name').value.trim();
         const email = document.getElementById('email').value.trim();
@@ -53,12 +54,12 @@ config.signup.open = () => {
             url: '/signup',
             body: {firstName, lastName, email, password},
         })
-            .then((response) => {
-                if (response.status === 201) {
+            .then(({status, parsedJson}) => {
+                if (status === 201) {
                     config.me.open();
                 } else {
-                    const {error} = response;
-                    console.log(error);
+                    const {error} = parsedJson;
+                    console.error(error);
                 }
             });
     });
@@ -82,15 +83,15 @@ config.login.open = () => {
         const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
-            url: '/login',
+            url: 'http://localhost:8080/api/v1/user/login',
             body: {email, password},
         })
-            .then((response) => {
-                if (response.status === 200) {
+            .then(({status, parsedJson}) => {
+                if (status === 200) {
                     config.me.open();
                 } else {
-                    const {error} = response;
-                    console.log(error);
+                    const {error} = parsedJson;
+                    console.error(error);
                 }
             })
     });
@@ -99,26 +100,43 @@ config.login.open = () => {
 }
 
 config.me.open = () => {
-    application.innerHTML = '';
-
+    application.innerHTML = ''
     const profile = new ProfilePage(application);
-    profile.render();
+    const profileHTML = profile.render()
+
     AjaxModule.getUsingFetch({
-        url: '/me',
+        url: 'http://localhost:8080/api/v1/user/profile',
         body: null
     })
-        .then((response) => {
-            profile.data = response.json();
+        .then(({status, parsedJson}) => {
+            profile.data = parsedJson;
             profile.renderData();
+
+            const avatar = application.getElementsByClassName('profile-info__user-avatar-input')[0];
+            application.addEventListener('submit', (evt) => {
+                evt.preventDefault();
+                const formData = new FormData();
+                formData.append('avatar', application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
+
+                AjaxModule.putUsingFetch({
+                    data: true,
+                    url: 'http://localhost:8080/api/v1/user/profile/avatar',
+                    body: formData
+                }).then(() => console.log('success'));
+
+            });
+
         })
         .catch((error) => {
             if (error instanceof Error) {
-                console.log(error);
+                console.error(error);
             }
             const {statusCode, responseObject} = error;
             alert(`Нет авторизации ${JSON.stringify({status, responseObject})}`);
             config.login.open();
         });
+
+    application.appendChild(profileHTML);
 }
 
 application.addEventListener('click', (evt) => {

@@ -1,7 +1,9 @@
 .img_avatar {
+    object-fit: contain;
     width: 184px;
     height: 184px;
 }
+
 
 .img_item-preview {
     margin: auto;
