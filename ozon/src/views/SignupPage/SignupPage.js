@@ -25,26 +25,31 @@ export class SignupPage extends BasePage {
             new Input({
                 type: 'email',
                 name: 'Email',
-                placeholder: 'email'},
+                placeholder: 'email'
+            },
             ),
             new Input({
                 type: 'password',
                 name: 'Pass',
-                placeholder: 'password'},
+                placeholder: 'password'
+            },
             ),
             new Input({
                 type: 'number',
                 name: 'Age',
-                placeholder: 'age'},
+                placeholder: 'age',
+            },
             ),
             new Input({
                 type: 'submit',
-                value: 'Зарегестрироваться!'},
+                value: 'Зарегестрироваться!'
+            },
             ),
             new Link({
                 href: '/home',
                 textContent: 'Главная страница',
-                dataset: 'home'},
+                dataset: 'home'
+            },
             ),
         ];
 
