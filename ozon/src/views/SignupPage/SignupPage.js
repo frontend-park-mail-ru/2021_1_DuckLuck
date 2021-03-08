@@ -20,16 +20,6 @@ export class SignupPage extends BasePage {
                         inputFields: [
                             new Input({
                                 type: 'text',
-                                name: 'first-name',
-                                placeholder: 'First name',
-                            }),
-                            new Input({
-                                type: 'text',
-                                name: 'last-name',
-                                placeholder: 'Last name',
-                            }),
-                            new Input({
-                                type: 'text',
                                 name: 'email',
                                 placeholder: 'Email address',
                             }),
@@ -37,6 +27,11 @@ export class SignupPage extends BasePage {
                                 type: 'password',
                                 name: 'password',
                                 placeholder: 'Password',
+                            }),
+                            new Input({
+                                type: 'password',
+                                name: 'repeat_password',
+                                placeholder: 'Repeat password',
                             }),
                         ],
                         forgotPassLink: new Link({
@@ -52,7 +47,7 @@ export class SignupPage extends BasePage {
             popupType: 'signup',
         });
         return new DOMParser().parseFromString(template, 'text/html')
-                              .getElementById('popup-wrapper');
+            .getElementById('popup-wrapper');
     }
 
 }

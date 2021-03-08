@@ -35,6 +35,7 @@ config.home.open = () => {
 config.signup.open = () => {
     const page = new SignupPage(application).render();
     const blind = page.getElementsByClassName('blind')[0];
+
     blind.addEventListener('click', (evt) => {
         if (evt.target === evt.currentTarget)
             application.removeChild(page);
@@ -64,14 +65,21 @@ config.signup.open = () => {
     });
 
     application.appendChild(page);
+
+    document.getElementById('form-header__login-link')
+        .addEventListener('click', (evt)=>{
+            evt.preventDefault();
+            application.removeChild(page);
+            config.login.open();
+        });
 }
 
 config.login.open = () => {
     const page = new LoginPage(application).render();
     const blind = page.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
-       if (evt.target === evt.currentTarget)
-           application.removeChild(page);
+        if (evt.target === evt.currentTarget)
+            application.removeChild(page);
     });
 
     const form = page.getElementsByClassName('form-body')[0];
@@ -96,6 +104,13 @@ config.login.open = () => {
     });
 
     application.appendChild(page);
+
+    document.getElementById('form-header__signup-link')
+        .addEventListener('click', (evt)=>{
+            evt.preventDefault();
+            application.removeChild(page);
+            config.signup.open();
+        });
 }
 
 config.me.open = () => {
