@@ -47,7 +47,6 @@ config.signup.open = () => {
 
         AjaxModule.postUsingFetch({
             url: 'http://localhost:8080/api/v1/user/signup',
-            // url: '/signup',
             body: {email, password, age},
         })
             .then(({status, parsedJson}) => {
@@ -55,7 +54,7 @@ config.signup.open = () => {
                     config.me.open();
                 } else {
                     const {error} = parsedJson;
-                    console.log(error);
+                    console.error(error);
                 }
             });
     });
@@ -81,7 +80,7 @@ config.login.open = () => {
                     config.me.open();
                 } else {
                     const {error} = parsedJson;
-                    console.log(error);
+                    console.error(error);
                 }
             })
     });
@@ -91,15 +90,15 @@ config.login.open = () => {
 }
 
 config.me.open = () => {
-    application.innerHTML = '';
+    application.innerHTML = ''
     const profile = new ProfilePage(application);
+    const profileHTML = profile.render()
 
     AjaxModule.getUsingFetch({
         url: 'http://localhost:8080/api/v1/user/profile',
         body: null
     })
         .then(({status, parsedJson}) => {
-            profile.render();
             profile.data = parsedJson;
             profile.renderData();
 
@@ -120,13 +119,14 @@ config.me.open = () => {
         })
         .catch((error) => {
             if (error instanceof Error) {
-                console.log(error);
+                console.error(error);
             }
             const {statusCode, responseObject} = error;
             alert(`Нет авторизации ${JSON.stringify({status, responseObject})}`);
             config.login.open();
         });
 
+    application.appendChild(profileHTML);
 }
 
 application.addEventListener('click', (evt) => {

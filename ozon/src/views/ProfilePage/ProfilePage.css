@@ -140,6 +140,7 @@
 }
 
 .profile-info__user-avatar {
+    object-fit: contain;
     display: inline-block;
     position: absolute;
     width: 184px;
@@ -233,7 +234,7 @@
 }
 
 .profile-info__user-avatar-input {
-    display: inline-block;
+    object-fit: contain;
 
     background: #FFFFFF;
     opacity: 0.9;
