@@ -3,7 +3,6 @@ import {LoginPage} from "./views/LoginPage/LoginPage.js";
 import {SignupPage} from "./views/SignupPage/SignupPage.js";
 import {HomePage} from "./views/HomePage/HomePage.js";
 import {AjaxModule} from "./modules/Ajax/Ajax.js";
-import {ProductPage} from "./views/ProductPage/ProductPage.js";
 import {FileServerHost, ServerApiPath, Urls} from "./utils/urls/urls.js";
 
 const application = document.getElementById('app');
@@ -32,7 +31,7 @@ config.home.open = () => {
 
     const page = new HomePage(application);
     page.render(config);
-}
+};
 
 config.signup.open = () => {
     const page = new SignupPage(application).render();
@@ -102,7 +101,7 @@ config.login.open = () => {
                     const {error} = parsedJson;
                     console.error(error);
                 }
-            })
+            });
     });
 
     application.appendChild(page);
@@ -130,8 +129,14 @@ config.me.open = () => {
             if (typeof avatar_file !== 'undefined') {
                 avatar_file = avatar_file.files[0];
             }
-            const first_name = document.getElementsByName('firstName')[0].value.trim();
-            const last_name = document.getElementsByName('lastName')[0].value.trim();
+            let first_name
+            let last_name;
+            if (typeof document.getElementsByName('firstName')[0] !== 'undefined') {
+                first_name = document.getElementsByName('firstName')[0].value.trim();
+            }
+            if (typeof document.getElementsByName('lastName')[0] !== 'undefined') {
+                last_name = document.getElementsByName('lastName')[0].value.trim();
+            }
 
             if (profile.isValid(['text'])) {
                 AjaxModule.putUsingFetch({
@@ -146,7 +151,7 @@ config.me.open = () => {
                     }).then((response) => {
                         profile.data = response;
                         if (response.avatar === '') {
-                            profile.data.avatar = ServerApiPath + Urls.profileAvatarUrl + Urls.defaultAvatar;
+                            profile.data.avatar = FileServerHost + Urls.defaultAvatar;
                         } else {
                             profile.data.avatar = FileServerHost + response.avatar;
                         }
@@ -198,8 +203,9 @@ config.me.open = () => {
             if (error instanceof Error) {
                 console.error(error);
             }
-            const {statusCode, responseObject} = error;
-            alert(`Нет авторизации ${JSON.stringify({status, responseObject})}`);
+            const {responseObject} = error;
+            alert(`Нет авторизации
+                   ${JSON.stringify({status, responseObject})}`);
             config.login.open();
         });
 
@@ -214,7 +220,5 @@ application.addEventListener('click', (evt) => {
         config[target.dataset.section].open();
     }
 });
-
-
 
 config.home.open();
