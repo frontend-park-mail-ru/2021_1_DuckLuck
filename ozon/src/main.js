@@ -112,11 +112,11 @@ config.me.open = () => {
         isPageWasOpened = true;
         application.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            const avatarFile = application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0];
+            const avatar_file = application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0];
             const first_name = document.getElementsByName('firstName')[0].value.trim();
             const last_name = document.getElementsByName('lastName')[0].value.trim();
 
-            if (first_name !== '' && last_name !== '') {
+            if (profile.isValid(['text'])) {
                 AjaxModule.putUsingFetch({
                     url: mainServerURL + 'profile',
                     body: {first_name, last_name}
@@ -140,27 +140,27 @@ config.me.open = () => {
                 })
             }
 
-            if (typeof avatarFile !== "undefined") {
-                const formData = new FormData();
-                formData.append('avatar', avatarFile);
-                AjaxModule.putUsingFetch({
-                    data: true,
-                    url: mainServerURL + 'profile/avatar',
-                    body: formData
-                }).then(() => {
-                    AjaxModule.getUsingFetch({
-                        url: 'http://localhost:8080/api/v1/user/profile/avatar',
-                        body: null
-                    }).then((response) => {
-                        return response.json();
-                    }).then((response) => {
-                        profile.data.avatar = fileServerURL + response.result;
-                        profile.renderAvatar();
+            if (profile.isValid(['file']) && typeof avatar_file !== "undefined") {
+                    const formData = new FormData();
+                    formData.append('avatar', avatar_file);
+                    AjaxModule.putUsingFetch({
+                        data: true,
+                        url: mainServerURL + 'profile/avatar',
+                        body: formData
+                    }).then(() => {
+                        AjaxModule.getUsingFetch({
+                            url: 'http://localhost:8080/api/v1/user/profile/avatar',
+                            body: null
+                        }).then((response) => {
+                            return response.json();
+                        }).then((response) => {
+                            profile.data.avatar = fileServerURL + response.result;
+                            profile.renderAvatar();
+                        })
+                    }).catch((err) => {
+                        console.error(err);
                     })
-                }).catch((err) => {
-                    console.error(err);
-                })
-            }
+                }
         });
     }
 

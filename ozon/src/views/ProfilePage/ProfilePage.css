@@ -253,3 +253,7 @@
 
     color: #262626;
 }
+
+.profile-credentials__input_error {
+    color: red;
+}

@@ -11,13 +11,14 @@
     <div class="profile-body">
         <div class="profile-info">
             <img class="profile-info__user-avatar img_avatar" src="" alt="Users avatar">
-            <div class="profile-info__user_name">Nikita Suvorov</div>
+            <div class="profile-info__user_name"></div>
         </div>
         <div class="profile-credentials">
             <div class="profile-credentials__text">Credentials</div>
             <form class="profile-credentials__form">
                 <div class="profile-credentials__input_description">{{this.avatarUpload.placeholder}}</div>
-                <input class="profile-info__user-avatar-input" type="{{this.avatarUpload.type}}" placeholder="">
+                <input class="profile-info__user-avatar-input" type="{{this.avatarUpload.type}}" placeholder="" name="{{this.avatarUpload.name}}">
+                <div class="profile-credentials__input_error" id="{{this.avatarUpload.name}}_error"></div>
                 {{#each this.inputFields}}
                     <div class="profile-credentials__input_description">{{this.placeholder}}</div>
                     {{#if this.isDisabled}}
@@ -25,6 +26,7 @@
                     {{else}}
                         <input class="profile-credentials__input_line" type="{{this.type}}" name="{{this.name}}" placeholder="">
                     {{/if}}
+                    <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
                 {{/each}}
 
                 <button type="submit" class="button_update">Update</button>
