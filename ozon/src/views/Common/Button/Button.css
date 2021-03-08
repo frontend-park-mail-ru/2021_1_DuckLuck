@@ -14,4 +14,19 @@
     font-family: Nunito;
 
     cursor: pointer;
-}
+
+.button_update {
+    width: 150px;
+    height: 70px;
+    margin-top: 20px;
+
+    background: rgba(51,160,255,1);
+    border-radius: 10px;
+    border: 0 none;
+
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    font-family: Nunito;
+
+    cursor: pointer;
