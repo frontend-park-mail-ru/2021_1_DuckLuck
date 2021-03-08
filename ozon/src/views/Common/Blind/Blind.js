@@ -1,7 +1,7 @@
 import BlindTemplate from "./Blind.hbs"
 
 export class Blind {
-    constructor({} = {}) {
+    constructor() {
         this.objectType = 'blind';
     };
 

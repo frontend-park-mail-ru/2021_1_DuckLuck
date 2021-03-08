@@ -1,7 +1,7 @@
 import AuthenticationFormTemplate from "./AuthenticationForm.hbs"
 
 export class AuthenticationForm {
-    constructor({} = {}) {
+    constructor() {
         this.objectType = 'authenticationForm';
     };
 
