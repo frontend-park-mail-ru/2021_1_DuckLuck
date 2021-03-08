@@ -3,12 +3,10 @@ import {LoginPage} from "./views/LoginPage/LoginPage.js";
 import {SignupPage} from "./views/SignupPage/SignupPage.js";
 import {HomePage} from "./views/HomePage/HomePage.js";
 import {AjaxModule} from "./modules/Ajax/Ajax.js";
-import {ServerApiPath, Urls} from "./utils/urls/urls.js";
+import {ProductPage} from "./views/ProductPage/ProductPage.js";
+import {FileServerHost, ServerApiPath, Urls} from "./utils/urls/urls.js";
 
 const application = document.getElementById('app');
-const fileServerURL = 'http://localhost:8100'
-const mainServerURL = 'http://localhost:8080/api/v1/user/'
-const defaultAvatarURL = 'http://localhost:8100/avatar/default.png'
 
 const config = {
     home: {
@@ -50,8 +48,6 @@ config.signup.open = () => {
         evt.preventDefault();
 
 
-        // const firstName = document.getElementById('first-name').value.trim();
-        // const lastName = document.getElementById('last-name').value.trim();
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
@@ -150,9 +146,9 @@ config.me.open = () => {
                     }).then((response) => {
                         profile.data = response;
                         if (response.avatar === '') {
-                            profile.data.avatar = defaultAvatarURL
+                            profile.data.avatar = ServerApiPath + Urls.profileAvatarUrl + Urls.defaultAvatar;
                         } else {
-                            profile.data.avatar = fileServerURL + response.avatar;
+                            profile.data.avatar = FileServerHost + response.avatar;
                         }
                         profile.renderData();
                     })
@@ -175,7 +171,7 @@ config.me.open = () => {
                         }).then((response) => {
                             return response.json();
                         }).then((response) => {
-                            profile.data.avatar = fileServerURL + response.result;
+                            profile.data.avatar = FileServerHost + response.result;
                             profile.renderAvatar();
                         })
                     }).catch((err) => {
@@ -193,9 +189,9 @@ config.me.open = () => {
     }).then((response) => {
         profile.data = response;
         if (response.avatar === '') {
-            profile.data.avatar = defaultAvatarURL
+            profile.data.avatar = FileServerHost + Urls.defaultAvatar;
         } else {
-            profile.data.avatar = fileServerURL + response.avatar;
+            profile.data.avatar = FileServerHost + response.avatar;
         }
         profile.renderData();
         }).catch((error) => {
@@ -218,5 +214,7 @@ application.addEventListener('click', (evt) => {
         config[target.dataset.section].open();
     }
 });
+
+
 
 config.home.open();

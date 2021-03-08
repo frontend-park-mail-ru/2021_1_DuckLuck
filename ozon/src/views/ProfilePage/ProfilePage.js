@@ -31,7 +31,6 @@ export class ProfilePage extends BasePage {
         const firstNameInput = document.getElementsByName('firstName')[0];
         const lastNameInput = document.getElementsByName('lastName')[0];
         const emailInput = document.getElementsByName('email')[0];
-        const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
         const nameLabel = document.getElementsByClassName('profile-info__user_name')[0];
 
         firstNameInput.value = '';
@@ -42,22 +41,13 @@ export class ProfilePage extends BasePage {
         lastNameInput.placeholder = last_name;
         nameLabel.innerHTML = first_name + ' ' + last_name;
 
-        if (avatar === '') {
-            avatarImage.src = defaultAvatarSRC;
-        } else {
-            avatarImage.src = avatar;
-        }
+        this.renderAvatar()
     }
 
     renderAvatar = () => {
         const { avatar = ''} = this.data;
         const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
-
-        if (avatar === '') {
-            avatarImage.src = defaultAvatarSRC;
-        } else {
-            avatarImage.src = avatar;
-        }
+        avatarImage.src = avatar;
     }
 
     isValid = (specificTypeToCheck = []) => {
