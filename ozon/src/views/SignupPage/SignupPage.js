@@ -22,20 +22,30 @@ export class SignupPage extends BasePage {
         const form = document.createElement('form');
 
         const objectsToRender = [
-            new Input({type: 'email',
+            new Input({
+                type: 'email',
                 name: 'Email',
-                placeholder: 'email'}),
-            new Input({type: 'password',
+                placeholder: 'email'},
+            ),
+            new Input({
+                type: 'password',
                 name: 'Pass',
-                placeholder: 'password'}),
-            new Input({type: 'number',
+                placeholder: 'password'},
+            ),
+            new Input({
+                type: 'number',
                 name: 'Age',
-                placeholder: 'age'}),
-            new Input({type: 'submit',
-                value: 'Зарегестрироваться!'}),
-            new Link({href: '/home',
+                placeholder: 'age'},
+            ),
+            new Input({
+                type: 'submit',
+                value: 'Зарегестрироваться!'},
+            ),
+            new Link({
+                href: '/home',
                 textContent: 'Главная страница',
-                dataset: 'home'}),
+                dataset: 'home'},
+            ),
         ];
 
         form.innerHTML = signupTemplate({objects: objectsToRender});
