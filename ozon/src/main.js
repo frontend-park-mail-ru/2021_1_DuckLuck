@@ -3,6 +3,7 @@ import {LoginPage} from "./views/LoginPage/LoginPage.js";
 import {SignupPage} from "./views/SignupPage/SignupPage.js";
 import {HomePage} from "./views/HomePage/HomePage.js";
 import {AjaxModule} from "./modules/Ajax/Ajax.js";
+import {ServerApiPath, Urls} from "./utils/urls/urls.js";
 
 const application = document.getElementById('app');
 
@@ -20,7 +21,7 @@ const config = {
         text: 'Авторизоваться',
     },
     me: {
-        href: '/me',
+        href: '/profile',
         text: 'Профиль',
     },
 };
@@ -51,7 +52,7 @@ config.signup.open = () => {
         const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
-            url: '/signup',
+            url: ServerApiPath + Urls.signupUrl,
             body: {firstName, lastName, email, password},
         })
             .then(({status, parsedJson}) => {
@@ -83,7 +84,7 @@ config.login.open = () => {
         const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
-            url: 'http://localhost:8080/api/v1/user/login',
+            url: ServerApiPath + Urls.loginUrl,
             body: {email, password},
         })
             .then(({status, parsedJson}) => {
@@ -105,7 +106,7 @@ config.me.open = () => {
     const profileHTML = profile.render()
 
     AjaxModule.getUsingFetch({
-        url: 'http://localhost:8080/api/v1/user/profile',
+        url: ServerApiPath + Urls.profileUrl,
         body: null
     })
         .then(({status, parsedJson}) => {
@@ -120,7 +121,7 @@ config.me.open = () => {
 
                 AjaxModule.putUsingFetch({
                     data: true,
-                    url: 'http://localhost:8080/api/v1/user/profile/avatar',
+                    url: ServerApiPath + Urls.profileAvatarUrl,
                     body: formData
                 }).then(() => console.log('success'));
 
