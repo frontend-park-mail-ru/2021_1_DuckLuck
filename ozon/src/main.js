@@ -68,7 +68,7 @@ config.signup.open = () => {
 
     document
         .getElementById('form-header__login-link')
-        .addEventListener('click', (evt)=>{
+        .addEventListener('click', (evt) => {
             evt.preventDefault();
             application.removeChild(page);
             config.login.open();
@@ -108,7 +108,7 @@ config.login.open = () => {
 
     document
         .getElementById('form-header__signup-link')
-        .addEventListener('click', (evt)=>{
+        .addEventListener('click', (evt)  => {
             evt.preventDefault();
             application.removeChild(page);
             config.signup.open();
