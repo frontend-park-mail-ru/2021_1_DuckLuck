@@ -3,3 +3,11 @@
     height: 184px;
 }
 
+.img_item-preview {
+    margin: auto;
+    margin-top: 1px;
+    width: 299px;
+    height: 272px;
+    border-radius: 5px;
+}
+}
