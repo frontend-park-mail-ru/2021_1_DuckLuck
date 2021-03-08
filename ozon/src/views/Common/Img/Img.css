@@ -4,6 +4,15 @@
     height: 184px;
 }
 
+.img_size_m {
+    width: 380px;
+    height: 380px;
+}
+
+.img_size_s {
+    width: 85px;
+    height: 85px;
+}
 
 .img_item-preview {
     margin: auto;
