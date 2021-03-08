@@ -33,21 +33,26 @@ config.home.open = () => {
 }
 
 config.signup.open = () => {
-    application.innerHTML = '';
-    const page = new SignupPage(application);
-    const form = page.render();
+    const page = new SignupPage(application).render();
+    const blind = page.getElementsByClassName('blind')[0];
+    blind.addEventListener('click', (evt) => {
+        if (evt.target === evt.currentTarget)
+            application.removeChild(page);
+    });
 
+    const form = page.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = document.getElementsByName('Email')[0].value.trim();
-        const password = document.getElementsByName('Pass')[0].value.trim();
-        const age = document.getElementsByName('Age')[0].value;
 
+        const firstName = document.getElementById('first-name').value.trim();
+        const lastName = document.getElementById('last-name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
-            url: 'http://localhost:8080/api/v1/user/signup',
-            body: {email, password, age},
+            url: '/signup',
+            body: {firstName, lastName, email, password},
         })
             .then(({status, parsedJson}) => {
                 if (status === 201) {
@@ -58,18 +63,24 @@ config.signup.open = () => {
                 }
             });
     });
+
+    application.appendChild(page);
 }
 
 config.login.open = () => {
-    application.innerHTML = '';
-    const page = new LoginPage(application);
-    const form = page.render();
+    const page = new LoginPage(application).render();
+    const blind = page.getElementsByClassName('blind')[0];
+    blind.addEventListener('click', (evt) => {
+       if (evt.target === evt.currentTarget)
+           application.removeChild(page);
+    });
 
+    const form = page.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = form.elements['Емайл'].value.trim();
-        const password = form.elements['Пароль'].value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
             url: 'http://localhost:8080/api/v1/user/login',
@@ -85,8 +96,7 @@ config.login.open = () => {
             })
     });
 
-
-    application.appendChild(form);
+    application.appendChild(page);
 }
 
 config.me.open = () => {

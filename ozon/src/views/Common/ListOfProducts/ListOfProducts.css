@@ -1,0 +1,6 @@
+@import './ListOfProductsItem/ListOfProductsItem.css';
+
+.item-list {
+    display: flex;
+    flex-wrap: wrap
+}
