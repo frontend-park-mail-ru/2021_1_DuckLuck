@@ -21,7 +21,7 @@ export class Pagination {
             if (i > this.pagesCount) {
                 break;
             }
-            let buttonName = i === this.currentPage ? 'button_pagination_current-page' : 'button_pagination_common';
+            const buttonName = i === this.currentPage ? 'button_pagination_current-page' : 'button_pagination_common';
             buttons.push(new Button({name: buttonName, value: i.toString()}));
         }
 
