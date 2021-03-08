@@ -3,11 +3,23 @@ import {Input} from "../Common/Input/Input.js";
 import {Link} from "../Common/Link.js";
 import ProfileTemplate from "./ProfilePage.hbs"
 
+/**
+ * This is a description of the MyClass constructor function.
+ * @class
+ * @classdesc This is a description of the MyClass class.
+ */
 export class ProfilePage extends BasePage {
+    /**
+     *
+     * @param {Object} parent parents object
+     */
     constructor(parent) {
         super(parent);
     }
 
+    /**
+     *
+     */
     render = () => {
 
         const htmlTemplate = ProfileTemplate({
