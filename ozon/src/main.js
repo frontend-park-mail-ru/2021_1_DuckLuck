@@ -101,10 +101,67 @@ config.login.open = () => {
     application.appendChild(page);
 }
 
+let isPageWasOpened = false
 config.me.open = () => {
     application.innerHTML = ''
     const profile = new ProfilePage(application);
-    const profileHTML = profile.render()
+    const profileHTML = profile.render();
+
+    if (!isPageWasOpened) {
+        isPageWasOpened = true;
+        application.addEventListener('submit', (evt) => {
+            console.log("INSIDE")
+            evt.preventDefault();
+            const avatarFile = application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0];
+            const first_name = document.getElementsByName('firstName')[0].value.trim();
+            // const email = document.getElementsByName('email')[0].value.trim();
+            const last_name = document.getElementsByName('lastName')[0].value.trim();
+            // profile.data.email = email;
+
+            if (first_name !== '' && last_name !== '') {
+                AjaxModule.putUsingFetch({
+                    url: mainServerURL + 'profile',
+                    body: {first_name, last_name}
+                }).then(() => {
+                    AjaxModule.getUsingFetch({
+                        url: 'http://localhost:8080/api/v1/user/profile',
+                        body: null
+                    }).then((response) => {
+                        return response.json();
+                    }).then((response) => {
+                        console.log(response);
+                        profile.data = response;
+                        profile.renderData();
+                    })
+                }).catch((err) => {
+                    console.error(err);
+                })
+            }
+
+            if (typeof avatarFile !== "undefined") {
+                console.log("CORRECT!")
+                const formData = new FormData();
+                formData.append('avatar', avatarFile);
+                AjaxModule.putUsingFetch({
+                    data: true,
+                    url: mainServerURL + 'profile/avatar',
+                    body: formData
+                }).then(() => {
+                    AjaxModule.getUsingFetch({
+                        url: 'http://localhost:8080/api/v1/user/profile/avatar',
+                        body: null
+                    }).then((response) => {
+                        return response.json();
+                    }).then((response) => {
+                        profile.data.avatar = fileServerURL + response.result;
+                        profile.renderData();
+                    })
+                }).catch((err) => {
+                    console.error(err);
+                })
+            }
+        });
+    }
 
     AjaxModule.getUsingFetch({
         url: 'http://localhost:8080/api/v1/user/profile',
@@ -113,40 +170,10 @@ config.me.open = () => {
         return response.json();
     }).then((response) => {
         console.log(response);
-        profile.data = response
+        profile.data = response;
         profile.data.avatar = fileServerURL + response.avatar;
         profile.renderData();
-
-            application.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-                const avatarFile = application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0];
-                const first_name = document.getElementsByName('firstName')[0].value.trim();
-                const last_name = document.getElementsByName('lastName')[0].value.trim();
-
-                AjaxModule.putUsingFetch({
-                    url: mainServerURL + 'profile',
-                    body: {first_name, last_name}
-                }).catch((err) => {
-                    console.error(err);
-                })
-
-                // if (avatarFile) {
-                //     const formData = new FormData();
-                //     formData.append('avatar', avatarFile);
-                //     AjaxModule.putUsingFetch({
-                //         data: true,
-                //         url: mainServerURL + 'profile/avatar',
-                //         body: formData
-                //     }).catch((err) => {
-                //         console.error(err);
-                //     })
-                // }
-
-                // config.me.open();
-            });
-
-        })
-        .catch((error) => {
+        }).catch((error) => {
             if (error instanceof Error) {
                 console.error(error);
             }

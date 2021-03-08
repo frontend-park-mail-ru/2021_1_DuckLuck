@@ -26,9 +26,19 @@ export class ProfilePage extends BasePage {
                email = '',
                last_name = '',
                avatar = ''} = this.data;
-        document.getElementsByName('firstName')[0].placeholder = first_name;
-        document.getElementsByName('email')[0].placeholder = email;
-        document.getElementsByName('lastName')[0].placeholder = last_name;
-        document.getElementsByClassName('profile-info__user-avatar')[0].src = avatar;
+        const firstNameInput = document.getElementsByName('firstName')[0];
+        const lastNameInput = document.getElementsByName('lastName')[0];
+        const emailInput = document.getElementsByName('email')[0];
+        const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
+
+        firstNameInput.value = '';
+        firstNameInput.placeholder = first_name;
+        emailInput.value = ''
+        emailInput.placeholder = email;
+        lastNameInput.value = '';
+        lastNameInput.placeholder = last_name;
+        if (avatar !== '') {
+            avatarImage.src = avatar;
+        }
     }
 }
