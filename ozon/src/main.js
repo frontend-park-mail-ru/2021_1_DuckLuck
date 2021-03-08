@@ -66,7 +66,8 @@ config.signup.open = () => {
 
     application.appendChild(page);
 
-    document.getElementById('form-header__login-link')
+    document
+        .getElementById('form-header__login-link')
         .addEventListener('click', (evt)=>{
             evt.preventDefault();
             application.removeChild(page);
@@ -105,7 +106,8 @@ config.login.open = () => {
 
     application.appendChild(page);
 
-    document.getElementById('form-header__signup-link')
+    document
+        .getElementById('form-header__signup-link')
         .addEventListener('click', (evt)=>{
             evt.preventDefault();
             application.removeChild(page);
