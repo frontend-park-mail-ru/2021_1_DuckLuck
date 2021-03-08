@@ -1,0 +1,34 @@
+<div class="profile-page" id="profile-page">
+    <div class="profile-header">
+        <h1 class="profile-header__item">
+            <a class='profile-header__footer-link' href={{this.backLink.href}} data-section={{this.backLink.section}}>{{this.backLink.textContent}}</a>
+        </h1>
+        <h1 class="profile-header__item">
+            <span class="profile-header__footer-text">Profile</span>
+        </h1>
+    </div>
+
+    <div class="profile-body">
+        <div class="profile-info">
+            <img class="profile-info__user-avatar img_avatar" src="https://stockx-360.imgix.net/Air-Jordan-1-Retro-High-Dior/Images/Air-Jordan-1-Retro-High-Dior/Lv2/img03.jpg?auto=format,compress&w=559&q=90&dpr=2&updated_at=1607043976" alt="Users avatar">
+            <div class="profile-info__user_firstname">Nikita Suvorov</div>
+        </div>
+        <div class="profile-credentials">
+            <div class="profile-credentials__text">Credentials</div>
+            <form class="profile-credentials__form">
+                <div class="profile-credentials__input_description">{{this.avatarUpload.placeholder}}</div>
+                <input class="profile-info__user-avatar-input" type="{{this.avatarUpload.type}}" placeholder="">
+                {{#each this.inputFields}}
+                    <div class="profile-credentials__input_description">{{this.placeholder}}</div>
+                    {{#if this.isDisabled}}
+                        <input disabled class="profile-credentials__input_line" type="{{this.type}}" name="{{this.name}}" placeholder="">
+                    {{else}}
+                        <input class="profile-credentials__input_line" type="{{this.type}}" name="{{this.name}}" placeholder="">
+                    {{/if}}
+                {{/each}}
+
+                <button type="submit" class="button_update">Update</button>
+            </form>
+        </div>
+    </div>
+</div>

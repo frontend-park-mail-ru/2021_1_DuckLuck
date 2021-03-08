@@ -1,0 +1,23 @@
+<div class="item-container">
+    <div class="item-image">
+        <img src={{itemImage.src}} alt="" class="img img_item-preview">
+    </div>
+    <span class="item-name">{{itemName}}</span>
+    <div class="item-rating">
+        {{#for 0 itemRating 1}}
+            <div class="item-rating-star item-rating-star_yellowgreen">
+                <img src="" alt="" class="">
+            </div>
+        {{/for}}
+        {{#for itemRating 5 1}}
+            <div class="item-rating-star item-rating-star_gray">
+                <img src="" alt="" class="">
+            </div>
+        {{/for}}
+    </div>
+    <div class="item-price-block {{#if itemPrice.discount}}discount-active{{/if}}if}}">
+        <span class="item-discount-price item-price">{{itemPrice.discountPrice}}</span>
+        <span class="item-base-price item-price">{{itemPrice.base}}</span>
+        <span class="item-discount item-price">{{itemPrice.discount}}</span>
+    </div>
+</div>

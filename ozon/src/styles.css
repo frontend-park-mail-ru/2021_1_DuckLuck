@@ -1,4 +1,12 @@
-@import 'views/ProfilePage/ProfilePage.css';
+@import 'views/Common/Input/Input.css';
+@import 'views/Common/Button/Button.css';
+@import 'views/Common/Link/Link.css';
+@import 'views/Common/Blind/Blind.css';
+@import 'views/Common/AuthenticationForm/AuthenticationForm.css';
+@import 'views/Common/Pagination/Pagination.css';
+@import 'views/Common/ListOfProducts/ListOfProducts.css';
+@import 'views/Common/Img/Img.css';
+@import 'views/ProductPage/ProductPage.css';
 
 a, input {
     display: block;
