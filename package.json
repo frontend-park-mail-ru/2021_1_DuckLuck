@@ -4,9 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint ./",
+    "lint--fix": "eslint --fix ./",
     "start": "webpack && node ozon/server/index.mjs",
     "start-dev": "webpack --watch && node ozon/server/index.mjs",
+    "generate-doc": "jsdoc -c jsdoc-conf.json",
     "prepare": "husky install"
   },
   "keywords": [],
@@ -34,6 +36,7 @@
     "eslint-config-google": "^0.14.0",
     "handlebars-loader": "^1.7.1",
     "husky": "^5.1.3",
+    "jsdoc": "^3.6.6",
     "path": "^0.12.7",
     "regenerator-runtime": "^0.13.7",
     "request": "^2.88.2",

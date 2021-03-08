@@ -20,7 +20,6 @@
         "indent": ["error", 4],
         "quotes": ["error", "single"],
         "space-before-function-paren": ["error", "never"],
-        "padded-blocks": ["error", "always"],
         "prefer-arrow-callback": [0, { "allowNamedFunctions": true }],
         "func-names": ["error", "never"]
     }

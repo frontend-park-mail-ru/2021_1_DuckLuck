@@ -1,15 +1,24 @@
 import {BasePage} from '../BasePage.js';
 
+/**
+ * This is a description of the MyClass constructor function.
+ * @class
+ * @classdesc This is a description of the MyClass class.
+ */
 export class LoginPage extends BasePage {
-
+    /**
+     *
+     * @param {Object} parent parents object
+     */
     constructor(parent) {
-
         super(parent);
-
     }
 
+    /**
+     *
+     * @return {HTMLFormElement} html form
+     */
     render = () => {
-
         const form = document.createElement('form');
 
         const emailInput = document.createElement('input');
@@ -38,7 +47,5 @@ export class LoginPage extends BasePage {
         this._parent.appendChild(form);
 
         return form;
-
     }
-
 }

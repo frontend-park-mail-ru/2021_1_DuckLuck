@@ -26,22 +26,18 @@ const config = {
 };
 
 config.home.open = () => {
-
     application.innerHTML = '';
 
     const page = new HomePage(application);
     page.render(config);
-
 };
 
 config.signup.open = () => {
-
     application.innerHTML = '';
     const page = new SignupPage(application);
     const form = page.render();
 
     form.addEventListener('submit', (evt) => {
-
         evt.preventDefault();
 
         const email = document.getElementsByName('Email')[0].value.trim();
@@ -53,32 +49,22 @@ config.signup.open = () => {
             body: {email, password, age},
         })
             .then((response) => {
-
                 if (response.status === 201) {
-
                     config.me.open();
-
                 } else {
-
                     const {error} = response;
                     console.log(error);
-
                 }
-
             });
-
     });
-
 };
 
 config.login.open = () => {
-
     application.innerHTML = '';
     const page = new LoginPage(application);
     const form = page.render();
 
     form.addEventListener('submit', (evt) => {
-
         evt.preventDefault();
 
         const email = form.elements['Емайл'].value.trim();
@@ -89,29 +75,20 @@ config.login.open = () => {
             body: {email, password},
         })
             .then((response) => {
-
                 if (response.status === 200) {
-
                     config.me.open();
-
                 } else {
-
                     const {error} = response;
                     console.log(error);
-
                 }
-
             });
-
     });
 
 
     application.appendChild(form);
-
 };
 
 config.me.open = () => {
-
     application.innerHTML = '';
 
     const profile = new ProfilePage(application);
@@ -121,38 +98,27 @@ config.me.open = () => {
         body: null,
     })
         .then((response) => {
-
             profile.data = response.json();
             profile.renderData();
-
         })
         .catch((error) => {
-
             if (error instanceof Error) {
-
                 console.log(error);
-
             }
             const {responseObject} = error;
             alert(`Нет авторизации
                    ${JSON.stringify({status, responseObject})}`);
             config.login.open();
-
         });
-
 };
 
 application.addEventListener('click', (evt) => {
-
     const {target} = evt;
 
     if (target instanceof HTMLAnchorElement) {
-
         evt.preventDefault();
         config[target.dataset.section].open();
-
     }
-
 });
 
 config.home.open();
