@@ -10,7 +10,7 @@ export class Pagination {
     getHtmlString = () => {
         const buttons = [];
 
-        if (this.currentPage > 2) {
+        if (this.currentPage > 3) {
             buttons.push(new Button({name: 'button_pagination_first', value: '1'}));
         }
 
