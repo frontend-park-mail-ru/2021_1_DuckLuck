@@ -1,14 +1,19 @@
-import {BasePage} from "../BasePage.js";
+import {BasePage} from '../BasePage.js';
 
 export class HomePage extends BasePage {
+
     constructor(parent) {
+
         super(parent);
+
     }
 
     render = (config) => {
+
         Object
             .keys(config)
             .map((menuKey) => {
+
                 const {href, text} = config[menuKey];
 
                 const menuItem = document.createElement('a');
@@ -17,10 +22,15 @@ export class HomePage extends BasePage {
                 menuItem.dataset.section = menuKey;
 
                 return menuItem;
+
             })
             .forEach((element) => {
+
                 this._parent.appendChild(element);
+
             })
         ;
+
     }
+
 }

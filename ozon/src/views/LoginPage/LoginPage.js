@@ -1,11 +1,15 @@
-import {BasePage} from "../BasePage.js";
+import {BasePage} from '../BasePage.js';
 
 export class LoginPage extends BasePage {
+
     constructor(parent) {
+
         super(parent);
+
     }
 
     render = () => {
+
         const form = document.createElement('form');
 
         const emailInput = document.createElement('input');
@@ -34,5 +38,7 @@ export class LoginPage extends BasePage {
         this._parent.appendChild(form);
 
         return form;
+
     }
+
 }
