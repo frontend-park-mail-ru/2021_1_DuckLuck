@@ -1,0 +1,19 @@
+.popup {
+    z-index: 1003;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+}
+
+.popup_login, .popup_signup {
+    margin-left: -279px;
+    margin-top: -301px;
+    width: 557px;
+    height: 602px;
+    border-radius: 10px;
+    background: white;
+}
+
+.popup_signup {
+    height: 650px;
+}
