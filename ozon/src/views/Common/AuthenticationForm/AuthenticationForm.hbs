@@ -3,12 +3,12 @@
     <div class="authentication-block" id="authentication-block">
         <div class="form-header">
             <h1 class="form-header__head-item">
-                <a href="" class="link link_weight-h1">
+                <a href="" id="form-header__signup-link" class="link link_weight-h1">
                     <span class="text">Registration</span>
                 </a>
             </h1>
             <h1 class="form-header__head-item">
-                <a href="" class="link link_weight-h1">
+                <a href="" id="form-header__login-link" class="link link_weight-h1">
                     <span class="text">Log in</span>
                 </a>
             </h1>
@@ -29,7 +29,7 @@
                 {{/each}}
                 <br>
                 <button class="button button_auth_submit" type={{formData.submitButton.type}}>
-                        <span class="text">{{formData.submitButton.text}}</span>
+                    <span class="text">{{formData.submitButton.text}}</span>
                 </button>
             </form>
         </div>

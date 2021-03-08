@@ -7,9 +7,15 @@
 
     border-radius: 10px;
     border: 0 none;
+    outline: none;
+    opacity: 0.6;
 
     font-family: Nunito;
     font-size: 16px;
-    color: gray;
-    background: rgba(223,222,222,1);
+    color: #454545;
+    background: rgb(223, 222, 222);
+}
+
+.form-body__input-block:focus {
+    border: 2px solid #0080FF;
 }
