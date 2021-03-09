@@ -1,4 +1,4 @@
-import PopupTemplate from "./Popup.hbs"
+import PopupTemplate from './Popup.hbs';
 
 export class Popup {
     constructor({} = {}) {

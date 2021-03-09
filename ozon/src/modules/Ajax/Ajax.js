@@ -4,7 +4,6 @@
  * @classdesc This is a description of the MyClass class.
  */
 export class AjaxModule {
-
     /**
      *
      * @param {Object} ajaxArgs Arguments for ajax
@@ -41,16 +40,16 @@ export class AjaxModule {
         return this.#usingFetch({method: 'PUT', ...ajaxArgs});
     }
 
-    static #usingFetch = async (ajaxArgs) => {
+    static #usingFetch = async(ajaxArgs) => {
         // TODO: make beauty
         if (!ajaxArgs.data) {
             if (ajaxArgs.body) {
-                ajaxArgs.body = JSON.stringify(ajaxArgs.body)
+                ajaxArgs.body = JSON.stringify(ajaxArgs.body);
             }
-        }  else {
-            console.log("IMG!");
+        } else {
+            console.log('IMG!');
         }
-        const response =  await fetch (ajaxArgs.url, {
+        const response = await fetch(ajaxArgs.url, {
             method: ajaxArgs.method,
             body: (ajaxArgs.body) ? ajaxArgs.body : null,
             credentials: 'include',

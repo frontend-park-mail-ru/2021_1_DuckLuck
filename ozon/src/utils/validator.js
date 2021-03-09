@@ -16,7 +16,7 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
     }
 
 
-    let password = ''
+    let password = '';
     let isValid = true;
     for (const input of inputs) {
         console.log(input, input.type);
@@ -32,31 +32,38 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
             errField = document.getElementById(input.id + '_error');
         }
         if (input.type === 'text') {
-            if (input.name.includes('firstName') && ((isValid  = nameValidation(input)) !== true)) {
+            if (input.name.includes('firstName') && !(nameValidation(input))) {
+                isValid = false;
                 errField.innerHTML = 'Incorrect or empty First Name!';
-            } else if (input.name.includes('lastName') && ((isValid = nameValidation(input)) !== true)) {
+            } else if (input.name.includes('lastName') && !(nameValidation(input))) {
+                isValid = false;
                 errField.innerHTML = 'Incorrect or empty Last Name!';
             } else if (input.id === 'email') {
-                if ((isValid = emailValidation(input)) !== true) {
+                if (!(emailValidation(input))) {
+                    isValid = false;
                     errField.innerHTML = 'Incorrect Email!';
                 }
             }
         } else if (input.type === 'email') {
-            if ((isValid = emailValidation(input)) !== true) {
+            if (!(emailValidation(input))) {
+                isValid = false;
                 errField.innerHTML = 'Incorrect Email!';
             }
         } else if (input.type === 'file') {
-            if ((isValid = fileValidation(input)) !== true) {
+            if (!(fileValidation(input))) {
+                isValid = false;
                 errField.innerHTML = 'Incorrect File!';
             }
         } else if (input.type === 'password') {
             if (input.id === 'password') {
-                if ((isValid = passwordValidation(input)) !== true) {
+                if (!(passwordValidation(input))) {
+                    isValid = false;
                     errField.innerHTML = 'Incorrect password!';
                 }
                 password = input.value;
             } else if (input.id === 'repeat_password') {
-                if ((isValid = passwordRepeatValidation(input, password)) !== true) {
+                if (!(passwordRepeatValidation(input, password))) {
+                    isValid = false;
                     errField.innerHTML = 'Incorrect repeat password!';
                 }
             }

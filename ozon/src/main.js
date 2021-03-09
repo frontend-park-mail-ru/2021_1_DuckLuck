@@ -1,9 +1,9 @@
 import {ProfilePage} from './views/ProfilePage/ProfilePage.js';
-import {LoginPage} from "./views/LoginPage/LoginPage.js";
-import {SignupPage} from "./views/SignupPage/SignupPage.js";
-import {HomePage} from "./views/HomePage/HomePage.js";
-import {AjaxModule} from "./modules/Ajax/Ajax.js";
-import {ServerApiPath, Urls} from "./utils/urls/urls.js";
+import {LoginPage} from './views/LoginPage/LoginPage.js';
+import {SignupPage} from './views/SignupPage/SignupPage.js';
+import {HomePage} from './views/HomePage/HomePage.js';
+import {AjaxModule} from './modules/Ajax/Ajax.js';
+import {ServerApiPath, Urls} from './utils/urls/urls.js';
 
 const application = document.getElementById('app');
 
@@ -34,13 +34,14 @@ config.home.open = () => {
 };
 
 config.signup.open = () => {
-    const page =  new SignupPage(application)
+    const page = new SignupPage(application);
     const pageParsed = page.render();
     const blind = pageParsed.getElementsByClassName('blind')[0];
 
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(pageParsed);
+        }
     });
 
     const form = pageParsed.getElementsByClassName('form-body')[0];
@@ -51,8 +52,6 @@ config.signup.open = () => {
         if (page.isValid()) {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
-            const repeat_password = document.getElementById('repeat_password').value.trim();
-            console.log(repeat_password);
 
             AjaxModule.postUsingFetch({
                 url: ServerApiPath + Urls.signupUrl,
@@ -78,15 +77,16 @@ config.signup.open = () => {
             application.removeChild(pageParsed);
             config.login.open();
         });
-}
+};
 
 config.login.open = () => {
     const page = new LoginPage(application);
     const pageParsed = page.render();
     const blind = pageParsed.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(pageParsed);
+        }
     });
 
     const form = pageParsed.getElementsByClassName('form-body')[0];
@@ -117,21 +117,21 @@ config.login.open = () => {
 
     document
         .getElementById('form-header__signup-link')
-        .addEventListener('click', (evt)  => {
+        .addEventListener('click', (evt) => {
             evt.preventDefault();
             application.removeChild(pageParsed);
             config.signup.open();
         });
-}
+};
 
 config.me.open = () => {
-    application.innerHTML = ''
+    application.innerHTML = '';
     const profile = new ProfilePage(application);
-    const profileHTML = profile.render()
+    const profileHTML = profile.render();
 
     AjaxModule.getUsingFetch({
         url: ServerApiPath + Urls.profileUrl,
-        body: null
+        body: null,
     })
         .then(({status, parsedJson}) => {
             profile.data = parsedJson;
@@ -146,11 +146,9 @@ config.me.open = () => {
                 AjaxModule.putUsingFetch({
                     data: true,
                     url: ServerApiPath + Urls.profileAvatarUrl,
-                    body: formData
+                    body: formData,
                 }).then(() => console.log('success'));
-
             });
-
         })
         .catch((error) => {
             if (error instanceof Error) {
@@ -163,7 +161,7 @@ config.me.open = () => {
         });
 
     application.appendChild(profileHTML);
-}
+};
 
 application.addEventListener('click', (evt) => {
     const {target} = evt;

@@ -19,7 +19,7 @@
             <form action="">
                 {{#each formData.inputFields}}
                     <input type={{this.type}} class="form-body__input-block" id={{this.name}} placeholder="{{this.placeholder}}">
-                    <div style="color: red; margin-left: 200px; margin-top: -1%;" id="{{this.name}}_error"></div>
+                    <div class="form-header__error-div" id="{{this.name}}_error"></div>
                     {{#ifEquals this.type "password"}}
                         {{#ifEquals ../formType "login"}}
                             <label for="password">

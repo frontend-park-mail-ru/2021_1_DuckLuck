@@ -1,11 +1,11 @@
-import {BasePage} from "../BasePage.js";
-import {Input} from "../Common/Input/Input.js";
-import {Button} from "../Common/Button/Button.js";
-import {Link} from "../Common/Link/Link.js";
-import {Popup} from "../Common/Popup/Popup.js";
-import {Blind} from "../Common/Blind/Blind.js";
-import {AuthenticationForm} from "../Common/AuthenticationForm/AuthenticationForm.js";
-import {isValidForm} from "../../utils/validator";
+import {BasePage} from '../BasePage.js';
+import {Input} from '../Common/Input/Input.js';
+import {Button} from '../Common/Button/Button.js';
+import {Link} from '../Common/Link/Link.js';
+import {Popup} from '../Common/Popup/Popup.js';
+import {Blind} from '../Common/Blind/Blind.js';
+import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
+import {isValidForm} from '../../utils/validator';
 
 /**
  * This is a description of the MyClass constructor function.
@@ -48,15 +48,15 @@ export class LoginPage extends BasePage {
                         }),
                         submitButton: new Button({
                             text: 'Log in',
-                            type: 'submit'
+                            type: 'submit',
                         }),
-                },
-            }),
+                    },
+                }),
             background: new Blind().getHtmlString(),
             popupType: 'login',
         });
         return new DOMParser().parseFromString(template, 'text/html')
-                              .getElementById('popup-wrapper');
+            .getElementById('popup-wrapper');
     }
 
     isValid = (specificTypeToCheck = []) => {

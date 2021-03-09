@@ -1,4 +1,4 @@
-import AuthenticationFormTemplate from "./AuthenticationForm.hbs"
+import AuthenticationFormTemplate from './AuthenticationForm.hbs';
 
 export class AuthenticationForm {
     constructor() {
