@@ -1,5 +1,5 @@
 /**
- * @class AuthenticationForm
+ * @class TextArea
  * @classdesc This class is using for construct html via templates. One of the common views
  */
 export class TextArea {
