@@ -10,6 +10,7 @@ export class ProductsPage extends BasePage {
     }
 
     render = ({products, paginationInfo}) => {
+        console.log(products);
         const productsListHtmlString = new ListOfProducts(products).getHtmlString();
         const pagination = new Pagination(paginationInfo).getHtmlString();
         const template = ProductsPageTemplate({

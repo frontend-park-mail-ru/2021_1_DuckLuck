@@ -2,6 +2,7 @@ import {ProfilePage} from './views/ProfilePage/ProfilePage.js';
 import {LoginPage} from "./views/LoginPage/LoginPage.js";
 import {SignupPage} from "./views/SignupPage/SignupPage.js";
 import {HomePage} from "./views/HomePage/HomePage.js";
+import {ProductsPage} from "./views/ProductsPage/ProductsPage.js";
 import {AjaxModule} from "./modules/Ajax/Ajax.js";
 import {ServerApiPath, Urls} from "./utils/urls/urls.js";
 
@@ -23,6 +24,14 @@ const config = {
     me: {
         href: '/profile',
         text: 'Профиль',
+    },
+    item: {
+        href: '/item',
+        text: 'Товар',
+    },
+    items: {
+        href: '/items',
+        text: 'Товары',
     },
 };
 
@@ -157,6 +166,35 @@ config.me.open = () => {
 
     application.appendChild(profileHTML);
 }
+
+config.items.open = (currentPage=1) => {
+    application.innerHTML = '';
+    AjaxModule.postUsingFetch({
+        url: ServerApiPath + '/product',
+        body: {
+            page_num: currentPage,
+            count: 10,
+            sort_key: 'cost',
+            sort_direction: 'ASC',
+        }
+    })
+        .then(({status, parsedJson}) => {
+            const page = new ProductsPage(application).render({
+                products: parsedJson['list_preview_products'],
+                paginationInfo: {
+                    pagesCount: parsedJson['max_count_pages'],
+                    currentPage: currentPage,
+                },
+            });
+            for (const button of page.getElementsByClassName('button_pagination')) {
+                button.addEventListener('click', () => {
+                    config.items.open(parseInt(button.textContent));
+                });
+            }
+            application.appendChild(page);
+        });
+};
+
 
 application.addEventListener('click', (evt) => {
     const {target} = evt;
