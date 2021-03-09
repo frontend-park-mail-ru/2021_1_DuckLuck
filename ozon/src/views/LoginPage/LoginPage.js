@@ -8,13 +8,12 @@ import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationFor
 import {isValidForm} from '../../utils/validator';
 
 /**
- * This is a description of the MyClass constructor function.
- * @class
- * @classdesc This is a description of the MyClass class.
+ * @class LoginPage
+ * @extends BasePage
+ * @classdesc Class for Login page
  */
 export class LoginPage extends BasePage {
     /**
-     *
      * @param {Object} parent parents object
      */
     constructor(parent) {

@@ -7,11 +7,10 @@ import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
 import {isValidForm} from '../../utils/validator.js';
 
-
 /**
- * This is a description of the MyClass constructor function.
- * @class
- * @classdesc This is a description of the MyClass class.
+ * @class  SignupPage
+ * @extends BasePage
+ * @classdesc Class for signup page
  */
 export class SignupPage extends BasePage {
     /**
@@ -22,6 +21,10 @@ export class SignupPage extends BasePage {
         super(parent);
     }
 
+    /**
+     *
+     * @return {HTMLElement} rendered page
+     */
     render = () => {
         const template = new Popup().getHtmlString({
             popupBody:

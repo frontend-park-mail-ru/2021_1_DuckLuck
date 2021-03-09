@@ -6,11 +6,24 @@ import {isValidForm} from '../../utils/validator.js';
 import {AjaxModule} from "../../modules/Ajax/Ajax";
 import {FileServerHost, ServerApiPath, Urls} from "../../utils/urls/urls";
 
+/**
+ * @class  ProfilePage
+ * @extends BasePage
+ * @classdesc Class for showing profile of a user
+ */
 export class ProfilePage extends BasePage {
+    /**
+     * @param {Object} parent parents object
+     */
     constructor(parent) {
         super(parent);
     }
 
+
+    /**
+     *
+     * @return {HTMLElement} rendered page
+     */
     render = () => {
         const htmlTemplate = ProfileTemplate({
             inputFields: [new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
@@ -90,6 +103,9 @@ export class ProfilePage extends BasePage {
     }
 
 
+    /**
+     * @description Using for render data after AJAX methods.
+     */
     renderData = () => {
         const {first_name = '',
             email = '',
