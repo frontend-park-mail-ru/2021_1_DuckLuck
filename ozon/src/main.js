@@ -5,7 +5,7 @@ import {HomePage} from "./views/HomePage/HomePage.js";
 import {ProductsPage} from "./views/ProductsPage/ProductsPage.js";
 import {ProductPage} from "./views/ProductPage/ProductPage.js";
 import {AjaxModule} from "./modules/Ajax/Ajax.js";
-import {ServerApiPath, Urls} from "./utils/urls/urls.js";
+import {FileServerHost, ServerApiPath, Urls} from './utils/urls/urls.js';
 
 const application = document.getElementById('app');
 
@@ -44,126 +44,125 @@ config.home.open = () => {
 };
 
 config.signup.open = () => {
-    const page = new SignupPage(application).render();
-    const blind = page.getElementsByClassName('blind')[0];
+    const page = new SignupPage(application);
+    const pageParsed = page.render();
+    const blind = pageParsed.getElementsByClassName('blind')[0];
 
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(page);
+        }
     });
 
-    const form = page.getElementsByClassName('form-body')[0];
+    const form = pageParsed.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
+        if (page.isValid()) {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
 
-        AjaxModule.postUsingFetch({
-            url: ServerApiPath + Urls.signupUrl,
-            body: { email, password},
-        })
-            .then(({status, parsedJson}) => {
-                if (status === 201) {
-                    config.me.open();
-                } else {
-                    const {error} = parsedJson;
-                    console.error(error);
-                }
-            });
+            AjaxModule.postUsingFetch({
+                url: ServerApiPath + Urls.signupUrl,
+                body: {email, password},
+            })
+                .then(({status, parsedJson}) => {
+                    if (status === 201) {
+                        config.me.open();
+                    } else {
+                        const {error} = parsedJson;
+                        console.error(error);
+                    }
+                });
+        }
     });
 
-    application.appendChild(page);
+    application.appendChild(pageParsed);
 
     document
         .getElementById('form-header__login-link')
         .addEventListener('click', (evt) => {
             evt.preventDefault();
-            application.removeChild(page);
+            application.removeChild(pageParsed);
             config.login.open();
         });
-}
+};
 
 config.login.open = () => {
-    const page = new LoginPage(application).render();
-    const blind = page.getElementsByClassName('blind')[0];
+    const page = new LoginPage(application);
+    const pageParsed = page.render();
+    const blind = pageParsed.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(page);
+        }
     });
 
-    const form = page.getElementsByClassName('form-body')[0];
+    const form = pageParsed.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
+        if (page.isValid()) {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
 
-        AjaxModule.postUsingFetch({
-            url: ServerApiPath + Urls.loginUrl,
-            body: {email, password},
-        })
-            .then(({status, parsedJson}) => {
-                if (status === 200) {
-                    config.me.open();
-                } else {
-                    const {error} = parsedJson;
-                    console.error(error);
-                }
-            });
+            AjaxModule.postUsingFetch({
+                url: ServerApiPath + Urls.loginUrl,
+                body: {email, password},
+            })
+                .then(({status, parsedJson}) => {
+                    if (status === 200) {
+                        config.me.open();
+                    } else {
+                        const {error} = parsedJson;
+                        alert(error);
+                    }
+                });
+        }
     });
 
-    application.appendChild(page);
+
+    application.appendChild(pageParsed);
 
     document
         .getElementById('form-header__signup-link')
-        .addEventListener('click', (evt)  => {
+        .addEventListener('click', (evt) => {
             evt.preventDefault();
-            application.removeChild(page);
+            application.removeChild(pageParsed);
             config.signup.open();
         });
-}
+};
 
 config.me.open = () => {
-    application.innerHTML = ''
+    application.innerHTML = '';
     const profile = new ProfilePage(application);
-    const profileHTML = profile.render()
+    const profileHTML = profile.render();
 
     AjaxModule.getUsingFetch({
         url: ServerApiPath + Urls.profileUrl,
-        body: null
-    })
-        .then(({status, parsedJson}) => {
-            profile.data = parsedJson;
-            profile.renderData();
-
-            const avatar = application.getElementsByClassName('profile-info__user-avatar-input')[0];
-            application.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-                const formData = new FormData();
-                formData.append('avatar', application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
-
-                AjaxModule.putUsingFetch({
-                    data: true,
-                    url: ServerApiPath + Urls.profileAvatarUrl,
-                    body: formData
-                }).then(() => console.log('success'));
-
-            });
-
-        })
-        .catch((error) => {
-            if (error instanceof Error) {
-                console.error(error);
-            }
-            const {responseObject} = error;
-            alert(`Нет авторизации
-                   ${JSON.stringify({status, responseObject})}`);
+        body: null,
+    }).then((response) => {
+        return response.json();
+    }).then((response) => {
+        console.log(response);
+        if (response.error === 'user is unauthorized') {
             config.login.open();
-        });
-
-    application.appendChild(profileHTML);
-}
+            return;
+        }
+        const profileHTML = profile.render();
+        application.appendChild(profileHTML);
+        profile.addFormEventListener();
+        profile.data = response;
+        if (response.avatar === '') {
+            profile.data.avatar = FileServerHost + Urls.defaultAvatar;
+        } else {
+            profile.data.avatar = FileServerHost + response.avatar;
+        }
+        profile.renderData();
+    }).catch((error) => {
+        console.error(error);
+    });
+};
 
 config.item.open = (itemId=1) => {
     application.innerHTML = '';

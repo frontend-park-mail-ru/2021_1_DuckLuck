@@ -1,14 +1,12 @@
 /**
- * This is a description of the MyClass constructor function.
- * @class
- * @classdesc This is a description of the MyClass class.
+ * @class BasePage
+ * @classdesc Base class for all other views
  */
 export class BasePage {
     _parent;
     _data;
 
     /**
-     *
      * @param {Object} parent parents object
      */
     constructor(parent) {
@@ -18,7 +16,7 @@ export class BasePage {
 
     /**
      *
-     * @return {*}
+     * @return {Object} some data
      */
     get data() {
         return this._data;
@@ -26,7 +24,7 @@ export class BasePage {
 
     /**
      *
-     * @param {Object} data data object
+     * @param {Object} data data to set
      */
     set data(data) {
         this._data = data;

@@ -1,12 +1,25 @@
-import {Button} from "../Button/Button.js"
-import PaginationTemplate from "./Pagination.hbs"
+import {Button} from '../Button/Button.js';
+import PaginationTemplate from './Pagination.hbs';
 
+/**
+ * @class Pagination
+ * @classdesc This class is using for construct html via templates. One of the common views
+ */
 export class Pagination {
+    /**
+     *
+     * @param {number} pagesCount maximum amount of page
+     * @param {number} currentPage current page!
+     */
     constructor({pagesCount, currentPage}) {
         this.pagesCount = pagesCount;
         this.currentPage = currentPage;
     }
 
+    /**
+     *
+     * @return {string} generated HTML after templating
+     */
     getHtmlString = () => {
         const buttons = [];
 
