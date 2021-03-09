@@ -3,6 +3,7 @@ import {LoginPage} from "./views/LoginPage/LoginPage.js";
 import {SignupPage} from "./views/SignupPage/SignupPage.js";
 import {HomePage} from "./views/HomePage/HomePage.js";
 import {ProductsPage} from "./views/ProductsPage/ProductsPage.js";
+import {ProductPage} from "./views/ProductPage/ProductPage.js";
 import {AjaxModule} from "./modules/Ajax/Ajax.js";
 import {ServerApiPath, Urls} from "./utils/urls/urls.js";
 
@@ -166,6 +167,38 @@ config.me.open = () => {
 
     application.appendChild(profileHTML);
 }
+
+config.item.open = (itemId=1) => {
+    application.innerHTML = '';
+    AjaxModule.getUsingFetch({
+        url: ServerApiPath + `/product/${itemId}`,
+    })
+        .then(({status, parsedJson}) => {
+            const base = parsedJson['price']['base_cost'];
+            const discount = parsedJson['price']['discount'];
+            const discountPrice = base * (1 - discount*0.01);
+            const item = {
+                name: parsedJson['title'],
+                price: {
+                    discountPrice: discountPrice,
+                    base: base,
+                    discount: discount,
+                },
+                rating: parsedJson['rating'],
+                description: {
+                    Category: parsedJson['category'],
+                },
+                images: parsedJson['images'],
+            }
+            const page = new ProductPage(application).render({item: item});
+            for (const button of page.getElementsByClassName('button_pagination')) {
+                button.addEventListener('click', () => {
+                    config.items.open(parseInt(button.textContent));
+                });
+            }
+            application.appendChild(page);
+        });
+};
 
 config.items.open = (currentPage=1) => {
     application.innerHTML = '';

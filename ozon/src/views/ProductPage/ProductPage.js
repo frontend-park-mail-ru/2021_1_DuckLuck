@@ -2,17 +2,21 @@ import {BasePage} from "../BasePage.js";
 import {Img} from "../Common/Img/Img.js";
 import {Rating} from "../Common/Rating/Rating.js";
 import ProductPageTemplate from "./ProductPage.hbs"
+import {FileServerHost} from "../../utils/urls/urls.js";
 
 export class ProductPage extends BasePage {
     constructor(parent) {
         super(parent);
     }
 
-    render = (item) => {
+    render = ({item}) => {
         const images = [];
-        item['images'].forEach((img) => {
+        console.log(item)
+        console.log(item['images'])
+        item['images'].forEach((src) => {
+            console.log(src)
             images.push(new Img({
-                src: img['src'],
+                src: FileServerHost + src,
             }))
         });
         const template = ProductPageTemplate({
