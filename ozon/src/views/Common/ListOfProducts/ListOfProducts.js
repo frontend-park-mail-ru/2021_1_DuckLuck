@@ -1,6 +1,6 @@
 import {Img} from "../Img/Img"
 import {ListOfProductsItem} from "./ListOfProductsItem/ListOfProductsItem";
-import ListOFProductsItemTemplate from "./ListOFProducts.hbs"
+import ListOFProductsItemTemplate from "./ListOfProducts.hbs"
 import {FileServerHost} from "../../../utils/urls/urls.js";
 
 /**

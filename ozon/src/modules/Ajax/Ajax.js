@@ -44,7 +44,7 @@ export class AjaxModule {
     /**
      *
      * @param {Object} ajaxArgs argiments for ajax
-     * @return {Promise<{parsedJson: any, status: number}>}
+     * @return {Promise<Response>}
      * @description all these functions above using this private function to communicate with backend.
      */
     static #usingFetch = (ajaxArgs) => {

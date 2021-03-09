@@ -49,9 +49,7 @@ config.signup.open = () => {
     const blind = pageParsed.getElementsByClassName('blind')[0];
 
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget) {
-            application.removeChild(pageParsed);
-        }
+        application.removeChild(pageParsed);
     });
 
     const form = pageParsed.getElementsByClassName('form-body')[0];
@@ -61,7 +59,7 @@ config.signup.open = () => {
         if (!page.isValid()) {
             return;
         }
-      
+
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
@@ -69,30 +67,13 @@ config.signup.open = () => {
             url: ServerApiPath + Urls.signupUrl,
             body: {email, password},
         }).then(({status, parsedJson}) => {
-                if (status === 201) {
-                    config.me.open();
-                } else {
-                    const {error} = parsedJson;
-                    console.error(error);
-                }
-            });
-        
-
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-
-        AjaxModule.postUsingFetch({
-            url: ServerApiPath + Urls.signupUrl,
-            body: {email, password},
-        })
-            .then(({status, parsedJson}) => {
-                if (status === 201) {
-                    config.me.open();
-                } else {
-                    const {error} = parsedJson;
-                    console.error(error);
-                }
-            });
+            if (status === 201) {
+                config.me.open();
+            } else {
+                const {error} = parsedJson;
+                console.error(error);
+            }
+        });
     });
 
     application.appendChild(pageParsed);
@@ -111,34 +92,31 @@ config.login.open = () => {
     const pageParsed = page.render();
     const blind = pageParsed.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget) {
-            application.removeChild(page);
-        }
+        application.removeChild(pageParsed);
     });
 
     const form = pageParsed.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        if (page.isValid()) {
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
+        if (!page.isValid())
+            return;
 
-            AjaxModule.postUsingFetch({
-                url: ServerApiPath + Urls.loginUrl,
-                body: {email, password},
-            })
-                .then(({status, parsedJson}) => {
-                    if (status === 200) {
-                        config.me.open();
-                    } else {
-                        const {error} = parsedJson;
-                        alert(error);
-                    }
-                });
-        }
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        AjaxModule.postUsingFetch({
+            url: ServerApiPath + Urls.loginUrl,
+            body: {email, password},
+        }).then(({status, parsedJson}) => {
+            if (status === 200) {
+                config.me.open();
+            } else {
+                const {error} = parsedJson;
+                alert(error);
+            }
+        });
     });
-
 
     application.appendChild(pageParsed);
 
@@ -152,10 +130,6 @@ config.login.open = () => {
 };
 
 config.me.open = () => {
-    application.innerHTML = '';
-    const profile = new ProfilePage(application);
-    const profileHTML = profile.render();
-
     AjaxModule.getUsingFetch({
         url: ServerApiPath + Urls.profileUrl,
         body: null,
@@ -167,6 +141,8 @@ config.me.open = () => {
             config.login.open();
             return;
         }
+        application.innerHTML = '';
+        const profile = new ProfilePage(application);
         const profileHTML = profile.render();
         application.appendChild(profileHTML);
         profile.addFormEventListener();
@@ -186,32 +162,33 @@ config.item.open = (itemId=1) => {
     application.innerHTML = '';
     AjaxModule.getUsingFetch({
         url: ServerApiPath + `/product/${itemId}`,
-    })
-        .then(({status, parsedJson}) => {
-            const base = parsedJson['price']['base_cost'];
-            const discount = parsedJson['price']['discount'];
-            const discountPrice = base * (1 - discount*0.01);
-            const item = {
-                name: parsedJson['title'],
-                price: {
-                    discountPrice: discountPrice,
-                    base: base,
-                    discount: discount,
-                },
-                rating: parsedJson['rating'],
-                description: {
-                    Category: parsedJson['category'],
-                },
-                images: parsedJson['images'],
-            }
-            const page = new ProductPage(application).render(item);
-            for (const button of page.getElementsByClassName('button_pagination')) {
-                button.addEventListener('click', () => {
-                    config.items.open(parseInt(button.textContent));
-                });
-            }
-            application.appendChild(page);
-        });
+    }).then((response) => {
+        return response.json();
+    }).then((parsedJson) => {
+        const base = parsedJson['price']['base_cost'];
+        const discount = parsedJson['price']['discount'];
+        const discountPrice = base * (1 - discount*0.01);
+        const item = {
+            name: parsedJson['title'],
+            price: {
+                discountPrice: discountPrice,
+                base: base,
+                discount: discount,
+            },
+            rating: parsedJson['rating'],
+            description: {
+                Category: parsedJson['category'],
+            },
+            images: parsedJson['images'],
+        }
+        const page = new ProductPage(application).render(item);
+        for (const button of page.getElementsByClassName('button_pagination')) {
+            button.addEventListener('click', () => {
+                config.items.open(parseInt(button.textContent));
+            });
+        }
+        application.appendChild(page);
+    });
 };
 
 config.items.open = (currentPage=1) => {
@@ -220,31 +197,32 @@ config.items.open = (currentPage=1) => {
         url: ServerApiPath + '/product',
         body: {
             page_num: currentPage,
-            count: 10,
+            count: 4,
             sort_key: 'cost',
             sort_direction: 'ASC',
         }
-    })
-        .then(({status, parsedJson}) => {
-            const page = new ProductsPage(application).render({
-                products: parsedJson['list_preview_products'],
-                paginationInfo: {
-                    pagesCount: parsedJson['max_count_pages'],
-                    currentPage: currentPage,
-                },
-            });
-            for (const button of page.getElementsByClassName('button_pagination')) {
-                button.addEventListener('click', () => {
-                    config.items.open(parseInt(button.textContent));
-                });
-            }
-            for (const itemContainer of page.getElementsByClassName('item-container')) {
-                itemContainer.addEventListener('click', () => {
-                    config.item.open(parseInt(itemContainer.getElementsByClassName('item-id')[0].textContent));
-                });
-            }
-            application.appendChild(page);
+    }).then((response) => {
+        return response.json();
+    }).then((parsedJson) => {
+        const page = new ProductsPage(application).render({
+            products: parsedJson['list_preview_products'],
+            paginationInfo: {
+                pagesCount: parsedJson['max_count_pages'],
+                currentPage: currentPage,
+            },
         });
+        for (const button of page.getElementsByClassName('button_pagination')) {
+            button.addEventListener('click', () => {
+                config.items.open(parseInt(button.textContent));
+            });
+        }
+        for (const itemContainer of page.getElementsByClassName('item-container')) {
+            itemContainer.addEventListener('click', () => {
+                config.item.open(parseInt(itemContainer.getElementsByClassName('item-id')[0].textContent));
+            });
+        }
+        application.appendChild(page);
+    });
 };
 
 

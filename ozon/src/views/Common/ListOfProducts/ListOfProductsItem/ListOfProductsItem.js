@@ -1,4 +1,4 @@
-import ListOFProductsItemTemplate from './ListOFProductsItem.hbs';
+import ListOFProductsItemTemplate from './ListOfProductsItem.hbs';
 
 
 /**
