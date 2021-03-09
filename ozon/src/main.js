@@ -3,7 +3,7 @@ import {LoginPage} from './views/LoginPage/LoginPage.js';
 import {SignupPage} from './views/SignupPage/SignupPage.js';
 import {HomePage} from './views/HomePage/HomePage.js';
 import {AjaxModule} from './modules/Ajax/Ajax.js';
-import {ServerApiPath, Urls} from './utils/urls/urls.js';
+import {FileServerHost, ServerApiPath, Urls} from './utils/urls/urls.js';
 
 const application = document.getElementById('app');
 
@@ -40,7 +40,7 @@ config.signup.open = () => {
 
     blind.addEventListener('click', (evt) => {
         if (evt.target === evt.currentTarget) {
-            application.removeChild(pageParsed);
+            application.removeChild(page);
         }
     });
 
@@ -85,7 +85,7 @@ config.login.open = () => {
     const blind = pageParsed.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
         if (evt.target === evt.currentTarget) {
-            application.removeChild(pageParsed);
+            application.removeChild(page);
         }
     });
 
@@ -132,35 +132,27 @@ config.me.open = () => {
     AjaxModule.getUsingFetch({
         url: ServerApiPath + Urls.profileUrl,
         body: null,
-    })
-        .then(({status, parsedJson}) => {
-            profile.data = parsedJson;
-            profile.renderData();
-
-            const avatar = application.getElementsByClassName('profile-info__user-avatar-input')[0];
-            application.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-                const formData = new FormData();
-                formData.append('avatar', application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
-
-                AjaxModule.putUsingFetch({
-                    data: true,
-                    url: ServerApiPath + Urls.profileAvatarUrl,
-                    body: formData,
-                }).then(() => { });
-            });
-        })
-        .catch((error) => {
-            if (error instanceof Error) {
-                console.error(error);
-            }
-            const {responseObject} = error;
-            alert(`Нет авторизации
-                   ${JSON.stringify({status, responseObject})}`);
+    }).then((response) => {
+        return response.json();
+    }).then((response) => {
+        console.log(response);
+        if (response.error === 'user is unauthorized') {
             config.login.open();
-        });
-
-    application.appendChild(profileHTML);
+            return;
+        }
+        const profileHTML = profile.render();
+        application.appendChild(profileHTML);
+        profile.addFormEventListener();
+        profile.data = response;
+        if (response.avatar === '') {
+            profile.data.avatar = FileServerHost + Urls.defaultAvatar;
+        } else {
+            profile.data.avatar = FileServerHost + response.avatar;
+        }
+        profile.renderData();
+    }).catch((error) => {
+        console.error(error);
+    });
 };
 
 application.addEventListener('click', (evt) => {

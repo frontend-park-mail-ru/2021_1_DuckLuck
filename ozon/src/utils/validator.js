@@ -84,6 +84,7 @@ const emailValidation = (input) => {
 };
 
 const passwordValidation = (input) => {
+
     return input.value.length >= 3 && input.value.length <= 20;
 };
 
@@ -91,6 +92,7 @@ const passwordRepeatValidation = (input, password) => {
     const value = input.value;
     return value.length >= 6 && value.length <= 10 && value === password;
 };
+
 const MAX_FILE_SIZE = 10e6;
 const fileValidation = (input) => {
     const file = input.files[0];
@@ -98,4 +100,5 @@ const fileValidation = (input) => {
         return true;
     }
     return file.size < MAX_FILE_SIZE && /.*\.(jpeg|png|jpg)$/i.test(file.name);
+
 };

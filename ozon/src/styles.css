@@ -7,6 +7,7 @@
 @import 'views/Common/ListOfProducts/ListOfProducts.css';
 @import 'views/Common/Img/Img.css';
 @import 'views/ProductPage/ProductPage.css';
+@import 'views/ProfilePage/ProfilePage.css';
 
 a, input {
     display: block;

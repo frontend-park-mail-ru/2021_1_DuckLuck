@@ -3,7 +3,8 @@
 }
 
 .profile-page {
-    width: 896px;
+    margin: auto;
+    width: 400px;
     height: 820px;
 
     background: #FFFFFF;
@@ -153,7 +154,7 @@
     border-radius: 90px;
 }
 
-.profile-info__user_firstname {
+.profile-info__user_name {
     display: inline-block;
     padding-left: 180px;
 
@@ -251,4 +252,8 @@
     letter-spacing: -0.02em;
 
     color: #262626;
+}
+
+.profile-credentials__input_error {
+    color: red;
 }

@@ -7,6 +7,7 @@ import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
 import {isValidForm} from '../../utils/validator.js';
 
+
 /**
  * This is a description of the MyClass constructor function.
  * @class

@@ -40,14 +40,12 @@ export class AjaxModule {
         return this.#usingFetch({method: 'PUT', ...ajaxArgs});
     }
 
-    static #usingFetch = async(ajaxArgs) => {
+    static #usingFetch = (ajaxArgs) => {
         // TODO: make beauty
-        if (!ajaxArgs.data) {
-            if (ajaxArgs.body) {
-                ajaxArgs.body = JSON.stringify(ajaxArgs.body);
-            }
+        if (!ajaxArgs.data && ajaxArgs.body) {
+            ajaxArgs.body = JSON.stringify(ajaxArgs.body);
         }
-        const response = await fetch(ajaxArgs.url, {
+        return fetch(ajaxArgs.url, {
             method: ajaxArgs.method,
             body: (ajaxArgs.body) ? ajaxArgs.body : null,
             credentials: 'include',
@@ -57,11 +55,5 @@ export class AjaxModule {
             //     'Content-Type': 'application/json;charset=utf-8',
             // }
         });
-        const parsedJson = await response.json();
-
-        return {
-            status: response.status,
-            parsedJson,
-        };
     }
 }
