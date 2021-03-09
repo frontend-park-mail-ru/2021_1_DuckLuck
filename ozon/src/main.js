@@ -50,7 +50,7 @@ config.signup.open = () => {
 
     blind.addEventListener('click', (evt) => {
         if (evt.target === evt.currentTarget) {
-            application.removeChild(page);
+            application.removeChild(pageParsed);
         }
     });
 
@@ -61,6 +61,22 @@ config.signup.open = () => {
         if (!page.isValid()) {
             return;
         }
+      
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        AjaxModule.postUsingFetch({
+            url: ServerApiPath + Urls.signupUrl,
+            body: {email, password},
+        }).then(({status, parsedJson}) => {
+                if (status === 201) {
+                    config.me.open();
+                } else {
+                    const {error} = parsedJson;
+                    console.error(error);
+                }
+            });
+        
 
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
