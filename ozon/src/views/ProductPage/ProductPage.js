@@ -9,7 +9,7 @@ export class ProductPage extends BasePage {
         super(parent);
     }
 
-    render = ({item}) => {
+    render = (item) => {
         const images = [];
         console.log(item)
         console.log(item['images'])

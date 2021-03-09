@@ -187,7 +187,7 @@ config.item.open = (itemId=1) => {
                 },
                 images: parsedJson['images'],
             }
-            const page = new ProductPage(application).render({item: item});
+            const page = new ProductPage(application).render(item);
             for (const button of page.getElementsByClassName('button_pagination')) {
                 button.addEventListener('click', () => {
                     config.items.open(parseInt(button.textContent));
