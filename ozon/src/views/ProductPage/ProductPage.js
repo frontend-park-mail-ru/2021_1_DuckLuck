@@ -1,7 +1,7 @@
-import {BasePage} from "../BasePage.js";
-import {Img} from "../Common/Img/Img.js";
-import {Rating} from "../Common/Rating/Rating.js";
-import ProductPageTemplate from "./ProductPage.hbs"
+import {BasePage} from '../BasePage.js';
+import {Img} from '../Common/Img/Img.js';
+import {Rating} from '../Common/Rating/Rating.js';
+import ProductPageTemplate from './ProductPage.hbs';
 
 export class ProductPage extends BasePage {
     constructor(parent) {
@@ -13,7 +13,7 @@ export class ProductPage extends BasePage {
         item['images'].forEach((img) => {
             images.push(new Img({
                 src: img['src'],
-            }))
+            }));
         });
         const template = ProductPageTemplate({
             name: item['name'],
@@ -26,7 +26,6 @@ export class ProductPage extends BasePage {
             description: item['description'],
         });
         return new DOMParser().parseFromString(template, 'text/html')
-                              .getElementById('item-page-container');
+            .getElementById('item-page-container');
     }
-
 }

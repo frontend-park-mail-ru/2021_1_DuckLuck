@@ -1,10 +1,10 @@
-import {BasePage} from "../BasePage.js";
-import {Input} from "../Common/Input/Input.js";
-import {Button} from "../Common/Button/Button.js";
-import {Link} from "../Common/Link/Link.js";
-import {Popup} from "../Common/Popup/Popup.js";
-import {Blind} from "../Common/Blind/Blind.js";
-import {AuthenticationForm} from "../Common/AuthenticationForm/AuthenticationForm.js";
+import {BasePage} from '../BasePage.js';
+import {Input} from '../Common/Input/Input.js';
+import {Button} from '../Common/Button/Button.js';
+import {Link} from '../Common/Link/Link.js';
+import {Popup} from '../Common/Popup/Popup.js';
+import {Blind} from '../Common/Blind/Blind.js';
+import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
 
 /**
  * This is a description of the MyClass constructor function.
@@ -48,7 +48,7 @@ export class SignupPage extends BasePage {
                         }),
                         submitButton: new Button({
                             text: 'Register',
-                            type: 'submit'
+                            type: 'submit',
                         }),
                     },
                 }),

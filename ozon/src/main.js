@@ -1,9 +1,9 @@
 import {ProfilePage} from './views/ProfilePage/ProfilePage.js';
-import {LoginPage} from "./views/LoginPage/LoginPage.js";
-import {SignupPage} from "./views/SignupPage/SignupPage.js";
-import {HomePage} from "./views/HomePage/HomePage.js";
-import {AjaxModule} from "./modules/Ajax/Ajax.js";
-import {ServerApiPath, Urls} from "./utils/urls/urls.js";
+import {LoginPage} from './views/LoginPage/LoginPage.js';
+import {SignupPage} from './views/SignupPage/SignupPage.js';
+import {HomePage} from './views/HomePage/HomePage.js';
+import {AjaxModule} from './modules/Ajax/Ajax.js';
+import {FileServerHost, ServerApiPath, Urls} from './utils/urls/urls.js';
 
 const application = document.getElementById('app');
 
@@ -38,8 +38,9 @@ config.signup.open = () => {
     const blind = page.getElementsByClassName('blind')[0];
 
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(page);
+        }
     });
 
     const form = page.getElementsByClassName('form-body')[0];
@@ -47,14 +48,12 @@ config.signup.open = () => {
         evt.preventDefault();
 
 
-        const firstName = document.getElementById('first-name').value.trim();
-        const lastName = document.getElementById('last-name').value.trim();
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
             url: ServerApiPath + Urls.signupUrl,
-            body: {firstName, lastName, email, password},
+            body: {email, password},
         })
             .then(({status, parsedJson}) => {
                 if (status === 201) {
@@ -75,14 +74,15 @@ config.signup.open = () => {
             application.removeChild(page);
             config.login.open();
         });
-}
+};
 
 config.login.open = () => {
     const page = new LoginPage(application).render();
     const blind = page.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(page);
+        }
     });
 
     const form = page.getElementsByClassName('form-body')[0];
@@ -110,53 +110,42 @@ config.login.open = () => {
 
     document
         .getElementById('form-header__signup-link')
-        .addEventListener('click', (evt)  => {
+        .addEventListener('click', (evt) => {
             evt.preventDefault();
             application.removeChild(page);
             config.signup.open();
         });
-}
+};
 
 config.me.open = () => {
-    application.innerHTML = ''
+    application.innerHTML = '';
     const profile = new ProfilePage(application);
-    const profileHTML = profile.render()
 
     AjaxModule.getUsingFetch({
         url: ServerApiPath + Urls.profileUrl,
-        body: null
-    })
-        .then(({status, parsedJson}) => {
-            profile.data = parsedJson;
-            profile.renderData();
-
-            const avatar = application.getElementsByClassName('profile-info__user-avatar-input')[0];
-            application.addEventListener('submit', (evt) => {
-                evt.preventDefault();
-                const formData = new FormData();
-                formData.append('avatar', application.getElementsByClassName('profile-info__user-avatar-input')[0].files[0]);
-
-                AjaxModule.putUsingFetch({
-                    data: true,
-                    url: ServerApiPath + Urls.profileAvatarUrl,
-                    body: formData
-                }).then(() => console.log('success'));
-
-            });
-
-        })
-        .catch((error) => {
-            if (error instanceof Error) {
-                console.error(error);
-            }
-            const {responseObject} = error;
-            alert(`Нет авторизации
-                   ${JSON.stringify({status, responseObject})}`);
+        body: null,
+    }).then((response) => {
+        return response.json();
+    }).then((response) => {
+        console.log(response);
+        if (response.error === 'user is unauthorized') {
             config.login.open();
-        });
-
-    application.appendChild(profileHTML);
-}
+            return;
+        }
+        const profileHTML = profile.render();
+        application.appendChild(profileHTML);
+        profile.addFormEventListener();
+        profile.data = response;
+        if (response.avatar === '') {
+            profile.data.avatar = FileServerHost + Urls.defaultAvatar;
+        } else {
+            profile.data.avatar = FileServerHost + response.avatar;
+        }
+        profile.renderData();
+    }).catch((error) => {
+        console.error(error);
+    });
+};
 
 application.addEventListener('click', (evt) => {
     const {target} = evt;

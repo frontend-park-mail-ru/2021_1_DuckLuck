@@ -1,9 +1,9 @@
 export class Input {
     constructor({type = 'text',
-                name = '',
-                placeholder='',
-                value = '',
-                isDisabled=false} = {}) {
+        name = '',
+        placeholder='',
+        value = '',
+        isDisabled=false} = {}) {
         this.objectType = 'input';
         this.name=name;
         this.type = type;
