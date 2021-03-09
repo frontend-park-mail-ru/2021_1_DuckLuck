@@ -4,22 +4,6 @@
  * @classdesc This is a description of the MyClass class.
  */
 export class AjaxModule {
-    /**
-     *
-     * @param {Object} ajaxArgs Arguments for ajax
-     * @return {Promise<Response<any, Record<string, any>, number>>}
-     */
-    static #usingFetch = async(ajaxArgs) => {
-        return await fetch(ajaxArgs.url, {
-            method: ajaxArgs.method,
-            body: (ajaxArgs.body) ? JSON.stringify(ajaxArgs.body) : null,
-            credentials: 'include',
-            mode: 'cors',
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-            },
-        });
-    }
 
     /**
      *
