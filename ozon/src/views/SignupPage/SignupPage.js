@@ -1,15 +1,15 @@
-import {BasePage} from "../BasePage.js";
-import {Input} from "../Common/Input/Input.js";
-import {Button} from "../Common/Button/Button.js";
-import {Link} from "../Common/Link/Link.js";
-import {Popup} from "../Common/Popup/Popup.js";
-import {Blind} from "../Common/Blind/Blind.js";
-import {AuthenticationForm} from "../Common/AuthenticationForm/AuthenticationForm.js";
+import {BasePage} from '../BasePage.js';
+import {Input} from '../Common/Input/Input.js';
+import {Button} from '../Common/Button/Button.js';
+import {Link} from '../Common/Link/Link.js';
+import {Popup} from '../Common/Popup/Popup.js';
+import {Blind} from '../Common/Blind/Blind.js';
+import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
 
 /**
- * This is a description of the MyClass constructor function.
- * @class
- * @classdesc This is a description of the MyClass class.
+ * @class  SignupPage
+ * @extends BasePage
+ * @classdesc Class for signup page
  */
 export class SignupPage extends BasePage {
     /**
@@ -20,6 +20,10 @@ export class SignupPage extends BasePage {
         super(parent);
     }
 
+    /**
+     *
+     * @return {HTMLElement} rendered page
+     */
     render = () => {
         const template = new Popup().getHtmlString({
             popupBody:
@@ -48,7 +52,7 @@ export class SignupPage extends BasePage {
                         }),
                         submitButton: new Button({
                             text: 'Register',
-                            type: 'submit'
+                            type: 'submit',
                         }),
                     },
                 }),

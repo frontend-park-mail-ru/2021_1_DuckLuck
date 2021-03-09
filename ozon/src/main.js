@@ -1,9 +1,9 @@
 import {ProfilePage} from './views/ProfilePage/ProfilePage.js';
-import {LoginPage} from "./views/LoginPage/LoginPage.js";
-import {SignupPage} from "./views/SignupPage/SignupPage.js";
-import {HomePage} from "./views/HomePage/HomePage.js";
-import {AjaxModule} from "./modules/Ajax/Ajax.js";
-import {ServerApiPath, Urls} from "./utils/urls/urls.js";
+import {LoginPage} from './views/LoginPage/LoginPage.js';
+import {SignupPage} from './views/SignupPage/SignupPage.js';
+import {HomePage} from './views/HomePage/HomePage.js';
+import {AjaxModule} from './modules/Ajax/Ajax.js';
+import {ServerApiPath, Urls} from './utils/urls/urls.js';
 
 const application = document.getElementById('app');
 
@@ -38,8 +38,9 @@ config.signup.open = () => {
     const blind = page.getElementsByClassName('blind')[0];
 
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(page);
+        }
     });
 
     const form = page.getElementsByClassName('form-body')[0];
@@ -75,14 +76,15 @@ config.signup.open = () => {
             application.removeChild(page);
             config.login.open();
         });
-}
+};
 
 config.login.open = () => {
     const page = new LoginPage(application).render();
     const blind = page.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(page);
+        }
     });
 
     const form = page.getElementsByClassName('form-body')[0];
@@ -110,21 +112,21 @@ config.login.open = () => {
 
     document
         .getElementById('form-header__signup-link')
-        .addEventListener('click', (evt)  => {
+        .addEventListener('click', (evt) => {
             evt.preventDefault();
             application.removeChild(page);
             config.signup.open();
         });
-}
+};
 
 config.me.open = () => {
-    application.innerHTML = ''
+    application.innerHTML = '';
     const profile = new ProfilePage(application);
-    const profileHTML = profile.render()
+    const profileHTML = profile.render();
 
     AjaxModule.getUsingFetch({
         url: ServerApiPath + Urls.profileUrl,
-        body: null
+        body: null,
     })
         .then(({status, parsedJson}) => {
             profile.data = parsedJson;
@@ -139,11 +141,9 @@ config.me.open = () => {
                 AjaxModule.putUsingFetch({
                     data: true,
                     url: ServerApiPath + Urls.profileAvatarUrl,
-                    body: formData
+                    body: formData,
                 }).then(() => console.log('success'));
-
             });
-
         })
         .catch((error) => {
             if (error instanceof Error) {
@@ -156,7 +156,7 @@ config.me.open = () => {
         });
 
     application.appendChild(profileHTML);
-}
+};
 
 application.addEventListener('click', (evt) => {
     const {target} = evt;

@@ -1,19 +1,31 @@
-import {BasePage} from "../BasePage.js";
-import {Img} from "../Common/Img/Img.js";
-import {Rating} from "../Common/Rating/Rating.js";
-import ProductPageTemplate from "./ProductPage.hbs"
+import {BasePage} from '../BasePage.js';
+import {Img} from '../Common/Img/Img.js';
+import {Rating} from '../Common/Rating/Rating.js';
+import ProductPageTemplate from './ProductPage.hbs';
 
+/**
+ * @class ProductPage
+ * @extends BasePage
+ * @classdesc Class for Product page
+ */
 export class ProductPage extends BasePage {
+    /**
+     * @param {Object} parent parents object
+     */
     constructor(parent) {
         super(parent);
     }
 
+    /**
+     * @param {Object} item product to render
+     * @return {HTMLElement} rendered element
+     */
     render = (item) => {
         const images = [];
         item['images'].forEach((img) => {
             images.push(new Img({
                 src: img['src'],
-            }))
+            }));
         });
         const template = ProductPageTemplate({
             name: item['name'],
@@ -26,7 +38,6 @@ export class ProductPage extends BasePage {
             description: item['description'],
         });
         return new DOMParser().parseFromString(template, 'text/html')
-                              .getElementById('item-page-container');
+            .getElementById('item-page-container');
     }
-
 }
