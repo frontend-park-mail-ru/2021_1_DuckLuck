@@ -5,7 +5,7 @@ import {Link} from '../Common/Link/Link.js';
 import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
-
+import {isValidForm} from '../../utils/validator';
 
 /**
  * @class LoginPage
@@ -56,5 +56,10 @@ export class LoginPage extends BasePage {
         });
         return new DOMParser().parseFromString(template, 'text/html')
             .getElementById('popup-wrapper');
+    }
+
+    isValid = (specificTypeToCheck = []) => {
+        const form = document.getElementsByClassName('form-body')[0].getElementsByTagName('form')[0];
+        return isValidForm(form, specificTypeToCheck);
     }
 }

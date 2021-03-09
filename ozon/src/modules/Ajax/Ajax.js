@@ -40,6 +40,7 @@ export class AjaxModule {
         return this.#usingFetch({method: 'PUT', ...ajaxArgs});
     }
 
+
     /**
      *
      * @param {Object} ajaxArgs argiments for ajax
@@ -52,8 +53,6 @@ export class AjaxModule {
             if (ajaxArgs.body) {
                 ajaxArgs.body = JSON.stringify(ajaxArgs.body);
             }
-        } else {
-            console.log('IMG!');
         }
         const response = await fetch(ajaxArgs.url, {
             method: ajaxArgs.method,
@@ -65,11 +64,5 @@ export class AjaxModule {
             //     'Content-Type': 'application/json;charset=utf-8',
             // }
         });
-        const parsedJson = await response.json();
-
-        return {
-            status: response.status,
-            parsedJson,
-        };
     }
 }
