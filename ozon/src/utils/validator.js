@@ -59,11 +59,11 @@ const passwordValidation = (input) => {
     return input.value.length >= 6 && input.value.length <= 10;
 };
 
-const MAX_FILE_SIZE = 10e6;
+const maxFileSize = 10e6;
 const fileValidation = (input) => {
     const file = input.files[0];
     if (typeof file === 'undefined') {
         return true;
     }
-    return file.size < MAX_FILE_SIZE && /.*\.(jpeg|png|jpg)$/i.test(file.name);
+    return file.size < maxFileSize && /.*\.(jpeg|png|jpg)$/i.test(file.name);
 };

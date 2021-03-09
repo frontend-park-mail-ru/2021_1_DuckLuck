@@ -25,27 +25,26 @@ export class ProfilePage extends BasePage {
     }
 
     addFormEventListener = () => {
-        const form = document.getElementsByClassName('profile-credentials__form')[0]
+        const form = document.getElementById('form')
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            console.log("Test");
-            let avatar_file = document.getElementsByClassName('profile-info__user-avatar-input')[0];
-            if (typeof avatar_file !== 'undefined') {
-                avatar_file = avatar_file.files[0];
+            let avatarFile = document.getElementsByClassName('profile-info__user-avatar-input')[0];
+            if (typeof avatarFile !== 'undefined') {
+                avatarFile = avatarFile.files[0];
             }
-            let first_name;
-            let last_name;
+            let firstName;
+            let lastName;
             if (typeof document.getElementsByName('firstName')[0] !== 'undefined') {
-                first_name = document.getElementsByName('firstName')[0].value.trim();
+                firstName = document.getElementsByName('firstName')[0].value.trim();
             }
             if (typeof document.getElementsByName('lastName')[0] !== 'undefined') {
-                last_name = document.getElementsByName('lastName')[0].value.trim();
+                lastName = document.getElementsByName('lastName')[0].value.trim();
             }
 
             if (this.isValid(['text'])) {
                 AjaxModule.putUsingFetch({
                     url: ServerApiPath + Urls.profileUrl,
-                    body: {first_name, last_name},
+                    body: {first_name: firstName, last_name: lastName},
                 }).then(() => {
                     AjaxModule.getUsingFetch({
                         url: ServerApiPath + Urls.profileUrl,
@@ -66,9 +65,9 @@ export class ProfilePage extends BasePage {
                 });
             }
 
-            if (this.isValid(['file']) && typeof avatar_file !== 'undefined') {
+            if (this.isValid(['file']) && typeof avatarFile !== 'undefined') {
                 const formData = new FormData();
-                formData.append('avatar', avatar_file);
+                formData.append('avatar', avatarFile);
                 AjaxModule.putUsingFetch({
                     data: true,
                     url: ServerApiPath + Urls.profileAvatarUrl,
