@@ -1,14 +1,14 @@
 import {BasePage} from '../BasePage.js';
 
 /**
- * This is a description of the MyClass constructor function.
- * @class
- * @classdesc This is a description of the MyClass class.
+ * @class HomePage
+ * @extends BasePage
+ * @classdesc Class for initial, starting page
  */
 export class HomePage extends BasePage {
     /**
      *
-     * @param {Object} parent parent
+     * @param {Object} parent of a Home page (application)
      */
     constructor(parent) {
         super(parent);
@@ -16,7 +16,7 @@ export class HomePage extends BasePage {
 
     /**
      *
-     * @param {Object} config configuration
+     * @param {Object} config configuration which will use to render this page
      */
     render = (config) => {
         Object

@@ -1,12 +1,12 @@
 /**
- * This is a description of the MyClass constructor function.
- * @class
- * @classdesc This is a description of the MyClass class.
+ *
+ * @class AjaxModule
+ * @classdesc This class uses only by his private methods. Responsible for communication with backend via Ajax.
  */
 export class AjaxModule {
     /**
      *
-     * @param {Object} ajaxArgs Arguments for ajax
+     * @param {Object} ajaxArgs Arguments for ajax GET method
      * @return {Promise<Response<*, Record<string, *>, number>>}
      */
     static getUsingFetch = (ajaxArgs) => {
@@ -15,7 +15,7 @@ export class AjaxModule {
 
     /**
      *
-     * @param {Object} ajaxArgs Arguments for ajax
+     * @param {Object} ajaxArgs Arguments for ajax POST method
      * @return {Promise<Response<*, Record<string, *>, number>>}
      */
     static postUsingFetch = (ajaxArgs) => {
@@ -24,7 +24,7 @@ export class AjaxModule {
 
     /**
      *
-     * @param {Object} ajaxArgs Arguments for ajax
+     * @param {Object} ajaxArgs Arguments for ajax DELETE method
      * @return {Promise<Response<*, Record<string, *>, number>>}
      */
     static deleteUsingFetch = (ajaxArgs) => {
@@ -33,23 +33,28 @@ export class AjaxModule {
 
     /**
      *
-     * @param {Object} ajaxArgs Arguments for ajax
+     * @param {Object} ajaxArgs Arguments for ajax PUT method
      * @return {Promise<Response<*, Record<string, *>, number>>}
      */
     static putUsingFetch = (ajaxArgs) => {
         return this.#usingFetch({method: 'PUT', ...ajaxArgs});
     }
 
-    static #usingFetch = async (ajaxArgs) => {
+
+    /**
+     *
+     * @param {Object} ajaxArgs argiments for ajax
+     * @return {Promise<{parsedJson: any, status: number}>}
+     * @description all these functions above using this private function to communicate with backend.
+     */
+    static #usingFetch = async(ajaxArgs) => {
         // TODO: make beauty
         if (!ajaxArgs.data) {
             if (ajaxArgs.body) {
-                ajaxArgs.body = JSON.stringify(ajaxArgs.body)
+                ajaxArgs.body = JSON.stringify(ajaxArgs.body);
             }
-        }  else {
-            console.log("IMG!");
         }
-        const response =  await fetch (ajaxArgs.url, {
+        const response = await fetch(ajaxArgs.url, {
             method: ajaxArgs.method,
             body: (ajaxArgs.body) ? ajaxArgs.body : null,
             credentials: 'include',
@@ -59,11 +64,5 @@ export class AjaxModule {
             //     'Content-Type': 'application/json;charset=utf-8',
             // }
         });
-        const parsedJson = await response.json();
-
-        return {
-            status: response.status,
-            parsedJson,
-        };
     }
 }

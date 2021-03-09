@@ -12,7 +12,9 @@
         "sourceType": "module"
     },
     "rules": {
-        "no-console": "off",
+        "semi": "error",
+        "camelcase": "error",
+        "no-console": ["error", { "allow": ["warn", "error"] }],
         "no-invalid-this": "off",
         "complexity": ["error", { "max": 4 }],
         "no-var": 1,

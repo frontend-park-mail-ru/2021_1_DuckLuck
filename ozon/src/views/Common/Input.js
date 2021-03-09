@@ -1,15 +1,14 @@
 /**
- * This is a description of the MyClass constructor function.
- * @class
- * @classdesc This is a description of the MyClass class.
+ * @class Input
+ * @classdesc This class is using for construct html via templates. One of the common views
  */
 export class Input {
     /**
      *
-     * @param {string} type type
-     * @param {string} name name
-     * @param {string} placeholder ph
-     * @param {string} value vals
+     * @param {string} type type of input(email, password, etc...)
+     * @param {string} name name of input
+     * @param {string} placeholder placeholder of input
+     * @param {string} value value inside the placeholder
      */
     constructor({type = 'text',
         name = '',

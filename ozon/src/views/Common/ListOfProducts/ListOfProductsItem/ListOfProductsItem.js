@@ -1,6 +1,18 @@
-import ListOFProductsItemTemplate from "./ListOFProductsItem.hbs"
+import ListOFProductsItemTemplate from './ListOFProductsItem.hbs';
 
+
+/**
+ * @class ListOfProductsItem
+ * @classdesc This class is using for construct html via templates. One of the common views
+ */
 export class ListOfProductsItem {
+
+    /**
+     * @param {Object} Image of a product
+     * @param {string} itemName
+     * @param {number} itemRating
+     * @param {Object} itemPrice
+     */
     constructor({ itemImage, itemName = '', itemRating = 0,
                     itemPrice= {discountPrice: '', base: '', discount: ''}, itemId=0} = {}) {
         this.itemImage = itemImage;
@@ -10,6 +22,11 @@ export class ListOfProductsItem {
         this.itemId = itemId;
     }
 
+
+    /**
+     *
+     * @return {string} generated HTML after templating
+     */
     getHtmlString = () => {
         return ListOFProductsItemTemplate({
             itemId: this.itemId,

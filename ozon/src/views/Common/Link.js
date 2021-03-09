@@ -1,14 +1,13 @@
 /**
- * This is a description of the MyClass constructor function.
- * @class
- * @classdesc This is a description of the MyClass class.
+ * @class Link
+ * @classdesc This class is using for construct html via templates. One of the common views
  */
 export class Link {
     /**
      *
-     * @param {string} href ref
-     * @param {string} textContent tc
-     * @param {string} dataset ds
+     * @param {string} href link where to go
+     * @param {string} textContent text of link
+     * @param {string} dataset dataset of link
      */
     constructor({href = '/home',
         textContent = '',
