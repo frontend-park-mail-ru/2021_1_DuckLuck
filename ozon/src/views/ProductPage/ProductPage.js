@@ -11,10 +11,7 @@ export class ProductPage extends BasePage {
 
     render = (item) => {
         const images = [];
-        console.log(item)
-        console.log(item['images'])
         item['images'].forEach((src) => {
-            console.log(src)
             images.push(new Img({
                 src: FileServerHost + src,
             }))
