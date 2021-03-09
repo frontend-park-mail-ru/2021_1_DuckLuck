@@ -1,7 +1,7 @@
-import {Img} from "../Img/Img"
-import {ListOfProductsItem} from "./ListOfProductsItem/ListOfProductsItem";
-import ListOFProductsItemTemplate from "./ListOFProducts.hbs"
-import {FileServerHost} from "../../../utils/urls/urls.js";
+import {Img} from '../Img/Img';
+import {ListOfProductsItem} from './ListOfProductsItem/ListOfProductsItem';
+import ListOFProductsItemTemplate from './ListOfProducts.hbs';
+import {FileServerHost} from '../../../utils/urls/urls.js';
 
 /**
  * @class ListOfProducts
@@ -18,18 +18,17 @@ export class ListOfProducts {
             const base = item['price']['base_cost'];
             const discount = item['price']['discount'];
             const discountPrice = base * discount*0.01;
-           this.items.push(new ListOfProductsItem({
-               itemId: item['id'],
-               itemImage: new Img({src: FileServerHost + item['preview_image']}),
-               itemName: item['title'],
-               itemRating: item['rating'],
-               itemPrice: {
-                   base: base,
-                   discount: discount,
-                   discountPrice: discountPrice,
-               },
-           }));
-
+            this.items.push(new ListOfProductsItem({
+                itemId: item['id'],
+                itemImage: new Img({src: FileServerHost + item['preview_image']}),
+                itemName: item['title'],
+                itemRating: item['rating'],
+                itemPrice: {
+                    base: base,
+                    discount: discount,
+                    discountPrice: discountPrice,
+                },
+            }));
         });
     };
 

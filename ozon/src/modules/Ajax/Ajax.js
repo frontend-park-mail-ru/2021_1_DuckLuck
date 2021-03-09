@@ -1,7 +1,8 @@
 /**
  *
  * @class AjaxModule
- * @classdesc This class uses only by his private methods. Responsible for communication with backend via Ajax.
+ * @classdesc This class uses only by his private methods.
+ * Responsible for communication with backend via Ajax.
  */
 export class AjaxModule {
     /**
@@ -44,7 +45,7 @@ export class AjaxModule {
     /**
      *
      * @param {Object} ajaxArgs argiments for ajax
-     * @return {Promise<{parsedJson: any, status: number}>}
+     * @return {Promise<Response>}
      * @description all these functions above using this private function to communicate with backend.
      */
     static #usingFetch = (ajaxArgs) => {

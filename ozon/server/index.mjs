@@ -2,7 +2,7 @@
 
 import express from 'express';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import {fileURLToPath} from 'url';
 
 const app = express();
 app.use(express.json());
