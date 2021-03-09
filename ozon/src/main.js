@@ -56,15 +56,12 @@ config.signup.open = () => {
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-
-        const firstName = document.getElementById('first-name').value.trim();
-        const lastName = document.getElementById('last-name').value.trim();
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
             url: ServerApiPath + Urls.signupUrl,
-            body: {firstName, lastName, email, password},
+            body: { email, password},
         })
             .then(({status, parsedJson}) => {
                 if (status === 201) {
@@ -222,6 +219,11 @@ config.items.open = (currentPage=1) => {
             for (const button of page.getElementsByClassName('button_pagination')) {
                 button.addEventListener('click', () => {
                     config.items.open(parseInt(button.textContent));
+                });
+            }
+            for (const itemContainer of page.getElementsByClassName('item-container')) {
+                itemContainer.addEventListener('click', () => {
+                    config.item.open(parseInt(itemContainer.getElementsByClassName('item-id')[0].textContent));
                 });
             }
             application.appendChild(page);

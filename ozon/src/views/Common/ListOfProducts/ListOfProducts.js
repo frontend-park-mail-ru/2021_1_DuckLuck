@@ -11,6 +11,7 @@ export class ListOfProducts {
             const discount = item['price']['discount'];
             const discountPrice = base * discount*0.01;
            this.items.push(new ListOfProductsItem({
+               itemId: item['id'],
                itemImage: new Img({src: FileServerHost + item['preview_image']}),
                itemName: item['title'],
                itemRating: item['rating'],
