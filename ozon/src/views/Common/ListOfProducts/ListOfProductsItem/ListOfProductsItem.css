@@ -36,6 +36,7 @@
 .item-discount-price {
     color: #40bfff;
     font-weight: bold;
+    display: none;
 }
 
 .item-base-price {
@@ -52,6 +53,15 @@
     color: #fb7181;
     font-weight: bold;
     font-size: 14px;
+    display: none;
+}
+
+.discount-active .item-discount {
+    display: block;
+}
+
+.discount-active .item-discount-price {
+    display: block;
 }
 
 .item-rating {

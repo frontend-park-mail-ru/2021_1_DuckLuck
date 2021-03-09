@@ -1,4 +1,7 @@
 <div class="item-container">
+    <div class="item-id" style="display: none">
+        {{itemId}}
+    </div>
     <div class="item-image">
         <img src={{itemImage.src}} alt="" class="img img_item-preview">
     </div>
@@ -15,9 +18,9 @@
             </div>
         {{/for}}
     </div>
-    <div class="item-price-block {{#if itemPrice.discount}}discount-active{{/if}}if}}">
+    <div class="item-price-block {{#ifNotEquals itemPrice.discount 0}}discount-active{{/ifNotEquals}}">
         <span class="item-discount-price item-price">{{itemPrice.discountPrice}}</span>
         <span class="item-base-price item-price">{{itemPrice.base}}</span>
-        <span class="item-discount item-price">{{itemPrice.discount}}</span>
+        <span class="item-discount item-price">{{itemPrice.discount}}% Off</span>
     </div>
 </div>

@@ -1,7 +1,9 @@
-import {BasePage} from '../BasePage.js';
-import {Img} from '../Common/Img/Img.js';
-import {Rating} from '../Common/Rating/Rating.js';
-import ProductPageTemplate from './ProductPage.hbs';
+import {BasePage} from "../BasePage.js";
+import {Img} from "../Common/Img/Img.js";
+import {Rating} from "../Common/Rating/Rating.js";
+import ProductPageTemplate from "./ProductPage.hbs"
+import {FileServerHost} from "../../utils/urls/urls.js";
+
 
 /**
  * @class ProductPage
@@ -22,9 +24,9 @@ export class ProductPage extends BasePage {
      */
     render = (item) => {
         const images = [];
-        item['images'].forEach((img) => {
+        item['images'].forEach((src) => {
             images.push(new Img({
-                src: img['src'],
+                src: FileServerHost + src,
             }));
         });
         const template = ProductPageTemplate({
