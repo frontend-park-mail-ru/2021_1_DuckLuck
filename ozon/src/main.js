@@ -120,7 +120,6 @@ config.login.open = () => {
 config.me.open = () => {
     application.innerHTML = '';
     const profile = new ProfilePage(application);
-    const profileHTML = profile.render();
 
     AjaxModule.getUsingFetch({
         url: ServerApiPath + Urls.profileUrl,
@@ -128,6 +127,14 @@ config.me.open = () => {
     }).then((response) => {
         return response.json();
     }).then((response) => {
+        console.log(response);
+        if (response.error === 'user is unauthorized') {
+            config.login.open();
+            return;
+        }
+        const profileHTML = profile.render();
+        application.appendChild(profileHTML);
+        profile.addFormEventListener();
         profile.data = response;
         if (response.avatar === '') {
             profile.data.avatar = FileServerHost + Urls.defaultAvatar;
@@ -136,17 +143,8 @@ config.me.open = () => {
         }
         profile.renderData();
     }).catch((error) => {
-        if (error instanceof Error) {
-            console.error(error);
-        }
-        const {responseObject} = error;
-        alert(`Нет авторизации
-                   ${JSON.stringify({status, responseObject})}`);
-        config.login.open();
+        console.error(error);
     });
-
-    application.appendChild(profileHTML);
-    profile.addFormEventListener();
 };
 
 application.addEventListener('click', (evt) => {
