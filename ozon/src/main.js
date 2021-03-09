@@ -34,8 +34,9 @@ config.home.open = () => {
 };
 
 config.signup.open = () => {
-    const page = new SignupPage(application).render();
-    const blind = page.getElementsByClassName('blind')[0];
+    const page = new SignupPage(application);
+    const pageParsed = page.render();
+    const blind = pageParsed.getElementsByClassName('blind')[0];
 
     blind.addEventListener('click', (evt) => {
         if (evt.target === evt.currentTarget) {
@@ -43,76 +44,82 @@ config.signup.open = () => {
         }
     });
 
-    const form = page.getElementsByClassName('form-body')[0];
+    const form = pageParsed.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
 
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
+        if (page.isValid()) {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
 
-        AjaxModule.postUsingFetch({
-            url: ServerApiPath + Urls.signupUrl,
-            body: {email, password},
-        })
-            .then(({status, parsedJson}) => {
-                if (status === 201) {
-                    config.me.open();
-                } else {
-                    const {error} = parsedJson;
-                    console.error(error);
-                }
-            });
+            AjaxModule.postUsingFetch({
+                url: ServerApiPath + Urls.signupUrl,
+                body: {email, password},
+            })
+                .then(({status, parsedJson}) => {
+                    if (status === 201) {
+                        config.me.open();
+                    } else {
+                        const {error} = parsedJson;
+                        console.error(error);
+                    }
+                });
+        }
     });
 
-    application.appendChild(page);
+    application.appendChild(pageParsed);
 
     document
         .getElementById('form-header__login-link')
         .addEventListener('click', (evt) => {
             evt.preventDefault();
-            application.removeChild(page);
+            application.removeChild(pageParsed);
             config.login.open();
         });
 };
 
 config.login.open = () => {
-    const page = new LoginPage(application).render();
-    const blind = page.getElementsByClassName('blind')[0];
+    const page = new LoginPage(application);
+    const pageParsed = page.render();
+    const blind = pageParsed.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
         if (evt.target === evt.currentTarget) {
             application.removeChild(page);
         }
     });
 
-    const form = page.getElementsByClassName('form-body')[0];
+    const form = pageParsed.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
+        if (page.isValid()) {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
 
-        AjaxModule.postUsingFetch({
-            url: ServerApiPath + Urls.loginUrl,
-            body: {email, password},
-        })
-            .then(({status, parsedJson}) => {
-                if (status === 200) {
-                    config.me.open();
-                } else {
-                    const {error} = parsedJson;
-                    console.error(error);
-                }
-            });
+            AjaxModule.postUsingFetch({
+                url: ServerApiPath + Urls.loginUrl,
+                body: {email, password},
+            })
+                .then(({status, parsedJson}) => {
+                    if (status === 200) {
+                        config.me.open();
+                    } else {
+                        const {error} = parsedJson;
+                        alert(error);
+                    }
+                });
+        }
     });
 
-    application.appendChild(page);
+
+    application.appendChild(pageParsed);
 
     document
         .getElementById('form-header__signup-link')
         .addEventListener('click', (evt) => {
             evt.preventDefault();
-            application.removeChild(page);
+            application.removeChild(pageParsed);
             config.signup.open();
         });
 };
@@ -120,6 +127,7 @@ config.login.open = () => {
 config.me.open = () => {
     application.innerHTML = '';
     const profile = new ProfilePage(application);
+    const profileHTML = profile.render();
 
     AjaxModule.getUsingFetch({
         url: ServerApiPath + Urls.profileUrl,

@@ -14,6 +14,8 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
         }
     }
 
+
+    let password = '';
     let isValid = true;
     for (const input of inputs) {
         if (specificTypesToCheck.length > 0 && !specificTypesToCheck.includes(input.type)) {
@@ -22,20 +24,46 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
         if (input.disabled === true) {
             continue;
         }
-        const errField = document.getElementById(input.name + '_error');
+
+        let errField = document.getElementById(input.name + '_error');
+        if (errField === null) {
+            errField = document.getElementById(input.id + '_error');
+        }
         if (input.type === 'text') {
-            if (input.name.includes('firstName') && ((isValid = nameValidation(input)) !== true)) {
+            if (input.name.includes('firstName') && !(nameValidation(input))) {
+                isValid = false;
                 errField.innerHTML = 'Incorrect or empty First Name!';
-            } else if (input.name.includes('lastName') && ((isValid = nameValidation(input)) !== true)) {
+            } else if (input.name.includes('lastName') && !(nameValidation(input))) {
+                isValid = false;
                 errField.innerHTML = 'Incorrect or empty Last Name!';
+            } else if (input.id === 'email') {
+                if (!(emailValidation(input))) {
+                    isValid = false;
+                    errField.innerHTML = 'Incorrect Email!';
+                }
             }
         } else if (input.type === 'email') {
-            if ((isValid = emailValidation(input)) !== true) {
+            if (!(emailValidation(input))) {
+                isValid = false;
                 errField.innerHTML = 'Incorrect Email!';
             }
         } else if (input.type === 'file') {
-            if ((isValid = fileValidation(input)) !== true) {
+            if (!(fileValidation(input))) {
+                isValid = false;
                 errField.innerHTML = 'Incorrect File!';
+            }
+        } else if (input.type === 'password') {
+            if (input.id === 'password') {
+                if (!(passwordValidation(input))) {
+                    isValid = false;
+                    errField.innerHTML = 'Incorrect password!';
+                }
+                password = input.value;
+            } else if (input.id === 'repeat_password') {
+                if (!(passwordRepeatValidation(input, password))) {
+                    isValid = false;
+                    errField.innerHTML = 'Incorrect repeat password!';
+                }
             }
         }
     }
@@ -56,14 +84,21 @@ const emailValidation = (input) => {
 };
 
 const passwordValidation = (input) => {
-    return input.value.length >= 6 && input.value.length <= 10;
+
+    return input.value.length >= 3 && input.value.length <= 20;
 };
 
-const maxFileSize = 10e6;
+const passwordRepeatValidation = (input, password) => {
+    const value = input.value;
+    return value.length >= 6 && value.length <= 10 && value === password;
+};
+
+const MAX_FILE_SIZE = 10e6;
 const fileValidation = (input) => {
     const file = input.files[0];
     if (typeof file === 'undefined') {
         return true;
     }
-    return file.size < maxFileSize && /.*\.(jpeg|png|jpg)$/i.test(file.name);
+    return file.size < MAX_FILE_SIZE && /.*\.(jpeg|png|jpg)$/i.test(file.name);
+
 };
