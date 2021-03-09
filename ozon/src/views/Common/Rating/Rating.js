@@ -1,4 +1,4 @@
-import RatingTempalte from "./Rating.hbs"
+import RatingTempalte from './Rating.hbs';
 
 export class Rating {
     constructor({minRating = 0, maxRating = 5} = {}) {

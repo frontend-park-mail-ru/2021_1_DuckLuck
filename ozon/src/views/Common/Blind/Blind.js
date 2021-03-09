@@ -1,4 +1,4 @@
-import BlindTemplate from "./Blind.hbs"
+import BlindTemplate from './Blind.hbs';
 
 export class Blind {
     constructor() {

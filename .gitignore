@@ -3,8 +3,3 @@ node_modules
 package-lock.json
 dist
 .husky
-<<<<<<< HEAD
-out
-=======
-out
->>>>>>> 37215e718cb2cecbeeac00c14c29c91a70ff014d

@@ -1,7 +1,7 @@
-import {BasePage} from "../BasePage.js";
-import {ListOfProducts} from "../Common/ListOfProducts/ListOfProducts.js"
-import {Pagination} from "../Common/Pagination/Pagination";
-import ProductsPageTemplate from "./ProductsPage.hbs"
+import {BasePage} from '../BasePage.js';
+import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
+import {Pagination} from '../Common/Pagination/Pagination';
+import ProductsPageTemplate from './ProductsPage.hbs';
 
 
 export class ProductsPage extends BasePage {

@@ -1,5 +1,5 @@
-import {Button} from "../Button/Button.js"
-import PaginationTemplate from "./Pagination.hbs"
+import {Button} from '../Button/Button.js';
+import PaginationTemplate from './Pagination.hbs';
 
 export class Pagination {
     constructor({pagesCount, currentPage}) {

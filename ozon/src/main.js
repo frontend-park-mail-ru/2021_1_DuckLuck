@@ -1,9 +1,9 @@
 import {ProfilePage} from './views/ProfilePage/ProfilePage.js';
-import {LoginPage} from "./views/LoginPage/LoginPage.js";
-import {SignupPage} from "./views/SignupPage/SignupPage.js";
-import {HomePage} from "./views/HomePage/HomePage.js";
-import {AjaxModule} from "./modules/Ajax/Ajax.js";
-import {FileServerHost, ServerApiPath, Urls} from "./utils/urls/urls.js";
+import {LoginPage} from './views/LoginPage/LoginPage.js';
+import {SignupPage} from './views/SignupPage/SignupPage.js';
+import {HomePage} from './views/HomePage/HomePage.js';
+import {AjaxModule} from './modules/Ajax/Ajax.js';
+import {FileServerHost, ServerApiPath, Urls} from './utils/urls/urls.js';
 
 const application = document.getElementById('app');
 
@@ -38,8 +38,9 @@ config.signup.open = () => {
     const blind = page.getElementsByClassName('blind')[0];
 
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(page);
+        }
     });
 
     const form = page.getElementsByClassName('form-body')[0];
@@ -73,14 +74,15 @@ config.signup.open = () => {
             application.removeChild(page);
             config.login.open();
         });
-}
+};
 
 config.login.open = () => {
     const page = new LoginPage(application).render();
     const blind = page.getElementsByClassName('blind')[0];
     blind.addEventListener('click', (evt) => {
-        if (evt.target === evt.currentTarget)
+        if (evt.target === evt.currentTarget) {
             application.removeChild(page);
+        }
     });
 
     const form = page.getElementsByClassName('form-body')[0];
@@ -108,87 +110,21 @@ config.login.open = () => {
 
     document
         .getElementById('form-header__signup-link')
-        .addEventListener('click', (evt)  => {
+        .addEventListener('click', (evt) => {
             evt.preventDefault();
             application.removeChild(page);
             config.signup.open();
         });
-}
+};
 
-let isPageWasOpened = false
 config.me.open = () => {
-    application.innerHTML = ''
+    application.innerHTML = '';
     const profile = new ProfilePage(application);
     const profileHTML = profile.render();
 
-    if (!isPageWasOpened) {
-        isPageWasOpened = true;
-        application.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-            let avatar_file = application.getElementsByClassName('profile-info__user-avatar-input')[0];
-            if (typeof avatar_file !== 'undefined') {
-                avatar_file = avatar_file.files[0];
-            }
-            let first_name
-            let last_name;
-            if (typeof document.getElementsByName('firstName')[0] !== 'undefined') {
-                first_name = document.getElementsByName('firstName')[0].value.trim();
-            }
-            if (typeof document.getElementsByName('lastName')[0] !== 'undefined') {
-                last_name = document.getElementsByName('lastName')[0].value.trim();
-            }
-
-            if (profile.isValid(['text'])) {
-                AjaxModule.putUsingFetch({
-                    url: ServerApiPath + Urls.profileUrl,
-                    body: {first_name, last_name}
-                }).then(() => {
-                    AjaxModule.getUsingFetch({
-                        url: ServerApiPath + Urls.profileUrl,
-                        body: null
-                    }).then((response) => {
-                        return response.json();
-                    }).then((response) => {
-                        profile.data = response;
-                        if (response.avatar === '') {
-                            profile.data.avatar = FileServerHost + Urls.defaultAvatar;
-                        } else {
-                            profile.data.avatar = FileServerHost + response.avatar;
-                        }
-                        profile.renderData();
-                    })
-                }).catch((err) => {
-                    console.error(err);
-                })
-            }
-
-            if (profile.isValid(['file']) && typeof avatar_file !== "undefined") {
-                    const formData = new FormData();
-                    formData.append('avatar', avatar_file);
-                    AjaxModule.putUsingFetch({
-                        data: true,
-                        url: ServerApiPath + Urls.profileAvatarUrl,
-                        body: formData
-                    }).then(() => {
-                        AjaxModule.getUsingFetch({
-                            url: ServerApiPath + Urls.profileAvatarUrl,
-                            body: null
-                        }).then((response) => {
-                            return response.json();
-                        }).then((response) => {
-                            profile.data.avatar = FileServerHost + response.result;
-                            profile.renderAvatar();
-                        })
-                    }).catch((err) => {
-                        console.error(err);
-                    })
-                }
-        });
-    }
-
     AjaxModule.getUsingFetch({
         url: ServerApiPath + Urls.profileUrl,
-        body: null
+        body: null,
     }).then((response) => {
         return response.json();
     }).then((response) => {
@@ -199,18 +135,19 @@ config.me.open = () => {
             profile.data.avatar = FileServerHost + response.avatar;
         }
         profile.renderData();
-        }).catch((error) => {
-            if (error instanceof Error) {
-                console.error(error);
-            }
-            const {responseObject} = error;
-            alert(`Нет авторизации
+    }).catch((error) => {
+        if (error instanceof Error) {
+            console.error(error);
+        }
+        const {responseObject} = error;
+        alert(`Нет авторизации
                    ${JSON.stringify({status, responseObject})}`);
-            config.login.open();
-        });
+        config.login.open();
+    });
 
     application.appendChild(profileHTML);
-}
+    profile.addFormEventListener();
+};
 
 application.addEventListener('click', (evt) => {
     const {target} = evt;
