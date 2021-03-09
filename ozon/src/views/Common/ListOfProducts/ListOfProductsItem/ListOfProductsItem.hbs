@@ -18,7 +18,7 @@
             </div>
         {{/for}}
     </div>
-    <div class="item-price-block discount-active">
+    <div class="item-price-block {{#ifNotEquals itemPrice.discount 0}}discount-active{{/ifNotEquals}}">
         <span class="item-discount-price item-price">{{itemPrice.discountPrice}}</span>
         <span class="item-base-price item-price">{{itemPrice.base}}</span>
         <span class="item-discount item-price">{{itemPrice.discount}}% Off</span>

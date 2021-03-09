@@ -1,10 +1,9 @@
 import {BasePage} from '../BasePage.js';
 import {Input} from '../Common/Input/Input.js';
-import {Link} from '../Common/Link.js';
 import ProfileTemplate from './ProfilePage.hbs';
 import {isValidForm} from '../../utils/validator.js';
-import {AjaxModule} from "../../modules/Ajax/Ajax";
-import {FileServerHost, ServerApiPath, Urls} from "../../utils/urls/urls";
+import {AjaxModule} from '../../modules/Ajax/Ajax';
+import {FileServerHost, ServerApiPath, Urls} from '../../utils/urls/urls';
 
 /**
  * @class  ProfilePage
@@ -29,7 +28,6 @@ export class ProfilePage extends BasePage {
             inputFields: [new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
                 new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
                 new Input({type: 'text', name: 'lastName', placeholder: 'Last name'})],
-            backLink: new Link({href: '/home', textContent: '<', dataset: 'home'}),
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),
         });
 
@@ -38,7 +36,7 @@ export class ProfilePage extends BasePage {
     }
 
     addFormEventListener = () => {
-        const form = document.getElementById('form')
+        const form = document.getElementById('form');
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             let avatarFile = document.getElementsByClassName('profile-info__user-avatar-input')[0];

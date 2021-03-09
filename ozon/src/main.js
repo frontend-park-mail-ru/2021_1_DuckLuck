@@ -1,10 +1,10 @@
 import {ProfilePage} from './views/ProfilePage/ProfilePage.js';
-import {LoginPage} from "./views/LoginPage/LoginPage.js";
-import {SignupPage} from "./views/SignupPage/SignupPage.js";
-import {HomePage} from "./views/HomePage/HomePage.js";
-import {ProductsPage} from "./views/ProductsPage/ProductsPage.js";
-import {ProductPage} from "./views/ProductPage/ProductPage.js";
-import {AjaxModule} from "./modules/Ajax/Ajax.js";
+import {LoginPage} from './views/LoginPage/LoginPage.js';
+import {SignupPage} from './views/SignupPage/SignupPage.js';
+import {HomePage} from './views/HomePage/HomePage.js';
+import {ProductsPage} from './views/ProductsPage/ProductsPage.js';
+import {ProductPage} from './views/ProductPage/ProductPage.js';
+import {AjaxModule} from './modules/Ajax/Ajax.js';
 import {FileServerHost, ServerApiPath, Urls} from './utils/urls/urls.js';
 
 const application = document.getElementById('app');
@@ -99,8 +99,9 @@ config.login.open = () => {
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        if (!page.isValid())
+        if (!page.isValid()) {
             return;
+        }
 
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
@@ -136,7 +137,6 @@ config.me.open = () => {
     }).then((response) => {
         return response.json();
     }).then((response) => {
-        console.log(response);
         if (response.error === 'user is unauthorized') {
             config.login.open();
             return;
@@ -180,7 +180,7 @@ config.item.open = (itemId=1) => {
                 Category: parsedJson['category'],
             },
             images: parsedJson['images'],
-        }
+        };
         const page = new ProductPage(application).render(item);
         for (const button of page.getElementsByClassName('button_pagination')) {
             button.addEventListener('click', () => {
@@ -200,7 +200,7 @@ config.items.open = (currentPage=1) => {
             count: 4,
             sort_key: 'cost',
             sort_direction: 'ASC',
-        }
+        },
     }).then((response) => {
         return response.json();
     }).then((parsedJson) => {

@@ -71,10 +71,6 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
     return isValid;
 };
 
-const loginValidation = (input) => {
-    return /^[a-zA-Z][a-zA-Z0-9]*$/.test(input.value);
-};
-
 const nameValidation = (input) => {
     return /^[a-zA-Zа-яА-Я]+$/.test(input.value);
 };
