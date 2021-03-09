@@ -40,14 +40,13 @@ config.signup.open = () => {
 
     blind.addEventListener('click', (evt) => {
         if (evt.target === evt.currentTarget) {
-            application.removeChild(page);
+            application.removeChild(pageParsed);
         }
     });
 
     const form = pageParsed.getElementsByClassName('form-body')[0];
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
-
 
         if (page.isValid()) {
             const email = document.getElementById('email').value.trim();
@@ -56,8 +55,7 @@ config.signup.open = () => {
             AjaxModule.postUsingFetch({
                 url: ServerApiPath + Urls.signupUrl,
                 body: {email, password},
-            })
-                .then(({status, parsedJson}) => {
+            }).then(({status, parsedJson}) => {
                     if (status === 201) {
                         config.me.open();
                     } else {

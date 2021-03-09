@@ -47,14 +47,12 @@ export class AjaxModule {
      * @return {Promise<{parsedJson: any, status: number}>}
      * @description all these functions above using this private function to communicate with backend.
      */
-    static #usingFetch = async(ajaxArgs) => {
+    static #usingFetch = (ajaxArgs) => {
         // TODO: make beauty
-        if (!ajaxArgs.data) {
-            if (ajaxArgs.body) {
-                ajaxArgs.body = JSON.stringify(ajaxArgs.body);
-            }
+        if (!ajaxArgs.data && ajaxArgs.body) {
+            ajaxArgs.body = JSON.stringify(ajaxArgs.body);
         }
-        const response = await fetch(ajaxArgs.url, {
+        return fetch(ajaxArgs.url, {
             method: ajaxArgs.method,
             body: (ajaxArgs.body) ? ajaxArgs.body : null,
             credentials: 'include',
