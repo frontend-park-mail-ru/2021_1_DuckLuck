@@ -1,5 +1,4 @@
 export const isValidForm = (form, specificTypesToCheck = []) => {
-    console.log(form);
     if (!form) {
         return false;
     }
@@ -19,7 +18,6 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
     let password = '';
     let isValid = true;
     for (const input of inputs) {
-        console.log(input, input.type);
         if (specificTypesToCheck.length > 0 && !specificTypesToCheck.includes(input.type)) {
             continue;
         }

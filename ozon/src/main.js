@@ -147,7 +147,7 @@ config.me.open = () => {
                     data: true,
                     url: ServerApiPath + Urls.profileAvatarUrl,
                     body: formData,
-                }).then(() => console.log('success'));
+                }).then(() => { });
             });
         })
         .catch((error) => {

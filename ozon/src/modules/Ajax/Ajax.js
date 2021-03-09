@@ -46,8 +46,6 @@ export class AjaxModule {
             if (ajaxArgs.body) {
                 ajaxArgs.body = JSON.stringify(ajaxArgs.body);
             }
-        } else {
-            console.log('IMG!');
         }
         const response = await fetch(ajaxArgs.url, {
             method: ajaxArgs.method,
