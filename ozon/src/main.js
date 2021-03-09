@@ -58,23 +58,25 @@ config.signup.open = () => {
     form.addEventListener('submit', (evt) => {
         evt.preventDefault();
 
-        if (page.isValid()) {
-            const email = document.getElementById('email').value.trim();
-            const password = document.getElementById('password').value.trim();
-
-            AjaxModule.postUsingFetch({
-                url: ServerApiPath + Urls.signupUrl,
-                body: {email, password},
-            })
-                .then(({status, parsedJson}) => {
-                    if (status === 201) {
-                        config.me.open();
-                    } else {
-                        const {error} = parsedJson;
-                        console.error(error);
-                    }
-                });
+        if (!page.isValid()) {
+            return;
         }
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
+
+        AjaxModule.postUsingFetch({
+            url: ServerApiPath + Urls.signupUrl,
+            body: {email, password},
+        })
+            .then(({status, parsedJson}) => {
+                if (status === 201) {
+                    config.me.open();
+                } else {
+                    const {error} = parsedJson;
+                    console.error(error);
+                }
+            });
     });
 
     application.appendChild(pageParsed);
