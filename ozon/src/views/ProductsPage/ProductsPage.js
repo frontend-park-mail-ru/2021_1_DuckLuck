@@ -1,7 +1,7 @@
 import {BasePage} from '../BasePage.js';
 import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
 import {Pagination} from '../Common/Pagination/Pagination';
-import ProductsPageTemplate from './ProductsPage.hbs';
+import productsPageTemplate from './ProductsPage.hbs';
 
 /**
  * @class ProductsPage
@@ -25,7 +25,7 @@ export class ProductsPage extends BasePage {
     render = ({products, paginationInfo}) => {
         const productsListHtmlString = new ListOfProducts(products).getHtmlString();
         const pagination = new Pagination(paginationInfo).getHtmlString();
-        const template = ProductsPageTemplate({
+        const template = productsPageTemplate({
             productsList: productsListHtmlString,
             pagination: pagination,
         });

@@ -1,8 +1,8 @@
-import {BasePage} from "../BasePage.js";
-import {Img} from "../Common/Img/Img.js";
-import {Rating} from "../Common/Rating/Rating.js";
-import ProductPageTemplate from "./ProductPage.hbs"
-import {FileServerHost} from "../../utils/urls/urls.js";
+import {BasePage} from '../BasePage.js';
+import {Img} from '../Common/Img/Img.js';
+import {Rating} from '../Common/Rating/Rating.js';
+import productPageTemplate from './ProductPage.hbs';
+import {fileServerHost} from '../../utils/urls/urls.js';
 
 
 /**
@@ -26,10 +26,10 @@ export class ProductPage extends BasePage {
         const images = [];
         item['images'].forEach((src) => {
             images.push(new Img({
-                src: FileServerHost + src,
+                src: fileServerHost + src,
             }));
         });
-        const template = ProductPageTemplate({
+        const template = productPageTemplate({
             name: item['name'],
             price: item['price'],
             rating: new Rating().getHtmlString({

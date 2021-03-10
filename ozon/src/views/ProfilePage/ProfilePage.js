@@ -1,9 +1,9 @@
 import {BasePage} from '../BasePage.js';
 import {Input} from '../Common/Input/Input.js';
-import ProfileTemplate from './ProfilePage.hbs';
+import profileTemplate from './ProfilePage.hbs';
 import {isValidForm} from '../../utils/validator.js';
 import {AjaxModule} from '../../modules/Ajax/Ajax';
-import {FileServerHost, ServerApiPath, Urls} from '../../utils/urls/urls';
+import {fileServerHost, ServerApiPath, Urls} from '../../utils/urls/urls';
 
 /**
  * @class  ProfilePage
@@ -24,7 +24,7 @@ export class ProfilePage extends BasePage {
      * @return {HTMLElement} rendered page
      */
     render = () => {
-        const htmlTemplate = ProfileTemplate({
+        const htmlTemplate = profileTemplate({
             inputFields: [new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
                 new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
                 new Input({type: 'text', name: 'lastName', placeholder: 'Last name'})],
@@ -65,9 +65,9 @@ export class ProfilePage extends BasePage {
                     }).then((response) => {
                         this.data = response;
                         if (response.avatar === '') {
-                            this.data.avatar = FileServerHost + Urls.defaultAvatar;
+                            this.data.avatar = fileServerHost + Urls.defaultAvatar;
                         } else {
-                            this.data.avatar = FileServerHost + response.avatar;
+                            this.data.avatar = fileServerHost + response.avatar;
                         }
                         this.renderData();
                     });
@@ -90,7 +90,7 @@ export class ProfilePage extends BasePage {
                     }).then((response) => {
                         return response.json();
                     }).then((response) => {
-                        this.data.avatar = FileServerHost + response.result;
+                        this.data.avatar = fileServerHost + response.result;
                         this.renderAvatar();
                     });
                 }).catch((err) => {
@@ -107,8 +107,7 @@ export class ProfilePage extends BasePage {
     renderData = () => {
         const {first_name = '',
             email = '',
-            last_name = '',
-            avatar = ''} = this.data;
+            last_name = ''} = this.data;
         const firstNameInput = document.getElementsByName('firstName')[0];
         const lastNameInput = document.getElementsByName('lastName')[0];
         const emailInput = document.getElementsByName('email')[0];
@@ -125,12 +124,21 @@ export class ProfilePage extends BasePage {
         this.renderAvatar();
     }
 
+    /**
+     * Renders avatar of user if page is loading or he uploads new
+     */
     renderAvatar = () => {
         const {avatar = ''} = this.data;
         const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
         avatarImage.src = avatar;
     }
 
+    /**
+     *
+     * @param {string[]} specificTypeToCheck if this parameter is not empty, only inputs of a certain
+     * type specified in this parameter will be checked
+     * @return {boolean} true if form valid, false otherwise
+     */
     isValid = (specificTypeToCheck = []) => {
         return isValidForm(document.getElementsByClassName('profile-credentials__form')[0], specificTypeToCheck);
     }

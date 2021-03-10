@@ -1,6 +1,6 @@
 import {Img} from '../Img/Img';
 import {ListOfProductsItem} from './ListOfProductsItem/ListOfProductsItem';
-import ListOFProductsItemTemplate from './ListOfProducts.hbs';
+import listOFProductsItemTemplate from './ListOfProducts.hbs';
 import {FileServerHost} from '../../../utils/urls/urls.js';
 
 /**
@@ -42,6 +42,6 @@ export class ListOfProducts {
             itemsTemplates.push(item.getHtmlString());
         });
 
-        return ListOFProductsItemTemplate({items: itemsTemplates});
+        return listOFProductsItemTemplate({items: itemsTemplates});
     };
 }

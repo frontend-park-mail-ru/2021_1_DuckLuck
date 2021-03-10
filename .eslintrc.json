@@ -13,10 +13,9 @@
     },
     "rules": {
         "semi": "error",
-        "camelcase": "error",
+        "camelcase": "off",
         "no-console": ["error", { "allow": ["warn", "error"] }],
         "no-invalid-this": "off",
-        "complexity": ["error", { "max": 4 }],
         "no-var": 1,
         "no-eval": "error",
         "indent": ["error", 4],

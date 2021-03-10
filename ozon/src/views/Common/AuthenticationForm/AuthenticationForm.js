@@ -1,4 +1,4 @@
-import AuthenticationFormTemplate from './AuthenticationForm.hbs';
+import authenticationFormTemplate from './AuthenticationForm.hbs';
 
 
 /**
@@ -6,6 +6,9 @@ import AuthenticationFormTemplate from './AuthenticationForm.hbs';
  * @classdesc This class is using for construct html via templates. One of the common views
  */
 export class AuthenticationForm {
+    /**
+     * A default constructor for AuthenticationForm
+     */
     constructor() {
         this.objectType = 'authenticationForm';
     };
@@ -17,7 +20,7 @@ export class AuthenticationForm {
      * @return {string} HTML string, which will generated after templating
      */
     getHtmlString = ({formType, formData}) => {
-        return AuthenticationFormTemplate({
+        return authenticationFormTemplate({
             formType: formType,
             formData: formData,
         });

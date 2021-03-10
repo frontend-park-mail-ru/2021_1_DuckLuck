@@ -1,4 +1,4 @@
-import ListOFProductsItemTemplate from './ListOfProductsItem.hbs';
+import listOFProductsItemTemplate from './ListOfProductsItem.hbs';
 
 
 /**
@@ -27,7 +27,7 @@ export class ListOfProductsItem {
      * @return {string} generated HTML after templating
      */
     getHtmlString = () => {
-        return ListOFProductsItemTemplate({
+        return listOFProductsItemTemplate({
             itemId: this.itemId,
             itemImage: this.itemImage,
             itemName: this.itemName,

@@ -1,4 +1,4 @@
-import RatingTempalte from './Rating.hbs';
+import ratingTempalte from './Rating.hbs';
 
 /**
  * @class Rating
@@ -23,7 +23,7 @@ export class Rating {
      * @return {string} generated HTML after templating
      */
     getHtmlString = ({ratingObject, ratingValue}) => {
-        return RatingTempalte({
+        return ratingTempalte({
             ratingObject: ratingObject,
             ratingValue: ratingValue,
             minRatingValue: this.minRatingValue,
