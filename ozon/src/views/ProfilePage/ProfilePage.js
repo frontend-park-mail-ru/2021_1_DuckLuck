@@ -3,7 +3,7 @@ import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfilePage.hbs';
 import {isValidForm} from '../../utils/validator.js';
 import {AjaxModule} from '../../modules/Ajax/Ajax';
-import {fileServerHost, ServerApiPath, Urls} from '../../utils/urls/urls';
+import {fileServerHost, serverApiPath, urls} from '../../utils/urls/urls';
 
 /**
  * @class  ProfilePage
@@ -54,18 +54,18 @@ export class ProfilePage extends BasePage {
 
             if (this.isValid(['text'])) {
                 AjaxModule.putUsingFetch({
-                    url: ServerApiPath + Urls.profileUrl,
+                    url: serverApiPath + urls.profileUrl,
                     body: {first_name: firstName, last_name: lastName},
                 }).then(() => {
                     AjaxModule.getUsingFetch({
-                        url: ServerApiPath + Urls.profileUrl,
+                        url: serverApiPath + urls.profileUrl,
                         body: null,
                     }).then((response) => {
                         return response.json();
                     }).then((response) => {
                         this.data = response;
                         if (response.avatar === '') {
-                            this.data.avatar = fileServerHost + Urls.defaultAvatar;
+                            this.data.avatar = fileServerHost + urls.defaultAvatar;
                         } else {
                             this.data.avatar = fileServerHost + response.avatar;
                         }
@@ -81,11 +81,11 @@ export class ProfilePage extends BasePage {
                 formData.append('avatar', avatarFile);
                 AjaxModule.putUsingFetch({
                     data: true,
-                    url: ServerApiPath + Urls.profileAvatarUrl,
+                    url: serverApiPath + urls.profileAvatarUrl,
                     body: formData,
                 }).then(() => {
                     AjaxModule.getUsingFetch({
-                        url: ServerApiPath + Urls.profileAvatarUrl,
+                        url: serverApiPath + urls.profileAvatarUrl,
                         body: null,
                     }).then((response) => {
                         return response.json();
