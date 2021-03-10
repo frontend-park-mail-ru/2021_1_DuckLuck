@@ -53,15 +53,24 @@ export class AjaxModule {
         if (!ajaxArgs.data && ajaxArgs.body) {
             ajaxArgs.body = JSON.stringify(ajaxArgs.body);
         }
-        return fetch(ajaxArgs.url, {
-            method: ajaxArgs.method,
-            body: (ajaxArgs.body) ? ajaxArgs.body : null,
-            credentials: 'include',
-            mode: 'cors',
-            // TODO: Uncomment and make multipart/data and boundary (doesnt work right now)
-            // headers: {
-            //     'Content-Type': 'application/json;charset=utf-8',
-            // }
-        });
+
+        if (ajaxArgs.data) {
+            return fetch(ajaxArgs.url, {
+                method: ajaxArgs.method,
+                body: (ajaxArgs.body) ? ajaxArgs.body : null,
+                credentials: 'include',
+                mode: 'cors',
+            });
+        } else {
+            return fetch(ajaxArgs.url, {
+                method: ajaxArgs.method,
+                body: (ajaxArgs.body) ? ajaxArgs.body : null,
+                credentials: 'include',
+                mode: 'cors',
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                }
+            });
+        }
     }
 }
