@@ -1,5 +1,5 @@
 import {Button} from '../Button/Button.js';
-import PaginationTemplate from './Pagination.hbs';
+import paginationTemplate from './Pagination.hbs';
 
 /**
  * @class Pagination
@@ -42,6 +42,6 @@ export class Pagination {
             buttons.push(new Button({name: 'button_pagination_last', value: this.pagesCount.toString()}));
         }
 
-        return PaginationTemplate({buttons: buttons});
+        return paginationTemplate({buttons: buttons});
     }
 }

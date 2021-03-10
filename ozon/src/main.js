@@ -5,7 +5,7 @@ import {HomePage} from './views/HomePage/HomePage.js';
 import {ProductsPage} from './views/ProductsPage/ProductsPage.js';
 import {ProductPage} from './views/ProductPage/ProductPage.js';
 import {AjaxModule} from './modules/Ajax/Ajax.js';
-import {FileServerHost, ServerApiPath, Urls} from './utils/urls/urls.js';
+import {fileServerHost, serverApiPath, urls} from './utils/urls/urls.js';
 
 const application = document.getElementById('app');
 
@@ -64,7 +64,7 @@ config.signup.open = () => {
         const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
-            url: ServerApiPath + Urls.signupUrl,
+            url: serverApiPath + urls.signupUrl,
             body: {email, password},
         }).then(({status, parsedJson}) => {
             if (status === 201) {
@@ -107,7 +107,7 @@ config.login.open = () => {
         const password = document.getElementById('password').value.trim();
 
         AjaxModule.postUsingFetch({
-            url: ServerApiPath + Urls.loginUrl,
+            url: serverApiPath + urls.loginUrl,
             body: {email, password},
         }).then(({status, parsedJson}) => {
             if (status === 200) {
@@ -132,7 +132,7 @@ config.login.open = () => {
 
 config.me.open = () => {
     AjaxModule.getUsingFetch({
-        url: ServerApiPath + Urls.profileUrl,
+        url: serverApiPath + urls.profileUrl,
         body: null,
     }).then((response) => {
         return response.json();
@@ -148,9 +148,9 @@ config.me.open = () => {
         profile.addFormEventListener();
         profile.data = response;
         if (response.avatar === '') {
-            profile.data.avatar = FileServerHost + Urls.defaultAvatar;
+            profile.data.avatar = fileServerHost + urls.defaultAvatar;
         } else {
-            profile.data.avatar = FileServerHost + response.avatar;
+            profile.data.avatar = fileServerHost + response.avatar;
         }
         profile.renderData();
     }).catch((error) => {
@@ -161,13 +161,13 @@ config.me.open = () => {
 config.item.open = (itemId=1) => {
     application.innerHTML = '';
     AjaxModule.getUsingFetch({
-        url: ServerApiPath + `/product/${itemId}`,
+        url: serverApiPath + `/product/${itemId}`,
     }).then((response) => {
         return response.json();
     }).then((parsedJson) => {
         const base = parsedJson['price']['base_cost'];
         const discount = parsedJson['price']['discount'];
-        const discountPrice = base * (1 - discount*0.01);
+        const discountPrice = (base * (1 - discount)).toFixed(2);
         const item = {
             name: parsedJson['title'],
             price: {
@@ -194,7 +194,7 @@ config.item.open = (itemId=1) => {
 config.items.open = (currentPage=1) => {
     application.innerHTML = '';
     AjaxModule.postUsingFetch({
-        url: ServerApiPath + '/product',
+        url: serverApiPath + '/product',
         body: {
             page_num: currentPage,
             count: 4,

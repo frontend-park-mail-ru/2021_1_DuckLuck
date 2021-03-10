@@ -1,9 +1,9 @@
-export const ServerHost = 'http://localhost:8080';
-export const FileServerHost = 'http://localhost:8100';
-export const ServerApiPath = `${ServerHost}/api/v1`;
+export const serverHost = 'http://localhost:8080';
+export const fileServerHost = 'http://localhost:8100';
+export const serverApiPath = `${serverHost}/api/v1`;
 
 
-export const Urls = {
+export const urls = {
     loginUrl: '/user/login',
     logoutUrl: '/user/logout',
     signupUrl: '/user/signup',

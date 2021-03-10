@@ -80,7 +80,6 @@ const emailValidation = (input) => {
 };
 
 const passwordValidation = (input) => {
-
     return input.value.length >= 3 && input.value.length <= 20;
 };
 
@@ -96,5 +95,4 @@ const fileValidation = (input) => {
         return true;
     }
     return file.size < MAX_FILE_SIZE && /.*\.(jpeg|png|jpg)$/i.test(file.name);
-
 };

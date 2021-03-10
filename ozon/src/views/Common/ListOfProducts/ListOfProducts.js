@@ -1,7 +1,7 @@
 import {Img} from '../Img/Img';
 import {ListOfProductsItem} from './ListOfProductsItem/ListOfProductsItem';
-import ListOFProductsItemTemplate from './ListOfProducts.hbs';
-import {FileServerHost} from '../../../utils/urls/urls.js';
+import listOFProductsItemTemplate from './ListOfProducts.hbs';
+import {fileServerHost} from '../../../utils/urls/urls.js';
 
 /**
  * @class ListOfProducts
@@ -20,7 +20,7 @@ export class ListOfProducts {
             const discountPrice = base * discount*0.01;
             this.items.push(new ListOfProductsItem({
                 itemId: item['id'],
-                itemImage: new Img({src: FileServerHost + item['preview_image']}),
+                itemImage: new Img({src: fileServerHost + item['preview_image']}),
                 itemName: item['title'],
                 itemRating: item['rating'],
                 itemPrice: {
@@ -42,6 +42,6 @@ export class ListOfProducts {
             itemsTemplates.push(item.getHtmlString());
         });
 
-        return ListOFProductsItemTemplate({items: itemsTemplates});
+        return listOFProductsItemTemplate({items: itemsTemplates});
     };
 }

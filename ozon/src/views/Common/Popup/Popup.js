@@ -1,4 +1,4 @@
-import PopupTemplate from './Popup.hbs';
+import popupTemplate from './Popup.hbs';
 
 /**
  * @class Popup
@@ -20,6 +20,6 @@ export class Popup {
      * @return {string} generated HTML after templating
      */
     getHtmlString = ({popupBody, background, popupType}) => {
-        return PopupTemplate({popupBody, background, popupType});
+        return popupTemplate({popupBody, background, popupType});
     };
 }

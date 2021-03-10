@@ -58,6 +58,12 @@ export class LoginPage extends BasePage {
             .getElementById('popup-wrapper');
     }
 
+    /**
+     *
+     * @param {string[]} specificTypeToCheck if this parameter is not empty, only inputs of a certain
+     * type specified in this parameter will be checked
+     * @return {boolean} true if form valid, false otherwise
+     */
     isValid = (specificTypeToCheck = []) => {
         const form = document.getElementsByClassName('form-body')[0].getElementsByTagName('form')[0];
         return isValidForm(form, specificTypeToCheck);
