@@ -167,7 +167,7 @@ config.item.open = (itemId=1) => {
     }).then((parsedJson) => {
         const base = parsedJson['price']['base_cost'];
         const discount = parsedJson['price']['discount'];
-        const discountPrice = base * (1 - discount*0.01);
+        const discountPrice = (base * (1 - discount)).toFixed(2);
         const item = {
             name: parsedJson['title'],
             price: {
