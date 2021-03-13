@@ -33,7 +33,7 @@ export class SignupPage extends BasePage {
                     formData: {
                         inputFields: [
                             new Input({
-                                type: 'text',
+                                type: 'email',
                                 name: 'email',
                                 placeholder: 'Email address',
                             }),
