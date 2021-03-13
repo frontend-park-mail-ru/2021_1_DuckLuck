@@ -44,24 +44,30 @@ export class AjaxModule {
 
     /**
      *
-     * @param {Object} ajaxArgs argiments for ajax
+     * @param {Object} ajaxArgs arguments for ajax
      * @return {Promise<Response>}
      * @description all these functions above using this private function to communicate with backend.
      */
     static #usingFetch = (ajaxArgs) => {
-        // TODO: make beauty
         if (!ajaxArgs.data && ajaxArgs.body) {
             ajaxArgs.body = JSON.stringify(ajaxArgs.body);
         }
-        return fetch(ajaxArgs.url, {
+
+        const init = {
             method: ajaxArgs.method,
             body: (ajaxArgs.body) ? ajaxArgs.body : null,
             credentials: 'include',
             mode: 'cors',
-            // TODO: Uncomment and make multipart/data and boundary (doesnt work right now)
-            // headers: {
-            //     'Content-Type': 'application/json;charset=utf-8',
-            // }
-        });
+        };
+
+        if (ajaxArgs.data) {
+            init['enctype'] = 'multipart/form-data';
+        } else {
+            init['headers'] = {
+                'Content-Type': 'application/json;charset=utf-8',
+            };
+        }
+
+        return fetch(ajaxArgs.url, init);
     }
 }
