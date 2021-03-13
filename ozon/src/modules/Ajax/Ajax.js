@@ -61,7 +61,7 @@ export class AjaxModule {
         };
 
         if (ajaxArgs.data) {
-            init['enctype'] = "multipart/form-data";
+            init['enctype'] = 'multipart/form-data';
         } else {
             init['headers'] = {
                 'Content-Type': 'application/json;charset=utf-8',
