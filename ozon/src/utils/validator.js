@@ -15,13 +15,19 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
     }
 
 
-    let password = '';
-    let isValid = true;
+    const userInfo = {
+        password: '',
+    };
+    const result = {
+        isValid: true,
+    };
     for (const input of inputs) {
-        if (specificTypesToCheck.length > 0 && !specificTypesToCheck.includes(input.type)) {
+        if (specificTypesToCheck.length > 0 &&
+           !specificTypesToCheck.includes(input.type)) {
             continue;
         }
-        if (input.disabled === true) {
+
+        if (input.disabled) {
             continue;
         }
 
@@ -29,70 +35,86 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
         if (errField === null) {
             errField = document.getElementById(input.id + '_error');
         }
-        if (input.type === 'text') {
-            if (input.name.includes('firstName') && !(nameValidation(input))) {
-                isValid = false;
-                errField.innerHTML = 'Incorrect or empty First Name!';
-            } else if (input.name.includes('lastName') && !(nameValidation(input))) {
-                isValid = false;
-                errField.innerHTML = 'Incorrect or empty Last Name!';
-            } else if (input.id === 'email') {
-                if (!(emailValidation(input))) {
-                    isValid = false;
-                    errField.innerHTML = 'Incorrect Email!';
-                }
+
+        switch (input.type) {
+        case 'text':
+            if (input.name.includes('firstName')) {
+                nameValidation(input, result, errField);
+            } else if (input.name.includes('lastName')) {
+                nameValidation(input, result, errField);
             }
-        } else if (input.type === 'email') {
-            if (!(emailValidation(input))) {
-                isValid = false;
-                errField.innerHTML = 'Incorrect Email!';
+            break;
+        case 'email':
+            emailValidation(input, result, errField);
+            break;
+        case 'file':
+            fileValidation(input, result, errField);
+            break;
+        case 'password':
+            switch (input.id) {
+            case 'password':
+                passwordValidation(input, result, errField, userInfo);
+                break;
+            case 'repeat_password':
+                passwordRepeatValidation(input, result, errField, userInfo.password);
+                break;
+            default:
+                break;
             }
-        } else if (input.type === 'file') {
-            if (!(fileValidation(input))) {
-                isValid = false;
-                errField.innerHTML = 'Incorrect File!';
-            }
-        } else if (input.type === 'password') {
-            if (input.id === 'password') {
-                if (!(passwordValidation(input))) {
-                    isValid = false;
-                    errField.innerHTML = 'Incorrect password!';
-                }
-                password = input.value;
-            } else if (input.id === 'repeat_password') {
-                if (!(passwordRepeatValidation(input, password))) {
-                    isValid = false;
-                    errField.innerHTML = 'Incorrect repeat password!';
-                }
-            }
+            break;
+
+        default:
+            console.error('unsupported type of input!');
+            break;
         }
     }
 
-    return isValid;
+    return result.isValid;
 };
 
-const nameValidation = (input) => {
-    return /^[a-zA-Zа-яА-Я]+$/.test(input.value);
+const nameValidation = (input, result, errField) => {
+    const isValidName = /^[a-zA-Zа-яА-Я]+$/.test(input.value);
+    if (!isValidName) {
+        result.isValid = false;
+        errField.innerHTML = 'Incorrect or empty First Name!';
+    }
 };
 
-const emailValidation = (input) => {
-    return /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(input.value);
+const emailValidation = (input, result, errField) => {
+    const isValidEmail = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(input.value);
+    if (!isValidEmail) {
+        result.isValid = false;
+        errField.innerHTML = 'Incorrect or Email!';
+    }
 };
 
-const passwordValidation = (input) => {
-    return input.value.length >= 3 && input.value.length <= 20;
+const passwordValidation = (input, result, errField, userInfo) => {
+    const isPasswordValid = input.value.length >= 3 && input.value.length <= 20;
+    if (!isPasswordValid) {
+        result.isValid = false;
+        errField.innerHTML = 'Password is too short or too long!';
+    }
+    userInfo.password = input.value;
 };
 
-const passwordRepeatValidation = (input, password) => {
+const passwordRepeatValidation = (input, result, errField, password) => {
     const value = input.value;
-    return value.length >= 6 && value.length <= 10 && value === password;
+    if (value !== password) {
+        result.isValid = false;
+        errField.innerHTML = 'Repeat password doesnt match!';
+    } else if (input.value.length < 3 || input.value.length > 20) {
+        result.isValid = false;
+        errField.innerHTML = 'Repeat password is too short or too long!';
+    }
 };
 
 const MAX_FILE_SIZE = 10e6;
-const fileValidation = (input) => {
+const fileValidation = (input, result, errField) => {
     const file = input.files[0];
-    if (typeof file === 'undefined') {
-        return true;
+    const isValidFile = file !== undefined &&
+                         file.size < MAX_FILE_SIZE && /.*\.(jpeg|png|jpg)$/i.test(file.name);
+    if (!isValidFile) {
+        result.isValid = false;
+        errField.innerHTML = 'Incorrect file or file size!';
     }
-    return file.size < MAX_FILE_SIZE && /.*\.(jpeg|png|jpg)$/i.test(file.name);
 };
