@@ -100,7 +100,7 @@ export class ProfilePage extends BasePage {
                     console.error(err);
                 });
             }
-        })
+        });
     }
 
 
@@ -116,12 +116,9 @@ export class ProfilePage extends BasePage {
         const emailInput = document.getElementsByName('email')[0];
         const nameLabel = document.getElementsByClassName('profile-info__user_name')[0];
 
-        firstNameInput.value = '';
-        firstNameInput.placeholder = first_name;
-        emailInput.value = '';
-        emailInput.placeholder = email;
-        lastNameInput.value = '';
-        lastNameInput.placeholder = last_name;
+        firstNameInput.value = first_name;
+        emailInput.value = email;
+        lastNameInput.value = last_name;
         nameLabel.innerHTML = first_name + ' ' + last_name;
 
         this.renderAvatar();
