@@ -19,9 +19,9 @@
                 {{#each this.inputFields}}
                     <div class="profile-credentials__input_description">{{this.placeholder}}</div>
                     {{#if this.isDisabled}}
-                        <input disabled class="profile-credentials__input_line" type="{{this.type}}" name="{{this.name}}" placeholder="">
+                        <input disabled class="profile-credentials__input_line" type="{{this.type}}" name="{{this.name}}" value="">
                     {{else}}
-                        <input class="profile-credentials__input_line" type="{{this.type}}" name="{{this.name}}" placeholder="">
+                        <input class="profile-credentials__input_line" type="{{this.type}}" name="{{this.name}}" value="">
                     {{/if}}
                     <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
                 {{/each}}

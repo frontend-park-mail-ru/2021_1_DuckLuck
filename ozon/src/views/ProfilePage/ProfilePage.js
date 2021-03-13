@@ -37,12 +37,9 @@ export class ProfilePage extends BasePage {
 
     addFormEventListener = () => {
         const form = document.getElementById('form');
+
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            let avatarFile = document.getElementsByClassName('profile-info__user-avatar-input')[0];
-            if (typeof avatarFile !== 'undefined') {
-                avatarFile = avatarFile.files[0];
-            }
             let firstName;
             let lastName;
             if (typeof document.getElementsByName('firstName')[0] !== 'undefined') {
@@ -75,8 +72,14 @@ export class ProfilePage extends BasePage {
                     console.error(err);
                 });
             }
+        });
 
-            if (this.isValid(['file']) && typeof avatarFile !== 'undefined') {
+
+        const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
+        avatarInput.addEventListener('change', (evt) => {
+            evt.preventDefault();
+            const avatarFile = avatarInput.files[0];
+            if (this.isValid(['file']) && avatarFile !== undefined) {
                 const formData = new FormData();
                 formData.append('avatar', avatarFile);
                 AjaxModule.putUsingFetch({
@@ -113,12 +116,9 @@ export class ProfilePage extends BasePage {
         const emailInput = document.getElementsByName('email')[0];
         const nameLabel = document.getElementsByClassName('profile-info__user_name')[0];
 
-        firstNameInput.value = '';
-        firstNameInput.placeholder = first_name;
-        emailInput.value = '';
-        emailInput.placeholder = email;
-        lastNameInput.value = '';
-        lastNameInput.placeholder = last_name;
+        firstNameInput.value = first_name;
+        emailInput.value = email;
+        lastNameInput.value = last_name;
         nameLabel.innerHTML = first_name + ' ' + last_name;
 
         this.renderAvatar();
