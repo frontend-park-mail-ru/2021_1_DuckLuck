@@ -23,7 +23,8 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
     };
     for (const input of inputs) {
         if (specificTypesToCheck.length > 0 &&
-           !specificTypesToCheck.includes(input.type)) {
+           !specificTypesToCheck.includes(input.type)
+        ) {
             continue;
         }
 
@@ -38,9 +39,9 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
 
         switch (input.type) {
         case 'text':
-            if (input.name.includes('firstName')) {
-                nameValidation(input, result, errField);
-            } else if (input.name.includes('lastName')) {
+            if (input.name.includes('firstName') ||
+                input.name.includes('lastName')
+            ) {
                 nameValidation(input, result, errField);
             }
             break;
