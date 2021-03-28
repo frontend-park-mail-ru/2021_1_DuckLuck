@@ -1,4 +1,4 @@
-import {BasePage} from '../BasePage.js';
+import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfilePage.hbs';
 import {isValidForm} from '../../utils/validator.js';
@@ -7,10 +7,10 @@ import {fileServerHost, serverApiPath, urls} from '../../utils/urls/urls';
 
 /**
  * @class  ProfilePage
- * @extends BasePage
+ * @extends BaseView
  * @classdesc Class for showing profile of a user
  */
-export class ProfilePage extends BasePage {
+export class ProfilePage extends BaseView {
     /**
      * @param {Object} parent parents object
      */

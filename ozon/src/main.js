@@ -1,7 +1,7 @@
 import {ProfilePage} from './views/ProfilePage/ProfilePage.js';
 import {LoginPage} from './views/LoginPage/LoginPage.js';
 import {SignupPage} from './views/SignupPage/SignupPage.js';
-import {HomePage} from './views/HomePage/HomePage.js';
+import {HomeView} from './views/HomePage/HomeView.js';
 import {ProductsPage} from './views/ProductsPage/ProductsPage.js';
 import {ProductPage} from './views/ProductPage/ProductPage.js';
 import {AjaxModule} from './modules/Ajax/Ajax.js';
@@ -39,95 +39,109 @@ const config = {
 config.home.open = () => {
     application.innerHTML = '';
 
-    const page = new HomePage(application);
+    const page = new HomeView(application);
     page.render(config);
+    page.show();
 };
 
 config.signup.open = () => {
     const page = new SignupPage(application);
-    const pageParsed = page.render();
-    const blind = pageParsed.getElementsByClassName('blind')[0];
+    if (page.cache === '') {
+        page.show()
+        const pageParsed = page.cache;
+        const blind = pageParsed.getElementsByClassName('blind')[0];
 
-    blind.addEventListener('click', (evt) => {
-        application.removeChild(pageParsed);
-    });
-
-    const form = pageParsed.getElementsByClassName('form-body')[0];
-    form.addEventListener('submit', (evt) => {
-        evt.preventDefault();
-
-        if (!page.isValid()) {
-            return;
-        }
-
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-
-        AjaxModule.postUsingFetch({
-            url: serverApiPath + urls.signupUrl,
-            body: {email, password},
-        }).then(({status, parsedJson}) => {
-            if (status === 201) {
-                config.me.open();
-            } else {
-                const {error} = parsedJson;
-                console.error(error);
-            }
+        blind.addEventListener('click', (evt) => {
+            console.log("HIDDEN");
+            page.hide()
+            // application.removeChild(pageParsed);
         });
-    });
 
-    application.appendChild(pageParsed);
-
-    document
-        .getElementById('form-header__login-link')
-        .addEventListener('click', (evt) => {
+        const form = pageParsed.getElementsByClassName('form-body')[0];
+        form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            application.removeChild(pageParsed);
-            config.login.open();
+
+            if (!page.isValid()) {
+                return;
+            }
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            AjaxModule.postUsingFetch({
+                url: serverApiPath + urls.signupUrl,
+                body: {email, password},
+            }).then(({status, parsedJson}) => {
+                if (status === 201) {
+                    config.me.open();
+                } else {
+                    const {error} = parsedJson;
+                    console.error(error);
+                }
+            });
         });
+
+        document
+            .getElementById('form-header__login-link')
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                console.log("TO LOGIN");
+                // application.removeChild(pageParsed);
+                page.hide()
+                config.login.open();
+            });
+    } else {
+        page.show();
+    }
 };
 
 config.login.open = () => {
     const page = new LoginPage(application);
-    const pageParsed = page.render();
-    const blind = pageParsed.getElementsByClassName('blind')[0];
-    blind.addEventListener('click', (evt) => {
-        application.removeChild(pageParsed);
-    });
-
-    const form = pageParsed.getElementsByClassName('form-body')[0];
-    form.addEventListener('submit', (evt) => {
-        evt.preventDefault();
-
-        if (!page.isValid()) {
-            return;
-        }
-
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
-
-        AjaxModule.postUsingFetch({
-            url: serverApiPath + urls.loginUrl,
-            body: {email, password},
-        }).then(({status, parsedJson}) => {
-            if (status === 200) {
-                config.me.open();
-            } else {
-                const {error} = parsedJson;
-                alert(error);
-            }
+    if (page.cache === '') {
+        page.show();
+        const pageParsed = page.cache;
+        const blind = pageParsed.getElementsByClassName('blind')[0];
+        blind.addEventListener('click', (evt) => {
+            page.hide()
+            // application.removeChild(pageParsed);
         });
-    });
 
-    application.appendChild(pageParsed);
-
-    document
-        .getElementById('form-header__signup-link')
-        .addEventListener('click', (evt) => {
+        const form = pageParsed.getElementsByClassName('form-body')[0];
+        form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            application.removeChild(pageParsed);
-            config.signup.open();
+
+            if (!page.isValid()) {
+                return;
+            }
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            AjaxModule.postUsingFetch({
+                url: serverApiPath + urls.loginUrl,
+                body: {email, password},
+            }).then(({status, parsedJson}) => {
+                if (status === 200) {
+                    config.me.open();
+                } else {
+                    const {error} = parsedJson;
+                    alert(error);
+                }
+            });
         });
+
+        document
+            .getElementById('form-header__signup-link')
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                console.log("TO SIGNUP");
+                page.hide()
+                // application.removeChild(pageParsed);
+                config.signup.open();
+            });
+    } else {
+        page.show();
+    }
 };
 
 config.me.open = () => {

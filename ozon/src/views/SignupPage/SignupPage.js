@@ -1,4 +1,4 @@
-import {BasePage} from '../BasePage.js';
+import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import {Button} from '../Common/Button/Button.js';
 import {Link} from '../Common/Link/Link.js';
@@ -9,23 +9,33 @@ import {isValidForm} from '../../utils/validator.js';
 
 /**
  * @class  SignupPage
- * @extends BasePage
+ * @extends BaseView
  * @classdesc Class for signup page
  */
-export class SignupPage extends BasePage {
+export class SignupPage extends BaseView {
     /**
      *
      * @param {Object} parent parents object
      */
     constructor(parent) {
+        if (SignupPage.__instance) {
+            return SignupPage.__instance;
+        }
+
         super(parent);
+        SignupPage.__instance = this;
     }
 
     /**
      *
-     * @return {HTMLElement} rendered page
+     * @return {void} rendered page
      */
     render = () => {
+        if (this.cache !== '') {
+            this._cache.hidden = false;
+            return;
+        }
+
         const template = new Popup().getHtmlString({
             popupBody:
                 new AuthenticationForm().getHtmlString({
@@ -60,8 +70,10 @@ export class SignupPage extends BasePage {
             background: new Blind().getHtmlString(),
             popupType: 'signup',
         });
-        return new DOMParser().parseFromString(template, 'text/html')
-            .getElementById('popup-wrapper');
+        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
+
+
+        this.el.appendChild(this.cache);
     }
 
     /**

@@ -1,14 +1,14 @@
-import {BasePage} from '../BasePage.js';
+import {BaseView} from '../BaseView.js';
 import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsPage.hbs';
 
 /**
  * @class ProductsPage
- * @extends BasePage
+ * @extends BaseView
  * @classdesc Class for showing product
  */
-export class ProductsPage extends BasePage {
+export class ProductsPage extends BaseView {
     /**
      * @param {Object} parent parents object
      */

@@ -1,4 +1,4 @@
-import {BasePage} from '../BasePage.js';
+import {BaseView} from '../BaseView.js';
 import {Img} from '../Common/Img/Img.js';
 import {Rating} from '../Common/Rating/Rating.js';
 import productPageTemplate from './ProductPage.hbs';
@@ -7,10 +7,10 @@ import {fileServerHost} from '../../utils/urls/urls.js';
 
 /**
  * @class ProductPage
- * @extends BasePage
+ * @extends BaseView
  * @classdesc Class for Product page
  */
-export class ProductPage extends BasePage {
+export class ProductPage extends BaseView {
     /**
      * @param {Object} parent parents object
      */

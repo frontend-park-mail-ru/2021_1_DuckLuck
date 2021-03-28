@@ -1,4 +1,4 @@
-import {BasePage} from '../BasePage.js';
+import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import {Button} from '../Common/Button/Button.js';
 import {Link} from '../Common/Link/Link.js';
@@ -9,22 +9,32 @@ import {isValidForm} from '../../utils/validator';
 
 /**
  * @class LoginPage
- * @extends BasePage
+ * @extends BaseView
  * @classdesc Class for Login page
  */
-export class LoginPage extends BasePage {
+export class LoginPage extends BaseView {
     /**
      * @param {Object} parent parents object
      */
     constructor(parent) {
+        if (LoginPage.__instance) {
+            return LoginPage.__instance;
+        }
+
         super(parent);
+        LoginPage.__instance = this;
     }
 
     /**
      *
-     * @return {HTMLFormElement} html form
+     * @return {void} html form
      */
     render = () => {
+        if (this.cache !== '') {
+            this._cache.hidden = false;
+            return;
+        }
+
         const template = new Popup().getHtmlString({
             popupBody:
                 new AuthenticationForm().getHtmlString({
@@ -54,8 +64,9 @@ export class LoginPage extends BasePage {
             background: new Blind().getHtmlString(),
             popupType: 'login',
         });
-        return new DOMParser().parseFromString(template, 'text/html')
-            .getElementById('popup-wrapper');
+        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
+        this.el.appendChild(this.cache);
+
     }
 
     /**
