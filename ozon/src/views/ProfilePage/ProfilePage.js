@@ -15,15 +15,25 @@ export class ProfilePage extends BaseView {
      * @param {Object} parent parents object
      */
     constructor(parent) {
+        if (ProfilePage.__instance) {
+            return ProfilePage.__instance;
+        }
+
         super(parent);
+        ProfilePage.__instance = this;
     }
 
 
     /**
      *
-     * @return {HTMLElement} rendered page
+     * @return {void} rendered page
      */
     render = () => {
+        if (this.cache !== '') {
+            this._cache.hidden = false;
+            return;
+        }
+
         const htmlTemplate = profileTemplate({
             inputFields: [new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
                 new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
@@ -31,8 +41,9 @@ export class ProfilePage extends BaseView {
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),
         });
 
-        return new DOMParser().parseFromString(htmlTemplate, 'text/html')
-            .getElementById('profile-page');
+        this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
+
+        this.el.appendChild(this.cache);
     }
 
     addFormEventListener = () => {

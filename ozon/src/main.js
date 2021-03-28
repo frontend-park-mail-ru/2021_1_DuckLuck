@@ -59,6 +59,7 @@ config.signup.open = () => {
 
         const form = pageParsed.getElementsByClassName('form-body')[0];
         form.addEventListener('submit', (evt) => {
+            console.log("SIGNUP FORM SUMBIT");
             evt.preventDefault();
 
             if (!page.isValid()) {
@@ -81,11 +82,11 @@ config.signup.open = () => {
             });
         });
 
-        document
-            .getElementById('form-header__login-link')
+        // document
+        //     .getElementById('form-header__login-link')
+        pageParsed.getElementsByClassName('link link_weight-h1')[1]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
-                console.log("TO LOGIN");
                 // application.removeChild(pageParsed);
                 page.hide()
                 config.login.open();
@@ -109,6 +110,7 @@ config.login.open = () => {
         const form = pageParsed.getElementsByClassName('form-body')[0];
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
+            console.log("LOGIN FORM SUMBIT");
 
             if (!page.isValid()) {
                 return;
@@ -130,11 +132,12 @@ config.login.open = () => {
             });
         });
 
-        document
-            .getElementById('form-header__signup-link')
+        // console.log(pageParsed.getElementsByClassName('link link_weight-h1')[0]);
+        // document
+        //     .getElementById('form-header__signup-link')
+            pageParsed.getElementsByClassName('link link_weight-h1')[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
-                console.log("TO SIGNUP");
                 page.hide()
                 // application.removeChild(pageParsed);
                 config.signup.open();
@@ -145,31 +148,36 @@ config.login.open = () => {
 };
 
 config.me.open = () => {
-    AjaxModule.getUsingFetch({
-        url: serverApiPath + urls.profileUrl,
-        body: null,
-    }).then((response) => {
-        return response.json();
-    }).then((response) => {
-        if (response.error === 'user is unauthorized') {
-            config.login.open();
-            return;
-        }
-        application.innerHTML = '';
-        const profile = new ProfilePage(application);
-        const profileHTML = profile.render();
-        application.appendChild(profileHTML);
-        profile.addFormEventListener();
-        profile.data = response;
-        if (response.avatar === '') {
-            profile.data.avatar = fileServerHost + urls.defaultAvatar;
-        } else {
-            profile.data.avatar = fileServerHost + response.avatar;
-        }
-        profile.renderData();
-    }).catch((error) => {
-        console.error(error);
-    });
+    const profile = new ProfilePage(application);
+    if (profile.cache === '') {
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.profileUrl,
+            body: null,
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            if (response.error === 'user is unauthorized') {
+                config.login.open();
+                return;
+            }
+            application.innerHTML = '';
+            const profile = new ProfilePage(application);
+            profile.show()
+            const profileHTML = profile.cache;
+            profile.addFormEventListener();
+            profile.data = response;
+            if (response.avatar === '') {
+                profile.data.avatar = fileServerHost + urls.defaultAvatar;
+            } else {
+                profile.data.avatar = fileServerHost + response.avatar;
+            }
+            profile.renderData();
+        }).catch((error) => {
+            console.error(error);
+        });
+    } else {
+        profile.show();
+    }
 };
 
 config.item.open = (itemId=1) => {

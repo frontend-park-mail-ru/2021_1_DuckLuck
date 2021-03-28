@@ -36,7 +36,7 @@ export class HomeView extends BaseView {
             links: [new Link({href: '/home', name: 'Home', type: 'href', dataSection: 'home'}),
                     new Link({href: '/signup', name: 'Зарегестрироваться', type: 'href', dataSection: 'signup'}),
                     new Link({href: '/login', name: 'Войти', type: 'href', dataSection: 'login'}),
-                    new Link({href: '/me', name: 'Профиль', type: 'href', dataSection: 'profile'}),],
+                    new Link({href: '/profile', name: 'Профиль', type: 'href', dataSection: 'me'}),],
         });
         this._cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('home-view-block');
         this.el.appendChild(this.cache);

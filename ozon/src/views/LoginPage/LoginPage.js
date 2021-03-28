@@ -76,7 +76,7 @@ export class LoginPage extends BaseView {
      * @return {boolean} true if form valid, false otherwise
      */
     isValid = (specificTypeToCheck = []) => {
-        const form = document.getElementsByClassName('form-body')[0].getElementsByTagName('form')[0];
+        const form = this.cache.getElementsByClassName('form-body')[0].getElementsByTagName('form')[0];
         return isValidForm(form, specificTypeToCheck);
     }
 }
