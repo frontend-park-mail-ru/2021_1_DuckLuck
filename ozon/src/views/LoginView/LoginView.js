@@ -5,7 +5,9 @@ import {Link} from '../Common/Link/Link.js';
 import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
-import {isValidForm} from '../../utils/validator';
+import {isValidForm} from '../../modules/Valiadtor/validator';
+import Router from '../../Router';
+import Bus from '../../bus';
 
 /**
  * @class LoginView
@@ -65,6 +67,28 @@ export class LoginView extends BaseView {
             popupType: 'login',
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
+
+        const blind = this.cache.getElementsByClassName('blind')[0];
+        blind.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            this.remove();
+            (new Router()).return();
+        });
+
+        const form = this.cache.getElementsByClassName('form-body')[0];
+        form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            Bus.emit('login-send-data' );
+        });
+
+
+        this.cache.getElementsByClassName('link link_weight-h1')[0]
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                this.remove();
+                new Router().open('/signup', true);
+            });
+
         this.el.appendChild(this.cache);
     }
 

@@ -15,35 +15,48 @@ export class ProductView extends BaseView {
      * @param {Object} parent parents object
      */
     constructor(parent) {
+        if (ProductView.__instance) {
+            return ProductView.__instance;
+        }
+
         super(parent);
+        this._itemID = 1;
+        ProductView.__instance = this;
     }
 
 
-    set item(item) {
-        this._item = item;
+    /**
+     *
+     * @param {number} itemID
+     */
+    set itemID(itemID) {
+        this._itemID = itemID;
+    }
+
+    show = () => {
+        this._presenter.loadProduct(this._itemID);
     }
 
     /**
      * @param {Object} item product to render
-     * @return {HTMLElement} rendered element
      */
     render = () => {
         this.el.innerHTML = '';
         const images = [];
-        this._item['images'].forEach((src) => {
+        this._presenter.item['images'].forEach((src) => {
             images.push(new Img({
                 src: fileServerHost + src,
             }));
         });
         const template = productPageTemplate({
-            name: this._item['name'],
-            price: this._item['price'],
+            name: this._presenter.item['name'],
+            price: this._presenter.item['price'],
             rating: new Rating().getHtmlString({
                 ratingObject: 'item',
-                ratingValue: this._item['rating'],
+                ratingValue: this._presenter.item['rating'],
             }),
             images: images,
-            description: this._item['description'],
+            description: this._presenter.item['description'],
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('item-page-container');
         this.el.appendChild(this.cache);

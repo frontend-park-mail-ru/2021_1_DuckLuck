@@ -1,9 +1,7 @@
 import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
-import {isValidForm} from '../../utils/validator.js';
-import {AjaxModule} from '../../modules/Ajax/Ajax';
-import {fileServerHost, serverApiPath, urls} from '../../utils/urls/urls';
+import Bus from '../../bus.js';
 
 /**
  * @class  ProfileView
@@ -25,12 +23,21 @@ export class ProfileView extends BaseView {
 
 
     /**
+     * @description redef of show method
+     */
+    show() {
+        this._presenter.tryAuth();
+    }
+
+    /**
      *
      * @return {void} rendered page
      */
     render = () => {
+        this.el.innerHTML = '';
         if (this.cache !== '') {
-            this._cache.hidden = false;
+            this.el.appendChild(this.cache);
+            this.renderData();
             return;
         }
 
@@ -42,95 +49,72 @@ export class ProfileView extends BaseView {
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
-
         this.el.appendChild(this.cache);
-    }
-
-    addFormEventListener = () => {
         const form = document.getElementById('form');
 
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            let firstName;
-            let lastName;
-            if (typeof document.getElementsByName('firstName')[0] !== 'undefined') {
-                firstName = document.getElementsByName('firstName')[0].value.trim();
-            }
-            if (typeof document.getElementsByName('lastName')[0] !== 'undefined') {
-                lastName = document.getElementsByName('lastName')[0].value.trim();
-            }
-
-            if (this.isValid(['text'])) {
-                AjaxModule.putUsingFetch({
-                    url: serverApiPath + urls.profileUrl,
-                    body: {first_name: firstName, last_name: lastName},
-                }).then(() => {
-                    AjaxModule.getUsingFetch({
-                        url: serverApiPath + urls.profileUrl,
-                        body: null,
-                    }).then((response) => {
-                        return response.json();
-                    }).then((response) => {
-                        this.data = response;
-                        if (response.avatar === '') {
-                            this.data.avatar = fileServerHost + urls.defaultAvatar;
-                        } else {
-                            this.data.avatar = fileServerHost + response.avatar;
-                        }
-                        this.renderData();
-                    });
-                }).catch((err) => {
-                    console.error(err);
-                });
-            }
+            Bus.emit('profile-flname-change' );
         });
-
 
         const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
         avatarInput.addEventListener('change', (evt) => {
             evt.preventDefault();
-            const avatarFile = avatarInput.files[0];
-            if (this.isValid(['file']) && avatarFile !== undefined) {
-                const formData = new FormData();
-                formData.append('avatar', avatarFile);
-                AjaxModule.putUsingFetch({
-                    data: true,
-                    url: serverApiPath + urls.profileAvatarUrl,
-                    body: formData,
-                }).then(() => {
-                    AjaxModule.getUsingFetch({
-                        url: serverApiPath + urls.profileAvatarUrl,
-                        body: null,
-                    }).then((response) => {
-                        return response.json();
-                    }).then((response) => {
-                        this.data.avatar = fileServerHost + response.result;
-                        this.renderAvatar();
-                    });
-                }).catch((err) => {
-                    console.error(err);
-                });
-            }
+            Bus.emit('profile-avatar-change' );
         });
+
+        this.renderData();
     }
 
+
+    /**
+     *
+     * @param {string} firstName
+     * @param {string} lastName
+     */
+    changeFirstLastName = (firstName, lastName) => {
+        const firstNameInput = document.getElementsByName('firstName')[0];
+        const lastNameInput = document.getElementsByName('lastName')[0];
+        const nameLabel = document.getElementsByClassName('profile-info__user_name')[0];
+
+        firstNameInput.value = firstName;
+        lastNameInput.value = lastName;
+        nameLabel.innerHTML = firstName + ' ' + lastName;
+    }
+
+    /**
+     *
+     * @param {string} avatarURL
+     */
+    changeAvatar = (avatarURL) => {
+        const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
+        avatarImage.src = avatarURL;
+    }
+
+    /**
+     *
+     * @param {string} email
+     */
+    changeEmail = (email) => {
+        const emailInput = document.getElementsByName('email')[0];
+        emailInput.value = email;
+    }
 
     /**
      * @description Using for render data after AJAX methods.
      */
     renderData = () => {
-        const {first_name = '',
-            email = '',
-            last_name = ''} = this.data;
         const firstNameInput = document.getElementsByName('firstName')[0];
         const lastNameInput = document.getElementsByName('lastName')[0];
         const emailInput = document.getElementsByName('email')[0];
         const nameLabel = document.getElementsByClassName('profile-info__user_name')[0];
 
-        firstNameInput.value = first_name;
-        emailInput.value = email;
-        lastNameInput.value = last_name;
-        nameLabel.innerHTML = first_name + ' ' + last_name;
+        const firstName = this._presenter.getFirstName();
+        const lastName = this._presenter.getLastName();
+        firstNameInput.value = firstName;
+        emailInput.value = this._presenter.getEmail();
+        lastNameInput.value = lastName;
+        nameLabel.innerHTML = firstName + ' ' + lastName;
 
         this.renderAvatar();
     }
@@ -139,18 +123,8 @@ export class ProfileView extends BaseView {
      * Renders avatar of user if page is loading or he uploads new
      */
     renderAvatar = () => {
-        const {avatar = ''} = this.data;
+        const avatar = this._presenter.getAvatar();
         const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
         avatarImage.src = avatar;
-    }
-
-    /**
-     *
-     * @param {string[]} specificTypeToCheck if this parameter is not empty, only inputs of a certain
-     * type specified in this parameter will be checked
-     * @return {boolean} true if form valid, false otherwise
-     */
-    isValid = (specificTypeToCheck = []) => {
-        return isValidForm(document.getElementsByClassName('profile-credentials__form')[0], specificTypeToCheck);
     }
 }

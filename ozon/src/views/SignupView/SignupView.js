@@ -5,7 +5,8 @@ import {Link} from '../Common/Link/Link.js';
 import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
-import {isValidForm} from '../../utils/validator.js';
+import Router from '../../Router.js';
+import Bus from '../../bus.js';
 
 /**
  * @class  SignupView
@@ -70,18 +71,28 @@ export class SignupView extends BaseView {
             background: new Blind().getHtmlString(),
             popupType: 'signup',
         });
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
-        this.el.appendChild(this.cache);
-    }
 
-    /**
-     *
-     * @param {string[]} specificTypeToCheck if this parameter is not empty, only inputs of a certain
-     * type specified in this parameter will be checked
-     * @return {boolean} true if form valid, false otherwise
-     */
-    isValid = (specificTypeToCheck = []) => {
-        const form = this.cache.getElementsByClassName('form-body')[0].getElementsByTagName('form')[0];
-        return isValidForm(form, specificTypeToCheck);
+        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
+
+        const blind = this.cache.getElementsByClassName('blind')[0];
+        blind.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            this.remove();
+            (new Router()).return();
+        });
+
+        const form = this.cache.getElementsByClassName('form-body')[0];
+        form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            Bus.emit('signup-send-data');
+        });
+
+        this.cache.getElementsByClassName('link link_weight-h1')[1]
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                this.remove();
+                new Router().open('/login', true);
+            });
+        this.el.appendChild(this.cache);
     }
 }
