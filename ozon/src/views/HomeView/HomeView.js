@@ -25,7 +25,7 @@ export class HomeView extends BaseView {
      *
      * @param {Object} config configuration which will use to render this page
      */
-    render = (config) => {
+    render = () => {
         this.el.innerHTML = '';
         if (this.cache) {
             this.el.appendChild(this.cache);
@@ -36,9 +36,10 @@ export class HomeView extends BaseView {
             links: [new Link({href: '/home', name: 'Home', type: 'href', dataSection: 'home'}),
                     new Link({href: '/signup', name: 'Зарегестрироваться', type: 'href', dataSection: 'signup'}),
                     new Link({href: '/login', name: 'Войти', type: 'href', dataSection: 'login'}),
-                    new Link({href: '/profile', name: 'Профиль', type: 'href', dataSection: 'me'}),],
+                    new Link({href: '/profile', name: 'Профиль', type: 'href', dataSection: 'me'}),
+                    new Link({href: '/items', name: 'Товары', type: 'href', dataSection: 'items'}),],
         });
-        this._cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('home-view-block');
+        this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('home-view-block');
         this.el.appendChild(this.cache);
     }
 }

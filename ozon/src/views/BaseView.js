@@ -31,6 +31,10 @@ export class BaseView {
         this._cache.hidden = true;
     }
 
+    remove() {
+         this.el.removeChild(this.cache);
+    }
+
     show () {
         this.render();
         this._cache.hidden = false;

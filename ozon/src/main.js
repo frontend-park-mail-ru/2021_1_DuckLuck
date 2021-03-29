@@ -1,9 +1,9 @@
-import {ProfilePage} from './views/ProfilePage/ProfilePage.js';
-import {LoginPage} from './views/LoginPage/LoginPage.js';
-import {SignupPage} from './views/SignupPage/SignupPage.js';
-import {HomeView} from './views/HomePage/HomeView.js';
-import {ProductsPage} from './views/ProductsPage/ProductsPage.js';
-import {ProductPage} from './views/ProductPage/ProductPage.js';
+import {ProfileView} from './views/ProfileView/ProfileView.js';
+import {LoginView} from './views/LoginView/LoginView.js';
+import {SignupView} from './views/SignupView/SignupView.js';
+import {HomeView} from './views/HomeView/HomeView.js';
+import {ProductsView} from './views/ProductsView/ProductsView.js';
+import {ProductView} from './views/ProductView/ProductView.js';
 import {AjaxModule} from './modules/Ajax/Ajax.js';
 import {fileServerHost, serverApiPath, urls} from './utils/urls/urls.js';
 
@@ -40,21 +40,18 @@ config.home.open = () => {
     application.innerHTML = '';
 
     const page = new HomeView(application);
-    page.render(config);
     page.show();
 };
 
 config.signup.open = () => {
-    const page = new SignupPage(application);
+    const page = new SignupView(application);
     if (page.cache === '') {
         page.show()
         const pageParsed = page.cache;
         const blind = pageParsed.getElementsByClassName('blind')[0];
 
         blind.addEventListener('click', (evt) => {
-            console.log("HIDDEN");
-            page.hide()
-            // application.removeChild(pageParsed);
+            page.remove();
         });
 
         const form = pageParsed.getElementsByClassName('form-body')[0];
@@ -82,13 +79,10 @@ config.signup.open = () => {
             });
         });
 
-        // document
-        //     .getElementById('form-header__login-link')
         pageParsed.getElementsByClassName('link link_weight-h1')[1]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
-                // application.removeChild(pageParsed);
-                page.hide()
+                page.remove();
                 config.login.open();
             });
     } else {
@@ -97,21 +91,18 @@ config.signup.open = () => {
 };
 
 config.login.open = () => {
-    const page = new LoginPage(application);
+    const page = new LoginView(application);
     if (page.cache === '') {
         page.show();
         const pageParsed = page.cache;
         const blind = pageParsed.getElementsByClassName('blind')[0];
         blind.addEventListener('click', (evt) => {
-            page.hide()
-            // application.removeChild(pageParsed);
+            page.remove();
         });
 
         const form = pageParsed.getElementsByClassName('form-body')[0];
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            console.log("LOGIN FORM SUMBIT");
-
             if (!page.isValid()) {
                 return;
             }
@@ -132,14 +123,11 @@ config.login.open = () => {
             });
         });
 
-        // console.log(pageParsed.getElementsByClassName('link link_weight-h1')[0]);
-        // document
-        //     .getElementById('form-header__signup-link')
+
             pageParsed.getElementsByClassName('link link_weight-h1')[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
-                page.hide()
-                // application.removeChild(pageParsed);
+                page.remove();
                 config.signup.open();
             });
     } else {
@@ -148,7 +136,7 @@ config.login.open = () => {
 };
 
 config.me.open = () => {
-    const profile = new ProfilePage(application);
+    const profile = new ProfileView(application);
     if (profile.cache === '') {
         AjaxModule.getUsingFetch({
             url: serverApiPath + urls.profileUrl,
@@ -161,7 +149,7 @@ config.me.open = () => {
                 return;
             }
             application.innerHTML = '';
-            const profile = new ProfilePage(application);
+            const profile = new ProfileView(application);
             profile.show()
             const profileHTML = profile.cache;
             profile.addFormEventListener();
@@ -181,7 +169,6 @@ config.me.open = () => {
 };
 
 config.item.open = (itemId=1) => {
-    application.innerHTML = '';
     AjaxModule.getUsingFetch({
         url: serverApiPath + `/product/${itemId}`,
     }).then((response) => {
@@ -203,18 +190,18 @@ config.item.open = (itemId=1) => {
             },
             images: parsedJson['images'],
         };
-        const page = new ProductPage(application).render(item);
-        for (const button of page.getElementsByClassName('button_pagination')) {
+        const page = new ProductView(application);
+        page.item = item;
+        page.show();
+        for (const button of page.cache.getElementsByClassName('button_pagination')) {
             button.addEventListener('click', () => {
                 config.items.open(parseInt(button.textContent));
             });
         }
-        application.appendChild(page);
     });
 };
 
 config.items.open = (currentPage=1) => {
-    application.innerHTML = '';
     AjaxModule.postUsingFetch({
         url: serverApiPath + '/product',
         body: {
@@ -226,24 +213,23 @@ config.items.open = (currentPage=1) => {
     }).then((response) => {
         return response.json();
     }).then((parsedJson) => {
-        const page = new ProductsPage(application).render({
-            products: parsedJson['list_preview_products'],
-            paginationInfo: {
-                pagesCount: parsedJson['max_count_pages'],
-                currentPage: currentPage,
-            },
-        });
-        for (const button of page.getElementsByClassName('button_pagination')) {
+        const page = new ProductsView(application)
+        page.products = parsedJson['list_preview_products'];
+        page.paginationInfo = {
+            pagesCount: parsedJson['max_count_pages'],
+            currentPage: currentPage,
+        };
+        page.show();
+        for (const button of page.cache.getElementsByClassName('button_pagination')) {
             button.addEventListener('click', () => {
                 config.items.open(parseInt(button.textContent));
             });
         }
-        for (const itemContainer of page.getElementsByClassName('item-container')) {
+        for (const itemContainer of page.cache.getElementsByClassName('item-container')) {
             itemContainer.addEventListener('click', () => {
                 config.item.open(parseInt(itemContainer.getElementsByClassName('item-id')[0].textContent));
             });
         }
-        application.appendChild(page);
     });
 };
 

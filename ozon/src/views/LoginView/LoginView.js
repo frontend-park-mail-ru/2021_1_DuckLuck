@@ -5,45 +5,44 @@ import {Link} from '../Common/Link/Link.js';
 import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
-import {isValidForm} from '../../utils/validator.js';
+import {isValidForm} from '../../utils/validator';
 
 /**
- * @class  SignupPage
+ * @class LoginView
  * @extends BaseView
- * @classdesc Class for signup page
+ * @classdesc Class for Login page
  */
-export class SignupPage extends BaseView {
+export class LoginView extends BaseView {
     /**
-     *
      * @param {Object} parent parents object
      */
     constructor(parent) {
-        if (SignupPage.__instance) {
-            return SignupPage.__instance;
+        if (LoginView.__instance) {
+            return LoginView.__instance;
         }
 
         super(parent);
-        SignupPage.__instance = this;
+        LoginView.__instance = this;
     }
 
     /**
      *
-     * @return {void} rendered page
+     * @return {void} html form
      */
     render = () => {
         if (this.cache !== '') {
-            this._cache.hidden = false;
+            this.el.appendChild(this.cache);
             return;
         }
 
         const template = new Popup().getHtmlString({
             popupBody:
                 new AuthenticationForm().getHtmlString({
-                    formType: 'signup',
+                    formType: 'login',
                     formData: {
                         inputFields: [
                             new Input({
-                                type: 'email',
+                                type: 'text',
                                 name: 'email',
                                 placeholder: 'Email address',
                             }),
@@ -52,27 +51,20 @@ export class SignupPage extends BaseView {
                                 name: 'password',
                                 placeholder: 'Password',
                             }),
-                            new Input({
-                                type: 'password',
-                                name: 'repeat_password',
-                                placeholder: 'Repeat password',
-                            }),
                         ],
                         forgotPassLink: new Link({
                             href: 'test',
                         }),
                         submitButton: new Button({
-                            text: 'Register',
+                            text: 'Log in',
                             type: 'submit',
                         }),
                     },
                 }),
             background: new Blind().getHtmlString(),
-            popupType: 'signup',
+            popupType: 'login',
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
-
-
         this.el.appendChild(this.cache);
     }
 

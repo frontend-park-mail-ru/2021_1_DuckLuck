@@ -1,26 +1,26 @@
 import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
-import profileTemplate from './ProfilePage.hbs';
+import profileTemplate from './ProfileView.hbs';
 import {isValidForm} from '../../utils/validator.js';
 import {AjaxModule} from '../../modules/Ajax/Ajax';
 import {fileServerHost, serverApiPath, urls} from '../../utils/urls/urls';
 
 /**
- * @class  ProfilePage
+ * @class  ProfileView
  * @extends BaseView
  * @classdesc Class for showing profile of a user
  */
-export class ProfilePage extends BaseView {
+export class ProfileView extends BaseView {
     /**
      * @param {Object} parent parents object
      */
     constructor(parent) {
-        if (ProfilePage.__instance) {
-            return ProfilePage.__instance;
+        if (ProfileView.__instance) {
+            return ProfileView.__instance;
         }
 
         super(parent);
-        ProfilePage.__instance = this;
+        ProfileView.__instance = this;
     }
 
 
