@@ -1,6 +1,8 @@
 import {AjaxModule} from '../modules/Ajax/Ajax.js';
 import {serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../bus.js';
+import Bus from '../utils/bus/bus.js';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for Log in User in MVP Arch
@@ -18,11 +20,13 @@ class LoginModel {
         }).then((response) => {
             return response.json();
         }).then((response) => {
-            if (response.result === 'success') {
-                Bus.emit('login-emit-result', 'success');
+            if (response.result === Responses.Success) {
+                Bus.emit(Events.LoginEmitResult, Responses.Success);
             } else {
-                Bus.emit('login-emit-result', 'failure to login');
+                Bus.emit(Events.LoginEmitResult, Responses.Error);
             }
+        }).catch(() => {
+            Bus.emit(Events.LoginEmitResult, Responses.Error);
         });
     }
 }

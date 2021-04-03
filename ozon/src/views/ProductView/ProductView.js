@@ -11,17 +11,20 @@ import {fileServerHost} from '../../utils/urls/urls.js';
  * @classdesc Class for Product page
  */
 export class ProductView extends BaseView {
+    static #instance
     /**
      * @param {Object} parent parents object
+     * @param {Number} id ID of loaded product
      */
-    constructor(parent) {
-        if (ProductView.__instance) {
-            return ProductView.__instance;
+    constructor(parent, id = 1) {
+        if (ProductView.#instance) {
+            ProductView.#instance._itemID = id;
+            return ProductView.#instance;
         }
 
         super(parent);
-        this._itemID = 1;
-        ProductView.__instance = this;
+        this.itemID = id;
+        ProductView.#instance = this;
     }
 
 
@@ -34,31 +37,31 @@ export class ProductView extends BaseView {
     }
 
     show = () => {
-        this._presenter.loadProduct(this._itemID);
+        this.presenter.loadProduct(this._itemID);
     }
 
     /**
-     * @param {Object} item product to render
+     *
      */
     render = () => {
-        this.el.innerHTML = '';
+        this.parent.innerHTML = '';
         const images = [];
-        this._presenter.item['images'].forEach((src) => {
+        this.presenter.item['images'].forEach((src) => {
             images.push(new Img({
                 src: fileServerHost + src,
             }));
         });
         const template = productPageTemplate({
-            name: this._presenter.item['name'],
-            price: this._presenter.item['price'],
+            name: this.presenter.item['name'],
+            price: this.presenter.item['price'],
             rating: new Rating().getHtmlString({
                 ratingObject: 'item',
-                ratingValue: this._presenter.item['rating'],
+                ratingValue: this.presenter.item['rating'],
             }),
             images: images,
-            description: this._presenter.item['description'],
+            description: this.presenter.item['description'],
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('item-page-container');
-        this.el.appendChild(this.cache);
+        this.parent.appendChild(this.cache);
     }
 }

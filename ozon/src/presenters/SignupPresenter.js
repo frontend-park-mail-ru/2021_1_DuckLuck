@@ -1,6 +1,8 @@
 import BasePresenter from './BasePresenter.js';
-import Bus from '../bus.js';
+import Bus from '../utils/bus/bus.js';
 import Router from '../Router';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Presenter for Signup View and Model
@@ -13,6 +15,8 @@ class SignupPresenter extends BasePresenter {
      */
     constructor(view, model) {
         super(view, model);
+        Bus.on(Events.SignupSendData, this.sendFormToModel);
+        Bus.on(Events.SignupEmitResult, this.processSignupResult);
     }
 
     /**
@@ -20,7 +24,7 @@ class SignupPresenter extends BasePresenter {
      */
     sendFormToModel = () => {
         if (!this.isFormValid(['text'])) {
-            Bus.emit('signup-incorrect-form' );
+            Bus.emit(Events.SignupIncorrectForm, {});
             return;
         }
         const email = document.getElementById('email').value.trim();
@@ -33,9 +37,9 @@ class SignupPresenter extends BasePresenter {
      * @param {string} result
      */
     processSignupResult = (result) => {
-        if (result === 'success') {
+        if (result === Responses.Success) {
             this._view.remove();
-            new Router().open('/profile', true);
+            Router.open('/profile', {replaceState: true});
         } else {
             console.error(result);
         }

@@ -1,6 +1,8 @@
 import {AjaxModule} from '../modules/Ajax/Ajax.js';
 import {fileServerHost, serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../bus.js';
+import Bus from '../utils/bus/bus.js';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for Avatar Loading/Uploading in MVP Arch
@@ -26,8 +28,9 @@ class AvatarModel {
             }).then((response) => {
                 return response.json();
             }).then((response) => {
-                this.avatarURL = fileServerHost + response.result;
-                Bus.emit('profile-avatar-result', 'success');
+                this.#saveAndEmit(response.result);
+            }).catch(() => {
+                Bus.emit(Events.ProfileAvatarResult, Responses.Error);
             });
             return '';
         } else {
@@ -53,12 +56,20 @@ class AvatarModel {
             }).then((response) => {
                 return response.json();
             }).then((response) => {
-                this.avatarURL = fileServerHost + response.result;
-                Bus.emit('profile-avatar-result', 'success');
+                this.#saveAndEmit(response.result);
             });
-        }).catch((err) => {
-            console.error(err);
+        }).catch(() => {
+            Bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
+    }
+
+    /**
+     *
+     * @param {URL} url url to avatar on file server
+     */
+    #saveAndEmit = (url) => {
+        this.avatarURL = fileServerHost + url;
+        Bus.emit(Events.ProfileAvatarResult, Responses.Success);
     }
 }
 

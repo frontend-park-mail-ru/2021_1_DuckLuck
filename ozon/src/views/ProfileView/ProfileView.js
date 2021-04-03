@@ -1,7 +1,8 @@
 import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
-import Bus from '../../bus.js';
+import Bus from '../../utils/bus/bus.js';
+import Events from '../../utils/bus/events';
 
 /**
  * @class  ProfileView
@@ -9,16 +10,17 @@ import Bus from '../../bus.js';
  * @classdesc Class for showing profile of a user
  */
 export class ProfileView extends BaseView {
+    static #instance
     /**
      * @param {Object} parent parents object
      */
     constructor(parent) {
-        if (ProfileView.__instance) {
-            return ProfileView.__instance;
+        if (ProfileView.#instance) {
+            return ProfileView.#instance;
         }
 
         super(parent);
-        ProfileView.__instance = this;
+        ProfileView.#instance = this;
     }
 
 
@@ -26,7 +28,7 @@ export class ProfileView extends BaseView {
      * @description redef of show method
      */
     show() {
-        this._presenter.tryAuth();
+        this.presenter.tryAuth();
     }
 
     /**
@@ -34,9 +36,9 @@ export class ProfileView extends BaseView {
      * @return {void} rendered page
      */
     render = () => {
-        this.el.innerHTML = '';
+        this.parent.innerHTML = '';
         if (this.cache !== '') {
-            this.el.appendChild(this.cache);
+            this.parent.appendChild(this.cache);
             this.renderData();
             return;
         }
@@ -49,18 +51,18 @@ export class ProfileView extends BaseView {
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
-        this.el.appendChild(this.cache);
+        this.parent.appendChild(this.cache);
         const form = document.getElementById('form');
 
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            Bus.emit('profile-flname-change' );
+            Bus.emit(Events.ProfileFLNameChange, {});
         });
 
         const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
         avatarInput.addEventListener('change', (evt) => {
             evt.preventDefault();
-            Bus.emit('profile-avatar-change' );
+            Bus.emit(Events.ProfileAvatarChange, {});
         });
 
         this.renderData();
@@ -73,13 +75,9 @@ export class ProfileView extends BaseView {
      * @param {string} lastName
      */
     changeFirstLastName = (firstName, lastName) => {
-        const firstNameInput = document.getElementsByName('firstName')[0];
-        const lastNameInput = document.getElementsByName('lastName')[0];
-        const nameLabel = document.getElementsByClassName('profile-info__user_name')[0];
-
-        firstNameInput.value = firstName;
-        lastNameInput.value = lastName;
-        nameLabel.innerHTML = firstName + ' ' + lastName;
+        document.getElementsByName('firstName')[0].value = firstName;
+        document.getElementsByName('lastName')[0].value = lastName;
+        document.getElementsByClassName('profile-info__user_name')[0].innerHTML = firstName + ' ' + lastName;
     }
 
     /**
@@ -87,8 +85,7 @@ export class ProfileView extends BaseView {
      * @param {string} avatarURL
      */
     changeAvatar = (avatarURL) => {
-        const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
-        avatarImage.src = avatarURL;
+        document.getElementsByClassName('profile-info__user-avatar')[0].src = avatarURL;
     }
 
     /**
@@ -96,35 +93,15 @@ export class ProfileView extends BaseView {
      * @param {string} email
      */
     changeEmail = (email) => {
-        const emailInput = document.getElementsByName('email')[0];
-        emailInput.value = email;
+        document.getElementsByName('email')[0].value = email;
     }
 
     /**
      * @description Using for render data after AJAX methods.
      */
     renderData = () => {
-        const firstNameInput = document.getElementsByName('firstName')[0];
-        const lastNameInput = document.getElementsByName('lastName')[0];
-        const emailInput = document.getElementsByName('email')[0];
-        const nameLabel = document.getElementsByClassName('profile-info__user_name')[0];
-
-        const firstName = this._presenter.getFirstName();
-        const lastName = this._presenter.getLastName();
-        firstNameInput.value = firstName;
-        emailInput.value = this._presenter.getEmail();
-        lastNameInput.value = lastName;
-        nameLabel.innerHTML = firstName + ' ' + lastName;
-
-        this.renderAvatar();
-    }
-
-    /**
-     * Renders avatar of user if page is loading or he uploads new
-     */
-    renderAvatar = () => {
-        const avatar = this._presenter.getAvatar();
-        const avatarImage = document.getElementsByClassName('profile-info__user-avatar')[0];
-        avatarImage.src = avatar;
+        this.changeFirstLastName(this.presenter.getFirstName(), this.presenter.getLastName());
+        this.changeEmail(this.presenter.getEmail());
+        this.changeAvatar(this.presenter.getAvatar());
     }
 }

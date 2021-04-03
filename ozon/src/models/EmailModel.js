@@ -1,6 +1,8 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
 import {serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../bus';
+import Bus from '../utils/bus/bus';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for getting/changing Users Email in MVP Arch
@@ -19,7 +21,9 @@ class EmailModel {
                 return response.json();
             }).then((response) => {
                 this._email = response.email;
-                Bus.emit('profile-email-result', 'success');
+                Bus.emit(Events.ProfileEmailResult, Responses.Success);
+            }).catch(() => {
+                Bus.emit(Events.ProfileEmailResult, Responses.Error);
             });
             return '';
         } else {

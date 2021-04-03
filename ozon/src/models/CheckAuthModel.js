@@ -1,6 +1,8 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
 import {serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../bus';
+import Bus from '../utils/bus/bus';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for Checking for Users Authorization in MVP Arch
@@ -17,10 +19,12 @@ class CheckAuthModel {
             return response.json();
         }).then((response) => {
             if (response.error === 'user is unauthorized') {
-                Bus.emit('check-auth-result', 'error');
+                Bus.emit(Events.ProfileCheckAuthResult, Responses.Error);
                 return;
             }
-            Bus.emit('check-auth-result', 'success');
+            Bus.emit(Events.ProfileCheckAuthResult, Responses.Success);
+        }).catch(() => {
+            Bus.emit(Events.ProfileCheckAuthResult, Responses.Error);
         });
     }
 }

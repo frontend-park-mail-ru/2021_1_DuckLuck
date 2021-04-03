@@ -1,6 +1,8 @@
 import {AjaxModule} from '../modules/Ajax/Ajax.js';
 import {serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../bus.js';
+import Bus from '../utils/bus/bus.js';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for Signup in MVP Arch
@@ -19,10 +21,12 @@ class SignupModel {
             return response.json();
         }).then((response) => {
             if (response.result === 'success') {
-                Bus.emit('signup-emit-result', 'success');
+                Bus.emit(Events.SignupEmitResult, Responses.Success);
             } else {
-                Bus.emit('signup-emit-result', 'failure to signup');
+                Bus.emit(Events.SignupEmitResult, Responses.Error);
             }
+        }).catch(() => {
+            Bus.emit(Events.SignupEmitResult, Responses.Error);
         });
     }
 }

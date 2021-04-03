@@ -1,6 +1,7 @@
 import {BaseView} from '../BaseView.js';
 import homeViewTemplate from './HomeView.hbs';
 import {Link} from '../Common/Link/Link.js';
+import config from '../../utils/configs/homeConfig';
 
 /**
  * @class HomeView
@@ -8,38 +9,41 @@ import {Link} from '../Common/Link/Link.js';
  * @classdesc Class for initial, starting page
  */
 export class HomeView extends BaseView {
+    static #instance;
+
     /**
      *
-     * @param {Object} el
+     * @param {HTMLObjectElement} parent Parent element
      */
-    constructor(el) {
-        if (HomeView.__instance) {
-            return HomeView.__instance;
+    constructor(parent) {
+        if (HomeView.#instance) {
+            return HomeView.#instance;
         }
 
-        super(el);
-        HomeView.__instance = this;
+        super(parent);
+        HomeView.#instance = this;
     }
 
-    /**
-     *
-     * @param {Object} config configuration which will use to render this page
-     */
     render = () => {
-        this.el.innerHTML = '';
+        this.parent.innerHTML = '';
         if (this.cache) {
-            this.el.appendChild(this.cache);
+            this.parent.appendChild(this.cache);
             return;
         }
 
-        const htmlTemplate = homeViewTemplate({
-            links: [new Link({href: '/home', name: 'Home', type: 'href', dataSection: 'home'}),
-                new Link({href: '/signup', name: 'Зарегестрироваться', type: 'href', dataSection: 'signup'}),
-                new Link({href: '/login', name: 'Войти', type: 'href', dataSection: 'login'}),
-                new Link({href: '/profile', name: 'Профиль', type: 'href', dataSection: 'me'}),
-                new Link({href: '/items', name: 'Товары', type: 'href', dataSection: 'items'})],
-        });
-        this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('home-view-block');
-        this.el.appendChild(this.cache);
+
+        const htmlTemplate = homeViewTemplate(
+            {links:
+                    config.map((elem) => {
+                        return new Link({href: elem.href,
+                            name: elem.name,
+                            type: 'href',
+                            dataSection: elem.dataSection});
+                    }),
+            },
+        );
+        this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').
+            getElementById('home-view-block');
+        this.parent.appendChild(this.cache);
     }
 }

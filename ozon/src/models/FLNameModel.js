@@ -1,6 +1,8 @@
 import {AjaxModule} from '../modules/Ajax/Ajax.js';
 import {serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../bus.js';
+import Bus from '../utils/bus/bus.js';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for getting/changing Users First/Last name in MVP Arch
@@ -49,9 +51,9 @@ class FLNameModel {
         }).then(() => {
             this.firstName = firstName;
             this.lastName = lastName;
-            Bus.emit('profile-flname-result', 'success');
-        }).catch((err) => {
-            console.error(err);
+            Bus.emit(Events.ProfileFLNameResult, Responses.Success);
+        }).catch(() => {
+            Bus.emit(Events.ProfileFLNameResult, Responses.Error);
         });
     }
 
@@ -67,7 +69,9 @@ class FLNameModel {
         }).then((response) => {
             this.firstName = response.first_name;
             this.lastName = response.last_name;
-            Bus.emit('profile-flname-result', 'success');
+            Bus.emit(Events.ProfileFLNameResult, Responses.Success);
+        }).catch(() => {
+            Bus.emit(Events.ProfileFLNameResult, Responses.Error);
         });
     }
 }

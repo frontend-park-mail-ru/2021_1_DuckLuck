@@ -5,9 +5,9 @@ import {Link} from '../Common/Link/Link.js';
 import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
-import {isValidForm} from '../../modules/Valiadtor/validator';
 import Router from '../../Router';
-import Bus from '../../bus';
+import Bus from '../../utils/bus/bus';
+import Events from '../../utils/bus/events';
 
 /**
  * @class LoginView
@@ -15,16 +15,17 @@ import Bus from '../../bus';
  * @classdesc Class for Login page
  */
 export class LoginView extends BaseView {
+    static #instance
     /**
-     * @param {Object} parent parents object
+     * @param {HTMLElement} parent Parent element
      */
     constructor(parent) {
-        if (LoginView.__instance) {
-            return LoginView.__instance;
+        if (LoginView.#instance) {
+            return LoginView.#instance;
         }
 
         super(parent);
-        LoginView.__instance = this;
+        LoginView.#instance = this;
     }
 
     /**
@@ -33,7 +34,7 @@ export class LoginView extends BaseView {
      */
     render = () => {
         if (this.cache !== '') {
-            this.el.appendChild(this.cache);
+            this.parent.appendChild(this.cache);
             return;
         }
 
@@ -68,17 +69,17 @@ export class LoginView extends BaseView {
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
 
-        const blind = this.cache.getElementsByClassName('blind')[0];
-        blind.addEventListener('click', (evt) => {
-            evt.preventDefault();
-            this.remove();
-            (new Router()).return();
-        });
+        this.cache.getElementsByClassName('blind')[0]
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                this.remove();
+                Router.return();
+            });
 
         const form = this.cache.getElementsByClassName('form-body')[0];
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            Bus.emit('login-send-data' );
+            Bus.emit(Events.LoginSendData, {});
         });
 
 
@@ -86,20 +87,9 @@ export class LoginView extends BaseView {
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
                 this.remove();
-                new Router().open('/signup', true);
+                Router.open('/signup', {replaceState: true});
             });
 
-        this.el.appendChild(this.cache);
-    }
-
-    /**
-     *
-     * @param {string[]} specificTypeToCheck if this parameter is not empty, only inputs of a certain
-     * type specified in this parameter will be checked
-     * @return {boolean} true if form valid, false otherwise
-     */
-    isValid = (specificTypeToCheck = []) => {
-        const form = this.cache.getElementsByClassName('form-body')[0].getElementsByTagName('form')[0];
-        return isValidForm(form, specificTypeToCheck);
+        this.parent.appendChild(this.cache);
     }
 }

@@ -1,7 +1,9 @@
 import BasePresenter from './BasePresenter.js';
-import Bus from '../bus.js';
+import Bus from '../utils/bus/bus.js';
 import {isValidForm} from '../modules/Valiadtor/validator';
 import Router from '../Router';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Presenter for Profile View and Model
@@ -14,6 +16,12 @@ class ProfilePresenter extends BasePresenter {
      */
     constructor(view, model) {
         super(view, model);
+        Bus.on(Events.ProfileFLNameChange, this.sendFirstLastName);
+        Bus.on(Events.ProfileFLNameResult, this.firstLastNameSendProcessResult);
+        Bus.on(Events.ProfileAvatarChange, this.sendAvatar);
+        Bus.on(Events.ProfileAvatarResult, this.avatarSendProcessResult);
+        Bus.on(Events.ProfileEmailResult, this.emailSendProcessResult);
+        Bus.on(Events.ProfileCheckAuthResult, this.tryAuthProcessResult);
     }
 
     /**
@@ -28,9 +36,9 @@ class ProfilePresenter extends BasePresenter {
     /**
      * @description Send data to model
      */
-    changeFirstLastName = () => {
+    sendFirstLastName = () => {
         if (!this.isFormValid(['text'])) {
-            Bus.emit('profile-incorrect-flname' );
+            Bus.emit(Events.ProfileIncorrectFLName, {});
             return;
         }
         const firstName = document.getElementsByName('firstName')[0].value.trim();
@@ -42,8 +50,8 @@ class ProfilePresenter extends BasePresenter {
      * @param {string} result
      * @description Processed a signal
      */
-    firstLastNameChangeProcessResult = (result) => {
-        if (result === 'success') {
+    firstLastNameSendProcessResult = (result) => {
+        if (result === Responses.Success) {
             this._view.changeFirstLastName(this.getFirstName(), this.getLastName());
         } else {
             console.error(result);
@@ -81,6 +89,11 @@ class ProfilePresenter extends BasePresenter {
      * @return {string}
      */
     getEmail = () => {
+        if (this._model.email === undefined) {
+            this._model.getEmail();
+            return '';
+        }
+
         return this._model.email;
     }
 
@@ -100,9 +113,9 @@ class ProfilePresenter extends BasePresenter {
     /**
      * @description get data view and send to model
      */
-    changeAvatar = () => {
+    sendAvatar = () => {
         if (!this.isFormValid(['file'])) {
-            Bus.emit('profile-incorrect-avatar' );
+            Bus.emit(Events.ProfileIncorrectAvatar, {});
             return;
         }
 
@@ -114,8 +127,8 @@ class ProfilePresenter extends BasePresenter {
      *
      * @param {string} result
      */
-    avatarChangeProcessResult = (result) => {
-        if (result === 'success') {
+    avatarSendProcessResult = (result) => {
+        if (result === Responses.Success) {
             this._view.changeAvatar(this.getAvatar());
         } else {
             console.error(result);
@@ -126,8 +139,8 @@ class ProfilePresenter extends BasePresenter {
      *
      * @param {string} result
      */
-    emailChangeProcessResult = (result) => {
-        if (result === 'success') {
+    emailSendProcessResult = (result) => {
+        if (result === Responses.Success) {
             this._view.changeEmail(this.getEmail());
         } else {
             console.error(result);
@@ -146,11 +159,11 @@ class ProfilePresenter extends BasePresenter {
      * @param {string} result
      */
     tryAuthProcessResult = (result) => {
-        if (result === 'success') {
+        if (result === Responses.Success) {
             this._view.render();
-            this._view._cache.hidden = false;
+            (this._view.cache).hidden = false;
         } else {
-            new Router().open('/login', true);
+            Router.open('/login', {replaceState: true});
         }
     }
 }

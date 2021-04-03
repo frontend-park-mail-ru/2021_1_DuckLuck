@@ -14,7 +14,7 @@ class Bus {
      * @param {string} event Some event
      * @param {function} callback A function which will call when event is emitted.
      */
-    on(event, callback) { // подписываемся на событие
+    on = (event, callback) => {
         this.listeners[event] = this.listeners[event] || [];
         this.listeners[event].push(callback);
     }
@@ -24,7 +24,7 @@ class Bus {
      * @param {string} event Some event
      * @param {function} callback A function which will removed from callable when event is emitted.
      */
-    off(event, callback) { // отписываемся от события
+    off = (event, callback) => {
         this.listeners[event] = this.listeners[event]
             .filter(function(listener) {
                 return listener !== callback;
@@ -36,7 +36,7 @@ class Bus {
      * @param {string} event Some event
      * @param {Object} data Data which will be passed through function.
      */
-    emit(event, data) { // публикуем (диспатчим, эмитим) событие
+    emit = (event, data) => {
         this.listeners[event].forEach(function(listener) {
             listener(data);
         });

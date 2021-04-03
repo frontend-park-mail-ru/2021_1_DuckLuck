@@ -1,6 +1,8 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
 import {serverApiPath} from '../utils/urls/urls';
-import Bus from '../bus';
+import Bus from '../utils/bus/bus';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for Product in MVP Arch
@@ -40,7 +42,9 @@ class ProductModel {
                 },
                 images: parsedJson['images'],
             };
-            Bus.emit('product-model-loaded', 'success');
+            Bus.emit(Events.ProductLoaded, Responses.Success);
+        }).catch(() => {
+            Bus.emit(Events.ProductLoaded, Responses.Error);
         });
     }
 }

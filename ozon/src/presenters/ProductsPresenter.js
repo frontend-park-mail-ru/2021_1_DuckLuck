@@ -1,4 +1,7 @@
 import BasePresenter from './BasePresenter.js';
+import Bus from '../utils/bus/bus';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Presenter for Product View and Model
@@ -11,6 +14,8 @@ class ProductsPresenter extends BasePresenter {
      */
     constructor(view, model) {
         super(view, model);
+        Bus.on(Events.ProductsLoad, this.loadProducts);
+        Bus.on(Events.ProductsLoaded, this.productLoadedReaction);
     }
 
     /**
@@ -42,9 +47,9 @@ class ProductsPresenter extends BasePresenter {
      * @param {string} result
      */
     productLoadedReaction = (result) => {
-        if (result === 'success') {
+        if (result === Responses.Success) {
             this._view.render();
-            this._view._cache.hidden = false;
+            this._view.cache.hidden = false;
         } else {
             console.error('Cant load products');
         }

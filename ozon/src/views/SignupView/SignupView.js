@@ -6,7 +6,8 @@ import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
 import Router from '../../Router.js';
-import Bus from '../../bus.js';
+import Bus from '../../utils/bus/bus.js';
+import Events from '../../utils/bus/events';
 
 /**
  * @class  SignupView
@@ -14,17 +15,18 @@ import Bus from '../../bus.js';
  * @classdesc Class for signup page
  */
 export class SignupView extends BaseView {
+    static #instance
     /**
      *
      * @param {Object} parent parents object
      */
     constructor(parent) {
-        if (SignupView.__instance) {
-            return SignupView.__instance;
+        if (SignupView.#instance) {
+            return SignupView.#instance;
         }
 
         super(parent);
-        SignupView.__instance = this;
+        SignupView.#instance = this;
     }
 
     /**
@@ -33,7 +35,7 @@ export class SignupView extends BaseView {
      */
     render = () => {
         if (this.cache !== '') {
-            this.el.appendChild(this.cache);
+            this.parent.appendChild(this.cache);
             return;
         }
 
@@ -78,21 +80,21 @@ export class SignupView extends BaseView {
         blind.addEventListener('click', (evt) => {
             evt.preventDefault();
             this.remove();
-            (new Router()).return();
+            Router.return();
         });
 
         const form = this.cache.getElementsByClassName('form-body')[0];
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            Bus.emit('signup-send-data');
+            Bus.emit(Events.SignupSendData, {});
         });
 
         this.cache.getElementsByClassName('link link_weight-h1')[1]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
                 this.remove();
-                new Router().open('/login', true);
+                Router.open('/login', {replaceState: true});
             });
-        this.el.appendChild(this.cache);
+        this.parent.appendChild(this.cache);
     }
 }

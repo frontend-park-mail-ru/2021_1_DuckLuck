@@ -3,32 +3,53 @@
  * @classdesc Base class for all other views
  */
 export class BaseView {
+    #parent
+    #cache
+    #presenter
+    #instance
+
     /**
      *
-     * @param {Object} el HTML element
+     * @param {Object} parent  Parent HTML element
      */
-    constructor(el) {
-        this.el = el;
+    constructor(parent) {
+        this.#parent = parent;
 
-        this.el.dataset.view = this.constructor.name;
-        this.el.hidden = false;
-        this._cache = '';
+        this.#parent.dataset.view = this.constructor.name;
+        this.#parent.hidden = false;
+        this.#cache = '';
     }
 
     /**
      *
      * @return {boolean} is element Active?
      */
-    get active() {
-        return !this.el.hidden;
+    get isActive() {
+        return !this.parent.hidden;
     }
 
     /**
      *
-     * @return {string} Cache of View
+     * @return {HTMLElement} Cache of View
      */
     get cache() {
-        return this._cache;
+        return this.#cache;
+    }
+
+    /**
+     *
+     * @return {Object} Presenter of View
+     */
+    get presenter() {
+        return this.#presenter;
+    }
+
+    /**
+     *
+     * @return {HTMLElement} Parent of this View
+     */
+    get parent() {
+        return this.#parent;
     }
 
     /**
@@ -36,7 +57,7 @@ export class BaseView {
      * @param {string} cache Cache of View
      */
     set cache(cache) {
-        this._cache = cache;
+        this.#cache = cache;
     }
 
     /**
@@ -44,21 +65,22 @@ export class BaseView {
      * @param {Object} presenter Chained Presenter of View
      */
     set presenter(presenter) {
-        this._presenter = presenter;
+        this.#presenter = presenter;
     }
+
 
     /**
      * @description Hides an element in HTML
      */
     hide() {
-        this._cache.hidden = true;
+        this.#cache.hidden = true;
     }
 
     /**
      * @description Removes Element from HTML
      */
     remove() {
-        this.el.removeChild(this.cache);
+        this.#parent.removeChild(this.cache);
     }
 
     /**
@@ -66,14 +88,14 @@ export class BaseView {
      */
     show() {
         this.render();
-        this._cache.hidden = false;
+        this.#cache.hidden = false;
     }
 
     /**
      * @description Drop cache and render
      */
     reRender() {
-        this._cache = '';
+        this.#cache = '';
         this.render();
     }
 
