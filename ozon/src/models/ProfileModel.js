@@ -1,20 +1,23 @@
-import FLNameModel from './FLNameModel';
-import AvatarModel from './AvatarModel';
-import EmailModel from './EmailModel';
-import CheckAuthModel from './CheckAuthModel';
+import FLNameModule from './subModules/FLNameModule';
+import AvatarModule from './subModules/AvatarModule';
+import EmailModule from './subModules/EmailModule';
+import CheckAuthModule from './subModules/CheckAuthModule';
+import BaseModel from './BaseModel';
 
 /**
  * @description Model for Profile in MVP Arch. THIS IS A FACADE!
  */
-class ProfileModel {
+class ProfileModel extends BaseModel {
     /**
+     * @param {Object} bus bus of this mvp part
      * @description simple Constructor. Creating all elements inside (FACADE)
      */
-    constructor() {
-        this._fLNameModel = new FLNameModel();
-        this._emailModel = new EmailModel();
-        this._avatarModel = new AvatarModel();
-        this._checkAuthModel = new CheckAuthModel();
+    constructor(bus) {
+        super(bus);
+        this._fLNameModel = new FLNameModule(bus);
+        this._emailModel = new EmailModule(bus);
+        this._avatarModel = new AvatarModule(bus);
+        this._checkAuthModel = new CheckAuthModule(bus);
     }
 
     /**

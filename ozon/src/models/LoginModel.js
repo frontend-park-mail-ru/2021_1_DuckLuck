@@ -1,13 +1,20 @@
 import {AjaxModule} from '../modules/Ajax/Ajax.js';
 import {serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../utils/bus/bus.js';
+import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for Log in User in MVP Arch
  */
-class LoginModel {
+class LoginModel extends BaseModel {
+    /**
+     * @param {Object} bus bus of this mvp part
+     */
+    constructor(bus) {
+        super(bus);
+    }
+
     /**
      *
      * @param {string} email
@@ -21,12 +28,12 @@ class LoginModel {
             return response.json();
         }).then((response) => {
             if (response.result === Responses.Success) {
-                Bus.emit(Events.LoginEmitResult, Responses.Success);
+                this.bus.emit(Events.LoginEmitResult, Responses.Success);
             } else {
-                Bus.emit(Events.LoginEmitResult, Responses.Error);
+                this.bus.emit(Events.LoginEmitResult, Responses.Error);
             }
         }).catch(() => {
-            Bus.emit(Events.LoginEmitResult, Responses.Error);
+            this.bus.emit(Events.LoginEmitResult, Responses.Error);
         });
     }
 }

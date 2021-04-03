@@ -6,18 +6,22 @@ export class BaseView {
     #parent
     #cache
     #presenter
-    #instance
+    #bus
+    #id
 
     /**
      *
      * @param {Object} parent  Parent HTML element
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(parent) {
+    constructor(parent, bus) {
         this.#parent = parent;
 
         this.#parent.dataset.view = this.constructor.name;
         this.#parent.hidden = false;
         this.#cache = '';
+        this.#bus = bus;
+        this.#id = 1;
     }
 
     /**
@@ -54,7 +58,23 @@ export class BaseView {
 
     /**
      *
-     * @param {string} cache Cache of View
+     * @return {Object} Bus of this mvp part
+     */
+    get bus() {
+        return this.#bus;
+    }
+
+    /**
+     *
+     * @return {number} id,page number,item id, etc. for this view (use if needs)
+     */
+    get ID() {
+        return this.#id;
+    }
+
+    /**
+     *
+     * @param {HTMLElement} cache Cache of View
      */
     set cache(cache) {
         this.#cache = cache;
@@ -66,6 +86,14 @@ export class BaseView {
      */
     set presenter(presenter) {
         this.#presenter = presenter;
+    }
+
+    /**
+     *
+     * @param {number} id new id
+     */
+    set ID(id) {
+        this.#id = id;
     }
 
 

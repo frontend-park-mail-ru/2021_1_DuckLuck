@@ -1,6 +1,5 @@
 import BasePresenter from './BasePresenter.js';
-import Bus from '../utils/bus/bus.js';
-import Router from '../Router';
+import Router from '../utils/router/Router';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 
@@ -12,11 +11,12 @@ class SignupPresenter extends BasePresenter {
      *
      * @param {Object} view
      * @param {Object} model
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(view, model) {
-        super(view, model);
-        Bus.on(Events.SignupSendData, this.sendFormToModel);
-        Bus.on(Events.SignupEmitResult, this.processSignupResult);
+    constructor(view, model, bus) {
+        super(view, model, bus);
+        this.bus.on(Events.SignupSendData, this.sendFormToModel);
+        this.bus.on(Events.SignupEmitResult, this.processSignupResult);
     }
 
     /**
@@ -24,12 +24,12 @@ class SignupPresenter extends BasePresenter {
      */
     sendFormToModel = () => {
         if (!this.isFormValid(['text'])) {
-            Bus.emit(Events.SignupIncorrectForm, {});
+            this.bus.emit(Events.SignupIncorrectForm, {});
             return;
         }
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
-        this._model.signupUser({email, password});
+        this.model.signupUser({email, password});
     }
 
     /**
@@ -38,7 +38,7 @@ class SignupPresenter extends BasePresenter {
      */
     processSignupResult = (result) => {
         if (result === Responses.Success) {
-            this._view.remove();
+            this.view.remove();
             Router.open('/profile', {replaceState: true});
         } else {
             console.error(result);

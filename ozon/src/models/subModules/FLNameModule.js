@@ -1,13 +1,20 @@
-import {AjaxModule} from '../modules/Ajax/Ajax.js';
-import {serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../utils/bus/bus.js';
-import Events from '../utils/bus/events';
-import Responses from '../utils/bus/responses';
+import {AjaxModule} from '../../modules/Ajax/Ajax.js';
+import {serverApiPath, urls} from '../../utils/urls/urls';
+import BaseModel from '../BaseModel';
+import Events from '../../utils/bus/events';
+import Responses from '../../utils/bus/responses';
 
 /**
  * @description Model for getting/changing Users First/Last name in MVP Arch
  */
-class FLNameModel {
+class FLNameModule extends BaseModel {
+    /**
+     * @param {Object} bus bus of this mvp part
+     */
+    constructor(bus) {
+        super(bus);
+    }
+
     /**
      * @param {string} firstName
      */
@@ -51,9 +58,9 @@ class FLNameModel {
         }).then(() => {
             this.firstName = firstName;
             this.lastName = lastName;
-            Bus.emit(Events.ProfileFLNameResult, Responses.Success);
+            this.bus.emit(Events.ProfileFLNameResult, Responses.Success);
         }).catch(() => {
-            Bus.emit(Events.ProfileFLNameResult, Responses.Error);
+            this.bus.emit(Events.ProfileFLNameResult, Responses.Error);
         });
     }
 
@@ -69,11 +76,11 @@ class FLNameModel {
         }).then((response) => {
             this.firstName = response.first_name;
             this.lastName = response.last_name;
-            Bus.emit(Events.ProfileFLNameResult, Responses.Success);
+            this.bus.emit(Events.ProfileFLNameResult, Responses.Success);
         }).catch(() => {
-            Bus.emit(Events.ProfileFLNameResult, Responses.Error);
+            this.bus.emit(Events.ProfileFLNameResult, Responses.Error);
         });
     }
 }
 
-export default FLNameModel;
+export default FLNameModule;

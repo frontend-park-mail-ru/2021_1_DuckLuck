@@ -1,7 +1,6 @@
 import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
-import Bus from '../../utils/bus/bus.js';
 import Events from '../../utils/bus/events';
 
 /**
@@ -10,17 +9,12 @@ import Events from '../../utils/bus/events';
  * @classdesc Class for showing profile of a user
  */
 export class ProfileView extends BaseView {
-    static #instance
     /**
      * @param {Object} parent parents object
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(parent) {
-        if (ProfileView.#instance) {
-            return ProfileView.#instance;
-        }
-
-        super(parent);
-        ProfileView.#instance = this;
+    constructor(parent, bus) {
+        super(parent, bus);
     }
 
 
@@ -56,13 +50,13 @@ export class ProfileView extends BaseView {
 
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            Bus.emit(Events.ProfileFLNameChange, {});
+            this.bus.emit(Events.ProfileFLNameChange, {});
         });
 
         const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
         avatarInput.addEventListener('change', (evt) => {
             evt.preventDefault();
-            Bus.emit(Events.ProfileAvatarChange, {});
+            this.bus.emit(Events.ProfileAvatarChange, {});
         });
 
         this.renderData();

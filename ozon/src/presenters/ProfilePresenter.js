@@ -1,7 +1,6 @@
 import BasePresenter from './BasePresenter.js';
-import Bus from '../utils/bus/bus.js';
 import {isValidForm} from '../modules/Valiadtor/validator';
-import Router from '../Router';
+import Router from '../utils/router/Router';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 
@@ -13,15 +12,16 @@ class ProfilePresenter extends BasePresenter {
      *
      * @param {Object} view
      * @param {Object} model
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(view, model) {
-        super(view, model);
-        Bus.on(Events.ProfileFLNameChange, this.sendFirstLastName);
-        Bus.on(Events.ProfileFLNameResult, this.firstLastNameSendProcessResult);
-        Bus.on(Events.ProfileAvatarChange, this.sendAvatar);
-        Bus.on(Events.ProfileAvatarResult, this.avatarSendProcessResult);
-        Bus.on(Events.ProfileEmailResult, this.emailSendProcessResult);
-        Bus.on(Events.ProfileCheckAuthResult, this.tryAuthProcessResult);
+    constructor(view, model, bus) {
+        super(view, model, bus);
+        this.bus.on(Events.ProfileFLNameChange, this.sendFirstLastName);
+        this.bus.on(Events.ProfileFLNameResult, this.firstLastNameSendProcessResult);
+        this.bus.on(Events.ProfileAvatarChange, this.sendAvatar);
+        this.bus.on(Events.ProfileAvatarResult, this.avatarSendProcessResult);
+        this.bus.on(Events.ProfileEmailResult, this.emailSendProcessResult);
+        this.bus.on(Events.ProfileCheckAuthResult, this.tryAuthProcessResult);
     }
 
     /**
@@ -38,12 +38,12 @@ class ProfilePresenter extends BasePresenter {
      */
     sendFirstLastName = () => {
         if (!this.isFormValid(['text'])) {
-            Bus.emit(Events.ProfileIncorrectFLName, {});
+            this.bus.emit(Events.ProfileIncorrectFLName, {});
             return;
         }
         const firstName = document.getElementsByName('firstName')[0].value.trim();
         const lastName = document.getElementsByName('lastName')[0].value.trim();
-        this._model.changeFirstLastName(firstName, lastName);
+        this.model.changeFirstLastName(firstName, lastName);
     }
 
     /**
@@ -52,7 +52,7 @@ class ProfilePresenter extends BasePresenter {
      */
     firstLastNameSendProcessResult = (result) => {
         if (result === Responses.Success) {
-            this._view.changeFirstLastName(this.getFirstName(), this.getLastName());
+            this.view.changeFirstLastName(this.getFirstName(), this.getLastName());
         } else {
             console.error(result);
         }
@@ -63,12 +63,12 @@ class ProfilePresenter extends BasePresenter {
      * @return {string}
      */
     getFirstName = () => {
-        if (this._model.firstName === undefined) {
-            this._model.getFirstLastName();
+        if (this.model.firstName === undefined) {
+            this.model.getFirstLastName();
             return '';
         }
 
-        return this._model.firstName;
+        return this.model.firstName;
     }
 
     /**
@@ -76,12 +76,12 @@ class ProfilePresenter extends BasePresenter {
      * @return {string}
      */
     getLastName = () => {
-        if (this._model.lastName === undefined) {
-            this._model.getFirstLastName();
+        if (this.model.lastName === undefined) {
+            this.model.getFirstLastName();
             return '';
         }
 
-        return this._model.lastName;
+        return this.model.lastName;
     }
 
     /**
@@ -89,12 +89,12 @@ class ProfilePresenter extends BasePresenter {
      * @return {string}
      */
     getEmail = () => {
-        if (this._model.email === undefined) {
-            this._model.getEmail();
+        if (this.model.email === undefined) {
+            this.model.getEmail();
             return '';
         }
 
-        return this._model.email;
+        return this.model.email;
     }
 
     /**
@@ -102,12 +102,12 @@ class ProfilePresenter extends BasePresenter {
      * @return {string}
      */
     getAvatar = () => {
-        if (this._model.avatarURL === undefined) {
-            this._model.getAvatar();
+        if (this.model.avatarURL === undefined) {
+            this.model.getAvatar();
             return '';
         }
 
-        return this._model.avatarURL;
+        return this.model.avatarURL;
     }
 
     /**
@@ -115,12 +115,12 @@ class ProfilePresenter extends BasePresenter {
      */
     sendAvatar = () => {
         if (!this.isFormValid(['file'])) {
-            Bus.emit(Events.ProfileIncorrectAvatar, {});
+            this.bus.emit(Events.ProfileIncorrectAvatar, {});
             return;
         }
 
         const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
-        this._model.changeAvatar(avatarInput.files[0]);
+        this.model.changeAvatar(avatarInput.files[0]);
     }
 
     /**
@@ -129,7 +129,7 @@ class ProfilePresenter extends BasePresenter {
      */
     avatarSendProcessResult = (result) => {
         if (result === Responses.Success) {
-            this._view.changeAvatar(this.getAvatar());
+            this.view.changeAvatar(this.getAvatar());
         } else {
             console.error(result);
         }
@@ -141,7 +141,7 @@ class ProfilePresenter extends BasePresenter {
      */
     emailSendProcessResult = (result) => {
         if (result === Responses.Success) {
-            this._view.changeEmail(this.getEmail());
+            this.view.changeEmail(this.getEmail());
         } else {
             console.error(result);
         }
@@ -151,7 +151,7 @@ class ProfilePresenter extends BasePresenter {
      * @description attempts to authorize
      */
     tryAuth = () => {
-        this._model.checkAuth();
+        this.model.checkAuth();
     }
 
     /**
@@ -160,8 +160,8 @@ class ProfilePresenter extends BasePresenter {
      */
     tryAuthProcessResult = (result) => {
         if (result === Responses.Success) {
-            this._view.render();
-            (this._view.cache).hidden = false;
+            this.view.render();
+            (this.view.cache).hidden = false;
         } else {
             Router.open('/login', {replaceState: true});
         }

@@ -27,14 +27,12 @@ class Router {
 
     /**
      * @param {string} path URL Path
-     * @param {BaseView} View View in MVP Architecture
+     * @param {BaseView} view View in MVP Architecture
      * @return {Object} This object
      */
-    register(path, View) {
+    register(path, view) {
         this.#routes[path] = {
-            View: View,
-            view: null,
-            el: null,
+            view: view,
         };
 
         return this;
@@ -81,17 +79,13 @@ class Router {
             );
         }
 
-        let {View, view, el} = route;
+        const {view} = route;
 
-        if (!view && params.id !== '') {
-            view = new View(this.#root, params.id);
-        } else if (!view) {
-            view = new View(this.#root);
+        if (params.id !== undefined && params.id !== '') {
+            view.ID = params.id;
         }
 
         view.show();
-
-        this.#routes[path] = {View, view, el};
     }
 
     /**
@@ -111,25 +105,29 @@ class Router {
 
         window.addEventListener('popstate', function() {
             const currentPath = window.location.pathname;
-            const {path, id} = this.splitURL(currentPath);
-            this.open(path, {id: id});
+            let {url, id} = this.splitURL(currentPath);
+            if (url[0] !== '/') {
+                url = '/' + url;
+            }
+            this.open(url, {id: id});
         }.bind(this));
 
         const currentPath = window.location.pathname;
-        const {path, id} = this.splitURL(currentPath);
-        this.open(`/${path}`, {id: id});
+        const {url, id} = this.splitURL(currentPath);
+        this.open(`/${url}`, {id: id});
     }
 
     /**
      *
-     * @param {URL} path
+     * @param {string} url
+     * @param {Boolean} isPathOnly is url contains only pure path?
      * @return {{path, id: (string|number)}}
      */
-    splitURL(path) {
-        const pathArray = path.split('/');
-        path = pathArray[1];
-        const id = pathArray[2] === undefined ? '' : pathArray[2];
-        return {path, id};
+    splitURL(url, isPathOnly = false) {
+        const pathArray = url.split('/');
+        url = pathArray[1 - isPathOnly];
+        const id = pathArray[2 - isPathOnly] === undefined ? '' : pathArray[2 - isPathOnly];
+        return {url, id};
     }
 }
 

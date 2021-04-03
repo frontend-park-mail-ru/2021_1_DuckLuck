@@ -11,33 +11,17 @@ import {fileServerHost} from '../../utils/urls/urls.js';
  * @classdesc Class for Product page
  */
 export class ProductView extends BaseView {
-    static #instance
     /**
      * @param {Object} parent parents object
-     * @param {Number} id ID of loaded product
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(parent, id = 1) {
-        if (ProductView.#instance) {
-            ProductView.#instance._itemID = id;
-            return ProductView.#instance;
-        }
-
-        super(parent);
-        this.itemID = id;
-        ProductView.#instance = this;
+    constructor(parent, bus) {
+        super(parent, bus);
     }
 
-
-    /**
-     *
-     * @param {number} itemID
-     */
-    set itemID(itemID) {
-        this._itemID = itemID;
-    }
 
     show = () => {
-        this.presenter.loadProduct(this._itemID);
+        this.presenter.loadProduct(this.ID);
     }
 
     /**

@@ -1,5 +1,4 @@
 import BasePresenter from './BasePresenter.js';
-import Bus from '../utils/bus/bus';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 
@@ -11,11 +10,12 @@ class ProductsPresenter extends BasePresenter {
      *
      * @param {Object} view
      * @param {Object} model
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(view, model) {
-        super(view, model);
-        Bus.on(Events.ProductsLoad, this.loadProducts);
-        Bus.on(Events.ProductsLoaded, this.productLoadedReaction);
+    constructor(view, model, bus) {
+        super(view, model, bus);
+        this.bus.on(Events.ProductsLoad, this.loadProducts);
+        this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
     }
 
     /**
@@ -23,7 +23,7 @@ class ProductsPresenter extends BasePresenter {
      * @return {Object}
      */
     get products() {
-        return this._model.products;
+        return this.model.products;
     }
 
     /**
@@ -31,7 +31,7 @@ class ProductsPresenter extends BasePresenter {
      * @return {{pagesCount: *, currentPage: Number}|*}
      */
     get paginationInfo() {
-        return this._model.paginationInfo;
+        return this.model.paginationInfo;
     }
 
     /**
@@ -39,7 +39,7 @@ class ProductsPresenter extends BasePresenter {
      * @param {Number} page
      */
     loadProducts = (page) => {
-        this._model.loadProducts(page);
+        this.model.loadProducts(page);
     }
 
     /**
@@ -48,8 +48,8 @@ class ProductsPresenter extends BasePresenter {
      */
     productLoadedReaction = (result) => {
         if (result === Responses.Success) {
-            this._view.render();
-            this._view.cache.hidden = false;
+            this.view.render();
+            this.view.cache.hidden = false;
         } else {
             console.error('Cant load products');
         }

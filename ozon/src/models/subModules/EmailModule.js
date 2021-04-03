@@ -1,13 +1,20 @@
-import {AjaxModule} from '../modules/Ajax/Ajax';
-import {serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../utils/bus/bus';
-import Events from '../utils/bus/events';
-import Responses from '../utils/bus/responses';
+import {AjaxModule} from '../../modules/Ajax/Ajax';
+import {serverApiPath, urls} from '../../utils/urls/urls';
+import BaseModel from '../BaseModel';
+import Events from '../../utils/bus/events';
+import Responses from '../../utils/bus/responses';
 
 /**
  * @description Model for getting/changing Users Email in MVP Arch
  */
-class EmailModel {
+class EmailModule extends BaseModel {
+    /**
+     * @param {Object} bus bus of this mvp part
+     */
+    constructor(bus) {
+        super(bus);
+    }
+
     /**
      *
      * @return {string|*} User email
@@ -21,9 +28,9 @@ class EmailModel {
                 return response.json();
             }).then((response) => {
                 this._email = response.email;
-                Bus.emit(Events.ProfileEmailResult, Responses.Success);
+                this.bus.emit(Events.ProfileEmailResult, Responses.Success);
             }).catch(() => {
-                Bus.emit(Events.ProfileEmailResult, Responses.Error);
+                this.bus.emit(Events.ProfileEmailResult, Responses.Error);
             });
             return '';
         } else {
@@ -32,4 +39,4 @@ class EmailModel {
     }
 }
 
-export default EmailModel;
+export default EmailModule;

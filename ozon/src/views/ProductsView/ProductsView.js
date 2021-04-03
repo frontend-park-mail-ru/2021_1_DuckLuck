@@ -2,8 +2,8 @@ import {BaseView} from '../BaseView.js';
 import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
-import Bus from '../../utils/bus/bus';
-import Router from '../../Router';
+import {Bus} from '../../utils/bus/bus';
+import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
 
 /**
@@ -12,31 +12,19 @@ import Events from '../../utils/bus/events';
  * @classdesc Class for showing product
  */
 export class ProductsView extends BaseView {
-    static #instance;
-    /**
-     * @param {Object} parent parents object
-     */
-
     /**
      *
-     * @param {Object}parent
-     * @param {Number} page
-     * @return {ProductsView}
+     * @param {Object} parent parents object
+     * @param {Object} bus bus of this mvp part
+     *
      */
-    constructor(parent, page) {
-        if (ProductsView.#instance) {
-            ProductsView.#instance._currentPage = page === undefined ? 1 : page;
-            return ProductsView.#instance;
-        }
-
-        super(parent);
-        this._currentPage = page === undefined ? 1 : page;
-        ProductsView.#instance = this;
+    constructor(parent, bus) {
+        super(parent, bus);
     }
 
 
     show = () => {
-        Bus.emit(Events.ProductsLoad, this._currentPage);
+        this.bus.emit(Events.ProductsLoad, this.ID);
     }
 
     /**
@@ -57,14 +45,14 @@ export class ProductsView extends BaseView {
         for (const button of this.cache.getElementsByClassName('button_pagination')) {
             button.addEventListener('click', () => {
                 const page = parseInt(button.textContent);
-                this._currentPage = page;
+                this.ID = page;
                 Router.open('/items', {id: page});
             });
         }
         for (const itemContainer of this.cache.getElementsByClassName('item-container')) {
             itemContainer.addEventListener('click', () => {
                 const productID = parseInt(itemContainer.getElementsByClassName('item-id')[0].textContent);
-                Bus.emit(Events.ProductChangeID, productID);
+                Bus.globalBus.emit(Events.ProductChangeID, productID);
                 Router.open('/item', {id: productID});
             });
         }

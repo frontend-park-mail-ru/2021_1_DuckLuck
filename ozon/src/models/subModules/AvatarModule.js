@@ -1,13 +1,20 @@
-import {AjaxModule} from '../modules/Ajax/Ajax.js';
-import {fileServerHost, serverApiPath, urls} from '../utils/urls/urls';
-import Bus from '../utils/bus/bus.js';
-import Events from '../utils/bus/events';
-import Responses from '../utils/bus/responses';
+import {AjaxModule} from '../../modules/Ajax/Ajax.js';
+import {fileServerHost, serverApiPath, urls} from '../../utils/urls/urls';
+import BaseModel from '../BaseModel';
+import Events from '../../utils/bus/events';
+import Responses from '../../utils/bus/responses';
 
 /**
  * @description Model for Avatar Loading/Uploading in MVP Arch
  */
-class AvatarModel {
+class AvatarModule extends BaseModel {
+    /**
+     * @param {Object} bus bus of this mvp part
+     */
+    constructor(bus) {
+        super(bus);
+    }
+
     /**
      *
      * @param {string} URL New URL for avatar
@@ -30,7 +37,7 @@ class AvatarModel {
             }).then((response) => {
                 this.#saveAndEmit(response.result);
             }).catch(() => {
-                Bus.emit(Events.ProfileAvatarResult, Responses.Error);
+                this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
             });
             return '';
         } else {
@@ -59,7 +66,7 @@ class AvatarModel {
                 this.#saveAndEmit(response.result);
             });
         }).catch(() => {
-            Bus.emit(Events.ProfileAvatarResult, Responses.Error);
+            this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
     }
 
@@ -69,9 +76,9 @@ class AvatarModel {
      */
     #saveAndEmit = (url) => {
         this.avatarURL = fileServerHost + url;
-        Bus.emit(Events.ProfileAvatarResult, Responses.Success);
+        this.bus.emit(Events.ProfileAvatarResult, Responses.Success);
     }
 }
 
-export default AvatarModel;
+export default AvatarModule;
 

@@ -1,9 +1,26 @@
 /**
  * @description Simple Bus class which provider "Mediator" pattern through all application.
  */
-class Bus {
+export class Bus {
     /**
      * @description Simple constructor
+     */
+    static #globalBus
+
+
+    /**
+     * @return {Object} Singleton. Global Bus to cross-presenter actions
+     */
+    static get globalBus() {
+        if (Bus.#globalBus === undefined) {
+            Bus.#globalBus = new Bus();
+        }
+
+        return Bus.#globalBus;
+    }
+
+    /**
+     * @description default constructor
      */
     constructor() {
         this.listeners = {};
@@ -43,4 +60,3 @@ class Bus {
     }
 }
 
-export default new Bus;

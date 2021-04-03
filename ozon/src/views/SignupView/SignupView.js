@@ -5,8 +5,7 @@ import {Link} from '../Common/Link/Link.js';
 import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
-import Router from '../../Router.js';
-import Bus from '../../utils/bus/bus.js';
+import Router from '../../utils/router/Router.js';
 import Events from '../../utils/bus/events';
 
 /**
@@ -15,18 +14,13 @@ import Events from '../../utils/bus/events';
  * @classdesc Class for signup page
  */
 export class SignupView extends BaseView {
-    static #instance
     /**
      *
      * @param {Object} parent parents object
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(parent) {
-        if (SignupView.#instance) {
-            return SignupView.#instance;
-        }
-
-        super(parent);
-        SignupView.#instance = this;
+    constructor(parent, bus) {
+        super(parent, bus);
     }
 
     /**
@@ -86,7 +80,7 @@ export class SignupView extends BaseView {
         const form = this.cache.getElementsByClassName('form-body')[0];
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            Bus.emit(Events.SignupSendData, {});
+            this.bus.emit(Events.SignupSendData, {});
         });
 
         this.cache.getElementsByClassName('link link_weight-h1')[1]

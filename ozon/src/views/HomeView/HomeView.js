@@ -9,19 +9,13 @@ import config from '../../utils/configs/homeConfig';
  * @classdesc Class for initial, starting page
  */
 export class HomeView extends BaseView {
-    static #instance;
-
     /**
      *
-     * @param {HTMLObjectElement} parent Parent element
+     * @param {HTMLElement} parent Parent element
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(parent) {
-        if (HomeView.#instance) {
-            return HomeView.#instance;
-        }
-
-        super(parent);
-        HomeView.#instance = this;
+    constructor(parent, bus) {
+        super(parent, bus);
     }
 
     render = () => {

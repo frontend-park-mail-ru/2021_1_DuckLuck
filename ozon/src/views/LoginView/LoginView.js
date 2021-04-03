@@ -5,8 +5,7 @@ import {Link} from '../Common/Link/Link.js';
 import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
-import Router from '../../Router';
-import Bus from '../../utils/bus/bus';
+import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
 
 /**
@@ -15,17 +14,12 @@ import Events from '../../utils/bus/events';
  * @classdesc Class for Login page
  */
 export class LoginView extends BaseView {
-    static #instance
     /**
      * @param {HTMLElement} parent Parent element
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(parent) {
-        if (LoginView.#instance) {
-            return LoginView.#instance;
-        }
-
-        super(parent);
-        LoginView.#instance = this;
+    constructor(parent, bus) {
+        super(parent, bus);
     }
 
     /**
@@ -79,7 +73,7 @@ export class LoginView extends BaseView {
         const form = this.cache.getElementsByClassName('form-body')[0];
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            Bus.emit(Events.LoginSendData, {});
+            this.bus.emit(Events.LoginSendData, {});
         });
 
 

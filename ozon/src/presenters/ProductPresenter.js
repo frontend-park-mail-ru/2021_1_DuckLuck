@@ -1,7 +1,7 @@
 import BasePresenter from './BasePresenter.js';
-import Bus from '../utils/bus/bus';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import {Bus} from '../utils/bus/bus';
 
 /**
  * @description Presenter for Products View and Model
@@ -11,11 +11,12 @@ class ProductsPresenter extends BasePresenter {
      *
      * @param {Object} view
      * @param {Object} model
+     * @param {Object} bus bus of this mvp part
      */
-    constructor(view, model) {
-        super(view, model);
-        Bus.on(Events.ProductChangeID, this.changeID);
-        Bus.on(Events.ProductLoaded, this.productLoadedReaction);
+    constructor(view, model, bus) {
+        super(view, model, bus);
+        Bus.globalBus.on(Events.ProductChangeID, this.changeID);
+        this.bus.on(Events.ProductLoaded, this.productLoadedReaction);
     }
 
     /**
@@ -23,7 +24,7 @@ class ProductsPresenter extends BasePresenter {
      * @return {Object}
      */
     get item() {
-        return this._model.item;
+        return this.model.item;
     }
 
     /**
@@ -31,7 +32,7 @@ class ProductsPresenter extends BasePresenter {
      * @param {Number} productID
      */
     loadProduct = (productID) => {
-        this._model.loadProduct(productID);
+        this.model.loadProduct(productID);
     }
 
     /**
@@ -39,7 +40,7 @@ class ProductsPresenter extends BasePresenter {
      * @param {Number} id ID of a product
      */
     changeID = (id) => {
-        this._view._itemID = id;
+        this.view.ID = id;
     }
 
     /**
@@ -48,8 +49,8 @@ class ProductsPresenter extends BasePresenter {
      */
     productLoadedReaction = (result) => {
         if (result === Responses.Success) {
-            this._view.reRender();
-            this._view.cache.hidden = false;
+            this.view.reRender();
+            this.view.cache.hidden = false;
         } else {
             console.error('Cant load product');
         }

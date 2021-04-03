@@ -1,13 +1,20 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
 import {serverApiPath} from '../utils/urls/urls';
-import Bus from '../utils/bus/bus';
+import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for ProductS in MVP Arch
  */
-class ProductsModel {
+class ProductsModel extends BaseModel {
+    /**
+     * @param {Object} bus bus of this mvp part
+     */
+    constructor(bus) {
+        super(bus);
+    }
+
     /**
      *
      * @return {Object} Array of products
@@ -26,11 +33,11 @@ class ProductsModel {
 
     /**
      *
-     * @param {Number} currentPage
+     * @param {Number|String} currentPage
      * @param {Object} body Body of request
      */
     loadProducts(currentPage, body = {
-        page_num: currentPage,
+        page_num: parseInt(currentPage),
         count: 4,
         sort_key: 'cost',
         sort_direction: 'ASC',
@@ -46,9 +53,9 @@ class ProductsModel {
                 pagesCount: parsedJson['max_count_pages'],
                 currentPage: currentPage,
             };
-            Bus.emit(Events.ProductsLoaded, Responses.Success);
+            this.bus.emit(Events.ProductsLoaded, Responses.Success);
         }).catch(() => {
-            Bus.emit(Events.ProductsLoaded, Responses.Error);
+            this.bus.emit(Events.ProductsLoaded, Responses.Error);
         });
     }
 }

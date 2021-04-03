@@ -1,13 +1,19 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
 import {serverApiPath} from '../utils/urls/urls';
-import Bus from '../utils/bus/bus';
+import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for Product in MVP Arch
  */
-class ProductModel {
+class ProductModel extends BaseModel {
+    /**
+     * @param {Object} bus bus of this mvp part
+     */
+    constructor(bus) {
+        super(bus);
+    }
     /**
      * @return {Object} item
      */
@@ -42,9 +48,9 @@ class ProductModel {
                 },
                 images: parsedJson['images'],
             };
-            Bus.emit(Events.ProductLoaded, Responses.Success);
+            this.bus.emit(Events.ProductLoaded, Responses.Success);
         }).catch(() => {
-            Bus.emit(Events.ProductLoaded, Responses.Error);
+            this.bus.emit(Events.ProductLoaded, Responses.Error);
         });
     }
 }
