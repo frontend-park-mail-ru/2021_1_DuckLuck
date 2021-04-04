@@ -9,13 +9,12 @@ import Responses from '../utils/bus/responses';
  */
 class ProfilePresenter extends BasePresenter {
     /**
-     *
-     * @param {Object} view
-     * @param {Object} model
-     * @param {Object} bus bus of this mvp part
+     * @param {HTMLElement} application html of application
+     * @param {Class} View Class of view object
+     * @param {Class} Model Class of model object
      */
-    constructor(view, model, bus) {
-        super(view, model, bus);
+    constructor(application, View, Model) {
+        super(application, View, Model);
         this.bus.on(Events.ProfileFLNameChange, this.sendFirstLastName);
         this.bus.on(Events.ProfileFLNameResult, this.firstLastNameSendProcessResult);
         this.bus.on(Events.ProfileAvatarChange, this.sendAvatar);
@@ -38,7 +37,7 @@ class ProfilePresenter extends BasePresenter {
      */
     sendFirstLastName = () => {
         if (!this.isFormValid(['text'])) {
-            this.bus.emit(Events.ProfileIncorrectFLName, {});
+            this.bus.emit(Events.ProfileIncorrectFLName);
             return;
         }
         const firstName = document.getElementsByName('firstName')[0].value.trim();
@@ -115,7 +114,7 @@ class ProfilePresenter extends BasePresenter {
      */
     sendAvatar = () => {
         if (!this.isFormValid(['file'])) {
-            this.bus.emit(Events.ProfileIncorrectAvatar, {});
+            this.bus.emit(Events.ProfileIncorrectAvatar);
             return;
         }
 

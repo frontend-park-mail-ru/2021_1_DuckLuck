@@ -9,13 +9,6 @@ import Responses from '../../utils/bus/responses';
  */
 class CheckAuthModule extends BaseModel {
     /**
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(bus) {
-        super(bus);
-    }
-
-    /**
      * @description Sending Ajax. Then emits signal of success/failure of Authorization
      */
     checkAuth() {

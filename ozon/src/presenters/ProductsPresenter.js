@@ -7,13 +7,12 @@ import Responses from '../utils/bus/responses';
  */
 class ProductsPresenter extends BasePresenter {
     /**
-     *
-     * @param {Object} view
-     * @param {Object} model
-     * @param {Object} bus bus of this mvp part
+     * @param {HTMLElement} application html of application
+     * @param {Class} View Class of view object
+     * @param {Class} Model Class of model object
      */
-    constructor(view, model, bus) {
-        super(view, model, bus);
+    constructor(application, View, Model) {
+        super(application, View, Model);
         this.bus.on(Events.ProductsLoad, this.loadProducts);
         this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
     }

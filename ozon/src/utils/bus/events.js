@@ -21,6 +21,7 @@ const Events = {
     ProductsLoaded: 'products-loaded',
 
     ProductChangeID: 'product-changeID',
+    ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
 };
 

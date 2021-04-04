@@ -9,13 +9,6 @@ import Responses from '../utils/bus/responses';
  */
 class LoginModel extends BaseModel {
     /**
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(bus) {
-        super(bus);
-    }
-
-    /**
      *
      * @param {string} email
      * @param {string} password

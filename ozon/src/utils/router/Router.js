@@ -21,7 +21,7 @@ class Router {
     /**
      * @param {HTMLElement} root root html element
      */
-    setRoot(root) {
+    set root(root) {
         this.#root = root;
     }
 
@@ -92,7 +92,7 @@ class Router {
      * @description We need to call this function to make router start works!
      */
     start() {
-        this.#root.addEventListener('click', function(event) {
+        this.#root.addEventListener('click', (event) => {
             if (!(event.target instanceof HTMLAnchorElement)) {
                 return;
             }
@@ -101,16 +101,16 @@ class Router {
             const link = event.target;
 
             this.open(link.pathname);
-        }.bind(this));
+        });
 
-        window.addEventListener('popstate', function() {
+        window.addEventListener('popstate', () => {
             const currentPath = window.location.pathname;
             let {url, id} = this.splitURL(currentPath);
             if (url[0] !== '/') {
                 url = '/' + url;
             }
             this.open(url, {id: id});
-        }.bind(this));
+        });
 
         const currentPath = window.location.pathname;
         const {url, id} = this.splitURL(currentPath);

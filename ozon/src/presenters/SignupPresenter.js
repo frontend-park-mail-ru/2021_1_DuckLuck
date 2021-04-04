@@ -8,13 +8,12 @@ import Responses from '../utils/bus/responses';
  */
 class SignupPresenter extends BasePresenter {
     /**
-     *
-     * @param {Object} view
-     * @param {Object} model
-     * @param {Object} bus bus of this mvp part
+     * @param {HTMLElement} application html of application
+     * @param {Class} View Class of view object
+     * @param {Class} Model Class of model object
      */
-    constructor(view, model, bus) {
-        super(view, model, bus);
+    constructor(application, View, Model) {
+        super(application, View, Model);
         this.bus.on(Events.SignupSendData, this.sendFormToModel);
         this.bus.on(Events.SignupEmitResult, this.processSignupResult);
     }
@@ -24,7 +23,7 @@ class SignupPresenter extends BasePresenter {
      */
     sendFormToModel = () => {
         if (!this.isFormValid(['text'])) {
-            this.bus.emit(Events.SignupIncorrectForm, {});
+            this.bus.emit(Events.SignupIncorrectForm);
             return;
         }
         const email = document.getElementById('email').value.trim();

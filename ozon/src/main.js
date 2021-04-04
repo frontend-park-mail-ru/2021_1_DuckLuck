@@ -15,51 +15,26 @@ import ProductsModel from './models/ProductsModel';
 import ProductsPresenter from './presenters/ProductsPresenter';
 import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
-import {Bus} from './utils/bus/bus';
 
 const application = document.getElementById('app');
 
-Router.setRoot(application);
+Router.root = application;
 
-const homeView = new HomeView(application, null);
+const homeView = new HomeView(application, null, null);
 
-const signupBus = new Bus();
-const signupView = new SignupView(application, signupBus);
-const signupModel = new SignupModel(signupBus);
-const signupPresenter = new SignupPresenter(signupView, signupModel, signupBus);
-signupView.presenter = signupPresenter;
-
-const loginBus = new Bus();
-const loginView = new LoginView(application, loginBus);
-const loginModel = new LoginModel(loginBus);
-const loginPresenter = new LoginPresenter(loginView, loginModel, loginBus);
-loginView.presenter = loginPresenter;
-
-const profileBus = new Bus();
-const profileView = new ProfileView(application, profileBus);
-const profileModel = new ProfileModel(profileBus);
-const profilePresenter = new ProfilePresenter(profileView, profileModel, profileBus);
-profileView.presenter = profilePresenter;
-
-const productsBus = new Bus();
-const productsView = new ProductsView(application, productsBus);
-const productsModel = new ProductsModel(productsBus);
-const productsPresenter = new ProductsPresenter(productsView, productsModel, productsBus);
-productsView.presenter = productsPresenter;
-
-const productBus = new Bus();
-const productView = new ProductView(application, productBus);
-const productModel = new ProductModel(productBus);
-const productPresenter = new ProductPresenter(productView, productModel, productBus);
-productView.presenter = productPresenter;
+const signupPresenter = new SignupPresenter(application, SignupView, SignupModel);
+const loginPresenter = new LoginPresenter(application, LoginView, LoginModel);
+const profilePresenter = new ProfilePresenter(application, ProfileView, ProfileModel);
+const productsPresenter = new ProductsPresenter(application, ProductsView, ProductsModel);
+const productPresenter = new ProductPresenter(application, ProductView, ProductModel);
 
 
 Router
     .register('/', homeView)
-    .register('/signup', signupView)
-    .register('/login', loginView)
-    .register('/profile', profileView)
-    .register('/items', productsView)
-    .register('/item', productView);
+    .register('/signup', signupPresenter.view)
+    .register('/login', loginPresenter.view)
+    .register('/profile', profilePresenter.view)
+    .register('/items', productsPresenter.view)
+    .register('/item', productPresenter.view);
 
 Router.start();

@@ -3,7 +3,7 @@ import {Img} from '../Common/Img/Img.js';
 import {Rating} from '../Common/Rating/Rating.js';
 import productPageTemplate from './ProductView.hbs';
 import {fileServerHost} from '../../utils/urls/urls.js';
-
+import Events from '../../utils/bus/events';
 
 /**
  * @class ProductView
@@ -11,17 +11,8 @@ import {fileServerHost} from '../../utils/urls/urls.js';
  * @classdesc Class for Product page
  */
 export class ProductView extends BaseView {
-    /**
-     * @param {Object} parent parents object
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(parent, bus) {
-        super(parent, bus);
-    }
-
-
     show = () => {
-        this.presenter.loadProduct(this.ID);
+        this.bus.emit(Events.ProductLoad, this.ID);
     }
 
     /**

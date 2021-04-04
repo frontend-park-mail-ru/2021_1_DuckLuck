@@ -8,17 +8,13 @@ import Responses from '../utils/bus/responses';
  * @description Model for Product in MVP Arch
  */
 class ProductModel extends BaseModel {
-    /**
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(bus) {
-        super(bus);
-    }
+    #item
+
     /**
      * @return {Object} item
      */
     get item() {
-        return this._item;
+        return this.#item;
     }
 
     /**
@@ -35,7 +31,7 @@ class ProductModel extends BaseModel {
             const base = parsedJson['price']['base_cost'];
             const discount = parsedJson['price']['discount'];
             const discountPrice = (base * (1 - discount * 0.01)).toFixed(2);
-            this._item = {
+            this.#item = {
                 name: parsedJson['title'],
                 price: {
                     discountPrice: discountPrice,

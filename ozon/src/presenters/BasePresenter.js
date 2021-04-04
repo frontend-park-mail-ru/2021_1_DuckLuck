@@ -1,4 +1,5 @@
 import {isValidForm} from '../modules/Valiadtor/validator.js';
+import {Bus} from '../utils/bus/bus';
 
 /**
  * @description Base Presenter class
@@ -10,14 +11,14 @@ class BasePresenter {
 
     /**
      *
-     * @param {Object} view
-     * @param {Object} model
-     * @param {Object} bus bus of this mvp part
+     * @param {HTMLElement} application html of application
+     * @param {Class} View Class of view object
+     * @param {Class} Model Class of model object
      */
-    constructor(view, model, bus) {
-        this.#view = view;
-        this.#model = model;
-        this.#bus = bus;
+    constructor(application, View, Model) {
+        this.#bus = new Bus();
+        this.#view = new View(application, this, this.#bus);
+        this.#model = new Model(this.#bus);
     }
 
     /**

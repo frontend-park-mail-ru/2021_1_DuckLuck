@@ -12,16 +12,17 @@ export class BaseView {
     /**
      *
      * @param {Object} parent  Parent HTML element
+     * @param {Object} presenter Presenter of this view
      * @param {Object} bus bus of this mvp part
      */
-    constructor(parent, bus) {
+    constructor(parent, presenter, bus) {
         this.#parent = parent;
-
         this.#parent.dataset.view = this.constructor.name;
         this.#parent.hidden = false;
         this.#cache = '';
         this.#bus = bus;
         this.#id = 1;
+        this.#presenter = presenter;
     }
 
     /**
@@ -82,14 +83,6 @@ export class BaseView {
 
     /**
      *
-     * @param {Object} presenter Chained Presenter of View
-     */
-    set presenter(presenter) {
-        this.#presenter = presenter;
-    }
-
-    /**
-     *
      * @param {number} id new id
      */
     set ID(id) {
@@ -122,7 +115,7 @@ export class BaseView {
     /**
      * @description Drop cache and render
      */
-    reRender() {
+    reRender = () => {
         this.#cache = '';
         this.render();
     }

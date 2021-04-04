@@ -8,25 +8,21 @@ import Responses from '../../utils/bus/responses';
  * @description Model for getting/changing Users First/Last name in MVP Arch
  */
 class FLNameModule extends BaseModel {
-    /**
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(bus) {
-        super(bus);
-    }
+    #firstName;
+    #lastName;
 
     /**
      * @param {string} firstName
      */
     set firstName(firstName) {
-        this._firstName= firstName;
+        this.#firstName= firstName;
     }
 
     /**
      * @param {string} lastName
      */
     set lastName(lastName) {
-        this._lastName= lastName;
+        this.#lastName= lastName;
     }
 
     /**
@@ -34,7 +30,7 @@ class FLNameModule extends BaseModel {
      * @return {string} first name
      */
     get firstName() {
-        return this._firstName;
+        return this.#firstName;
     }
 
     /**
@@ -42,7 +38,7 @@ class FLNameModule extends BaseModel {
      * @return {string} last name
      */
     get lastName() {
-        return this._lastName;
+        return this.#lastName;
     }
 
     /**

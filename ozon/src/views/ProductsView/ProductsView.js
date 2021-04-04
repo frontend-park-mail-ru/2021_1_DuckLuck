@@ -12,17 +12,6 @@ import Events from '../../utils/bus/events';
  * @classdesc Class for showing product
  */
 export class ProductsView extends BaseView {
-    /**
-     *
-     * @param {Object} parent parents object
-     * @param {Object} bus bus of this mvp part
-     *
-     */
-    constructor(parent, bus) {
-        super(parent, bus);
-    }
-
-
     show = () => {
         this.bus.emit(Events.ProductsLoad, this.ID);
     }

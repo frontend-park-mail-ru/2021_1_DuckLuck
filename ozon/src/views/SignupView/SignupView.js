@@ -16,15 +16,6 @@ import Events from '../../utils/bus/events';
 export class SignupView extends BaseView {
     /**
      *
-     * @param {Object} parent parents object
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(parent, bus) {
-        super(parent, bus);
-    }
-
-    /**
-     *
      * @return {void} rendered page
      */
     render = () => {
@@ -80,7 +71,7 @@ export class SignupView extends BaseView {
         const form = this.cache.getElementsByClassName('form-body')[0];
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this.bus.emit(Events.SignupSendData, {});
+            this.bus.emit(Events.SignupSendData);
         });
 
         this.cache.getElementsByClassName('link link_weight-h1')[1]

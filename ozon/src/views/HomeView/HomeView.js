@@ -9,15 +9,6 @@ import config from '../../utils/configs/homeConfig';
  * @classdesc Class for initial, starting page
  */
 export class HomeView extends BaseView {
-    /**
-     *
-     * @param {HTMLElement} parent Parent element
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(parent, bus) {
-        super(parent, bus);
-    }
-
     render = () => {
         this.parent.innerHTML = '';
         if (this.cache) {

@@ -8,19 +8,14 @@ import Responses from '../../utils/bus/responses';
  * @description Model for Avatar Loading/Uploading in MVP Arch
  */
 class AvatarModule extends BaseModel {
-    /**
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(bus) {
-        super(bus);
-    }
+    #avatarURL
 
     /**
      *
      * @param {string} URL New URL for avatar
      */
     set avatarURL(URL) {
-        this._avatarURL= URL;
+        this.#avatarURL= URL;
     }
 
     /**
@@ -28,7 +23,7 @@ class AvatarModule extends BaseModel {
      * @return {string} Avatar`s URL
      */
     get avatarURL() {
-        if (this._avatarURL === undefined) {
+        if (this.#avatarURL === undefined) {
             AjaxModule.getUsingFetch({
                 url: serverApiPath + urls.profileAvatarUrl,
                 body: null,
@@ -40,9 +35,8 @@ class AvatarModule extends BaseModel {
                 this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
             });
             return '';
-        } else {
-            return this._avatarURL;
         }
+        return this.#avatarURL;
     }
 
     /**

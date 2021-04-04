@@ -10,15 +10,6 @@ import Events from '../../utils/bus/events';
  */
 export class ProfileView extends BaseView {
     /**
-     * @param {Object} parent parents object
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(parent, bus) {
-        super(parent, bus);
-    }
-
-
-    /**
      * @description redef of show method
      */
     show = () => {
@@ -50,13 +41,13 @@ export class ProfileView extends BaseView {
 
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this.bus.emit(Events.ProfileFLNameChange, {});
+            this.bus.emit(Events.ProfileFLNameChange);
         });
 
         const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
         avatarInput.addEventListener('change', (evt) => {
             evt.preventDefault();
-            this.bus.emit(Events.ProfileAvatarChange, {});
+            this.bus.emit(Events.ProfileAvatarChange);
         });
 
         this.renderData();

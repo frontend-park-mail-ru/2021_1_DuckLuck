@@ -8,19 +8,15 @@ import Responses from '../utils/bus/responses';
  * @description Model for ProductS in MVP Arch
  */
 class ProductsModel extends BaseModel {
-    /**
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(bus) {
-        super(bus);
-    }
+    #products
+    #paginationInfo
 
     /**
      *
      * @return {Object} Array of products
      */
     get products() {
-        return this._products;
+        return this.#products;
     }
 
     /**
@@ -28,7 +24,7 @@ class ProductsModel extends BaseModel {
      * @return {Object} Pagination info
      */
     get paginationInfo() {
-        return this._paginationInfo;
+        return this.#paginationInfo;
     }
 
     /**
@@ -48,8 +44,8 @@ class ProductsModel extends BaseModel {
         }).then((response) => {
             return response.json();
         }).then((parsedJson) => {
-            this._products = parsedJson['list_preview_products'];
-            this._paginationInfo = {
+            this.#products = parsedJson['list_preview_products'];
+            this.#paginationInfo = {
                 pagesCount: parsedJson['max_count_pages'],
                 currentPage: currentPage,
             };

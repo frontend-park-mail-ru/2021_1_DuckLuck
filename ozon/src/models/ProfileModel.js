@@ -8,51 +8,28 @@ import BaseModel from './BaseModel';
  * @description Model for Profile in MVP Arch. THIS IS A FACADE!
  */
 class ProfileModel extends BaseModel {
+    #fLNameModel;
+    #emailModel;
+    #avatarModel;
+    #checkAuthModel;
+
     /**
      * @param {Object} bus bus of this mvp part
      * @description simple Constructor. Creating all elements inside (FACADE)
      */
     constructor(bus) {
         super(bus);
-        this._fLNameModel = new FLNameModule(bus);
-        this._emailModel = new EmailModule(bus);
-        this._avatarModel = new AvatarModule(bus);
-        this._checkAuthModel = new CheckAuthModule(bus);
-    }
-
-    /**
-     * @param {string} firstName
-     */
-    set firstName(firstName) {
-        this._fLNameModel._firstName = firstName;
-    }
-
-    /**
-     * @param {string} lastName
-     */
-    set lastName(lastName) {
-        this._fLNameModel._lastName = lastName;
-    }
-
-    /**
-     * @param {string} email
-     */
-    set email(email) {
-        this._emailModel._email = email;
-    }
-
-    /**
-     * @param {string} avatarURL
-     */
-    set avatarURL(avatarURL) {
-        this._avatarModel._avatarURL = avatarURL;
+        this.#fLNameModel = new FLNameModule(bus);
+        this.#emailModel = new EmailModule(bus);
+        this.#avatarModel = new AvatarModule(bus);
+        this.#checkAuthModel = new CheckAuthModule(bus);
     }
 
     /**
      * @return {string}
      */
     get firstName() {
-        return this._fLNameModel.firstName;
+        return this.#fLNameModel.firstName;
     }
 
     /**
@@ -60,7 +37,7 @@ class ProfileModel extends BaseModel {
      * @return {string}
      */
     get lastName() {
-        return this._fLNameModel.lastName;
+        return this.#fLNameModel.lastName;
     }
 
     /**
@@ -68,7 +45,7 @@ class ProfileModel extends BaseModel {
      * @return {string|*}
      */
     get email() {
-        return this._emailModel.email;
+        return this.#emailModel.email;
     }
 
     /**
@@ -76,7 +53,7 @@ class ProfileModel extends BaseModel {
      * @return {string}
      */
     get avatarURL() {
-        return this._avatarModel.avatarURL;
+        return this.#avatarModel.avatarURL;
     }
 
     /**
@@ -85,7 +62,7 @@ class ProfileModel extends BaseModel {
      * @param {string} lastName
      */
     changeFirstLastName = (firstName, lastName) => {
-        this._fLNameModel.changeFirstLastName(firstName, lastName);
+        this.#fLNameModel.changeFirstLastName(firstName, lastName);
     }
 
     /**
@@ -93,7 +70,7 @@ class ProfileModel extends BaseModel {
      * @description We will get Name later by emitiing a signal!
      */
     getFirstLastName = () => {
-        this._fLNameModel.getFirstLastName();
+        this.#fLNameModel.getFirstLastName();
     }
 
     /**
@@ -101,7 +78,7 @@ class ProfileModel extends BaseModel {
      * @param {File} file
      */
     changeAvatar = (file) => {
-        this._avatarModel.changeAvatar(file);
+        this.#avatarModel.changeAvatar(file);
     }
 
     /**
@@ -115,7 +92,7 @@ class ProfileModel extends BaseModel {
      * @description Checking for Auth. Emit signal later
      */
     checkAuth = () => {
-        this._checkAuthModel.checkAuth();
+        this.#checkAuthModel.checkAuth();
     }
 }
 

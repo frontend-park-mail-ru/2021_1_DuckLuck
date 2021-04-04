@@ -15,14 +15,6 @@ import Events from '../../utils/bus/events';
  */
 export class LoginView extends BaseView {
     /**
-     * @param {HTMLElement} parent Parent element
-     * @param {Object} bus bus of this mvp part
-     */
-    constructor(parent, bus) {
-        super(parent, bus);
-    }
-
-    /**
      *
      * @return {void} html form
      */
@@ -73,7 +65,7 @@ export class LoginView extends BaseView {
         const form = this.cache.getElementsByClassName('form-body')[0];
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
-            this.bus.emit(Events.LoginSendData, {});
+            this.bus.emit(Events.LoginSendData);
         });
 
 
