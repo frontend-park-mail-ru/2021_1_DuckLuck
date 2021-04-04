@@ -100,21 +100,21 @@ export class BaseView {
     /**
      * @description Hides an element in HTML
      */
-    hide() {
+    hide = () => {
         this.#cache.hidden = true;
     }
 
     /**
      * @description Removes Element from HTML
      */
-    remove() {
+    remove = () => {
         this.#parent.removeChild(this.cache);
     }
 
     /**
      * @description Show element in HTML
      */
-    show() {
+    show = () => {
         this.render();
         this.#cache.hidden = false;
     }
@@ -130,7 +130,7 @@ export class BaseView {
     /**
      * Render from template
      */
-    render() {
+    render = () => {
 
     }
 }

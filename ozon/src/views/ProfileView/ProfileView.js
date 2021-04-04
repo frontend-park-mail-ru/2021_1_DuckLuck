@@ -21,7 +21,7 @@ export class ProfileView extends BaseView {
     /**
      * @description redef of show method
      */
-    show() {
+    show = () => {
         this.presenter.tryAuth();
     }
 
