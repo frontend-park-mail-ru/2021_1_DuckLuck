@@ -1,5 +1,4 @@
-
-name: S3 deploy
+name: duckluckmarket-front-task
 
 on:
   pull_request:
