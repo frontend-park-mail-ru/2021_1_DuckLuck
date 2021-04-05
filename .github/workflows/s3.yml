@@ -19,6 +19,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Linter
+        run: npm i
+
       - name: Install deps
         run: npm i
 
