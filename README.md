@@ -4,7 +4,7 @@ Frontend репозиторий команды DuckLuck
 
 # Ссылка на деплой
 
-[Деплой](http://duckluckmarket.xyz:8200/)
+[Деплой](duckluckmarket.xyz)
 
 # Ссылка на репозиторий бэкенда
 
