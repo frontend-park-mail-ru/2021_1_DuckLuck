@@ -62,12 +62,12 @@ class ProfilePresenter extends BasePresenter {
      * @return {string}
      */
     getFirstName = () => {
-        if (this.model.firstName === undefined) {
-            this.model.getFirstLastName();
-            return '';
+        if (this.model.firstName !== undefined) {
+            return this.model.firstName;
         }
 
-        return this.model.firstName;
+        this.model.getFirstLastName();
+        return '';
     }
 
     /**
@@ -75,12 +75,12 @@ class ProfilePresenter extends BasePresenter {
      * @return {string}
      */
     getLastName = () => {
-        if (this.model.lastName === undefined) {
-            this.model.getFirstLastName();
-            return '';
+        if (this.model.lastName !== undefined) {
+            return this.model.lastName;
         }
 
-        return this.model.lastName;
+        this.model.getFirstLastName();
+        return '';
     }
 
     /**
@@ -88,12 +88,12 @@ class ProfilePresenter extends BasePresenter {
      * @return {string}
      */
     getEmail = () => {
-        if (this.model.email === undefined) {
-            this.model.getEmail();
-            return '';
+        if (this.model.email !== undefined) {
+            return this.model.email;
         }
 
-        return this.model.email;
+        this.model.getEmail();
+        return '';
     }
 
     /**
@@ -101,12 +101,12 @@ class ProfilePresenter extends BasePresenter {
      * @return {string}
      */
     getAvatar = () => {
-        if (this.model.avatarURL === undefined) {
-            this.model.getAvatar();
-            return '';
+        if (this.model.avatarURL !== undefined) {
+            return this.model.avatarURL;
         }
 
-        return this.model.avatarURL;
+        this.model.getAvatar();
+        return '';
     }
 
     /**

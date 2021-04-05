@@ -23,20 +23,20 @@ class AvatarModule extends BaseModel {
      * @return {string} Avatar`s URL
      */
     get avatarURL() {
-        if (this.#avatarURL === undefined) {
-            AjaxModule.getUsingFetch({
-                url: serverApiPath + urls.profileAvatarUrl,
-                body: null,
-            }).then((response) => {
-                return response.json();
-            }).then((response) => {
-                this.#saveAndEmit(response.result);
-            }).catch(() => {
-                this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
-            });
-            return '';
+        if (this.#avatarURL !== undefined) {
+            return this.#avatarURL;
         }
-        return this.#avatarURL;
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.profileAvatarUrl,
+            body: null,
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            this.#saveAndEmit(response.result);
+        }).catch(() => {
+            this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
+        });
+        return '';
     }
 
     /**

@@ -15,21 +15,21 @@ class EmailModule extends BaseModel {
      * @return {string|*} User email
      */
     get email() {
-        if (this.#email === undefined) {
-            AjaxModule.getUsingFetch({
-                url: serverApiPath + urls.profileUrl,
-                body: null,
-            }).then((response) => {
-                return response.json();
-            }).then((response) => {
-                this.#email = response.email;
-                this.bus.emit(Events.ProfileEmailResult, Responses.Success);
-            }).catch(() => {
-                this.bus.emit(Events.ProfileEmailResult, Responses.Error);
-            });
-            return '';
+        if (this.#email !== undefined) {
+            return this.#email;
         }
-        return this.#email;
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.profileUrl,
+            body: null,
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            this.#email = response.email;
+            this.bus.emit(Events.ProfileEmailResult, Responses.Success);
+        }).catch(() => {
+            this.bus.emit(Events.ProfileEmailResult, Responses.Error);
+        });
+        return '';
     }
 }
 
