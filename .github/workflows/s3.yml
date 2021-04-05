@@ -19,11 +19,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Linter
-        run: npm run lint
-
       - name: Install deps
         run: npm i
+
+      - name: Linter
+        run: npm run lint
 
       - name: Build
         run: npm run build
