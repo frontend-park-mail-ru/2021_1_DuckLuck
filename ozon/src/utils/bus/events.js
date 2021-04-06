@@ -8,6 +8,7 @@ const Events = {
     SignupEmitResult: 'signup-emit-result',
     SignupIncorrectForm: 'signup-incorrect-form',
 
+    ProfileNewUserLoggedIn: 'profile-new-user-logged-in',
     ProfileFLNameChange: 'profile-flname-change',
     ProfileFLNameResult: 'profile-flname-result',
     ProfileIncorrectFLName: 'profile-incorrect-flname',

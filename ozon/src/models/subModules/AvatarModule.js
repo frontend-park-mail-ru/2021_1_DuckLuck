@@ -32,7 +32,7 @@ class AvatarModule extends BaseModel {
         }).then((response) => {
             return response.json();
         }).then((response) => {
-            this.#saveAndEmit(response.result);
+            this.#saveAndEmit(response.url.String);
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
@@ -57,7 +57,7 @@ class AvatarModule extends BaseModel {
             }).then((response) => {
                 return response.json();
             }).then((response) => {
-                this.#saveAndEmit(response.result);
+                this.#saveAndEmit(response.url.String);
             });
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);

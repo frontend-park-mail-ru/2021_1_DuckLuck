@@ -3,6 +3,7 @@ import {isValidForm} from '../modules/Valiadtor/validator';
 import Router from '../utils/router/Router';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import {Bus} from '../utils/bus/bus';
 
 /**
  * @description Presenter for Profile View and Model
@@ -21,6 +22,8 @@ class ProfilePresenter extends BasePresenter {
         this.bus.on(Events.ProfileAvatarResult, this.avatarSendProcessResult);
         this.bus.on(Events.ProfileEmailResult, this.emailSendProcessResult);
         this.bus.on(Events.ProfileCheckAuthResult, this.tryAuthProcessResult);
+
+        Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
     }
 
     /**
@@ -160,10 +163,19 @@ class ProfilePresenter extends BasePresenter {
     tryAuthProcessResult = (result) => {
         if (result === Responses.Success) {
             this.view.render();
-            (this.view.cache).hidden = false;
+            this.view.cache.hidden = false;
         } else {
             Router.open('/login', {replaceState: true});
         }
+    }
+
+    /**
+     * @description This function is used when user is re-loginned or creates a new account
+     * Just clear cache and model
+     */
+    removeData = () => {
+        this.model = new this.ModelClass(this.bus);
+        this.view.clearCache();
     }
 }
 

@@ -1,10 +1,37 @@
+import {serverApiPath, urls} from '../../utils/urls/urls';
+
 /**
  *
  * @class AjaxModule
  * @classdesc This class uses only by his private methods.
  * Responsible for communication with backend via Ajax.
  */
+
+const csrfTokenMinutesValid = 15;
+const secondsInMinute = 60;
+const MillisecondsInSecond = 1e3;
+
+/**
+ * @description AJAX interaction class
+ */
 export class AjaxModule {
+    static #csrfToken;
+
+    /**
+     * @description sets a cookie and gets a csrf token for HTTP header
+     */
+    static getCSRFToken =() => {
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.csrfUrl,
+        }).then(async(response) => {
+            return response.json();
+        }).then(async(response) => {
+            AjaxModule.#csrfToken = response.token;
+            setTimeout(this.getCSRFToken, csrfTokenMinutesValid * secondsInMinute * MillisecondsInSecond);
+        }).catch((err) => {
+            console.error(err);
+        });
+    }
     /**
      *
      * @param {Object} ajaxArgs Arguments for ajax GET method
@@ -48,7 +75,7 @@ export class AjaxModule {
      * @return {Promise<Response>}
      * @description all these functions above using this private function to communicate with backend.
      */
-    static #usingFetch = (ajaxArgs) => {
+    static #usingFetch = async(ajaxArgs) => {
         if (!ajaxArgs.data && ajaxArgs.body) {
             ajaxArgs.body = JSON.stringify(ajaxArgs.body);
         }
@@ -62,9 +89,13 @@ export class AjaxModule {
 
         if (ajaxArgs.data) {
             init['enctype'] = 'multipart/form-data';
+            init['headers'] = {
+                'X-CSRF-TOKEN': AjaxModule.#csrfToken,
+            };
         } else {
             init['headers'] = {
                 'Content-Type': 'application/json;charset=utf-8',
+                'X-CSRF-TOKEN': AjaxModule.#csrfToken,
             };
         }
 

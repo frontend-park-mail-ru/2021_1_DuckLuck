@@ -70,8 +70,8 @@ class FLNameModule extends BaseModel {
         }).then((response) => {
             return response.json();
         }).then((response) => {
-            this.firstName = response.first_name;
-            this.lastName = response.last_name;
+            this.firstName = response.first_name.String;
+            this.lastName = response.last_name.String;
             this.bus.emit(Events.ProfileFLNameResult, Responses.Success);
         }).catch(() => {
             this.bus.emit(Events.ProfileFLNameResult, Responses.Error);

@@ -113,10 +113,17 @@ export class BaseView {
     }
 
     /**
+     * @description clears cache of View
+     */
+    clearCache = () => {
+        this.#cache = '';
+    }
+
+    /**
      * @description Drop cache and render
      */
     reRender = () => {
-        this.#cache = '';
+        this.clearCache();
         this.render();
     }
 

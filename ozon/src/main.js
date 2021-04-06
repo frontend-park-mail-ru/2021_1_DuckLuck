@@ -15,6 +15,10 @@ import ProductsModel from './models/ProductsModel';
 import ProductsPresenter from './presenters/ProductsPresenter';
 import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
+import {AjaxModule} from './modules/Ajax/Ajax';
+
+
+AjaxModule.getCSRFToken();
 
 const application = document.getElementById('app');
 
@@ -27,7 +31,6 @@ const loginPresenter = new LoginPresenter(application, LoginView, LoginModel);
 const profilePresenter = new ProfilePresenter(application, ProfileView, ProfileModel);
 const productsPresenter = new ProductsPresenter(application, ProductsView, ProductsModel);
 const productPresenter = new ProductPresenter(application, ProductView, ProductModel);
-
 
 Router
     .register('/', homeView)
