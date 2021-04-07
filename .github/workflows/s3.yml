@@ -1,7 +1,9 @@
-name: duckluckmarket-front-task
+name: Build and deploy
 
 on:
   pull_request:
+    branches: [ develop, main ]
+  push:
     branches: [ develop, main ]
 
 jobs:
