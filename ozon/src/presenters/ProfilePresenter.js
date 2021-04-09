@@ -22,6 +22,8 @@ class ProfilePresenter extends BasePresenter {
         this.bus.on(Events.ProfileAvatarResult, this.avatarSendProcessResult);
         this.bus.on(Events.ProfileEmailResult, this.emailSendProcessResult);
         this.bus.on(Events.ProfileCheckAuthResult, this.tryAuthProcessResult);
+        this.bus.on(Events.ProfileAllGet, this.getAllData);
+        this.bus.on(Events.ProfileAllResult, this.renderAllData);
 
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
     }
@@ -176,6 +178,22 @@ class ProfilePresenter extends BasePresenter {
     removeData = () => {
         this.model.clear();
         this.view.clearCache();
+    }
+
+    getAllData = () => {
+        this.model.getProfileData();
+    }
+
+    /**
+     *
+     * @param {Responses} status
+     */
+    renderAllData = (status) => {
+        if (status === Responses.Success) {
+            this.view.renderData();
+            return;
+        }
+        console.error(status);
     }
 }
 

@@ -15,7 +15,7 @@ const millisecondsInSecond = 1e3;
  * @description AJAX interaction class
  */
 export class AjaxModule {
-    static #csrfToken = undefined;
+    static #csrfToken;
 
     /**
      * @description sets a cookie and gets a csrf token for HTTP header

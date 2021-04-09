@@ -15,6 +15,11 @@ class AvatarModule extends BaseModel {
      * @param {string} URL New URL for avatar
      */
     set avatarURL(URL) {
+        if (URL === '') {
+            this.#avatarURL = fileServerHost + urls.defaultAvatar;
+            return;
+        }
+
         this.#avatarURL= URL;
     }
 

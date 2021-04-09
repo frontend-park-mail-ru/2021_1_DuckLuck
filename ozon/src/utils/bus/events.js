@@ -17,6 +17,8 @@ const Events = {
     ProfileIncorrectAvatar: 'profile-incorrect-avatar',
     ProfileEmailResult: 'profile-email-result',
     ProfileCheckAuthResult: 'profile-check-auth-result',
+    ProfileAllResult: 'profile-all-result',
+    ProfileAllGet: 'profile-all-get',
 
     ProductsLoad: 'products-load',
     ProductsLoaded: 'products-loaded',

@@ -10,6 +10,13 @@ import Responses from '../../utils/bus/responses';
 class EmailModule extends BaseModel {
     #email
 
+
+    /**
+     * @param {string} newEmail
+     */
+    set email(newEmail) {
+        this.#email = newEmail;
+    }
     /**
      *
      * @return {string|*} User email

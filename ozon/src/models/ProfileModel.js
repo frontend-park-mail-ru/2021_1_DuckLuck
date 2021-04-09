@@ -3,6 +3,10 @@ import AvatarModule from './subModules/AvatarModule';
 import EmailModule from './subModules/EmailModule';
 import CheckAuthModule from './subModules/CheckAuthModule';
 import BaseModel from './BaseModel';
+import {AjaxModule} from '../modules/Ajax/Ajax';
+import {serverApiPath, urls} from '../utils/urls/urls';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
 
 /**
  * @description Model for Profile in MVP Arch. THIS IS A FACADE!
@@ -103,6 +107,26 @@ class ProfileModel extends BaseModel {
         this.#emailModel.clear();
         this.#avatarModel.clear();
         this.#checkAuthModel.clear();
+    }
+
+    /**
+     * @description gets all data for profile from one AJAX request
+     */
+    getProfileData() {
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.profileUrl,
+            body: null,
+        }).then((response) => {
+            return response.json();
+        }).then((response) => {
+            this.#fLNameModel.firstName = response.first_name.String;
+            this.#fLNameModel.lastName = response.last_name.String;
+            this.#avatarModel.avatarURL = response.avatar.url.String;
+            this.#emailModel.email = response.email;
+            this.bus.emit(Events.ProfileAllResult, Responses.Success);
+        }).catch(() => {
+            this.bus.emit(Events.ProfileAllResult, Responses.Error);
+        });
     }
 }
 
