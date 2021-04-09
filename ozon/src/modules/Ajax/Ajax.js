@@ -20,9 +20,9 @@ export class AjaxModule {
     /**
      * @description sets a cookie and gets a csrf token for HTTP header
      */
-    static getCSRFToken = async () => {
+    static getCSRFToken = async() => {
         const init = {
-            method: "GET",
+            method: 'GET',
             credentials: 'include',
             mode: 'cors',
         };
@@ -31,9 +31,11 @@ export class AjaxModule {
         init['headers'] = {
             'Content-Type': 'application/json;charset=utf-8',
             'X-CSRF-TOKEN': AjaxModule.#csrfToken,
-        }
+        };
 
-        await fetch(serverApiPath + urls.csrfUrl, init).then(async (result) => {
+        // Да, then в then`е выглядит странно, но если делать как обычно, последовательно,
+        // то webpack кидает 22 ошибки во время сборки...
+        await fetch(serverApiPath + urls.csrfUrl, init).then(async(result) => {
             await result.json().then((resultJSON) => {
                 AjaxModule.#csrfToken = resultJSON.token;
                 setTimeout(this.getCSRFToken, csrfTokenMinutesValid * secondsInMinute * millisecondsInSecond);

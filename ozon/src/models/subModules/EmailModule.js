@@ -32,6 +32,9 @@ class EmailModule extends BaseModel {
         return '';
     }
 
+    /**
+     * @description Clears all saved data in model
+     */
     clear() {
         this.#email = undefined;
     }

@@ -95,6 +95,9 @@ class ProfileModel extends BaseModel {
         this.#checkAuthModel.checkAuth();
     }
 
+    /**
+     * @description Clears all saved data in model
+     */
     clear() {
         this.#fLNameModel.clear();
         this.#emailModel.clear();

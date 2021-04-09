@@ -18,6 +18,9 @@ class BaseModel {
         return this.#bus;
     }
 
+    /**
+     * @description Clears all saved data in model
+     */
     clear() {
 
     }

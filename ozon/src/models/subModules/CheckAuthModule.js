@@ -17,6 +17,7 @@ class CheckAuthModule extends BaseModel {
             url: serverApiPath + urls.profileUrl,
             body: null,
         }).then((response) => {
+            console.log("CHECK AUTH MODEL STATUS", response.status);
             if (response.status !== HTTPResponses.Success) {
                 this.bus.emit(Events.ProfileCheckAuthResult, Responses.Error);
                 return;

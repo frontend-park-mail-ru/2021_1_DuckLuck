@@ -78,6 +78,9 @@ class FLNameModule extends BaseModel {
         });
     }
 
+    /**
+     * @description Clears all saved data in model
+     */
     clear() {
         this.#firstName = undefined;
         this.#lastName = undefined;

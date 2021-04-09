@@ -30,13 +30,15 @@ class AvatarModule extends BaseModel {
             url: serverApiPath + urls.profileAvatarUrl,
             body: null,
         }).then((response) => {
+            console.log("AVATAR MODULE STATUS", response.status);
             return response.json();
         }).then((response) => {
+            console.log(response.url.String);
             this.#saveAndEmit(response.url.String);
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
-        return '';
+        return fileServerHost + urls.defaultAvatar;
     }
 
     /**
@@ -73,6 +75,9 @@ class AvatarModule extends BaseModel {
         this.bus.emit(Events.ProfileAvatarResult, Responses.Success);
     }
 
+    /**
+     * @description Clears all saved data in model
+     */
     clear() {
         this.#avatarURL = undefined;
     }
