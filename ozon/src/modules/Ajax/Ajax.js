@@ -101,7 +101,6 @@ export class AjaxModule {
             mode: 'cors',
         };
 
-        console.log(AjaxModule.#csrfToken);
         if (ajaxArgs.data) {
             init['enctype'] = 'multipart/form-data';
             init['headers'] = {
