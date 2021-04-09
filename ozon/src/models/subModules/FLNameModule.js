@@ -77,6 +77,11 @@ class FLNameModule extends BaseModel {
             this.bus.emit(Events.ProfileFLNameResult, Responses.Error);
         });
     }
+
+    clear() {
+        this.#firstName = undefined;
+        this.#lastName = undefined;
+    }
 }
 
 export default FLNameModule;

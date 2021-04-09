@@ -72,6 +72,10 @@ class AvatarModule extends BaseModel {
         this.avatarURL = fileServerHost + url;
         this.bus.emit(Events.ProfileAvatarResult, Responses.Success);
     }
+
+    clear() {
+        this.#avatarURL = undefined;
+    }
 }
 
 export default AvatarModule;

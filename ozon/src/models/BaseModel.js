@@ -17,6 +17,10 @@ class BaseModel {
     get bus() {
         return this.#bus;
     }
+
+    clear() {
+
+    }
 }
 
 export default BaseModel;

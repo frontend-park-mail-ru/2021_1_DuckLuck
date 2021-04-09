@@ -9,27 +9,35 @@ import {serverApiPath, urls} from '../../utils/urls/urls';
 
 const csrfTokenMinutesValid = 15;
 const secondsInMinute = 60;
-const MillisecondsInSecond = 1e3;
+const millisecondsInSecond = 1e3;
 
 /**
  * @description AJAX interaction class
  */
 export class AjaxModule {
-    static #csrfToken;
+    static #csrfToken = undefined;
 
     /**
      * @description sets a cookie and gets a csrf token for HTTP header
      */
-    static getCSRFToken =() => {
-        AjaxModule.getUsingFetch({
-            url: serverApiPath + urls.csrfUrl,
-        }).then(async(response) => {
-            return response.json();
-        }).then(async(response) => {
-            AjaxModule.#csrfToken = response.token;
-            setTimeout(this.getCSRFToken, csrfTokenMinutesValid * secondsInMinute * MillisecondsInSecond);
-        }).catch((err) => {
-            console.error(err);
+    static getCSRFToken = async () => {
+        const init = {
+            method: "GET",
+            credentials: 'include',
+            mode: 'cors',
+        };
+
+
+        init['headers'] = {
+            'Content-Type': 'application/json;charset=utf-8',
+            'X-CSRF-TOKEN': AjaxModule.#csrfToken,
+        }
+
+        await fetch(serverApiPath + urls.csrfUrl, init).then(async (result) => {
+            await result.json().then((resultJSON) => {
+                AjaxModule.#csrfToken = resultJSON.token;
+                setTimeout(this.getCSRFToken, csrfTokenMinutesValid * secondsInMinute * millisecondsInSecond);
+            });
         });
     }
     /**
@@ -76,6 +84,10 @@ export class AjaxModule {
      * @description all these functions above using this private function to communicate with backend.
      */
     static #usingFetch = async(ajaxArgs) => {
+        if (AjaxModule.#csrfToken === undefined) {
+            await AjaxModule.getCSRFToken();
+        }
+
         if (!ajaxArgs.data && ajaxArgs.body) {
             ajaxArgs.body = JSON.stringify(ajaxArgs.body);
         }
@@ -87,6 +99,7 @@ export class AjaxModule {
             mode: 'cors',
         };
 
+        console.log(AjaxModule.#csrfToken);
         if (ajaxArgs.data) {
             init['enctype'] = 'multipart/form-data';
             init['headers'] = {

@@ -15,10 +15,6 @@ import ProductsModel from './models/ProductsModel';
 import ProductsPresenter from './presenters/ProductsPresenter';
 import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
-import {AjaxModule} from './modules/Ajax/Ajax';
-
-
-AjaxModule.getCSRFToken();
 
 const application = document.getElementById('app');
 

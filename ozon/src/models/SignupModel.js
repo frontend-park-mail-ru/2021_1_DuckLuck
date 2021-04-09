@@ -25,7 +25,7 @@ class SignupModel extends BaseModel {
             } else {
                 this.bus.emit(Events.SignupEmitResult, Responses.Error);
             }
-        }).catch((err) => {
+        }).catch(() => {
             this.bus.emit(Events.SignupEmitResult, Responses.Error);
         });
     }

@@ -31,6 +31,10 @@ class EmailModule extends BaseModel {
         });
         return '';
     }
+
+    clear() {
+        this.#email = undefined;
+    }
 }
 
 export default EmailModule;

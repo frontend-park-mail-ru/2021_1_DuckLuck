@@ -94,6 +94,13 @@ class ProfileModel extends BaseModel {
     checkAuth = () => {
         this.#checkAuthModel.checkAuth();
     }
+
+    clear() {
+        this.#fLNameModel.clear();
+        this.#emailModel.clear();
+        this.#avatarModel.clear();
+        this.#checkAuthModel.clear();
+    }
 }
 
 export default ProfileModel;

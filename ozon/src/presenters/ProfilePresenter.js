@@ -174,7 +174,7 @@ class ProfilePresenter extends BasePresenter {
      * Just clear cache and model
      */
     removeData = () => {
-        this.model = new this.ModelClass(this.bus);
+        this.model.clear();
         this.view.clearCache();
     }
 }
