@@ -1,6 +1,7 @@
 import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import {Bus} from "../utils/bus/bus";
 
 /**
  * @description Presenter for Header View and Model
@@ -13,6 +14,7 @@ class HeaderPresenter extends BasePresenter {
      */
     constructor(application, View, Model) {
         super(application, View, Model);
+        Bus.globalBus.on(Events.HeaderChangeCatalogID, this.changeCatalogID);
         this.bus.on(Events.HeaderLoad, this.loadHeader);
         this.bus.on(Events.HeaderLoaded, this.headerLoadedReaction);
     }
@@ -23,6 +25,30 @@ class HeaderPresenter extends BasePresenter {
      */
     get categories() {
         return this.model.categories;
+    }
+
+    /**
+     *
+     * @return {Number}
+     */
+    get currentCategoryIndex() {
+        return this.model.currentCategoryIndex;
+    }
+
+    /**
+     *
+     *
+     */
+    set currentCategoryIndex(index) {
+        this.model.currentCategoryIndex = index;
+    }
+
+    /**
+     *
+     * @param {Number} id ID of a category
+     */
+    changeCatalogID = (id) => {
+        this.view.ID = id;
     }
 
     /**
