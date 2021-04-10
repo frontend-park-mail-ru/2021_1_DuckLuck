@@ -38,7 +38,7 @@ class ProductsModel extends BaseModel {
 
     /**
      *
-     *
+     * @param {Number} id
      */
     set categoryId(id) {
         this.#categoryId = id;

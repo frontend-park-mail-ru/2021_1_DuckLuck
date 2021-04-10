@@ -27,7 +27,7 @@ class HeaderModel extends BaseModel {
     }
 
     /**
-     *
+     * @param {Number} index
      */
     set currentCategoryIndex(index) {
         this.#currentCategoryIndex = index;

@@ -21,12 +21,13 @@ export class HeaderView extends BaseView {
     show = () => {
         this.bus.emit(Events.HeaderLoad, this.ID);
     }
+
     /**
      *
      */
     render = () => {
         this.parent.innerHTML = '';
-        const logo =  new Img({src: staticServerHost + '/svg/header/logo.svg'});
+        const logo = new Img({src: staticServerHost + '/svg/header/logo.svg'});
         const headerMenu = [
             {
                 text: 'Войти',
@@ -126,7 +127,7 @@ export class HeaderView extends BaseView {
 
         const catalogListCategories = this.cache.getElementsByClassName(headerStyles.category);
         const catalogListSubcategories = Array.from(
-            this.cache.getElementsByClassName(headerStyles.catalogListSubcategories)
+            this.cache.getElementsByClassName(headerStyles.catalogListSubcategories),
         );
         Array.from(catalogListCategories).forEach((category, i) => {
             category.addEventListener('mouseover', () => {
