@@ -24,10 +24,12 @@
     --neutral-color: #4d5f71;
     --light-color: #f2f3f5;
     --dark-color: #001a34;
+    --discout-color: #f91155;
 
     --button-content-gap: 5px;
 
     --standart-border-radius: 3px;
+    --lower-border-radius: 3px;
     --standart-border: 2px solid var(--colored-object-color);
 
     --margin-xxs: 2px;
@@ -41,5 +43,12 @@
 
     --img-size-s: 16px;
     --img-size-l: 24px;
+    --img-size-xxl: 250px;
 
+    --height-s: 24px;
+    --height-l: 32px;
+
+    --width-s: 48px;
+    --width-m: 62px;
+    --width-l: 96px;
 }
