@@ -1,7 +1,7 @@
 import {BaseView} from '../BaseView.js';
 import homeViewTemplate from './HomeView.hbs';
 import {Link} from '../Common/Link/Link.js';
-import config from '../../utils/configs/homeConfig';
+import config from '../../utils/configs/homeConfig/homeConfig';
 
 /**
  * @class HomeView

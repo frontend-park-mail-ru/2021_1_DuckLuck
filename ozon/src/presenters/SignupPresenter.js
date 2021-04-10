@@ -2,6 +2,7 @@ import BasePresenter from './BasePresenter.js';
 import Router from '../utils/router/Router';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import {Bus} from '../utils/bus/bus';
 
 /**
  * @description Presenter for Signup View and Model
@@ -38,6 +39,7 @@ class SignupPresenter extends BasePresenter {
     processSignupResult = (result) => {
         if (result === Responses.Success) {
             this.view.remove();
+            Bus.globalBus.emit(Events.ProfileNewUserLoggedIn);
             Router.open('/profile', {replaceState: true});
         } else {
             console.error(result);
