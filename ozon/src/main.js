@@ -16,6 +16,7 @@ import ProductsPresenter from './presenters/ProductsPresenter';
 import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
+import './styles.css';
 
 if ('serviceWorker' in navigator) {
     const registration = runtime.register();

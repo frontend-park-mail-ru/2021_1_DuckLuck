@@ -13,12 +13,8 @@ module.exports = {
     module: {
         rules: [
             {
-            test: /\.css$/i,
-            use: [
-                    "handlebars-loader", // handlebars loader expects raw resource string
-                    "extract-loader",
-                    "css-loader",
-                ],
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             {
             test: /\.hbs$/,
@@ -46,8 +42,8 @@ module.exports = {
         ],
     },
     plugins: [
-        new HtmlWebpackPlugin({inject: true, template: path.join(__dirname, '/ozon/src/index.html')}),
         new MiniCssExtractPlugin({filename: 'bundle.css'}),
+        new HtmlWebpackPlugin({inject: true, template: path.join(__dirname, '/ozon/src/index.html')}),
         new ServiceWorkerWebpackPlugin({
             entry: path.join(__dirname, '/ozon/src/sw.js'),
         }),

@@ -8,7 +8,6 @@
 @import 'views/Common/Img/Img.css';
 @import 'views/ProductView/ProductView.css';
 @import 'views/ProfileView/ProfileView.css';
-
 a, input {
     display: block;
 }
