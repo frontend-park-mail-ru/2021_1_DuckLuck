@@ -14,4 +14,5 @@ export const urls = {
     csrfUrl: '/csrf',
     cart: '/cart',
     cartProduct: '/cart/product',
+    order: '/order',
 };

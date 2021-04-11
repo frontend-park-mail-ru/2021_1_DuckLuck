@@ -18,6 +18,9 @@ import ProductPresenter from './presenters/ProductPresenter';
 import CartPresenter from './presenters/CartPresenter';
 import {CartView} from './views/CartView/CartView';
 import CartModel from './models/CartModel';
+import {OrderView} from './views/OrderView/OrderView';
+import OrderPresenter from './presenters/OrderPresenter';
+import OrderModel from './models/OrderModel';
 
 const application = document.getElementById('app');
 
@@ -31,6 +34,7 @@ const profilePresenter = new ProfilePresenter(application, ProfileView, ProfileM
 const productsPresenter = new ProductsPresenter(application, ProductsView, ProductsModel);
 const productPresenter = new ProductPresenter(application, ProductView, ProductModel);
 const cartPresenter = new CartPresenter(application, CartView, CartModel);
+const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
 
 Router
     .register('/', homeView)
@@ -39,6 +43,7 @@ Router
     .register('/profile', profilePresenter.view)
     .register('/items', productsPresenter.view)
     .register('/item', productPresenter.view)
-    .register('/cart', cartPresenter.view);
+    .register('/cart', cartPresenter.view)
+    .register('/order', orderPresenter.view);
 
 Router.start();

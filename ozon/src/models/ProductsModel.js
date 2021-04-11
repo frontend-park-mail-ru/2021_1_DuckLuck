@@ -37,6 +37,7 @@ class ProductsModel extends BaseModel {
         count: 4,
         sort_key: 'cost',
         sort_direction: 'ASC',
+        category: 1,
     }) {
         AjaxModule.postUsingFetch({
             url: serverApiPath + '/product',

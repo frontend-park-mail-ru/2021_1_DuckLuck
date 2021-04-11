@@ -34,6 +34,12 @@ const config = [
         name: 'Корзина',
         dataSection: 'cart',
     },
+
+    {
+        href: '/order',
+        name: 'Заказ',
+        dataSection: 'order',
+    },
 ];
 
 export default config;

@@ -22,7 +22,6 @@ const Events = {
 
     ProductsLoad: 'products-load',
     ProductsLoaded: 'products-loaded',
-
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
@@ -32,6 +31,11 @@ const Events = {
     CartProductRemoved: 'cart-removed-product',
     CartLoad: 'cart-load',
     CartLoaded: 'cart-loaded',
+    CartUserUnauthorized: 'cart-user-unauthorized',
+
+    OrderLoad: 'order-load',
+    OrderLoaded: 'order-loaded',
+    SendOrder: 'order-send',
 };
 
 export default Events;
