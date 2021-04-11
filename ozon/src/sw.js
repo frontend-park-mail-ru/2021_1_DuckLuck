@@ -18,7 +18,6 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
     if (navigator.onLine) {
         return;
-        // return fetch(event.request);
     }
 
     event.respondWith(
