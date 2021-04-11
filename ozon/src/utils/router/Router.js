@@ -53,6 +53,7 @@ class Router {
         replaceState: false,
         id: '',
     }) {
+        console.log(path);
         const route = this.#routes[path];
 
 
