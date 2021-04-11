@@ -28,7 +28,6 @@ const profilePresenter = new ProfilePresenter(application, ProfileView, ProfileM
 const productsPresenter = new ProductsPresenter(application, ProductsView, ProductsModel);
 const productPresenter = new ProductPresenter(application, ProductView, ProductModel);
 
-
 Router
     .register('/', homeView)
     .register('/signup', signupPresenter.view)

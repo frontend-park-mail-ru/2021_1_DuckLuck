@@ -11,4 +11,5 @@ export const urls = {
     profileAvatarUrl: '/user/profile/avatar',
     productUrl: '/product',
     defaultAvatar: '/avatar/default.png',
+    csrfUrl: '/csrf',
 };
