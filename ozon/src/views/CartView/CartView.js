@@ -10,11 +10,7 @@ import Events from '../../utils/bus/events';
  */
 export class CartView extends BaseView {
     show = () => {
-        // if (this.presenter.needsRerender) {
         this.bus.emit(Events.CartLoad);
-        // return;
-        // }
-        // this.render();
     }
 
     render = () => {
