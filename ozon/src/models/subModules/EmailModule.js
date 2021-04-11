@@ -10,6 +10,13 @@ import Responses from '../../utils/bus/responses';
 class EmailModule extends BaseModel {
     #email
 
+
+    /**
+     * @param {string} newEmail
+     */
+    set email(newEmail) {
+        this.#email = newEmail;
+    }
     /**
      *
      * @return {string|*} User email
@@ -30,6 +37,13 @@ class EmailModule extends BaseModel {
             this.bus.emit(Events.ProfileEmailResult, Responses.Error);
         });
         return '';
+    }
+
+    /**
+     * @description Clears all saved data in model
+     */
+    clear() {
+        this.#email = undefined;
     }
 }
 

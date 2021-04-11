@@ -48,4 +48,7 @@ module.exports = {
             entry: path.join(__dirname, '/ozon/src/sw.js'),
         }),
     ],
+    experiments: {
+        topLevelAwait: true,
+    }
 }

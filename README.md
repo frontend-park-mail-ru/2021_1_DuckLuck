@@ -1,10 +1,11 @@
 # DuckLuck
+[![Build And Deploy Status](https://github.com/frontend-park-mail-ru/2021_1_DuckLuck/actions/workflows/s3.yml/badge.svg)](https://github.com/frontend-park-mail-ru/2021_1_DuckLuck/actions/workflows/s3.yml)
 
 Frontend репозиторий команды DuckLuck
 
 # Ссылка на деплой
 
-[Деплой](http://duckluckmarket.xyz:8200/)
+[Деплой](https://duckluckmarket.xyz)
 
 # Ссылка на репозиторий бэкенда
 

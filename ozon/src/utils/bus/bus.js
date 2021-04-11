@@ -54,7 +54,7 @@ export class Bus {
      * @param {Object} data Data which will be passed through function.
      */
     emit(event, ...data) {
-        this.listeners[event].forEach(function(listener) {
+        this.listeners[event].forEach((listener) => {
             listener(...data);
         });
     }

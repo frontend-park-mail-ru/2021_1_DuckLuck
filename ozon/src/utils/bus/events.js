@@ -8,6 +8,7 @@ const Events = {
     SignupEmitResult: 'signup-emit-result',
     SignupIncorrectForm: 'signup-incorrect-form',
 
+    ProfileNewUserLoggedIn: 'profile-new-user-logged-in',
     ProfileFLNameChange: 'profile-flname-change',
     ProfileFLNameResult: 'profile-flname-result',
     ProfileIncorrectFLName: 'profile-incorrect-flname',
@@ -16,6 +17,8 @@ const Events = {
     ProfileIncorrectAvatar: 'profile-incorrect-avatar',
     ProfileEmailResult: 'profile-email-result',
     ProfileCheckAuthResult: 'profile-check-auth-result',
+    ProfileAllResult: 'profile-all-result',
+    ProfileAllGet: 'profile-all-get',
 
     ProductsLoad: 'products-load',
     ProductsLoaded: 'products-loaded',
