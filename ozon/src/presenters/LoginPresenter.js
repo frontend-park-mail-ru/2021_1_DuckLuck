@@ -27,6 +27,10 @@ class LoginPresenter extends BasePresenter {
             this.bus.emit(Events.LoginIncorrectForm);
             return;
         }
+        if (!navigator.onLine) {
+            Router.open('/offline');
+            return;
+        }
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
         this.model.loginUser({email, password});

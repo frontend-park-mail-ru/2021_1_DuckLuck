@@ -17,16 +17,21 @@ import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
 import runtime from 'serviceworker-webpack-plugin/lib/runtime';
 import './styles.css';
+import {OfflineView} from './views/OfflineView/OfflineView';
 
 if ('serviceWorker' in navigator) {
-    const registration = runtime.register();
+    runtime.register();
 }
+
+window.addEventListener('online', () => console.warn('came online'));
+window.addEventListener('offline', () => console.warn('came offline'));
 
 const application = document.getElementById('app');
 
 Router.root = application;
 
 const homeView = new HomeView(application, null, null);
+const offlineView = new OfflineView(application, null, null);
 
 const signupPresenter = new SignupPresenter(application, SignupView, SignupModel);
 const loginPresenter = new LoginPresenter(application, LoginView, LoginModel);
@@ -40,6 +45,7 @@ Router
     .register('/login', loginPresenter.view)
     .register('/profile', profilePresenter.view)
     .register('/items', productsPresenter.view)
-    .register('/item', productPresenter.view);
+    .register('/item', productPresenter.view)
+    .register('/offline', offlineView);
 
 Router.start();

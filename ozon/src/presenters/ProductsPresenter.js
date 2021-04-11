@@ -1,6 +1,7 @@
 import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import Router from '../utils/router/Router';
 
 /**
  * @description Presenter for Product View and Model
@@ -38,6 +39,10 @@ class ProductsPresenter extends BasePresenter {
      * @param {Number} page
      */
     loadProducts = (page) => {
+        if (!navigator.onLine) {
+            Router.open('/offline', {replaceState: true});
+            return;
+        }
         this.model.loadProducts(page);
     }
 

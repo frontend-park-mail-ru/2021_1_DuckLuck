@@ -45,6 +45,10 @@ class ProfilePresenter extends BasePresenter {
             this.bus.emit(Events.ProfileIncorrectFLName);
             return;
         }
+        if (!navigator.onLine) {
+            Router.open('/offline' );
+            return;
+        }
         const firstName = document.getElementsByName('firstName')[0].value.trim();
         const lastName = document.getElementsByName('lastName')[0].value.trim();
         this.model.changeFirstLastName(firstName, lastName);
@@ -118,6 +122,10 @@ class ProfilePresenter extends BasePresenter {
      * @description get data view and send to model
      */
     sendAvatar = () => {
+        if (!navigator.onLine) {
+            Router.open('/offline');
+            return;
+        }
         if (!this.isFormValid(['file'])) {
             this.bus.emit(Events.ProfileIncorrectAvatar);
             return;
@@ -155,6 +163,10 @@ class ProfilePresenter extends BasePresenter {
      * @description attempts to authorize
      */
     tryAuth = () => {
+        if (!navigator.onLine) {
+            Router.open('/offline', {replaceState: true});
+            return;
+        }
         this.model.checkAuth();
     }
 
@@ -181,6 +193,10 @@ class ProfilePresenter extends BasePresenter {
     }
 
     getAllData = () => {
+        if (!navigator.onLine) {
+            Router.open('/offline', {replaceState: true});
+            return;
+        }
         this.model.getProfileData();
     }
 
