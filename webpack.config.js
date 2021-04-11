@@ -1,4 +1,7 @@
 const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 module.exports = {
     entry: ["regenerator-runtime/runtime.js", "./ozon/src/main.js"],
@@ -8,7 +11,16 @@ module.exports = {
         path: path.resolve(__dirname, './ozon/src/dist'),
     },
     module: {
-        rules: [ {
+        rules: [
+            {
+            test: /\.css$/i,
+            use: [
+                    "handlebars-loader", // handlebars loader expects raw resource string
+                    "extract-loader",
+                    "css-loader",
+                ],
+            },
+            {
             test: /\.hbs$/,
             loader: 'handlebars-loader',
             options: {
@@ -32,5 +44,12 @@ module.exports = {
             }
         }
         ],
-    }
+    },
+    plugins: [
+        new HtmlWebpackPlugin({inject: true, template: path.join(__dirname, '/ozon/src/index.html')}),
+        new MiniCssExtractPlugin({filename: 'bundle.css'}),
+        new ServiceWorkerWebpackPlugin({
+            entry: path.join(__dirname, '/ozon/src/sw.js'),
+        }),
+    ],
 }
