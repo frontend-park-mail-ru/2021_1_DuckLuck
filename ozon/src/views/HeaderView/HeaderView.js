@@ -86,7 +86,7 @@ export class HeaderView extends BaseView {
             buttonStyles: buttonStyles,
         });
 
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('header');
+        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementsByClassName(headerStyles.main);
 
         const logoButton = this.cache.getElementsByClassName(headerStyles.logoBlock)[0];
         logoButton.addEventListener('click', () => {
