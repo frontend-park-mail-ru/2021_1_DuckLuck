@@ -6,6 +6,7 @@
   "scripts": {
     "lint": "eslint ./",
     "lint--fix": "eslint --fix ./",
+    "build": "webpack",
     "start": "webpack && node ozon/server/index.js",
     "start-dev": "webpack --watch & node ozon/server/index.js",
     "generate-doc": "jsdoc -c jsdoc-conf.json",
