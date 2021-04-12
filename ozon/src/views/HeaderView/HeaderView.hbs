@@ -1,4 +1,4 @@
-<header class="{{headerStyles.main}}" id="header">
+<div class="{{headerStyles.main}}" id="header">
     <div class="{{headerStyles.body}}">
         <div class="{{headerStyles.logoBlock}}">
             <div class="{{headerStyles.logoWrapper}}">
@@ -12,8 +12,8 @@
                 <button class="{{buttonStyles.catalog}}">
                     <div class="{{headerStyles.catalogButtonBody}}">
                         {{#with catalog}}
-                            <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.menuImgL}} {{../imgStyles.invertColor}}">
-                            <img loading="lazy" src={{img.1.src}} class="{{../imgStyles.menuImgL}} {{../imgStyles.invertColor}} {{../headerStyles.hidden}}">
+                            <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}}">
+                            <img loading="lazy" src={{img.1.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}} {{../decorators.hidden}}">
                             <span class="{{../headerStyles.catalogText}}">{{text}}</span>
                         {{/with}}
                     </div>
@@ -40,7 +40,7 @@
                         {{#with searchButton}}
                             <button type="submit" class="{{../../buttonStyles.search}}">
                                 <div class="{{../../headerStyles.searchImgWrapper}}">
-                                    <img loading="lazy" src={{img.src}} class="{{../../imgStyles.menuImgL}} {{../../imgStyles.invertColor}}">
+                                    <img loading="lazy" src={{img.src}} class="{{../../imgStyles.menuImgL}} {{../../decorators.invertColor}}">
                                 </div>
                             </button>
                         {{/with}}
@@ -59,7 +59,7 @@
             {{/each}}
         </div>
     </div>
-    <div class="{{headerStyles.catalogList}} {{headerStyles.hidden}}">
+    <div class="{{headerStyles.catalogList}} {{decorators.hidden}}">
         <div class="{{headerStyles.catalogListBody}}">
             <div class="{{headerStyles.catalogListCategories}}">
                 {{#each catalog.categories}}
@@ -67,7 +67,7 @@
                 {{/each}}
             </div>
             {{#each catalog.categories}}
-                <div class="{{../headerStyles.catalogListSubcategories}} {{#ifNotEquals ../currentCategory this.id}}{{../headerStyles.hidden}}{{/ifNotEquals}}">
+                <div class="{{../headerStyles.catalogListSubcategories}} {{#ifNotEquals ../currentCategory this.id}}{{../decorators.hidden}}{{/ifNotEquals}}">
                     {{#each this.next}}
                         <div class="{{../../headerStyles.catalogItemWrapper}}">
                             <div class="{{../../headerStyles.catalogItemBody}}">
@@ -82,4 +82,4 @@
             {{/each}}
         </div>
     </div>
-</header>
+</div>

@@ -193,12 +193,3 @@
     color: var(--light-color);
     font-family: var(--font);
 }
-
-.hidden {
-    display: none;
-}
-
-.disabledLink {
-    pointer-events: none;
-    text-decoration: none;
-}
