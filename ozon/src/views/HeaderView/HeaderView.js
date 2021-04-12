@@ -11,7 +11,6 @@ import {Img} from '../Common/Img/Img';
 import {Button} from '../Common/Button/Button';
 import {Input} from '../Common/Input/Input';
 import Router from '../../utils/router/Router';
-import {Bus} from '../../utils/bus/bus';
 
 /**
  * @class HeaderView
