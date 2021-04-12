@@ -1,0 +1,195 @@
+@import "../../constants.css";
+
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
+.body {
+    max-width: var(--max-width);
+    padding: 4px 28px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logoBlock {
+    margin-right: var(--margin-xxl);
+    cursor: pointer;
+}
+
+.catalogBlock {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 135px;
+    cursor: pointer;
+    margin-right: 16px;
+}
+
+
+.catalogButtonBody {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--button-content-gap);
+}
+
+.menu {
+    display: inline-flex;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: var(--lower-font-size);
+}
+
+.searchBlock {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-radius: var(--standart-border-radius);
+    border: var(--standart-border);
+    margin-right: var(--margin-xl);
+}
+
+.searchForm {
+    display: flex;
+}
+
+.searchAreaBlock {
+    background: var(--light-color);
+    display: inline-flex;
+    align-items: center;
+    color: var(--neutral-color);
+    border-radius: var(--standart-border-radius);
+    margin: var(--margin-xxs);
+}
+
+.searchAreaText {
+    margin-left: var(--margin-m);
+    margin-right: var(--margin-m);
+    font-size: var(--standart-font-size);
+    line-height: var(--standart-line-height);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    white-space: nowrap;
+    max-width: 170px;
+}
+.searchAreaPointer {
+    margin-right: var(--margin-s);
+}
+
+.searchButtonBlock {
+    display: flex;
+}
+
+.searchInputBlock {
+    flex: 1;
+}
+
+.logoWrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 40px;
+    width: 128px;
+}
+
+.menuItem {
+    margin-right: var(--margin-l);
+    cursor: pointer;
+    height: 56px;
+    width: 76px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 8px;
+    box-sizing: border-box;
+    color: var(--dark-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.menuItem:hover {
+    color: var(--colored-object-color);
+}
+
+.catalogList {
+    width: 100%;
+    height: 100%;
+    max-width: var(--max-width);
+    padding: 4px 28px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    font-family: var(--font);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.category {
+    margin-top: var(--margin-s);
+    margin-bottom: var(--margin-s);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.subcategory {
+    margin-top: var(--margin-s);
+    margin-bottom: var(--margin-s);
+    font-weight: var(--bold-font);
+    font-size: var(--lower-font-size);
+    cursor: pointer;
+}
+
+.subsubcategory {
+    margin-top: var(--margin-s);
+    margin-bottom: var(--margin-s);
+    font-size: var(--lower-font-size);
+    cursor: pointer;
+}
+
+.searchImgWrapper {
+    margin: auto;
+}
+
+
+.catalogListCategories {
+    display: flex;
+    flex-direction: column;
+}
+
+.catalogListBody {
+    display: flex;
+    flex-direction: row;
+}
+
+.catalogListSubcategories {
+    padding-left: 50px;
+    column-count: 4;
+    column-gap: var(--columns-gap);
+    margin-right: var(--margin-xl);
+}
+
+.catalogItemWrapper {
+    display: inline-block;
+    width: 100%;
+    line-height: var(--standart-line-height);
+    box-sizing: border-box;
+    margin-bottom: var(--margin-xxl);
+}
+
+.catalogItemBody {
+    display: flex;
+    flex-direction: column;
+}
+
+.catalogText {
+    color: var(--light-color);
+    font-family: var(--font);
+}
