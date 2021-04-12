@@ -13,14 +13,9 @@ import Events from '../../utils/bus/events';
  */
 export class ProductsView extends BaseView {
     show = () => {
-        this.bus.emit(Events.ProductsLoad, this.ID);
+        this.bus.emit(Events.ProductsLoad, this.ID, this.subID);
     }
 
-    /**
-     *
-     * @param {Object[]} products array of product
-     * @param {Object} paginationInfo info about current pagination state
-     */
     render = () => {
         this.parent.innerHTML = '';
         const productsListHtmlString = new ListOfProducts(this.presenter.products).getHtmlString();

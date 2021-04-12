@@ -8,6 +8,7 @@ export class BaseView {
     #presenter
     #bus
     #id
+    #subId
 
     /**
      *
@@ -22,6 +23,7 @@ export class BaseView {
         this.#cache = '';
         this.#bus = bus;
         this.#id = 1;
+        this.#subId = 1;
         this.#presenter = presenter;
     }
 
@@ -75,6 +77,14 @@ export class BaseView {
 
     /**
      *
+     * @return {number} id,page number,item id, etc. for this view (use if needs)
+     */
+    get subID() {
+        return this.#subId;
+    }
+
+    /**
+     *
      * @param {HTMLElement} cache Cache of View
      */
     set cache(cache) {
@@ -87,6 +97,14 @@ export class BaseView {
      */
     set ID(id) {
         this.#id = id;
+    }
+
+    /**
+     *
+     * @param {number | string} subId new sub id
+     */
+    set subID(subId) {
+        this.#subId = subId;
     }
 
 

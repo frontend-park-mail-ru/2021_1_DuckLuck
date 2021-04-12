@@ -28,15 +28,16 @@ class ProductsModel extends BaseModel {
     }
 
     /**
-     *
-     * @param {Number|String} currentPage
+     * @param {Number|String} category
+     * @param {Number|String} page
      * @param {Object} body Body of request
      */
-    loadProducts(currentPage, body = {
-        page_num: parseInt(currentPage),
+    loadProducts(category, page, body = {
+        page_num: +page,
         count: 4,
         sort_key: 'cost',
         sort_direction: 'ASC',
+        category: +category,
     }) {
         AjaxModule.postUsingFetch({
             url: serverApiPath + '/product',
@@ -47,7 +48,7 @@ class ProductsModel extends BaseModel {
             this.#products = parsedJson['list_preview_products'];
             this.#paginationInfo = {
                 pagesCount: parsedJson['max_count_pages'],
-                currentPage: currentPage,
+                currentPage: page,
             };
             this.bus.emit(Events.ProductsLoaded, Responses.Success);
         }).catch(() => {

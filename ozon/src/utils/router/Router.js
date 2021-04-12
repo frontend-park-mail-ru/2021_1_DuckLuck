@@ -52,9 +52,9 @@ class Router {
     open(path, params = {
         replaceState: false,
         id: '',
+        subId: '',
     }) {
         const route = this.#routes[path];
-
 
         if (!route) {
             this.open('/');
@@ -63,6 +63,10 @@ class Router {
 
         if (params.id !== undefined && params.id !== '') {
             path = `${path}/${params.id}`;
+        }
+
+        if (params.subId !== undefined && params.subId !== '') {
+            path = `${path}/${params.subId}`;
         }
 
         if (window.location.pathname !== path && !params.replaceState) {
@@ -83,6 +87,10 @@ class Router {
 
         if (params.id !== undefined && params.id !== '') {
             view.ID = params.id;
+        }
+
+        if (params.subId !== undefined && params.subId !== '') {
+            view.subId = params.subId;
         }
 
         view.show();
@@ -113,8 +121,8 @@ class Router {
         });
 
         const currentPath = window.location.pathname;
-        const {url, id} = this.splitURL(currentPath);
-        this.open(`/${url}`, {id: id});
+        const {url, id, subId} = this.splitURL(currentPath);
+        this.open(`/${url}`, {id: id, subId: subId});
     }
 
     /**
@@ -127,7 +135,8 @@ class Router {
         const pathArray = url.split('/');
         url = pathArray[1 - isPathOnly];
         const id = pathArray[2 - isPathOnly] === undefined ? '' : pathArray[2 - isPathOnly];
-        return {url, id};
+        const subId = pathArray[3 - isPathOnly] === undefined ? '' : pathArray[3 - isPathOnly];
+        return {url, id, subId};
     }
 }
 
