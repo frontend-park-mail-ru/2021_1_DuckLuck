@@ -26,6 +26,12 @@ const Events = {
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
+
+    CartAddProduct: 'cart-add-product',
+    CartRemoveProduct: 'cart-remove-product',
+    CartProductRemoved: 'cart-removed-product',
+    CartLoad: 'cart-load',
+    CartLoaded: 'cart-loaded',
 };
 
 export default Events;
