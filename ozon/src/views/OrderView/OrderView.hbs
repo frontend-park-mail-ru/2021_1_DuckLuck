@@ -1,0 +1,21 @@
+<div class="products-list-block" id="products-list-block">
+    <div class="cart-list-body">
+        {{#each productsList}}
+            <span>NAME = {{this.title}}</span>
+            <span>BASE_COST = {{this.price.base_cost}}</span>
+            <span>DISCOUNT = {{this.price.discount}}</span>
+            <span>COUNT = {{this.count}}</span>
+            <br>
+        {{/each}}
+        <div>BASE COST = {{this.price.total_base_cost}}</div>
+        <div>COST WITH DISCOUNT = {{this.price.total_cost}}</div>
+        <div>TOTAL DISCOUNT = {{this.price.total_discount}}</div>
+    </div>
+    <form class="order__form" id="form">
+        {{#each this.inputFields}}
+            <div class="order__form__input_description">{{this.placeholder}}</div>
+            <input class="order__form__input_line" type="{{this.type}}" name="{{this.name}}" value={{this.value}}>
+        {{/each}}
+        <button type="submit" class="button_send_order">Send order</button>
+    </form>
+</div>
