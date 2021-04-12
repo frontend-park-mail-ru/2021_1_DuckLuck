@@ -33,7 +33,5 @@ export class OrderView extends BaseView {
             evt.preventDefault();
             this.bus.emit(Events.SendOrder);
         });
-
-        this.renderData();
     };
 }
