@@ -16,6 +16,7 @@ class ProductsPresenter extends BasePresenter {
         super(application, View, Model);
         Bus.globalBus.on(Events.ProductsChangeCategory, this.changeCategory);
         this.bus.on(Events.ProductsLoad, this.loadProducts);
+        Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
         this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
     }
 
@@ -35,8 +36,23 @@ class ProductsPresenter extends BasePresenter {
         return this.model.paginationInfo;
     }
 
+
     /**
-     * @param {Number} category
+     * @return {Number}
+     */
+    get categoryId() {
+        return this.model.categoryId;
+    }
+
+    /**
+     *
+     * @param {Number} id
+     */
+    changeCategoryId = (id) => {
+        this.model.categoryId = id;
+    }
+
+    /**
      * @param {Number} page
      */
     loadProducts = (category, page) => {

@@ -10,6 +10,7 @@ import Responses from '../utils/bus/responses';
 class ProductsModel extends BaseModel {
     #products
     #paginationInfo
+    #categoryId
 
     /**
      *
@@ -25,6 +26,21 @@ class ProductsModel extends BaseModel {
      */
     get paginationInfo() {
         return this.#paginationInfo;
+    }
+
+    /**
+     * @return {Number}
+     */
+    get categoryId() {
+        return this.#categoryId;
+    }
+
+    /**
+     *
+     * @param {Number} id
+     */
+    set categoryId(id) {
+        this.#categoryId = id;
     }
 
     /**

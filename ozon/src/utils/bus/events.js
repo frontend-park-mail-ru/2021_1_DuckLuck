@@ -27,6 +27,11 @@ const Events = {
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
+
+    HeaderLoad: 'product-load',
+    HeaderLoaded: 'product-loaded',
+    HeaderChangeCatalogID: 'header-change-catalog-id',
+    HeaderChangeCategoryID: 'header-change-category-id',
 };
 
 export default Events;

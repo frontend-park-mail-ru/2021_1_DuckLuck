@@ -1,3 +1,5 @@
+@import "../../../constants.css";
+
 .img_avatar {
     object-fit: contain;
     width: 184px;
@@ -20,4 +22,18 @@
     width: 299px;
     height: 272px;
     border-radius: 5px;
+}
+
+.menuImgS {
+    height: var(--img-size-s);
+    width: var(--img-size-s);
+}
+
+.menuImgL {
+    height: var(--img-size-l);
+    width: var(--img-size-l);
+}
+
+.invertColor {
+    filter: invert();
 }

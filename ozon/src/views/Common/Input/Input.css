@@ -1,3 +1,5 @@
+@import "../../../constants.css";
+
 .form-body__input-block {
     width: 383px;
     height: 50px;
@@ -18,4 +20,17 @@
 
 .form-body__input-block:focus {
     border: 2px solid #0080FF;
+}
+
+.search {
+    flex: 1;
+    height: 100%;
+    border: none;
+    padding: 0 0 0 8px;
+    color: var(--dark-color);
+    font-size: var(--standart-font-size);
+    outline: none;
+    background: transparent;
+    width: calc(100% - .5px);
+    font-family: var(--font);
 }
