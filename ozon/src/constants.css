@@ -1,0 +1,45 @@
+@font-face {
+    font-family: "GTEestiPro";
+    font-weight: 700;
+    src: url("https://cdn1.ozone.ru/graphics/test/fonts/GT-Eesti-Pro-Display-Bold.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "GTEestiPro";
+    src: url("https://cdn1.ozone.ru/graphics/test/fonts/GT-Eesti-Pro-Text-Book.woff2") format("woff2");
+}
+
+:root {
+    --font: GTEestiPro, arial, sans-serif;
+    --bold-font: 700;
+
+    --lower-font-size: 14px;
+    --standart-font-size: 16px;
+
+    --standart-line-height: 25px;
+
+    --max-width: 1472px;
+
+    --colored-object-color: #005bff;
+    --neutral-color: #4d5f71;
+    --light-color: #f2f3f5;
+    --dark-color: #001a34;
+
+    --button-content-gap: 5px;
+
+    --standart-border-radius: 3px;
+    --standart-border: 2px solid var(--colored-object-color);
+
+    --margin-xxs: 2px;
+    --margin-s: 5px;
+    --margin-m: 12px;
+    --margin-l: 16px;
+    --margin-xl: 24px;
+    --margin-xxl: 40px;
+
+    --columns-gap: 24px;
+
+    --img-size-s: 16px;
+    --img-size-l: 24px;
+
+}

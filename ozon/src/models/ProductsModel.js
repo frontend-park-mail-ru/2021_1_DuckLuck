@@ -10,6 +10,7 @@ import Responses from '../utils/bus/responses';
 class ProductsModel extends BaseModel {
     #products
     #paginationInfo
+    #categoryId
 
     /**
      *
@@ -29,6 +30,22 @@ class ProductsModel extends BaseModel {
 
     /**
      *
+     * @return {Number}
+     */
+    get categoryId() {
+        return this.#categoryId;
+    }
+
+    /**
+     *
+     * @param {Number} id
+     */
+    set categoryId(id) {
+        this.#categoryId = id;
+    }
+
+    /**
+     *
      * @param {Number|String} currentPage
      * @param {Object} body Body of request
      */
@@ -37,7 +54,7 @@ class ProductsModel extends BaseModel {
         count: 4,
         sort_key: 'cost',
         sort_direction: 'ASC',
-        category: 1,
+        category: this.categoryId,
     }) {
         AjaxModule.postUsingFetch({
             url: serverApiPath + '/product',
