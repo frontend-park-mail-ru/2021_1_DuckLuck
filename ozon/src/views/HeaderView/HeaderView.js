@@ -3,6 +3,7 @@ import headerStyles from './HeaderView.css';
 import buttonStyles from '../Common/Button/Button.css';
 import imgStyles from '../Common/Img/Img.css';
 import inputStyles from '../Common/Input/Input.css';
+import decorators from '../decorators.css';
 import headerTemplate from './HeaderView.hbs';
 import {staticServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
@@ -84,9 +85,11 @@ export class HeaderView extends BaseView {
             imgStyles: imgStyles,
             inputStyles: inputStyles,
             buttonStyles: buttonStyles,
+            decorators: decorators,
         });
 
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('header');
+        this.cache = new DOMParser().parseFromString(template, 'text/html')
+            .getElementsByClassName(headerStyles.main)[0];
 
         const logoButton = this.cache.getElementsByClassName(headerStyles.logoBlock)[0];
         logoButton.addEventListener('click', () => {
@@ -114,14 +117,14 @@ export class HeaderView extends BaseView {
         const catalogList = this.cache.getElementsByClassName(headerStyles.catalogList)[0];
         catalogBlock.addEventListener('click', () => {
             const images = Array.from(catalogBlock.getElementsByClassName(imgStyles.menuImgL));
-            if (images[0].classList.contains(headerStyles.hidden)) {
-                images[0].classList.remove(headerStyles.hidden);
-                images[1].classList.add(headerStyles.hidden);
-                catalogList.classList.add(headerStyles.hidden);
+            if (images[0].classList.contains(decorators.hidden)) {
+                images[0].classList.remove(decorators.hidden);
+                images[1].classList.add(decorators.hidden);
+                catalogList.classList.add(decorators.hidden);
             } else {
-                images[1].classList.remove(headerStyles.hidden);
-                images[0].classList.add(headerStyles.hidden);
-                catalogList.classList.remove(headerStyles.hidden);
+                images[1].classList.remove(decorators.hidden);
+                images[0].classList.add(decorators.hidden);
+                catalogList.classList.remove(decorators.hidden);
             }
         });
 
@@ -132,8 +135,8 @@ export class HeaderView extends BaseView {
         Array.from(catalogListCategories).forEach((category, i) => {
             category.addEventListener('mouseover', () => {
                 if (i !== this.presenter.currentCategoryIndex) {
-                    catalogListSubcategories[i].classList.remove(headerStyles.hidden);
-                    catalogListSubcategories[this.presenter.currentCategoryIndex].classList.add(headerStyles.hidden);
+                    catalogListSubcategories[i].classList.remove(decorators.hidden);
+                    catalogListSubcategories[this.presenter.currentCategoryIndex].classList.add(decorators.hidden);
                     this.presenter.currentCategoryIndex = i;
                 }
             });

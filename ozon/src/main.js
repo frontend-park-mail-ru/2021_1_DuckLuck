@@ -4,6 +4,7 @@ import {SignupView} from './views/SignupView/SignupView.js';
 import {HomeView} from './views/HomeView/HomeView.js';
 import {ProductView} from './views/ProductView/ProductView.js';
 import {ProductsView} from './views/ProductsView/ProductsView';
+import {HeaderView} from './views/HeaderView/HeaderView';
 import ProfilePresenter from './presenters/ProfilePresenter';
 import Router from './utils/router/Router.js';
 import SignupModel from './models/SignupModel';
@@ -15,6 +16,12 @@ import ProductsModel from './models/ProductsModel';
 import ProductsPresenter from './presenters/ProductsPresenter';
 import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
+import HeaderModel from './models/HeaderModel';
+import HeaderPresenter from './presenters/HeaderPresenter';
+
+const header = document.getElementsByTagName('header')[0];
+const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
+headerPresenter.view.show();
 
 const application = document.getElementById('app');
 
