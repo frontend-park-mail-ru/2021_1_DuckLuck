@@ -1,26 +1,28 @@
 <div class="{{productStyles.block}}">
-    <div class="{{productStyles.wrapper}}">
-        <div class="{{productStyles.categoriesBlock}}">
-            {{#each category}}
-                <span class="{{../productStyles.category}}">{{this.name}}</span>
-                <span> ></span>
-            {{/each}}
+    <div class="{{productStyles.categoriesBlock}}">
+        {{#each category}}
+            <span class="{{../productStyles.category}}">{{this.name}}</span>
+            <span> ></span>
+        {{/each}}
+    </div>
+    <div class="{{productStyles.badges}}">
+        <div class="{{productStyles.discountBadge}}" {{#ifEquals price.discount 0}} style="visibility: hidden;"{{/ifEquals}}>
+            <span class="{{productStyles.discountText}}">-{{productStyles.discount}}%</span>
         </div>
+    </div>
+    <div class="{{productStyles.name}}">{{name}}</div>
+    <div class="{{productStyles.rating}}">
+        {{#for 0 rating 1}}
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="">
+        {{/for}}
+        {{#for rating 5 1}}
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="">
+        {{/for}}
+    </div>
+    <div class="{{productStyles.wrapperWrapper}}">
+    <div class="{{productStyles.wrapper}}">
         <div class="{{productStyles.mainInformation}}">
-            <div class="{{productStyles.badges}}">
-                <div class="{{productStyles.discountBadge}}" {{#ifEquals price.discount 0}} style="visibility: hidden;"{{/ifEquals}}>
-                    <span class="{{productStyles.discountText}}">-{{productStyles.discount}}%</span>
-                </div>
-            </div>
-            <div class="{{productStyles.name}}">{{name}}</div>
-            <div class="{{productStyles.rating}}">
-                {{#for 0 rating 1}}
-                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="">
-                {{/for}}
-                {{#for rating 5 1}}
-                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="">
-                {{/for}}
-            </div>
+
             <div class="{{productStyles.imagesBlock}}">
                 <div class="{{productStyles.images}}">
                     <div class="{{productStyles.imageWrapper}}">
@@ -45,7 +47,7 @@
             </div>
         </div>
         <div class="{{productStyles.description}}">
-            <span class="{{productStyles.Title}}">Описание</span>
+            <span class="{{productStyles.title}}">Описание</span>
             <span class="{{productStyles.descriptionText}}">{{description}}</span>
         </div>
         <div class="{{productStyles.specifications}}"></div>
@@ -63,5 +65,6 @@
                 </button>
             </div>
         </div>
+    </div>
     </div>
 </div>

@@ -8,9 +8,8 @@
     width: 100%;
     box-sizing: border-box;
     font-family: var(--font);
-    align-items: center;
     justify-content: space-between;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .wrapper {
@@ -106,4 +105,35 @@
 .menu {
     display: flex;
     flex-direction: column;
+}
+
+.buyMenu {
+    border: 1px solid;
+    border-color: var(--neutral-light-color);
+    border-radius: var(--standart-border-radius);
+    width: 350px;
+    height: 285px;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-family: var(--font);
+    font-size: var(--font-size-xl);
+    font-weight: var(--bold-font);
+}
+
+.descriptionText {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+}
+
+.wrapperWrapper {
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid;
+    border-color: var(--neutral-light-color);
 }
