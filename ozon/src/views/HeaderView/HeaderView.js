@@ -99,7 +99,7 @@ export class HeaderView extends BaseView {
         this.cache.addEventListener('click', (evt) => {
             if (evt.target.hasAttribute('category')) {
                 const categoryId = parseInt(evt.target.getAttribute('category'));
-                Bus.globalBus.emit(Events.HeaderChangeCategoryID, categoryId);
+                // Bus.globalBus.emit(Events.HeaderChangeCategoryID, categoryId);
                 Router.open('/items', {id: categoryId});
             }
         });

@@ -85,10 +85,12 @@ class Router {
 
         const {view} = route;
 
+        view.ID = 1;
         if (params.id !== undefined && params.id !== '') {
             view.ID = params.id;
         }
 
+        view.subId = 1;
         if (params.subId !== undefined && params.subId !== '') {
             view.subId = params.subId;
         }
