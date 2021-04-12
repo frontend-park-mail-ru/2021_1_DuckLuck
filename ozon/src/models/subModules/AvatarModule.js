@@ -15,6 +15,11 @@ class AvatarModule extends BaseModel {
      * @param {string} URL New URL for avatar
      */
     set avatarURL(URL) {
+        if (URL === '') {
+            this.#avatarURL = fileServerHost + urls.defaultAvatar;
+            return;
+        }
+
         this.#avatarURL= URL;
     }
 
@@ -32,11 +37,11 @@ class AvatarModule extends BaseModel {
         }).then((response) => {
             return response.json();
         }).then((response) => {
-            this.#saveAndEmit(response.result);
+            this.#saveAndEmit(response.url.String);
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
-        return '';
+        return fileServerHost + urls.defaultAvatar;
     }
 
     /**
@@ -57,7 +62,7 @@ class AvatarModule extends BaseModel {
             }).then((response) => {
                 return response.json();
             }).then((response) => {
-                this.#saveAndEmit(response.result);
+                this.#saveAndEmit(response.url.String);
             });
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
@@ -71,6 +76,13 @@ class AvatarModule extends BaseModel {
     #saveAndEmit = (url) => {
         this.avatarURL = fileServerHost + url;
         this.bus.emit(Events.ProfileAvatarResult, Responses.Success);
+    }
+
+    /**
+     * @description Clears all saved data in model
+     */
+    clear() {
+        this.#avatarURL = undefined;
     }
 }
 

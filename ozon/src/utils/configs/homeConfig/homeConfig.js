@@ -26,7 +26,13 @@ const config = [
     {
         href: '/items',
         name: 'Продукты',
-        dataSection: 'me',
+        dataSection: 'items',
+    },
+
+    {
+        href: '/cart',
+        name: 'Корзина',
+        dataSection: 'cart',
     },
 ];
 

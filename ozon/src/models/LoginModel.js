@@ -3,6 +3,7 @@ import {serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import HTTPResponses from '../utils/http-responses/httpResponses';
 
 /**
  * @description Model for Log in User in MVP Arch
@@ -18,9 +19,7 @@ class LoginModel extends BaseModel {
             url: serverApiPath + urls.loginUrl,
             body: {email, password},
         }).then((response) => {
-            return response.json();
-        }).then((response) => {
-            if (response.result === Responses.Success) {
+            if (response.status === HTTPResponses.Success) {
                 this.bus.emit(Events.LoginEmitResult, Responses.Success);
             } else {
                 this.bus.emit(Events.LoginEmitResult, Responses.Error);

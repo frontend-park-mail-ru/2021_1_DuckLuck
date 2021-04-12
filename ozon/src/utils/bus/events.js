@@ -8,6 +8,7 @@ const Events = {
     SignupEmitResult: 'signup-emit-result',
     SignupIncorrectForm: 'signup-incorrect-form',
 
+    ProfileNewUserLoggedIn: 'profile-new-user-logged-in',
     ProfileFLNameChange: 'profile-flname-change',
     ProfileFLNameResult: 'profile-flname-result',
     ProfileIncorrectFLName: 'profile-incorrect-flname',
@@ -16,6 +17,8 @@ const Events = {
     ProfileIncorrectAvatar: 'profile-incorrect-avatar',
     ProfileEmailResult: 'profile-email-result',
     ProfileCheckAuthResult: 'profile-check-auth-result',
+    ProfileAllResult: 'profile-all-result',
+    ProfileAllGet: 'profile-all-get',
 
     ProductsLoad: 'products-load',
     ProductsLoaded: 'products-loaded',
@@ -24,10 +27,17 @@ const Events = {
     ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
 
+
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',
     HeaderChangeCatalogID: 'header-change-catalog-id',
     HeaderChangeCategoryID: 'header-change-category-id',
+
+    CartAddProduct: 'cart-add-product',
+    CartRemoveProduct: 'cart-remove-product',
+    CartProductRemoved: 'cart-removed-product',
+    CartLoad: 'cart-load',
+    CartLoaded: 'cart-loaded',
 };
 
 export default Events;
