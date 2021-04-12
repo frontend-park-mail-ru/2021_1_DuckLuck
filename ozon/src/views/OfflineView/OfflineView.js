@@ -4,9 +4,9 @@ import {Blind} from '../Common/Blind/Blind.js';
 import Router from '../../utils/router/Router.js';
 
 /**
- * @class  SignupView
+ * @class  OfflineView
  * @extends BaseView
- * @classdesc Class for signup page
+ * @classdesc Class for offline view (when user doesn't have internet connection)
  */
 export class OfflineView extends BaseView {
     /**

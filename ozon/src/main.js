@@ -23,9 +23,6 @@ if ('serviceWorker' in navigator) {
     runtime.register();
 }
 
-window.addEventListener('online', () => console.warn('came online'));
-window.addEventListener('offline', () => console.warn('came offline'));
-
 const application = document.getElementById('app');
 
 Router.root = application;
