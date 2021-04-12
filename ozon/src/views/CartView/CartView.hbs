@@ -1,0 +1,12 @@
+<div class="products-list-block" id="products-list-block">
+    <div class="cart-list-body">
+        {{#each productsList}}
+            <span>NAME = {{this.title}}</span>
+            <span>BASE_COST = {{this.price.base_cost}}</span>
+            <span>DISCOUNT = {{this.price.discount}}</span>
+            <span>COUNT = {{this.count}}</span>
+            <button class="cart-list-body-remove-product" id={{this.id}}>X</button>
+            <br>
+        {{/each}}
+    </div>
+</div>

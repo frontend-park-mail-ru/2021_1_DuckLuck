@@ -4,6 +4,7 @@ import {SignupView} from './views/SignupView/SignupView.js';
 import {HomeView} from './views/HomeView/HomeView.js';
 import {ProductView} from './views/ProductView/ProductView.js';
 import {ProductsView} from './views/ProductsView/ProductsView';
+import {HeaderView} from './views/HeaderView/HeaderView';
 import ProfilePresenter from './presenters/ProfilePresenter';
 import Router from './utils/router/Router.js';
 import SignupModel from './models/SignupModel';
@@ -15,13 +16,23 @@ import ProductsModel from './models/ProductsModel';
 import ProductsPresenter from './presenters/ProductsPresenter';
 import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
-import runtime from 'serviceworker-webpack-plugin/lib/runtime';
-import './styles.css';
+// import runtime from 'serviceworker-webpack-plugin/lib/runtime';
+// import './styles.css';
 import {OfflineView} from './views/OfflineView/OfflineView';
 
-if ('serviceWorker' in navigator) {
-    runtime.register();
-}
+// if ('serviceWorker' in navigator) {
+//     runtime.register();
+// }
+
+import CartPresenter from './presenters/CartPresenter';
+import {CartView} from './views/CartView/CartView';
+import CartModel from './models/CartModel';
+import HeaderModel from './models/HeaderModel';
+import HeaderPresenter from './presenters/HeaderPresenter';
+
+const header = document.getElementsByTagName('header')[0];
+const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
+headerPresenter.view.show();
 
 const application = document.getElementById('app');
 
@@ -35,6 +46,7 @@ const loginPresenter = new LoginPresenter(application, LoginView, LoginModel);
 const profilePresenter = new ProfilePresenter(application, ProfileView, ProfileModel);
 const productsPresenter = new ProductsPresenter(application, ProductsView, ProductsModel);
 const productPresenter = new ProductPresenter(application, ProductView, ProductModel);
+const cartPresenter = new CartPresenter(application, CartView, CartModel);
 
 Router
     .register('/', homeView)
@@ -43,6 +55,7 @@ Router
     .register('/profile', profilePresenter.view)
     .register('/items', productsPresenter.view)
     .register('/item', productPresenter.view)
-    .register('/offline', offlineView);
+    .register('/offline', offlineView)
+    .register('/cart', cartPresenter.view);
 
 Router.start();

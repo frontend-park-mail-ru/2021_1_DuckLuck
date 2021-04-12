@@ -1,10 +1,11 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
+//const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 module.exports = {
-    entry: ["regenerator-runtime/runtime.js", "./ozon/src/main.js"],
+    entry: {app:  './ozon/src/main.js',
+            'service-worker': "./ozon/src/sw.js"},
     mode: "development",
     output: {
         filename: "bundle.js",
@@ -38,14 +39,41 @@ module.exports = {
                     ],
                 }
             }
-        }
+        },
+        {
+            test: /\.css$/,
+            use: [
+                'style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        modules: true,
+                    }
+                },
+                {
+                    loader: "postcss-loader",
+                    options: {
+                        postcssOptions: {
+                            plugins: [
+                                [
+                                    "postcss-preset-env",
+                                    {
+                                        // Options
+                                    },
+                                ],
+                            ],
+                        },
+                    },
+                },
+            ],
+        },
         ],
     },
     plugins: [
         new MiniCssExtractPlugin({filename: 'bundle.css'}),
         new HtmlWebpackPlugin({inject: true, template: path.join(__dirname, '/ozon/src/index.html')}),
-        new ServiceWorkerWebpackPlugin({
-            entry: path.join(__dirname, '/ozon/src/sw.js'),
-        }),
+        // new ServiceWorkerWebpackPlugin({
+        //     entry: path.join(__dirname, '/ozon/src/sw.js'),
+        // }),
     ],
 }
