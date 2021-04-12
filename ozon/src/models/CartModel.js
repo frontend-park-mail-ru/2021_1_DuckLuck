@@ -45,12 +45,23 @@ class CartModel extends BaseModel {
                 count: +count,
             },
         }).then((response) => {
+            if (response.status !== Responses.Success) {
+                throw response.status;
+            }
             return response.json();
         }).then((parsedJson) => {
             this.#needsRerender = true;
             this.#ids.push(id);
         }).catch((err) => {
-            console.error(err);
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.CartUserUnauthorized);
+                break;
+            }
+            default: {
+                break;
+            }
+            }
         });
     }
 
@@ -81,8 +92,7 @@ class CartModel extends BaseModel {
             body: {product_id: +id},
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
-                Bus.globalBus.emit(Events.CartProductRemoved, Responses.Error);
-                return;
+                throw response.status;
             }
             this.#needsRerender = true;
             if (this.#ids.indexOf(id) !== -1) {
@@ -101,6 +111,9 @@ class CartModel extends BaseModel {
         AjaxModule.getUsingFetch({
             url: serverApiPath + urls.cart,
         }).then((response) => {
+            if (response.status !== Responses.Success) {
+                throw response.status;
+            }
             return response.json();
         }).then((parsedJson) => {
             this.#needsRerender = false;
