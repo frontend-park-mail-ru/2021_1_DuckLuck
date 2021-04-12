@@ -1,0 +1,16 @@
+@import '../../constants.css';
+
+.block {
+    width: var(--max-width);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+
+.body {
+    display: flex;
+}
+
+.listWrapper {
+    margin: auto;
+}

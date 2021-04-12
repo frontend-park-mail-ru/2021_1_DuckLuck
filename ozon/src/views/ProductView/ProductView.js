@@ -4,6 +4,7 @@ import {Rating} from '../Common/Rating/Rating.js';
 import productPageTemplate from './ProductView.hbs';
 import {fileServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
+import productStyles from './ProductView.css';
 
 /**
  * @class ProductView
@@ -29,14 +30,13 @@ export class ProductView extends BaseView {
         const template = productPageTemplate({
             name: this.presenter.item['name'],
             price: this.presenter.item['price'],
-            rating: new Rating().getHtmlString({
-                ratingObject: 'item',
-                ratingValue: this.presenter.item['rating'],
-            }),
+            rating: this.presenter.item['rating'],
             images: images,
-            description: this.presenter.item['description'],
+            description: this.presenter.item['description']['descriptionText'],
+            category: this.presenter.item['description']['category'],
+            productStyles: productStyles,
         });
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('item-page-container');
+        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementsByClassName(productStyles.block)[0];
         this.parent.appendChild(this.cache);
     }
 }

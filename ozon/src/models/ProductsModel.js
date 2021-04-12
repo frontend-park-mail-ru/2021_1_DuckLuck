@@ -51,7 +51,7 @@ class ProductsModel extends BaseModel {
      */
     loadProducts(currentPage, body = {
         page_num: parseInt(currentPage),
-        count: 4,
+        count: 3,
         sort_key: 'cost',
         sort_direction: 'ASC',
         category: this.categoryId,

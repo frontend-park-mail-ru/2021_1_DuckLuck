@@ -1,100 +1,58 @@
-@import '../Common/Rating/Rating.css';
+@import '../../constants.css';
 
-.item-page-container {
-    width: 930px;
-    height: 620px;
-    display: flex;
-}
-
-.item-images-block {
-    display: flex;
-    flex-direction: column;
-    width: 45%;
-}
-
-.main-item-image-block__image {
-    margin-left: 10px;
-    margin-top: 10px;
-}
-
-.common-item-images-block {
-    display: flex;
-    flex-direction: row;
-}
-
-.common-item-image-block__image {
-    margin-left: 10px;
-    margin-top: 10px;
-    border: 2px solid;
-    border-color: rgb(204, 219, 228);
-}
-
-.item-information-block {
-    width: 55%;
+.block {
     display: flex;
     flex-direction: column;
 }
 
-.item-information-block .rating {
-    margin-left: 0;
+.categoriesBlock {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }
 
-.item-description-block {
+.category {
+    font-family: var(--font);
+    font-size: var(--lower-font-size);
+    color: var(--colored-object-color);
+}
+
+.mainInformation {
     display: flex;
     flex-direction: column;
 }
 
-.description-row {
+.name {
+    font-family: var(--font);
+    font-size: var(--large-font-size);
+    font-weight: var(--bold-font);
+}
+
+.discountBlock {
+    border-radius: 3px;
+}
+
+.discountBadge {
+    height: var(--height-s);
+    width: var(--width-m);
+    background: var(--discout-color);
+    border-radius: var(--lower-border-radius);
     display: flex;
-    flex-direction: row;
 }
 
-.description-row__span {
-    margin-right: 10px;
-    margin-bottom: 10px;
-}
-
-.purchase-block {
-    display: flex;
-    flex-direction: row;
-}
-
-.item-count-block {
-    width: 120px;
-    height: 50px;
-    display: flex;
-    background: #F6F7F8;
-}
-
-.description-row__span {
-    width: 20%;
-}
-
-.item-count-block * {
+.discountText {
+    font-family: var(--font);
+    font-size: var(--lower-font-size);
+    color: var(--light-color);
     margin: auto;
 }
 
-.item-information-block__item-name {
-    height: 55px;
-    margin-top: 10px;
-    font-family: Poppins;
-    font-size: 24px;
-}
-
-.item-price-block {
-    width: 40%;
-    margin-bottom: 10px;
+.images {
     display: flex;
+    flex-direction: column;
 }
 
-.item-description-block {
-    height: 45%;
-    margin-top: 10px;
-    font-family: Poppins;
-    font-size: 14px;
-}
-
-.purchase-block .button_add-to-cart {
-    margin-left: 100px;
-    margin-right: 17px;
+.imageWrapper {
+    width: var(--img-size-xl);
+    height: var(--img-size-xl);
 }

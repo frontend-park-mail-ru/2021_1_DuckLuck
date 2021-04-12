@@ -15,6 +15,7 @@
 
     --lower-font-size: 14px;
     --standart-font-size: 16px;
+    --large-font-size: 24px;
 
     --standart-line-height: 25px;
 
@@ -43,6 +44,7 @@
 
     --img-size-s: 16px;
     --img-size-l: 24px;
+    --img-size-xl: 62px;
     --img-size-xxl: 250px;
 
     --height-s: 24px;

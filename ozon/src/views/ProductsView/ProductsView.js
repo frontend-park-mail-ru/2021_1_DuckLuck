@@ -2,6 +2,7 @@ import {BaseView} from '../BaseView.js';
 import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
+import productsStyles from './ProductsView.css';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
@@ -28,8 +29,10 @@ export class ProductsView extends BaseView {
         const template = productsPageTemplate({
             productsList: productsListHtmlString,
             pagination: pagination,
+            productsStyles: productsStyles,
         });
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
+        this.cache = new DOMParser().parseFromString(template, 'text/html')
+            .getElementsByClassName(productsStyles.block)[0];
 
         for (const button of this.cache.getElementsByClassName('button_pagination')) {
             button.addEventListener('click', () => {
