@@ -25,15 +25,10 @@
 }
 
 .menuImgS {
-    height: var(--img-size-s);
-    width: var(--img-size-s);
+    size: var(--img-size-s);
 }
 
 .menuImgL {
-    height: var(--img-size-l);
-    width: var(--img-size-l);
+    size: var(--img-size-l);
 }
 
-.invertColor {
-    filter: invert();
-}
