@@ -3,6 +3,7 @@ import {serverApiPath, urls} from '../../utils/urls/urls';
 import BaseModel from '../BaseModel';
 import Events from '../../utils/bus/events';
 import Responses from '../../utils/bus/responses';
+import HTTPResponses from '../../utils/http-responses/httpResponses';
 
 /**
  * @description Model for Checking for Users Authorization in MVP Arch
@@ -16,9 +17,7 @@ class CheckAuthModule extends BaseModel {
             url: serverApiPath + urls.profileUrl,
             body: null,
         }).then((response) => {
-            return response.json();
-        }).then((response) => {
-            if (response.error === 'user is unauthorized') {
+            if (response.status !== HTTPResponses.Success) {
                 this.bus.emit(Events.ProfileCheckAuthResult, Responses.Error);
                 return;
             }

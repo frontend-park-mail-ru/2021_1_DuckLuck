@@ -50,7 +50,7 @@ export class ProfileView extends BaseView {
             this.bus.emit(Events.ProfileAvatarChange);
         });
 
-        this.renderData();
+        this.bus.emit(Events.ProfileAllGet);
     }
 
 

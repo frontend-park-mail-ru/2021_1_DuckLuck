@@ -17,6 +17,13 @@ class BaseModel {
     get bus() {
         return this.#bus;
     }
+
+    /**
+     * @description Clears all saved data in model
+     */
+    clear() {
+
+    }
 }
 
 export default BaseModel;
