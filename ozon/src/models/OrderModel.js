@@ -93,7 +93,6 @@ class OrderModel extends BaseModel {
                 console.error(response);
                 return;
             }
-            console.warn('ORDER SENT!');
         }).catch((err) => {
             console.error(err);
         });

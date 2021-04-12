@@ -36,8 +36,4 @@ export class OrderView extends BaseView {
 
         this.renderData();
     };
-
-    renderData = () => {
-
-    }
 }
