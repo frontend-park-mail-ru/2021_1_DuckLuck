@@ -1,6 +1,5 @@
 import {BaseView} from '../BaseView.js';
 import {Img} from '../Common/Img/Img.js';
-import {Rating} from '../Common/Rating/Rating.js';
 import productPageTemplate from './ProductView.hbs';
 import {fileServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
@@ -40,7 +39,8 @@ export class ProductView extends BaseView {
             productStyles: productStyles,
 
         });
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementsByClassName(productStyles.block)[0];
+        this.cache = new DOMParser().parseFromString(template, 'text/html')
+            .getElementsByClassName(productStyles.block)[0];
         this.parent.appendChild(this.cache);
 
         document.getElementsByClassName('button_inc')[0].addEventListener('click', (evt) => {
