@@ -5,6 +5,7 @@ import {fileServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
 import productStyles from './ProductView.css';
 import {Bus} from '../../utils/bus/bus';
+import imagesStyles from './../Common/Img/Img.css';
 
 
 /**
@@ -37,7 +38,7 @@ export class ProductView extends BaseView {
             description: this.presenter.item['description']['descriptionText'],
             category: this.presenter.item['description']['category'],
             productStyles: productStyles,
-
+            imagesStyles: imagesStyles,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html')
             .getElementsByClassName(productStyles.block)[0];

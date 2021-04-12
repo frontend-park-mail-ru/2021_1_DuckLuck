@@ -41,7 +41,7 @@
     display: inline-flex;
     justify-content: flex-end;
     align-items: center;
-    font-size: var(--lower-font-size);
+    font-size: var(--font-size-s);
 }
 
 .searchBlock {
@@ -69,7 +69,7 @@
 .searchAreaText {
     margin-left: var(--margin-m);
     margin-right: var(--margin-m);
-    font-size: var(--standart-font-size);
+    font-size: var(--font-size-m);
     line-height: var(--standart-line-height);
     overflow: hidden;
     text-overflow: ellipsis;
@@ -143,14 +143,14 @@
     margin-top: var(--margin-s);
     margin-bottom: var(--margin-s);
     font-weight: var(--bold-font);
-    font-size: var(--lower-font-size);
+    font-size: var(--font-size-s);
     cursor: pointer;
 }
 
 .subsubcategory {
     margin-top: var(--margin-s);
     margin-bottom: var(--margin-s);
-    font-size: var(--lower-font-size);
+    font-size: var(--font-size-s);
     cursor: pointer;
 }
 

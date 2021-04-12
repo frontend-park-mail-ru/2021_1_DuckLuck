@@ -2,6 +2,20 @@
 
 .block {
     display: flex;
+    max-width: var(--max-width);
+    padding: 4px 28px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+}
+
+.wrapper {
+    margin: 0 auto;
+    display: flex;
     flex-direction: column;
 }
 
@@ -13,7 +27,7 @@
 
 .category {
     font-family: var(--font);
-    font-size: var(--lower-font-size);
+    font-size: var(--font-size-s);
     color: var(--colored-object-color);
 }
 
@@ -24,7 +38,7 @@
 
 .name {
     font-family: var(--font);
-    font-size: var(--large-font-size);
+    font-size: var(--font-size-xl);
     font-weight: var(--bold-font);
 }
 
@@ -42,17 +56,54 @@
 
 .discountText {
     font-family: var(--font);
-    font-size: var(--lower-font-size);
+    font-size: var(--font-size-s);
     color: var(--light-color);
     margin: auto;
+}
+
+.priceBlock {
+    display: flex;
+    flex-direction: row;
+}
+
+.discountPrice {
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+    color: var(--discout-color);
+    margin-left: var(--margin-s);
+}
+
+.price {
+    font-family: var(--font);
+    font-size: var(--font-size-xl);
+    margin-left: var(--margin-s);
+    position: relative;
 }
 
 .images {
     display: flex;
     flex-direction: column;
+    gap: var(--margin-m);
+}
+
+.imagesBlock {
+    display: flex;
+    flex-direction: row;
 }
 
 .imageWrapper {
     width: var(--img-size-xl);
     height: var(--img-size-xl);
+}
+
+.mainImage {
+    width: var(--img-size-xxxl);
+    height: var(--img-size-xxxl);
+    display: flex;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
 }

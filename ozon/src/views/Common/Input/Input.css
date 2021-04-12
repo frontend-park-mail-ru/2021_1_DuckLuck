@@ -28,7 +28,7 @@
     border: none;
     padding: 0 0 0 8px;
     color: var(--dark-color);
-    font-size: var(--standart-font-size);
+    font-size: var(--font-size-m);
     outline: none;
     background: transparent;
     width: calc(100% - .5px);

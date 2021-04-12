@@ -14,7 +14,7 @@
             <span class="{{itemStyles.discountPrice}}"  {{#ifEquals itemPrice.discount 0}} style="display: none;"{{/ifEquals}}>
                 {{itemPrice.discountPrice}}₽
             </span>
-            <span class="{{itemStyles.price}} {{#ifNotEquals itemPrice.discount 0}}{{itemStyles.strikethrough}}{{/ifNotEquals}}"  {{#ifEquals itemPrice.discount 0}} style="font-size: var(--standart-font-size); font-weight: var(--bold-font)"{{/ifEquals}}>
+            <span class="{{itemStyles.price}} {{#ifNotEquals itemPrice.discount 0}}{{itemStyles.strikethrough}}{{/ifNotEquals}}"  {{#ifEquals itemPrice.discount 0}} style="font-size: var(--font-size-m); font-weight: var(--bold-font)"{{/ifEquals}}>
                 {{itemPrice.base}}₽
             </span>
         </div>

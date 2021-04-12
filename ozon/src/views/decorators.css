@@ -1,7 +1,19 @@
+@import '../constants.css';
+
+
 .hidden {
     display: none;
 }
 
 .invertColor {
     filter: invert();
+}
+
+.strikethrough:before {
+    border-bottom: 2px solid var(--discout-color);
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 50%;
+    transform: rotate(-5deg);
 }
