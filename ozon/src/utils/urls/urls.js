@@ -14,4 +14,6 @@ export const urls = {
     productUrl: '/product',
     defaultAvatar: '/avatar/default.png',
     csrfUrl: '/csrf',
+    cart: '/cart',
+    cartProduct: '/cart/product',
 };
