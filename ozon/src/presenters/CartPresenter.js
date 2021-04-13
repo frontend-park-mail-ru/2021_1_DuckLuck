@@ -91,7 +91,7 @@ class CartPresenter extends BasePresenter {
     }
 
     cartUserUnauthorizedReaction = () => {
-        Router.open('/login');
+        Router.open('/login', {replaceState: true});
     }
 }
 
