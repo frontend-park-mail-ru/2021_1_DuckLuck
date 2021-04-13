@@ -34,19 +34,20 @@ export class LoginView extends BaseView {
                             new Input({
                                 type: 'text',
                                 name: 'email',
-                                placeholder: 'Email address',
+                                placeholder: 'Электронная почта',
                             }),
                             new Input({
                                 type: 'password',
                                 name: 'password',
-                                placeholder: 'Password',
+                                placeholder: 'Пароль',
                             }),
                         ],
-                        forgotPassLink: new Link({
-                            href: 'test',
+                        link: new Link({
+                            href: '/signup',
+                            name: 'Зарегистрироваться',
                         }),
                         submitButton: new Button({
-                            text: 'Log in',
+                            text: 'Войти',
                             type: 'submit',
                         }),
                     },
