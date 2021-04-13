@@ -58,6 +58,7 @@ class Router {
             }
         }
 
+
         if (!route) {
             this.open('/');
             return;
@@ -78,7 +79,12 @@ class Router {
         }
 
         const view = route[1];
-        view.IDs = groups;
+        if (groups) {
+            view.IDs = groups;
+        }
+
+
+        console.log(view);
 
         view.show();
     }
