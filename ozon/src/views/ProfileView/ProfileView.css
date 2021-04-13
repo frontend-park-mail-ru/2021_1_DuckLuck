@@ -74,6 +74,9 @@
     font-family: var(--font);
     font-size: var(--font-size-m);
     color: var(--colored-object-color);
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
 }
 
 .fioWrapper {
@@ -86,4 +89,10 @@
     font-family: var(--font);
     font-size: var(--font-size-s);
     color: var(--discout-color);
+}
+
+.changeText {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--colored-object-color);
 }

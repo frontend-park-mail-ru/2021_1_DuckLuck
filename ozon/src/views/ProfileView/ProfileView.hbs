@@ -11,24 +11,29 @@
         <div class="{{profileStyles.svgWrapper}}">
             <img src="https://duckluckmarket.hb.bizmrg.com/svg/header/smile.svg" alt="" class="{{profileStyles.svg}}">
         </div>
-        <div class="{{profileStyles.info}}">
+        <form class="{{profileStyles.info}}" id="form">
             <span class="{{profileStyles.titleText}}">Учётные данные</span>
             <div class="{{profileStyles.fioWrapper}}">
                 <div class="{{profileStyles.infoElem}}">
                     <span class="{{profileStyles.infoTitle}}">Фамилия</span>
-                    <input class="{{profileStyles.infoText}}" placeholder="Cуворов">
+                    <input type="text" name="lastName"class="{{profileStyles.infoText}}" placeholder="Cуворов">
+                    <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
                 </div>
                 <div class="{{profileStyles.infoElem}}">
                     <span class="{{profileStyles.infoTitle}}">Имя</span>
-                    <input class="{{profileStyles.infoText}}" placeholder="Никита">
+                    <input type="text" name="firstName" class="{{profileStyles.infoText}}" placeholder="Никита">
+                    <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
                 </div>
             </div>
             <div class="{{profileStyles.infoElem}}">
                 <span class="{{profileStyles.infoTitle}}">Почта</span>
-                <input class="{{profileStyles.infoText}}" placeholder="suvnik.2000@mail.ru" disabled>
+                <input type="email" name="email" class="{{profileStyles.infoText}}" placeholder="suvnik.2000@mail.ru" disabled>
             </div>
-            <span class="{{profileStyles.change}}">Изменить</span>
-        </div>
+            <button type="submit" class="{{profileStyles.change}}">
+                <span class="{{profileStyles.changeText}}">Изменить</span>
+            </button>
+
+        </form>
 
     </div>
 </div>
