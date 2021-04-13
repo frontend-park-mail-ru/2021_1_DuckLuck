@@ -83,7 +83,7 @@ export class BaseView {
 
     /**
      *
-     * @param {Array.number} id new id
+     * @param {Object} ids new ids
      */
     set IDs(ids) {
         this.#ids = ids;

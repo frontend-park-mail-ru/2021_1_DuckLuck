@@ -49,7 +49,6 @@ class Router {
     open(path, params = {
         replaceState: false,
     }) {
-        console.log(path);
         let route;
         let groups;
         for (const page of this.#routes) {
@@ -107,8 +106,7 @@ class Router {
             this.open(currentPath);
         });
 
-        let currentPath = window.location.pathname;
-        this.open(currentPath);
+        this.open(window.location.pathname);
     }
 }
 
