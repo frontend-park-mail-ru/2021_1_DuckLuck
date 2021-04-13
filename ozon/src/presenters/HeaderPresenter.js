@@ -74,6 +74,10 @@ class HeaderPresenter extends BasePresenter {
         }
     }
 
+    /**
+     *
+     * @param {string}result
+     */
     updateAuthorizeState = (result) => {
         if (result === Responses.Success) {
             this.model.swapAuthorizeState();
