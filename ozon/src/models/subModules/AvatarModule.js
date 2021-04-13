@@ -16,7 +16,7 @@ class AvatarModule extends BaseModel {
      */
     set avatarURL(URL) {
         if (URL === '') {
-            this.#avatarURL = fileServerHost + urls.defaultAvatar;
+            this.#avatarURL = urls.defaultAvatar;
             return;
         }
 
@@ -37,7 +37,7 @@ class AvatarModule extends BaseModel {
         }).then((response) => {
             return response.json();
         }).then((response) => {
-            this.#saveAndEmit(response.url.String);
+            this.#saveAndEmit(response.url);
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
@@ -62,7 +62,7 @@ class AvatarModule extends BaseModel {
             }).then((response) => {
                 return response.json();
             }).then((response) => {
-                this.#saveAndEmit(response.url.String);
+                this.#saveAndEmit(response.url);
             });
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
@@ -71,10 +71,10 @@ class AvatarModule extends BaseModel {
 
     /**
      *
-     * @param {URL} url url to avatar on file server
+     * @param {string} url url to avatar on file server
      */
     #saveAndEmit = (url) => {
-        this.avatarURL = fileServerHost + url;
+        this.avatarURL = url;
         this.bus.emit(Events.ProfileAvatarResult, Responses.Success);
     }
 

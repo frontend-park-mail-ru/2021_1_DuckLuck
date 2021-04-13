@@ -19,6 +19,9 @@ const Events = {
     ProfileCheckAuthResult: 'profile-check-auth-result',
     ProfileAllResult: 'profile-all-result',
     ProfileAllGet: 'profile-all-get',
+    ProfileLogout: 'profile-logout',
+    ProfileLogoutEmitResult: 'profile-logout-emit-result',
+    ProfileIncorrectLogout: 'profile-logout-incorrect',
 
     ProductsLoad: 'products-load',
     ProductsLoaded: 'products-loaded',

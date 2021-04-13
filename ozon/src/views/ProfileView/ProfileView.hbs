@@ -1,11 +1,14 @@
 <div class="{{profileStyles.block}}" id="profile-page">
     <div class="{{profileStyles.avatarBlock}}">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{profileStyles.avatarWrapper}}">
+        <label>
+            <img id="avatar-img" src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{profileStyles.avatarWrapper}}">
+            <input id="avatar-input" type="file" hidden>
+        </label>
         <div class="{{profileStyles.nameWrapper}}">
-            <span class="{{profileStyles.titleText}}">Никита</span>
-            <span class="{{profileStyles.titleText}}">Суворов</span>
+            <span id="profile-firstName" class="{{profileStyles.titleText}}">Никита</span>
+            <span id="profile-lastName" class="{{profileStyles.titleText}}">Суворов</span>
         </div>
-        <span class="{{profileStyles.exit}}">Выйти</span>
+        <span id="logout" class="{{profileStyles.exit}}">Выйти</span>
     </div>
     <div class="{{profileStyles.informationBlock}}">
         <div class="{{profileStyles.svgWrapper}}">

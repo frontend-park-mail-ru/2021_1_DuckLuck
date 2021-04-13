@@ -7,6 +7,7 @@ import {AjaxModule} from '../modules/Ajax/Ajax';
 import {serverApiPath, urls} from '../utils/urls/urls';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import HTTPResponses from "../utils/http-responses/httpResponses";
 
 /**
  * @description Model for Profile in MVP Arch. THIS IS A FACADE!
@@ -126,6 +127,23 @@ class ProfileModel extends BaseModel {
             this.bus.emit(Events.ProfileAllResult, Responses.Success);
         }).catch(() => {
             this.bus.emit(Events.ProfileAllResult, Responses.Error);
+        });
+    }
+
+    /**
+     * @description logout profile from one AJAX request
+     */
+    profileLogout() {
+        AjaxModule.deleteUsingFetch({
+            url: serverApiPath + urls.logoutUrl,
+        }).then((response) => {
+            if (response.status === HTTPResponses.Success) {
+                this.bus.emit(Events.ProfileLogoutEmitResult, Responses.Success);
+            } else {
+                this.bus.emit(Events.ProfileLogoutEmitResult, Responses.Error);
+            }
+        }).catch(() => {
+            this.bus.emit(Events.ProfileLogoutEmitResult, Responses.Error);
         });
     }
 }

@@ -24,6 +24,7 @@ class ProfilePresenter extends BasePresenter {
         this.bus.on(Events.ProfileCheckAuthResult, this.tryAuthProcessResult);
         this.bus.on(Events.ProfileAllGet, this.getAllData);
         this.bus.on(Events.ProfileAllResult, this.renderAllData);
+        this.bus.on(Events.ProfileLogout, this.profileLogout);
 
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
     }
@@ -34,17 +35,19 @@ class ProfilePresenter extends BasePresenter {
      * @return {boolean}
      */
     isFormValid = (specificTypeToCheck = []) => {
-        return isValidForm(document.getElementsByClassName('profile-credentials__form')[0], specificTypeToCheck);
+        return isValidForm(document.getElementById('form'), specificTypeToCheck);
     }
 
     /**
      * @description Send data to model
      */
     sendFirstLastName = () => {
-        if (!this.isFormValid(['text'])) {
-            this.bus.emit(Events.ProfileIncorrectFLName);
-            return;
-        }
+        // TODO: validator
+        // if (!this.isFormValid(['text'])) {
+        //     this.bus.emit(Events.ProfileIncorrectFLName);
+        //     return;
+        // }
+
         if (!navigator.onLine) {
             Router.open('/offline' );
             return;
@@ -126,13 +129,26 @@ class ProfilePresenter extends BasePresenter {
             Router.open('/offline');
             return;
         }
-        if (!this.isFormValid(['file'])) {
-            this.bus.emit(Events.ProfileIncorrectAvatar);
+        // if (!this.isFormValid(['file'])) {
+        //     this.bus.emit(Events.ProfileIncorrectAvatar);
+        //     return;
+        // }
+
+        const avatarInput = document.getElementById('avatar-input');
+        this.model.changeAvatar(avatarInput.files[0]);
+    }
+
+    /**
+     * @description logout from profile
+     */
+    profileLogout = () => {
+        if (!navigator.onLine) {
+            Router.open('/offline');
             return;
         }
-
-        const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
-        this.model.changeAvatar(avatarInput.files[0]);
+        this.view.remove();
+        Router.open('/', {replaceState: true});
+        this.model.profileLogout();
     }
 
     /**

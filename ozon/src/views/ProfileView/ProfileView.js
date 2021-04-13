@@ -39,18 +39,24 @@ export class ProfileView extends BaseView {
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
         this.parent.appendChild(this.cache);
-        // const form = document.getElementById('form');
-        //
-        // form.addEventListener('submit', (evt) => {
-        //     evt.preventDefault();
-        //     this.bus.emit(Events.ProfileFLNameChange);
-        // });
-        //
-        // const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
-        // avatarInput.addEventListener('change', (evt) => {
-        //     evt.preventDefault();
-        //     this.bus.emit(Events.ProfileAvatarChange);
-        // });
+
+        const form = document.getElementById('form');
+        form.addEventListener('submit', (evt) => {
+            evt.preventDefault();
+            this.bus.emit(Events.ProfileFLNameChange);
+        });
+
+        const avatarInput = document.getElementById('avatar-input');
+        avatarInput.addEventListener('change', (evt) => {
+            evt.preventDefault();
+            this.bus.emit(Events.ProfileAvatarChange);
+        });
+
+        const logout = document.getElementById('logout');
+        logout.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            this.bus.emit(Events.ProfileLogout);
+        });
 
         this.bus.emit(Events.ProfileAllGet);
     }
@@ -62,9 +68,10 @@ export class ProfileView extends BaseView {
      * @param {string} lastName
      */
     changeFirstLastName = (firstName, lastName) => {
-        // document.getElementsByName('firstName')[0].value = firstName;
-        // document.getElementsByName('lastName')[0].value = lastName;
-        // document.getElementsByClassName('profile-info__user_name')[0].innerHTML = firstName + ' ' + lastName;
+        document.getElementsByName('firstName')[0].value = firstName;
+        document.getElementsByName('lastName')[0].value = lastName;
+        document.getElementById('profile-firstName').textContent = firstName;
+        document.getElementById('profile-lastName').textContent = lastName;
     }
 
     /**
@@ -72,7 +79,7 @@ export class ProfileView extends BaseView {
      * @param {string} avatarURL
      */
     changeAvatar = (avatarURL) => {
-        // document.getElementsByClassName('profile-info__user-avatar')[0].src = avatarURL;
+        document.getElementById('avatar-img').src = avatarURL;
     }
 
     /**
@@ -80,15 +87,15 @@ export class ProfileView extends BaseView {
      * @param {string} email
      */
     changeEmail = (email) => {
-        // document.getElementsByName('email')[0].value = email;
+        document.getElementsByName('email')[0].value = email;
     }
 
     /**
      * @description Using for render data after AJAX methods.
      */
     renderData = () => {
-        // this.changeFirstLastName(this.presenter.getFirstName(), this.presenter.getLastName());
-        // this.changeEmail(this.presenter.getEmail());
-        // this.changeAvatar(this.presenter.getAvatar());
+        this.changeFirstLastName(this.presenter.getFirstName(), this.presenter.getLastName());
+        this.changeEmail(this.presenter.getEmail());
+        this.changeAvatar(this.presenter.getAvatar());
     }
 }
