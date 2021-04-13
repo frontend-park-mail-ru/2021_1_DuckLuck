@@ -40,7 +40,7 @@ class ProductModel extends BaseModel {
                 },
                 rating: parsedJson['rating'],
                 description: {
-                    descriptionText: parsedJson['description']['String'],
+                    descriptionText: parsedJson['description'],
                     category: parsedJson['category'],
                 },
                 images: parsedJson['images'],

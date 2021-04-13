@@ -1,33 +1,31 @@
-<div class="profile-page" id="profile-page">
-    <div class="profile-header">
-        <h1 class="profile-header__item">
-            <span class="profile-header__footer-text">Profile</span>
-        </h1>
+<div class="{{profileStyles.block}}" id="profile-page">
+    <div class="{{profileStyles.avatarBlock}}">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{profileStyles.avatarWrapper}}">
+        <span class="{{profileStyles.titleText}}">Никита</span>
+        <span class="{{profileStyles.titleText}}">Суворов</span>
     </div>
-
-    <div class="profile-body">
-        <div class="profile-info">
-            <img class="profile-info__user-avatar img_avatar" src="" alt="Users avatar">
-            <div class="profile-info__user_name"></div>
+    <div class="{{profileStyles.informationBlock}}">
+        <div class="{{profileStyles.svgWrapper}}">
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/header/smile.svg" alt="" class="{{profileStyles.svg}}">
         </div>
-        <div class="profile-credentials">
-            <div class="profile-credentials__text">Credentials</div>
-            <form class="profile-credentials__form" id="form">
-                <div class="profile-credentials__input_description">{{this.avatarUpload.placeholder}}</div>
-                <input class="profile-info__user-avatar-input" type="{{this.avatarUpload.type}}" placeholder="" name="{{this.avatarUpload.name}}">
-                <div class="profile-credentials__input_error" id="{{this.avatarUpload.name}}_error"></div>
-                {{#each this.inputFields}}
-                    <div class="profile-credentials__input_description">{{this.placeholder}}</div>
-                    {{#if this.isDisabled}}
-                        <input disabled class="profile-credentials__input_line" type="{{this.type}}" name="{{this.name}}" value="">
-                    {{else}}
-                        <input class="profile-credentials__input_line" type="{{this.type}}" name="{{this.name}}" value="">
-                    {{/if}}
-                    <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
-                {{/each}}
-
-                <button type="submit" class="button_update">Update</button>
-            </form>
+        <div class="{{profileStyles.info}}">
+            <span class="{{profileStyles.titleText}}">Учётные данные</span>
+            <div class="{{profileStyles.fioWrapper}}">
+                <div class="{{profileStyles.infoElem}}">
+                    <span class="{{profileStyles.infoTitle}}">Фамилия</span>
+                    <input class="{{profileStyles.infoText}}" placeholder="Cуворов">
+                </div>
+                <div class="{{profileStyles.infoElem}}">
+                    <span class="{{profileStyles.infoTitle}}">Имя</span>
+                    <input class="{{profileStyles.infoText}}" placeholder="Никита">
+                </div>
+            </div>
+            <div class="{{profileStyles.infoElem}}">
+                <span class="{{profileStyles.infoTitle}}">Почта</span>
+                <input class="{{profileStyles.infoText}}" placeholder="suvnik.2000@mail.ru" disabled>
+            </div>
+            <span class="{{profileStyles.change}}">Изменить</span>
         </div>
+
     </div>
 </div>

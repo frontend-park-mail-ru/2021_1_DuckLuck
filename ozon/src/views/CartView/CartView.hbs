@@ -1,12 +1,67 @@
 <div class="products-list-block" id="products-list-block">
-    <div class="cart-list-body">
-        {{#each productsList}}
-            <span>NAME = {{this.title}}</span>
-            <span>BASE_COST = {{this.price.base_cost}}</span>
-            <span>DISCOUNT = {{this.price.discount}}</span>
-            <span>COUNT = {{this.count}}</span>
-            <button class="cart-list-body-remove-product" id={{this.id}}>X</button>
-            <br>
-        {{/each}}
+    <div class="{{cartStyles.body}}">
+        <div class="{{cartStyles.title}}">
+            <span class="{{cartStyles.titleText}}"></span>
+        </div>
+        <div class="{{cartStyles.wrapper}}">
+            <div class="{{cartStyles.wrapper}}">
+                <div class="{{cartStyles.cartInfo}}">
+                    <div class="{{cartStyles.selectMenu}}">
+                        <input type="checkbox" name="a" value="Выбрать все">
+                        <span class="{{cartStyles.deleteSelectedText}}">Удалить выбранные</span>
+                    </div>
+                    <div class="{{cartStyles.deliveryBlock}}">
+                        <span class="{{cartStyles.deliveryText}}">Доставка Ozon</span>
+                    </div>
+                    <div class="{{cartStyles.productsListBlock}}">
+                        <div class="{{cartStyles.productsList}}">
+                            <div class="{{cartStyles.productsListElem}}">
+                                <input type="checkbox" name="a" value="">
+                                <div class="{{cartStyles.image}}"></div>
+                                <div class="{{cartStyles.description}}">
+                                    <span class="{{cartStyles.name}}"></span>
+                                    <div class="{{cartStyles.productMenu}}">
+                                        <span class="{{cartStyles.productMenuText}}">В избранное</span>
+                                        <span class="{{cartStyles.productMenuText}}">Удалить</span>
+                                    </div>
+                                </div>
+                                <div class="{{cartStyles.priceBlock}}">
+                                    <div class="{{cartStyles.price}}">
+                                        <span class="{{cartStyles.priceText}}"></span>
+                                    </div>
+                                    <div class="{{cartStyles.priceInfo}}">
+                                        <span class="{{cartStyles.basePrice}}"></span>
+                                        <span class="{{cartStyles.discount}}"></span>
+                                    </div>
+                                </div>
+                                <div class="{{cartStyles.countMenu}}"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="{{cartStyles.orderMenu}}">
+                    <div class="{{cartStyles.orderButtonWrapper}}">
+                        <button class="{{cartStyles.orderButton}}"></button>
+                    </div>
+                    <div class="{{cartStyles.orderInfo}}">
+                        <span class="{{cartStyles.orderInfoTitle}}">Ваша корзина</span>
+                        <div class="{{cartStyles.orderInfoBody}}">
+                            <div class="{{cartStyles.orderInfoRow}}">
+                                <span class="{{cartStyles.orderInfoText}}">Товары ()</span>
+                                <span class="{{cartStyles.orderInfoPrice}}"></span>
+                            </div>
+                            <div class="{{cartStyles.orderInfoRow}}">
+                                <span class="{{cartStyles.orderInfoText}}">Скидка</span>
+                                <span class="{{cartStyles.orderInfoDiscount}}"></span>
+                            </div>
+                            <div class="{{cartStyles.totalPriceBlock}}">
+                                <span class="{{cartStyles.totalPriceText}}">Общая стоимость</span>
+                                <span class="{{cartStyles.totalPriceText}}"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

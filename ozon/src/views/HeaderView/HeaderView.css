@@ -126,7 +126,6 @@
     margin: 0 auto;
     box-sizing: border-box;
     font-family: var(--font);
-    display: flex;
     align-items: center;
     justify-content: space-between;
 }
@@ -170,7 +169,7 @@
 }
 
 .catalogListSubcategories {
-    padding-left: 50px;
+    padding-left: 100px;
     column-count: 4;
     column-gap: var(--columns-gap);
     margin-right: var(--margin-xl);

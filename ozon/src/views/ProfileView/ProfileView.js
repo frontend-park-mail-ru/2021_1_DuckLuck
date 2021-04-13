@@ -1,6 +1,7 @@
 import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
+import profileStyles from './ProfileView.css';
 import Events from '../../utils/bus/events';
 
 /**
@@ -33,22 +34,23 @@ export class ProfileView extends BaseView {
                 new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
                 new Input({type: 'text', name: 'lastName', placeholder: 'Last name'})],
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),
+            profileStyles: profileStyles,
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
         this.parent.appendChild(this.cache);
-        const form = document.getElementById('form');
-
-        form.addEventListener('submit', (evt) => {
-            evt.preventDefault();
-            this.bus.emit(Events.ProfileFLNameChange);
-        });
-
-        const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
-        avatarInput.addEventListener('change', (evt) => {
-            evt.preventDefault();
-            this.bus.emit(Events.ProfileAvatarChange);
-        });
+        // const form = document.getElementById('form');
+        //
+        // form.addEventListener('submit', (evt) => {
+        //     evt.preventDefault();
+        //     this.bus.emit(Events.ProfileFLNameChange);
+        // });
+        //
+        // const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
+        // avatarInput.addEventListener('change', (evt) => {
+        //     evt.preventDefault();
+        //     this.bus.emit(Events.ProfileAvatarChange);
+        // });
 
         this.bus.emit(Events.ProfileAllGet);
     }
@@ -60,9 +62,9 @@ export class ProfileView extends BaseView {
      * @param {string} lastName
      */
     changeFirstLastName = (firstName, lastName) => {
-        document.getElementsByName('firstName')[0].value = firstName;
-        document.getElementsByName('lastName')[0].value = lastName;
-        document.getElementsByClassName('profile-info__user_name')[0].innerHTML = firstName + ' ' + lastName;
+        // document.getElementsByName('firstName')[0].value = firstName;
+        // document.getElementsByName('lastName')[0].value = lastName;
+        // document.getElementsByClassName('profile-info__user_name')[0].innerHTML = firstName + ' ' + lastName;
     }
 
     /**
@@ -70,7 +72,7 @@ export class ProfileView extends BaseView {
      * @param {string} avatarURL
      */
     changeAvatar = (avatarURL) => {
-        document.getElementsByClassName('profile-info__user-avatar')[0].src = avatarURL;
+        // document.getElementsByClassName('profile-info__user-avatar')[0].src = avatarURL;
     }
 
     /**
@@ -78,15 +80,15 @@ export class ProfileView extends BaseView {
      * @param {string} email
      */
     changeEmail = (email) => {
-        document.getElementsByName('email')[0].value = email;
+        // document.getElementsByName('email')[0].value = email;
     }
 
     /**
      * @description Using for render data after AJAX methods.
      */
     renderData = () => {
-        this.changeFirstLastName(this.presenter.getFirstName(), this.presenter.getLastName());
-        this.changeEmail(this.presenter.getEmail());
-        this.changeAvatar(this.presenter.getAvatar());
+        // this.changeFirstLastName(this.presenter.getFirstName(), this.presenter.getLastName());
+        // this.changeEmail(this.presenter.getEmail());
+        // this.changeAvatar(this.presenter.getAvatar());
     }
 }
