@@ -1,5 +1,6 @@
 import {BaseView} from '../BaseView.js';
 import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
+import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.css';
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.css';
@@ -42,9 +43,9 @@ export class ProductsView extends BaseView {
                 Router.open(`/items/${this.IDs['category']}/${page}`, {id: page});
             });
         }
-        for (const itemContainer of this.cache.getElementsByClassName('item-container')) {
+        for (const itemContainer of this.cache.getElementsByClassName(ListOfProductsItemStyles.block)) {
             itemContainer.addEventListener('click', () => {
-                const productID = parseInt(itemContainer.getElementsByClassName('item-id')[0].textContent);
+                const productID = parseInt(itemContainer.getAttribute('item-id'));
                 Bus.globalBus.emit(Events.ProductChangeID, productID);
                 Router.open(`/item/${productID}`);
             });
