@@ -53,7 +53,7 @@
                 <div class="{{../headerStyles.menuItem}}" href="{{this.href}}">
                     {{#with this}}
                         <img src="{{img.src}}" class="{{../imgStyles.menuImgL}}">
-                        <span>{{text}}</span>
+                        <span id="span-text-{{this.name}}">{{text}}</span>
                     {{/with}}
                 </div>
             {{/each}}
