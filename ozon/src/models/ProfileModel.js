@@ -119,7 +119,6 @@ class ProfileModel extends BaseModel {
         }).then((response) => {
             return response.json();
         }).then((response) => {
-            console.log(response);
             this.#fLNameModel.firstName = response.first_name;
             this.#fLNameModel.lastName = response.last_name;
             this.#avatarModel.avatarURL = response.avatar.url;
