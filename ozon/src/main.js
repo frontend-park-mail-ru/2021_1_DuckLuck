@@ -44,13 +44,13 @@ const cartPresenter = new CartPresenter(application, CartView, CartModel);
 const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
 
 Router
-    .register('/', homeView)
-    .register('/signup', signupPresenter.view)
-    .register('/login', loginPresenter.view)
-    .register('/profile', profilePresenter.view)
-    .register('/items', productsPresenter.view)
-    .register('/item', productPresenter.view)
-    .register('/cart', cartPresenter.view)
-    .register('/order', orderPresenter.view);
+    .register(/^\/$/, homeView)
+    .register(/^\/signup$/, signupPresenter.view)
+    .register(/^\/login$/, loginPresenter.view)
+    .register(/^\/profile$/, profilePresenter.view)
+    .register(/^\/item(\/(?<productID>[0-9]*))?$/, productPresenter.view)
+    .register(/^\/items(\/(?<category>[0-9]*)(\/(?<page>[0-9]*))?)?$/, productsPresenter.view)
+    .register(/^\/cart$/, cartPresenter.view)
+    .register(/^\/order$/, orderPresenter.view);
 
 Router.start();

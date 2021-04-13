@@ -14,6 +14,7 @@ class ProductsPresenter extends BasePresenter {
      */
     constructor(application, View, Model) {
         super(application, View, Model);
+        Bus.globalBus.on(Events.ProductsChangeCategory, this.changeCategory);
         this.bus.on(Events.ProductsLoad, this.loadProducts);
         Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
         this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
@@ -35,8 +36,8 @@ class ProductsPresenter extends BasePresenter {
         return this.model.paginationInfo;
     }
 
+
     /**
-     *
      * @return {Number}
      */
     get categoryId() {
@@ -52,11 +53,11 @@ class ProductsPresenter extends BasePresenter {
     }
 
     /**
-     *
+     * @param {Number} category
      * @param {Number} page
      */
-    loadProducts = (page) => {
-        this.model.loadProducts(page);
+    loadProducts = (category, page) => {
+        this.model.loadProducts(category, page);
     }
 
     /**
@@ -70,6 +71,14 @@ class ProductsPresenter extends BasePresenter {
         } else {
             console.error('Cant load products');
         }
+    }
+
+    /**
+     * @param {number} newCategory
+     */
+    changeCategory = (newCategory) => {
+        this.view.ID = newCategory;
+        this.view.subID = 1; // first page of pagination!
     }
 }
 

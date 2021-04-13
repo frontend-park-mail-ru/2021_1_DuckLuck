@@ -13,7 +13,11 @@ import {Bus} from '../../utils/bus/bus';
  */
 export class ProductView extends BaseView {
     show = () => {
-        this.bus.emit(Events.ProductLoad, this.ID);
+        if (!this.IDs['productID']) {
+            this.IDs['productID'] = 1;
+        }
+
+        this.bus.emit(Events.ProductLoad, this.IDs['productID']);
     }
 
     /**
