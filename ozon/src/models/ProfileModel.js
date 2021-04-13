@@ -119,9 +119,9 @@ class ProfileModel extends BaseModel {
         }).then((response) => {
             return response.json();
         }).then((response) => {
-            this.#fLNameModel.firstName = response.first_name.String;
-            this.#fLNameModel.lastName = response.last_name.String;
-            this.#avatarModel.avatarURL = response.avatar.url.String;
+            this.#fLNameModel.firstName = response.first_name;
+            this.#fLNameModel.lastName = response.last_name;
+            this.#avatarModel.avatarURL = response.avatar.url;
             this.#emailModel.email = response.email;
             this.bus.emit(Events.ProfileAllResult, Responses.Success);
         }).catch(() => {
