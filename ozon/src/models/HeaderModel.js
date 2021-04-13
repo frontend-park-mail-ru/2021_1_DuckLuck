@@ -4,7 +4,7 @@ import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import {Bus} from '../utils/bus/bus.js';
-import HTTPResponses from "../utils/http-responses/httpResponses";
+import HTTPResponses from '../utils/http-responses/httpResponses';
 
 /**
  * @description Model for Header in MVP Arch
