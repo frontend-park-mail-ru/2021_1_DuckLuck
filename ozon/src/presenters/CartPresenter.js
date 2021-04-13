@@ -42,6 +42,10 @@ class CartPresenter extends BasePresenter {
      * @description loads all products
      */
     loadProducts = () => {
+        if (!navigator.onLine) {
+            Router.open('/offline');
+            return;
+        }
         this.model.loadProducts();
     }
 
