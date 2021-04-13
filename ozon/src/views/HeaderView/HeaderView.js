@@ -34,21 +34,25 @@ export class HeaderView extends BaseView {
                 img: new Img({src: staticServerHost + '/svg/header/smile.svg'}),
                 button: new Button(),
                 href: '/login',
+                name: 'login',
             }, {
                 text: 'Заказы',
                 img: new Img({src: staticServerHost + '/svg/header/orders.svg'}),
                 button: new Button(),
                 href: '/orders',
+                name: 'orders',
             }, {
                 text: 'Избранное',
                 img: new Img({src: staticServerHost + '/svg/header/favorites.svg'}),
                 button: new Button(),
                 href: '/favorites',
+                name: 'favorites',
             }, {
                 text: 'Корзина',
                 img: new Img({src: staticServerHost + '/svg/header/cart.svg'}),
                 button: new Button(),
                 href: '/cart',
+                name: 'cart',
             },
         ];
         const catalog = {
@@ -141,4 +145,21 @@ export class HeaderView extends BaseView {
         });
         this.parent.appendChild(this.cache);
     }
+
+    /**
+     *
+     * @param {boolean} userIsAuthorized
+     */
+    changeLoginIcon = (userIsAuthorized) => {
+        const icon = document.getElementsByName('login')[0];
+        if (userIsAuthorized === true) {
+            icon.getElementsByTagName('span')[0].textContent = 'Профиль';
+            icon.setAttribute('href', '/profile');
+        } else {
+            icon.getElementsByTagName('span')[0].textContent = 'Войти';
+            icon.setAttribute('href', '/login');
+        }
+    }
 }
+
+
