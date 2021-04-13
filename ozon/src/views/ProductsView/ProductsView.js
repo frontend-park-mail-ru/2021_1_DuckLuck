@@ -13,7 +13,13 @@ import Events from '../../utils/bus/events';
  */
 export class ProductsView extends BaseView {
     show = () => {
-        this.bus.emit(Events.ProductsLoad, this.ID, this.subID);
+        if (!this.IDs['category']) {
+            this.IDs['category'] = 1;
+        }
+        if (!this.IDs['page']) {
+            this.IDs['page'] = 1;
+        }
+        this.bus.emit(Events.ProductsLoad, this.IDs['category'], this.IDs['page']);
     }
 
     render = () => {
@@ -30,14 +36,14 @@ export class ProductsView extends BaseView {
             button.addEventListener('click', () => {
                 const page = parseInt(button.textContent);
                 this.ID = page;
-                Router.open('/items', {id: page});
+                Router.open(`/items/${this.IDs['category']}/${page}`, {id: page});
             });
         }
         for (const itemContainer of this.cache.getElementsByClassName('item-container')) {
             itemContainer.addEventListener('click', () => {
                 const productID = parseInt(itemContainer.getElementsByClassName('item-id')[0].textContent);
                 Bus.globalBus.emit(Events.ProductChangeID, productID);
-                Router.open('/item', {id: productID});
+                Router.open(`/item/${productID}`);
             });
         }
 

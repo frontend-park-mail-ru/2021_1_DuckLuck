@@ -14,7 +14,7 @@ class Router {
         if (Router.#instance) {
             return Router.#instance;
         }
-        this.#routes = {};
+        this.#routes = [];
         Router.#instance = this;
     }
 
@@ -26,15 +26,12 @@ class Router {
     }
 
     /**
-     * @param {string} path URL Path
+     * @param {RegExp} path URL Path
      * @param {BaseView} view View in MVP Architecture
      * @return {Object} This object
      */
     register(path, view) {
-        this.#routes[path] = {
-            view: view,
-        };
-
+        this.#routes.push([path, view]);
         return this;
     }
 
@@ -51,22 +48,20 @@ class Router {
      */
     open(path, params = {
         replaceState: false,
-        id: '',
-        subId: '',
     }) {
-        const route = this.#routes[path];
+        console.log(path);
+        let route;
+        let groups;
+        for (const page of this.#routes) {
+            if (path.match(page[0])) {
+                groups = path.match(page[0]).groups;
+                route = page;
+            }
+        }
 
         if (!route) {
             this.open('/');
             return;
-        }
-
-        if (params.id !== undefined && params.id !== '') {
-            path = `${path}/${params.id}`;
-        }
-
-        if (params.subId !== undefined && params.subId !== '') {
-            path = `${path}/${params.subId}`;
         }
 
         if (window.location.pathname !== path && !params.replaceState) {
@@ -83,17 +78,8 @@ class Router {
             );
         }
 
-        const {view} = route;
-
-        view.ID = 1;
-        if (params.id !== undefined && params.id !== '') {
-            view.ID = params.id;
-        }
-
-        view.subId = 1;
-        if (params.subId !== undefined && params.subId !== '') {
-            view.subId = params.subId;
-        }
+        const view = route[1];
+        view.IDs = groups;
 
         view.show();
     }
@@ -114,31 +100,15 @@ class Router {
         });
 
         window.addEventListener('popstate', () => {
-            const currentPath = window.location.pathname;
-            let {url, id} = this.splitURL(currentPath);
-            if (url[0] !== '/') {
-                url = '/' + url;
+            let currentPath = window.location.pathname;
+            if (currentPath[0] !== '/') {
+                currentPath = '/' + url;
             }
-            this.open(url, {id: id});
+            this.open(currentPath);
         });
 
-        const currentPath = window.location.pathname;
-        const {url, id, subId} = this.splitURL(currentPath);
-        this.open(`/${url}`, {id: id, subId: subId});
-    }
-
-    /**
-     *
-     * @param {string} url
-     * @param {Boolean} isPathOnly is url contains only pure path?
-     * @return {{path, id: (string|number)}}
-     */
-    splitURL(url, isPathOnly = false) {
-        const pathArray = url.split('/');
-        url = pathArray[1 - isPathOnly];
-        const id = pathArray[2 - isPathOnly] === undefined ? '' : pathArray[2 - isPathOnly];
-        const subId = pathArray[3 - isPathOnly] === undefined ? '' : pathArray[3 - isPathOnly];
-        return {url, id, subId};
+        let currentPath = window.location.pathname;
+        this.open(currentPath);
     }
 }
 

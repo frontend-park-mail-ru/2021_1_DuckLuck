@@ -7,8 +7,7 @@ export class BaseView {
     #cache
     #presenter
     #bus
-    #id
-    #subId
+    #ids
 
     /**
      *
@@ -22,8 +21,7 @@ export class BaseView {
         this.#parent.hidden = false;
         this.#cache = '';
         this.#bus = bus;
-        this.#id = 1;
-        this.#subId = 1;
+        this.#ids = {};
         this.#presenter = presenter;
     }
 
@@ -71,16 +69,8 @@ export class BaseView {
      *
      * @return {number} id,page number,item id, etc. for this view (use if needs)
      */
-    get ID() {
-        return this.#id;
-    }
-
-    /**
-     *
-     * @return {number} id,page number,item id, etc. for this view (use if needs)
-     */
-    get subID() {
-        return this.#subId;
+    get IDs() {
+        return this.#ids;
     }
 
     /**
@@ -93,18 +83,10 @@ export class BaseView {
 
     /**
      *
-     * @param {number} id new id
+     * @param {Array.number} id new id
      */
-    set ID(id) {
-        this.#id = id;
-    }
-
-    /**
-     *
-     * @param {number | string} subId new sub id
-     */
-    set subID(subId) {
-        this.#subId = subId;
+    set IDs(ids) {
+        this.#ids = ids;
     }
 
 
