@@ -27,10 +27,6 @@ class LoginPresenter extends BasePresenter {
             this.bus.emit(Events.LoginIncorrectForm);
             return;
         }
-        if (!navigator.onLine) {
-            Router.open('/offline');
-            return;
-        }
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value.trim();
         this.model.loginUser({email, password});
@@ -42,12 +38,21 @@ class LoginPresenter extends BasePresenter {
      * @description Processes result for login attempt
      */
     processLoginResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.remove();
             Bus.globalBus.emit(Events.ProfileNewUserLoggedIn);
             Router.open('/profile', {replaceState: true});
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 }

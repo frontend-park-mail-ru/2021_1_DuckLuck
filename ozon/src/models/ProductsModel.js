@@ -3,6 +3,7 @@ import {serverApiPath} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import HTTPResponses from '../utils/http-responses/httpResponses';
 
 /**
  * @description Model for ProductS in MVP Arch
@@ -60,6 +61,9 @@ class ProductsModel extends BaseModel {
             url: serverApiPath + '/product',
             body: body,
         }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
             return response.json();
         }).then((parsedJson) => {
             this.#products = parsedJson['list_preview_products'];
@@ -68,8 +72,21 @@ class ProductsModel extends BaseModel {
                 currentPage: currentPage,
             };
             this.bus.emit(Events.ProductsLoaded, Responses.Success);
-        }).catch(() => {
-            this.bus.emit(Events.ProductsLoaded, Responses.Error);
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.ProductsLoaded, Responses.Unauthorized);
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.ProductsLoaded, Responses.Offline);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.ProductsLoaded, Responses.Error);
+                break;
+            }
+            }
         });
     }
 }

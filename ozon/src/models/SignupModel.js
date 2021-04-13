@@ -20,10 +20,19 @@ class SignupModel extends BaseModel {
             url: serverApiPath + urls.signupUrl,
             body: {email, password},
         }).then((response) => {
-            if (response.status === HTTPResponses.Created) {
+            switch (response.status) {
+            case HTTPResponses.Created: {
                 this.bus.emit(Events.SignupEmitResult, Responses.Success);
-            } else {
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.SignupEmitResult, Responses.Offline);
+                break;
+            }
+            default: {
                 this.bus.emit(Events.SignupEmitResult, Responses.Error);
+                break;
+            }
             }
         }).catch(() => {
             this.bus.emit(Events.SignupEmitResult, Responses.Error);

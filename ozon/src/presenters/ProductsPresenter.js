@@ -57,10 +57,6 @@ class ProductsPresenter extends BasePresenter {
      * @param {Number} page
      */
     loadProducts = (page) => {
-        if (!navigator.onLine) {
-            Router.open('/offline', {replaceState: true});
-            return;
-        }
         this.model.loadProducts(page);
     }
 
@@ -69,11 +65,20 @@ class ProductsPresenter extends BasePresenter {
      * @param {string} result
      */
     productLoadedReaction = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.render();
             this.view.cache.hidden = false;
-        } else {
-            console.error('Cant load products');
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
         }
     }
 }
