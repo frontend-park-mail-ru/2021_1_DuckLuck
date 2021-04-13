@@ -19,10 +19,11 @@ export class AuthenticationForm {
      * @param {Object} formData Array of objects which will rendered inside template
      * @return {string} HTML string, which will generated after templating
      */
-    getHtmlString = ({formType, formData}) => {
+    getHtmlString = ({formType, formData, styles}) => {
         return authenticationFormTemplate({
             formType: formType,
             formData: formData,
+            styles: styles,
         });
     };
 }

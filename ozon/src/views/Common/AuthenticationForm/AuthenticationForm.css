@@ -1,5 +1,6 @@
 @import '../Blind/Blind.css';
 @import '../Popup/Popup.css';
+@import '../../../constants.css';
 
 .form-header {
     display: flex;
@@ -49,4 +50,72 @@
     color: red;
     margin-left: 200px;
     margin-top: -1%;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    margin: var(--margin-xxl);
+    gap: 20px;
+}
+
+.inputBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.inputText {
+
+}
+
+.title {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+}
+
+.wrapper {
+    display: flex;
+}
+
+.button {
+    display: flex;
+    background: var(--colored-object-color);
+    border-radius: var(--standart-border-radius);
+    border: none;
+    height: 48px;
+}
+
+.buttonText {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--light-color);
+    margin: auto;
+}
+
+.inputWrapper {
+    height: 42px;
+    width: 328px;
+}
+
+.input {
+    height: 100%;
+    width: 100%;
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    border-radius: var(--standart-border-radius);
+    border: solid 1px;
+    border-color: #cdd2d8;
+}
+
+.fieldName {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+}
+
+.signup {
+    margin: auto;
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--colored-object-color);
 }
