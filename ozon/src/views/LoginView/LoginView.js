@@ -58,26 +58,27 @@ export class LoginView extends BaseView {
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
 
-        // this.cache.getElementsByClassName('blind')[0]
-        //     .addEventListener('click', (evt) => {
-        //         evt.preventDefault();
-        //         this.remove();
-        //         Router.return();
-        //     });
+        this.cache.getElementsByClassName('blind')[0]
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                this.remove();
+                Router.return();
+            });
 
-        // const form = this.cache.getElementsByClassName('form-body')[0];
-        // form.addEventListener('submit', (evt) => {
-        //     evt.preventDefault();
-        //     this.bus.emit(Events.LoginSendData);
-        // });
+        const form = this.cache.getElementsByClassName(AuthenticationFormStyles.button)[0];
+        form.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            this.bus.emit(Events.LoginSendData);
+        });
 
 
-        // this.cache.getElementsByClassName('link link_weight-h1')[0]
-        //     .addEventListener('click', (evt) => {
-        //         evt.preventDefault();
-        //         this.remove();
-        //         Router.open('/signup', {replaceState: true});
-        //     });
+        this.cache.getElementsByClassName(AuthenticationFormStyles.signup)[0]
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                this.remove();
+                Router.open('/signup', {replaceState: true});
+            });
+
 
         this.parent.appendChild(this.cache);
     }

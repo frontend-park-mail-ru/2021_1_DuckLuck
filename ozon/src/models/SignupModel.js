@@ -22,8 +22,8 @@ class SignupModel extends BaseModel {
             body: {email, password},
         }).then((response) => {
             if (response.status === HTTPResponses.Created) {
-                this.bus.emit(Events.SignupEmitResult, Responses.Success);
                 Bus.globalBus.emit(Events.SignupEmitResult, Responses.Success);
+                this.bus.emit(Events.SignupEmitResult, Responses.Success);
             } else {
                 this.bus.emit(Events.SignupEmitResult, Responses.Error);
             }

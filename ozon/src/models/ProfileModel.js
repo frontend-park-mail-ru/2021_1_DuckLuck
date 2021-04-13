@@ -8,6 +8,7 @@ import {serverApiPath, urls} from '../utils/urls/urls';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import HTTPResponses from '../utils/http-responses/httpResponses';
+import {Bus} from '../utils/bus/bus.js';
 
 /**
  * @description Model for Profile in MVP Arch. THIS IS A FACADE!
@@ -138,6 +139,7 @@ class ProfileModel extends BaseModel {
             url: serverApiPath + urls.logoutUrl,
         }).then((response) => {
             if (response.status === HTTPResponses.Success) {
+                Bus.globalBus.emit(Events.ProfileLogoutEmitResult, Responses.Success);
                 this.bus.emit(Events.ProfileLogoutEmitResult, Responses.Success);
             } else {
                 this.bus.emit(Events.ProfileLogoutEmitResult, Responses.Error);

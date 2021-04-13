@@ -152,6 +152,7 @@ export class HeaderView extends BaseView {
      */
     changeLoginIcon = (userIsAuthorized) => {
         const icon = document.getElementsByName('login')[0];
+        console.log(userIsAuthorized);
         if (userIsAuthorized === true) {
             icon.getElementsByTagName('span')[0].textContent = 'Профиль';
             icon.setAttribute('href', '/profile');

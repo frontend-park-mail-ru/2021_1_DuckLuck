@@ -64,25 +64,26 @@ export class SignupView extends BaseView {
 
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
 
-        // const blind = this.cache.getElementsByClassName('blind')[0];
-        // blind.addEventListener('click', (evt) => {
-        //     evt.preventDefault();
-        //     this.remove();
-        //     Router.return();
-        // });
-        //
-        // const form = this.cache.getElementsByClassName('form-body')[0];
-        // form.addEventListener('submit', (evt) => {
-        //     evt.preventDefault();
-        //     this.bus.emit(Events.SignupSendData);
-        // });
-        //
-        // this.cache.getElementsByClassName('link link_weight-h1')[1]
-        //     .addEventListener('click', (evt) => {
-        //         evt.preventDefault();
-        //         this.remove();
-        //         Router.open('/login', {replaceState: true});
-        //     });
+        this.cache.getElementsByClassName('blind')[0]
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                this.remove();
+                Router.return();
+            });
+
+        const form = this.cache.getElementsByClassName(AuthenticationFormStyles.button)[0];
+        form.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            this.bus.emit(Events.SignupSendData);
+        });
+
+
+        this.cache.getElementsByClassName(AuthenticationFormStyles.signup)[0]
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                this.remove();
+                Router.open('/login', {replaceState: true});
+            });
         this.parent.appendChild(this.cache);
     }
 }
