@@ -25,6 +25,15 @@ import OrderModel from './models/OrderModel';
 import HeaderModel from './models/HeaderModel';
 import HeaderPresenter from './presenters/HeaderPresenter';
 
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((registration) => {
+        }).catch((registrationError) => {
+            console.error('SW registration failed: ', registrationError);
+        });
+    });
+}
+
 const header = document.getElementsByTagName('header')[0];
 const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
 headerPresenter.view.show();
