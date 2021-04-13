@@ -24,7 +24,7 @@ export class CartView extends BaseView {
         this.parent.appendChild(this.cache);
 
 
-        for (const product of document.getElementsByClassName('cart-list-body-remove-product')) {
+        for (const product of document.getElementsByClassName(cartStyles.deleteSelectedText)) {
             product.addEventListener('click', (evt) => {
                 evt.preventDefault();
                 Bus.globalBus.emit(Events.CartRemoveProduct, product.id);
