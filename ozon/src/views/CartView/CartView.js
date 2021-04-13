@@ -2,6 +2,7 @@ import {BaseView} from '../BaseView.js';
 import cartPageTemplate from './CartView.hbs';
 import {Bus} from '../../utils/bus/bus';
 import Events from '../../utils/bus/events';
+import cartStyles from './CartView.css';
 
 /**
  * @class ProductsView
@@ -17,6 +18,7 @@ export class CartView extends BaseView {
         this.parent.innerHTML = '';
         const template = cartPageTemplate({
             productsList: this.presenter.products,
+            cartStyles: cartStyles,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);

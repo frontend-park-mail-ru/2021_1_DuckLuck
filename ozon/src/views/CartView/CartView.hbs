@@ -1,13 +1,16 @@
-<div class="products-list-block" id="products-list-block">
+<div class="{{cartStyles.cartWrapper}}" id="products-list-block">
     <div class="{{cartStyles.body}}">
         <div class="{{cartStyles.title}}">
-            <span class="{{cartStyles.titleText}}"></span>
+            <span class="{{cartStyles.titleText}}">Корзина</span>
         </div>
-        <div class="{{cartStyles.wrapper}}">
+        <div class="{{cartStyles.mainWrapper}}">
             <div class="{{cartStyles.wrapper}}">
                 <div class="{{cartStyles.cartInfo}}">
                     <div class="{{cartStyles.selectMenu}}">
-                        <input type="checkbox" name="a" value="Выбрать все">
+                        <div class="{{cartStyles.selectAll}}">
+                            <input type="checkbox" name="a" value="Выбрать все" class="{{cartStyles.checkbox}}">
+                            <span class="{{cartStyles.selectAllText}}">Выбрать все</span>
+                        </div>
                         <span class="{{cartStyles.deleteSelectedText}}">Удалить выбранные</span>
                     </div>
                     <div class="{{cartStyles.deliveryBlock}}">
@@ -17,9 +20,11 @@
                         <div class="{{cartStyles.productsList}}">
                             <div class="{{cartStyles.productsListElem}}">
                                 <input type="checkbox" name="a" value="">
-                                <div class="{{cartStyles.image}}"></div>
+                                <div class="{{cartStyles.image}}">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{cartStyles.productImage}}">
+                                </div>
                                 <div class="{{cartStyles.description}}">
-                                    <span class="{{cartStyles.name}}"></span>
+                                    <span class="{{cartStyles.name}}">Игровой набор Play-Doh 24 банки, 20383F02</span>
                                     <div class="{{cartStyles.productMenu}}">
                                         <span class="{{cartStyles.productMenuText}}">В избранное</span>
                                         <span class="{{cartStyles.productMenuText}}">Удалить</span>
@@ -30,33 +35,122 @@
                                         <span class="{{cartStyles.priceText}}"></span>
                                     </div>
                                     <div class="{{cartStyles.priceInfo}}">
-                                        <span class="{{cartStyles.basePrice}}"></span>
-                                        <span class="{{cartStyles.discount}}"></span>
+                                        <span class="{{cartStyles.basePrice}}">1309₽</span>
+                                        <span class="{{cartStyles.discount}}">Скидка 430₽</span>
                                     </div>
                                 </div>
-                                <div class="{{cartStyles.countMenu}}"></div>
+                                <div class="{{cartStyles.countMenu}}">
+                                    <button class="{{cartStyles.countButton}}">-</button>
+                                    <span class="{{cartStyles.count}}">3</span>
+                                    <button class="{{cartStyles.countButton}}">+</button>
+                                </div>
+                            </div>
+                            <div class="{{cartStyles.productsListElem}}">
+                                <input type="checkbox" name="a" value="">
+                                <div class="{{cartStyles.image}}">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{cartStyles.productImage}}">
+                                </div>
+                                <div class="{{cartStyles.description}}">
+                                    <span class="{{cartStyles.name}}">Игровой набор Play-Doh 24 банки, 20383F02</span>
+                                    <div class="{{cartStyles.productMenu}}">
+                                        <span class="{{cartStyles.productMenuText}}">В избранное</span>
+                                        <span class="{{cartStyles.productMenuText}}">Удалить</span>
+                                    </div>
+                                </div>
+                                <div class="{{cartStyles.priceBlock}}">
+                                    <div class="{{cartStyles.price}}">
+                                        <span class="{{cartStyles.priceText}}"></span>
+                                    </div>
+                                    <div class="{{cartStyles.priceInfo}}">
+                                        <span class="{{cartStyles.basePrice}}">1309₽</span>
+                                        <span class="{{cartStyles.discount}}">Скидка 430₽</span>
+                                    </div>
+                                </div>
+                                <div class="{{cartStyles.countMenu}}">
+                                    <button class="{{cartStyles.countButton}}">-</button>
+                                    <span class="{{cartStyles.count}}">3</span>
+                                    <button class="{{cartStyles.countButton}}">+</button>
+                                </div>
+                            </div>
+                            <div class="{{cartStyles.productsListElem}}">
+                                <input type="checkbox" name="a" value="">
+                                <div class="{{cartStyles.image}}">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{cartStyles.productImage}}">
+                                </div>
+                                <div class="{{cartStyles.description}}">
+                                    <span class="{{cartStyles.name}}">Игровой набор Play-Doh 24 банки, 20383F02</span>
+                                    <div class="{{cartStyles.productMenu}}">
+                                        <span class="{{cartStyles.productMenuText}}">В избранное</span>
+                                        <span class="{{cartStyles.productMenuText}}">Удалить</span>
+                                    </div>
+                                </div>
+                                <div class="{{cartStyles.priceBlock}}">
+                                    <div class="{{cartStyles.price}}">
+                                        <span class="{{cartStyles.priceText}}"></span>
+                                    </div>
+                                    <div class="{{cartStyles.priceInfo}}">
+                                        <span class="{{cartStyles.basePrice}}">1309₽</span>
+                                        <span class="{{cartStyles.discount}}">Скидка 430₽</span>
+                                    </div>
+                                </div>
+                                <div class="{{cartStyles.countMenu}}">
+                                    <button class="{{cartStyles.countButton}}">-</button>
+                                    <span class="{{cartStyles.count}}">3</span>
+                                    <button class="{{cartStyles.countButton}}">+</button>
+                                </div>
+                            </div>
+                            <div class="{{cartStyles.productsListElem}}">
+                                <input type="checkbox" name="a" value="">
+                                <div class="{{cartStyles.image}}">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{cartStyles.productImage}}">
+                                </div>
+                                <div class="{{cartStyles.description}}">
+                                    <span class="{{cartStyles.name}}">Игровой набор Play-Doh 24 банки, 20383F02</span>
+                                    <div class="{{cartStyles.productMenu}}">
+                                        <span class="{{cartStyles.productMenuText}}">В избранное</span>
+                                        <span class="{{cartStyles.productMenuText}}">Удалить</span>
+                                    </div>
+                                </div>
+                                <div class="{{cartStyles.priceBlock}}">
+                                    <div class="{{cartStyles.price}}">
+                                        <span class="{{cartStyles.priceText}}"></span>
+                                    </div>
+                                    <div class="{{cartStyles.priceInfo}}">
+                                        <span class="{{cartStyles.basePrice}}">1309₽</span>
+                                        <span class="{{cartStyles.discount}}">Скидка 430₽</span>
+                                    </div>
+                                </div>
+                                <div class="{{cartStyles.countMenu}}">
+                                    <button class="{{cartStyles.countButton}}">-</button>
+                                    <span class="{{cartStyles.count}}">3</span>
+                                    <button class="{{cartStyles.countButton}}">+</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="{{cartStyles.orderMenu}}">
                     <div class="{{cartStyles.orderButtonWrapper}}">
-                        <button class="{{cartStyles.orderButton}}"></button>
+                        <button class="{{cartStyles.orderButton}}">
+                            <span class="{{cartStyles.orderSubmit}}">Перейти к оформлению</span>
+                        </button>
                     </div>
                     <div class="{{cartStyles.orderInfo}}">
-                        <span class="{{cartStyles.orderInfoTitle}}">Ваша корзина</span>
-                        <div class="{{cartStyles.orderInfoBody}}">
-                            <div class="{{cartStyles.orderInfoRow}}">
-                                <span class="{{cartStyles.orderInfoText}}">Товары ()</span>
-                                <span class="{{cartStyles.orderInfoPrice}}"></span>
-                            </div>
-                            <div class="{{cartStyles.orderInfoRow}}">
-                                <span class="{{cartStyles.orderInfoText}}">Скидка</span>
-                                <span class="{{cartStyles.orderInfoDiscount}}"></span>
-                            </div>
-                            <div class="{{cartStyles.totalPriceBlock}}">
-                                <span class="{{cartStyles.totalPriceText}}">Общая стоимость</span>
-                                <span class="{{cartStyles.totalPriceText}}"></span>
+                        <div class="{{cartStyles.orderInfoWrapper}}">
+                            <span class="{{cartStyles.orderInfoTitle}}">Ваша корзина</span>
+                            <div class="{{cartStyles.orderInfoBody}}">
+                                <div class="{{cartStyles.orderInfoRow}}">
+                                    <span class="{{cartStyles.orderInfoText}}">Товары ()</span>
+                                    <span class="{{cartStyles.orderInfoPrice}}">2 060 ₽</span>
+                                </div>
+                                <div class="{{cartStyles.orderInfoRow}}">
+                                    <span class="{{cartStyles.orderInfoText}}">Скидка</span>
+                                    <span class="{{cartStyles.orderInfoDiscount}}">- 552 ₽</span>
+                                </div>
+                                <div class="{{cartStyles.totalPriceBlock}}">
+                                    <span class="{{cartStyles.orderTotalPriceTitle}}">Общая стоимость</span>
+                                    <span class="{{cartStyles.totalPriceText}}">1 508 ₽</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -65,3 +159,4 @@
         </div>
     </div>
 </div>
+
