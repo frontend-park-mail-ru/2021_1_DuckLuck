@@ -2,6 +2,7 @@ import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import {Bus} from '../utils/bus/bus';
+import Router from '../utils/router/Router';
 
 /**
  * @description Presenter for Login View and Model
@@ -16,6 +17,8 @@ class CartPresenter extends BasePresenter {
         super(application, View, Model);
         this.bus.on(Events.CartLoad, this.loadProducts);
         this.bus.on(Events.CartLoaded, this.cartLoadedReaction);
+        this.bus.on(Events.CartUserUnauthorized, this.cartUserUnauthorizedReaction);
+
         Bus.globalBus.on(Events.CartProductRemoved, this.productRemovedReaction);
         Bus.globalBus.on(Events.CartAddProduct, this.addProduct);
         Bus.globalBus.on(Events.CartRemoveProduct, this.removeProduct);
@@ -50,7 +53,7 @@ class CartPresenter extends BasePresenter {
             this.view.render();
             return;
         }
-        console.error(status);
+        Router.open('/login', {replaceState: true});
     }
 
     /**
@@ -81,6 +84,10 @@ class CartPresenter extends BasePresenter {
             return;
         }
         console.error(result);
+    }
+
+    cartUserUnauthorizedReaction = () => {
+        Router.open('/login');
     }
 }
 
