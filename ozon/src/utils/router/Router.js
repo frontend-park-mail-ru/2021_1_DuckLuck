@@ -79,12 +79,7 @@ class Router {
         }
 
         const view = route[1];
-        if (groups) {
-            view.IDs = groups;
-        }
-
-
-        console.log(view);
+        view.IDs = groups;
 
         view.show();
     }
