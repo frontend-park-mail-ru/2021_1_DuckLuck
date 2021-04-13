@@ -56,7 +56,7 @@ class CartModel extends BaseModel {
             switch (err) {
             case HTTPResponses.Unauthorized: {
                 this.bus.emit(Events.CartUserUnauthorized);
-                break;
+                return;
             }
             default: {
                 break;
@@ -111,7 +111,7 @@ class CartModel extends BaseModel {
         AjaxModule.getUsingFetch({
             url: serverApiPath + urls.cart,
         }).then((response) => {
-            if (response.status !== Responses.Success) {
+            if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
             return response.json();
@@ -122,7 +122,20 @@ class CartModel extends BaseModel {
                 return elem.id;
             }) || [];
             this.bus.emit(Events.CartLoaded, Responses.Success);
-        }).catch(() => {
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.CartUserUnauthorized);
+                return;
+            }
+            case HTTPResponses.InternalError: {
+                this.#needsRerender = false;
+                this.#products = [];
+                this.#ids = [];
+                this.bus.emit(Events.CartLoaded, Responses.Success);
+                return;
+            }
+            }
             this.bus.emit(Events.CartLoaded, Responses.Error);
         });
     }

@@ -16,7 +16,7 @@ import ProductsModel from './models/ProductsModel';
 import ProductsPresenter from './presenters/ProductsPresenter';
 import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
-import {OfflineView} from './views/OfflineView/OfflineView';
+// import {OfflineView} from './views/OfflineView/OfflineView';
 import CartPresenter from './presenters/CartPresenter';
 import {CartView} from './views/CartView/CartView';
 import CartModel from './models/CartModel';
@@ -44,7 +44,7 @@ const application = document.getElementById('app');
 Router.root = application;
 
 const homeView = new HomeView(application, null, null);
-const offlineView = new OfflineView(application, null, null);
+// const offlineView = new OfflineView(application, null, null);
 
 const signupPresenter = new SignupPresenter(application, SignupView, SignupModel);
 const loginPresenter = new LoginPresenter(application, LoginView, LoginModel);
@@ -55,14 +55,13 @@ const cartPresenter = new CartPresenter(application, CartView, CartModel);
 const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
 
 Router
-    .register('/', homeView)
-    .register('/signup', signupPresenter.view)
-    .register('/login', loginPresenter.view)
-    .register('/profile', profilePresenter.view)
-    .register('/items', productsPresenter.view)
-    .register('/item', productPresenter.view)
-    .register('/offline', offlineView)
-    .register('/cart', cartPresenter.view)
-    .register('/order', orderPresenter.view);
+    .register(new RegExp('^/$'), homeView)
+    .register(new RegExp('^/signup$'), signupPresenter.view)
+    .register(new RegExp('^/login$'), loginPresenter.view)
+    .register(new RegExp('^/profile$'), profilePresenter.view)
+    .register(new RegExp('^/item(/(?<productID>[0-9]*))?$'), productPresenter.view)
+    .register(new RegExp('^/items(/(?<category>[0-9]*)(/(?<page>[0-9]*))?)?$'), productsPresenter.view)
+    .register(new RegExp('^/cart$'), cartPresenter.view)
+    .register(new RegExp('^/order$'), orderPresenter.view);
 
 Router.start();

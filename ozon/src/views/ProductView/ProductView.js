@@ -15,7 +15,11 @@ import imagesStyles from './../Common/Img/Img.css';
  */
 export class ProductView extends BaseView {
     show = () => {
-        this.bus.emit(Events.ProductLoad, this.ID);
+        if (!this.IDs['productID']) {
+            this.IDs['productID'] = 1;
+        }
+
+        this.bus.emit(Events.ProductLoad, this.IDs['productID']);
     }
 
     /**
