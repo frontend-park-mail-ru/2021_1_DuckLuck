@@ -55,13 +55,13 @@ const cartPresenter = new CartPresenter(application, CartView, CartModel);
 const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
 
 Router
-    .register(new RegExp('^/$'), homeView)
-    .register(new RegExp('^/signup$'), signupPresenter.view)
-    .register(new RegExp('^/login$'), loginPresenter.view)
-    .register(new RegExp('^/profile$'), profilePresenter.view)
-    .register(new RegExp('^/item(/(?<productID>[0-9]*))?$'), productPresenter.view)
-    .register(new RegExp('^/items(/(?<category>[0-9]*)(/(?<page>[0-9]*))?)?$'), productsPresenter.view)
-    .register(new RegExp('^/cart$'), cartPresenter.view)
-    .register(new RegExp('^/order$'), orderPresenter.view);
+    .register(/^\/$/, homeView)
+    .register(/^\/signup$/, signupPresenter.view)
+    .register(/^\/login$/, loginPresenter.view)
+    .register(/^\/profile$/, profilePresenter.view)
+    .register(/^\/item(\/(?<productID>[0-9]*))?$/, productPresenter.view)
+    .register(/^\/items(\/(?<category>[0-9]*)(\/(?<page>[0-9]*))?)?$/, productsPresenter.view)
+    .register(/^\/cart$/, cartPresenter.view)
+    .register(/^\/order$/, orderPresenter.view);
 
 Router.start();
