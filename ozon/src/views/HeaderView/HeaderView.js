@@ -153,14 +153,13 @@ export class HeaderView extends BaseView {
      * @param {boolean} userIsAuthorized
      */
     changeLoginIcon = (userIsAuthorized) => {
+        const icon = document.getElementsByName('login')[0];
         if (userIsAuthorized === true) {
-            document
-                .getElementById('span-text-login')
-                .textContent = 'Профиль';
+            icon.getElementsByTagName('span')[0].textContent = 'Профиль';
+            icon.setAttribute('href', '/profile');
         } else {
-            document
-                .getElementById('span-text-login')
-                .textContent = 'Войти';
+            icon.getElementsByTagName('span')[0].textContent = 'Войти';
+            icon.setAttribute('href', '/login');
         }
     }
 }
