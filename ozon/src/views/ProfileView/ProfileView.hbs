@@ -5,8 +5,8 @@
             <input id="avatar-input" type="file" hidden>
         </label>
         <div class="{{profileStyles.nameWrapper}}">
-            <span id="profile-firstName" class="{{profileStyles.titleText}}">Никита</span>
-            <span id="profile-lastName" class="{{profileStyles.titleText}}">Суворов</span>
+            <span id="profile-firstName" class="{{profileStyles.titleText}}"></span>
+            <span id="profile-lastName" class="{{profileStyles.titleText}}"></span>
         </div>
         <span id="logout" class="{{profileStyles.exit}}">Выйти</span>
     </div>
@@ -19,12 +19,12 @@
             <div class="{{profileStyles.fioWrapper}}">
                 <div class="{{profileStyles.infoElem}}">
                     <span class="{{profileStyles.infoTitle}}">Фамилия</span>
-                    <input type="text" name="lastName"class="{{profileStyles.infoText}}" placeholder="Cуворов">
+                    <input type="text" name="lastName"class="{{profileStyles.infoText}}" placeholder="">
                     <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
                 </div>
                 <div class="{{profileStyles.infoElem}}">
                     <span class="{{profileStyles.infoTitle}}">Имя</span>
-                    <input type="text" name="firstName" class="{{profileStyles.infoText}}" placeholder="Никита">
+                    <input type="text" name="firstName" class="{{profileStyles.infoText}}" placeholder="">
                     <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
                 </div>
             </div>
