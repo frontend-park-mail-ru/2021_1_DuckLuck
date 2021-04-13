@@ -16,19 +16,24 @@ import ProductsModel from './models/ProductsModel';
 import ProductsPresenter from './presenters/ProductsPresenter';
 import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
-// import runtime from 'serviceworker-webpack-plugin/lib/runtime';
-// import './styles.css';
 import {OfflineView} from './views/OfflineView/OfflineView';
-
-// if ('serviceWorker' in navigator) {
-//     runtime.register();
-// }
-
 import CartPresenter from './presenters/CartPresenter';
 import {CartView} from './views/CartView/CartView';
 import CartModel from './models/CartModel';
+import {OrderView} from './views/OrderView/OrderView';
+import OrderPresenter from './presenters/OrderPresenter';
+import OrderModel from './models/OrderModel';
 import HeaderModel from './models/HeaderModel';
 import HeaderPresenter from './presenters/HeaderPresenter';
+
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js').then((registration) => {
+        }).catch((registrationError) => {
+            console.error('SW registration failed: ', registrationError);
+        });
+    });
+}
 
 const header = document.getElementsByTagName('header')[0];
 const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
@@ -47,6 +52,7 @@ const profilePresenter = new ProfilePresenter(application, ProfileView, ProfileM
 const productsPresenter = new ProductsPresenter(application, ProductsView, ProductsModel);
 const productPresenter = new ProductPresenter(application, ProductView, ProductModel);
 const cartPresenter = new CartPresenter(application, CartView, CartModel);
+const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
 
 Router
     .register('/', homeView)
@@ -56,6 +62,7 @@ Router
     .register('/items', productsPresenter.view)
     .register('/item', productPresenter.view)
     .register('/offline', offlineView)
-    .register('/cart', cartPresenter.view);
+    .register('/cart', cartPresenter.view)
+    .register('/order', orderPresenter.view);
 
 Router.start();

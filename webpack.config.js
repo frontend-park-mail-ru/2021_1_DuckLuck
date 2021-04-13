@@ -1,7 +1,7 @@
 const path = require('path')
 
 module.exports = {
-    entry: {app: './ozon/src/main.js'},
+    entry: ["regenerator-runtime/runtime.js", "./ozon/src/main.js"],
     mode: "development",
     output: {
         filename: "bundle.js",
@@ -9,10 +9,6 @@ module.exports = {
     },
     module: {
         rules: [
-            {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
-            },
             {
             test: /\.hbs$/,
             loader: 'handlebars-loader',

@@ -2,13 +2,16 @@
 
 import express from 'express';
 import path from 'path';
+import {fileURLToPath} from 'url';
 
 const app = express();
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, 'ozon/src/dist')));
+app.use(express.json());
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const __dirnameOfProject = path.dirname(__dirname);
 
+app.use(express.static(`${__dirnameOfProject}/src`));
 app.get(/.*$/, (request, response) => {
-    response.sendFile(path.join(__dirname, 'ozon/src/dist/index.html'));
+    response.sendFile(`${__dirnameOfProject}/src/index.html`);
 });
 
 app.listen(3000);
