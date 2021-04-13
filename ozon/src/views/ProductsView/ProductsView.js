@@ -44,11 +44,21 @@ export class ProductsView extends BaseView {
             });
         }
         for (const itemContainer of this.cache.getElementsByClassName(ListOfProductsItemStyles.block)) {
-            itemContainer.addEventListener('click', () => {
-                const productID = parseInt(itemContainer.getAttribute('item-id'));
-                Bus.globalBus.emit(Events.ProductChangeID, productID);
-                Router.open(`/item/${productID}`);
-            });
+            const productID = parseInt(itemContainer.getAttribute('item-id'));
+            itemContainer.getElementsByClassName(ListOfProductsItemStyles.infoWrapper)[0]
+                .addEventListener('click', () => {
+                    Bus.globalBus.emit(Events.ProductChangeID, productID);
+                    Router.open(`/item/${productID}`);
+                });
+
+            itemContainer.getElementsByClassName(ListOfProductsItemStyles.cartButton)[0]
+                .addEventListener('click', (evt) => {
+                    evt.preventDefault();
+                    Bus.globalBus.emit(Events.CartAddProduct, {
+                        id: productID,
+                        count: 1,
+                    });
+                });
         }
 
         this.parent.appendChild(this.cache);
