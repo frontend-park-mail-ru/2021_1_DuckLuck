@@ -12,7 +12,7 @@ import HTTPResponses from '../utils/http-responses/httpResponses';
 class HeaderModel extends BaseModel {
     #categories;
     #currentCategoryIndex = 0;
-    #stateAuthorize = false;
+    #userIsAuthorized = false;
 
     /**
      * @return {Object} categories
@@ -32,14 +32,14 @@ class HeaderModel extends BaseModel {
      * swap user authorize state
      */
     swapAuthorizeState() {
-        this.#stateAuthorize = !this.#stateAuthorize;
+        this.#userIsAuthorized = !this.#userIsAuthorized;
     }
 
     /**
      * @return {boolean} current authorize state
      */
     get currentAuthorizeState() {
-        return this.#stateAuthorize;
+        return this.#userIsAuthorized;
     }
 
     /**

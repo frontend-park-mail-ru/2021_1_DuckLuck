@@ -150,10 +150,10 @@ export class HeaderView extends BaseView {
 
     /**
      *
-     * @param {boolean} state
+     * @param {boolean} userIsAuthorized
      */
-    changeLoginIcon = (state) => {
-        if (state === true) {
+    changeLoginIcon = (userIsAuthorized) => {
+        if (userIsAuthorized === true) {
             document
                 .getElementById('span-text-login')
                 .textContent = 'Профиль';
