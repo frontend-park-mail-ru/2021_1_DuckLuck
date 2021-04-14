@@ -21,7 +21,7 @@ class SignupModel extends BaseModel {
             body: {email, password},
         }).then((response) => {
             switch (response.status) {
-            case HTTPResponses.Success: {
+            case HTTPResponses.Created: {
                 this.bus.emit(Events.SignupEmitResult, Responses.Success);
                 break;
             }
