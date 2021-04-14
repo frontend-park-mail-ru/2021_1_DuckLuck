@@ -21,7 +21,7 @@ export class CartView extends BaseView {
         let discount = 0;
         for (const product of this.presenter.products) {
             baseCost += +product.count * +product.price.base_cost;
-            discount += +product.count * (Math.ceil(product.price.base_cost * (product.price.discount * 0.01)));
+            discount += +product.count * Math.ceil(+product.price.discount * +product.price.base_cost / 100);
         }
         const template = cartPageTemplate({
             productsList: this.presenter.products,
@@ -52,7 +52,7 @@ export class CartView extends BaseView {
             elemList.getElementsByClassName(cartStyles.incButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
                 const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
-                if (count === 0) {
+                if (count <= 1) {
                     return;
                 }
                 Bus.globalBus.emit(Events.CartProductChange, {

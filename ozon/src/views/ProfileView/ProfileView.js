@@ -25,14 +25,14 @@ export class ProfileView extends BaseView {
         this.parent.innerHTML = '';
         if (this.cache !== '') {
             this.parent.appendChild(this.cache);
-            this.renderData();
+            this.bus.emit(Events.ProfileAllGet);
             return;
         }
 
         const htmlTemplate = profileTemplate({
             inputFields: [
-                new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
-                new Input({type: 'text', name: 'lastName', placeholder: 'Last name'}),
+                new Input({type: 'text', name: 'firstName', placeholder: 'Имя'}),
+                new Input({type: 'text', name: 'lastName', placeholder: 'Фамилия'}),
             ],
             inputEmail: new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),

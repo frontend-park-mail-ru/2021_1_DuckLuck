@@ -56,10 +56,19 @@ class ProfilePresenter extends BasePresenter {
      * @description Processed a signal
      */
     firstLastNameSendProcessResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.changeFirstLastName(this.getFirstName(), this.getLastName());
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 
@@ -119,10 +128,10 @@ class ProfilePresenter extends BasePresenter {
      * @description get data view and send to model
      */
     sendAvatar = () => {
-        if (!this.isFormValid(['file'])) {
-            this.bus.emit(Events.ProfileIncorrectAvatar);
-            return;
-        }
+        // if (!this.isFormValid(['file'])) {
+        //     this.bus.emit(Events.ProfileIncorrectAvatar);
+        //     return;
+        // }
 
         const avatarInput = document.getElementById('avatar-input');
         this.model.changeAvatar(avatarInput.files[0]);
@@ -233,6 +242,10 @@ class ProfilePresenter extends BasePresenter {
     renderAllData = (status) => {
         if (status === Responses.Success) {
             this.view.renderData();
+            return;
+        }
+        if (status === Responses.Offline) {
+            Router.open('/offline', {replaceState: true});
             return;
         }
         console.error(status);
