@@ -1,10 +1,13 @@
 import {BaseView} from '../BaseView.js';
 import {Img} from '../Common/Img/Img.js';
-import {Rating} from '../Common/Rating/Rating.js';
 import productPageTemplate from './ProductView.hbs';
 import {fileServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
+import productStyles from './ProductView.css';
+import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
+import imagesStyles from './../Common/Img/Img.css';
+
 
 /**
  * @class ProductView
@@ -13,6 +16,9 @@ import {Bus} from '../../utils/bus/bus';
  */
 export class ProductView extends BaseView {
     show = () => {
+        if (!this.IDs) {
+            this.IDs = {};
+        }
         if (!this.IDs['productID']) {
             this.IDs['productID'] = 1;
         }
@@ -35,35 +41,27 @@ export class ProductView extends BaseView {
         const template = productPageTemplate({
             name: this.presenter.item['name'],
             price: this.presenter.item['price'],
-            rating: new Rating().getHtmlString({
-                ratingObject: 'item',
-                ratingValue: this.presenter.item['rating'],
-            }),
+            rating: this.presenter.item['rating'],
             images: images,
-            description: this.presenter.item['description']['Category'],
+            description: this.presenter.item['description']['descriptionText'],
+            category: this.presenter.item['description']['category'],
+            productStyles: productStyles,
+            imagesStyles: imagesStyles,
+            decorators: decorators,
         });
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('item-page-container');
+        this.cache = new DOMParser().parseFromString(template, 'text/html')
+            .getElementsByClassName(productStyles.block)[0];
         this.parent.appendChild(this.cache);
 
-        document.getElementsByClassName('button_inc')[0].addEventListener('click', (evt) => {
-            evt.preventDefault();
-            document.getElementsByClassName('item-count-block__item-count')[0].innerHTML =
-            (+document.getElementsByClassName('item-count-block__item-count')[0].innerHTML + 1).toString();
+        const mainImage = this.cache.getElementsByClassName(imagesStyles.imgXXL)[0];
+        Array.from(this.cache.getElementsByClassName(imagesStyles.imgXL)).forEach((image) => {
+            image.addEventListener('click', () => {
+                mainImage.setAttribute('src', image.getAttribute('src'));
+            });
         });
-
-        document.getElementsByClassName('button_dec')[0].addEventListener('click', (evt) => {
+        document.getElementsByClassName(productStyles.cartButton)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
-            const amount = +document.getElementsByClassName('item-count-block__item-count')[0].innerHTML;
-            if (amount <= 0) {
-                return;
-            }
-            document.getElementsByClassName('item-count-block__item-count')[0].innerHTML = (amount - 1).toString();
-        });
-
-        document.getElementsByClassName('button_add-to-cart')[0].addEventListener('click', (evt) => {
-            evt.preventDefault();
-            const count = document.getElementsByClassName('item-count-block__item-count')[0].innerHTML;
-            Bus.globalBus.emit(Events.CartAddProduct, this.ID, count);
+            Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
         });
     }
 }

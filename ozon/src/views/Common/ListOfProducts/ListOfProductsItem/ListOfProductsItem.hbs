@@ -1,26 +1,42 @@
-<div class="item-container">
-    <div class="item-id" style="display: none">
-        {{itemId}}
-    </div>
-    <div class="item-image">
-        <img src={{itemImage.src}} alt="" class="img img_item-preview">
-    </div>
-    <span class="item-name">{{itemName}}</span>
-    <div class="item-rating">
-        {{#for 0 itemRating 1}}
-            <div class="item-rating-star item-rating-star_yellowgreen">
-                <img src="" alt="" class="">
+<div class="{{itemStyles.block}}" item-id="{{itemId}}">
+    <div class="{{itemStyles.infoWrapper}}">
+        <div class="{{itemStyles.images}}">
+            <img src="{{itemImage.src}}" class="{{itemStyles.image}}">
+        </div>
+        <div class="{{itemStyles.discountBlock}}">
+            <div class="{{itemStyles.discountBadge}}" {{#ifEquals itemPrice.discount 0}} style="visibility: hidden;"{{/ifEquals}}>
+                <span class="{{itemStyles.discountText}}">
+                    -{{itemPrice.discount}}%
+                </span>
             </div>
-        {{/for}}
-        {{#for itemRating 5 1}}
-            <div class="item-rating-star item-rating-star_gray">
-                <img src="" alt="" class="">
+        </div>
+        <div class="{{itemStyles.priceBlock}}">
+            <span class="{{itemStyles.discountPrice}}  {{#ifEquals itemPrice.discount 0}} {{decorators.hidden}}{{/ifEquals}}">
+                {{itemPrice.discountPrice}}₽
+            </span>
+            <span class="{{itemStyles.price}} {{#ifNotEquals itemPrice.discount 0}}{{itemStyles.strikethrough}}{{/ifNotEquals}}"  {{#ifEquals itemPrice.discount 0}} style="font-size: var(--font-size-m); font-weight: var(--bold-font)"{{/ifEquals}}>
+                {{itemPrice.base}}₽
+            </span>
+        </div>
+        <div class="{{itemStyles.descriptionBlock}}">
+            <span class="{{itemStyles.name}}">
+                {{itemName}}
+            </span>
+            <div class="{{itemStyles.rating}}">
+                {{#for 0 itemRating 1}}
+                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="">
+                {{/for}}
+                {{#for itemRating 5 1}}
+                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="">
+                {{/for}}
             </div>
-        {{/for}}
+        </div>
     </div>
-    <div class="item-price-block {{#ifNotEquals itemPrice.discount 0}}discount-active{{/ifNotEquals}}">
-        <span class="item-discount-price item-price">{{itemPrice.discountPrice}}</span>
-        <span class="item-base-price item-price">{{itemPrice.base}}</span>
-        <span class="item-discount item-price">{{itemPrice.discount}}% Off</span>
+    <div class="{{itemStyles.buttonsBlock}}">
+        <button class="{{itemStyles.cartButton}}">
+            <span class="{{itemStyles.buttonText}}">
+                В корзину
+            </span>
+        </button>
     </div>
 </div>

@@ -34,18 +34,13 @@ class CartModel extends BaseModel {
      * @param {number | string} count amount of product
      */
     addProduct(id, count) {
-        if (this.#ids.includes(id)) {
-            this.changeItemAmount(id, count);
-            return;
-        }
-
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id,
                 count: +count,
             },
         }).then((response) => {
-            if (response.status !== Responses.Success) {
+            if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
             return response.json();
@@ -75,6 +70,16 @@ class CartModel extends BaseModel {
      * @param {number | string} count new amount of product
      */
     changeItemAmount(id, count) {
+        if (count === 0) {
+            this.removeProduct(id);
+            return;
+        }
+        for (const product of this.#products) {
+            if (product.id === id) {
+                this.#products[this.#products.indexOf(product)].count = +count;
+            }
+        }
+
         AjaxModule.putUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id,
@@ -92,6 +97,11 @@ class CartModel extends BaseModel {
      * @param {number} id id of removed product
      */
     removeProduct = (id) => {
+        for (const product of this.#products) {
+            if (product.id === id) {
+                this.#products.splice(this.#products.indexOf(product), 1);
+            }
+        }
         AjaxModule.deleteUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id},
@@ -138,7 +148,7 @@ class CartModel extends BaseModel {
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
-                this.bus.emit(Events.CartUserUnauthorized);
+                this.bus.emit(Events.CartLoaded, Responses.Unauthorized);
                 return;
             }
             case HTTPResponses.InternalError: {

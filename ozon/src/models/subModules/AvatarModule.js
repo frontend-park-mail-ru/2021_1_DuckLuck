@@ -1,9 +1,9 @@
 import {AjaxModule} from '../../modules/Ajax/Ajax.js';
-import {fileServerHost, serverApiPath, urls} from '../../utils/urls/urls';
 import BaseModel from '../BaseModel';
 import Events from '../../utils/bus/events';
 import Responses from '../../utils/bus/responses';
 import HTTPResponses from '../../utils/http-responses/httpResponses';
+import {serverApiPath, staticServerHost, urls} from '../../utils/urls/urls';
 
 /**
  * @description Model for Avatar Loading/Uploading in MVP Arch
@@ -16,8 +16,8 @@ class AvatarModule extends BaseModel {
      * @param {string} URL New URL for avatar
      */
     set avatarURL(URL) {
-        if (URL === '') {
-            this.#avatarURL = fileServerHost + urls.defaultAvatar;
+        if (URL === '' || URL === staticServerHost + '/') {
+            this.#avatarURL = staticServerHost + urls.defaultAvatar;
             return;
         }
 
@@ -38,11 +38,11 @@ class AvatarModule extends BaseModel {
         }).then((response) => {
             return response.json();
         }).then((response) => {
-            this.#saveAndEmit(response.url.String);
+            this.#saveAndEmit(response.url);
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
-        return fileServerHost + urls.defaultAvatar;
+        return staticServerHost + urls.defaultAvatar;
     }
 
     /**
@@ -66,7 +66,7 @@ class AvatarModule extends BaseModel {
                 }
                 return response.json();
             }).then((response) => {
-                this.#saveAndEmit(response.url.String);
+                this.#saveAndEmit(response.url);
             });
         }).catch((err) => {
             switch (err) {
@@ -88,10 +88,10 @@ class AvatarModule extends BaseModel {
 
     /**
      *
-     * @param {URL} url url to avatar on file server
+     * @param {string} url url to avatar on file server
      */
     #saveAndEmit = (url) => {
-        this.avatarURL = fileServerHost + url;
+        this.avatarURL = url;
         this.bus.emit(Events.ProfileAvatarResult, Responses.Success);
     }
 

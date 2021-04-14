@@ -17,6 +17,7 @@ class HeaderPresenter extends BasePresenter {
         Bus.globalBus.on(Events.HeaderChangeCatalogID, this.changeCatalogID);
         Bus.globalBus.on(Events.LoginEmitResult, this.updateAuthorizeState);
         Bus.globalBus.on(Events.SignupEmitResult, this.updateAuthorizeState);
+        Bus.globalBus.on(Events.ProfileLogoutEmitResult, this.updateAuthorizeState);
         this.bus.on(Events.HeaderLoad, this.loadHeader);
         this.bus.on(Events.HeaderLoaded, this.headerLoadedReaction);
     }

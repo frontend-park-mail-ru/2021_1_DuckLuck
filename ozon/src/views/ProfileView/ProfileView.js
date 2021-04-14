@@ -1,6 +1,7 @@
 import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
+import profileStyles from './ProfileView.css';
 import Events from '../../utils/bus/events';
 
 /**
@@ -24,30 +25,38 @@ export class ProfileView extends BaseView {
         this.parent.innerHTML = '';
         if (this.cache !== '') {
             this.parent.appendChild(this.cache);
-            this.renderData();
+            this.bus.emit(Events.ProfileAllGet);
             return;
         }
 
         const htmlTemplate = profileTemplate({
-            inputFields: [new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
-                new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
-                new Input({type: 'text', name: 'lastName', placeholder: 'Last name'})],
+            inputFields: [
+                new Input({type: 'text', name: 'firstName', placeholder: 'Имя'}),
+                new Input({type: 'text', name: 'lastName', placeholder: 'Фамилия'}),
+            ],
+            inputEmail: new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),
+            profileStyles: profileStyles,
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
         this.parent.appendChild(this.cache);
         const form = document.getElementById('form');
-
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.ProfileFLNameChange);
         });
 
-        const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
+        const avatarInput = document.getElementById('avatar-input');
         avatarInput.addEventListener('change', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.ProfileAvatarChange);
+        });
+
+        const logout = document.getElementById('logout');
+        logout.addEventListener('click', (evt) => {
+            evt.preventDefault();
+            this.bus.emit(Events.ProfileLogout);
         });
 
         this.bus.emit(Events.ProfileAllGet);
@@ -62,7 +71,8 @@ export class ProfileView extends BaseView {
     changeFirstLastName = (firstName, lastName) => {
         document.getElementsByName('firstName')[0].value = firstName;
         document.getElementsByName('lastName')[0].value = lastName;
-        document.getElementsByClassName('profile-info__user_name')[0].innerHTML = firstName + ' ' + lastName;
+        document.getElementById('profile-firstName').textContent = firstName;
+        document.getElementById('profile-lastName').textContent = lastName;
     }
 
     /**
@@ -70,7 +80,7 @@ export class ProfileView extends BaseView {
      * @param {string} avatarURL
      */
     changeAvatar = (avatarURL) => {
-        document.getElementsByClassName('profile-info__user-avatar')[0].src = avatarURL;
+        document.getElementById('avatar-img').src = avatarURL;
     }
 
     /**

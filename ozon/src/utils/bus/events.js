@@ -19,6 +19,9 @@ const Events = {
     ProfileCheckAuthResult: 'profile-check-auth-result',
     ProfileAllResult: 'profile-all-result',
     ProfileAllGet: 'profile-all-get',
+    ProfileLogout: 'profile-logout',
+    ProfileLogoutEmitResult: 'profile-logout-emit-result',
+    ProfileIncorrectLogout: 'profile-logout-incorrect',
 
     ProductsLoad: 'products-load',
     ProductsLoaded: 'products-loaded',
@@ -35,6 +38,7 @@ const Events = {
     HeaderChangeCategoryID: 'header-change-category-id',
 
     CartAddProduct: 'cart-add-product',
+    CartProductChange: 'cart-update-product',
     CartRemoveProduct: 'cart-remove-product',
     CartProductRemoved: 'cart-removed-product',
     CartLoad: 'cart-load',

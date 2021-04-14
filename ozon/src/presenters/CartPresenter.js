@@ -22,6 +22,7 @@ class CartPresenter extends BasePresenter {
         Bus.globalBus.on(Events.CartProductRemoved, this.productRemovedReaction);
         Bus.globalBus.on(Events.CartAddProduct, this.addProduct);
         Bus.globalBus.on(Events.CartRemoveProduct, this.removeProduct);
+        Bus.globalBus.on(Events.CartProductChange, this.changeProduct);
     }
 
     /**
@@ -46,14 +47,27 @@ class CartPresenter extends BasePresenter {
     }
 
     /**
-     * @param {Responses} status
+     * @param {Responses} result
      */
-    cartLoadedReaction = (status) => {
-        if (status === Responses.Success) {
+    cartLoadedReaction = (result) => {
+        switch (result) {
+        case Responses.Success: {
             this.view.render();
             return;
         }
-        Router.open('/login', {replaceState: true});
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        case Responses.Unauthorized: {
+            Router.open('/login', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
     }
 
     /**
@@ -66,6 +80,10 @@ class CartPresenter extends BasePresenter {
             return;
         }
         this.model.addProduct(id, count);
+    }
+
+    changeProduct = ({id, count}) => {
+        this.model.changeItemAmount(id, count);
     }
 
     /**
@@ -96,6 +114,10 @@ class CartPresenter extends BasePresenter {
         }
         case Responses.Offline: {
             Router.open('/offline');
+            break;
+        }
+        case Responses.Unauthorized: {
+            Router.open('/login');
             break;
         }
         default: {

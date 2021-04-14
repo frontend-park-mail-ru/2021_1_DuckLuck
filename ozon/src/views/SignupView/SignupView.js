@@ -7,6 +7,7 @@ import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
 import Router from '../../utils/router/Router.js';
 import Events from '../../utils/bus/events';
+import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.css';
 
 /**
  * @class  SignupView
@@ -33,27 +34,29 @@ export class SignupView extends BaseView {
                             new Input({
                                 type: 'email',
                                 name: 'email',
-                                placeholder: 'Email address',
+                                placeholder: 'Электронная почта',
                             }),
                             new Input({
                                 type: 'password',
                                 name: 'password',
-                                placeholder: 'Password',
+                                placeholder: 'Пароль',
                             }),
                             new Input({
                                 type: 'password',
                                 name: 'repeat_password',
-                                placeholder: 'Repeat password',
+                                placeholder: 'Повтор пароля',
                             }),
                         ],
-                        forgotPassLink: new Link({
-                            href: 'test',
+                        link: new Link({
+                            href: '/login',
+                            name: 'Войти',
                         }),
                         submitButton: new Button({
-                            text: 'Register',
+                            text: 'Зарегистрироваться',
                             type: 'submit',
                         }),
                     },
+                    styles: AuthenticationFormStyles,
                 }),
             background: new Blind().getHtmlString(),
             popupType: 'signup',
@@ -61,20 +64,21 @@ export class SignupView extends BaseView {
 
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
 
-        const blind = this.cache.getElementsByClassName('blind')[0];
-        blind.addEventListener('click', (evt) => {
-            evt.preventDefault();
-            this.remove();
-            Router.return();
-        });
+        this.cache.getElementsByClassName('blind')[0]
+            .addEventListener('click', (evt) => {
+                evt.preventDefault();
+                this.remove();
+                Router.return();
+            });
 
-        const form = this.cache.getElementsByClassName('form-body')[0];
-        form.addEventListener('submit', (evt) => {
+        const form = this.cache.getElementsByClassName(AuthenticationFormStyles.button)[0];
+        form.addEventListener('click', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.SignupSendData);
         });
 
-        this.cache.getElementsByClassName('link link_weight-h1')[1]
+
+        this.cache.getElementsByClassName(AuthenticationFormStyles.signup)[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
                 this.remove();

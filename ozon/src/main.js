@@ -1,7 +1,6 @@
 import {ProfileView} from './views/ProfileView/ProfileView.js';
 import {LoginView} from './views/LoginView/LoginView.js';
 import {SignupView} from './views/SignupView/SignupView.js';
-import {HomeView} from './views/HomeView/HomeView.js';
 import {ProductView} from './views/ProductView/ProductView.js';
 import {ProductsView} from './views/ProductsView/ProductsView';
 import {HeaderView} from './views/HeaderView/HeaderView';
@@ -43,7 +42,6 @@ const application = document.getElementById('app');
 
 Router.root = application;
 
-const homeView = new HomeView(application, null, null);
 const offlineView = new OfflineView(application, null, null);
 
 const signupPresenter = new SignupPresenter(application, SignupView, SignupModel);
@@ -55,7 +53,7 @@ const cartPresenter = new CartPresenter(application, CartView, CartModel);
 const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
 
 Router
-    .register(/^\/$/, homeView)
+    .register(/^\/$/, productsPresenter.view)
     .register(/^\/signup$/, signupPresenter.view)
     .register(/^\/login$/, loginPresenter.view)
     .register(/^\/profile$/, profilePresenter.view)

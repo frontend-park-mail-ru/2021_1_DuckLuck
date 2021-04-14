@@ -7,6 +7,8 @@ import {AjaxModule} from '../modules/Ajax/Ajax';
 import {serverApiPath, urls} from '../utils/urls/urls';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import HTTPResponses from '../utils/http-responses/httpResponses';
+import {Bus} from '../utils/bus/bus.js';
 
 /**
  * @description Model for Profile in MVP Arch. THIS IS A FACADE!
@@ -117,6 +119,9 @@ class ProfileModel extends BaseModel {
             url: serverApiPath + urls.profileUrl,
             body: null,
         }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
             return response.json();
         }).then((response) => {
             this.#fLNameModel.firstName = response.first_name;
@@ -124,8 +129,34 @@ class ProfileModel extends BaseModel {
             this.#avatarModel.avatarURL = response.avatar.url;
             this.#emailModel.email = response.email;
             this.bus.emit(Events.ProfileAllResult, Responses.Success);
+        }).catch((result) => {
+            switch (result) {
+            case Responses.Offline: {
+                this.bus.emit(Events.ProfileAllResult, Responses.Offline);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.ProfileAllResult, Responses.Error);
+                break;
+            }
+            }
+        });
+    }
+
+    /**
+     * @description logout profile from one AJAX request
+     */
+    profileLogout() {
+        AjaxModule.deleteUsingFetch({
+            url: serverApiPath + urls.logoutUrl,
+        }).then((response) => {
+            if (response.status === HTTPResponses.Success) {
+                Bus.globalBus.emit(Events.ProfileLogoutEmitResult, Responses.Success);
+            } else {
+                Bus.globalBus.emit(Events.ProfileLogoutEmitResult, Responses.Error);
+            }
         }).catch(() => {
-            this.bus.emit(Events.ProfileAllResult, Responses.Error);
+            Bus.globalBus.emit(Events.ProfileLogoutEmitResult, Responses.Error);
         });
     }
 }

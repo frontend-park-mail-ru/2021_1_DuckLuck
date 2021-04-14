@@ -1,0 +1,13 @@
+@import '../../../constants.css';
+
+.wrapper {
+    display: flex;
+    height: 100%;
+}
+
+.title {
+    margin: auto;
+    font-family: var(--font);
+    font-size: var(--font-size-xl);
+    font-weight: var(--bold-font);
+}

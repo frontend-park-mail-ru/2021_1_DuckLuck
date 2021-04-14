@@ -2,6 +2,7 @@ import {BaseView} from '../BaseView.js';
 import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import Router from '../../utils/router/Router.js';
+import {OfflineForm} from '../Common/OfflineForm/OfflineForm.js';
 
 /**
  * @class  OfflineView
@@ -20,7 +21,7 @@ export class OfflineView extends BaseView {
         }
 
         const template = new Popup().getHtmlString({
-            popupBody: 'YOU ARE CURRENTLY OFFLINE!',
+            popupBody: new OfflineForm().getHtmlString(),
             background: new Blind().getHtmlString(),
             popupType: 'signup',
         });

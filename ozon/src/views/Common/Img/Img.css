@@ -25,10 +25,18 @@
 }
 
 .menuImgS {
-    size: var(--img-size-s);
+    size: var(--img-size-xs);
 }
 
 .menuImgL {
-    size: var(--img-size-l);
+    size: var(--img-size-s);
 }
 
+.imgXL {
+    height: 100%;
+}
+
+.imgXXL {
+    height: 100%;
+    margin: auto;
+}

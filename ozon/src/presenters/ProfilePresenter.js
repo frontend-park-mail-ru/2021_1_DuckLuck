@@ -24,6 +24,7 @@ class ProfilePresenter extends BasePresenter {
         this.bus.on(Events.ProfileCheckAuthResult, this.tryAuthProcessResult);
         this.bus.on(Events.ProfileAllGet, this.getAllData);
         this.bus.on(Events.ProfileAllResult, this.renderAllData);
+        this.bus.on(Events.ProfileLogout, this.profileLogout);
 
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
     }
@@ -34,7 +35,7 @@ class ProfilePresenter extends BasePresenter {
      * @return {boolean}
      */
     isFormValid = (specificTypeToCheck = []) => {
-        return isValidForm(document.getElementsByClassName('profile-credentials__form')[0], specificTypeToCheck);
+        return isValidForm(document.getElementById('form'), specificTypeToCheck);
     }
 
     /**
@@ -55,10 +56,19 @@ class ProfilePresenter extends BasePresenter {
      * @description Processed a signal
      */
     firstLastNameSendProcessResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.changeFirstLastName(this.getFirstName(), this.getLastName());
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 
@@ -118,13 +128,21 @@ class ProfilePresenter extends BasePresenter {
      * @description get data view and send to model
      */
     sendAvatar = () => {
-        if (!this.isFormValid(['file'])) {
-            this.bus.emit(Events.ProfileIncorrectAvatar);
+        const avatarInput = document.getElementById('avatar-input');
+        this.model.changeAvatar(avatarInput.files[0]);
+    }
+
+    /**
+     * @description logout from profile
+     */
+    profileLogout = () => {
+        if (!navigator.onLine) {
+            Router.open('/offline');
             return;
         }
-
-        const avatarInput = document.getElementsByClassName('profile-info__user-avatar-input')[0];
-        this.model.changeAvatar(avatarInput.files[0]);
+        this.view.remove();
+        Router.open('/', {replaceState: true});
+        this.model.profileLogout();
     }
 
     /**
@@ -219,6 +237,10 @@ class ProfilePresenter extends BasePresenter {
     renderAllData = (status) => {
         if (status === Responses.Success) {
             this.view.renderData();
+            return;
+        }
+        if (status === Responses.Offline) {
+            Router.open('/offline', {replaceState: true});
             return;
         }
         console.error(status);
