@@ -59,10 +59,7 @@ export class ProductsView extends BaseView {
             itemContainer.getElementsByClassName(ListOfProductsItemStyles.cartButton)[0]
                 .addEventListener('click', (evt) => {
                     evt.preventDefault();
-                    Bus.globalBus.emit(Events.CartAddProduct, {
-                        id: productID,
-                        count: 1,
-                    });
+                    Bus.globalBus.emit(Events.CartAddProduct, productID, 1);
                 });
         }
 

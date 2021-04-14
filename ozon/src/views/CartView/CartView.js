@@ -56,7 +56,7 @@ export class CartView extends BaseView {
                     id: itemId,
                     count: count-1,
                 });
-                this.show();
+                this.changeContent(itemId, count - 1);
             });
 
             elemList.getElementsByClassName(cartStyles.decButton)[0].addEventListener('click', (evt) => {
@@ -65,7 +65,7 @@ export class CartView extends BaseView {
                     id: itemId,
                     count: count+1,
                 });
-                this.show();
+                this.changeContent(itemId, count + 1);
             });
         }
 
@@ -74,4 +74,23 @@ export class CartView extends BaseView {
             Router.open('/order');
         });
     };
+
+    changeContent = (changedID, newCount) => {
+        let baseCost = 0;
+        let discount = 0;
+        for (const product of this.presenter.products) {
+            baseCost += +product.count * +product.price.base_cost;
+            discount += +product.count * +product.price.discount;
+        }
+
+        document.getElementsByClassName(cartStyles.orderInfoPrice)[0].innerHTML = baseCost.toString();
+        document.getElementsByClassName(cartStyles.orderInfoDiscount)[0].innerHTML = discount.toString();
+        document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML = (baseCost - discount).toString();
+
+        for (const elemList of document.getElementsByClassName(cartStyles.productsListElem)) {
+            if (elemList.getAttribute('product_id') === changedID) {
+                elemList.getElementsByClassName(cartStyles.count)[0].textContent = newCount;
+            }
+        }
+    }
 }
