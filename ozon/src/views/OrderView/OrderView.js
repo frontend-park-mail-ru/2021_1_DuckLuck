@@ -20,7 +20,7 @@ export class OrderView extends BaseView {
         let discount = 0;
         for (const product of this.presenter.products) {
             baseCost += +product.count * +product.price.base_cost;
-            discount += +product.count * +product.price.discount;
+            discount += +product.count * (Math.ceil(product.price.base_cost * (product.price.discount * 0.01)));
         }
         const template = orderTemplate({
             productsList: this.presenter.products,
