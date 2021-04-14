@@ -4,6 +4,7 @@ import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import HTTPResponses from '../utils/http-responses/httpResponses';
+import Router from '../utils/router/Router';
 
 /**
  * @description Model for Product in MVP Arch
@@ -90,11 +91,18 @@ class OrderModel extends BaseModel {
             },
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
-                console.error(response);
-                return;
+                throw response.status;
             }
         }).catch((err) => {
-            console.error(err);
+            switch (err) {
+            case HTTPResponses.Offline: {
+                Router.open('/offline');
+                break;
+            }
+            default: {
+                console.error('error order sending');
+            }
+            }
         });
     }
 }

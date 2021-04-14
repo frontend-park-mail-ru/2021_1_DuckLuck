@@ -1,28 +1,8 @@
 const CACHE_NAME = 'OZON-CACHE-v1';
 
 
-const resources = [
-    '/dist/bundle.js',
-    '/index.html',
-    '/styles.css',
-    '/views/decorators.css',
-    '/views/ProductView/ProductView.css',
-    '/views/ProfileView/ProfileView.css',
-    '/views/Common/Button/Button.css',
-    '/views/Common/Rating/Rating.css',
-    '/views/Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.css',
-    '/views/Common/ListOfProducts/ListOfProducts.css',
-    '/views/Common/Img/Img.css',
-    '/views/Common/Popup/Popup.css',
-    '/views/Common/Pagination/Pagination.css',
-    '/views/Common/Input/Input.css',
-    '/views/Common/Link/Link.css',
-    '/views/Common/AuthenticationForm/AuthenticationForm.css',
-    '/views/Common/Blind/Blind.css',
-    '/views/HeaderView/HeaderView.css',
-    '/constants.css',
-    '/',
-];
+const resources = [];
+
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
@@ -34,22 +14,34 @@ self.addEventListener('install', (event) => {
     );
 });
 
-self.addEventListener('fetch', (event) => {
-    if (navigator.onLine) {
-        return;
-    }
+self.addEventListener('activate', (event) => {
+    event.waitUntil(self.clients.claim());
+});
 
+self.addEventListener('fetch', (event) => {
     event.respondWith(
-        caches
-            .match(event.request)
-            .then((cachedResponse) => {
-                if (cachedResponse) {
-                    return cachedResponse;
+        (async() => {
+            if (navigator.onLine) {
+                const response = await fetch(event.request);
+                if (response && response.ok && event.type && event.request.method === 'GET') {
+                    const cache = await caches.open(CACHE_NAME);
+                    await cache.put(event.request, response.clone());
                 }
-                return fetch(event.request);
-            })
-            .catch((err) => {
-                console.error('smth went wrong with caches.match: ', err);
-            }),
+
+                return response;
+            }
+            const cache = await caches.open(CACHE_NAME);
+            const response = await cache.match(event.request);
+            if (!response || event.request.method !== 'GET') {
+                return new Response(null, {
+                    headers: {
+                        'Content-Type': 'text/html; charset=utf-8',
+                    },
+                    status: 410,
+                });
+            } else {
+                return response;
+            }
+        })(),
     );
 });

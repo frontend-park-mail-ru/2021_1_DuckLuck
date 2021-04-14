@@ -46,10 +46,6 @@ class OrderPresenter extends BasePresenter {
      */
 
     loadOrder = () => {
-        if (!navigator.onLine) {
-            Router.open('/offline');
-            return;
-        }
         this.model.loadOrder();
     }
 
@@ -71,10 +67,6 @@ class OrderPresenter extends BasePresenter {
      * @description Sends order form to model
      */
     sendOrder = () => {
-        if (!navigator.onLine) {
-            Router.open('/offline');
-            return;
-        }
         this.model.address = document.getElementsByName('address')[0].value.trim();
         const email = document.getElementsByName('email')[0].value.trim();
         const first_name = document.getElementsByName('firstName')[0].value.trim();

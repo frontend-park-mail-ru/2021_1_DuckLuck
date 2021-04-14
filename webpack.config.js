@@ -8,8 +8,7 @@ module.exports = {
         path: path.resolve(__dirname, './ozon/src/dist'),
     },
     module: {
-        rules: [
-            {
+        rules: [ {
             test: /\.hbs$/,
             loader: 'handlebars-loader',
             options: {

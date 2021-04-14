@@ -20,11 +20,19 @@ class LoginModel extends BaseModel {
             url: serverApiPath + urls.loginUrl,
             body: {email, password},
         }).then((response) => {
-            if (response.status === HTTPResponses.Success) {
-                Bus.globalBus.emit(Events.LoginEmitResult, Responses.Success);
+            switch (response.status) {
+            case HTTPResponses.Success: {
                 this.bus.emit(Events.LoginEmitResult, Responses.Success);
-            } else {
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.LoginEmitResult, Responses.Offline);
+                break;
+            }
+            default: {
                 this.bus.emit(Events.LoginEmitResult, Responses.Error);
+                break;
+            }
             }
         }).catch(() => {
             this.bus.emit(Events.LoginEmitResult, Responses.Error);

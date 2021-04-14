@@ -23,16 +23,12 @@ class SignupPresenter extends BasePresenter {
      * @description get data from view and send to model
      */
     sendFormToModel = () => {
-        // if (!this.isFormValid(['text'])) {
-        //     this.bus.emit(Events.SignupIncorrectForm);
-        //     return;
-        // }
-        if (!navigator.onLine) {
-            Router.open('/offline');
+        if (!this.isFormValid(['text'])) {
+            this.bus.emit(Events.SignupIncorrectForm);
             return;
         }
-        const email = document.getElementsByName('email')[0].value.trim();
-        const password = document.getElementsByName('password')[0].value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
         this.model.signupUser({email, password});
     }
 
@@ -41,12 +37,21 @@ class SignupPresenter extends BasePresenter {
      * @param {string} result
      */
     processSignupResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.remove();
             Bus.globalBus.emit(Events.ProfileNewUserLoggedIn);
             Router.open('/profile', {replaceState: true});
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 }

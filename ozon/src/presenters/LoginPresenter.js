@@ -23,16 +23,12 @@ class LoginPresenter extends BasePresenter {
      * @description Gets data from View, than validates it and sends to Model.
      */
     sendFormToModel = () => {
-        // if (!this.isFormValid(['text'])) {
-        //     this.bus.emit(Events.LoginIncorrectForm);
-        //     return;
-        // }
-        if (!navigator.onLine) {
-            Router.open('/offline');
+        if (!this.isFormValid(['text'])) {
+            this.bus.emit(Events.LoginIncorrectForm);
             return;
         }
-        const email = document.getElementsByName('email')[0].value.trim();
-        const password = document.getElementsByName('password')[0].value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
         this.model.loginUser({email, password});
     }
 
@@ -42,12 +38,21 @@ class LoginPresenter extends BasePresenter {
      * @description Processes result for login attempt
      */
     processLoginResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.remove();
             Bus.globalBus.emit(Events.ProfileNewUserLoggedIn);
             Router.open('/profile', {replaceState: true});
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 }

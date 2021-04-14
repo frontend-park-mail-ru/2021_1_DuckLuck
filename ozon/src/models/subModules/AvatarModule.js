@@ -3,6 +3,7 @@ import {fileServerHost, serverApiPath, urls} from '../../utils/urls/urls';
 import BaseModel from '../BaseModel';
 import Events from '../../utils/bus/events';
 import Responses from '../../utils/bus/responses';
+import HTTPResponses from '../../utils/http-responses/httpResponses';
 
 /**
  * @description Model for Avatar Loading/Uploading in MVP Arch
@@ -60,12 +61,28 @@ class AvatarModule extends BaseModel {
                 url: serverApiPath + urls.profileAvatarUrl,
                 body: null,
             }).then((response) => {
+                if (response.status !== HTTPResponses.Success) {
+                    throw response.status;
+                }
                 return response.json();
             }).then((response) => {
                 this.#saveAndEmit(response.url);
             });
-        }).catch(() => {
-            this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.ProfileAvatarResult, Responses.Unauthorized);
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.ProfileAvatarResult, Responses.Offline);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
+                break;
+            }
+            }
         });
     }
 

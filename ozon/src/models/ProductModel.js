@@ -3,6 +3,7 @@ import {serverApiPath} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
+import HTTPResponses from '../utils/http-responses/httpResponses';
 
 /**
  * @description Model for Product in MVP Arch
@@ -26,6 +27,9 @@ class ProductModel extends BaseModel {
         AjaxModule.getUsingFetch({
             url: serverApiPath + `/product/${itemId}`,
         }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
             return response.json();
         }).then((parsedJson) => {
             const base = parsedJson['price']['base_cost'];
@@ -46,8 +50,21 @@ class ProductModel extends BaseModel {
                 images: parsedJson['images'],
             };
             this.bus.emit(Events.ProductLoaded, Responses.Success);
-        }).catch(() => {
-            this.bus.emit(Events.ProductLoaded, Responses.Error);
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.ProductLoaded, Responses.Unauthorized);
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.ProductLoaded, Responses.Offline);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.ProductLoaded, Responses.Error);
+                break;
+            }
+            }
         });
     }
 }
