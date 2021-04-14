@@ -174,3 +174,8 @@
     display: flex;
     align-items: center;
 }
+
+.priceWithoutDiscount {
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font)
+}

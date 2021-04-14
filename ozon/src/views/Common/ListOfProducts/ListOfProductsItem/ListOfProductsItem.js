@@ -1,5 +1,6 @@
 import listOFProductsItemTemplate from './ListOfProductsItem.hbs';
 import itemStyles from './ListOfProductsItem.css';
+import decorators from '../../../decorators.css';
 
 /**
  * @class ListOfProductsItem
@@ -34,6 +35,7 @@ export class ListOfProductsItem {
             itemRating: this.itemRating,
             itemPrice: this.itemPrice,
             itemStyles: itemStyles,
+            decorators: decorators,
         });
     }
 }

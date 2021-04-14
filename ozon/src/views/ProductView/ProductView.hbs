@@ -46,8 +46,8 @@
         <div class="{{productStyles.aboutProduct}}"></div>
         <div class="{{productStyles.buyMenu}}">
             <div class="{{productStyles.priceBlock}}">
-                <span class="{{productStyles.discountPrice}}"  {{#ifEquals price.discount 0}} style="display: none;"{{/ifEquals}}>{{price.discountPrice}}₽</span>
-                <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}}"  {{#ifEquals price.discount 0}} style="font-size: var(--font-size-xxl); font-weight: var(--bold-font)"{{/ifEquals}}>{{price.base}}₽</span>
+                <span class="{{productStyles.discountPrice}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
+                <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
             </div>
             <div class="{{productStyles.buttons}}">
                 <button class="{{productStyles.cartButton}}">

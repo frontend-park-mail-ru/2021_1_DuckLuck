@@ -162,15 +162,12 @@
 }
 
 .orderButton {
-    margin: auto;
     width: var(--width-xxl);
     height: var(--height-s);
     border-radius: var(--standart-border-radius);
     border: none;
-    background: #3ac267;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 20px;
+    background: var(--order-color);
+    margin: var(--margin-m) auto auto;
 }
 
 .orderSubmit {
@@ -267,10 +264,6 @@
 .totalPriceText {
     font-weight: var(--bold-font);
     font-size: var(--font-size-l);
-}
-
-.productsList {
-
 }
 
 .input {

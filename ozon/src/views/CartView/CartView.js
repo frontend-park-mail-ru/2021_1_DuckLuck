@@ -52,7 +52,7 @@ export class CartView extends BaseView {
 
             elemList.getElementsByClassName(cartStyles.incButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
-                const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
+                const count = +elemList.getElementsByClassName('count')[0].textContent;
                 if (count <= 1) {
                     return;
                 }
@@ -67,7 +67,7 @@ export class CartView extends BaseView {
 
             elemList.getElementsByClassName(cartStyles.decButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
-                const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
+                const count = +elemList.getElementsByClassName('count')[0].textContent;
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
                     count: count + 1,
@@ -108,7 +108,7 @@ export class CartView extends BaseView {
                 if (newCount === 0) {
                     elemList.remove();
                 }
-                elemList.getElementsByClassName(cartStyles.count)[0].textContent = newCount;
+                elemList.getElementsByClassName('count')[0].textContent = newCount;
             }
         }
     }

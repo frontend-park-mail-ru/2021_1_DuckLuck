@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="{{itemStyles.priceBlock}}">
-            <span class="{{itemStyles.discountPrice}}"  {{#ifEquals itemPrice.discount 0}} style="display: none;"{{/ifEquals}}>
+            <span class="{{itemStyles.discountPrice}}  {{#ifEquals itemPrice.discount 0}} {{decorators.hidden}}{{/ifEquals}}">
                 {{itemPrice.discountPrice}}₽
             </span>
             <span class="{{itemStyles.price}} {{#ifNotEquals itemPrice.discount 0}}{{itemStyles.strikethrough}}{{/ifNotEquals}}"  {{#ifEquals itemPrice.discount 0}} style="font-size: var(--font-size-m); font-weight: var(--bold-font)"{{/ifEquals}}>

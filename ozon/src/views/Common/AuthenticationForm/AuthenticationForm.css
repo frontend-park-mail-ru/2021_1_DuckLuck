@@ -64,10 +64,6 @@
     flex-direction: column;
 }
 
-.inputText {
-
-}
-
 .title {
     font-family: var(--font);
     font-size: var(--font-size-l);
