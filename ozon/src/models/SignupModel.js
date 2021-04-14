@@ -5,7 +5,6 @@ import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import HTTPResponses from '../utils/http-responses/httpResponses';
-import {Bus} from '../utils/bus/bus.js';
 
 /**
  * @description Model for Signup in MVP Arch

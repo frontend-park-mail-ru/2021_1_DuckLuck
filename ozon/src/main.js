@@ -15,7 +15,7 @@ import ProductsModel from './models/ProductsModel';
 import ProductsPresenter from './presenters/ProductsPresenter';
 import ProductModel from './models/ProductModel';
 import ProductPresenter from './presenters/ProductPresenter';
-// import {OfflineView} from './views/OfflineView/OfflineView';
+import {OfflineView} from './views/OfflineView/OfflineView';
 import CartPresenter from './presenters/CartPresenter';
 import {CartView} from './views/CartView/CartView';
 import CartModel from './models/CartModel';
@@ -42,7 +42,7 @@ const application = document.getElementById('app');
 
 Router.root = application;
 
-// const offlineView = new OfflineView(application, null, null);
+const offlineView = new OfflineView(application, null, null);
 
 const signupPresenter = new SignupPresenter(application, SignupView, SignupModel);
 const loginPresenter = new LoginPresenter(application, LoginView, LoginModel);
@@ -60,6 +60,7 @@ Router
     .register(/^\/item(\/(?<productID>[0-9]*))?$/, productPresenter.view)
     .register(/^\/items(\/(?<category>[0-9]*)(\/(?<page>[0-9]*))?)?$/, productsPresenter.view)
     .register(/^\/cart$/, cartPresenter.view)
+    .register(/^\/offline$/, offlineView)
     .register(/^\/order$/, orderPresenter.view);
 
 Router.start();
