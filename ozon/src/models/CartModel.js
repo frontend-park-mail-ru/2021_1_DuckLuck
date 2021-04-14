@@ -75,11 +75,9 @@ class CartModel extends BaseModel {
      * @param {number | string} count new amount of product
      */
     changeItemAmount(id, count) {
-        for (let product of this.#products) {
+        for (const product of this.#products) {
             if (product.id === id) {
-                console.log(this.#products[this.#products.indexOf(product)]);
                 this.#products[this.#products.indexOf(product)].count = +count;
-                console.log(this.#products[this.#products.indexOf(product)]);
             }
         }
 

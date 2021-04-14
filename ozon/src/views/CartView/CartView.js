@@ -48,22 +48,25 @@ export class CartView extends BaseView {
 
         for (const elemList of document.getElementsByClassName(cartStyles.productsListElem)) {
             const itemId = Number(elemList.getAttribute('product_id'));
-            const count = Number(elemList.getElementsByClassName(cartStyles.count)[0].textContent);
 
             elemList.getElementsByClassName(cartStyles.incButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
+                const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
-                    count: count-1,
+                    count: count - 1,
                 });
-                this.changeContent(itemId, count - 1);
+                if (count > 0) {
+                    this.changeContent(itemId, count - 1);
+                }
             });
 
             elemList.getElementsByClassName(cartStyles.decButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
+                const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
-                    count: count+1,
+                    count: count + 1,
                 });
                 this.changeContent(itemId, count + 1);
             });
@@ -75,6 +78,11 @@ export class CartView extends BaseView {
         });
     };
 
+    /**
+     *
+     * @param {number} changedID
+     * @param {number} newCount
+     */
     changeContent = (changedID, newCount) => {
         let baseCost = 0;
         let discount = 0;
@@ -88,7 +96,7 @@ export class CartView extends BaseView {
         document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML = (baseCost - discount).toString();
 
         for (const elemList of document.getElementsByClassName(cartStyles.productsListElem)) {
-            if (elemList.getAttribute('product_id') === changedID) {
+            if (+elemList.getAttribute('product_id') === changedID) {
                 elemList.getElementsByClassName(cartStyles.count)[0].textContent = newCount;
             }
         }
