@@ -9,7 +9,7 @@
 .body {
     max-width: var(--max-width);
     padding: 4px 28px;
-    margin: 0 auto;
+    margin: var(--margin-xl) auto 0;
     width: 100%;
     box-sizing: border-box;
     font-family: var(--font);
