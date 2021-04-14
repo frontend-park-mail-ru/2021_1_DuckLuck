@@ -152,12 +152,11 @@ class ProfileModel extends BaseModel {
         }).then((response) => {
             if (response.status === HTTPResponses.Success) {
                 Bus.globalBus.emit(Events.ProfileLogoutEmitResult, Responses.Success);
-                this.bus.emit(Events.ProfileLogoutEmitResult, Responses.Success);
             } else {
-                this.bus.emit(Events.ProfileLogoutEmitResult, Responses.Error);
+                Bus.globalBus.emit(Events.ProfileLogoutEmitResult, Responses.Error);
             }
         }).catch(() => {
-            this.bus.emit(Events.ProfileLogoutEmitResult, Responses.Error);
+            Bus.globalBus.emit(Events.ProfileLogoutEmitResult, Responses.Error);
         });
     }
 }
