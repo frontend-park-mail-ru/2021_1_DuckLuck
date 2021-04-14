@@ -1,5 +1,4 @@
 import {AjaxModule} from '../../modules/Ajax/Ajax.js';
-import {fileServerHost, serverApiPath, urls} from '../../utils/urls/urls';
 import BaseModel from '../BaseModel';
 import Events from '../../utils/bus/events';
 import Responses from '../../utils/bus/responses';
@@ -16,8 +15,8 @@ class AvatarModule extends BaseModel {
      * @param {string} URL New URL for avatar
      */
     set avatarURL(URL) {
-        if (URL === '') {
-            this.#avatarURL = urls.defaultAvatar;
+        if (URL === '' || URL === staticServerHost + '/') {
+            this.#avatarURL = staticServerHost + urls.defaultAvatar;
             return;
         }
 
@@ -42,7 +41,7 @@ class AvatarModule extends BaseModel {
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
-        return fileServerHost + urls.defaultAvatar;
+        return staticServerHost + urls.defaultAvatar;
     }
 
     /**
