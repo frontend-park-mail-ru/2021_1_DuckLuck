@@ -100,12 +100,14 @@
 .imageWrapper {
     width: var(--img-size-xl);
     height: var(--img-size-xl);
+    cursor: pointer;
 }
 
 .mainImage {
     width: var(--img-size-xxxl);
     height: var(--img-size-xxxl);
     display: flex;
+    cursor: pointer;
 }
 
 .menu {
@@ -158,6 +160,7 @@
     border-radius: var(--standart-border-radius);
     border: none;
     margin: auto;
+    cursor: pointer;
 }
 
 .buttonText {
