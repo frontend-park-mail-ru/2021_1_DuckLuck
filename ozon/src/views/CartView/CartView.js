@@ -52,6 +52,9 @@ export class CartView extends BaseView {
             elemList.getElementsByClassName(cartStyles.incButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
                 const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
+                if (count === 0) {
+                    return;
+                }
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
                     count: count - 1,
