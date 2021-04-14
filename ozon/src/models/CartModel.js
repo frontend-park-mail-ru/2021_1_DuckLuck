@@ -45,7 +45,7 @@ class CartModel extends BaseModel {
                 count: +count,
             },
         }).then((response) => {
-            if (response.status !== Responses.Success) {
+            if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
             return response.json();

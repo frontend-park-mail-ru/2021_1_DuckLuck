@@ -18,114 +18,35 @@
                     </div>
                     <div class="{{cartStyles.productsListBlock}}">
                         <div class="{{cartStyles.productsList}}">
-                            <div class="{{cartStyles.productsListElem}}">
-                                <input type="checkbox" name="a" value="">
-                                <div class="{{cartStyles.image}}">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{cartStyles.productImage}}">
-                                </div>
-                                <div class="{{cartStyles.description}}">
-                                    <span class="{{cartStyles.name}}">Игровой набор Play-Doh 24 банки, 20383F02</span>
-                                    <div class="{{cartStyles.productMenu}}">
-                                        <span class="{{cartStyles.productMenuText}}">В избранное</span>
-                                        <span class="{{cartStyles.productMenuText}}">Удалить</span>
+                            {{#each this.productsList}}
+                                <div class="{{../cartStyles.productsListElem}}">
+                                    <input type="checkbox" name="a" value="">
+                                    <div class="{{../cartStyles.image}}">
+                                        <img src={{this.preview_image}} alt="" class="{{../cartStyles.productImage}}">
+                                    </div>
+                                    <div class="{{../cartStyles.description}}">
+                                        <span class="{{../cartStyles.name}}">{{this.title}}</span>
+                                        <div class="{{../cartStyles.productMenu}}">
+                                            <span class="{{../cartStyles.productMenuText}}">В избранное</span>
+                                            <span class="{{../cartStyles.productMenuText}}" title={{this.id}}>Удалить</span>
+                                        </div>
+                                    </div>
+                                    <div class="{{../cartStyles.priceBlock}}">
+                                        <div class="{{../cartStyles.price}}">
+                                            <span class="{{../cartStyles.priceText}}"></span>
+                                        </div>
+                                        <div class="{{../cartStyles.priceInfo}}">
+                                            <span class="{{../cartStyles.basePrice}}">{{this.price.base_cost}}₽</span>
+                                            <span class="{{../cartStyles.discount}}">Скидка {{this.price.discount}}₽</span>
+                                        </div>
+                                    </div>
+                                    <div class="{{../cartStyles.countMenu}}">
+                                        <button class="{{../cartStyles.countButton}}" title={{this.id}}>-</button>
+                                        <span class="{{../cartStyles.count}}" title={{this.id}}>{{this.count}}</span>
+                                        <button class="{{../cartStyles.countButton}}" title={{this.id}}>+</button>
                                     </div>
                                 </div>
-                                <div class="{{cartStyles.priceBlock}}">
-                                    <div class="{{cartStyles.price}}">
-                                        <span class="{{cartStyles.priceText}}"></span>
-                                    </div>
-                                    <div class="{{cartStyles.priceInfo}}">
-                                        <span class="{{cartStyles.basePrice}}">1309₽</span>
-                                        <span class="{{cartStyles.discount}}">Скидка 430₽</span>
-                                    </div>
-                                </div>
-                                <div class="{{cartStyles.countMenu}}">
-                                    <button class="{{cartStyles.countButton}}">-</button>
-                                    <span class="{{cartStyles.count}}">3</span>
-                                    <button class="{{cartStyles.countButton}}">+</button>
-                                </div>
-                            </div>
-                            <div class="{{cartStyles.productsListElem}}">
-                                <input type="checkbox" name="a" value="">
-                                <div class="{{cartStyles.image}}">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{cartStyles.productImage}}">
-                                </div>
-                                <div class="{{cartStyles.description}}">
-                                    <span class="{{cartStyles.name}}">Игровой набор Play-Doh 24 банки, 20383F02</span>
-                                    <div class="{{cartStyles.productMenu}}">
-                                        <span class="{{cartStyles.productMenuText}}">В избранное</span>
-                                        <span class="{{cartStyles.productMenuText}}">Удалить</span>
-                                    </div>
-                                </div>
-                                <div class="{{cartStyles.priceBlock}}">
-                                    <div class="{{cartStyles.price}}">
-                                        <span class="{{cartStyles.priceText}}"></span>
-                                    </div>
-                                    <div class="{{cartStyles.priceInfo}}">
-                                        <span class="{{cartStyles.basePrice}}">1309₽</span>
-                                        <span class="{{cartStyles.discount}}">Скидка 430₽</span>
-                                    </div>
-                                </div>
-                                <div class="{{cartStyles.countMenu}}">
-                                    <button class="{{cartStyles.countButton}}">-</button>
-                                    <span class="{{cartStyles.count}}">3</span>
-                                    <button class="{{cartStyles.countButton}}">+</button>
-                                </div>
-                            </div>
-                            <div class="{{cartStyles.productsListElem}}">
-                                <input type="checkbox" name="a" value="">
-                                <div class="{{cartStyles.image}}">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{cartStyles.productImage}}">
-                                </div>
-                                <div class="{{cartStyles.description}}">
-                                    <span class="{{cartStyles.name}}">Игровой набор Play-Doh 24 банки, 20383F02</span>
-                                    <div class="{{cartStyles.productMenu}}">
-                                        <span class="{{cartStyles.productMenuText}}">В избранное</span>
-                                        <span class="{{cartStyles.productMenuText}}">Удалить</span>
-                                    </div>
-                                </div>
-                                <div class="{{cartStyles.priceBlock}}">
-                                    <div class="{{cartStyles.price}}">
-                                        <span class="{{cartStyles.priceText}}"></span>
-                                    </div>
-                                    <div class="{{cartStyles.priceInfo}}">
-                                        <span class="{{cartStyles.basePrice}}">1309₽</span>
-                                        <span class="{{cartStyles.discount}}">Скидка 430₽</span>
-                                    </div>
-                                </div>
-                                <div class="{{cartStyles.countMenu}}">
-                                    <button class="{{cartStyles.countButton}}">-</button>
-                                    <span class="{{cartStyles.count}}">3</span>
-                                    <button class="{{cartStyles.countButton}}">+</button>
-                                </div>
-                            </div>
-                            <div class="{{cartStyles.productsListElem}}">
-                                <input type="checkbox" name="a" value="">
-                                <div class="{{cartStyles.image}}">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/92/Golang_Gopher.jpg" alt="" class="{{cartStyles.productImage}}">
-                                </div>
-                                <div class="{{cartStyles.description}}">
-                                    <span class="{{cartStyles.name}}">Игровой набор Play-Doh 24 банки, 20383F02</span>
-                                    <div class="{{cartStyles.productMenu}}">
-                                        <span class="{{cartStyles.productMenuText}}">В избранное</span>
-                                        <span class="{{cartStyles.productMenuText}}">Удалить</span>
-                                    </div>
-                                </div>
-                                <div class="{{cartStyles.priceBlock}}">
-                                    <div class="{{cartStyles.price}}">
-                                        <span class="{{cartStyles.priceText}}"></span>
-                                    </div>
-                                    <div class="{{cartStyles.priceInfo}}">
-                                        <span class="{{cartStyles.basePrice}}">1309₽</span>
-                                        <span class="{{cartStyles.discount}}">Скидка 430₽</span>
-                                    </div>
-                                </div>
-                                <div class="{{cartStyles.countMenu}}">
-                                    <button class="{{cartStyles.countButton}}">-</button>
-                                    <span class="{{cartStyles.count}}">3</span>
-                                    <button class="{{cartStyles.countButton}}">+</button>
-                                </div>
-                            </div>
+                            {{/each}}
                         </div>
                     </div>
                 </div>
@@ -140,16 +61,16 @@
                             <span class="{{cartStyles.orderInfoTitle}}">Ваша корзина</span>
                             <div class="{{cartStyles.orderInfoBody}}">
                                 <div class="{{cartStyles.orderInfoRow}}">
-                                    <span class="{{cartStyles.orderInfoText}}">Товары ()</span>
-                                    <span class="{{cartStyles.orderInfoPrice}}">2 060 ₽</span>
+                                    <span class="{{cartStyles.orderInfoText}}">Товары ({{this.cartSize}})</span>
+                                    <span class="{{cartStyles.orderInfoPrice}}">{{this.baseCost}}₽</span>
                                 </div>
                                 <div class="{{cartStyles.orderInfoRow}}">
                                     <span class="{{cartStyles.orderInfoText}}">Скидка</span>
-                                    <span class="{{cartStyles.orderInfoDiscount}}">- 552 ₽</span>
+                                    <span class="{{cartStyles.orderInfoDiscount}}">- {{this.discount}} ₽</span>
                                 </div>
                                 <div class="{{cartStyles.totalPriceBlock}}">
                                     <span class="{{cartStyles.orderTotalPriceTitle}}">Общая стоимость</span>
-                                    <span class="{{cartStyles.totalPriceText}}">1 508 ₽</span>
+                                    <span class="{{cartStyles.totalPriceText}}">{{this.totalCost}} ₽</span>
                                 </div>
                             </div>
                         </div>

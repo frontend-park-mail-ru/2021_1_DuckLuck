@@ -16,19 +16,69 @@ export class CartView extends BaseView {
 
     render = () => {
         this.parent.innerHTML = '';
+        let baseCost = 0;
+        let discount = 0;
+        for (const product of this.presenter.products) {
+            baseCost += +product.count * +product.price.base_cost;
+            discount += +product.count * +product.price.discount;
+        }
         const template = cartPageTemplate({
             productsList: this.presenter.products,
             cartStyles: cartStyles,
+            cartSize: this.presenter.products.length,
+            baseCost: baseCost,
+            discount: discount,
+            totalCost: baseCost - discount,
+
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
 
 
-        for (const product of document.getElementsByClassName(cartStyles.deleteSelectedText)) {
+        for (const product of document.getElementsByClassName(cartStyles.productMenuText)) {
             product.addEventListener('click', (evt) => {
                 evt.preventDefault();
-                Bus.globalBus.emit(Events.CartRemoveProduct, product.id);
+                if (!product.title) {
+                    return;
+                }
+                Bus.globalBus.emit(Events.CartRemoveProduct, product.title);
             });
         }
+
+        for (const amountButton of document.getElementsByClassName(cartStyles.countButton)) {
+            if (amountButton.innerHTML === '+') {
+                amountButton.addEventListener('click', (evt) => {
+                    evt.preventDefault();
+                    const amount = +document.querySelectorAll(
+                        `span.${cartStyles.count}[title='${amountButton.title}']`)[0].innerHTML;
+                    Bus.globalBus.emit(Events.CartAddProduct, amountButton.title, amount + 1);
+                    this.show();
+                });
+            }
+            if (amountButton.innerHTML === '-') {
+                amountButton.addEventListener('click', (evt) => {
+                    evt.preventDefault();
+                    const amount = +document.querySelectorAll(
+                        `span.${cartStyles.count}[title='${amountButton.title}']`)[0].innerHTML;
+                    Bus.globalBus.emit(Events.CartAddProduct, amountButton.title, amount - 1);
+                    this.show();
+                });
+            }
+        }
+
+        // document.getElementsByClassName('button_inc')[0].addEventListener('click', (evt) => {
+        //     evt.preventDefault();
+        //     document.getElementsByClassName('item-count-block__item-count')[0].innerHTML =
+        //     (+document.getElementsByClassName('item-count-block__item-count')[0].innerHTML + 1).toString();
+        // });
+        //
+        // document.getElementsByClassName('button_dec')[0].addEventListener('click', (evt) => {
+        //     evt.preventDefault();
+        //     const amount = +document.getElementsByClassName('item-count-block__item-count')[0].innerHTML;
+        //     if (amount <= 0) {
+        //         return;
+        //     }
+        //     document.getElementsByClassName('item-count-block__item-count')[0].innerHTML = (amount - 1).toString();
+        // });
     };
 }

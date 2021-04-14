@@ -66,7 +66,6 @@ class CartPresenter extends BasePresenter {
      * @param {number|string} count
      */
     addProduct = (id, count) => {
-        console.log(id, count)
         if (count < 0 || id < 0) {
             return;
         }

@@ -260,6 +260,10 @@
     color: var(--discout-color);
 }
 
+.count {
+
+}
+
 .basePrice {
     font-weight: var(--bold-font);
 }
