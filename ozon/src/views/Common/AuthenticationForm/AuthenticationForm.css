@@ -84,6 +84,7 @@
     border-radius: var(--standart-border-radius);
     border: none;
     height: 48px;
+    cursor: pointer;
 }
 
 .buttonText {
@@ -118,4 +119,5 @@
     font-family: var(--font);
     font-size: var(--font-size-m);
     color: var(--colored-object-color);
+    cursor: pointer;
 }

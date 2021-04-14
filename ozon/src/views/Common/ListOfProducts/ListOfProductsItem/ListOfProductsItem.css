@@ -82,6 +82,7 @@
     border: none;
     position: absolute;
     bottom: 0;
+    cursor: pointer;
 }
 
 .buttonText {
