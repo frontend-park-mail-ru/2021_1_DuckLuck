@@ -65,20 +65,5 @@ export class CartView extends BaseView {
                 });
             }
         }
-
-        // document.getElementsByClassName('button_inc')[0].addEventListener('click', (evt) => {
-        //     evt.preventDefault();
-        //     document.getElementsByClassName('item-count-block__item-count')[0].innerHTML =
-        //     (+document.getElementsByClassName('item-count-block__item-count')[0].innerHTML + 1).toString();
-        // });
-        //
-        // document.getElementsByClassName('button_dec')[0].addEventListener('click', (evt) => {
-        //     evt.preventDefault();
-        //     const amount = +document.getElementsByClassName('item-count-block__item-count')[0].innerHTML;
-        //     if (amount <= 0) {
-        //         return;
-        //     }
-        //     document.getElementsByClassName('item-count-block__item-count')[0].innerHTML = (amount - 1).toString();
-        // });
     };
 }

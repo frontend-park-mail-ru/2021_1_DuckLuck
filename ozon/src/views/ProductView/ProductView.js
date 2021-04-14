@@ -54,7 +54,6 @@ export class ProductView extends BaseView {
             .getElementsByClassName(productStyles.block)[0];
         this.parent.appendChild(this.cache);
 
-
         document.getElementsByClassName(productStyles.cartButton)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);

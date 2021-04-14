@@ -1,3 +1,5 @@
+@import '../../../constants.css';
+
 .popup {
     z-index: 1003;
     left: 50%;
@@ -6,14 +8,14 @@
 }
 
 .popup_login, .popup_signup {
-    margin-left: -279px;
-    margin-top: -301px;
-    width: 557px;
-    height: 602px;
-    border-radius: 10px;
+    margin-left: -208px;
+    margin-top: -168px;
+    width: 416px;
+    height: 363px;
+    border-radius: var(--lower-border-radius);
     background: white;
 }
 
 .popup_signup {
-    height: 650px;
+    height: 405px;
 }

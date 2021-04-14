@@ -23,16 +23,16 @@ class SignupPresenter extends BasePresenter {
      * @description get data from view and send to model
      */
     sendFormToModel = () => {
-        if (!this.isFormValid(['text'])) {
-            this.bus.emit(Events.SignupIncorrectForm);
-            return;
-        }
+        // if (!this.isFormValid(['text'])) {
+        //     this.bus.emit(Events.SignupIncorrectForm);
+        //     return;
+        // }
         if (!navigator.onLine) {
             Router.open('/offline');
             return;
         }
-        const email = document.getElementById('email').value.trim();
-        const password = document.getElementById('password').value.trim();
+        const email = document.getElementsByName('email')[0].value.trim();
+        const password = document.getElementsByName('password')[0].value.trim();
         this.model.signupUser({email, password});
     }
 
