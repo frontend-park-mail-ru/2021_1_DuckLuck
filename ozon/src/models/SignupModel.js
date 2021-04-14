@@ -5,6 +5,7 @@ import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import HTTPResponses from '../utils/http-responses/httpResponses';
+import {Bus} from '../utils/bus/bus';
 
 /**
  * @description Model for Signup in MVP Arch
@@ -22,6 +23,7 @@ class SignupModel extends BaseModel {
         }).then((response) => {
             switch (response.status) {
             case HTTPResponses.Created: {
+                Bus.globalBus.emit(Events.SignupEmitResult, Responses.Success);
                 this.bus.emit(Events.SignupEmitResult, Responses.Success);
                 break;
             }

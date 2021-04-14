@@ -21,7 +21,7 @@ export class CartView extends BaseView {
         let discount = 0;
         for (const product of this.presenter.products) {
             baseCost += +product.count * +product.price.base_cost;
-            discount += +product.count * +product.price.discount;
+            discount += +product.count * Math.ceil(+product.price.discount * +product.price.base_cost / 100);
         }
         const template = cartPageTemplate({
             productsList: this.presenter.products,

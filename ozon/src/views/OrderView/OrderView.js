@@ -3,6 +3,7 @@ import Events from '../../utils/bus/events';
 import orderTemplate from './OrderView.hbs';
 import {Input} from '../Common/Input/Input';
 import orderStyles from './OrderView.css';
+import Router from '../../utils/router/Router';
 
 /**
  * @class ProductsView
@@ -16,8 +17,8 @@ export class OrderView extends BaseView {
 
     render = () => {
         this.parent.innerHTML = '';
-        let baseCost = 0;
-        let discount = 0;
+        let baseCost = this.presenter.baseCost;
+        let discount = this.presenter.discount;
         for (const product of this.presenter.products) {
             baseCost += +product.count * +product.price.base_cost;
             discount += +product.count * +product.price.discount;
@@ -43,6 +44,8 @@ export class OrderView extends BaseView {
         this.cache.getElementsByClassName(orderStyles.orderButton)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.SendOrder);
+            this.remove();
+            Router.open('/', {replaceState: true});
         });
     };
 }
