@@ -46,31 +46,27 @@ export class CartView extends BaseView {
             });
         }
 
-        for (const amountButton of document.getElementsByClassName(cartStyles.countButton)) {
-            if (amountButton.innerHTML === '+') {
-                amountButton.addEventListener('click', (evt) => {
-                    evt.preventDefault();
-                    const amount = +document.querySelectorAll(
-                        `span.${cartStyles.count}[title='${amountButton.title}']`)[0].innerHTML;
-                    Bus.globalBus.emit(Events.CartAddProduct, {
-                        id: Number(amountButton.title),
-                        count: amount+1,
-                    });
-                    this.show();
+        for (const elemList of document.getElementsByClassName(cartStyles.productsListElem)) {
+            const itemId = Number(elemList.getAttribute('product_id'));
+            const count = Number(elemList.getElementsByClassName(cartStyles.count)[0].textContent);
+
+            elemList.getElementsByClassName(cartStyles.incButton)[0].addEventListener('click', (evt) => {
+                evt.preventDefault();
+                Bus.globalBus.emit(Events.CartProductChange, {
+                    id: itemId,
+                    count: count-1,
                 });
-            }
-            if (amountButton.innerHTML === '-') {
-                amountButton.addEventListener('click', (evt) => {
-                    evt.preventDefault();
-                    const amount = +document.querySelectorAll(
-                        `span.${cartStyles.count}[title='${amountButton.title}']`)[0].innerHTML;
-                    Bus.globalBus.emit(Events.CartAddProduct, {
-                        id: Number(amountButton.title),
-                        count: amount-1,
-                    });
-                    this.show();
+                this.show();
+            });
+
+            elemList.getElementsByClassName(cartStyles.decButton)[0].addEventListener('click', (evt) => {
+                evt.preventDefault();
+                Bus.globalBus.emit(Events.CartProductChange, {
+                    id: itemId,
+                    count: count+1,
                 });
-            }
+                this.show();
+            });
         }
 
         document.getElementsByClassName(cartStyles.orderButtonWrapper)[0].addEventListener('click', (evt) => {

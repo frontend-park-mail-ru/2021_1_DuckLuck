@@ -38,6 +38,7 @@ const Events = {
     HeaderChangeCategoryID: 'header-change-category-id',
 
     CartAddProduct: 'cart-add-product',
+    CartProductChange: 'cart-update-product',
     CartRemoveProduct: 'cart-remove-product',
     CartProductRemoved: 'cart-removed-product',
     CartLoad: 'cart-load',

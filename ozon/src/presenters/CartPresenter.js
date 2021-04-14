@@ -22,6 +22,7 @@ class CartPresenter extends BasePresenter {
         Bus.globalBus.on(Events.CartProductRemoved, this.productRemovedReaction);
         Bus.globalBus.on(Events.CartAddProduct, this.addProduct);
         Bus.globalBus.on(Events.CartRemoveProduct, this.removeProduct);
+        Bus.globalBus.on(Events.CartProductChange, this.changeProduct);
     }
 
     /**
@@ -66,6 +67,10 @@ class CartPresenter extends BasePresenter {
             return;
         }
         this.model.addProduct(id, count);
+    }
+
+    changeProduct = ({id, count}) => {
+        this.model.changeItemAmount(id, count);
     }
 
     /**
