@@ -55,10 +55,15 @@ class CartModel extends BaseModel {
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
-                this.bus.emit(Events.CartUserUnauthorized);
-                return;
+                this.bus.emit(Events.CartProductAdded, Responses.Unauthorized);
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.CartProductAdded, Responses.Offline);
+                break;
             }
             default: {
+                console.error(err);
                 break;
             }
             }
@@ -99,8 +104,16 @@ class CartModel extends BaseModel {
                 this.#ids.splice(this.#ids.indexOf(id), 1);
             }
             Bus.globalBus.emit(Events.CartProductRemoved, Responses.Success);
-        }).catch(() => {
-            Bus.globalBus.emit(Events.CartProductRemoved, Responses.Error);
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.CartProductRemoved, Responses.Offline);
+                break;
+            }
+            default: {
+                Bus.globalBus.emit(Events.CartProductRemoved, Responses.Error);
+            }
+            }
         });
     }
 

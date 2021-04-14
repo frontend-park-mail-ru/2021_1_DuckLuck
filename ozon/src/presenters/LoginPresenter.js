@@ -38,12 +38,21 @@ class LoginPresenter extends BasePresenter {
      * @description Processes result for login attempt
      */
     processLoginResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.remove();
             Bus.globalBus.emit(Events.ProfileNewUserLoggedIn);
             Router.open('/profile', {replaceState: true});
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 }

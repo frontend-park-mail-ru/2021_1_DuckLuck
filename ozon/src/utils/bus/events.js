@@ -39,7 +39,7 @@ const Events = {
     CartProductRemoved: 'cart-removed-product',
     CartLoad: 'cart-load',
     CartLoaded: 'cart-loaded',
-    CartUserUnauthorized: 'cart-user-unauthorized',
+    CartProductAdded: 'cart-product-added',
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',

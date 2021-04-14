@@ -17,7 +17,7 @@ class CartPresenter extends BasePresenter {
         super(application, View, Model);
         this.bus.on(Events.CartLoad, this.loadProducts);
         this.bus.on(Events.CartLoaded, this.cartLoadedReaction);
-        this.bus.on(Events.CartUserUnauthorized, this.cartUserUnauthorizedReaction);
+        this.bus.on(Events.CartProductAdded, this.cartProductAddedReaction);
 
         Bus.globalBus.on(Events.CartProductRemoved, this.productRemovedReaction);
         Bus.globalBus.on(Events.CartAddProduct, this.addProduct);
@@ -86,8 +86,23 @@ class CartPresenter extends BasePresenter {
         console.error(result);
     }
 
-    cartUserUnauthorizedReaction = () => {
-        Router.open('/login');
+    /**
+     * @param {string} result
+     */
+    cartProductAddedReaction = (result) => {
+        switch (result) {
+        case Responses.Success: {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
     }
 }
 

@@ -132,10 +132,19 @@ class ProfilePresenter extends BasePresenter {
      * @param {string} result
      */
     avatarSendProcessResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.changeAvatar(this.getAvatar());
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 
@@ -144,10 +153,20 @@ class ProfilePresenter extends BasePresenter {
      * @param {string} result
      */
     emailSendProcessResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.changeEmail(this.getEmail());
-        } else {
+
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 
@@ -163,11 +182,20 @@ class ProfilePresenter extends BasePresenter {
      * @param {string} result
      */
     tryAuthProcessResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.render();
             this.view.cache.hidden = false;
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
             Router.open('/login', {replaceState: true});
+            break;
+        }
         }
     }
 

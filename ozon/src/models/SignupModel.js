@@ -5,7 +5,6 @@ import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import HTTPResponses from '../utils/http-responses/httpResponses';
-import {Bus} from '../utils/bus/bus.js';
 
 /**
  * @description Model for Signup in MVP Arch
@@ -21,11 +20,19 @@ class SignupModel extends BaseModel {
             url: serverApiPath + urls.signupUrl,
             body: {email, password},
         }).then((response) => {
-            if (response.status === HTTPResponses.Created) {
+            switch (response.status) {
+            case HTTPResponses.Created: {
                 this.bus.emit(Events.SignupEmitResult, Responses.Success);
-                Bus.globalBus.emit(Events.SignupEmitResult, Responses.Success);
-            } else {
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.SignupEmitResult, Responses.Offline);
+                break;
+            }
+            default: {
                 this.bus.emit(Events.SignupEmitResult, Responses.Error);
+                break;
+            }
             }
         }).catch(() => {
             this.bus.emit(Events.SignupEmitResult, Responses.Error);

@@ -2,6 +2,7 @@ import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import {Bus} from '../utils/bus/bus';
+import Router from '../utils/router/Router';
 
 /**
  * @description Presenter for Products View and Model
@@ -48,11 +49,20 @@ class ProductsPresenter extends BasePresenter {
      * @param {string}result
      */
     productLoadedReaction = (result) => {
-        if (result === Responses.Success) {
-            this.view.reRender();
+        switch (result) {
+        case Responses.Success: {
+            this.view.render();
             this.view.cache.hidden = false;
-        } else {
-            console.error('Cant load product');
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
         }
     }
 }
