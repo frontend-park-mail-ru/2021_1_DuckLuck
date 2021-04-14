@@ -35,7 +35,7 @@ class CartModel extends BaseModel {
      */
     addProduct(id, count) {
         if (this.#ids.includes(id)) {
-            this.changeItemAmount(id, count);
+            this.changeItemAmount(id, count + 1);
             return;
         }
 
