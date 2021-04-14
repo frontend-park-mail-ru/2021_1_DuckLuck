@@ -147,7 +147,7 @@
     flex-direction: column;
 }
 
-.countButton {
+.incButton, .decButton{
     font-family: var(--font);
     font-size: var(--font-size-m);
     color: var(--colored-object-color);
