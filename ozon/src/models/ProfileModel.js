@@ -129,7 +129,7 @@ class ProfileModel extends BaseModel {
             this.#avatarModel.avatarURL = response.avatar.url;
             this.#emailModel.email = response.email;
             this.bus.emit(Events.ProfileAllResult, Responses.Success);
-        }).catch(() => {
+        }).catch((result) => {
             switch (result) {
             case Responses.Offline: {
                 this.bus.emit(Events.ProfileAllResult, Responses.Offline);

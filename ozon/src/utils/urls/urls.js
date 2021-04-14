@@ -1,5 +1,5 @@
-export const serverHost = 'https://duckluckmarket.xyz';
-export const fileServerHost = 'https://duckluckmarket.xyz';
+export const serverHost = 'http://localhost:8080';
+export const fileServerHost = 'http://localhost:8080';
 export const staticServerHost = 'https://duckluckmarket.hb.bizmrg.com';
 export const serverApiPath = `${serverHost}/api/v1`;
 

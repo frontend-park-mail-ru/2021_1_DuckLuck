@@ -3,6 +3,7 @@ import BaseModel from '../BaseModel';
 import Events from '../../utils/bus/events';
 import Responses from '../../utils/bus/responses';
 import HTTPResponses from '../../utils/http-responses/httpResponses';
+import {serverApiPath, staticServerHost, urls} from '../../utils/urls/urls';
 
 /**
  * @description Model for Avatar Loading/Uploading in MVP Arch
