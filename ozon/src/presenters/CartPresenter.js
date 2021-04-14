@@ -51,7 +51,8 @@ class CartPresenter extends BasePresenter {
     cartLoadedReaction = (result) => {
         switch (result) {
         case Responses.Success: {
-            break;
+            this.view.render();
+            return;
         }
         case Responses.Offline: {
             Router.open('/offline', {replaceState: true});
