@@ -30,16 +30,17 @@ export class ProfileView extends BaseView {
         }
 
         const htmlTemplate = profileTemplate({
-            inputFields: [new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
+            inputFields: [
                 new Input({type: 'text', name: 'firstName', placeholder: 'First Name'}),
-                new Input({type: 'text', name: 'lastName', placeholder: 'Last name'})],
+                new Input({type: 'text', name: 'lastName', placeholder: 'Last name'}),
+            ],
+            inputEmail: new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),
             profileStyles: profileStyles,
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
         this.parent.appendChild(this.cache);
-
         const form = document.getElementById('form');
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();

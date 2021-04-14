@@ -17,26 +17,17 @@
         <form class="{{profileStyles.info}}" id="form">
             <span class="{{profileStyles.titleText}}">Учётные данные</span>
             <div class="{{profileStyles.fioWrapper}}">
-                <div class="{{profileStyles.infoElem}}">
-                    <span class="{{profileStyles.infoTitle}}">Фамилия</span>
-                    <input type="text" name="lastName"class="{{profileStyles.infoText}}" placeholder="">
-                    <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
-                </div>
-                <div class="{{profileStyles.infoElem}}">
-                    <span class="{{profileStyles.infoTitle}}">Имя</span>
-                    <input type="text" name="firstName" class="{{profileStyles.infoText}}" placeholder="">
-                    <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
-                </div>
-            </div>
-            <div class="{{profileStyles.infoElem}}">
-                <span class="{{profileStyles.infoTitle}}">Почта</span>
-                <input type="email" name="email" class="{{profileStyles.infoText}}" placeholder="suvnik.2000@mail.ru" disabled>
+                {{#each inputFields}}
+                    <div class="{{../profileStyles.infoElem}}">
+                        <span class="{{../profileStyles.infoTitle}}">{{this.name}}</span>
+                        <input type="text" name="{{this.name}}"class="{{../profileStyles.infoText}}" placeholder="">
+                        <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
+                    </div>
+                {{/each}}
             </div>
             <button type="submit" class="{{profileStyles.change}}">
                 <span class="{{profileStyles.changeText}}">Изменить</span>
             </button>
-
         </form>
-
     </div>
 </div>
