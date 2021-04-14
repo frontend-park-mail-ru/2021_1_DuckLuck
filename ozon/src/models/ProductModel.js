@@ -30,7 +30,7 @@ class ProductModel extends BaseModel {
         }).then((parsedJson) => {
             const base = parsedJson['price']['base_cost'];
             const discount = parsedJson['price']['discount'];
-            const discountPrice = (base * (1 - discount * 0.01)).toFixed(2);
+            const discountPrice = Math.ceil(base * (1 - discount * 0.01));
             this.#item = {
                 name: parsedJson['title'],
                 price: {
