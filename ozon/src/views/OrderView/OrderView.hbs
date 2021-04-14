@@ -29,16 +29,16 @@
                             <span class="{{orderStyles.orderInfoTitle}}">Ваш заказ</span>
                             <div class="{{orderStyles.orderInfoBody}}">
                                 <div class="{{orderStyles.orderInfoRow}}">
-                                    <span class="{{orderStyles.orderInfoText}}">Товары</span>
-                                    <span class="{{orderStyles.orderInfoPrice}}">2 060 ₽</span>
+                                    <span class="{{orderStyles.orderInfoText}}">Товары ({{this.cartSize}})</span>
+                                    <span class="{{orderStyles.orderInfoPrice}}">{{this.baseCost}}₽</span>
                                 </div>
                                 <div class="{{orderStyles.orderInfoRow}}">
                                     <span class="{{orderStyles.orderInfoText}}">Скидка</span>
-                                    <span class="{{orderStyles.orderInfoDiscount}}">- 552 ₽</span>
+                                    <span class="{{orderStyles.orderInfoDiscount}}">- {{this.discount}} ₽</span>
                                 </div>
                                 <div class="{{orderStyles.totalPriceBlock}}">
                                     <span class="{{orderStyles.orderTotalPriceTitle}}">Итого</span>
-                                    <span class="{{orderStyles.totalPriceText}}">1 508 ₽</span>
+                                    <span class="{{orderStyles.totalPriceText}}">{{this.totalCost}} ₽</span>
                                 </div>
                             </div>
                         </div>

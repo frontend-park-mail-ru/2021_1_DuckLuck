@@ -3,6 +3,7 @@ import cartPageTemplate from './CartView.hbs';
 import {Bus} from '../../utils/bus/bus';
 import Events from '../../utils/bus/events';
 import cartStyles from './CartView.css';
+import Router from '../../utils/router/Router';
 
 /**
  * @class ProductsView
@@ -65,5 +66,10 @@ export class CartView extends BaseView {
                 });
             }
         }
+
+        document.getElementsByClassName(cartStyles.orderButtonWrapper)[0].addEventListener('click', (evt) => {
+            evt.preventDefault();
+            Router.open('/order');
+        });
     };
 }

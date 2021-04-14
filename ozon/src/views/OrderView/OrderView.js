@@ -16,6 +16,12 @@ export class OrderView extends BaseView {
 
     render = () => {
         this.parent.innerHTML = '';
+        let baseCost = 0;
+        let discount = 0;
+        for (const product of this.presenter.products) {
+            baseCost += +product.count * +product.price.base_cost;
+            discount += +product.count * +product.price.discount;
+        }
         const template = orderTemplate({
             productsList: this.presenter.products,
             inputFields: [new Input({type: 'email', name: 'email', placeholder: 'Электронная почта',
@@ -25,8 +31,11 @@ export class OrderView extends BaseView {
             new Input({type: 'text', name: 'lastName', placeholder: 'Фамилия',
                 value: this.presenter.recipient.last_name}),
             new Input({type: 'text', name: 'address', placeholder: 'Адрес доставки'})],
-            price: this.presenter.price,
             orderStyles: orderStyles,
+            cartSize: this.presenter.products.length,
+            baseCost: baseCost,
+            discount: discount,
+            totalCost: baseCost - discount,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
