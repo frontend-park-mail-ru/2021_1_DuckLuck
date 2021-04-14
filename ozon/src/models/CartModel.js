@@ -75,6 +75,10 @@ class CartModel extends BaseModel {
      * @param {number | string} count new amount of product
      */
     changeItemAmount(id, count) {
+        if (count === 0) {
+            this.removeProduct(id);
+            return;
+        }
         for (const product of this.#products) {
             if (product.id === id) {
                 this.#products[this.#products.indexOf(product)].count = +count;
@@ -98,6 +102,11 @@ class CartModel extends BaseModel {
      * @param {number} id id of removed product
      */
     removeProduct = (id) => {
+        for (const product of this.#products) {
+            if (product.id === id) {
+                this.#products.splice(this.#products.indexOf(product), 1);
+            }
+        }
         AjaxModule.deleteUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id},
