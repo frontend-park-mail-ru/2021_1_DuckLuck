@@ -119,6 +119,9 @@ class ProfileModel extends BaseModel {
             url: serverApiPath + urls.profileUrl,
             body: null,
         }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
             return response.json();
         }).then((response) => {
             this.#fLNameModel.firstName = response.first_name;
@@ -127,7 +130,16 @@ class ProfileModel extends BaseModel {
             this.#emailModel.email = response.email;
             this.bus.emit(Events.ProfileAllResult, Responses.Success);
         }).catch(() => {
-            this.bus.emit(Events.ProfileAllResult, Responses.Error);
+            switch (result) {
+            case Responses.Offline: {
+                this.bus.emit(Events.ProfileAllResult, Responses.Offline);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.ProfileAllResult, Responses.Error);
+                break;
+            }
+            }
         });
     }
 

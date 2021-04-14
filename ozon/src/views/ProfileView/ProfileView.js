@@ -25,7 +25,7 @@ export class ProfileView extends BaseView {
         this.parent.innerHTML = '';
         if (this.cache !== '') {
             this.parent.appendChild(this.cache);
-            this.renderData();
+            this.bus.emit(Events.ProfileAllGet);
             return;
         }
 

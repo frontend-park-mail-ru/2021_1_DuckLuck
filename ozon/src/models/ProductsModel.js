@@ -78,7 +78,12 @@ class ProductsModel extends BaseModel {
                 break;
             }
             case HTTPResponses.Offline: {
-                this.bus.emit(Events.ProductsLoaded, Responses.Offline);
+                this.#products = [];
+                this.#paginationInfo = {
+                    pagesCount: 1,
+                    currentPage: 1,
+                };
+                this.bus.emit(Events.ProductsLoaded, Responses.Success);
                 break;
             }
             default: {

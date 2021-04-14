@@ -91,12 +91,15 @@ export class CartView extends BaseView {
         let discount = 0;
         for (const product of this.presenter.products) {
             baseCost += +product.count * +product.price.base_cost;
-            discount += +product.count * +product.price.discount;
+            discount += +product.count * (Math.ceil(product.price.base_cost * (product.price.discount * 0.01)));
         }
 
-        document.getElementsByClassName(cartStyles.orderInfoPrice)[0].innerHTML = baseCost.toString();
-        document.getElementsByClassName(cartStyles.orderInfoDiscount)[0].innerHTML = discount.toString();
-        document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML = (baseCost - discount).toString();
+        document.getElementsByClassName(cartStyles.orderInfoPrice)[0].innerHTML =
+            baseCost.toString() + '₽';
+        document.getElementsByClassName(cartStyles.orderInfoDiscount)[0].innerHTML =
+            '- ' + discount.toString() + ' ₽';
+        document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML =
+            (baseCost - discount).toString() + ' ₽';
 
         for (const elemList of document.getElementsByClassName(cartStyles.productsListElem)) {
             if (+elemList.getAttribute('product_id') === changedID) {
