@@ -42,14 +42,8 @@ class ProfilePresenter extends BasePresenter {
      * @description Send data to model
      */
     sendFirstLastName = () => {
-        // TODO: validator
-        // if (!this.isFormValid(['text'])) {
-        //     this.bus.emit(Events.ProfileIncorrectFLName);
-        //     return;
-        // }
-
-        if (!navigator.onLine) {
-            Router.open('/offline' );
+        if (!this.isFormValid(['text'])) {
+            this.bus.emit(Events.ProfileIncorrectFLName);
             return;
         }
         const firstName = document.getElementsByName('firstName')[0].value.trim();
@@ -125,14 +119,10 @@ class ProfilePresenter extends BasePresenter {
      * @description get data view and send to model
      */
     sendAvatar = () => {
-        if (!navigator.onLine) {
-            Router.open('/offline');
+        if (!this.isFormValid(['file'])) {
+            this.bus.emit(Events.ProfileIncorrectAvatar);
             return;
         }
-        // if (!this.isFormValid(['file'])) {
-        //     this.bus.emit(Events.ProfileIncorrectAvatar);
-        //     return;
-        // }
 
         const avatarInput = document.getElementById('avatar-input');
         this.model.changeAvatar(avatarInput.files[0]);
@@ -156,10 +146,19 @@ class ProfilePresenter extends BasePresenter {
      * @param {string} result
      */
     avatarSendProcessResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.changeAvatar(this.getAvatar());
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 
@@ -168,10 +167,20 @@ class ProfilePresenter extends BasePresenter {
      * @param {string} result
      */
     emailSendProcessResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.changeEmail(this.getEmail());
-        } else {
+
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 
@@ -179,10 +188,6 @@ class ProfilePresenter extends BasePresenter {
      * @description attempts to authorize
      */
     tryAuth = () => {
-        if (!navigator.onLine) {
-            Router.open('/offline', {replaceState: true});
-            return;
-        }
         this.model.checkAuth();
     }
 
@@ -191,11 +196,20 @@ class ProfilePresenter extends BasePresenter {
      * @param {string} result
      */
     tryAuthProcessResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.render();
             this.view.cache.hidden = false;
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
             Router.open('/login', {replaceState: true});
+            break;
+        }
         }
     }
 
@@ -209,10 +223,6 @@ class ProfilePresenter extends BasePresenter {
     }
 
     getAllData = () => {
-        if (!navigator.onLine) {
-            Router.open('/offline', {replaceState: true});
-            return;
-        }
         this.model.getProfileData();
     }
 
