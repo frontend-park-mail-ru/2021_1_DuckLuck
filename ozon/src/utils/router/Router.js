@@ -58,7 +58,6 @@ class Router {
             }
         }
 
-
         if (!route) {
             this.open('/');
             return;

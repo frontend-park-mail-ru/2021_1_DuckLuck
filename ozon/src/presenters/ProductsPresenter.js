@@ -57,7 +57,6 @@ class ProductsPresenter extends BasePresenter {
      * @param {Number} category
      * @param {Number} page
      */
-
     loadProducts = (category, page) => {
         this.model.loadProducts(category, page);
     }

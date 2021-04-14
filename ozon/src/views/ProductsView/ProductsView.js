@@ -48,6 +48,7 @@ export class ProductsView extends BaseView {
                 Router.open(`/items/${this.IDs['category']}/${page}`, {id: page});
             });
         }
+      
         for (const itemContainer of this.cache.getElementsByClassName(ListOfProductsItemStyles.block)) {
             const productID = parseInt(itemContainer.getAttribute('item-id'));
             itemContainer.getElementsByClassName(ListOfProductsItemStyles.infoWrapper)[0]
