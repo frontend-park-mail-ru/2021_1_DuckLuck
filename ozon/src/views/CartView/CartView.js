@@ -52,7 +52,10 @@ export class CartView extends BaseView {
                     evt.preventDefault();
                     const amount = +document.querySelectorAll(
                         `span.${cartStyles.count}[title='${amountButton.title}']`)[0].innerHTML;
-                    Bus.globalBus.emit(Events.CartAddProduct, amountButton.title, amount + 1);
+                    Bus.globalBus.emit(Events.CartAddProduct, {
+                        id: Number(amountButton.title),
+                        count: amount+1,
+                    });
                     this.show();
                 });
             }
@@ -61,7 +64,10 @@ export class CartView extends BaseView {
                     evt.preventDefault();
                     const amount = +document.querySelectorAll(
                         `span.${cartStyles.count}[title='${amountButton.title}']`)[0].innerHTML;
-                    Bus.globalBus.emit(Events.CartAddProduct, amountButton.title, amount - 1);
+                    Bus.globalBus.emit(Events.CartAddProduct, {
+                        id: Number(amountButton.title),
+                        count: amount-1,
+                    });
                     this.show();
                 });
             }

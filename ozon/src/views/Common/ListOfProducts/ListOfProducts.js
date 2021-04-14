@@ -18,7 +18,7 @@ export class ListOfProducts {
         items.forEach((item) => {
             const base = item['price']['base_cost'];
             const discount = item['price']['discount'];
-            const discountPrice = base * (1 - discount*0.01);
+            const discountPrice = Math.ceil(base * (1 - discount * 0.01));
             this.items.push(new ListOfProductsItem({
                 itemId: item['id'],
                 itemImage: new Img({src: staticServerHost + item['preview_image']}),
