@@ -1,21 +1,51 @@
-<div class="products-list-block" id="products-list-block">
-    <div class="cart-list-body">
-        {{#each productsList}}
-            <span>NAME = {{this.title}}</span>
-            <span>BASE_COST = {{this.price.base_cost}}</span>
-            <span>DISCOUNT = {{this.price.discount}}</span>
-            <span>COUNT = {{this.count}}</span>
-            <br>
-        {{/each}}
-        <div>BASE COST = {{this.price.total_base_cost}}</div>
-        <div>COST WITH DISCOUNT = {{this.price.total_cost}}</div>
-        <div>TOTAL DISCOUNT = {{this.price.total_discount}}</div>
+<div class="{{orderStyles.cartWrapper}}" id="products-list-block">
+    <div class="{{orderStyles.body}}">
+        <div class="{{orderStyles.title}}">
+            <span class="{{orderStyles.titleText}}">Оформление заказа</span>
+        </div>
+        <div class="{{orderStyles.mainWrapper}}">
+            <div class="{{orderStyles.wrapper}}">
+                <div class="{{orderStyles.cartInfo}}">
+                    <div class="{{orderStyles.deliveryBlock}}">
+                        <span class="{{orderStyles.deliveryText}}">Доставка Ozon</span>
+                    </div>
+                    <div class="{{orderStyles.productsListBlock}}">
+                        {{#each this.inputFields}}
+                            <div class="{{../orderStyles.productsListElem}}">
+                                <div class="">{{this.placeholder}}</div>
+                                <input class="{{../orderStyles.input}}" type="{{this.type}}" name="{{this.name}}" value={{this.value}}>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="{{orderStyles.orderMenu}}">
+                    <div class="{{orderStyles.orderButtonWrapper}}">
+                        <button class="{{orderStyles.orderButton}}">
+                            <span class="{{orderStyles.orderSubmit}}">Отправить заказ</span>
+                        </button>
+                    </div>
+                    <div class="{{orderStyles.orderInfo}}">
+                        <div class="{{orderStyles.orderInfoWrapper}}">
+                            <span class="{{orderStyles.orderInfoTitle}}">Ваш заказ</span>
+                            <div class="{{orderStyles.orderInfoBody}}">
+                                <div class="{{orderStyles.orderInfoRow}}">
+                                    <span class="{{orderStyles.orderInfoText}}">Товары</span>
+                                    <span class="{{orderStyles.orderInfoPrice}}">2 060 ₽</span>
+                                </div>
+                                <div class="{{orderStyles.orderInfoRow}}">
+                                    <span class="{{orderStyles.orderInfoText}}">Скидка</span>
+                                    <span class="{{orderStyles.orderInfoDiscount}}">- 552 ₽</span>
+                                </div>
+                                <div class="{{orderStyles.totalPriceBlock}}">
+                                    <span class="{{orderStyles.orderTotalPriceTitle}}">Итого</span>
+                                    <span class="{{orderStyles.totalPriceText}}">1 508 ₽</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <form class="order__form" id="form">
-        {{#each this.inputFields}}
-            <div class="order__form__input_description">{{this.placeholder}}</div>
-            <input class="order__form__input_line" type="{{this.type}}" name="{{this.name}}" value={{this.value}}>
-        {{/each}}
-        <button type="submit" class="button_send_order">Send order</button>
-    </form>
 </div>
+
