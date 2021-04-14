@@ -75,7 +75,7 @@ class CartPresenter extends BasePresenter {
      * @param {number} id
      * @param {number|string} count
      */
-    addProduct = ({id, count}) => {
+    addProduct = (id, count) => {
         if (count < 0 || id < 0) {
             return;
         }
