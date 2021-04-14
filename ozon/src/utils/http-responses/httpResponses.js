@@ -4,7 +4,6 @@ const HTTPResponses = {
     Unauthorized: 401,
     InternalError: 500,
     Offline: 410,
-    InternalError: 500,
 };
 
 export default HTTPResponses;

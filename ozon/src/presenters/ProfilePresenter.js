@@ -128,11 +128,6 @@ class ProfilePresenter extends BasePresenter {
      * @description get data view and send to model
      */
     sendAvatar = () => {
-        // if (!this.isFormValid(['file'])) {
-        //     this.bus.emit(Events.ProfileIncorrectAvatar);
-        //     return;
-        // }
-
         const avatarInput = document.getElementById('avatar-input');
         this.model.changeAvatar(avatarInput.files[0]);
     }

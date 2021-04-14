@@ -18,7 +18,6 @@ export class ProductView extends BaseView {
     show = () => {
         if (!this.IDs) {
             this.IDs = {};
-            this.IDs['productID'] = 1;
         }
         if (!this.IDs['productID']) {
             this.IDs['productID'] = 1;
