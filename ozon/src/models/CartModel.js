@@ -138,7 +138,7 @@ class CartModel extends BaseModel {
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
-                this.bus.emit(Events.CartUserUnauthorized);
+                this.bus.emit(Events.CartLoaded, Responses.Unauthorized);
                 return;
             }
             case HTTPResponses.InternalError: {

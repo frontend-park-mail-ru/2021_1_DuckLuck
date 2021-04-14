@@ -47,14 +47,26 @@ class CartPresenter extends BasePresenter {
     }
 
     /**
-     * @param {Responses} status
+     * @param {Responses} result
      */
-    cartLoadedReaction = (status) => {
-        if (status === Responses.Success) {
-            this.view.render();
-            return;
+    cartLoadedReaction = (result) => {
+        switch (result) {
+        case Responses.Success: {
+            break;
         }
-        Router.open('/login', {replaceState: true});
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        case Responses.Unauthorized: {
+            Router.open('/login', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
     }
 
     /**
@@ -101,6 +113,10 @@ class CartPresenter extends BasePresenter {
         }
         case Responses.Offline: {
             Router.open('/offline');
+            break;
+        }
+        case Responses.Unauthorized: {
+            Router.open('/login');
             break;
         }
         default: {
