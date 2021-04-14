@@ -25,11 +25,11 @@
 }
 
 .menuImgS {
-    size: var(--img-size-s);
+    size: var(--img-size-xs);
 }
 
 .menuImgL {
-    size: var(--img-size-l);
+    size: var(--img-size-s);
 }
 
 .imgXL {

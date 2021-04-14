@@ -9,7 +9,7 @@
 .body {
     max-width: var(--max-width);
     padding: 4px 28px;
-    margin: var(--margin-xl) auto 0;
+    margin: var(--margin-l) auto 0;
     width: 100%;
     box-sizing: border-box;
     font-family: var(--font);
@@ -26,7 +26,7 @@
 .mainWrapper {
     display: flex;
     flex-direction: column;
-    margin-top: var(--margin-xl);
+    margin-top: var(--margin-l);
 }
 
 .wrapper {
@@ -91,7 +91,7 @@
     width: 903px;
     height: 61px;
     background: var(--neutral-background-color);
-    margin: var(--margin-l);
+    margin: var(--margin-s);
     display: flex;
     border-radius: var(--standart-border-radius);
 }
@@ -99,7 +99,7 @@
 .deliveryText {
     font-family: var(--font);
     font-size: var(--font-size-s);
-    margin: var(--margin-l);
+    margin: var(--margin-s);
 }
 
 .image {

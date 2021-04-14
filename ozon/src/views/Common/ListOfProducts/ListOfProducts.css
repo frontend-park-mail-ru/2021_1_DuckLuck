@@ -1,7 +1,8 @@
 @import './ListOfProductsItem/ListOfProductsItem.css';
+@import '../../../constants.css';
 
 .body {
     display: flex;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: var(--gap-s);
 }

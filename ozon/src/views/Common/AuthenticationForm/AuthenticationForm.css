@@ -55,8 +55,8 @@
 .body {
     display: flex;
     flex-direction: column;
-    margin: var(--margin-xxl);
-    gap: 20px;
+    margin: var(--margin-xl);
+    gap: var(--gap-s);
 }
 
 .inputBlock {
@@ -83,7 +83,7 @@
     background: var(--colored-object-color);
     border-radius: var(--standart-border-radius);
     border: none;
-    height: 48px;
+    height: var(--height-xs);
     cursor: pointer;
 }
 
@@ -95,8 +95,8 @@
 }
 
 .inputWrapper {
-    height: 42px;
-    width: 328px;
+    height: var(--height-xxs);
+    width: var(--width-l);
 }
 
 .input {
@@ -106,7 +106,7 @@
     font-size: var(--font-size-m);
     border-radius: var(--standart-border-radius);
     border: solid 1px;
-    border-color: #cdd2d8;
+    border-color: var(--input-color);
 }
 
 .fieldName {
