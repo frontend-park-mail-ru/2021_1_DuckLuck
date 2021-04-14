@@ -56,10 +56,19 @@ class ProfilePresenter extends BasePresenter {
      * @description Processed a signal
      */
     firstLastNameSendProcessResult = (result) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.changeFirstLastName(this.getFirstName(), this.getLastName());
-        } else {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        default: {
             console.error(result);
+            break;
+        }
         }
     }
 
@@ -233,6 +242,10 @@ class ProfilePresenter extends BasePresenter {
     renderAllData = (status) => {
         if (status === Responses.Success) {
             this.view.renderData();
+            return;
+        }
+        if (status === Responses.Offline) {
+            Router.open('/offline', {replaceState: true});
             return;
         }
         console.error(status);
