@@ -94,6 +94,7 @@
 .imagesBlock {
     display: flex;
     flex-direction: row;
+    gap: var(--gap-s);
 }
 
 .imageWrapper {
