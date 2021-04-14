@@ -8,8 +8,8 @@
 
 .body {
     max-width: var(--max-width);
-    padding: 4px 28px;
-    margin: var(--margin-xl) auto 0;
+    padding: var(--padding-xs) var(--padding-l);
+    margin: var(--margin-l) auto 0;
     width: 100%;
     box-sizing: border-box;
     font-family: var(--font);
@@ -36,14 +36,12 @@
     width: 100%;
     box-sizing: border-box;
     font-family: var(--font);
-    display: flex;
     justify-content: space-between;
 }
 
 .cartInfo {
     display: flex;
     flex-direction: column;
-    width: 100%;
     background: white;
     width: 935px;
     border-radius: var(--lower-border-radius);
@@ -54,21 +52,20 @@
     flex-direction: row;
     background: white;
     max-width: var(--max-width);
-    padding: 4px 28px;
+    padding: var(--padding-xs) var(--padding-l);
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
     font-family: var(--font);
-    display: flex;
     border-bottom: solid 1px;
-    height: 48px;
-    gap: 5px;
+    height: var(--height-xs);
+    gap: var(--gap-xxs);
 }
 
 .selectAll {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: var(--gap-xxs);
 }
 
 .selectAllText {
@@ -87,10 +84,10 @@
 }
 
 .deliveryBlock {
-    width: 903px;
-    height: 61px;
+    width: var(--width-xxxxl);
+    height: var(--height-m);
     background: var(--neutral-background-color);
-    margin: var(--margin-l);
+    margin: var(--margin-s);
     display: flex;
     border-radius: var(--standart-border-radius);
 }
@@ -98,12 +95,12 @@
 .deliveryText {
     font-family: var(--font);
     font-size: var(--font-size-s);
-    margin: var(--margin-l);
+    margin: var(--margin-s);
 }
 
 .image {
-    width: 92px;
-    height: 92px;
+    width: var(--height-l);
+    height: var(--height-l);
 }
 
 .productImage {
@@ -118,10 +115,9 @@
     width: 100%;
     box-sizing: border-box;
     font-family: var(--font);
-    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4px 28px;
+    padding: var(--padding-xs) var(--padding-l);
     border-bottom: solid 1px;
     border-color: var(--neutral-background-color);
 }
@@ -157,8 +153,8 @@
 }
 
 .orderMenu {
-    width: 455px;
-    height: 372px;
+    width: var(--width-xxxl);
+    height: var(--height-xxxl);
     background: white;
     border-radius: var(--lower-border-radius);
     display: flex;
@@ -167,8 +163,8 @@
 
 .orderButton {
     margin: auto;
-    width: 407px;
-    height: 56px;
+    width: var(--width-xxl);
+    height: var(--height-s);
     border-radius: var(--standart-border-radius);
     border: none;
     background: #3ac267;
@@ -185,54 +181,54 @@
 
 .orderButtonWrapper {
     display: flex;
-    width: 455px;
-    height: 152px;
+    width: var(--width-xxxl);
+    height: var(--height-xl);
     border-bottom: solid 1px;
 }
 
 .orderInfo {
     display: flex;
     flex-direction: column;
-    width: 455px;
+    width: var(--width-xxxl);
 }
 
 .orderInfoTitle {
     font-family: var(--font);
     font-size: var(--font-size-l);
     font-weight: var(--bold-font);
-    margin-left: 20px;
+    margin-left: var(--margin-m);
 }
 
 .orderInfoText {
     font-family: var(--font);
     font-size: var(--font-size-s);
-    margin-left: 20px;
+    margin-left: var(--margin-m);
 }
 
 .orderInfoWrapper {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
+    gap: var(--gap-s);
+    margin-top: var(--margin-m);
 }
 
 .orderInfoBody {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: var(--gap-s);
 }
 
 .totalPriceBlock {
     border-top: 1px solid;
-    padding-left: 20px;
-    padding-top: 10px;
+    padding-left: var(--padding-m);
+    padding-top: var(--padding-s);
     display: flex;
     flex-direction: row;
     width: 100%;
     box-sizing: border-box;
     font-family: var(--font);
     justify-content: space-between;
-    padding-right: 20px;
+    padding-right: var(--padding-l);
 }
 
 .orderTotalPriceTitle {
@@ -249,7 +245,7 @@
     box-sizing: border-box;
     font-family: var(--font);
     justify-content: space-between;
-    padding-right: 20px;
+    padding-right: var(--padding-l);
 }
 
 .orderInfoDiscount {

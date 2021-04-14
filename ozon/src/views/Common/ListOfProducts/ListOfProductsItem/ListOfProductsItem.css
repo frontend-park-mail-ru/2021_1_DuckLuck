@@ -2,25 +2,25 @@
 
 .block {
     display: flex;
-    width: var(--img-size-xxl);
-    height: 450px;
+    width: var(--img-size-l);
+    height: var(--height-xxxxl);
     flex-direction: column;
 }
 
 .infoWrapper {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: var(--gap-xxs);
     cursor: pointer;
 }
 
 .discountBlock {
-    border-radius: 3px;
+    border-radius: var(--standart-border-radius);
 }
 
 .discountBadge {
-    height: var(--height-s);
-    width: var(--width-m);
+    height: var(--height-xxxxs);
+    width: var(--width-xxs);
     background: var(--discout-color);
     border-radius: var(--lower-border-radius);
     display: flex;
@@ -43,13 +43,13 @@
     font-size: var(--font-size-m);
     font-weight: var(--bold-font);
     color: var(--discout-color);
-    margin-left: var(--margin-s);
+    margin-left: var(--margin-xxs);
 }
 
 .price {
     font-family: var(--font);
     font-size: var(--font-size-s);
-    margin-left: var(--margin-s);
+    margin-left: var(--margin-xxs);
     position: relative;
 }
 
@@ -71,14 +71,14 @@
 .rating {
     display: flex;
     flex-direction: row;
-    margin-top: var(--margin-m);
+    margin-top: var(--margin-xs);
 }
 
 .cartButton {
     background: var(--colored-object-color);
     display: flex;
-    height: var(--height-l);
-    width: var(--width-l);
+    height: var(--height-xxxs);
+    width: var(--width-xs);
     border-radius: var(--standart-border-radius);
     border: none;
     position: absolute;
@@ -94,8 +94,8 @@
 }
 
 .image {
-    width: var(--img-size-xxl);
-    height: var(--img-size-xxl);
+    width: var(--img-size-l);
+    height: var(--img-size-l);
 }
 
 .buttonsBlock {

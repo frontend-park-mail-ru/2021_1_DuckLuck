@@ -3,6 +3,7 @@ import Events from '../../utils/bus/events';
 import orderTemplate from './OrderView.hbs';
 import {Input} from '../Common/Input/Input';
 import orderStyles from './OrderView.css';
+import Router from '../../utils/router/Router';
 
 /**
  * @class ProductsView
@@ -37,6 +38,8 @@ export class OrderView extends BaseView {
         this.cache.getElementsByClassName(orderStyles.orderButton)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.SendOrder);
+            this.remove();
+            Router.open('/', {replaceState: true});
         });
     };
 }

@@ -34,10 +34,10 @@ class CartModel extends BaseModel {
      * @param {number | string} count amount of product
      */
     addProduct(id, count) {
-        if (this.#ids.includes(id)) {
-            this.changeItemAmount(id, count + 1);
-            return;
-        }
+        // if (this.#ids.includes(id)) {
+        //     this.changeItemAmount(id, count + 1);
+        //     return;
+        // }
 
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.cartProduct,

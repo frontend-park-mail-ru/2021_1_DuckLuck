@@ -3,7 +3,7 @@
 .block {
     display: flex;
     max-width: var(--max-width);
-    padding: 4px 28px;
+    padding: var(--padding-xs) var(--padding-l);
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
@@ -21,7 +21,7 @@
 .categoriesBlock {
     display: flex;
     flex-direction: row;
-    gap: 5px;
+    gap: var(--gap-xxs);
 }
 
 .category {
@@ -42,12 +42,12 @@
 }
 
 .discountBlock {
-    border-radius: 3px;
+    border-radius: var(--standart-border-radius);
 }
 
 .discountBadge {
-    height: var(--height-s);
-    width: var(--width-m);
+    height: var(--height-xxxxs);
+    width: var(--width-xxs);
     background: var(--discout-color);
     border-radius: var(--lower-border-radius);
     display: flex;
@@ -63,9 +63,8 @@
 .priceBlock {
     display: flex;
     flex-direction: row;
-    margin: 0 auto;
-    width: 294px;
-    margin-top: var(--margin-xl);
+    width: var(--width-m);
+    margin: var(--margin-l) auto 0;
 }
 
 .discountPrice {
@@ -73,14 +72,14 @@
     font-size: var(--font-size-xxl);
     font-weight: var(--bold-font);
     color: var(--discout-color);
-    margin-left: var(--margin-s);
+    margin-left: var(--margin-xxs);
 }
 
 .price {
     font-family: var(--font);
     font-size: var(--font-size-l);
     font-weight: var(--bold-font);
-    margin-left: var(--margin-s);
+    margin-left: var(--margin-xxs);
     position: relative;
     margin-top: auto;
     margin-bottom: auto;
@@ -89,7 +88,7 @@
 .images {
     display: flex;
     flex-direction: column;
-    gap: var(--margin-m);
+    gap: var(--margin-xs);
 }
 
 .imagesBlock {
@@ -98,14 +97,14 @@
 }
 
 .imageWrapper {
-    width: var(--img-size-xl);
-    height: var(--img-size-xl);
+    width: var(--img-size-m);
+    height: var(--img-size-m);
     cursor: pointer;
 }
 
 .mainImage {
-    width: var(--img-size-xxxl);
-    height: var(--img-size-xxxl);
+    width: var(--img-size-xl);
+    height: var(--img-size-xl);
     display: flex;
     cursor: pointer;
 }
@@ -119,18 +118,18 @@
     border: 1px solid;
     border-color: var(--neutral-light-color);
     border-radius: var(--standart-border-radius);
-    width: 350px;
-    height: 285px;
+    width: var(--width-xl);
+    height: var(--width-xl);
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: var(--gap-xl);
 }
 
 .description {
     display: flex;
     flex-direction: column;
-    padding-top: var(--margin-xl);
-    gap: 10px;
+    padding-top: var(--margin-l);
+    gap: var(--gap-xs);
 }
 
 .title {
@@ -145,17 +144,17 @@
 }
 
 .wrapperWrapper {
-    padding-top: var(--margin-l);
+    padding-top: var(--margin-s);
     display: flex;
     flex-direction: row;
     border-top: 1px solid;
     border-color: var(--neutral-light-color);
-    margin-top: var(--margin-xl);
+    margin-top: var(--margin-l);
 }
 
 .cartButton {
-    height: 56px;
-    width: 294px;
+    height: var(--height-s);
+    width: var(--width-m);
     background: var(--colored-object-color);
     border-radius: var(--standart-border-radius);
     border: none;
