@@ -25,24 +25,14 @@
 
             <div class="{{productStyles.imagesBlock}}">
                 <div class="{{productStyles.images}}">
-                    <div class="{{productStyles.imageWrapper}}">
-                        <img src="https://cdn1.ozone.ru/s3/multimedia-6/wc1200/6013748442.jpg" class="{{imagesStyles.imgXL}}">
-                    </div>
-                    <div class="{{productStyles.imageWrapper}}">
-                        <img src="https://cdn1.ozone.ru/s3/multimedia-6/wc1200/6013748442.jpg" class="{{imagesStyles.imgXL}}">
-                    </div>
-                    <div class="{{productStyles.imageWrapper}}">
-                        <img src="https://cdn1.ozone.ru/s3/multimedia-6/wc1200/6013748442.jpg" class="{{imagesStyles.imgXL}}">
-                    </div>
-                    <div class="{{productStyles.imageWrapper}}">
-                        <img src="https://cdn1.ozone.ru/s3/multimedia-6/wc1200/6013748442.jpg" class="{{imagesStyles.imgXL}}">
-                    </div>
-                    <div class="{{productStyles.imageWrapper}}">
-                        <img src="https://cdn1.ozone.ru/s3/multimedia-6/wc1200/6013748442.jpg" class="{{imagesStyles.imgXL}}">
-                    </div>
+                    {{#each images}}
+                        <div class="{{../productStyles.imageWrapper}}">
+                            <img src="{{this.src}}" class="{{../imagesStyles.imgXL}}">
+                        </div>
+                    {{/each}}
                 </div>
                 <div class="{{productStyles.mainImage}}">
-                    <img src="https://cdn1.ozone.ru/s3/multimedia-6/wc1200/6013748442.jpg" alt="" class="{{imagesStyles.imgXXL}}">
+                    <img src="{{images.0.src}}" alt="" class="{{imagesStyles.imgXXL}}">
                 </div>
             </div>
         </div>
