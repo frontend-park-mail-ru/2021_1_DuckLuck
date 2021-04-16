@@ -130,9 +130,6 @@ export class HeaderView extends BaseView {
             });
         });
 
-
-
-
         const catalogListCategories = this.cache.getElementsByClassName(headerStyles.category);
         const catalogListSubcategories = Array.from(
             this.cache.getElementsByClassName(headerStyles.catalogListSubcategories),
