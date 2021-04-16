@@ -110,7 +110,7 @@
 
 .productsListElem {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     max-width: var(--max-width);
     margin: 0 auto;
     width: 100%;
@@ -188,6 +188,7 @@
     width: var(--width-xxxl);
     height: var(--height-xl);
     border-bottom: solid 1px;
+    flex-direction: column;
 }
 
 .orderInfo {
@@ -277,4 +278,19 @@
     width: 50%;
     font-family: var(--font);
     font-size: var(--font-size-s);
+}
+
+.rules {
+    margin-left: var(--margin-l);
+    margin-right: var(--margin-l);
+    margin-bottom: var(--margin-l);
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    color: var(--neutral-color);
+}
+
+.link {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    color: var(--colored-object-color);
 }
