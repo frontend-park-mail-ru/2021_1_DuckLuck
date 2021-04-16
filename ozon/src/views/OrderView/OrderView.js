@@ -1,9 +1,13 @@
 import {BaseView} from '../BaseView.js';
 import Events from '../../utils/bus/events';
 import orderTemplate from './OrderView.hbs';
+import noticeTemplate from './OrderNotice.hbs';
+import noticeStyles from './OrderNotice.css';
 import {Input} from '../Common/Input/Input';
 import orderStyles from './OrderView.css';
 import Router from '../../utils/router/Router';
+import {Popup} from '../Common/Popup/Popup';
+import {Blind} from '../Common/Blind/Blind';
 
 /**
  * @class ProductsView
@@ -38,8 +42,20 @@ export class OrderView extends BaseView {
         this.cache.getElementsByClassName(orderStyles.orderButton)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.SendOrder);
-            this.remove();
-            Router.open('/', {replaceState: true});
+            const notice = new DOMParser().parseFromString(new Popup().getHtmlString({
+                popupBody: noticeTemplate({
+                    styles: noticeStyles,
+                }),
+                background: new Blind().getHtmlString(),
+                popupType: 'signup',
+            }), 'text/html').getElementById('popup-wrapper');
+            this.parent.appendChild(notice);
+            notice.getElementsByClassName('blind')[0]
+                .addEventListener('click', (evt) => {
+                    evt.preventDefault();
+                    this.remove();
+                    Router.open('/', {replaceState: true});
+                });
         });
     };
 }
