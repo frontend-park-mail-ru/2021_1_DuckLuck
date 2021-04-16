@@ -19,9 +19,9 @@
             </span>
         </div>
         <div class="{{itemStyles.descriptionBlock}}">
-            <span class="{{itemStyles.name}}">
+            <div class="{{itemStyles.name}}">
                 {{itemName}}
-            </span>
+            </div>
             <div class="{{itemStyles.rating}}">
                 {{#for 0 itemRating 1}}
                     <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="">
@@ -40,7 +40,7 @@
                 </span>
             </button>
         {{/ifEquals}}
-        
+
         {{#ifEquals itemInCart false}}
             <button class="{{itemStyles.notInCartButton}}">
                 <span class="{{itemStyles.buttonText}}">

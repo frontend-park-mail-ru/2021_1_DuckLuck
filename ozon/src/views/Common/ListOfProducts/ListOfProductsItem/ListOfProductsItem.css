@@ -69,7 +69,9 @@
 .name {
     font-family: var(--font);
     font-size: var(--font-size-m);
-    white-space: normal;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: var(--height-s);
 }
 
 .rating {
