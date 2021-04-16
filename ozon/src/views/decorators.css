@@ -17,3 +17,15 @@
     height: 50%;
     transform: rotate(-5deg);
 }
+
+.noScroll {
+    overflow: hidden;
+}
+
+.lock {
+    pointer-events: none;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+    background: gray;
+}
+

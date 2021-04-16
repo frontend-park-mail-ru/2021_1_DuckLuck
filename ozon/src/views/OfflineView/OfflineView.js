@@ -3,6 +3,7 @@ import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import Router from '../../utils/router/Router.js';
 import {OfflineForm} from '../Common/OfflineForm/OfflineForm.js';
+import decorator from '../decorators.css';
 
 /**
  * @class  OfflineView
@@ -15,6 +16,9 @@ export class OfflineView extends BaseView {
      * @return {void} rendered page
      */
     render = () => {
+        const body = document.getElementsByTagName('body')[0];
+        body.classList.add(decorator.noScroll);
+
         if (this.cache !== '') {
             this.parent.appendChild(this.cache);
             return;
@@ -31,6 +35,7 @@ export class OfflineView extends BaseView {
         const blind = this.cache.getElementsByClassName('blind')[0];
         blind.addEventListener('click', (evt) => {
             evt.preventDefault();
+            body.classList.remove(decorator.noScroll);
             this.remove();
             Router.return();
         });

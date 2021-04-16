@@ -8,6 +8,7 @@ import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationFor
 import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.css';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
+import decorator from '../decorators.css';
 
 /**
  * @class LoginView
@@ -20,6 +21,9 @@ export class LoginView extends BaseView {
      * @return {void} html form
      */
     render = () => {
+        const body = document.getElementsByTagName('body')[0];
+        body.classList.add(decorator.noScroll);
+
         if (this.cache !== '') {
             this.parent.appendChild(this.cache);
             return;
@@ -58,9 +62,11 @@ export class LoginView extends BaseView {
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
 
+
         this.cache.getElementsByClassName('blind')[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
+                body.classList.remove(decorator.noScroll);
                 this.remove();
                 Router.return();
             });

@@ -40,6 +40,12 @@ class OrderPresenter extends BasePresenter {
         return this.model.recipient;
     }
 
+    /**
+     * @return {String} Address
+     */
+    get address() {
+        return this.model.address;
+    }
 
     /**
      * @description Loads all information about order from model

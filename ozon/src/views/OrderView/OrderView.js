@@ -8,6 +8,7 @@ import orderStyles from './OrderView.css';
 import Router from '../../utils/router/Router';
 import {Popup} from '../Common/Popup/Popup';
 import {Blind} from '../Common/Blind/Blind';
+import decorator from '../decorators.css';
 
 /**
  * @class ProductsView
@@ -29,7 +30,9 @@ export class OrderView extends BaseView {
                 value: this.presenter.recipient.first_name}),
             new Input({type: 'text', name: 'lastName', placeholder: 'Фамилия',
                 value: this.presenter.recipient.last_name}),
-            new Input({type: 'text', name: 'address', placeholder: 'Адрес доставки'})],
+            new Input({type: 'text', name: 'address', placeholder: 'Адрес доставки',
+                value: this.presenter.address}),
+            ],
             orderStyles: orderStyles,
             cartSize: this.presenter.products.length,
             baseCost: +this.presenter.price.total_base_cost,
@@ -49,10 +52,13 @@ export class OrderView extends BaseView {
                 background: new Blind().getHtmlString(),
                 popupType: 'signup',
             }), 'text/html').getElementById('popup-wrapper');
+            const body = document.getElementsByTagName('body')[0];
+            body.classList.add(decorator.noScroll);
             this.parent.appendChild(notice);
             notice.getElementsByClassName('blind')[0]
                 .addEventListener('click', (evt) => {
                     evt.preventDefault();
+                    body.classList.remove(decorator.noScroll);
                     this.remove();
                     Router.open('/', {replaceState: true});
                 });

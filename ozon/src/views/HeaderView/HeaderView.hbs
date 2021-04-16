@@ -20,10 +20,10 @@
                 </button>
             </div>
         </div>
-        <div class="{{headerStyles.searchBlock}}">
+        <div class="{{headerStyles.searchBlock}} {{decorators.lock}}">
             {{#with searchBlock}}
-                <form class="{{../headerStyles.searchForm}}">
-                    <div class="{{../headerStyles.searchAreaBlock}}">
+                <form class="{{../headerStyles.searchForm}} {{../decorators.lock}}">
+                    <div class="{{../headerStyles.searchAreaBlock}} {{../decorators.lock}}">
                         {{#with searchArea}}
                             <span title="{{text}}" class="{{../../headerStyles.searchAreaText}}">{{text}}</span>
                             <div class="{{../../headerStyles.searchAreaPointer}}">
@@ -31,12 +31,12 @@
                             </div>
                         {{/with}}
                     </div>
-                    <div class="{{../headerStyles.searchInputBlock}}">
+                    <div class="{{../headerStyles.searchInputBlock}} {{../decorators.lock}}">
                         {{#with searchInput}}
-                            <input placeholder="{{placeholder}}" type={{type}} name={{name}} class="{{../../inputStyles.search}}">
+                            <input placeholder="{{placeholder}}" type={{type}} name={{name}} class="{{../../inputStyles.search}} {{../../decorators.lock}}">
                         {{/with}}
                     </div>
-                    <div class="{{../headerStyles.searchButtonBlock}}">
+                    <div class="{{../headerStyles.searchButtonBlock}} {{../decorators.lock}}">
                         {{#with searchButton}}
                             <button type="submit" class="{{../../buttonStyles.search}}">
                                 <div class="{{../../headerStyles.searchImgWrapper}}">
@@ -50,7 +50,7 @@
         </div>
         <div class="{{headerStyles.menu}}">
             {{#each headerMenu}}
-                <div class="{{../headerStyles.menuItem}}" href="{{this.href}}" name="{{this.name}}">
+                <div class="{{../headerStyles.menuItem}} {{#ifEquals this.href "/orders"}} {{../decorators.lock}} {{/ifEquals}} {{#ifEquals this.href "/favorites"}} {{../decorators.lock}} {{/ifEquals}}" href="{{this.href}}" name="{{this.name}}">
                     {{#with this}}
                         <img src="{{img.src}}" class="{{../imgStyles.menuImgL}}">
                         <span>{{text}}</span>

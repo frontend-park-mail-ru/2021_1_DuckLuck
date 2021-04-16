@@ -26,9 +26,19 @@
     color: white;
 }
 
+.currentPage:hover {
+    background: var(--dark-colored-object-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
 .commonPage {
     background: white;
     color: var(--colored-object-color);
+}
+
+.commonPage:hover {
+    background: var(--neutral-background-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .buttonBigWrapper {
@@ -47,4 +57,10 @@
     font-family: var(--font);
     font-size: var(--font-size-s);
     font-weight: var(--bold-font);
+}
+
+.bigButton:hover {
+    background: var(--dark-neutral-background-color);
+    color: var(--dark-colored-object-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
 }
