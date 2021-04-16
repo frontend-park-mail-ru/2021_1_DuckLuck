@@ -55,6 +55,9 @@
                         <img src="{{img.src}}" class="{{../imgStyles.menuImgL}}">
                         <span>{{text}}</span>
                     {{/with}}
+                    {{#ifEquals this.additionalSpan true}}
+                        <span name="addSpan{{this.name}}" class="{{this.additionalSpanClass}}">0</span>
+                    {{/ifEquals}}
                 </div>
             {{/each}}
         </div>

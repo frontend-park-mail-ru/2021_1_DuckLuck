@@ -36,6 +36,7 @@ const Events = {
     HeaderLoaded: 'product-loaded',
     HeaderChangeCatalogID: 'header-change-catalog-id',
     HeaderChangeCategoryID: 'header-change-category-id',
+    HeaderChangeCartItems: 'header-change-cart-items',
 
     CartAddProduct: 'cart-add-product',
     CartProductChange: 'cart-update-product',
@@ -44,6 +45,9 @@ const Events = {
     CartLoad: 'cart-load',
     CartLoaded: 'cart-loaded',
     CartProductAdded: 'cart-product-added',
+    CartLoadProductsAmount: 'cart-load-products-amount',
+    CartLoadedProductsAmountReaction: 'cart-loaded-products-amount-reaction',
+
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',

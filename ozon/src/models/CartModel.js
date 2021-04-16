@@ -34,6 +34,9 @@ class CartModel extends BaseModel {
      * @param {number | string} count amount of product
      */
     addProduct(id, count) {
+        Bus.globalBus.emit(Events.HeaderChangeCartItems, 1);
+
+
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id,
@@ -48,6 +51,7 @@ class CartModel extends BaseModel {
             this.#needsRerender = true;
             this.#ids.push(id);
         }).catch((err) => {
+            Bus.globalBus.emit(Events.HeaderChangeCartItems, -1);
             switch (err) {
             case HTTPResponses.Unauthorized: {
                 this.bus.emit(Events.CartProductAdded, Responses.Unauthorized);
@@ -76,7 +80,9 @@ class CartModel extends BaseModel {
         }
         for (const product of this.#products) {
             if (product.id === id) {
+                const diff = +count - this.#products[this.#products.indexOf(product)].count;
                 this.#products[this.#products.indexOf(product)].count = +count;
+                Bus.globalBus.emit(Events.HeaderChangeCartItems, diff);
             }
         }
 
@@ -98,7 +104,9 @@ class CartModel extends BaseModel {
      */
     removeProduct = (id) => {
         for (const product of this.#products) {
-            if (product.id === id) {
+            if (product.id === +id) {
+                Bus.globalBus.emit(Events.HeaderChangeCartItems,
+                    -this.#products[this.#products.indexOf(product)].count);
                 this.#products.splice(this.#products.indexOf(product), 1);
             }
         }
@@ -160,6 +168,26 @@ class CartModel extends BaseModel {
             }
             }
             this.bus.emit(Events.CartLoaded, Responses.Error);
+        });
+    }
+
+    loadProductsAmount = () => {
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.cart,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((parsedJson) => {
+            this.#products = parsedJson.products || [];
+            let count = 0;
+            for (const product of this.#products) {
+                count += product.count;
+            }
+            this.bus.emit(Events.CartLoadedProductsAmountReaction, count);
+        }).catch((err) => {
+            console.error(err);
         });
     }
 }

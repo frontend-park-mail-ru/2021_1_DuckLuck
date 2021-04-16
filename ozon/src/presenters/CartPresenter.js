@@ -18,11 +18,13 @@ class CartPresenter extends BasePresenter {
         this.bus.on(Events.CartLoad, this.loadProducts);
         this.bus.on(Events.CartLoaded, this.cartLoadedReaction);
         this.bus.on(Events.CartProductAdded, this.cartProductAddedReaction);
+        this.bus.on(Events.CartLoadedProductsAmountReaction, this.productsAmountLoadedReaction);
 
         Bus.globalBus.on(Events.CartProductRemoved, this.productRemovedReaction);
         Bus.globalBus.on(Events.CartAddProduct, this.addProduct);
         Bus.globalBus.on(Events.CartRemoveProduct, this.removeProduct);
         Bus.globalBus.on(Events.CartProductChange, this.changeProduct);
+        Bus.globalBus.on(Events.CartLoadProductsAmount, this.loadProductsAmount);
     }
 
     /**
@@ -125,6 +127,17 @@ class CartPresenter extends BasePresenter {
             break;
         }
         }
+    }
+
+    loadProductsAmount = () => {
+        this.model.loadProductsAmount();
+    }
+
+    /**
+     * @param {number} count
+     */
+    productsAmountLoadedReaction = (count) => {
+        Bus.globalBus.emit(Events.HeaderChangeCartItems, count);
     }
 }
 

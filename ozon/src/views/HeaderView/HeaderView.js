@@ -11,6 +11,7 @@ import {Img} from '../Common/Img/Img';
 import {Button} from '../Common/Button/Button';
 import {Input} from '../Common/Input/Input';
 import Router from '../../utils/router/Router';
+import {Bus} from '../../utils/bus/bus';
 
 /**
  * @class HeaderView
@@ -53,6 +54,8 @@ export class HeaderView extends BaseView {
                 button: new Button(),
                 href: '/cart',
                 name: 'cart',
+                additionalSpan: true,
+                additionalSpanClass: headerStyles.cartItemsCounter,
             },
         ];
         const catalog = {
@@ -144,6 +147,7 @@ export class HeaderView extends BaseView {
             });
         });
         this.parent.appendChild(this.cache);
+        Bus.globalBus.emit(Events.CartLoadProductsAmount);
     }
 
     /**
@@ -159,6 +163,15 @@ export class HeaderView extends BaseView {
             icon.getElementsByTagName('span')[0].textContent = 'Войти';
             icon.setAttribute('href', '/login');
         }
+    }
+
+
+    /**
+     * @param {number} value
+     */
+    changeCartItems = (value) => {
+        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        counter.innerHTML = (+counter.innerHTML + value).toString();
     }
 }
 

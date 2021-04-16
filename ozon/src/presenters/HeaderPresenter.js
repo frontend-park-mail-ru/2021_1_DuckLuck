@@ -18,6 +18,7 @@ class HeaderPresenter extends BasePresenter {
         Bus.globalBus.on(Events.LoginEmitResult, this.updateAuthorizeState);
         Bus.globalBus.on(Events.SignupEmitResult, this.updateAuthorizeState);
         Bus.globalBus.on(Events.ProfileLogoutEmitResult, this.updateAuthorizeState);
+        Bus.globalBus.on(Events.HeaderChangeCartItems, this.changeCartItems);
         this.bus.on(Events.HeaderLoad, this.loadHeader);
         this.bus.on(Events.HeaderLoaded, this.headerLoadedReaction);
     }
@@ -86,6 +87,13 @@ class HeaderPresenter extends BasePresenter {
         } else {
             console.error('Cant load header');
         }
+    }
+
+    /**
+     * @param {number} value
+     */
+    changeCartItems = (value) => {
+        this.view.changeCartItems(value);
     }
 }
 
