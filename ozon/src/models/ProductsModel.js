@@ -51,7 +51,7 @@ class ProductsModel extends BaseModel {
      */
     loadProducts(category, page, body = {
         page_num: +page,
-        count: 11,
+        count: 9,
         sort_key: 'cost',
         sort_direction: 'ASC',
         category: +category,
