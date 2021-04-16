@@ -92,10 +92,10 @@ class CartModel extends BaseModel {
             this.#ids = (parsedJson.products || []).map((elem) => {
                 return elem.id;
             }) || [];
-            // Bus.globalBus.emit(Events.CartLoadedProductsID, this.#ids);
             Bus.globalBus.emit(event, this.#ids);
         }).catch((err) => {
             console.error(err);
+            Bus.globalBus.emit(event, []);
         });
     }
 
@@ -220,7 +220,7 @@ class CartModel extends BaseModel {
             }
             this.bus.emit(Events.CartLoadedProductsAmountReaction, count);
         }).catch((err) => {
-            console.error(err);
+            this.bus.emit(Events.CartLoadedProductsAmountReaction, 0);
         });
     }
 }

@@ -46,7 +46,7 @@ class LoginPresenter extends BasePresenter {
             break;
         }
         default: {
-            console.error(result);
+            this.view.wrongData();
             break;
         }
         }
