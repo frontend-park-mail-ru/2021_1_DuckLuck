@@ -25,6 +25,13 @@ export class LoginView extends BaseView {
         body.classList.add(decorator.noScroll);
 
         if (this.cache !== '') {
+            const inputs = this.cache.getElementsByTagName('input');
+            inputs[0].placeholder = 'Электронная почта';
+            inputs[1].placeholder = 'Пароль';
+            for (const input of inputs) {
+                input.style['border-color'] = '';
+            }
+
             this.parent.appendChild(this.cache);
             return;
         }
@@ -87,5 +94,13 @@ export class LoginView extends BaseView {
 
 
         this.parent.appendChild(this.cache);
+    }
+
+    wrongData = () => {
+        for (const input of this.cache.getElementsByTagName('input')) {
+            input.value = '';
+            input.placeholder = 'Некорректные данные';
+            input.style['border-color'] = '#ff726f';
+        }
     }
 }

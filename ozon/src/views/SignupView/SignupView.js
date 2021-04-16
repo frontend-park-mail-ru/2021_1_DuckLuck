@@ -25,6 +25,14 @@ export class SignupView extends BaseView {
         body.classList.add(decorator.noScroll);
 
         if (this.cache !== '') {
+            const inputs = this.cache.getElementsByTagName('input');
+            inputs[0].placeholder = 'Электронная почта';
+            inputs[1].placeholder = 'Пароль';
+            inputs[2].placeholder = 'Повтор пароля';
+            for (const input of inputs) {
+                input.style['border-color'] = '';
+            }
+
             this.parent.appendChild(this.cache);
             return;
         }
@@ -90,5 +98,13 @@ export class SignupView extends BaseView {
                 Router.open('/login', {replaceState: true});
             });
         this.parent.appendChild(this.cache);
+    }
+
+    wrongData = () => {
+        for (const input of this.cache.getElementsByTagName('input')) {
+            input.value = '';
+            input.placeholder = 'Некорректные данные';
+            input.style['border-color'] = '#ff726f';
+        }
     }
 }
