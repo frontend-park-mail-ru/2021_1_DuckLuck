@@ -87,6 +87,7 @@ export class SignupView extends BaseView {
         const form = this.cache.getElementsByClassName(AuthenticationFormStyles.button)[0];
         form.addEventListener('click', (evt) => {
             evt.preventDefault();
+            body.classList.remove(decorator.noScroll);
             this.bus.emit(Events.SignupSendData);
         });
 
@@ -94,6 +95,7 @@ export class SignupView extends BaseView {
         this.cache.getElementsByClassName(AuthenticationFormStyles.signup)[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
+                body.classList.remove(decorator.noScroll);
                 this.remove();
                 Router.open('/login', {replaceState: true});
             });
