@@ -176,7 +176,7 @@
     height: 56px;
     border-radius: var(--standart-border-radius);
     border: none;
-    background: #3ac267;
+    background: var(--order-color);
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;

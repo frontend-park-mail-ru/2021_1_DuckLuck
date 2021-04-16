@@ -79,7 +79,7 @@
 }
 
 .inCartButton {
-    background: #339933;
+    background: var(--order-color);
     display: flex;
     height: var(--height-xxxs);
     width: var(--width-s);
@@ -88,6 +88,11 @@
     position: absolute;
     bottom: 0;
     cursor: pointer;
+}
+
+.inCartButton:hover {
+    background: var(--dark-order-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .notInCartButton {
@@ -102,7 +107,7 @@
     cursor: pointer;
 }
 
-.cartButton:hover {
+.notInCartButton:hover {
     background: var(--dark-colored-object-color);
     transition: .2s cubic-bezier(.4,0,.2,1);
 }
