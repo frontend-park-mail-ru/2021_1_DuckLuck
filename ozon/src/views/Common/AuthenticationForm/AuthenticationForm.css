@@ -81,6 +81,12 @@
     border: none;
     height: var(--height-xs);
     cursor: pointer;
+    outline: none;
+}
+
+.button:hover {
+    background: var(--dark-colored-object-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .buttonText {

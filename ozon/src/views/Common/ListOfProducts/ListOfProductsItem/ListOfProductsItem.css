@@ -90,6 +90,7 @@
     position: absolute;
     bottom: 0;
     cursor: pointer;
+    outline: none;
 }
 
 .inCartButton:hover {
@@ -107,6 +108,7 @@
     position: absolute;
     bottom: 0;
     cursor: pointer;
+    outline: none;
 }
 
 .notInCartButton:hover {

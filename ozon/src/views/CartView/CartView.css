@@ -181,7 +181,7 @@
     margin-right: auto;
     margin-top: 20px;
     cursor: pointer;
-
+    outline: none;
 }
 
 .orderButton:hover {

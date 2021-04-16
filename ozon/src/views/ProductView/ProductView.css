@@ -162,6 +162,7 @@
     border: none;
     margin: auto;
     cursor: pointer;
+    outline: none;
 }
 
 .inCartButton:hover {
@@ -177,6 +178,7 @@
     border: none;
     margin: auto;
     cursor: pointer;
+    outline: none;
 }
 
 .notInCartButton:hover {

@@ -170,6 +170,7 @@
     background: var(--order-color);
     margin: var(--margin-m) auto auto;
     cursor: pointer;
+    outline: none;
 }
 
 .orderButton:hover {
