@@ -18,6 +18,7 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProductChangeID, this.changeID);
         this.bus.on(Events.ProductLoad, this.loadProduct);
         this.bus.on(Events.ProductLoaded, this.productLoadedReaction);
+        Bus.globalBus.on(Events.CartLoadedProductID, this.productCartGotIds);
     }
 
     /**
@@ -51,8 +52,7 @@ class ProductsPresenter extends BasePresenter {
     productLoadedReaction = (result) => {
         switch (result) {
         case Responses.Success: {
-            this.view.render();
-            this.view.cache.hidden = false;
+            Bus.globalBus.emit(Events.CartGetProductID);
             break;
         }
         case Responses.Offline: {
@@ -64,6 +64,15 @@ class ProductsPresenter extends BasePresenter {
             break;
         }
         }
+    }
+
+    /**
+     * @param {number[]}ids
+     */
+    productCartGotIds = (ids) => {
+        this.model.item['inCart'] = !!ids.includes(this.model.item.id);
+        this.view.render();
+        this.view.cache.hidden = false;
     }
 }
 

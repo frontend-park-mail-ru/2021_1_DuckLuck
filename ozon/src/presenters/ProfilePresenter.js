@@ -142,6 +142,7 @@ class ProfilePresenter extends BasePresenter {
         }
         this.view.remove();
         Router.open('/', {replaceState: true});
+        Bus.globalBus.emit(Events.HeaderChangeCartItems, 0);
         this.model.profileLogout();
     }
 

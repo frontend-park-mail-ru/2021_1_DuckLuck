@@ -78,11 +78,23 @@
     margin-top: var(--margin-xs);
 }
 
-.cartButton {
+.inCartButton {
+    background: #339933;
+    display: flex;
+    height: var(--height-xxxs);
+    width: var(--width-s);
+    border-radius: var(--standart-border-radius);
+    border: none;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+}
+
+.notInCartButton {
     background: var(--colored-object-color);
     display: flex;
     height: var(--height-xxxs);
-    width: var(--width-xs);
+    width: var(--width-s);
     border-radius: var(--standart-border-radius);
     border: none;
     position: absolute;

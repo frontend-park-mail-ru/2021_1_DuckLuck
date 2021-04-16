@@ -1,4 +1,3 @@
-
 const Events = {
     LoginSendData: 'login-send-data',
     LoginEmitResult: 'login-emit-result',
@@ -36,6 +35,7 @@ const Events = {
     HeaderLoaded: 'product-loaded',
     HeaderChangeCatalogID: 'header-change-catalog-id',
     HeaderChangeCategoryID: 'header-change-category-id',
+    HeaderChangeCartItems: 'header-change-cart-items',
 
     CartAddProduct: 'cart-add-product',
     CartProductChange: 'cart-update-product',
@@ -44,10 +44,18 @@ const Events = {
     CartLoad: 'cart-load',
     CartLoaded: 'cart-loaded',
     CartProductAdded: 'cart-product-added',
+    CartLoadProductsAmount: 'cart-load-products-amount',
+    CartLoadedProductsAmountReaction: 'cart-loaded-products-amount-reaction',
+    CartGetProductsID: 'cart-get-products-ids',
+    CartGetProductID: 'cart-get-product-id',
+    CartLoadedProductsID: 'cart-loaded-products-ids',
+    CartLoadedProductID: 'cart-loaded-product-id',
+
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
     SendOrder: 'order-send',
 };
+
 
 export default Events;
