@@ -10,6 +10,7 @@
     font-family: var(--font);
     justify-content: space-between;
     flex-direction: column;
+    margin-bottom: var(--margin-xxl);
 }
 
 .wrapper {
