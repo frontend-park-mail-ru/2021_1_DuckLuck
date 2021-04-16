@@ -95,6 +95,11 @@
     font-weight: 700;
 }
 
+.catalog:hover {
+    background: var(--dark-colored-object-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
 .search {
     min-width: 76px;
     min-height: 40px;

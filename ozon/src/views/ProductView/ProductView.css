@@ -163,6 +163,11 @@
     cursor: pointer;
 }
 
+.cartButton:hover {
+    background: var(--dark-colored-object-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
 .buttonText {
     color: var(--light-color);
     font-family: var(--font);

@@ -26,6 +26,7 @@
 .mainWrapper {
     display: flex;
     flex-direction: column;
+    margin-top: var(--margin-l);
 }
 
 .wrapper {
@@ -156,7 +157,7 @@
     width: var(--width-xxxl);
     height: var(--height-xxxl);
     background: white;
-    border-radius: var(--lower-border-radius);
+    border-radius: var(--standart-border-radius);
     display: flex;
     flex-direction: column;
 }
@@ -168,6 +169,12 @@
     border: none;
     background: var(--order-color);
     margin: var(--margin-m) auto auto;
+    cursor: pointer;
+}
+
+.orderButton:hover {
+    background: var(--dark-order-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .orderSubmit {

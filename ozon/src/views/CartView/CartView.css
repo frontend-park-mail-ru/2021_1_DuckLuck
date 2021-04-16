@@ -139,6 +139,7 @@
     font-family: var(--font);
     font-size: var(--font-size-s);
     color: var(--colored-object-color);
+    cursor: pointer;
 }
 
 .priceInfo {
@@ -146,13 +147,18 @@
     flex-direction: column;
 }
 
-.incButton, .decButton{
+.incButton, .decButton {
     font-family: var(--font);
     font-size: var(--font-size-m);
     color: var(--colored-object-color);
     border: none;
     background-color: inherit;
     cursor: pointer;
+}
+
+.incButton:hover, .decButton:hover {
+    background: var(--neutral-background-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .orderMenu {
@@ -174,6 +180,13 @@
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
+    cursor: pointer;
+
+}
+
+.orderButton:hover {
+    background: var(--dark-order-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .orderSubmit {
