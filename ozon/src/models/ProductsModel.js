@@ -45,6 +45,14 @@ class ProductsModel extends BaseModel {
     }
 
     /**
+     *
+     * @param {Object} newProducts
+     */
+    set products(newProducts) {
+        return this.#products = newProducts;
+    }
+
+    /**
      * @param {Number|String} category
      * @param {Number|String} page
      * @param {Object} body Body of request

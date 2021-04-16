@@ -56,11 +56,17 @@ export class ProductsView extends BaseView {
                     Router.open(`/item/${productID}`);
                 });
 
-            itemContainer.getElementsByClassName(ListOfProductsItemStyles.cartButton)[0]
-                .addEventListener('click', (evt) => {
-                    evt.preventDefault();
-                    Bus.globalBus.emit(Events.CartAddProduct, productID, 1);
-                });
+            let item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.notInCartButton)[0];
+            if (item === undefined) {
+                item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.inCartButton)[0];
+            }
+
+            item.addEventListener('click', (evt) => {
+                evt.preventDefault();
+                Bus.globalBus.emit(Events.CartAddProduct, productID, 1);
+                item.className = ListOfProductsItemStyles.inCartButton;
+                item.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
+            });
         }
 
         this.parent.appendChild(this.cache);

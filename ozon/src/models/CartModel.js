@@ -22,6 +22,13 @@ class CartModel extends BaseModel {
     }
 
     /**
+     * @return {*[]}
+     */
+    get ids() {
+        return this.#ids;
+    }
+
+    /**
      * @return {boolean} Is View needs to be rerendered.
      */
     get needsRerender() {
@@ -66,6 +73,29 @@ class CartModel extends BaseModel {
                 break;
             }
             }
+        });
+    }
+
+    /**
+     *
+     * @param {string} event
+     */
+    getIDs = (event) => {
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.cart,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((parsedJson) => {
+            this.#ids = (parsedJson.products || []).map((elem) => {
+                return elem.id;
+            }) || [];
+            // Bus.globalBus.emit(Events.CartLoadedProductsID, this.#ids);
+            Bus.globalBus.emit(event, this.#ids);
+        }).catch((err) => {
+            console.error(err);
         });
     }
 
@@ -181,6 +211,9 @@ class CartModel extends BaseModel {
             return response.json();
         }).then((parsedJson) => {
             this.#products = parsedJson.products || [];
+            this.#ids = this.#products.map((elem) => {
+                return elem.id;
+            }) || [];
             let count = 0;
             for (const product of this.#products) {
                 count += product.count;

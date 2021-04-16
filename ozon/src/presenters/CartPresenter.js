@@ -25,6 +25,8 @@ class CartPresenter extends BasePresenter {
         Bus.globalBus.on(Events.CartRemoveProduct, this.removeProduct);
         Bus.globalBus.on(Events.CartProductChange, this.changeProduct);
         Bus.globalBus.on(Events.CartLoadProductsAmount, this.loadProductsAmount);
+        Bus.globalBus.on(Events.CartGetProductsID, this.getProductsIDs);
+        Bus.globalBus.on(Events.CartGetProductID, this.getProductID);
     }
 
     /**
@@ -138,6 +140,14 @@ class CartPresenter extends BasePresenter {
      */
     productsAmountLoadedReaction = (count) => {
         Bus.globalBus.emit(Events.HeaderChangeCartItems, count);
+    }
+
+    getProductsIDs = () => {
+        this.model.getIDs(Events.CartLoadedProductsID);
+    }
+
+    getProductID = () => {
+        this.model.getIDs(Events.CartLoadedProductID);
     }
 }
 

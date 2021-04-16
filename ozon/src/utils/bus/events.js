@@ -1,4 +1,3 @@
-
 const Events = {
     LoginSendData: 'login-send-data',
     LoginEmitResult: 'login-emit-result',
@@ -47,11 +46,16 @@ const Events = {
     CartProductAdded: 'cart-product-added',
     CartLoadProductsAmount: 'cart-load-products-amount',
     CartLoadedProductsAmountReaction: 'cart-loaded-products-amount-reaction',
+    CartGetProductsID: 'cart-get-products-ids',
+    CartGetProductID: 'cart-get-product-id',
+    CartLoadedProductsID: 'cart-loaded-products-ids',
+    CartLoadedProductID: 'cart-loaded-product-id',
 
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
     SendOrder: 'order-send',
 };
+
 
 export default Events;

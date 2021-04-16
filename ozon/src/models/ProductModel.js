@@ -48,6 +48,7 @@ class ProductModel extends BaseModel {
                     category: parsedJson['category'],
                 },
                 images: parsedJson['images'],
+                id: parsedJson['id'],
             };
             this.bus.emit(Events.ProductLoaded, Responses.Success);
         }).catch((err) => {
