@@ -9,7 +9,8 @@
     box-sizing: border-box;
     font-family: var(--font);
     display: flex;
-    gap: var(--margin-xxxl)
+    gap: var(--margin-xxxl);
+    margin-top: var(--margin-l);
 }
 
 .avatarWrapper {
