@@ -8,6 +8,7 @@ import orderStyles from './OrderView.css';
 import Router from '../../utils/router/Router';
 import {Popup} from '../Common/Popup/Popup';
 import {Blind} from '../Common/Blind/Blind';
+import decorator from '../decorators.css';
 
 /**
  * @class ProductsView
@@ -41,6 +42,9 @@ export class OrderView extends BaseView {
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
 
+        const body = document.getElementsByTagName('body')[0];
+        body.classList.add(decorator.noScroll);
+
         this.cache.getElementsByClassName(orderStyles.orderButton)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.SendOrder);
@@ -55,6 +59,7 @@ export class OrderView extends BaseView {
             notice.getElementsByClassName('blind')[0]
                 .addEventListener('click', (evt) => {
                     evt.preventDefault();
+                    body.classList.remove(decorator.noScroll);
                     this.remove();
                     Router.open('/', {replaceState: true});
                 });

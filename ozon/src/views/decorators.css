@@ -17,3 +17,7 @@
     height: 50%;
     transform: rotate(-5deg);
 }
+
+.noScroll {
+    overflow: hidden;
+}
