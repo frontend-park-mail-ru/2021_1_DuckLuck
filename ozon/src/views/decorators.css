@@ -25,7 +25,5 @@
 .lock {
     pointer-events: none;
     cursor: not-allowed;
-    filter: grayscale(100%);
-    background: gray;
 }
 
