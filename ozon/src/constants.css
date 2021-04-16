@@ -36,7 +36,7 @@
     --button-content-gap: 5px;
 
     --standart-border-radius: 3px;
-    --lower-border-radius: 3px;
+    --big-border-radius: 9px;
     --standart-border: 2px solid var(--colored-object-color);
 
     --margin-xxxs: 2px;

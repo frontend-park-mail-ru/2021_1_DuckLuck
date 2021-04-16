@@ -1,5 +1,6 @@
 import {Button} from '../Button/Button.js';
 import paginationTemplate from './Pagination.hbs';
+import styles from './Pagination.css';
 
 /**
  * @class Pagination
@@ -13,7 +14,8 @@ export class Pagination {
      */
     constructor({pagesCount, currentPage}) {
         this.pagesCount = pagesCount;
-        this.currentPage = currentPage;
+        this.currentPage = parseInt(currentPage);
+        this.maxButtons = 10;
     }
 
     /**
@@ -22,26 +24,63 @@ export class Pagination {
      */
     getHtmlString = () => {
         const buttons = [];
-
-        if (this.currentPage > 3) {
-            buttons.push(new Button({name: 'button_pagination_first', value: '1'}));
-        }
-
-        for (let i = this.currentPage - 2; i <= this.currentPage + 2; i++) {
+        let surplusPages = 0;
+        let shortagePages = 0;
+        for (
+            let i = this.currentPage - this.maxButtons/2;
+            i <= this.currentPage + this.maxButtons/2 + surplusPages;
+            i++
+        ) {
             if (i <= 0) {
+                surplusPages++;
                 continue;
             }
             if (i > this.pagesCount) {
+                shortagePages = this.currentPage + this.maxButtons / 2 + surplusPages - i;
                 break;
             }
-            const buttonName = i === this.currentPage ? 'button_pagination_current-page' : 'button_pagination_common';
-            buttons.push(new Button({name: buttonName, value: i.toString()}));
+            const buttonName = i === this.currentPage ? styles.currentPage : styles.commonPage;
+            buttons.push(new Button({
+                name: buttonName,
+                value: i,
+            }));
         }
 
-        if (this.pagesCount > this.currentPage + 2) {
-            buttons.push(new Button({name: 'button_pagination_last', value: this.pagesCount.toString()}));
+        const shortageButtons = [];
+        for (
+            let i = parseInt(buttons[0].value) - shortagePages;
+            i <= parseInt(buttons[0].value) + shortagePages;
+            i++
+        ) {
+            if (i <= 0) {
+                continue;
+            }
+            if (parseInt(buttons[0].value) <= i) {
+                break;
+            }
+            shortageButtons.push(new Button({
+                name: styles.commonPage,
+                value: i,
+            }));
+        }
+        const resultButtons = shortageButtons.concat(buttons);
+        const firstButton = new Button({
+            name: styles.bigButton,
+            value: 1,
+        });
+        const nextButton = new Button({
+            name: styles.bigButton,
+            value: this.currentPage + 1,
+        });
+        if (parseInt(nextButton.value) > this.pagesCount) {
+            nextButton.value = -1;
         }
 
-        return paginationTemplate({buttons: buttons});
+        return paginationTemplate({
+            firstButton: firstButton,
+            buttons: resultButtons,
+            nextButton: nextButton,
+            styles: styles,
+        });
     }
 }

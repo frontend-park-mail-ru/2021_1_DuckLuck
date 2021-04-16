@@ -9,8 +9,21 @@
 
 .body {
     display: flex;
+    max-width: 60%;
+    margin: auto;
+    width: 100%;
 }
 
 .listWrapper {
+    /*margin: auto;*/
+}
+
+.footer {
+    display: flex;
+    max-width: 60%;
     margin: auto;
+    width: 100%;
+    border-top: solid;
+    border-color: var(--neutral-background-color);
+    padding-top: var(--padding-m);
 }

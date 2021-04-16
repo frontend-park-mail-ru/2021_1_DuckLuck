@@ -4,6 +4,7 @@ import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsIte
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.css';
+import paginatorStyles from '../Common/Pagination/Pagination.css';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
@@ -39,9 +40,9 @@ export class ProductsView extends BaseView {
         this.cache = new DOMParser().parseFromString(template, 'text/html')
             .getElementsByClassName(productsStyles.block)[0];
 
-        for (const button of this.cache.getElementsByClassName('button_pagination')) {
+        for (const button of this.cache.getElementsByClassName(paginatorStyles.button)) {
             button.addEventListener('click', () => {
-                const page = parseInt(button.textContent);
+                const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
                 Router.open(`/items/${this.IDs['category']}/${page}`, {id: page});
             });

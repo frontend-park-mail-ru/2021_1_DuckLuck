@@ -5,6 +5,10 @@
     width: var(--img-size-l);
     height: var(--height-xxxxl);
     flex-direction: column;
+    border-top: solid;
+    border-color: var(--neutral-background-color);
+    padding-bottom: var(--padding-s);
+    padding-top: var(--padding-s);
 }
 
 .infoWrapper {
