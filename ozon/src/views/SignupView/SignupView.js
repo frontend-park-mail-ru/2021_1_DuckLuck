@@ -21,6 +21,9 @@ export class SignupView extends BaseView {
      * @return {void} rendered page
      */
     render = () => {
+        const body = document.getElementsByTagName('body')[0];
+        body.classList.add(decorator.noScroll);
+
         if (this.cache !== '') {
             this.parent.appendChild(this.cache);
             return;
@@ -65,8 +68,6 @@ export class SignupView extends BaseView {
 
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
 
-        const body = document.getElementsByTagName('body')[0];
-        body.classList.add(decorator.noScroll);
         this.cache.getElementsByClassName('blind')[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();

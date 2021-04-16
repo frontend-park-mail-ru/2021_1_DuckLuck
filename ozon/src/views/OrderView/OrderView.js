@@ -42,9 +42,6 @@ export class OrderView extends BaseView {
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
 
-        const body = document.getElementsByTagName('body')[0];
-        body.classList.add(decorator.noScroll);
-
         this.cache.getElementsByClassName(orderStyles.orderButton)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.SendOrder);
@@ -55,6 +52,8 @@ export class OrderView extends BaseView {
                 background: new Blind().getHtmlString(),
                 popupType: 'signup',
             }), 'text/html').getElementById('popup-wrapper');
+            const body = document.getElementsByTagName('body')[0];
+            body.classList.add(decorator.noScroll);
             this.parent.appendChild(notice);
             notice.getElementsByClassName('blind')[0]
                 .addEventListener('click', (evt) => {
