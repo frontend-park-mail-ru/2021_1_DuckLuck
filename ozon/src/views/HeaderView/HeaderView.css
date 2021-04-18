@@ -91,7 +91,6 @@
 }
 
 .logoWrapper {
-    display: flex;
     justify-content: flex-start;
     align-items: center;
     height: 40px;
