@@ -76,7 +76,8 @@ class OrderModel extends BaseModel {
             this.#recipient = parsedJson.recipient;
             ymaps.geolocation.get(
             ).then((parsedJson) => {
-                ymaps.geocode(parsedJson.geoObjects.position, {'json': true}).then((parsedJson) => {
+                ymaps.geocode(parsedJson.geoObjects.position, {'json': true},
+                ).then((parsedJson) => {
                     this.address = parsedJson
                         .GeoObjectCollection
                         .featureMember[0]
@@ -85,8 +86,6 @@ class OrderModel extends BaseModel {
                         .GeocoderMetaData
                         .Address
                         .formatted;
-                    this.bus.emit(Events.OrderLoaded, Responses.Success);
-                }).catch((err) => {
                     this.bus.emit(Events.OrderLoaded, Responses.Success);
                 });
             }).catch((err) => {
