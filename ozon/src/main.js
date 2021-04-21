@@ -34,10 +34,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-const header = document.getElementsByTagName('header')[0];
-const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
-headerPresenter.view.show();
-
 const application = document.getElementById('app');
 
 Router.root = application;
@@ -51,6 +47,10 @@ const productsPresenter = new ProductsPresenter(application, ProductsView, Produ
 const productPresenter = new ProductPresenter(application, ProductView, ProductModel);
 const cartPresenter = new CartPresenter(application, CartView, CartModel);
 const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
+
+const header = document.getElementsByTagName('header')[0];
+const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
+headerPresenter.view.show();
 
 Router
     .register(/^\/$/, productsPresenter.view)

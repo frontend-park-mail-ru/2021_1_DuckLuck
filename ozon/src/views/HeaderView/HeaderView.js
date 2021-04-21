@@ -11,6 +11,7 @@ import {Img} from '../Common/Img/Img';
 import {Button} from '../Common/Button/Button';
 import {Input} from '../Common/Input/Input';
 import Router from '../../utils/router/Router';
+import {Bus} from '../../utils/bus/bus';
 
 /**
  * @class HeaderView
@@ -53,6 +54,8 @@ export class HeaderView extends BaseView {
                 button: new Button(),
                 href: '/cart',
                 name: 'cart',
+                additionalSpan: true,
+                additionalSpanClass: headerStyles.cartItemsCounter,
             },
         ];
         const catalog = {
@@ -99,22 +102,6 @@ export class HeaderView extends BaseView {
             Router.open('/');
         });
 
-        this.cache.addEventListener('click', (evt) => {
-            if (evt.target.hasAttribute('category')) {
-                const categoryId = parseInt(evt.target.getAttribute('category'));
-                Router.open(`/items/${categoryId}`);
-            }
-        });
-
-        const menuItems = Array.from(this.cache.getElementsByClassName(headerStyles.menuItem));
-        menuItems.forEach((menuItem) => {
-            menuItem.addEventListener('click', () => {
-                const href = menuItem.getAttribute('href');
-                Router.open(href);
-            });
-        });
-
-
         const catalogBlock = this.cache.getElementsByClassName(headerStyles.catalogBlock)[0];
         const catalogList = this.cache.getElementsByClassName(headerStyles.catalogList)[0];
         catalogBlock.addEventListener('click', () => {
@@ -128,6 +115,22 @@ export class HeaderView extends BaseView {
                 images[0].classList.add(decorators.hidden);
                 catalogList.classList.remove(decorators.hidden);
             }
+        });
+
+        this.cache.addEventListener('click', (evt) => {
+            if (evt.target.hasAttribute('category')) {
+                const categoryId = parseInt(evt.target.getAttribute('category'));
+                catalogBlock.dispatchEvent(new Event('click'));
+                Router.open(`/items/${categoryId}`);
+            }
+        });
+
+        const menuItems = Array.from(this.cache.getElementsByClassName(headerStyles.menuItem));
+        menuItems.forEach((menuItem) => {
+            menuItem.addEventListener('click', () => {
+                const href = menuItem.getAttribute('href');
+                Router.open(href);
+            });
         });
 
         const catalogListCategories = this.cache.getElementsByClassName(headerStyles.category);
@@ -144,6 +147,7 @@ export class HeaderView extends BaseView {
             });
         });
         this.parent.appendChild(this.cache);
+        Bus.globalBus.emit(Events.CartLoadProductsAmount);
     }
 
     /**
@@ -159,6 +163,15 @@ export class HeaderView extends BaseView {
             icon.getElementsByTagName('span')[0].textContent = 'Войти';
             icon.setAttribute('href', '/login');
         }
+    }
+
+
+    /**
+     * @param {number} value
+     */
+    changeCartItems = (value) => {
+        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        counter.innerHTML = (+counter.innerHTML + value).toString();
     }
 }
 

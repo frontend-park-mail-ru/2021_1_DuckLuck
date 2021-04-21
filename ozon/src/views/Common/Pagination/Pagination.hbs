@@ -1,11 +1,24 @@
-<div class="pagination-wrapper">
-    <div class="pagination-block">
-        {{#each buttons}}
-            <div class="pagination-block_button">
-                <button class="button button_pagination {{this.name}}" type="">
-                    <span class="text">{{this.value}}</span>
-                </button>
-            </div>
-        {{/each}}
+<div class="{{styles.block}}">
+    {{#ifNotEquals buttons.0.value 1}}
+        <div class="{{styles.buttonBigWrapper}}">
+        <button class="{{styles.button}} {{styles.bigButton}}" page="{{firstButton.value}}">
+            <span class="{{../styles.buttonText}}">В начало</span>
+        </button>
     </div>
+    {{/ifNotEquals}}
+    {{#each buttons}}
+        <div class="{{../styles.buttonWrapper}}">
+            <button class="{{../styles.button}} {{this.name}}" page="{{this.value}}">
+                <span class="{{../styles.buttonText}}">{{this.value}}</span>
+            </button>
+        </div>
+    {{/each}}
+    {{#ifNotEquals nextButton.value -1}}
+        <div class="{{styles.buttonBigWrapper}}">
+        <button class="{{styles.button}} {{styles.bigButton}}" page="{{nextButton.value}}">
+            <span class="{{styles.buttonText}}">Дальше</span>
+        </button>
+    </div>
+    {{/ifNotEquals}}
 </div>
+

@@ -39,6 +39,7 @@ export class ProductView extends BaseView {
         });
 
         const template = productPageTemplate({
+            inCart: this.presenter.item['inCart'],
             name: this.presenter.item['name'],
             price: this.presenter.item['price'],
             rating: this.presenter.item['rating'],
@@ -59,9 +60,16 @@ export class ProductView extends BaseView {
                 mainImage.setAttribute('src', image.getAttribute('src'));
             });
         });
-        document.getElementsByClassName(productStyles.cartButton)[0].addEventListener('click', (evt) => {
+
+        let button = document.getElementsByClassName(productStyles.notInCartButton)[0];
+        if (!button) {
+            button = document.getElementsByClassName(productStyles.inCartButton)[0];
+        }
+        button.addEventListener('click', (evt) => {
             evt.preventDefault();
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
+            button.className = productStyles.inCartButton;
+            button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
         });
     }
 }

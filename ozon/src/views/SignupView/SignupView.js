@@ -8,6 +8,7 @@ import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationFor
 import Router from '../../utils/router/Router.js';
 import Events from '../../utils/bus/events';
 import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.css';
+import decorator from '../decorators.css';
 
 /**
  * @class  SignupView
@@ -20,7 +21,18 @@ export class SignupView extends BaseView {
      * @return {void} rendered page
      */
     render = () => {
+        const body = document.getElementsByTagName('body')[0];
+        body.classList.add(decorator.noScroll);
+
         if (this.cache !== '') {
+            const inputs = this.cache.getElementsByTagName('input');
+            inputs[0].placeholder = 'Электронная почта';
+            inputs[1].placeholder = 'Пароль';
+            inputs[2].placeholder = 'Повтор пароля';
+            for (const input of inputs) {
+                input.style['border-color'] = '';
+            }
+
             this.parent.appendChild(this.cache);
             return;
         }
@@ -67,6 +79,7 @@ export class SignupView extends BaseView {
         this.cache.getElementsByClassName('blind')[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
+                body.classList.remove(decorator.noScroll);
                 this.remove();
                 Router.return();
             });
@@ -74,6 +87,7 @@ export class SignupView extends BaseView {
         const form = this.cache.getElementsByClassName(AuthenticationFormStyles.button)[0];
         form.addEventListener('click', (evt) => {
             evt.preventDefault();
+            body.classList.remove(decorator.noScroll);
             this.bus.emit(Events.SignupSendData);
         });
 
@@ -81,9 +95,18 @@ export class SignupView extends BaseView {
         this.cache.getElementsByClassName(AuthenticationFormStyles.signup)[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
+                body.classList.remove(decorator.noScroll);
                 this.remove();
                 Router.open('/login', {replaceState: true});
             });
         this.parent.appendChild(this.cache);
+    }
+
+    wrongData = () => {
+        for (const input of this.cache.getElementsByTagName('input')) {
+            input.value = '';
+            input.placeholder = 'Некорректные данные';
+            input.style['border-color'] = '#ff726f';
+        }
     }
 }

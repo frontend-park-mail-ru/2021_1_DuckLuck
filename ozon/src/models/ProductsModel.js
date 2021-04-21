@@ -45,13 +45,21 @@ class ProductsModel extends BaseModel {
     }
 
     /**
+     *
+     * @param {Object} newProducts
+     */
+    set products(newProducts) {
+        return this.#products = newProducts;
+    }
+
+    /**
      * @param {Number|String} category
      * @param {Number|String} page
      * @param {Object} body Body of request
      */
     loadProducts(category, page, body = {
         page_num: +page,
-        count: 4,
+        count: 9,
         sort_key: 'cost',
         sort_direction: 'ASC',
         category: +category,

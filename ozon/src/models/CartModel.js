@@ -22,6 +22,13 @@ class CartModel extends BaseModel {
     }
 
     /**
+     * @return {*[]}
+     */
+    get ids() {
+        return this.#ids;
+    }
+
+    /**
      * @return {boolean} Is View needs to be rerendered.
      */
     get needsRerender() {
@@ -34,6 +41,9 @@ class CartModel extends BaseModel {
      * @param {number | string} count amount of product
      */
     addProduct(id, count) {
+        Bus.globalBus.emit(Events.HeaderChangeCartItems, 1);
+
+
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id,
@@ -48,6 +58,7 @@ class CartModel extends BaseModel {
             this.#needsRerender = true;
             this.#ids.push(id);
         }).catch((err) => {
+            Bus.globalBus.emit(Events.HeaderChangeCartItems, -1);
             switch (err) {
             case HTTPResponses.Unauthorized: {
                 this.bus.emit(Events.CartProductAdded, Responses.Unauthorized);
@@ -66,6 +77,43 @@ class CartModel extends BaseModel {
     }
 
     /**
+     *
+     * @param {string} event
+     */
+    getIDs = (event) => {
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.cart,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((parsedJson) => {
+            this.#ids = (parsedJson.products || []).map((elem) => {
+                return elem.id;
+            }) || [];
+            Bus.globalBus.emit(event, this.#ids);
+        }).catch((err) => {
+            console.error(err);
+            Bus.globalBus.emit(event, []);
+        });
+    }
+
+    /**
+     * @param {number} itemID
+     * @param {number | string} count
+     */
+    changeCartCounter = (itemID, count) => {
+        for (const product of this.#products) {
+            if (product.id === itemID) {
+                const diff = +count - this.#products[this.#products.indexOf(product)].count;
+                this.#products[this.#products.indexOf(product)].count = +count;
+                Bus.globalBus.emit(Events.HeaderChangeCartItems, diff);
+            }
+        }
+    }
+
+    /**
      * @param {number} id id of product
      * @param {number | string} count new amount of product
      */
@@ -74,11 +122,8 @@ class CartModel extends BaseModel {
             this.removeProduct(id);
             return;
         }
-        for (const product of this.#products) {
-            if (product.id === id) {
-                this.#products[this.#products.indexOf(product)].count = +count;
-            }
-        }
+
+        this.changeCartCounter(id, count);
 
         AjaxModule.putUsingFetch({
             url: serverApiPath + urls.cartProduct,
@@ -97,11 +142,8 @@ class CartModel extends BaseModel {
      * @param {number} id id of removed product
      */
     removeProduct = (id) => {
-        for (const product of this.#products) {
-            if (product.id === id) {
-                this.#products.splice(this.#products.indexOf(product), 1);
-            }
-        }
+        this.changeCartCounter(id, 0);
+
         AjaxModule.deleteUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id},
@@ -160,6 +202,29 @@ class CartModel extends BaseModel {
             }
             }
             this.bus.emit(Events.CartLoaded, Responses.Error);
+        });
+    }
+
+    loadProductsAmount = () => {
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.cart,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((parsedJson) => {
+            this.#products = parsedJson.products || [];
+            this.#ids = this.#products.map((elem) => {
+                return elem.id;
+            }) || [];
+            let count = 0;
+            for (const product of this.#products) {
+                count += product.count;
+            }
+            this.bus.emit(Events.CartLoadedProductsAmountReaction, count);
+        }).catch((err) => {
+            this.bus.emit(Events.CartLoadedProductsAmountReaction, 0);
         });
     }
 }

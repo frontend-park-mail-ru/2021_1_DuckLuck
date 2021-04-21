@@ -13,7 +13,7 @@
                         {{#each this.inputFields}}
                             <div class="{{../orderStyles.productsListElem}}">
                                 <div class="">{{this.placeholder}}</div>
-                                <input class="{{../orderStyles.input}}" type="{{this.type}}" name="{{this.name}}" value={{this.value}}>
+                                <input class="{{../orderStyles.input}}" type="{{this.type}}" name="{{this.name}}" value="{{this.value}}">
                             </div>
                         {{/each}}
                     </div>
@@ -23,6 +23,10 @@
                         <button class="{{orderStyles.orderButton}}">
                             <span class="{{orderStyles.orderSubmit}}">Отправить заказ</span>
                         </button>
+                        <div class="{{orderStyles.rules}}">Нажимая на кнопку, вы соглашаетесь с
+                            <span class="{{orderStyles.link}} {{decorators.lock}}">Условиями обработки перс. данных</span>, а также с
+                            <span class="{{orderStyles.link}} {{decorators.lock}}">Условиями продажи</span>
+                        </div>
                     </div>
                     <div class="{{orderStyles.orderInfo}}">
                         <div class="{{orderStyles.orderInfoWrapper}}">

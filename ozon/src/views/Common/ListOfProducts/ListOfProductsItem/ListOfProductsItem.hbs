@@ -19,9 +19,9 @@
             </span>
         </div>
         <div class="{{itemStyles.descriptionBlock}}">
-            <span class="{{itemStyles.name}}">
+            <div class="{{itemStyles.name}}">
                 {{itemName}}
-            </span>
+            </div>
             <div class="{{itemStyles.rating}}">
                 {{#for 0 itemRating 1}}
                     <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="">
@@ -33,10 +33,21 @@
         </div>
     </div>
     <div class="{{itemStyles.buttonsBlock}}">
-        <button class="{{itemStyles.cartButton}}">
-            <span class="{{itemStyles.buttonText}}">
-                В корзину
-            </span>
-        </button>
+        {{#ifEquals itemInCart true}}
+            <button class="{{itemStyles.inCartButton}}">
+                <span class="{{itemStyles.buttonText}}">
+                    Добавить +1
+                </span>
+            </button>
+        {{/ifEquals}}
+
+        {{#ifEquals itemInCart false}}
+            <button class="{{itemStyles.notInCartButton}}">
+                <span class="{{itemStyles.buttonText}}">
+                    В корзину
+                </span>
+            </button>
+        {{/ifEquals}}
+
     </div>
 </div>

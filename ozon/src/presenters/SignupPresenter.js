@@ -45,7 +45,7 @@ class SignupPresenter extends BasePresenter {
             break;
         }
         default: {
-            console.error(result);
+            this.view.wrongData();
             break;
         }
         }

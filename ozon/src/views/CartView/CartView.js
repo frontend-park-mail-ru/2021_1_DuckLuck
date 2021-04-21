@@ -3,6 +3,7 @@ import cartPageTemplate from './CartView.hbs';
 import {Bus} from '../../utils/bus/bus';
 import Events from '../../utils/bus/events';
 import cartStyles from './CartView.css';
+import decorators from '../decorators.css';
 import Router from '../../utils/router/Router';
 
 /**
@@ -31,7 +32,7 @@ export class CartView extends BaseView {
             baseCost: baseCost,
             discount: discount,
             totalCost: baseCost - discount,
-
+            decorators: decorators,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
