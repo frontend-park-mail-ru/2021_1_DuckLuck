@@ -74,24 +74,23 @@ class OrderModel extends BaseModel {
             this.#price = parsedJson.price;
             this.#products = parsedJson.products;
             this.#recipient = parsedJson.recipient;
-            ymaps.geolocation.get(
-            ).then((parsedJson) => {
-                ymaps.geocode(parsedJson.geoObjects.position, {'json': true},
-                ).then((parsedJson) => {
-                    this.address = parsedJson
-                        .GeoObjectCollection
-                        .featureMember[0]
-                        .GeoObject
-                        .metaDataProperty
-                        .GeocoderMetaData
-                        .Address
-                        .formatted;
+            ymaps.geolocation.get()
+                .then((parsedJson) => {
+                    ymaps.geocode(parsedJson.geoObjects.position, {'json': true})
+                        .then((parsedJson) => {
+                            this.address = parsedJson.GeoObjectCollection
+                                .featureMember[0]
+                                .GeoObject
+                                .metaDataProperty
+                                .GeocoderMetaData
+                                .Address
+                                .formatted;
+                            this.bus.emit(Events.OrderLoaded, Responses.Success);
+                        });
+                }).catch(() => {
                     this.bus.emit(Events.OrderLoaded, Responses.Success);
                 });
-            }).catch((err) => {
-                this.bus.emit(Events.OrderLoaded, Responses.Success);
-            });
-        }).catch((err) => {
+        }).catch(() => {
             this.bus.emit(Events.OrderLoaded, Responses.Error);
         });
     }

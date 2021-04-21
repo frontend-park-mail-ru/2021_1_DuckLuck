@@ -100,6 +100,20 @@ class CartModel extends BaseModel {
     }
 
     /**
+     * @param {number} itemID
+     * @param {number | string} count
+     */
+    changeCartCounter = (itemID, count) => {
+        for (const product of this.#products) {
+            if (product.id === itemID) {
+                const diff = +count - this.#products[this.#products.indexOf(product)].count;
+                this.#products[this.#products.indexOf(product)].count = +count;
+                Bus.globalBus.emit(Events.HeaderChangeCartItems, diff);
+            }
+        }
+    }
+
+    /**
      * @param {number} id id of product
      * @param {number | string} count new amount of product
      */
@@ -108,13 +122,8 @@ class CartModel extends BaseModel {
             this.removeProduct(id);
             return;
         }
-        for (const product of this.#products) {
-            if (product.id === id) {
-                const diff = +count - this.#products[this.#products.indexOf(product)].count;
-                this.#products[this.#products.indexOf(product)].count = +count;
-                Bus.globalBus.emit(Events.HeaderChangeCartItems, diff);
-            }
-        }
+
+        this.changeCartCounter(id, count);
 
         AjaxModule.putUsingFetch({
             url: serverApiPath + urls.cartProduct,
@@ -133,13 +142,8 @@ class CartModel extends BaseModel {
      * @param {number} id id of removed product
      */
     removeProduct = (id) => {
-        for (const product of this.#products) {
-            if (product.id === +id) {
-                Bus.globalBus.emit(Events.HeaderChangeCartItems,
-                    -this.#products[this.#products.indexOf(product)].count);
-                this.#products.splice(this.#products.indexOf(product), 1);
-            }
-        }
+        this.changeCartCounter(id, 0);
+
         AjaxModule.deleteUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id},

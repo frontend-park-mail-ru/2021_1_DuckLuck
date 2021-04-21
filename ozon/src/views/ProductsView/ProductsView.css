@@ -14,10 +14,6 @@
     width: 100%;
 }
 
-.listWrapper {
-    /*margin: auto;*/
-}
-
 .footer {
     display: flex;
     max-width: 60%;
