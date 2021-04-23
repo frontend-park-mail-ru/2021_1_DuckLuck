@@ -1,5 +1,12 @@
 <div class="{{productsStyles.block}}">
     <div class="{{productsStyles.body}}">
+        <select class="{{productsStyles.select}}">
+            {{#each select}}
+                <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
+                    {{this.name}}
+                </option>
+            {{/each}}
+        </select>
         <div class="{{productsStyles.listWrapper}}">{{{productsList}}}</div>
     </div>
     <div class="{{productsStyles.footer}}">
