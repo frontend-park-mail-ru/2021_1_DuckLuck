@@ -78,11 +78,11 @@ class BasePresenter {
 
     /**
      *
-     * @param {Object }specificTypeToCheck
+     * @param {Object} specificTypeToCheck
      * @return {boolean}
      */
-    isFormValid(specificTypeToCheck) {
-        const form = this.#view.cache.getElementsByClassName('form-body')[0].getElementsByTagName('form')[0];
+    isFormValid(specificTypeToCheck = []) {
+        const form = this.#view.cache.getElementsByTagName('form')[0];
         return isValidForm(form, specificTypeToCheck);
     }
 }

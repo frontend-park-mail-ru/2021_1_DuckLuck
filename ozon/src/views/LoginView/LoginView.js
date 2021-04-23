@@ -43,7 +43,7 @@ export class LoginView extends BaseView {
                     formData: {
                         inputFields: [
                             new Input({
-                                type: 'text',
+                                type: 'email',
                                 name: 'email',
                                 placeholder: 'Электронная почта',
                             }),
@@ -98,7 +98,7 @@ export class LoginView extends BaseView {
         this.parent.appendChild(this.cache);
     }
 
-    wrongData = () => {
+    invalidForm = () => {
         for (const input of this.cache.getElementsByTagName('input')) {
             input.value = '';
             input.placeholder = 'Некорректные данные';

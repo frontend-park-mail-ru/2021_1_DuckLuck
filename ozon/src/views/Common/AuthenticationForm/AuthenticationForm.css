@@ -46,10 +46,9 @@
     width: 150px;
 }
 
-.form-header__error-div {
+.error-span {
     color: red;
-    margin-left: 200px;
-    margin-top: -1%;
+    margin-left: 150px;
 }
 
 .body {
