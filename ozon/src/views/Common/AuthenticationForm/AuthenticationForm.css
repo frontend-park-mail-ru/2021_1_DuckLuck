@@ -1,5 +1,6 @@
 @import '../Blind/Blind.css';
 @import '../Popup/Popup.css';
+@import '../../../constants.css';
 
 .form-header {
     display: flex;
@@ -45,8 +46,79 @@
     width: 150px;
 }
 
-.form-header__error-div {
+.error-span {
     color: red;
-    margin-left: 200px;
-    margin-top: -1%;
+    margin-left: 150px;
+}
+
+.body {
+    display: flex;
+    flex-direction: column;
+    margin: var(--margin-xl);
+    gap: var(--gap-s);
+}
+
+.inputBlock {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+}
+
+.wrapper {
+    display: flex;
+}
+
+.button {
+    display: flex;
+    background: var(--colored-object-color);
+    border-radius: var(--standart-border-radius);
+    border: none;
+    height: var(--height-xs);
+    cursor: pointer;
+    outline: none;
+}
+
+.button:hover {
+    background: var(--dark-colored-object-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.buttonText {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--light-color);
+    margin: auto;
+}
+
+.inputWrapper {
+    height: var(--height-xxs);
+    width: var(--width-l);
+}
+
+.input {
+    height: 100%;
+    width: 100%;
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    border-radius: var(--standart-border-radius);
+    border: solid 1px;
+    border-color: var(--input-color);
+}
+
+.fieldName {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+}
+
+.signup {
+    margin: auto;
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--colored-object-color);
+    cursor: pointer;
 }

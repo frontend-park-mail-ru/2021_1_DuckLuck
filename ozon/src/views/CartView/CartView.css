@@ -1,0 +1,286 @@
+@import '../../constants.css';
+
+.cartWrapper {
+    background: var(--neutral-background-color);
+    width: 100%;
+    height: 100%;
+}
+
+.body {
+    max-width: var(--max-width);
+    padding: 4px 28px;
+    margin: var(--margin-l) auto 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    display: flex;
+    flex-direction: column;
+}
+
+.titleText {
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+}
+
+.mainWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--margin-l);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    justify-content: space-between;
+}
+
+.cartInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background: white;
+    width: 935px;
+    border-radius: var(--lower-border-radius);
+}
+
+.selectMenu {
+    display: flex;
+    flex-direction: row;
+    background: white;
+    max-width: var(--max-width);
+    padding: 4px 28px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    border-bottom: solid 1px;
+    height: 48px;
+    gap: 5px;
+}
+
+.selectAll {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.selectAllText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.deleteSelectedText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    margin-top: auto;
+    margin-bottom: auto;
+    color: var(--discout-color);
+}
+
+.deliveryBlock {
+    width: 903px;
+    height: 61px;
+    background: var(--neutral-background-color);
+    margin: var(--margin-s);
+    display: flex;
+    border-radius: var(--standart-border-radius);
+}
+
+.deliveryText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    margin: var(--margin-s);
+}
+
+.image {
+    width: 92px;
+    height: 92px;
+}
+
+.productImage {
+    height: 100%;
+}
+
+.productsListElem {
+    display: flex;
+    flex-direction: row;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px 28px;
+    border-bottom: solid 1px;
+    border-color: var(--neutral-background-color);
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+}
+
+.checkbox {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.productMenuText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    color: var(--colored-object-color);
+    cursor: pointer;
+}
+
+.priceInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.incButton, .decButton {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--colored-object-color);
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.incButton:hover, .decButton:hover {
+    background: var(--neutral-background-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.orderMenu {
+    width: 455px;
+    height: 372px;
+    background: white;
+    border-radius: var(--lower-border-radius);
+    display: flex;
+    flex-direction: column;
+}
+
+.orderButton {
+    margin: auto;
+    width: 407px;
+    height: 56px;
+    border-radius: var(--standart-border-radius);
+    border: none;
+    background: var(--order-color);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    cursor: pointer;
+    outline: none;
+}
+
+.orderButton:hover {
+    background: var(--dark-order-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.orderSubmit {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--light-color);
+}
+
+.orderButtonWrapper {
+    display: flex;
+    width: 455px;
+    height: 152px;
+    border-bottom: solid 1px;
+}
+
+.orderInfo {
+    display: flex;
+    flex-direction: column;
+    width: 455px;
+}
+
+.orderInfoTitle {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+    margin-left: 20px;
+}
+
+.orderInfoText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    margin-left: 20px;
+}
+
+.orderInfoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.orderInfoBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.totalPriceBlock {
+    border-top: 1px solid;
+    padding-left: 20px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+.orderTotalPriceTitle {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+}
+
+.orderInfoRow {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+.orderInfoDiscount {
+    color: var(--discout-color);
+}
+
+.discount {
+    color: var(--discout-color);
+}
+
+.basePrice {
+    font-weight: var(--bold-font);
+}
+
+.orderInfoPrice {
+    font-weight: var(--bold-font);
+}
+
+.totalPriceText {
+    font-weight: var(--bold-font);
+    font-size: var(--font-size-l);
+}

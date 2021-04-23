@@ -1,0 +1,55 @@
+<div class="{{orderStyles.cartWrapper}}" id="products-list-block">
+    <div class="{{orderStyles.body}}">
+        <div class="{{orderStyles.title}}">
+            <span class="{{orderStyles.titleText}}">Оформление заказа</span>
+        </div>
+        <div class="{{orderStyles.mainWrapper}}">
+            <div class="{{orderStyles.wrapper}}">
+                <div class="{{orderStyles.cartInfo}}">
+                    <div class="{{orderStyles.deliveryBlock}}">
+                        <span class="{{orderStyles.deliveryText}}">Доставка Ozon</span>
+                    </div>
+                    <div class="{{orderStyles.productsListBlock}}">
+                        {{#each this.inputFields}}
+                            <div class="{{../orderStyles.productsListElem}}">
+                                <div class="">{{this.placeholder}}</div>
+                                <input class="{{../orderStyles.input}}" type="{{this.type}}" name="{{this.name}}" value="{{this.value}}">
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <div class="{{orderStyles.orderMenu}}">
+                    <div class="{{orderStyles.orderButtonWrapper}}">
+                        <button class="{{orderStyles.orderButton}}">
+                            <span class="{{orderStyles.orderSubmit}}">Отправить заказ</span>
+                        </button>
+                        <div class="{{orderStyles.rules}}">Нажимая на кнопку, вы соглашаетесь с
+                            <span class="{{orderStyles.link}} {{decorators.lock}}">Условиями обработки перс. данных</span>, а также с
+                            <span class="{{orderStyles.link}} {{decorators.lock}}">Условиями продажи</span>
+                        </div>
+                    </div>
+                    <div class="{{orderStyles.orderInfo}}">
+                        <div class="{{orderStyles.orderInfoWrapper}}">
+                            <span class="{{orderStyles.orderInfoTitle}}">Ваш заказ</span>
+                            <div class="{{orderStyles.orderInfoBody}}">
+                                <div class="{{orderStyles.orderInfoRow}}">
+                                    <span class="{{orderStyles.orderInfoText}}">Товары ({{this.cartSize}})</span>
+                                    <span class="{{orderStyles.orderInfoPrice}}">{{this.baseCost}}₽</span>
+                                </div>
+                                <div class="{{orderStyles.orderInfoRow}}">
+                                    <span class="{{orderStyles.orderInfoText}}">Скидка</span>
+                                    <span class="{{orderStyles.orderInfoDiscount}}">- {{this.discount}} ₽</span>
+                                </div>
+                                <div class="{{orderStyles.totalPriceBlock}}">
+                                    <span class="{{orderStyles.orderTotalPriceTitle}}">Итого</span>
+                                    <span class="{{orderStyles.totalPriceText}}">{{this.totalCost}} ₽</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

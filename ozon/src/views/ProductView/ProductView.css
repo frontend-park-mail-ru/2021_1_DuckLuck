@@ -1,0 +1,204 @@
+@import '../../constants.css';
+
+.block {
+    display: flex;
+    max-width: var(--max-width);
+    padding: var(--padding-xs) var(--padding-l);
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    justify-content: space-between;
+    flex-direction: column;
+    margin-bottom: var(--margin-xxl);
+}
+
+.wrapper {
+    margin: 0 auto 0 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.categoriesBlock {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-xxs);
+}
+
+.category {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    color: var(--colored-object-color);
+}
+
+.mainInformation {
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-family: var(--font);
+    font-size: var(--font-size-xl);
+    font-weight: var(--bold-font);
+}
+
+.discountBlock {
+    border-radius: var(--standart-border-radius);
+}
+
+.discountBadge {
+    height: var(--height-xxxxs);
+    width: var(--width-xxs);
+    background: var(--discout-color);
+    border-radius: var(--lower-border-radius);
+    display: flex;
+}
+
+.discountText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    color: var(--light-color);
+    margin: auto;
+}
+
+.priceBlock {
+    display: flex;
+    flex-direction: row;
+    width: var(--width-m);
+    margin: var(--margin-l) auto 0;
+}
+
+.discountPrice {
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+    color: var(--discout-color);
+    margin-left: var(--margin-xxs);
+}
+
+.price {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+    margin-left: var(--margin-xxs);
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.images {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-xs);
+}
+
+.imagesBlock {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap-s);
+}
+
+.imageWrapper {
+    width: var(--img-size-m);
+    height: var(--img-size-m);
+    cursor: pointer;
+}
+
+.mainImage {
+    width: var(--img-size-xl);
+    height: var(--img-size-xl);
+    display: flex;
+    cursor: pointer;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+}
+
+.buyMenu {
+    border: 1px solid;
+    border-color: var(--neutral-light-color);
+    border-radius: var(--standart-border-radius);
+    width: var(--width-xl);
+    height: var(--width-xl);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xl);
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    padding-top: var(--margin-l);
+    gap: var(--gap-xs);
+}
+
+.title {
+    font-family: var(--font);
+    font-size: var(--font-size-xl);
+    font-weight: var(--bold-font);
+}
+
+.descriptionText {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+}
+
+.wrapperWrapper {
+    padding-top: var(--margin-s);
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid;
+    border-color: var(--neutral-light-color);
+    margin-top: var(--margin-l);
+}
+
+.inCartButton {
+    height: var(--height-s);
+    width: var(--width-m);
+    background: var(--order-color);
+    border-radius: var(--standart-border-radius);
+    border: none;
+    margin: auto;
+    cursor: pointer;
+    outline: none;
+}
+
+.inCartButton:hover {
+    background: var(--dark-order-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.notInCartButton {
+    height: var(--height-s);
+    width: var(--width-m);
+    background: var(--colored-object-color);
+    border-radius: var(--standart-border-radius);
+    border: none;
+    margin: auto;
+    cursor: pointer;
+    outline: none;
+}
+
+.notInCartButton:hover {
+    background: var(--dark-colored-object-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.buttonText {
+    color: var(--light-color);
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    font-weight: var(--bold-font);
+}
+
+.buttons {
+    display: flex;
+    align-items: center;
+}
+
+.priceWithoutDiscount {
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font)
+}

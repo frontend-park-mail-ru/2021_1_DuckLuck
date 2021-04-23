@@ -1,7 +1,8 @@
 import {Img} from '../Img/Img';
 import {ListOfProductsItem} from './ListOfProductsItem/ListOfProductsItem';
 import listOFProductsItemTemplate from './ListOfProducts.hbs';
-import {fileServerHost} from '../../../utils/urls/urls.js';
+import listOFProductsStyles from './ListOfProducts.css';
+import {staticServerHost} from '../../../utils/urls/urls.js';
 
 /**
  * @class ListOfProducts
@@ -17,10 +18,11 @@ export class ListOfProducts {
         items.forEach((item) => {
             const base = item['price']['base_cost'];
             const discount = item['price']['discount'];
-            const discountPrice = base * discount*0.01;
+            const discountPrice = Math.ceil(base * (1 - discount * 0.01));
             this.items.push(new ListOfProductsItem({
+                itemInCart: item['inCart'],
                 itemId: item['id'],
-                itemImage: new Img({src: fileServerHost + item['preview_image']}),
+                itemImage: new Img({src: staticServerHost + item['preview_image']}),
                 itemName: item['title'],
                 itemRating: item['rating'],
                 itemPrice: {
@@ -42,6 +44,9 @@ export class ListOfProducts {
             itemsTemplates.push(item.getHtmlString());
         });
 
-        return listOFProductsItemTemplate({items: itemsTemplates});
+        return listOFProductsItemTemplate({
+            items: itemsTemplates,
+            listOFProductsStyles: listOFProductsStyles,
+        });
     };
 }

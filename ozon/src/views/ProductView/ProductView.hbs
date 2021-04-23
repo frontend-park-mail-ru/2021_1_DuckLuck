@@ -1,0 +1,69 @@
+<div class="{{productStyles.block}}">
+    <div class="{{productStyles.categoriesBlock}}">
+        {{#each category}}
+            <span class="{{../productStyles.category}}">{{this.name}}</span>
+            <span> ></span>
+        {{/each}}
+    </div>
+    <div class="{{productStyles.badges}}">
+        <div class="{{productStyles.discountBadge}}" {{#ifEquals price.discount 0}} style="visibility: hidden;"{{/ifEquals}}>
+            <span class="{{productStyles.discountText}}">-{{price.discount}}%</span>
+        </div>
+    </div>
+    <div class="{{productStyles.name}}">{{name}}</div>
+    <div class="{{productStyles.rating}}">
+        {{#for 0 rating 1}}
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="">
+        {{/for}}
+        {{#for rating 5 1}}
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="">
+        {{/for}}
+    </div>
+    <div class="{{productStyles.wrapperWrapper}}">
+    <div class="{{productStyles.wrapper}}">
+        <div class="{{productStyles.mainInformation}}">
+
+            <div class="{{productStyles.imagesBlock}}">
+                <div class="{{productStyles.images}}">
+                    {{#each images}}
+                        <div class="{{../productStyles.imageWrapper}}">
+                            <img src="{{this.src}}" class="{{../imagesStyles.imgXL}}">
+                        </div>
+                    {{/each}}
+                </div>
+                <div class="{{productStyles.mainImage}}">
+                    <img src="{{images.0.src}}" alt="" class="{{imagesStyles.imgXXL}}">
+                </div>
+            </div>
+        </div>
+        <div class="{{productStyles.description}}">
+            <span class="{{productStyles.title}}">Описание</span>
+            <span class="{{productStyles.descriptionText}}">{{description}}</span>
+        </div>
+        <div class="{{productStyles.specifications}}"></div>
+    </div>
+    <div class="{{productStyles.menu}}">
+        <div class="{{productStyles.aboutProduct}}"></div>
+        <div class="{{productStyles.buyMenu}}">
+            <div class="{{productStyles.priceBlock}}">
+                <span class="{{productStyles.discountPrice}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
+                <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
+            </div>
+            <div class="{{productStyles.buttons}}">
+            {{#ifEquals inCart true}}
+                <button class="{{productStyles.inCartButton}}">
+                    <span class="{{productStyles.buttonText}}">Добавить +1</span>
+                </button>
+            {{/ifEquals}}
+
+            {{#ifEquals inCart false}}
+                <button class="{{productStyles.notInCartButton}}">
+                    <span class="{{productStyles.buttonText}}">В корзину</span>
+                </button>
+            {{/ifEquals}}
+
+            </div>
+        </div>
+    </div>
+    </div>
+</div>

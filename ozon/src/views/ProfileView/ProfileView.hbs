@@ -1,0 +1,38 @@
+<div class="{{profileStyles.block}}" id="profile-page">
+    <div class="{{profileStyles.avatarBlock}}">
+        <label>
+            <img id="avatar-img" src="" alt="" class="{{profileStyles.avatarWrapper}}">
+            <input id="avatar-input" type="file" hidden>
+        </label>
+        <div class="{{profileStyles.nameWrapper}}">
+            <span id="profile-firstName" class="{{profileStyles.titleText}}"></span>
+            <span id="profile-lastName" class="{{profileStyles.titleText}}"></span>
+        </div>
+        <span id="logout" class="{{profileStyles.exit}}">Выйти</span>
+    </div>
+    <div class="{{profileStyles.informationBlock}}">
+        <div class="{{profileStyles.svgWrapper}}">
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/header/smile.svg" alt="" class="{{profileStyles.svg}}">
+        </div>
+        <form class="{{profileStyles.info}}" id="form">
+            <span class="{{profileStyles.titleText}}">Учётные данные</span>
+            <div class="{{profileStyles.fioWrapper}}">
+                {{#each inputFields}}
+                    <div class="{{../profileStyles.infoElem}}">
+                        <span class="{{../profileStyles.infoTitle}}">{{this.placeholder}}</span>
+                        <input type="text" name="{{this.name}}"class="{{../profileStyles.infoText}}" placeholder="">
+                        <div class="profile-credentials__input_error" id="{{this.name}}_error"></div>
+                    </div>
+                {{/each}}
+            </div>
+            <div class="{{profileStyles.infoElem}}">
+                <span class="{{profileStyles.infoTitle}}">{{inputEmail.placeholder}}</span>
+                <input type="text" name="{{inputEmail.name}}"class="{{profileStyles.infoText}}" disabled placeholder="">
+                <div class="profile-credentials__input_error" id="{{inputEmail.name}}_error"></div>
+            </div>
+            <button type="submit" class="{{profileStyles.change}}">
+                <span class="{{profileStyles.changeText}}">Изменить</span>
+            </button>
+        </form>
+    </div>
+</div>

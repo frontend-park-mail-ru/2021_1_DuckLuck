@@ -1,3 +1,5 @@
+@import "../../../constants.css";
+
 .button {
     background: rgba(51, 160, 255, 1);
     border-radius: 10px;
@@ -79,4 +81,33 @@
 
 .button_pagination_first {
     margin-right: 30px;
+}
+
+.catalog {
+    min-height: 40px;
+    min-width: 120px;
+    background: var(--colored-object-color);
+    cursor: pointer;
+    color: var(--light-color)5;
+    border: none;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 700;
+    outline: none;
+}
+
+.catalog:hover {
+    background: var(--dark-colored-object-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.search {
+    min-width: 76px;
+    min-height: 40px;
+    background: var(--colored-object-color);
+    cursor: pointer;
+    color: var(--light-color);
+    border: none;
+    display: flex;
+    outline: none;
 }

@@ -1,38 +1,18 @@
-<div class="authentication-block-wrapper" id="authentication-block-wrapper">
-    {{{formData.blind}}}
-    <div class="authentication-block" id="authentication-block">
-        <div class="form-header">
-            <h1 class="form-header__head-item">
-                <a href="" id="form-header__signup-link" class="link link_weight-h1">
-                    <span class="text">Registration</span>
-                </a>
-            </h1>
-            <h1 class="form-header__head-item">
-                <a href="" id="form-header__login-link" class="link link_weight-h1">
-                    <span class="text">Log in</span>
-                </a>
-            </h1>
-            <div class="line_form-header line_form-header_{{formType}}"></div>
-        </div>
+<div class="{{styles.wrapper}}" id="authentication-block-wrapper">
+    <form class="{{styles.body}}">
+        <span class="{{styles.title}}">Войдите или зарегистрируйтесь, чтобы продолжить</span>
+        {{#each formData.inputFields}}
+            <div class="{{../styles.inputBlock}}">
+                <span class="{{../styles.fieldName}}"></span>
+                <div class="{{../styles.inputWrapper}}">
+                    <input id="{{this.name}}" name="{{this.name}}" type="{{this.type}}" class="{{../styles.input}}" placeholder="{{this.placeholder}}">
+                </div>
+            </div>
+        {{/each}}
 
-        <div class="form-body">
-            <form action="">
-                {{#each formData.inputFields}}
-                    <input type={{this.type}} class="form-body__input-block" id={{this.name}} placeholder="{{this.placeholder}}">
-                    <div class="form-header__error-div" id="{{this.name}}_error"></div>
-                    {{#ifEquals this.type "password"}}
-                        {{#ifEquals ../formType "login"}}
-                            <label for="password">
-                                <a href={{../formData.forgotPassLink.href}} class="link form-body__link">Forgot password?</a>
-                            </label>
-                        {{/ifEquals}}
-                    {{/ifEquals}}
-                {{/each}}
-                <br>
-                <button class="button button_auth_submit" type={{formData.submitButton.type}}>
-                    <span class="text">{{formData.submitButton.text}}</span>
-                </button>
-            </form>
-        </div>
-    </div>
+        <button class="{{styles.button}}" type="{{formData.submitButton.type}}">
+            <span class="{{styles.buttonText}}">{{formData.submitButton.text}}</span>
+        </button>
+        <span class="{{styles.signup}}" href="{{formData.link.href}}">{{formData.link.name}}</span>
+    </form>
 </div>

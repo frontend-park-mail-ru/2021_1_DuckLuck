@@ -1,0 +1,154 @@
+import BasePresenter from './BasePresenter.js';
+import Events from '../utils/bus/events';
+import Responses from '../utils/bus/responses';
+import {Bus} from '../utils/bus/bus';
+import Router from '../utils/router/Router';
+
+/**
+ * @description Presenter for Login View and Model
+ */
+class CartPresenter extends BasePresenter {
+    /**
+     * @param {HTMLElement} application html of application
+     * @param {Class} View Class of view object
+     * @param {Class} Model Class of model object
+     */
+    constructor(application, View, Model) {
+        super(application, View, Model);
+        this.bus.on(Events.CartLoad, this.loadProducts);
+        this.bus.on(Events.CartLoaded, this.cartLoadedReaction);
+        this.bus.on(Events.CartProductAdded, this.cartProductAddedReaction);
+        this.bus.on(Events.CartLoadedProductsAmountReaction, this.productsAmountLoadedReaction);
+
+        Bus.globalBus.on(Events.CartProductRemoved, this.productRemovedReaction);
+        Bus.globalBus.on(Events.CartAddProduct, this.addProduct);
+        Bus.globalBus.on(Events.CartRemoveProduct, this.removeProduct);
+        Bus.globalBus.on(Events.CartProductChange, this.changeProduct);
+        Bus.globalBus.on(Events.CartLoadProductsAmount, this.loadProductsAmount);
+        Bus.globalBus.on(Events.CartGetProductsID, this.getProductsIDs);
+        Bus.globalBus.on(Events.CartGetProductID, this.getProductID);
+    }
+
+    /**
+     * @return {Object} array of products
+     */
+    get products() {
+        return this.model.products;
+    }
+
+    /**
+     * @return {boolean} is view needs to be rerendered
+     */
+    get needsRerender() {
+        return this.model.needsRerender;
+    }
+
+    /**
+     * @description loads all products
+     */
+    loadProducts = () => {
+        this.model.loadProducts();
+    }
+
+    /**
+     * @param {Responses} result
+     */
+    cartLoadedReaction = (result) => {
+        switch (result) {
+        case Responses.Success: {
+            this.view.render();
+            return;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        case Responses.Unauthorized: {
+            Router.open('/login', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
+    }
+
+    /**
+     *
+     * @param {number} id
+     * @param {number|string} count
+     */
+    addProduct = (id, count) => {
+        if (count < 0 || id < 0) {
+            return;
+        }
+        this.model.addProduct(id, count);
+    }
+
+    changeProduct = ({id, count}) => {
+        this.model.changeItemAmount(id, count);
+    }
+
+    /**
+     * @param {number} id
+     */
+    removeProduct = (id) => {
+        this.model.removeProduct(id);
+    }
+
+    /**
+     * @param {Responses} result
+     */
+    productRemovedReaction = (result) => {
+        if (result === Responses.Success) {
+            this.view.show();
+            return;
+        }
+        console.error(result);
+    }
+
+    /**
+     * @param {string} result
+     */
+    cartProductAddedReaction = (result) => {
+        switch (result) {
+        case Responses.Success: {
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        case Responses.Unauthorized: {
+            Router.open('/login');
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
+    }
+
+    loadProductsAmount = () => {
+        this.model.loadProductsAmount();
+    }
+
+    /**
+     * @param {number} count
+     */
+    productsAmountLoadedReaction = (count) => {
+        Bus.globalBus.emit(Events.HeaderChangeCartItems, count);
+    }
+
+    getProductsIDs = () => {
+        this.model.getIDs(Events.CartLoadedProductsID);
+    }
+
+    getProductID = () => {
+        this.model.getIDs(Events.CartLoadedProductID);
+    }
+}
+
+export default CartPresenter;

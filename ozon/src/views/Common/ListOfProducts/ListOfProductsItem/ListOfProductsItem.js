@@ -1,5 +1,6 @@
 import listOFProductsItemTemplate from './ListOfProductsItem.hbs';
-
+import itemStyles from './ListOfProductsItem.css';
+import decorators from '../../../decorators.css';
 
 /**
  * @class ListOfProductsItem
@@ -12,8 +13,9 @@ export class ListOfProductsItem {
      * @param {number} itemRating
      * @param {Object} itemPrice
      */
-    constructor({itemImage, itemName = '', itemRating = 0,
+    constructor({itemImage, itemInCart = false, itemName = '', itemRating = 0,
         itemPrice= {discountPrice: '', base: '', discount: ''}, itemId=0} = {}) {
+        this.itemInCart = itemInCart;
         this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemRating = itemRating;
@@ -28,11 +30,14 @@ export class ListOfProductsItem {
      */
     getHtmlString = () => {
         return listOFProductsItemTemplate({
+            itemInCart: this.itemInCart,
             itemId: this.itemId,
             itemImage: this.itemImage,
             itemName: this.itemName,
             itemRating: this.itemRating,
             itemPrice: this.itemPrice,
+            itemStyles: itemStyles,
+            decorators: decorators,
         });
     }
 }
