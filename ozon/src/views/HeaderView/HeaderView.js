@@ -171,7 +171,9 @@ export class HeaderView extends BaseView {
      */
     changeCartItems = (value) => {
         const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
-        counter.innerHTML = (+counter.innerHTML + value).toString();
+        const newCounterAmount = +counter.innerHTML + value;
+        counter.innerHTML = newCounterAmount.toString();
+        counter.hidden = !newCounterAmount;
     }
 }
 

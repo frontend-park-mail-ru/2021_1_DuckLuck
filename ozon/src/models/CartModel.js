@@ -10,7 +10,7 @@ import HTTPResponses from '../utils/http-responses/httpResponses';
  * @description Model for Product in MVP Arch
  */
 class CartModel extends BaseModel {
-    #ids = new Set();
+    #ids
     #products
     #needsRerender;
     #lastAddedProductID
@@ -63,7 +63,8 @@ class CartModel extends BaseModel {
             return response.json();
         }).then(() => {
             Bus.globalBus.emit(Events.HeaderChangeCartItems, 1);
-            this.#ids.add(id);
+            Bus.globalBus.emit(Events.ProductsItemAdded, id);
+            this.#ids.add(+id);
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
@@ -87,6 +88,11 @@ class CartModel extends BaseModel {
      * @param {string} event
      */
     getIDs = (event) => {
+        if (this.#ids) {
+            Bus.globalBus.emit(event, this.#ids);
+            return;
+        }
+
         AjaxModule.getUsingFetch({
             url: serverApiPath + urls.cart,
         }).then((response) => {
@@ -106,12 +112,12 @@ class CartModel extends BaseModel {
     }
 
     /**
-     * @param {number} itemID
+     * @param {number | string} itemID
      * @param {number | string} count
      */
     changeCartCounter = (itemID, count) => {
         for (const product of this.#products) {
-            if (product.id === itemID) {
+            if (product.id === +itemID) {
                 const diff = +count - this.#products[this.#products.indexOf(product)].count;
                 this.#products[this.#products.indexOf(product)].count = +count;
                 Bus.globalBus.emit(Events.HeaderChangeCartItems, diff);
