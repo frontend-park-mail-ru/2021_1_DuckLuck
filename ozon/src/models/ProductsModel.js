@@ -117,8 +117,9 @@ class ProductsModel extends BaseModel {
         category: 1,
     }) {
         console.log(body);
-        AjaxModule.getUsingFetch({
+        AjaxModule.postUsingFetch({
             url: serverApiPath + '/product/search',
+            body: body,
         }).then((response) => {
             console.log(response);
             if (response.status !== HTTPResponses.Success) {
