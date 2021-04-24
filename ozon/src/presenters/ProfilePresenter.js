@@ -30,20 +30,33 @@ class ProfilePresenter extends BasePresenter {
     }
 
     /**
-     *
      * @param {Object} specificTypeToCheck
-     * @return {boolean}
+     * @return {Object} contains array of invalid fields
      */
-    isFormValid = (specificTypeToCheck = []) => {
-        return isValidForm(document.getElementById('form'), specificTypeToCheck);
+    isFirstLasNameFormValid = (specificTypeToCheck = []) => {
+        return isValidForm(document.getElementById('flname-form'), specificTypeToCheck);
+    }
+
+    /**
+     * @param {Object} specificTypeToCheck
+     * @return {Object} contains array of invalid fields
+     */
+    isAvatarValid = () => {
+        const form = document.createElement('form');
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.files = document.getElementById('avatar-input').files;
+        form.appendChild(input);
+        return !!isValidForm(form).failedFields.length;
     }
 
     /**
      * @description Send data to model
      */
     sendFirstLastName = () => {
-        if (!this.isFormValid(['text'])) {
-            this.bus.emit(Events.ProfileIncorrectFLName);
+        const result = this.isFirstLasNameFormValid();
+        if (result.failedFields.length) {
+            this.view.invalidForm(result.failedFields);
             return;
         }
         const firstName = document.getElementsByName('firstName')[0].value.trim();
@@ -128,6 +141,10 @@ class ProfilePresenter extends BasePresenter {
      * @description get data view and send to model
      */
     sendAvatar = () => {
+        if (this.isAvatarValid()) {
+            this.view.invalidAvatar();
+            return;
+        }
         const avatarInput = document.getElementById('avatar-input');
         this.model.changeAvatar(avatarInput.files[0]);
     }

@@ -3,6 +3,7 @@
         <label>
             <img id="avatar-img" src="" alt="" class="{{profileStyles.avatarWrapper}}">
             <input id="avatar-input" type="file" hidden>
+            <div id="invalid-avatar-span" class="{{profileStyles.incorrectAvatar}}"></div>
         </label>
         <div class="{{profileStyles.nameWrapper}}">
             <span id="profile-firstName" class="{{profileStyles.titleText}}"></span>
@@ -14,7 +15,7 @@
         <div class="{{profileStyles.svgWrapper}}">
             <img src="https://duckluckmarket.hb.bizmrg.com/svg/header/smile.svg" alt="" class="{{profileStyles.svg}}">
         </div>
-        <form class="{{profileStyles.info}}" id="form">
+        <form class="{{profileStyles.info}}" id="flname-form">
             <span class="{{profileStyles.titleText}}">Учётные данные</span>
             <div class="{{profileStyles.fioWrapper}}">
                 {{#each inputFields}}

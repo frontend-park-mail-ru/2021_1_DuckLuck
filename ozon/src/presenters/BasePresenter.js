@@ -79,7 +79,7 @@ class BasePresenter {
     /**
      *
      * @param {Object} specificTypeToCheck
-     * @return {boolean}
+     * @return {Object} contains array of invalid fields
      */
     isFormValid(specificTypeToCheck = []) {
         const form = this.#view.cache.getElementsByTagName('form')[0];

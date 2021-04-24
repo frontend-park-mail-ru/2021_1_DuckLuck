@@ -12,6 +12,7 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-throw-literal": "off",
         "no-unused-vars": "error",
         "semi": "error",
         "camelcase": "off",

@@ -101,12 +101,4 @@ export class SignupView extends BaseView {
             });
         this.parent.appendChild(this.cache);
     }
-
-    invalidForm = () => {
-        for (const input of this.cache.getElementsByTagName('input')) {
-            input.value = '';
-            input.placeholder = 'Некорректные данные';
-            input.style['border-color'] = '#ff726f';
-        }
-    }
 }

@@ -1,3 +1,5 @@
+import {fields} from '../utils/validationFields/validationFields';
+
 /**
  * @class BaseView
  * @classdesc Base class for all other views
@@ -117,6 +119,51 @@ export class BaseView {
      */
     clearCache = () => {
         this.#cache = '';
+    }
+
+    /**
+     * @param {HTMLElement} input
+     * @param {string} placeholder
+     */
+    static setInvalidInputPlaceholder(input, placeholder) {
+        input.value = '';
+        input.placeholder = placeholder;
+        input.style['border-color'] = '#ff726f';
+    }
+
+    /**
+     * @param {array} invalidFields
+     */
+    invalidForm = (invalidFields) => {
+        for (const input of this.cache.getElementsByTagName('input')) {
+            switch (input.name) {
+            case 'firstName':
+                if (invalidFields.includes(fields.firstName)) {
+                    BaseView.setInvalidInputPlaceholder(input, 'Некорр. новое имя');
+                }
+                break;
+            case 'lastName':
+                if (invalidFields.includes(fields.lastName)) {
+                    BaseView.setInvalidInputPlaceholder(input, 'Некорр. новая фамилия');
+                }
+                break;
+            case 'email':
+                if (invalidFields.includes(fields.email)) {
+                    BaseView.setInvalidInputPlaceholder(input, 'Некорректная электронная почта');
+                }
+                break;
+            case 'password':
+                if (invalidFields.includes(fields.password)) {
+                    BaseView.setInvalidInputPlaceholder(input, 'Некорректный пароль');
+                }
+                break;
+            case 'repeat_password':
+                if (invalidFields.includes(fields.repeatPassword)) {
+                    BaseView.setInvalidInputPlaceholder(input, 'Пароли не совпадают');
+                }
+                break;
+            }
+        }
     }
 
     /**

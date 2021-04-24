@@ -71,7 +71,11 @@
 }
 
 .infoText::placeholder {
-    color: black;
+    color: grey;
+}
+
+.incorrectAvatar {
+    color: firebrick;
 }
 
 .change {
