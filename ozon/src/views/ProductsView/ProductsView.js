@@ -19,11 +19,17 @@ export class ProductsView extends BaseView {
         if (!this.IDs) {
             this.IDs = {};
         }
-        if (!this.IDs['category']) {
-            this.IDs['category'] = 1;
-        }
         if (!this.IDs['page']) {
             this.IDs['page'] = 1;
+        }
+
+        if (this.IDs['searchData']) {
+            this.bus.emit(Events.ProductsLoadSearch, this.IDs['searchData'], this.IDs['page']);
+            return;
+        }
+
+        if (!this.IDs['category']) {
+            this.IDs['category'] = 1;
         }
         this.bus.emit(Events.ProductsLoad, this.IDs['category'], this.IDs['page']);
     }

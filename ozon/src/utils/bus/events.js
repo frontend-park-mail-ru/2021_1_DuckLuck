@@ -23,6 +23,7 @@ const Events = {
     ProfileIncorrectLogout: 'profile-logout-incorrect',
 
     ProductsLoad: 'products-load',
+    ProductsLoadSearch: 'products-load-search',
     ProductsLoaded: 'products-loaded',
     ProductsChangeCategory: 'products-change-category',
 

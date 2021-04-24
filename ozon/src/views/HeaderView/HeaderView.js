@@ -133,6 +133,20 @@ export class HeaderView extends BaseView {
             });
         });
 
+        const searchForm = this.cache.getElementsByClassName(headerStyles.searchForm)[0];
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
+            Router.open(`/search/${searchInput.value}`);
+        })
+
+        menuItems.forEach((menuItem) => {
+            menuItem.addEventListener('click', () => {
+                const href = menuItem.getAttribute('href');
+                Router.open(href);
+            });
+        });
+
         const catalogListCategories = this.cache.getElementsByClassName(headerStyles.category);
         const catalogListSubcategories = Array.from(
             this.cache.getElementsByClassName(headerStyles.catalogListSubcategories),

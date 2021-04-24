@@ -101,6 +101,61 @@ class ProductsModel extends BaseModel {
             }
         });
     }
+
+
+    /**
+     * @param {String} searchData
+     * @param {Number|String} page
+     * @param {Object} body Body of request
+     */
+    loadProductsSearch(searchData, page, body = {
+        query_string: searchData,
+        page_num: +page,
+        count: 9,
+        sort_key: 'cost',
+        sort_direction: 'ASC',
+        category: 1,
+    }) {
+        console.log(body);
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + '/product/search',
+        }).then((response) => {
+            console.log(response);
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((parsedJson) => {
+            this.#products = parsedJson['list_preview_products'];
+            this.#paginationInfo = {
+                pagesCount: parsedJson['max_count_pages'],
+                currentPage: page,
+            };
+            this.bus.emit(Events.ProductsLoaded, Responses.Success);
+        }).catch((err) => {
+            console.log(err);
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.ProductsLoaded, Responses.Unauthorized);
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.#products = [];
+                this.#paginationInfo = {
+                    pagesCount: 1,
+                    currentPage: 1,
+                };
+                this.bus.emit(Events.ProductsLoaded, Responses.Success);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.ProductsLoaded, Responses.Error);
+                break;
+            }
+            }
+        });
+    }
+
 }
 
 export default ProductsModel;

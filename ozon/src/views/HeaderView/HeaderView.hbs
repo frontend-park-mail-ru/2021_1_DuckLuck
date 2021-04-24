@@ -20,10 +20,10 @@
                 </button>
             </div>
         </div>
-        <div class="{{headerStyles.searchBlock}} {{decorators.lock}}">
+        <div class="{{headerStyles.searchBlock}}">
             {{#with searchBlock}}
-                <form class="{{../headerStyles.searchForm}} {{../decorators.lock}}">
-                    <div class="{{../headerStyles.searchAreaBlock}} {{../decorators.lock}}">
+                <form class="{{../headerStyles.searchForm}}">
+                    <div class="{{../headerStyles.searchAreaBlock}}">
                         {{#with searchArea}}
                             <span title="{{text}}" class="{{../../headerStyles.searchAreaText}}">{{text}}</span>
                             <div class="{{../../headerStyles.searchAreaPointer}}">
@@ -31,12 +31,12 @@
                             </div>
                         {{/with}}
                     </div>
-                    <div class="{{../headerStyles.searchInputBlock}} {{../decorators.lock}}">
+                    <div class="{{../headerStyles.searchInputBlock}}">
                         {{#with searchInput}}
-                            <input placeholder="{{placeholder}}" type={{type}} name={{name}} class="{{../../inputStyles.search}} {{../../decorators.lock}}">
+                            <input placeholder="{{placeholder}}" type={{type}} name={{name}} class="{{../../inputStyles.search}}">
                         {{/with}}
                     </div>
-                    <div class="{{../headerStyles.searchButtonBlock}} {{../decorators.lock}}">
+                    <div class="{{../headerStyles.searchButtonBlock}}">
                         {{#with searchButton}}
                             <button type="submit" class="{{../../buttonStyles.search}}">
                                 <div class="{{../../headerStyles.searchImgWrapper}}">
