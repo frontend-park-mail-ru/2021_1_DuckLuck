@@ -70,6 +70,8 @@ class ProductsPresenter extends BasePresenter {
         switch (result) {
         case Responses.Success: {
             Bus.globalBus.emit(Events.CartGetProductsID);
+            this.view.render();
+            this.view.cache.hidden = false;
             break;
         }
         case Responses.Offline: {
@@ -85,15 +87,16 @@ class ProductsPresenter extends BasePresenter {
 
     /**
      *
-     * @param {number[]}ids
+     * @param {Set} ids
      */
     productsCartGotIds = (ids) => {
-        this.model.products = this.model.products.map((elem) => {
-            elem['inCart'] = !!ids.includes(elem.id);
-            return elem;
-        });
-        this.view.render();
-        this.view.cache.hidden = false;
+        // this.model.products = this.model.products.map((elem) => {
+        //     elem['inCart'] = !!ids.has(elem.id);
+        //     return elem;
+        // });
+        this.view.setAddedProducts(ids);
+        // this.view.render();
+        // this.view.cache.hidden = false;
     }
 
     /**

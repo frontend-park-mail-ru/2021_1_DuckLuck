@@ -50,6 +50,7 @@ const Events = {
     CartGetProductID: 'cart-get-product-id',
     CartLoadedProductsID: 'cart-loaded-products-ids',
     CartLoadedProductID: 'cart-loaded-product-id',
+    CartAddLastProduct: 'cart-add-last-product',
 
 
     OrderLoad: 'order-load',

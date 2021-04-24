@@ -71,4 +71,17 @@ export class ProductsView extends BaseView {
 
         this.parent.appendChild(this.cache);
     };
+
+    /**
+     * @param {Set} productsInCart
+     */
+    setAddedProducts = (productsInCart) => {
+        for (const item of document.getElementsByClassName(ListOfProductsItemStyles.block)) {
+            if (productsInCart.has(+item.getAttribute('item-id'))) {
+                const button = item.getElementsByTagName('button')[0];
+                button.className = ListOfProductsItemStyles.inCartButton;
+                button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
+            }
+        }
+    }
 }
