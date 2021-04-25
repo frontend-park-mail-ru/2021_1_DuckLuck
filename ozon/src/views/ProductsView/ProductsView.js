@@ -23,8 +23,8 @@ export class ProductsView extends BaseView {
             this.IDs['page'] = 1;
         }
 
-        if (this.IDs['searchData']) {
-            this.bus.emit(Events.ProductsLoadSearch, this.IDs['searchData'], this.IDs['page']);
+        if (this.IDs['searchText']) {
+            this.bus.emit(Events.ProductsLoadSearch, this.IDs['searchText'], this.IDs['page']);
             return;
         }
 

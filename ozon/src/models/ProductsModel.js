@@ -121,12 +121,12 @@ class ProductsModel extends BaseModel {
             url: serverApiPath + '/product/search',
             body: body,
         }).then((response) => {
-            console.log(response);
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
             return response.json();
         }).then((parsedJson) => {
+            console.log(parsedJson);
             this.#products = parsedJson['list_preview_products'];
             this.#paginationInfo = {
                 pagesCount: parsedJson['max_count_pages'],
@@ -134,7 +134,6 @@ class ProductsModel extends BaseModel {
             };
             this.bus.emit(Events.ProductsLoaded, Responses.Success);
         }).catch((err) => {
-            console.log(err);
             switch (err) {
             case HTTPResponses.Unauthorized: {
                 this.bus.emit(Events.ProductsLoaded, Responses.Unauthorized);

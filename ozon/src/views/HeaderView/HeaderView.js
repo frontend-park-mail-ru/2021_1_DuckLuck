@@ -137,7 +137,7 @@ export class HeaderView extends BaseView {
         searchForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
-            Router.open(`/search/${searchInput.value}`);
+            Router.open(`/search/1/?text=${searchInput.value}`);
         })
 
         menuItems.forEach((menuItem) => {
