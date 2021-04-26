@@ -1,0 +1,36 @@
+<div class="{{ordersStyles.ordersWrapper}}" id="orders-list-block">
+    <div class="{{ordersStyles.body}}">
+        <select class="{{ordersStyles.select}}">
+            {{#each select}}
+                <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
+                    {{this.name}}
+                </option>
+            {{/each}}
+        </select>
+        <div class="{{ordersStyles.title}}">
+            <span class="{{ordersStyles.titleText}}">Ваши заказы</span>
+        </div>
+        {{#each this.orderList}}
+            <div class="{{../ordersStyles.order}}">
+                <span class="{{../ordersStyles.dateText}}">Заказ от {{this.date_added}}</span>
+                <span class="{{../ordersStyles.payStatusText}}">{{this.pay_status}}</span>
+                <span class="{{../ordersStyles.costText}}">{{this.total_cost}} ₽&nbsp</span>
+                <div>{{this.order_number}}</div>
+                <div class="{{../ordersStyles.addressText}}">Адрес доставки: {{this.address.address}}</div>
+
+
+                {{#each this.product_images}}
+                    <div class="{{../../ordersStyles.image}}" item-id="{{this.id}}">
+                        <img src="{{this.preview_image}}" alt="Product image" class="{{../../ordersStyles.productImage}}">
+                    </div>
+                {{/each}}
+            </div>
+        {{/each}}
+        {{#ifEquals this.isEmpty true}}
+            <div>Вы пока не сделали ни одного заказа :(</div>
+        {{/ifEquals}}
+    </div>
+    <div class="{{ordersStyles.footer}}">
+        {{{pagination}}}
+    </div>
+</div>

@@ -24,6 +24,9 @@ import OrderPresenter from './presenters/OrderPresenter';
 import OrderModel from './models/OrderModel';
 import HeaderModel from './models/HeaderModel';
 import HeaderPresenter from './presenters/HeaderPresenter';
+import {OrdersView} from './views/OrdersView/OrdersView';
+import OrdersPresenter from './presenters/OrdersPresenter';
+import OrdersModel from './models/OrdersModel';
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -47,6 +50,7 @@ const productsPresenter = new ProductsPresenter(application, ProductsView, Produ
 const productPresenter = new ProductPresenter(application, ProductView, ProductModel);
 const cartPresenter = new CartPresenter(application, CartView, CartModel);
 const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
+const ordersPresenter = new OrdersPresenter(application, OrdersView, OrdersModel);
 
 const header = document.getElementsByTagName('header')[0];
 const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
@@ -61,6 +65,7 @@ Router
     .register(/^\/items(\/(?<category>[0-9]*)(\/(?<page>[0-9]*))?)?$/, productsPresenter.view)
     .register(/^\/cart$/, cartPresenter.view)
     .register(/^\/offline$/, offlineView)
-    .register(/^\/order$/, orderPresenter.view);
+    .register(/^\/order$/, orderPresenter.view)
+    .register(/^\/orders(\/(?<page>[0-9]*))?$/, ordersPresenter.view);
 
 Router.start();
