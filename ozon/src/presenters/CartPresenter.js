@@ -28,6 +28,7 @@ class CartPresenter extends BasePresenter {
         Bus.globalBus.on(Events.CartGetProductsID, this.getProductsIDs);
         Bus.globalBus.on(Events.CartGetProductID, this.getProductID);
         Bus.globalBus.on(Events.CartAddLastProduct, this.addLastProduct);
+        Bus.globalBus.on(Events.OrderSent, this.dropCart);
     }
 
     /**
@@ -155,6 +156,10 @@ class CartPresenter extends BasePresenter {
         if (this.model.lastAddedProduct) {
             this.model.addProduct(this.model.lastAddedProduct, 1);
         }
+    }
+
+    dropCart = () => {
+        this.model.dropCart();
     }
 }
 

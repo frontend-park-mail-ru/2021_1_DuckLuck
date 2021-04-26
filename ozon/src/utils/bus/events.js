@@ -57,6 +57,7 @@ const Events = {
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
     SendOrder: 'order-send',
+    OrderSent: 'order-sent',
 };
 
 

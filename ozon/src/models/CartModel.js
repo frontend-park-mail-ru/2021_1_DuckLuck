@@ -44,6 +44,15 @@ class CartModel extends BaseModel {
     }
 
     /**
+     * @description drops the cart
+     */
+    dropCart = () => {
+        this.#ids = undefined;
+        this.#products = undefined;
+        this.#lastAddedProductID = undefined;
+    }
+
+    /**
      *
      * @param {number} id id of product
      * @param {number | string} count amount of product

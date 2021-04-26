@@ -175,6 +175,16 @@ export class HeaderView extends BaseView {
         counter.innerHTML = newCounterAmount.toString();
         counter.hidden = !newCounterAmount;
     }
+
+    /**
+     * @param {number} value
+     * @description sets items amount in cart to 0
+     */
+    setCartItems = (value) => {
+        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        counter.innerHTML = value.toString();
+        counter.hidden = !value;
+    }
 }
 
 
