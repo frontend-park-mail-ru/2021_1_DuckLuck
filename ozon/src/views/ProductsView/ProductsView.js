@@ -29,18 +29,19 @@ export class ProductsView extends BaseView {
         if (!this.IDs['page']) {
             this.IDs['page'] = 1;
         }
-
-        if (this.IDs['searchText']) {
-            this.#viewType = this.types.search;
-            this.bus.emit(Events.ProductsLoadSearch, this.IDs['searchText'], this.IDs['page']);
-            return;
+        if (!this.presenter.sortKey) {
+            this.presenter.changeSortKey('cost');
         }
-
-        if (!this.IDs['category']) {
-            this.IDs['category'] = 1;
+        if (!this.presenter.sortDirection) {
+            this.presenter.changeSortDirection('ASC');
         }
-        this.#viewType = this.types.category;
-        this.bus.emit(Events.ProductsLoad, this.IDs['category'], this.IDs['page']);
+        this.bus.emit(
+            Events.ProductsLoad,
+            this.IDs['category'],
+            this.IDs['page'],
+            this.presenter.sortKey,
+            this.presenter.sortDirection,
+        );
     }
 
     render = () => {
@@ -50,10 +51,52 @@ export class ProductsView extends BaseView {
         const template = productsPageTemplate({
             productsList: productsListHtmlString,
             pagination: pagination,
+            select: [
+                {
+                    key: 'cost',
+                    direction: 'ASC',
+                    name: 'Сначала дешевые',
+                },
+                {
+                    key: 'cost',
+                    direction: 'DESC',
+                    name: 'Сначала дорогие',
+                },
+                {
+                    key: 'date',
+                    direction: 'DESC',
+                    name: 'Новинки',
+                },
+                {
+                    key: 'rating',
+                    direction: 'DESC',
+                    name: 'Высокий рейтинг',
+                },
+                {
+                    key: 'discount',
+                    direction: 'DESC',
+                    name: 'По размеру скидки',
+                },
+            ],
+            sort: {
+                key: this.presenter.sortKey,
+                direction: this.presenter.sortDirection,
+            },
             productsStyles: productsStyles,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html')
             .getElementsByClassName(productsStyles.block)[0];
+
+        const select = this.cache.getElementsByClassName(productsStyles.select)[0];
+        select.addEventListener('change', () => {
+            const selected = select.selectedOptions[0];
+            const sortKey = selected.getAttribute('key');
+            const sortDirection = selected.getAttribute('direction');
+            this.presenter.changeSortKey(sortKey);
+            this.presenter.changeSortDirection(sortDirection);
+            Router.open(`/items/${this.IDs['category']}`);
+        });
+
 
         for (const button of this.cache.getElementsByClassName(paginatorStyles.button)) {
             button.addEventListener('click', () => {

@@ -138,7 +138,7 @@ export class HeaderView extends BaseView {
             event.preventDefault();
             const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
             Router.open(`/search/1/?text=${searchInput.value}`);
-        })
+        });
 
         menuItems.forEach((menuItem) => {
             menuItem.addEventListener('click', () => {

@@ -21,7 +21,6 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProductsChangeCategory, this.changeCategory);
         Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
         Bus.globalBus.on(Events.CartLoadedProductsID, this.productsCartGotIds);
-
     }
 
     /**
@@ -49,6 +48,20 @@ class ProductsPresenter extends BasePresenter {
     }
 
     /**
+     * @return {String}
+     */
+    get sortKey() {
+        return this.model.sortKey;
+    }
+
+    /**
+     * @return {String}
+     */
+    get sortDirection() {
+        return this.model.sortDirection;
+    }
+
+    /**
      *
      * @param {Number} id
      */
@@ -57,11 +70,29 @@ class ProductsPresenter extends BasePresenter {
     }
 
     /**
+     *
+     * @param {String} sortKey
+     */
+    changeSortKey = (sortKey) => {
+        this.model.sortKey = sortKey;
+    }
+
+    /**
+     *
+     * @param {String} sortDirection
+     */
+    changeSortDirection = (sortDirection) => {
+        this.model.sortDirection = sortDirection;
+    }
+
+    /**
      * @param {Number} category
      * @param {Number} page
+     * @param {String} sortKey
+     * @param {String} sortDirection
      */
-    loadProducts = (category, page) => {
-        this.model.loadProducts(category, page);
+    loadProducts = (category, page, sortKey, sortDirection) => {
+        this.model.loadProducts(category, page, sortKey, sortDirection);
     }
 
     /**
