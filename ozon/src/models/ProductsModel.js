@@ -98,7 +98,6 @@ class ProductsModel extends BaseModel {
         sort_direction: this.sortDirection,
         category: +category,
     }) {
-        console.log(body);
         AjaxModule.postUsingFetch({
             url: serverApiPath + '/product',
             body: body,
