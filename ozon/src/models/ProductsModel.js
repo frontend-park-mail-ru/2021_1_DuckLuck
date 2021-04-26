@@ -94,10 +94,11 @@ class ProductsModel extends BaseModel {
     loadProducts(category, page, sortKey, sortDirection, body = {
         page_num: +page,
         count: 9,
-        sort_key: sortKey,
-        sort_direction: sortDirection,
+        sort_key: this.sortKey,
+        sort_direction: this.sortDirection,
         category: +category,
     }) {
+        console.log(body);
         AjaxModule.postUsingFetch({
             url: serverApiPath + '/product',
             body: body,
@@ -146,8 +147,8 @@ class ProductsModel extends BaseModel {
         query_string: searchData,
         page_num: +page,
         count: 9,
-        sort_key: 'cost',
-        sort_direction: 'ASC',
+        sort_key: this.sortKey,
+        sort_direction: this.sortDirection,
         category: 1,
     }) {
         AjaxModule.postUsingFetch({
