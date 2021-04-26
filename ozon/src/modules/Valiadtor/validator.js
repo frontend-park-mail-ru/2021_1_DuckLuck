@@ -1,10 +1,6 @@
 import {fields} from '../../utils/validationFields/validationFields';
 
-export const isValidForm = (form, specificTypesToCheck = []) => {
-    if (!form) {
-        return false;
-    }
-
+export const isValidInputs = (inputs, specificTypesToCheck = []) => {
     const userInfo = {
         password: '',
     };
@@ -13,7 +9,7 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
         failedFields: [],
     };
 
-    for (const input of form.getElementsByTagName('input')) {
+    for (const input of inputs) {
         if (specificTypesToCheck.length > 0 &&
            !specificTypesToCheck.includes(input.type)
         ) {
@@ -43,7 +39,7 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
             case 'password':
                 passwordValidation(input, result, userInfo);
                 break;
-            case 'repeat_password':
+            case 'repeatPassword':
                 passwordRepeatValidation(input, result, userInfo.password);
                 break;
             default:
@@ -61,7 +57,7 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
 };
 
 const nameValidation = (input, result) => {
-    const isValidName = /^[a-zA-Zа-яА-Я]{3,30}$/.test(input.value);
+    const isValidName = /^[a-zA-Zа-яА-Я]+$/.test(input.value);
     if (!isValidName) {
         switch (input.name) {
         case 'firstName':

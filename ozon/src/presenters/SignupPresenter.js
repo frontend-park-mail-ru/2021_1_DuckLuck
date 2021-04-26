@@ -23,7 +23,7 @@ class SignupPresenter extends BasePresenter {
      * @description get data from view and send to model
      */
     sendFormToModel = () => {
-        const result = this.isFormValid();
+        const result = this.isInputsValid();
         if (result.failedFields.length) {
             this.view.invalidForm(result.failedFields);
             return;

@@ -1,4 +1,4 @@
-import {fields} from '../utils/validationFields/validationFields';
+import {fieldsPlaceholders} from '../utils/validationFields/validationFields';
 
 /**
  * @class BaseView
@@ -135,34 +135,15 @@ export class BaseView {
      * @param {array} invalidFields
      */
     invalidForm = (invalidFields) => {
-        for (const input of this.cache.getElementsByTagName('input')) {
-            switch (input.name) {
-            case 'firstName':
-                if (invalidFields.includes(fields.firstName)) {
-                    BaseView.setInvalidInputPlaceholder(input, 'Некорр. новое имя');
-                }
-                break;
-            case 'lastName':
-                if (invalidFields.includes(fields.lastName)) {
-                    BaseView.setInvalidInputPlaceholder(input, 'Некорр. новая фамилия');
-                }
-                break;
-            case 'email':
-                if (invalidFields.includes(fields.email)) {
-                    BaseView.setInvalidInputPlaceholder(input, 'Некорректная электронная почта');
-                }
-                break;
-            case 'password':
-                if (invalidFields.includes(fields.password)) {
-                    BaseView.setInvalidInputPlaceholder(input, 'Некорректный пароль');
-                }
-                break;
-            case 'repeat_password':
-                if (invalidFields.includes(fields.repeatPassword)) {
-                    BaseView.setInvalidInputPlaceholder(input, 'Пароли не совпадают');
-                }
+        const inputs = Array.from(this.cache.getElementsByTagName('input'));
+        for (const field of invalidFields) {
+            const input = inputs.find((input) => {
+                return field === input.name;
+            });
+            if (!input) {
                 break;
             }
+            BaseView.setInvalidInputPlaceholder(input, fieldsPlaceholders[`${input.name}`]);
         }
     }
 

@@ -31,7 +31,8 @@ class LoginModel extends BaseModel {
                 break;
             }
             default: {
-                throw null;
+                this.bus.emit(Events.LoginEmitResult, Responses.Error);
+                break;
             }
             }
         }).catch(() => {

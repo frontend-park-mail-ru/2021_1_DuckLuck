@@ -55,7 +55,7 @@ export class SignupView extends BaseView {
                             }),
                             new Input({
                                 type: 'password',
-                                name: 'repeat_password',
+                                name: 'repeatPassword',
                                 placeholder: 'Повтор пароля',
                             }),
                         ],

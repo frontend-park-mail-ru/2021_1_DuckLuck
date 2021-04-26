@@ -1,5 +1,5 @@
 import BasePresenter from './BasePresenter.js';
-import {isValidForm} from '../modules/Valiadtor/validator';
+import {isValidInputs} from '../modules/Valiadtor/validator';
 import Router from '../utils/router/Router';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
@@ -34,20 +34,18 @@ class ProfilePresenter extends BasePresenter {
      * @return {Object} contains array of invalid fields
      */
     isFirstLasNameFormValid = (specificTypeToCheck = []) => {
-        return isValidForm(document.getElementById('flname-form'), specificTypeToCheck);
+        return isValidInputs(document.getElementById('flname-form').getElementsByTagName('input'),
+            specificTypeToCheck);
     }
 
     /**
-     * @param {Object} specificTypeToCheck
-     * @return {Object} contains array of invalid fields
+     * @return {boolean} is dispatched file valid?
      */
     isAvatarValid = () => {
-        const form = document.createElement('form');
         const input = document.createElement('input');
         input.setAttribute('type', 'file');
         input.files = document.getElementById('avatar-input').files;
-        form.appendChild(input);
-        return !!isValidForm(form).failedFields.length;
+        return !!isValidInputs([input]).failedFields.length;
     }
 
     /**

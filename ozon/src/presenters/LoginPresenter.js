@@ -23,7 +23,7 @@ class LoginPresenter extends BasePresenter {
      * @description Gets data from View, than validates it and sends to Model.
      */
     sendFormToModel = () => {
-        const result = this.isFormValid();
+        const result = this.isInputsValid();
         if (result.failedFields.length) {
             this.view.invalidForm(result.failedFields);
             return;
