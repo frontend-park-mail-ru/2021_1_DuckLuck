@@ -15,7 +15,7 @@ import Events from '../../utils/bus/events';
  * @classdesc Class for showing product
  */
 export class ProductsView extends BaseView {
-    types = {
+    static #types = {
         search: 'search',
         category: 'category',
     }
@@ -103,10 +103,10 @@ export class ProductsView extends BaseView {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
                 switch (this.#viewType) {
-                case this.types.category:
+                case ProductsView.#types.category:
                     Router.open(`/items/${this.IDs['category']}/${page}`, {id: page});
                     break;
-                case this.types.search:
+                case ProductsView.#types.search:
                     Router.open(`/search/${page}/?text=${this.IDs['searchText']}`, {id: page});
                     break;
                 }
