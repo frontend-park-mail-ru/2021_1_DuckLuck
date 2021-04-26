@@ -1,5 +1,5 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
-import {serverApiPath, urls} from '../utils/urls/urls';
+import {fileServerHost, serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
@@ -12,6 +12,7 @@ import HTTPResponses from '../utils/http-responses/httpResponses';
 class CartModel extends BaseModel {
     #ids
     #products
+    #price
     #needsRerender;
     #lastAddedProductID
 
@@ -20,6 +21,13 @@ class CartModel extends BaseModel {
      */
     get products() {
         return this.#products;
+    }
+
+    /**
+     * @return {Object} price
+     */
+    get price() {
+        return this.#price;
     }
 
     /**
@@ -202,9 +210,13 @@ class CartModel extends BaseModel {
         }).then((parsedJson) => {
             this.#needsRerender = false;
             this.#products = parsedJson.products || [];
+            this.#price = parsedJson.price;
             this.#ids = new Set(this.#products.map((elem) => {
                 return elem.id;
             }) || []);
+            for (const product of this.#products) {
+                product.preview_image = fileServerHost + product.preview_image;
+            }
             this.bus.emit(Events.CartLoaded, Responses.Success);
         }).catch((err) => {
             switch (err) {

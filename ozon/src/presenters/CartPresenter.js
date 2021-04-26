@@ -39,6 +39,13 @@ class CartPresenter extends BasePresenter {
     }
 
     /**
+     * @return {Object} price of users cart
+     */
+    get price() {
+        return this.model.price;
+    }
+
+    /**
      * @return {boolean} is view needs to be rerendered
      */
     get needsRerender() {
