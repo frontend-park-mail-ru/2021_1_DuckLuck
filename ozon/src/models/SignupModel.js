@@ -32,7 +32,7 @@ class SignupModel extends BaseModel {
                 break;
             }
             default: {
-                throw {};
+                throw Responses.Error;
             }
             }
         }).catch(() => {

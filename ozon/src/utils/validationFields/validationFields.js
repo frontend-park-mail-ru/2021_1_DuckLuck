@@ -7,7 +7,7 @@ export const fields = {
     file: 'file',
 };
 
-export const fieldsPlaceholders = {
+export const incorrectFieldsMap = {
     firstName: 'Некорр. новое имя',
     lastName: 'Некорр. новая фамилия',
     email: 'Некорректная электронная почта',
