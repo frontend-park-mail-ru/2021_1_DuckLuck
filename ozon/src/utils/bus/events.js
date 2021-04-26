@@ -51,10 +51,14 @@ const Events = {
     CartLoadedProductsID: 'cart-loaded-products-ids',
     CartLoadedProductID: 'cart-loaded-product-id',
 
-
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
     SendOrder: 'order-send',
+
+    ReviewLoad: 'review-load',
+    ReviewLoaded: 'review-loaded',
+    ReviewOrder: 'review-send',
+
 };
 
 
