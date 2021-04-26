@@ -15,12 +15,16 @@ import Events from '../../utils/bus/events';
  * @classdesc Class for showing product
  */
 export class ProductsView extends BaseView {
+    types = {
+        search: 'search',
+        category: 'category',
+    }
+
+    #viewType
+
     show = () => {
         if (!this.IDs) {
             this.IDs = {};
-        }
-        if (!this.IDs['category']) {
-            this.IDs['category'] = 1;
         }
         if (!this.IDs['page']) {
             this.IDs['page'] = 1;
@@ -98,7 +102,14 @@ export class ProductsView extends BaseView {
             button.addEventListener('click', () => {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
-                Router.open(`/items/${this.IDs['category']}/${page}`, {id: page});
+                switch (this.#viewType) {
+                case this.types.category:
+                    Router.open(`/items/${this.IDs['category']}/${page}`, {id: page});
+                    break;
+                case this.types.search:
+                    Router.open(`/search/${page}/?text=${this.IDs['searchText']}`, {id: page});
+                    break;
+                }
             });
         }
 
