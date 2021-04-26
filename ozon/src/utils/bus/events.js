@@ -25,6 +25,7 @@ const Events = {
     ProductsLoad: 'products-load',
     ProductsLoaded: 'products-loaded',
     ProductsChangeCategory: 'products-change-category',
+    ProductsItemAdded: 'products-item-added',
 
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
@@ -50,11 +51,13 @@ const Events = {
     CartGetProductID: 'cart-get-product-id',
     CartLoadedProductsID: 'cart-loaded-products-ids',
     CartLoadedProductID: 'cart-loaded-product-id',
+    CartAddLastProduct: 'cart-add-last-product',
 
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
     SendOrder: 'order-send',
+    OrderSent: 'order-sent',
 };
 
 
