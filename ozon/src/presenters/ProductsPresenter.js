@@ -18,6 +18,7 @@ class ProductsPresenter extends BasePresenter {
         this.bus.on(Events.ProductsLoad, this.loadProducts);
         this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
         Bus.globalBus.on(Events.ProductsChangeCategory, this.changeCategory);
+        Bus.globalBus.on(Events.ProductsItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
         Bus.globalBus.on(Events.CartLoadedProductsID, this.productsCartGotIds);
     }
@@ -101,7 +102,8 @@ class ProductsPresenter extends BasePresenter {
     productLoadedReaction = (result) => {
         switch (result) {
         case Responses.Success: {
-            Bus.globalBus.emit(Events.CartGetProductsID);
+            this.view.render();
+            this.view.cache.hidden = false;
             break;
         }
         case Responses.Offline: {
@@ -117,15 +119,12 @@ class ProductsPresenter extends BasePresenter {
 
     /**
      *
-     * @param {number[]}ids
+     * @param {Set} ids
      */
     productsCartGotIds = (ids) => {
-        this.model.products = this.model.products.map((elem) => {
-            elem['inCart'] = !!ids.includes(elem.id);
-            return elem;
-        });
-        this.view.render();
-        this.view.cache.hidden = false;
+        if (ids.size) {
+            this.view.setAddedProducts(ids);
+        }
     }
 
     /**
@@ -134,6 +133,13 @@ class ProductsPresenter extends BasePresenter {
     changeCategory = (newCategory) => {
         this.view.ID = newCategory;
         this.view.subID = 1; // first page of pagination!
+    }
+
+    /**
+     * @param {number} itemID
+     */
+    setProductAdded = (itemID) => {
+        this.view.setProductAdded(itemID);
     }
 }
 
