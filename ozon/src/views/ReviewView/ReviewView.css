@@ -1,0 +1,50 @@
+@import '../../constants.css';
+
+.body {
+    display: flex;
+    flex-direction: column;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+}
+
+.productWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.notice {
+    display: flex;
+    flex-direction: row;
+}
+
+.rating {
+    display: flex;
+    flex-direction: column;
+}
+
+.stars {
+    display: flex;
+    flex-direction: row;
+}
+
+.impressions {
+    display: flex;
+    flex-direction: column;
+}
+
+.signature {
+    display: flex;
+    flex-direction: column;
+}
+
+.submit {
+    display: flex;
+    flex-direction: row;
+}
+
+.submitButton {
+
+}

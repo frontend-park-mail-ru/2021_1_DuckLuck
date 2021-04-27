@@ -48,6 +48,20 @@ class ReviewPresenter extends BasePresenter {
     }
 
     /**
+     * @return {string} comment
+     */
+    get comment() {
+        return this.model.comment;
+    }
+
+    /**
+     * @return {boolean} isPublic
+     */
+    get isPublic() {
+        return this.model.isPublic;
+    }
+
+    /**
      * @param {Number} id of product
      */
     set productId(id) {
@@ -76,6 +90,20 @@ class ReviewPresenter extends BasePresenter {
     }
 
     /**
+     * @param {string} comment
+     */
+    set comment(comment) {
+        this.model.comment = comment;
+    }
+
+    /**
+     * @param {boolean} isPublic
+     */
+    set isPublic(isPublic) {
+        this.model.isPublic = isPublic;
+    }
+
+    /**
      * @description Loads all information about review from model
      */
     loadReview = () => {
@@ -100,13 +128,10 @@ class ReviewPresenter extends BasePresenter {
      * @description Sends view form to model
      */
     sendReview = () => {
-        this.model.address = document.getElementsByName('address')[0].value.trim();
-        const email = document.getElementsByName('email')[0].value.trim();
-        const first_name = document.getElementsByName('firstName')[0].value.trim();
-        const last_name = document.getElementsByName('lastName')[0].value.trim();
-
-        this.model.recipient = {first_name, last_name, email};
-        this.model.sendOrder();
+        this.model.advantages = document.getElementsByName('advantages')[0].value.trim();
+        this.model.disadvantages = document.getElementsByName('disadvantages')[0].value.trim();
+        this.model.comment = document.getElementsByName('comment')[0].value.trim();
+        this.model.sendReview();
     }
 }
 

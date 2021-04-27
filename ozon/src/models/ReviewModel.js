@@ -46,6 +46,20 @@ class ReviewModel extends BaseModel {
     }
 
     /**
+     * @return {string} comment
+     */
+    get comment() {
+        return this.#comment;
+    }
+
+    /**
+     * @return {boolean} isPublic
+     */
+    get isPublic() {
+        return this.#isPublic;
+    }
+
+    /**
      * @param {Number} id of product
      */
     set productId(id) {
@@ -74,11 +88,25 @@ class ReviewModel extends BaseModel {
     }
 
     /**
+     * @param {string} comment
+     */
+    set comment(comment) {
+        this.#comment = comment;
+    }
+
+    /**
+     * @param {boolean} isPublic
+     */
+    set isPublic(isPublic) {
+        this.#isPublic = isPublic;
+    }
+
+    /**
      * @description Loads all information about review via AJAX
      */
     loadReview = () => {
         // TODO: проверка на то, что пользователь может оставлять отзыв к данному товару
-        this.bus.emit(Events.OrderLoaded, Responses.Success);
+        this.bus.emit(Events.ReviewLoaded, Responses.Success);
     }
 
     /**
@@ -86,7 +114,7 @@ class ReviewModel extends BaseModel {
      */
     sendReview = () => {
         AjaxModule.postUsingFetch({
-            url: serverApiPath + urls.order,
+            url: serverApiPath + urls.review,
             body: {
                 product_id: this.#productId,
                 rating: this.#rating,
