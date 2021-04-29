@@ -4,7 +4,7 @@ import reviewTemplate from './ReviewView.hbs';
 import {Input} from '../Common/Input/Input';
 import reviewStyles from './ReviewView.css';
 import {staticServerHost} from '../../utils/urls/urls';
-import Router from "../../utils/router/Router";
+import Router from '../../utils/router/Router';
 
 /**
  * @class ReviewView
