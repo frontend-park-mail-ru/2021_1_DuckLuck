@@ -120,33 +120,40 @@ class ReviewModel extends BaseModel {
      * @description Loads all information about review via AJAX
      */
     loadReview = () => {
-        // TODO: проверка на то, что пользователь может оставлять отзыв к данному товару
         AjaxModule.getUsingFetch({
-            url: serverApiPath + urls.profileUrl,
-            body: null,
+            url: serverApiPath + '/review/rights/product/' + this.product.id,
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
-            return response.json();
-        }).then((response) => {
-            this.userName = `${response.first_name} ${response.last_name[0]}.`;
+        }).then(() => {
             AjaxModule.getUsingFetch({
-                url: `${serverApiPath}${urls.productUrl}/${this.product.id}`,
+                url: serverApiPath + urls.profileUrl,
+                body: null,
             }).then((response) => {
                 if (response.status !== HTTPResponses.Success) {
                     throw response.status;
                 }
                 return response.json();
             }).then((response) => {
-                this.product = {
-                    id: response.id,
-                    category: response.category,
-                    image: `${staticServerHost}${response.images[0]}`,
-                    title: response.title,
-                    href: `/item/${this.product.id}`,
-                };
-                this.bus.emit(Events.ReviewLoaded, Responses.Success);
+                this.userName = `${response.first_name} ${response.last_name[0]}.`;
+                AjaxModule.getUsingFetch({
+                    url: `${serverApiPath}${urls.productUrl}/${this.product.id}`,
+                }).then((response) => {
+                    if (response.status !== HTTPResponses.Success) {
+                        throw response.status;
+                    }
+                    return response.json();
+                }).then((response) => {
+                    this.product = {
+                        id: response.id,
+                        category: response.category,
+                        image: `${staticServerHost}${response.images[0]}`,
+                        title: response.title,
+                        href: `/item/${this.product.id}`,
+                    };
+                    this.bus.emit(Events.ReviewLoaded, Responses.Success);
+                });
             });
         }).catch();
     }
