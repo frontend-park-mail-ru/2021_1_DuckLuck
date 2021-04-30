@@ -202,3 +202,8 @@
     font-size: var(--font-size-xxl);
     font-weight: var(--bold-font)
 }
+
+.reviewButton {
+    background: var(--colored-object-color);
+    color: var(--light-color);
+}

@@ -30,7 +30,6 @@ const Events = {
     ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
 
-
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',
     HeaderChangeCatalogID: 'header-change-catalog-id',
@@ -59,6 +58,7 @@ const Events = {
     ReviewLoaded: 'review-loaded',
     ReviewOrder: 'review-send',
 
+    ChangeReviewProductId: 'change-review-product-id',
 };
 
 

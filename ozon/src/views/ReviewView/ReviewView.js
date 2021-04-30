@@ -5,6 +5,7 @@ import {Input} from '../Common/Input/Input';
 import reviewStyles from './ReviewView.css';
 import {staticServerHost} from '../../utils/urls/urls';
 import Router from '../../utils/router/Router';
+import {Bus} from '../../utils/bus/bus';
 
 /**
  * @class ReviewView
@@ -42,6 +43,8 @@ export class ReviewView extends BaseView {
                 name: 'isPublic',
             }),
             styles: reviewStyles,
+            product: this.presenter.product,
+            userName: this.presenter.userName,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('review-block');
         this.parent.appendChild(this.cache);
@@ -49,10 +52,31 @@ export class ReviewView extends BaseView {
         const emptyStarLink = staticServerHost + '/svg/empty_star.svg';
         const starLink = staticServerHost + '/svg/star.svg';
         const stars = Array.from(this.cache.getElementsByClassName(reviewStyles.stars)[0].children);
+
+        const emptyRating = (event) => {
+            if (!event.target.classList.contains(reviewStyles.stars) &&
+                !event.target.classList.contains(reviewStyles.star)) {
+                stars.forEach((star) => {
+                    star.setAttribute('src', emptyStarLink);
+                });
+                let i = 0;
+                while (i < 5 && i < this.presenter.rating) {
+                    stars[i].setAttribute('src', starLink);
+                    i++;
+                }
+                while (i < 5) {
+                    stars[i].setAttribute('src', emptyStarLink);
+                    i++;
+                }
+            }
+        };
+
+        this.cache.addEventListener('mouseover', emptyRating);
+
+
         stars.forEach((star) => {
+            const currentStarValue = parseInt(star.getAttribute('value'));
             star.addEventListener('mouseover', () => {
-                const currentStarValue = parseInt(star.getAttribute('value'));
-                this.presenter.rating = currentStarValue + 1;
                 let i = 0;
                 while (i < 5 && parseInt(stars[i].getAttribute('value')) <= currentStarValue) {
                     stars[i].setAttribute('src', starLink);
@@ -63,7 +87,11 @@ export class ReviewView extends BaseView {
                     i++;
                 }
             });
+            star.addEventListener('click', () => {
+                this.presenter.rating = currentStarValue + 1;
+            });
         });
+
 
         const submitButton = this.cache.getElementsByClassName(reviewStyles.submitButton)[0];
         submitButton.addEventListener('click', () => {
@@ -74,6 +102,13 @@ export class ReviewView extends BaseView {
         const isPublic = document.getElementsByName('isPublic')[0];
         isPublic.addEventListener('change', () => {
             this.presenter.isPublic = !this.presenter.isPublic;
+        });
+
+        const productLink = this.cache.getElementsByClassName(reviewStyles.href)[0];
+        productLink.addEventListener('click', () => {
+            const productId = this.presenter.product.id;
+            Bus.globalBus.emit(Events.ProductChangeID, productId);
+            Router.open(`/item/${productId}`);
         });
     };
 }

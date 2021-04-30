@@ -1,5 +1,5 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
-import {serverApiPath, urls} from '../utils/urls/urls';
+import {serverApiPath, staticServerHost, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
@@ -10,18 +10,19 @@ import Router from '../utils/router/Router';
  * @description Model for Review in MVP Arch
  */
 class ReviewModel extends BaseModel {
-    #productId
+    #product
     #rating
     #advantages
     #disadvantages
     #comment
     #isPublic
+    #userName
 
     /**
-     * @return {Number} id of product
+     * @return {Object} product
      */
-    get productId() {
-        return this.#productId;
+    get product() {
+        return this.#product;
     }
 
     /**
@@ -60,10 +61,17 @@ class ReviewModel extends BaseModel {
     }
 
     /**
-     * @param {Number} id of product
+     * @return {String} userName
      */
-    set productId(id) {
-        this.#productId = id;
+    get userName() {
+        return this.#userName;
+    }
+
+    /**
+     * @param {Object} product
+     */
+    set product(product) {
+        this.#product = product;
     }
 
     /**
@@ -102,11 +110,45 @@ class ReviewModel extends BaseModel {
     }
 
     /**
+     * @param {String} userName
+     */
+    set userName(userName) {
+        this.#userName = userName;
+    }
+
+    /**
      * @description Loads all information about review via AJAX
      */
     loadReview = () => {
         // TODO: проверка на то, что пользователь может оставлять отзыв к данному товару
-        this.bus.emit(Events.ReviewLoaded, Responses.Success);
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.profileUrl,
+            body: null,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((response) => {
+            this.userName = `${response.first_name} ${response.last_name[0]}.`;
+            AjaxModule.getUsingFetch({
+                url: `${serverApiPath}${urls.productUrl}/${this.product.id}`,
+            }).then((response) => {
+                if (response.status !== HTTPResponses.Success) {
+                    throw response.status;
+                }
+                return response.json();
+            }).then((response) => {
+                this.product = {
+                    id: response.id,
+                    category: response.category,
+                    image: `${staticServerHost}${response.images[0]}`,
+                    title: response.title,
+                    href: `/item/${this.product.id}`,
+                };
+                this.bus.emit(Events.ReviewLoaded, Responses.Success);
+            });
+        }).catch();
     }
 
     /**
@@ -116,7 +158,7 @@ class ReviewModel extends BaseModel {
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.review,
             body: {
-                product_id: this.#productId,
+                product_id: this.#product,
                 rating: this.#rating,
                 advantages: this.#advantages,
                 disadvantages: this.#disadvantages,

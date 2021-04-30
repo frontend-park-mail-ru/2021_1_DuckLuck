@@ -2,6 +2,7 @@ import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import Router from '../utils/router/Router';
+import {Bus} from '../utils/bus/bus';
 
 /**
  * @description Presenter for Review View and Model
@@ -17,20 +18,22 @@ class ReviewPresenter extends BasePresenter {
         this.bus.on(Events.ReviewLoad, this.loadReview);
         this.bus.on(Events.ReviewLoaded, this.reviewLoadedReaction);
         this.bus.on(Events.SendOrder, this.sendReview);
+
+        Bus.globalBus.on(Events.ChangeReviewProductId, this.changeProductById);
     }
 
     /**
-     * @return {Number} id of product
+     * @return {Object} id of product
      */
-    get productId() {
-        return this.model.productId;
+    get product() {
+        return this.model.product;
     }
 
     /**
      * @return {Number} rating
      */
     get rating() {
-        return this.mode.rating;
+        return this.model.rating;
     }
 
     /**
@@ -62,10 +65,17 @@ class ReviewPresenter extends BasePresenter {
     }
 
     /**
-     * @param {Number} id of product
+     * @return {String} userName
      */
-    set productId(id) {
-        this.model.productId = id;
+    get userName() {
+        return this.model.userName;
+    }
+
+    /**
+     * @param {Object} product
+     */
+    set product(product) {
+        this.model.product = product;
     }
 
     /**
@@ -101,6 +111,21 @@ class ReviewPresenter extends BasePresenter {
      */
     set isPublic(isPublic) {
         this.model.isPublic = isPublic;
+    }
+
+    /**
+     * @param {String} userName
+     */
+    set userName(userName) {
+        this.model.userName = userName;
+    }
+
+
+    /**
+     * @param {Number} productId
+     */
+    changeProductById = (productId) => {
+        this.model.product = {id: productId};
     }
 
     /**
