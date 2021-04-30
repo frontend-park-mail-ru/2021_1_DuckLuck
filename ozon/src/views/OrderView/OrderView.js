@@ -47,6 +47,7 @@ export class OrderView extends BaseView {
             this.bus.emit(Events.SendOrder);
             const notice = new DOMParser().parseFromString(new Popup().getHtmlString({
                 popupBody: noticeTemplate({
+                    orderId: this.presenter.orderId,
                     styles: noticeStyles,
                 }),
                 background: new Blind().getHtmlString(),

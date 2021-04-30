@@ -14,6 +14,7 @@ class OrderModel extends BaseModel {
     #price
     #recipient
     #address
+    #orderId
 
     /**
      *
@@ -45,6 +46,13 @@ class OrderModel extends BaseModel {
     }
 
     /**
+     * @return {Number} orderId
+     */
+    get orderId() {
+        return this.#orderId;
+    }
+
+    /**
      * @param {string} newAddress
      */
     set address(newAddress) {
@@ -56,6 +64,13 @@ class OrderModel extends BaseModel {
      */
     set recipient(newRecipient) {
         this.#recipient = newRecipient;
+    }
+
+    /**
+     * @param {Number} orderId
+     */
+    set orderId(orderId) {
+        this.#orderId = orderId;
     }
 
 
@@ -108,6 +123,9 @@ class OrderModel extends BaseModel {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
+            return response.json();
+        }).then((response) => {
+            this.orderId = response.number;
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Offline: {

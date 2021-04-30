@@ -49,6 +49,13 @@ class OrderPresenter extends BasePresenter {
     }
 
     /**
+     * @return {Number} orderId
+     */
+    get orderId() {
+        return this.model.orderId;
+    }
+
+    /**
      * @description Loads all information about order from model
      */
 
