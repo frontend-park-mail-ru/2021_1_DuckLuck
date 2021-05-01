@@ -126,7 +126,6 @@ class ReviewModel extends BaseModel {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
-        }).then(() => {
             AjaxModule.getUsingFetch({
                 url: serverApiPath + urls.profileUrl,
                 body: null,
@@ -155,23 +154,26 @@ class ReviewModel extends BaseModel {
                     this.bus.emit(Events.ReviewLoaded, Responses.Success);
                 });
             });
-        }).catch();
+        }).catch(() => {
+            this.bus.emit(Events.ReviewLoaded, Responses.Error);
+        });
     }
 
     /**
      * @description Sends review form to backend
      */
     sendReview = () => {
-        AjaxModule.postUsingFetch({
-            url: serverApiPath + urls.review,
-            body: {
-                product_id: this.#product,
+        const body = {
+                product_id: this.#product.id,
                 rating: this.#rating,
                 advantages: this.#advantages,
                 disadvantages: this.#disadvantages,
                 comment: this.#comment,
-                isPublic: this.#isPublic,
-            },
+                isPublic: this.#isPublic ? this.#isPublic : true,
+        };
+        AjaxModule.postUsingFetch({
+            url: serverApiPath + urls.review,
+            body: body
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
