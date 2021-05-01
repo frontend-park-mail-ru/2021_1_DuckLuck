@@ -109,6 +109,13 @@
     height: 100%;
 }
 
+.emptyCartText {
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+    margin: auto;
+}
+
 .productsListElem {
     display: flex;
     flex-direction: row;
@@ -140,11 +147,6 @@
     font-size: var(--font-size-s);
     color: var(--colored-object-color);
     cursor: pointer;
-}
-
-.priceInfo {
-    display: flex;
-    flex-direction: column;
 }
 
 .incButton, .decButton {
@@ -268,16 +270,21 @@
     color: var(--discout-color);
 }
 
-.discount {
+.discountPrice {
     color: var(--discout-color);
 }
 
-.basePrice {
+.endPrice, .discountPrice{
     font-weight: var(--bold-font);
 }
 
 .orderInfoPrice {
     font-weight: var(--bold-font);
+}
+
+.oldPrice {
+    color: var(--old-price-color);
+    text-decoration: line-through;
 }
 
 .totalPriceText {
