@@ -40,7 +40,6 @@ export class ProductView extends BaseView {
         });
 
         const template = productPageTemplate({
-            inCart: this.presenter.item['inCart'],
             name: this.presenter.item['name'],
             price: this.presenter.item['price'],
             rating: this.presenter.item['rating'],
@@ -66,6 +65,7 @@ export class ProductView extends BaseView {
         if (!button) {
             button = document.getElementsByClassName(productStyles.inCartButton)[0];
         }
+
         button.addEventListener('click', (evt) => {
             evt.preventDefault();
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
@@ -78,5 +78,15 @@ export class ProductView extends BaseView {
             Bus.globalBus.emit(Events.ChangeReviewProductId, this.IDs['productID']);
             Router.open('/review');
         });
+        Bus.globalBus.emit(Events.CartGetProductID);
+    }
+
+    setButtonInCart = () => {
+        const button = document.getElementsByClassName(productStyles.notInCartButton)[0];
+        if (!button) {
+            return;
+        }
+        button.className = productStyles.inCartButton;
+        button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
     }
 }

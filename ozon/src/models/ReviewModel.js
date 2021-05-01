@@ -164,16 +164,16 @@ class ReviewModel extends BaseModel {
      */
     sendReview = () => {
         const body = {
-                product_id: this.#product.id,
-                rating: this.#rating,
-                advantages: this.#advantages,
-                disadvantages: this.#disadvantages,
-                comment: this.#comment,
-                isPublic: this.#isPublic ? this.#isPublic : true,
+            product_id: this.#product.id,
+            rating: this.#rating,
+            advantages: this.#advantages,
+            disadvantages: this.#disadvantages,
+            comment: this.#comment,
+            isPublic: this.#isPublic ? this.#isPublic : true,
         };
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.review,
-            body: body
+            body: body,
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;

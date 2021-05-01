@@ -52,7 +52,7 @@ class ProductsPresenter extends BasePresenter {
     productLoadedReaction = (result) => {
         switch (result) {
         case Responses.Success: {
-            Bus.globalBus.emit(Events.CartGetProductID);
+            this.view.render();
             break;
         }
         case Responses.Offline: {
@@ -67,12 +67,12 @@ class ProductsPresenter extends BasePresenter {
     }
 
     /**
-     * @param {number[]}ids
+     * @param {Set} ids
      */
     productCartGotIds = (ids) => {
-        this.model.item['inCart'] = !!ids.includes(this.model.item.id);
-        this.view.render();
-        this.view.cache.hidden = false;
+        if (ids.has(this.model.item.id)) {
+            this.view.setButtonInCart();
+        }
     }
 }
 
