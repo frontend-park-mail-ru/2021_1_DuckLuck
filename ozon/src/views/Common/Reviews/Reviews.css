@@ -1,0 +1,104 @@
+.block {
+    display: flex;
+    flex-direction: column;
+    width: 345px;
+    height: 189px;
+    font-family: GTEestiPro;
+}
+
+.ratingHeader {
+    display: flex;
+    flex-direction: row;
+    width: 345px;
+    height: 43px;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 0 0 12px;
+    border-bottom: 1px solid #d2d9df;
+    justify-content: space-between;
+}
+
+.ratingNumber {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 30px;
+    color: #001a34;
+}
+
+.starsWrapper {
+    display: flex;
+    flex-direction: row;
+    width: 272px;
+
+}
+
+.stars {
+    display: flex;
+    flex-direction: row;
+    gap: 4px;
+    width: 50%;
+}
+
+.starsInfo {
+    margin-top: 26px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.infoRow {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.colorStarsWrapper {
+    position: relative;
+    right: 136px;
+    width: 100%;
+}
+
+.color {
+    background: url("https://duckluckmarket.hb.bizmrg.com/svg/star.svg");
+    height: 24px;
+    background-size: 28px 24px;
+    background-position-x: -2px;
+    background-repeat: repeat-x;
+    width: 94.1176%;
+}
+
+.star {
+    height: 24px;
+}
+
+.starsNumber {
+    font-size: 14px;
+    line-height: 1.29;
+    color: #5a6c7d;
+    width: 70px;
+}
+
+.countLine {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.countColor {
+    overflow: hidden;
+    height: 6px;
+    border-radius: 5px;
+    background: #d2d9df;
+    width: 252px;
+}
+
+.colorLine {
+    background-color: #ff8970;
+    height: 6px;
+}
+
+.starsCounter {
+    color: #001a34;
+    font-size: 14px;
+    width: 30px;
+}
