@@ -1,0 +1,10 @@
+<div class="{{styles.block}}">
+    {{#each buttons}}
+        <div class="{{../styles.buttonWrapper}}">
+            <button class="{{../styles.button}} {{this.name}}" page="{{this.value}}">
+                <span class="{{../styles.buttonText}}">{{this.value}}</span>
+            </button>
+        </div>
+    {{/each}}
+</div>
+

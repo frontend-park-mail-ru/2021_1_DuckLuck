@@ -40,6 +40,16 @@
                 <span class="{{productStyles.descriptionText}}">{{description}}</span>
             </div>
             <div class="{{productStyles.specifications}}"></div>
+            <div class="{{productStyles.reviewListText}}">Отзывы: </div>
+            <select class="{{productsStyles.select}}">
+                {{#each select}}
+                    <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
+                        {{this.name}}
+                    </option>
+                {{/each}}
+            </select>
+            <div class="{{productStyles.reviewList}}"></div>
+            <div id="review-pagination"></div>
         </div>
         <div class="{{productStyles.menu}}">
             <div class="{{productStyles.aboutProduct}}"></div>
@@ -49,16 +59,9 @@
                     <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
                 </div>
                 <div class="{{productStyles.buttons}}">
-                {{#ifEquals inCart true}}
-                    <button class="{{productStyles.inCartButton}}">
-                        <span class="{{productStyles.buttonText}}">Добавить +1</span>
-                    </button>
-                {{/ifEquals}}
-                {{#ifEquals inCart false}}
                     <button class="{{productStyles.notInCartButton}}">
                         <span class="{{productStyles.buttonText}}">В корзину</span>
                     </button>
-                {{/ifEquals}}
                 </div>
             </div>
             <button class="{{productStyles.reviewButton}}">

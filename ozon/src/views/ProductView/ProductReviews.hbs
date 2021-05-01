@@ -1,0 +1,22 @@
+{{#each reviewsList}}
+    <div class="{{../productStyles.reviewBlock}}">
+        <div>
+            Отзыв от: {{this.user_name}}
+        </div>
+        <div>
+            Дата добавления: {{this.date_added}}
+        </div>
+        <div>
+            Рейтинг: {{this.rating}}
+        </div>
+        <div>
+            Достоинства: {{this.advantages}}
+        </div>
+        <div>
+            Недостатки: {{this.disadvantages}}
+        </div>
+        <div>
+            Дполнительный комментарий: {{this.comment}}
+        </div>
+    </div>
+{{/each}}

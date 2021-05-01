@@ -26,6 +26,7 @@ const Events = {
     ProductsLoaded: 'products-loaded',
     ProductsChangeCategory: 'products-change-category',
     ProductsItemAdded: 'products-item-added',
+    RenderProductReviews: 'render-product-reviews',
 
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
@@ -59,6 +60,8 @@ const Events = {
     ReviewLoad: 'review-load',
     ReviewLoaded: 'review-loaded',
     ReviewOrder: 'review-send',
+    GetProductReviews: 'get-product-reviews',
+    GetProductReviewsReaction: 'get-product-reviews-reaction',
 
     ChangeReviewProductId: 'change-review-product-id',
     OrderSent: 'order-sent',

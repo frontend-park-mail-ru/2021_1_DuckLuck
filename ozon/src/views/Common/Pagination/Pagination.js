@@ -1,5 +1,6 @@
 import {Button} from '../Button/Button.js';
 import paginationTemplate from './Pagination.hbs';
+import paginationOneButtonTemplate from './PaginationOneButton.hbs';
 import styles from './Pagination.css';
 
 /**
@@ -8,14 +9,15 @@ import styles from './Pagination.css';
  */
 export class Pagination {
     /**
-     *
      * @param {number} pagesCount maximum amount of page
+     * @param {boolean} isOneButton
      * @param {number} currentPage current page!
      */
-    constructor({pagesCount, currentPage}) {
+    constructor({pagesCount, currentPage}, isOneButton = false) {
         this.pagesCount = pagesCount;
         this.currentPage = parseInt(currentPage);
         this.maxButtons = 10;
+        this.isOneButton = isOneButton;
     }
 
     /**
@@ -23,6 +25,9 @@ export class Pagination {
      * @return {string} generated HTML after templating
      */
     getHtmlString = () => {
+        if (this.isOneButton) {
+            return this.getHtmlOneButtonString();
+        }
         const buttons = [];
         let surplusPages = 0;
         let shortagePages = 0;
@@ -81,6 +86,23 @@ export class Pagination {
             buttons: resultButtons,
             nextButton: nextButton,
             styles: styles,
+        });
+    }
+
+    /**
+     * @return {string} HTML
+     */
+    getHtmlOneButtonString() {
+        if (this.currentPage === this.pagesCount || !this.pagesCount) {
+            return '';
+        }
+
+        const loadMoreButton = new Button({
+            name: styles.bigButton,
+            value: 'Загрузить ещё',
+        });
+        return paginationOneButtonTemplate({
+            buttons: [loadMoreButton],
         });
     }
 }
