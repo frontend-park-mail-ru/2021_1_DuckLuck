@@ -34,14 +34,15 @@ export class ProfileView extends BaseView {
                 new Input({type: 'text', name: 'firstName', placeholder: 'Имя'}),
                 new Input({type: 'text', name: 'lastName', placeholder: 'Фамилия'}),
             ],
-            inputEmail: new Input({type: 'email', name: 'email', placeholder: 'Email address', isDisabled: true}),
+            inputEmail: new Input({type: 'email', name: 'email',
+                placeholder: 'Адрес электронной почты', isDisabled: true}),
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),
             profileStyles: profileStyles,
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
         this.parent.appendChild(this.cache);
-        const form = document.getElementById('form');
+        const form = document.getElementById('flname-form');
         form.addEventListener('submit', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.ProfileFLNameChange);
@@ -98,5 +99,9 @@ export class ProfileView extends BaseView {
         this.changeFirstLastName(this.presenter.getFirstName(), this.presenter.getLastName());
         this.changeEmail(this.presenter.getEmail());
         this.changeAvatar(this.presenter.getAvatar());
+    }
+
+    invalidAvatar = () => {
+        document.getElementById('invalid-avatar-span').innerHTML = 'Некорретный файл';
     }
 }

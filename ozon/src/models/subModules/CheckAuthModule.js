@@ -18,8 +18,7 @@ class CheckAuthModule extends BaseModel {
             body: null,
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
-                this.bus.emit(Events.ProfileCheckAuthResult, Responses.Error);
-                return;
+                throw Responses.Error;
             }
             this.bus.emit(Events.ProfileCheckAuthResult, Responses.Success);
         }).catch(() => {
