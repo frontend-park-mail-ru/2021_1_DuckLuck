@@ -129,11 +129,41 @@ export class ProductsView extends BaseView {
             item.addEventListener('click', (evt) => {
                 evt.preventDefault();
                 Bus.globalBus.emit(Events.CartAddProduct, productID, 1);
-                item.className = ListOfProductsItemStyles.inCartButton;
-                item.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
             });
         }
 
         this.parent.appendChild(this.cache);
+        Bus.globalBus.emit(Events.CartGetProductsID);
     };
+
+    /**
+     * @param {Set} productsInCart
+     */
+    setAddedProducts = (productsInCart) => {
+        for (const item of document.getElementsByClassName(ListOfProductsItemStyles.block)) {
+            if (productsInCart.has(+item.getAttribute('item-id'))) {
+                this.setButtonAddedStyle(item.getElementsByTagName('button')[0]);
+            }
+        }
+    }
+
+    /**
+     * @param {number} productID
+     */
+    setProductAdded = (productID) => {
+        const item = Array.from(document.getElementsByClassName(ListOfProductsItemStyles.block)).filter((item) => {
+            return +item.getAttribute('item-id') === productID;
+        })[0];
+        if (item) {
+            this.setButtonAddedStyle(item.getElementsByTagName('button')[0]);
+        }
+    }
+
+    /**
+     * @param {HTMLElement} button
+     */
+    setButtonAddedStyle = (button) => {
+        button.className = ListOfProductsItemStyles.inCartButton;
+        button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
+    }
 }

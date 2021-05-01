@@ -2,6 +2,7 @@ import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import Router from '../utils/router/Router';
+import {Bus} from '../utils/bus/bus';
 
 /**
  * @description Presenter for Login View and Model
@@ -80,6 +81,7 @@ class OrderPresenter extends BasePresenter {
 
         this.model.recipient = {first_name, last_name, email};
         this.model.sendOrder();
+        Bus.globalBus.emit(Events.OrderSent);
     }
 }
 
