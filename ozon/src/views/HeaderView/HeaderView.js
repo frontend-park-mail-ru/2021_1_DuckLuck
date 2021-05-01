@@ -19,7 +19,10 @@ import {Bus} from '../../utils/bus/bus';
  * @classdesc Class for Header page
  */
 export class HeaderView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = null) => {
         this.bus.emit(Events.HeaderLoad, this.ID);
     }
 
@@ -137,7 +140,7 @@ export class HeaderView extends BaseView {
         searchForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
-            Router.open(`/search/1/?text=${searchInput.value}`);
+            Router.open('/search/1', {}, {text: searchInput.value});
         });
 
         menuItems.forEach((menuItem) => {

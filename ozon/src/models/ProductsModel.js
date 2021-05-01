@@ -140,14 +140,16 @@ class ProductsModel extends BaseModel {
     /**
      * @param {String} searchData
      * @param {Number|String} page
+     * @param {String} sortKey
+     * @param {String} sortDirection
      * @param {Object} body Body of request
      */
-    loadProductsSearch(searchData, page, body = {
+    loadProductsSearch(searchData, page, sortKey, sortDirection, body = {
         query_string: searchData,
         page_num: +page,
         count: 9,
-        sort_key: 'cost',
-        sort_direction: 'ASC',
+        sort_key: sortKey,
+        sort_direction: sortDirection,
         category: 1,
     }) {
         AjaxModule.postUsingFetch({

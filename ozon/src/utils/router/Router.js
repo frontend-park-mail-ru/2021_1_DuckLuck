@@ -45,10 +45,11 @@ class Router {
     /**
      * @param {string} path
      * @param {Object} params params for Router
+     * @param {Object} pathParams
      */
     open(path, params = {
         replaceState: false,
-    }) {
+    }, pathParams = null) {
         let route;
         let groups;
         for (const page of this.#routes) {
@@ -62,6 +63,8 @@ class Router {
             this.open('/');
             return;
         }
+
+        path = this.adaptPath(path, pathParams);
 
         if (window.location.pathname !== path && !params.replaceState) {
             window.history.pushState(
@@ -79,8 +82,48 @@ class Router {
 
         const view = route[1];
         view.IDs = groups;
+        if (window.location.search) {
+            view.show(this.parseSearch(window.location.search));
+        } else {
+            view.show(pathParams);
+        }
+    }
 
-        view.show();
+    /**
+     * @param {string} path
+     * @param {Object} params
+     * @return {string}
+     */
+    adaptPath(path, params) {
+        if (params) {
+            path += '/?';
+            for (const param in params) {
+                if (params.hasOwnProperty(param)) {
+                    path += `${param}=${params[param]}&`;
+                }
+            }
+            // Remove last '&'
+            path = path.substr(0, path.length - 1);
+        }
+        return path;
+    }
+
+    /**
+     *
+     * @param {string|[]} search
+     * @return {Object|null}
+     */
+    parseSearch(search) {
+        if (!search) {
+            return null;
+        }
+        search = search.substr(1).split('&');
+        const returnObject = {};
+        for (let param of search) {
+            param = param.split('=');
+            returnObject[param[0]] = decodeURI(param[1]);
+        }
+        return returnObject;
     }
 
     /**
@@ -94,7 +137,6 @@ class Router {
 
             event.preventDefault();
             const link = event.target;
-
             this.open(link.pathname);
         });
 

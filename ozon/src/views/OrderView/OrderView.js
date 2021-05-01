@@ -16,7 +16,10 @@ import decorator from '../decorators.css';
  * @classdesc Class for showing product
  */
 export class OrderView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = null) => {
         this.bus.emit(Events.OrderLoad);
     }
 

@@ -105,9 +105,10 @@ export class BaseView {
     }
 
     /**
+     * @param {Object} URLParams
      * @description Show element in HTML
      */
-    show = () => {
+    show = (URLParams = null) => {
         this.render();
         this.#cache.hidden = false;
     }

@@ -99,9 +99,11 @@ class ProductsPresenter extends BasePresenter {
     /**
      * @param {string} searchData
      * @param {number} page
+     * @param {String} sortKey
+     * @param {String} sortDirection
      */
-    loadSearchProducts = (searchData, page) => {
-        this.model.loadProductsSearch(searchData, page);
+    loadSearchProducts = (searchData, page, sortKey, sortDirection) => {
+        this.model.loadProductsSearch(searchData, page, sortKey, sortDirection);
     }
 
     /**

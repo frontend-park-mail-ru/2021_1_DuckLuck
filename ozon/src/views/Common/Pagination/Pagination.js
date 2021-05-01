@@ -23,6 +23,9 @@ export class Pagination {
      * @return {string} generated HTML after templating
      */
     getHtmlString = () => {
+        if (!this.pagesCount) {
+            return '';
+        }
         const buttons = [];
         let surplusPages = 0;
         let shortagePages = 0;
