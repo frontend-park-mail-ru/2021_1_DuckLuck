@@ -12,6 +12,8 @@ class ProductsModel extends BaseModel {
     #products
     #paginationInfo
     #categoryId
+    #sortKey
+    #sortDirection
 
     /**
      *
@@ -37,6 +39,36 @@ class ProductsModel extends BaseModel {
     }
 
     /**
+     * @return {String}
+     */
+    get sortKey() {
+        return this.#sortKey;
+    }
+
+    /**
+     * @return {String}
+     */
+    get sortDirection() {
+        return this.#sortDirection;
+    }
+
+    /**
+     *
+     * @param {String} sortKey
+     */
+    set sortKey(sortKey) {
+        this.#sortKey = sortKey;
+    }
+
+    /**
+     *
+     * @param {String} sortDirection
+     */
+    set sortDirection(sortDirection) {
+        this.#sortDirection = sortDirection;
+    }
+
+    /**
      *
      * @param {Number} id
      */
@@ -55,13 +87,15 @@ class ProductsModel extends BaseModel {
     /**
      * @param {Number|String} category
      * @param {Number|String} page
+     * @param {String} sortKey
+     * @param {String} sortDirection
      * @param {Object} body Body of request
      */
-    loadProducts(category, page, body = {
+    loadProducts(category, page, sortKey, sortDirection, body = {
         page_num: +page,
         count: 9,
-        sort_key: 'cost',
-        sort_direction: 'ASC',
+        sort_key: sortKey,
+        sort_direction: sortDirection,
         category: +category,
     }) {
         AjaxModule.postUsingFetch({
