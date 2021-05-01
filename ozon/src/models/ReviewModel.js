@@ -121,7 +121,7 @@ class ReviewModel extends BaseModel {
      */
     loadReview = () => {
         AjaxModule.getUsingFetch({
-            url: serverApiPath + '/review/rights/product/' + this.product.id,
+            url: serverApiPath + urls.reviewRights + this.product.id,
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
