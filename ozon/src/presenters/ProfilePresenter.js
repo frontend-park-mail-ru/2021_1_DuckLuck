@@ -29,7 +29,7 @@ class ProfilePresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
         Bus.globalBus.on(Events.ProfileTransmitData, this.returnUserData);
 
-        this.model.getProfileData();
+        this.model.getProfileData(true);
     }
 
     /**

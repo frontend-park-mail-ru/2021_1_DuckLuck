@@ -112,9 +112,10 @@ class ProfileModel extends BaseModel {
     }
 
     /**
+     * @param {boolean} noRender
      * @description gets all data for profile from one AJAX request
      */
-    getProfileData() {
+    getProfileData(noRender = false) {
         AjaxModule.getUsingFetch({
             url: serverApiPath + urls.profileUrl,
             body: null,
@@ -128,8 +129,14 @@ class ProfileModel extends BaseModel {
             this.#fLNameModel.lastName = response.last_name;
             this.#avatarModel.avatarURL = response.avatar.url;
             this.#emailModel.email = response.email;
+            if (noRender) {
+                return;
+            }
             this.bus.emit(Events.ProfileAllResult, Responses.Success);
         }).catch((result) => {
+            if (noRender) {
+                return;
+            }
             switch (result) {
             case Responses.Offline: {
                 this.bus.emit(Events.ProfileAllResult, Responses.Offline);
