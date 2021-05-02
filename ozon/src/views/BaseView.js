@@ -1,3 +1,5 @@
+import {incorrectFieldsMap} from '../utils/validationFields/validationFields';
+
 /**
  * @class BaseView
  * @classdesc Base class for all other views
@@ -117,6 +119,32 @@ export class BaseView {
      */
     clearCache = () => {
         this.#cache = '';
+    }
+
+    /**
+     * @param {HTMLElement} input
+     * @param {string} placeholder
+     */
+    static setInvalidInputPlaceholder(input, placeholder) {
+        input.value = '';
+        input.placeholder = placeholder;
+        input.style['border-color'] = '#ff726f';
+    }
+
+    /**
+     * @param {array} invalidFields
+     */
+    invalidForm = (invalidFields) => {
+        const inputs = Array.from(this.cache.getElementsByTagName('input'));
+        for (const field of invalidFields) {
+            const input = inputs.find((input) => {
+                return field === input.name;
+            });
+            if (!input) {
+                break;
+            }
+            BaseView.setInvalidInputPlaceholder(input, incorrectFieldsMap[`${input.name}`]);
+        }
     }
 
     /**

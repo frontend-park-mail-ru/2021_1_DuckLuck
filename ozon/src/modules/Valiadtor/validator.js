@@ -1,16 +1,15 @@
-export const isValidForm = (form, specificTypesToCheck = []) => {
-    if (!form) {
-        return false;
-    }
+import {fields} from '../../utils/validationFields/validationFields';
 
+export const isValidInputs = (inputs, specificTypesToCheck = []) => {
     const userInfo = {
         password: '',
     };
+
     const result = {
-        isValid: true,
+        failedFields: [],
     };
 
-    for (const input of form.getElementsByTagName('input')) {
+    for (const input of inputs) {
         if (specificTypesToCheck.length > 0 &&
            !specificTypesToCheck.includes(input.type)
         ) {
@@ -40,7 +39,7 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
             case 'password':
                 passwordValidation(input, result, userInfo);
                 break;
-            case 'repeat_password':
+            case 'repeatPassword':
                 passwordRepeatValidation(input, result, userInfo.password);
                 break;
             default:
@@ -54,27 +53,34 @@ export const isValidForm = (form, specificTypesToCheck = []) => {
         }
     }
 
-    return result.isValid;
+    return result;
 };
 
 const nameValidation = (input, result) => {
     const isValidName = /^[a-zA-Zа-яА-Я]+$/.test(input.value);
     if (!isValidName) {
-        result.isValid = false;
+        switch (input.name) {
+        case 'firstName':
+            result.failedFields.push(fields.firstName);
+            break;
+        case 'lastName':
+            result.failedFields.push(fields.lastName);
+            break;
+        }
     }
 };
 
 const emailValidation = (input, result) => {
     const isValidEmail = /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(input.value);
     if (!isValidEmail) {
-        result.isValid = false;
+        result.failedFields.push(fields.email);
     }
 };
 
 const passwordValidation = (input, result, userInfo) => {
     const isPasswordValid = input.value.length >= 3 && input.value.length <= 20;
     if (!isPasswordValid) {
-        result.isValid = false;
+        result.failedFields.push(fields.password);
     }
     userInfo.password = input.value;
 };
@@ -82,9 +88,9 @@ const passwordValidation = (input, result, userInfo) => {
 const passwordRepeatValidation = (input, result, password) => {
     const value = input.value;
     if (value !== password) {
-        result.isValid = false;
+        result.failedFields.push(fields.repeatPassword);
     } else if (input.value.length < 3 || input.value.length > 20) {
-        result.isValid = false;
+        result.failedFields.push(fields.repeatPassword);
     }
 };
 
@@ -94,6 +100,6 @@ const fileValidation = (input, result) => {
     const isValidFile = file !== undefined &&
                          file.size < MAX_FILE_SIZE && /.*\.(jpeg|png|jpg)$/i.test(file.name);
     if (!isValidFile) {
-        result.isValid = false;
+        result.failedFields.push(fields.file);
     }
 };
