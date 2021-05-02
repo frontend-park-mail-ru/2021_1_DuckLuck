@@ -12,7 +12,7 @@ import {Bus} from '../../utils/bus/bus';
  * @extends BaseView
  * @classdesc Class for showing review
  */
-export class ReviewView extends BaseView {
+class ReviewView extends BaseView {
     show = () => {
         this.presenter.rating = 0;
         this.bus.emit(Events.ReviewRightsLoad);
@@ -57,16 +57,9 @@ export class ReviewView extends BaseView {
         const emptyRating = (event) => {
             if (!event.target.classList.contains(reviewStyles.stars) &&
                 !event.target.classList.contains(reviewStyles.star)) {
-                stars.forEach((star) => {
-                    star.setAttribute('src', emptyStarLink);
-                });
-                for (let i = 0; i < 5; i++) {
-                    if (i < this.presenter.rating) {
-                        stars[i].setAttribute('src', starLink);
-                        continue;
-                    }
-                    stars[i].setAttribute('src', emptyStarLink);
-                }
+                stars.forEach((star, i) =>
+                    star.setAttribute('src', i < this.presenter.rating ? starLink : emptyStarLink),
+                );
             }
         };
 
@@ -77,11 +70,8 @@ export class ReviewView extends BaseView {
             const currentStarValue = parseInt(star.getAttribute('value'));
             star.addEventListener('mouseover', () => {
                 for (let i = 0; i < 5; i++) {
-                    if (parseInt(stars[i].getAttribute('value')) <= currentStarValue) {
-                        stars[i].setAttribute('src', starLink);
-                        continue;
-                    }
-                    stars[i].setAttribute('src', emptyStarLink);
+                    const isStar = parseInt(stars[i].getAttribute('value')) <= currentStarValue;
+                    stars[i].setAttribute('src', isStar ? starLink : emptyStarLink);
                 }
             });
             star.addEventListener('click', () => {
@@ -109,3 +99,5 @@ export class ReviewView extends BaseView {
         });
     };
 }
+
+export default ReviewView;

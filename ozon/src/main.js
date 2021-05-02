@@ -26,7 +26,7 @@ import HeaderModel from './models/HeaderModel';
 import HeaderPresenter from './presenters/HeaderPresenter';
 import ReviewModel from './models/ReviewModel';
 import ReviewPresenter from './presenters/ReviewPresenter';
-import {ReviewView} from './views/ReviewView/ReviewView';
+import ReviewView from './views/ReviewView/ReviewView';
 
 
 if ('serviceWorker' in navigator) {
