@@ -19,7 +19,10 @@ import {Bus} from '../../utils/bus/bus';
  * @classdesc Class for Header page
  */
 export class HeaderView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = {}) => {
         this.bus.emit(Events.HeaderLoad, this.ID);
     }
 
@@ -126,6 +129,20 @@ export class HeaderView extends BaseView {
         });
 
         const menuItems = Array.from(this.cache.getElementsByClassName(headerStyles.menuItem));
+        menuItems.forEach((menuItem) => {
+            menuItem.addEventListener('click', () => {
+                const href = menuItem.getAttribute('href');
+                Router.open(href);
+            });
+        });
+
+        const searchForm = this.cache.getElementsByClassName(headerStyles.searchForm)[0];
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
+            Router.open('/search/1/', {}, {text: searchInput.value});
+        });
+
         menuItems.forEach((menuItem) => {
             menuItem.addEventListener('click', () => {
                 const href = menuItem.getAttribute('href');

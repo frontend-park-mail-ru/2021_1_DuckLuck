@@ -11,9 +11,10 @@ import Events from '../../utils/bus/events';
  */
 export class ProfileView extends BaseView {
     /**
-     * @description redef of show method
+     * @param {Object} URLParams
+     * @description redefinition of show method
      */
-    show = () => {
+    show = (URLParams = {}) => {
         this.presenter.tryAuth();
     }
 

@@ -59,6 +59,7 @@ Router
     .register(/^\/profile$/, profilePresenter.view)
     .register(/^\/item(\/(?<productID>[0-9]*))?$/, productPresenter.view)
     .register(/^\/items(\/(?<category>[0-9]*)(\/(?<page>[0-9]*))?)?$/, productsPresenter.view)
+    .register(/^\/search\/(?<page>[0-9]*)\/$/, productsPresenter.view)
     .register(/^\/cart$/, cartPresenter.view)
     .register(/^\/offline$/, offlineView)
     .register(/^\/order$/, orderPresenter.view);

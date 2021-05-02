@@ -15,7 +15,10 @@ import imagesStyles from './../Common/Img/Img.css';
  * @classdesc Class for Product page
  */
 export class ProductView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = {}) => {
         if (!this.IDs) {
             this.IDs = {};
         }
