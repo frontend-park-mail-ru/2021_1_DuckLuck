@@ -132,7 +132,7 @@ export class ProductsView extends BaseView {
                     Router.open(`/items/${this.IDs['category']}/${page}`);
                     break;
                 case ProductsView.#types.search:
-                    Router.open(`/search/${page}/?text=${this.IDs['searchText']}`);
+                    Router.open(`/search/${page}/`, {}, {text: this.IDs['searchText']});
                     break;
                 }
             });

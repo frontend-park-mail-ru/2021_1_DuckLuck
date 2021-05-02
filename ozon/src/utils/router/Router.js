@@ -97,14 +97,7 @@ class Router {
             return path;
         }
 
-        path += '?';
-        for (const param in params) {
-            if (params.hasOwnProperty(param)) {
-                path += `${param}=${params[param]}&`;
-            }
-        }
-        // Remove last '&'
-        path = path.substr(0, path.length - 1);
+        path += '?' + Object.keys(params).map((key) => [key, params[key]].join('=')).join('&');
         return path;
     }
 
