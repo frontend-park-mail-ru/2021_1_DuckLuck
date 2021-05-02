@@ -21,11 +21,13 @@ const Events = {
     ProfileLogout: 'profile-logout',
     ProfileLogoutEmitResult: 'profile-logout-emit-result',
     ProfileIncorrectLogout: 'profile-logout-incorrect',
+    ProfileTransmitData: 'profile-transmit-user-data',
 
     ProductsLoad: 'products-load',
     ProductsLoaded: 'products-loaded',
     ProductsChangeCategory: 'products-change-category',
     ProductsItemAdded: 'products-item-added',
+    ProductTransmitData: 'product-transmit-data',
 
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
@@ -56,8 +58,12 @@ const Events = {
     OrderLoaded: 'order-loaded',
     SendOrder: 'order-send',
 
-    ReviewLoad: 'review-load',
-    ReviewLoaded: 'review-loaded',
+    ReviewRightsLoad: 'review-rights-load',
+    ReviewRightsLoaded: 'review-rights-loaded',
+    ReviewUserDataLoad: 'review-user-data-load',
+    ReviewUserDataLoaded: 'review-user-data-loaded',
+    ReviewProductDataLoad: 'review-product-data-load',
+    ReviewProductDataLoaded: 'review-product-data-load',
     ReviewOrder: 'review-send',
 
     ChangeReviewProductId: 'change-review-product-id',

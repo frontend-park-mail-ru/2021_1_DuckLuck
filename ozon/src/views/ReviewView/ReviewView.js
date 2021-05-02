@@ -14,7 +14,8 @@ import {Bus} from '../../utils/bus/bus';
  */
 export class ReviewView extends BaseView {
     show = () => {
-        this.bus.emit(Events.ReviewLoad);
+        this.presenter.rating = 0;
+        this.bus.emit(Events.ReviewRightsLoad);
     }
 
     render = () => {
@@ -59,14 +60,12 @@ export class ReviewView extends BaseView {
                 stars.forEach((star) => {
                     star.setAttribute('src', emptyStarLink);
                 });
-                let i = 0;
-                while (i < 5 && i < this.presenter.rating) {
-                    stars[i].setAttribute('src', starLink);
-                    i++;
-                }
-                while (i < 5) {
+                for (let i = 0; i < 5; i++) {
+                    if (i < this.presenter.rating) {
+                        stars[i].setAttribute('src', starLink);
+                        continue;
+                    }
                     stars[i].setAttribute('src', emptyStarLink);
-                    i++;
                 }
             }
         };
@@ -77,14 +76,12 @@ export class ReviewView extends BaseView {
         stars.forEach((star) => {
             const currentStarValue = parseInt(star.getAttribute('value'));
             star.addEventListener('mouseover', () => {
-                let i = 0;
-                while (i < 5 && parseInt(stars[i].getAttribute('value')) <= currentStarValue) {
-                    stars[i].setAttribute('src', starLink);
-                    i++;
-                }
-                while (i < 5) {
+                for (let i = 0; i < 5; i++) {
+                    if (parseInt(stars[i].getAttribute('value')) <= currentStarValue) {
+                        stars[i].setAttribute('src', starLink);
+                        continue;
+                    }
                     stars[i].setAttribute('src', emptyStarLink);
-                    i++;
                 }
             });
             star.addEventListener('click', () => {

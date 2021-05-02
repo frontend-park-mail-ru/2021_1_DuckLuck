@@ -15,9 +15,12 @@ class ReviewPresenter extends BasePresenter {
      */
     constructor(application, View, Model) {
         super(application, View, Model);
-        this.bus.on(Events.ReviewLoad, this.loadReview);
-        this.bus.on(Events.ReviewLoaded, this.reviewLoadedReaction);
+        this.bus.on(Events.ReviewRightsLoad, this.loadReviewRights);
+        this.bus.on(Events.ReviewRightsLoaded, this.reviewRightsLoadedReaction);
         this.bus.on(Events.SendOrder, this.sendReview);
+
+        Bus.globalBus.on(Events.ReviewUserDataLoaded, this.reviewUserDataLoaded);
+        Bus.globalBus.on(Events.ReviewProductDataLoaded, this.reviewProductDataLoaded);
 
         Bus.globalBus.on(Events.ChangeReviewProductId, this.changeProductById);
     }
@@ -131,22 +134,38 @@ class ReviewPresenter extends BasePresenter {
     /**
      * @description Loads all information about review from model
      */
-    loadReview = () => {
-        this.model.loadReview();
+    loadReviewRights = () => {
+        this.model.loadReviewRights();
     }
 
     /**
      * @param {string} result
      * @description Reaction on view loading
      */
-    reviewLoadedReaction = (result) => {
+    reviewRightsLoadedReaction = (result) => {
         if (result === Responses.Success) {
+            Bus.globalBus.emit(Events.ProfileTransmitData, Events.ReviewUserDataLoaded);
+            Bus.globalBus.emit(Events.ProductTransmitData, Events.ReviewProductDataLoaded);
             this.view.render();
             this.view.cache.hidden = false;
         } else {
             console.error('Cant load review');
             Router.open('/items', {replaceState: true});
         }
+    }
+
+    /**
+     * @param {Object} profileData
+     */
+    reviewUserDataLoaded = (profileData) => {
+        this.model.userName = `${profileData.firstName} ${profileData.lastName}`;
+    }
+
+    /**
+     * @param {Object} productData
+     */
+    reviewProductDataLoaded = (productData) => {
+        this.model.product = productData;
     }
 
     /**
