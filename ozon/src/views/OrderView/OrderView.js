@@ -19,7 +19,7 @@ export class OrderView extends BaseView {
     /**
      * @param {Object} URLParams
      */
-    show = (URLParams = null) => {
+    show = (URLParams = {}) => {
         this.bus.emit(Events.OrderLoad);
     }
 

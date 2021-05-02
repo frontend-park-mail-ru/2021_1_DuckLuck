@@ -14,7 +14,7 @@ export class ProfileView extends BaseView {
      * @param {Object} URLParams
      * @description redefinition of show method
      */
-    show = (URLParams = null) => {
+    show = (URLParams = {}) => {
         this.presenter.tryAuth();
     }
 

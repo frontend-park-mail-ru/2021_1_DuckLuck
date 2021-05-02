@@ -18,7 +18,7 @@ export class ProductView extends BaseView {
     /**
      * @param {Object} URLParams
      */
-    show = (URLParams = null) => {
+    show = (URLParams = {}) => {
         if (!this.IDs) {
             this.IDs = {};
         }

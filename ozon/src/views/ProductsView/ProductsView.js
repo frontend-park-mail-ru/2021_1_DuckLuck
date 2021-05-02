@@ -25,7 +25,7 @@ export class ProductsView extends BaseView {
     /**
      * @param {Object} URLParams
      */
-    show = (URLParams = null) => {
+    show = (URLParams = {}) => {
         if (!this.IDs) {
             this.IDs = {};
         }
@@ -118,7 +118,7 @@ export class ProductsView extends BaseView {
                 Router.open(`/items/${this.IDs['category']}`);
                 break;
             case ProductsView.#types.search:
-                Router.open('/search/1', {}, {text: this.IDs['searchText']});
+                Router.open('/search/1/', {}, {text: this.IDs['searchText']});
                 break;
             }
         });

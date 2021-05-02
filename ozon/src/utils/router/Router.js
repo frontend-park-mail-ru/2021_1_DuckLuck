@@ -49,7 +49,7 @@ class Router {
      */
     open(path, params = {
         replaceState: false,
-    }, pathParams = null) {
+    }, pathParams = {}) {
         let route;
         let groups;
         for (const page of this.#routes) {
@@ -63,6 +63,7 @@ class Router {
             this.open('/');
             return;
         }
+
 
         path = this.adaptPath(path, pathParams);
 
@@ -82,11 +83,8 @@ class Router {
 
         const view = route[1];
         view.IDs = groups;
-        if (window.location.search) {
-            view.show(this.parseSearch(window.location.search));
-        } else {
-            view.show(pathParams);
-        }
+        Object.assign(pathParams, this.parseSearch(window.location.search));
+        view.show(pathParams);
     }
 
     /**
@@ -95,16 +93,18 @@ class Router {
      * @return {string}
      */
     adaptPath(path, params) {
-        if (params) {
-            path += '/?';
-            for (const param in params) {
-                if (params.hasOwnProperty(param)) {
-                    path += `${param}=${params[param]}&`;
-                }
-            }
-            // Remove last '&'
-            path = path.substr(0, path.length - 1);
+        if (!Object.keys(params).length) {
+            return path;
         }
+
+        path += '?';
+        for (const param in params) {
+            if (params.hasOwnProperty(param)) {
+                path += `${param}=${params[param]}&`;
+            }
+        }
+        // Remove last '&'
+        path = path.substr(0, path.length - 1);
         return path;
     }
 

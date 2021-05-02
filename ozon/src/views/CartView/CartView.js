@@ -15,7 +15,7 @@ export class CartView extends BaseView {
     /**
      * @param {Object} URLParams
      */
-    show = (URLParams = null) => {
+    show = (URLParams = {}) => {
         this.bus.emit(Events.CartLoad);
     }
 
