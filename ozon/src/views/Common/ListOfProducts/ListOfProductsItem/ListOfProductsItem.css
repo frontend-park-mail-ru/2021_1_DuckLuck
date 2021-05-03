@@ -81,39 +81,20 @@
 }
 
 .inCartButton {
-    background: var(--order-color);
     display: flex;
     height: var(--height-xxxs);
     width: var(--width-s);
     border-radius: var(--standart-border-radius);
-    border: none;
     position: absolute;
     bottom: 0;
-    cursor: pointer;
-    outline: none;
-}
-
-.inCartButton:hover {
-    background: var(--dark-order-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .notInCartButton {
-    background: var(--colored-object-color);
     display: flex;
     height: var(--height-xxxs);
     width: var(--width-s);
-    border-radius: var(--standart-border-radius);
-    border: none;
     position: absolute;
     bottom: 0;
-    cursor: pointer;
-    outline: none;
-}
-
-.notInCartButton:hover {
-    background: var(--dark-colored-object-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .buttonText {
