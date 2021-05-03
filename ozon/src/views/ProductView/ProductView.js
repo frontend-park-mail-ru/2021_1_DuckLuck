@@ -65,9 +65,9 @@ export class ProductView extends BaseView {
             });
         });
 
-        let button = document.getElementsByClassName(buttons.mainColor)[0];
+        let button = this.cache.getElementsByClassName(buttons.mainColor)[0];
         if (!button) {
-            button = document.getElementsByClassName(buttons.orderColor)[0];
+            button = this.cache.getElementsByClassName(buttons.orderColor)[0];
         }
 
         button.addEventListener('click', (evt) => {
@@ -82,7 +82,7 @@ export class ProductView extends BaseView {
     }
 
     setButtonInCart = () => {
-        const button = document.getElementsByClassName(buttons.mainColor)[0];
+        const button = this.cache.getElementsByClassName(buttons.mainColor)[0];
         if (!button) {
             return;
         }
