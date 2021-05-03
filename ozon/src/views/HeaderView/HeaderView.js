@@ -1,6 +1,6 @@
 import {BaseView} from '../BaseView.js';
 import headerStyles from './HeaderView.css';
-import buttonStyles from '../Common/Button/Button.css';
+import buttons from '../Common/Button/Button.css';
 import imgStyles from '../Common/Img/Img.css';
 import inputStyles from '../Common/Input/Input.css';
 import decorators from '../decorators.css';
@@ -93,7 +93,7 @@ export class HeaderView extends BaseView {
             headerStyles: headerStyles,
             imgStyles: imgStyles,
             inputStyles: inputStyles,
-            buttonStyles: buttonStyles,
+            buttons: buttons,
             decorators: decorators,
         });
 

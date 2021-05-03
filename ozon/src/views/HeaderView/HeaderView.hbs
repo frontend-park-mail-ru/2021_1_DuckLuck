@@ -9,7 +9,7 @@
         </div>
         <div class="{{headerStyles.catalogBlock}}">
             <div class="{{headerStyles.buttonBlock}}">
-                <button class="{{buttonStyles.catalog}}">
+                <button class="{{buttons.button}} {{buttons.mainColor}} {{buttons.catalog}}">
                     <div class="{{headerStyles.catalogButtonBody}}">
                         {{#with catalog}}
                             <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}}">
@@ -38,7 +38,7 @@
                     </div>
                     <div class="{{../headerStyles.searchButtonBlock}}">
                         {{#with searchButton}}
-                            <button type="submit" class="{{../../buttonStyles.search}}">
+                            <button type="submit" class="{{../../buttons.button}} {{../../buttons.mainColor}} {{../../buttons.search}}">
                                 <div class="{{../../headerStyles.searchImgWrapper}}">
                                     <img loading="lazy" src={{img.src}} class="{{../../imgStyles.menuImgL}} {{../../decorators.invertColor}}">
                                 </div>

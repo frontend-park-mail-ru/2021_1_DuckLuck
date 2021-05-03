@@ -32,19 +32,9 @@
 .catalog {
     min-height: 40px;
     min-width: 120px;
-    background: var(--colored-object-color);
-    cursor: pointer;
-    color: var(--light-color)5;
-    border: none;
-    border-radius: 3px;
+    color: var(--light-color) ;
     font-size: 16px;
     font-weight: 700;
-    outline: none;
-}
-
-.catalog:hover {
-    background: var(--dark-colored-object-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .search {
