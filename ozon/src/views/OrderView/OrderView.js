@@ -9,6 +9,7 @@ import Router from '../../utils/router/Router';
 import {Popup} from '../Common/Popup/Popup';
 import {Blind} from '../Common/Blind/Blind';
 import decorator from '../decorators.css';
+import buttons from '../Common/Button/Button.css';
 
 /**
  * @class ProductsView
@@ -41,6 +42,7 @@ export class OrderView extends BaseView {
             baseCost: +this.presenter.price.total_base_cost,
             discount: +this.presenter.price.total_discount,
             totalCost: +this.presenter.price.total_cost,
+            buttons: buttons,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
