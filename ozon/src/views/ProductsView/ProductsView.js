@@ -8,6 +8,7 @@ import paginatorStyles from '../Common/Pagination/Pagination.css';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
+import buttons from '../Common/Button/Button.css';
 
 /**
  * @class ProductsView
@@ -146,9 +147,9 @@ export class ProductsView extends BaseView {
                     Router.open(`/item/${productID}`);
                 });
 
-            let item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.notInCartButton)[0];
+            let item = itemContainer.getElementsByClassName(buttons.mainColor)[0];
             if (item === undefined) {
-                item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.inCartButton)[0];
+                item = itemContainer.getElementsByClassName(buttons.orderColor)[0];
             }
 
             item.addEventListener('click', (evt) => {
@@ -188,7 +189,8 @@ export class ProductsView extends BaseView {
      * @param {HTMLElement} button
      */
     setButtonAddedStyle = (button) => {
-        button.className = ListOfProductsItemStyles.inCartButton;
+        button.classList.remove(buttons.mainColor);
+        button.classList.add(buttons.orderColor);
         button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
     }
 }

@@ -33,6 +33,14 @@
     background: var(--dark-order-color);
 }
 
+.neutralColor {
+    background: var(--neutral-background-color);
+}
+
+.neutralColor:hover {
+    background: var(--dark-neutral-background-color);
+}
+
 .catalog {
     min-height: 40px;
     min-width: 120px;

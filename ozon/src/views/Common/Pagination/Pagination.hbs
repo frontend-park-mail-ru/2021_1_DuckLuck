@@ -8,14 +8,14 @@
     {{/ifNotEquals}}
     {{#each buttons}}
         <div class="{{../styles.buttonWrapper}}">
-            <button class="{{../styles.button}} {{this.name}}" page="{{this.value}}">
+            <button class="{{../buttonStyles.button}} {{../styles.button}} {{this.name}}" page="{{this.value}}">
                 <span class="{{../styles.buttonText}}">{{this.value}}</span>
             </button>
         </div>
     {{/each}}
     {{#ifNotEquals nextButton.value -1}}
         <div class="{{styles.buttonBigWrapper}}">
-        <button class="{{styles.button}} {{styles.bigButton}}" page="{{nextButton.value}}">
+        <button class="{{buttonStyles.button}} {{buttonStyles.neutralColor}} {{styles.button}} {{styles.bigButton}}" page="{{nextButton.value}}">
             <span class="{{styles.buttonText}}">Дальше</span>
         </button>
     </div>

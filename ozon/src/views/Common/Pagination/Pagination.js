@@ -1,6 +1,7 @@
 import {Button} from '../Button/Button.js';
 import paginationTemplate from './Pagination.hbs';
 import styles from './Pagination.css';
+import buttonStyles from '../Button/Button.css';
 
 /**
  * @class Pagination
@@ -42,7 +43,7 @@ export class Pagination {
                 shortagePages = this.currentPage + this.maxButtons / 2 + surplusPages - i;
                 break;
             }
-            const buttonName = i === this.currentPage ? styles.currentPage : styles.commonPage;
+            const buttonName = i === this.currentPage ? buttonStyles.mainColor : buttonStyles.transparent;
             buttons.push(new Button({
                 name: buttonName,
                 value: i,
@@ -62,7 +63,7 @@ export class Pagination {
                 break;
             }
             shortageButtons.push(new Button({
-                name: styles.commonPage,
+                name: buttonStyles.transparent,
                 value: i,
             }));
         }
@@ -84,6 +85,7 @@ export class Pagination {
             buttons: resultButtons,
             nextButton: nextButton,
             styles: styles,
+            buttonStyles: buttonStyles,
         });
     }
 }
