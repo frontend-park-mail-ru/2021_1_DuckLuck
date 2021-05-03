@@ -1,5 +1,15 @@
 @import "../../../constants.css";
 
+.button {
+    border: none;
+    cursor: pointer;
+    outline: none;
+}
+
+.transparent {
+    background-color: inherit;
+}
+
 .catalog {
     min-height: 40px;
     min-width: 120px;

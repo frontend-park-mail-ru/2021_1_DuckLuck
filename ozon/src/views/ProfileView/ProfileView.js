@@ -3,6 +3,7 @@ import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
 import profileStyles from './ProfileView.css';
 import Events from '../../utils/bus/events';
+import buttons from '../Common/Button/Button.css';
 
 /**
  * @class  ProfileView
@@ -39,6 +40,7 @@ export class ProfileView extends BaseView {
                 placeholder: 'Адрес электронной почты', isDisabled: true}),
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),
             profileStyles: profileStyles,
+            buttons: buttons,
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
