@@ -24,6 +24,7 @@ const Events = {
     ProfileTransmitData: 'profile-transmit-user-data',
 
     ProductsLoad: 'products-load',
+    ProductsLoadSearch: 'products-load-search',
     ProductsLoaded: 'products-loaded',
     ProductsChangeCategory: 'products-change-category',
     ProductsItemAdded: 'products-item-added',
@@ -38,6 +39,7 @@ const Events = {
     HeaderChangeCatalogID: 'header-change-catalog-id',
     HeaderChangeCategoryID: 'header-change-category-id',
     HeaderChangeCartItems: 'header-change-cart-items',
+    HeaderSetCartItems: 'header-set-cart-items',
 
     CartAddProduct: 'cart-add-product',
     CartProductChange: 'cart-update-product',
@@ -53,6 +55,7 @@ const Events = {
     CartLoadedProductsID: 'cart-loaded-products-ids',
     CartLoadedProductID: 'cart-loaded-product-id',
     CartAddLastProduct: 'cart-add-last-product',
+    CartDrop: 'cart-drop',
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',

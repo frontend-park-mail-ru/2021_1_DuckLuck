@@ -13,7 +13,10 @@ import Router from '../../utils/router/Router';
  * @classdesc Class for showing product
  */
 export class CartView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = {}) => {
         this.bus.emit(Events.CartLoad);
     }
 

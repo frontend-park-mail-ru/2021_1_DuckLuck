@@ -160,7 +160,8 @@ class ProfilePresenter extends BasePresenter {
         }
         this.view.remove();
         Router.open('/', {replaceState: true});
-        Bus.globalBus.emit(Events.HeaderChangeCartItems, 0);
+        Bus.globalBus.emit(Events.HeaderSetCartItems, 0);
+        Bus.globalBus.emit(Events.CartDrop);
         this.model.profileLogout();
     }
 
@@ -255,6 +256,7 @@ class ProfilePresenter extends BasePresenter {
      */
     renderAllData = (status) => {
         if (status === Responses.Success) {
+            Bus.globalBus.emit(Events.CartLoadProductsAmount);
             this.view.renderData();
             return;
         }

@@ -15,15 +15,25 @@ import Events from '../../utils/bus/events';
  * @classdesc Class for showing product
  */
 export class ProductsView extends BaseView {
-    show = () => {
+    static #types = {
+        search: 'search',
+        category: 'category',
+    }
+
+    #viewType
+
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = {}) => {
         if (!this.IDs) {
             this.IDs = {};
         }
-        if (!this.IDs['category']) {
-            this.IDs['category'] = 1;
-        }
         if (!this.IDs['page']) {
             this.IDs['page'] = 1;
+        }
+        if (!this.IDs['category']) {
+            this.IDs['category'] = 1;
         }
         if (!this.presenter.sortKey) {
             this.presenter.changeSortKey('cost');
@@ -31,13 +41,26 @@ export class ProductsView extends BaseView {
         if (!this.presenter.sortDirection) {
             this.presenter.changeSortDirection('ASC');
         }
-        this.bus.emit(
-            Events.ProductsLoad,
-            this.IDs['category'],
-            this.IDs['page'],
-            this.presenter.sortKey,
-            this.presenter.sortDirection,
-        );
+        if (URLParams && URLParams.text) {
+            this.#viewType = ProductsView.#types.search;
+            this.IDs['searchText'] = URLParams.text;
+            this.bus.emit(
+                Events.ProductsLoadSearch,
+                URLParams.text,
+                this.IDs['page'],
+                this.presenter.sortKey,
+                this.presenter.sortDirection,
+            );
+        } else {
+            this.#viewType = ProductsView.#types.category;
+            this.bus.emit(
+                Events.ProductsLoad,
+                this.IDs['category'],
+                this.IDs['page'],
+                this.presenter.sortKey,
+                this.presenter.sortDirection,
+            );
+        }
     }
 
     render = () => {
@@ -90,15 +113,28 @@ export class ProductsView extends BaseView {
             const sortDirection = selected.getAttribute('direction');
             this.presenter.changeSortKey(sortKey);
             this.presenter.changeSortDirection(sortDirection);
-            Router.open(`/items/${this.IDs['category']}`);
+            switch (this.#viewType) {
+            case ProductsView.#types.category:
+                Router.open(`/items/${this.IDs['category']}`);
+                break;
+            case ProductsView.#types.search:
+                Router.open('/search/1/', {}, {text: this.IDs['searchText']});
+                break;
+            }
         });
-
 
         for (const button of this.cache.getElementsByClassName(paginatorStyles.button)) {
             button.addEventListener('click', () => {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
-                Router.open(`/items/${this.IDs['category']}/${page}`, {id: page});
+                switch (this.#viewType) {
+                case ProductsView.#types.category:
+                    Router.open(`/items/${this.IDs['category']}/${page}`);
+                    break;
+                case ProductsView.#types.search:
+                    Router.open(`/search/${page}/`, {}, {text: this.IDs['searchText']});
+                    break;
+                }
             });
         }
 

@@ -16,7 +16,10 @@ import Router from '../../utils/router/Router';
  * @classdesc Class for Product page
  */
 export class ProductView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = {}) => {
         if (!this.IDs) {
             this.IDs = {};
         }

@@ -16,6 +16,7 @@ class ProductsPresenter extends BasePresenter {
     constructor(application, View, Model) {
         super(application, View, Model);
         this.bus.on(Events.ProductsLoad, this.loadProducts);
+        this.bus.on(Events.ProductsLoadSearch, this.loadSearchProducts);
         this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
         Bus.globalBus.on(Events.ProductsChangeCategory, this.changeCategory);
         Bus.globalBus.on(Events.ProductsItemAdded, this.setProductAdded);
@@ -93,6 +94,16 @@ class ProductsPresenter extends BasePresenter {
      */
     loadProducts = (category, page, sortKey, sortDirection) => {
         this.model.loadProducts(category, page, sortKey, sortDirection);
+    }
+
+    /**
+     * @param {string} searchData
+     * @param {number} page
+     * @param {String} sortKey
+     * @param {String} sortDirection
+     */
+    loadSearchProducts = (searchData, page, sortKey, sortDirection) => {
+        this.model.loadProductsSearch(searchData, page, sortKey, sortDirection);
     }
 
     /**
