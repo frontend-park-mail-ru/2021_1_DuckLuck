@@ -41,9 +41,9 @@
                                         </div>
                                     </div>
                                     <div class="{{../cartStyles.countMenu}}">
-                                        <button class="{{../cartStyles.incButton}}" title={{this.id}}>-</button>
+                                        <button class="{{../buttons.button}} {{../buttons.transparent}} {{../cartStyles.incButton}}" title={{this.id}}>-</button>
                                         <span class="count" title={{this.id}}>{{this.count}}</span>
-                                        <button class="{{../cartStyles.decButton}}" title={{this.id}}>+</button>
+                                        <button class="{{../buttons.button}} {{../buttons.transparent}} {{../cartStyles.decButton}}" title={{this.id}}>+</button>
                                     </div>
                                 </div>
                             {{/each}}
@@ -52,7 +52,7 @@
                 </div>
                 <div class="{{cartStyles.orderMenu}}">
                     <div class="{{cartStyles.orderButtonWrapper}}">
-                        <button class="{{cartStyles.orderButton}}">
+                        <button class="{{buttons.button}} {{buttons.orderColor}} {{cartStyles.orderButton}}">
                             <span class="{{cartStyles.orderSubmit}}">Перейти к оформлению</span>
                         </button>
                     </div>

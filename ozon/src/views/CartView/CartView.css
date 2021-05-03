@@ -153,14 +153,6 @@
     font-family: var(--font);
     font-size: var(--font-size-m);
     color: var(--colored-object-color);
-    border: none;
-    background-color: inherit;
-    cursor: pointer;
-}
-
-.incButton:hover, .decButton:hover {
-    background: var(--neutral-background-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .orderMenu {
@@ -176,19 +168,9 @@
     margin: auto;
     width: 407px;
     height: 56px;
-    border-radius: var(--standart-border-radius);
-    border: none;
-    background: var(--order-color);
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
-    cursor: pointer;
-    outline: none;
-}
-
-.orderButton:hover {
-    background: var(--dark-order-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .orderSubmit {

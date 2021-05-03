@@ -13,6 +13,10 @@
     background-color: inherit;
 }
 
+.transparent:hover {
+    background: var(--neutral-background-color);
+}
+
 .mainColor {
     background: var(--colored-object-color);
 }

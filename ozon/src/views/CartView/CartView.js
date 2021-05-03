@@ -6,6 +6,7 @@ import Events from '../../utils/bus/events';
 import cartStyles from './CartView.css';
 import decorators from '../decorators.css';
 import Router from '../../utils/router/Router';
+import buttons from '../Common/Button/Button.css';
 
 /**
  * @class ProductsView
@@ -33,6 +34,7 @@ export class CartView extends BaseView {
                 discount: price.total_discount,
                 totalCost: price.total_cost,
                 decorators: decorators,
+                buttons: buttons,
             });
         } else {
             template = emptyCartPageTemplate({
