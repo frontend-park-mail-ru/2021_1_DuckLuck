@@ -4,10 +4,29 @@
     border: none;
     cursor: pointer;
     outline: none;
+    border-radius: var(--standart-border-radius);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+    margin: auto;
 }
 
 .transparent {
     background-color: inherit;
+}
+
+.mainColor {
+    background: var(--colored-object-color);
+}
+
+.mainColor:hover {
+    background: var(--dark-colored-object-color);
+}
+
+.orderColor {
+    background: var(--order-color);
+}
+
+.orderColor:hover {
+    background: var(--dark-order-color);
 }
 
 .catalog {

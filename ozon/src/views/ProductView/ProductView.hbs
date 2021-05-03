@@ -50,7 +50,7 @@
                 <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
             </div>
             <div class="{{productStyles.buttons}}">
-                <button class="{{productStyles.notInCartButton}}">
+                <button class="{{buttons.button}} {{buttons.mainColor}} {{productStyles.notInCartButton}}">
                     <span class="{{productStyles.buttonText}}">В корзину</span>
                 </button>
             </div>

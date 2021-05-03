@@ -157,33 +157,11 @@
 .inCartButton {
     height: var(--height-s);
     width: var(--width-m);
-    background: var(--order-color);
-    border-radius: var(--standart-border-radius);
-    border: none;
-    margin: auto;
-    cursor: pointer;
-    outline: none;
-}
-
-.inCartButton:hover {
-    background: var(--dark-order-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .notInCartButton {
     height: var(--height-s);
     width: var(--width-m);
-    background: var(--colored-object-color);
-    border-radius: var(--standart-border-radius);
-    border: none;
-    margin: auto;
-    cursor: pointer;
-    outline: none;
-}
-
-.notInCartButton:hover {
-    background: var(--dark-colored-object-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 .buttonText {

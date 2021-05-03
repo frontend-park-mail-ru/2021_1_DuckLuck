@@ -7,6 +7,7 @@ import productStyles from './ProductView.css';
 import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
 import imagesStyles from './../Common/Img/Img.css';
+import buttons from '../Common/Button/Button.css';
 
 
 /**
@@ -51,6 +52,7 @@ export class ProductView extends BaseView {
             productStyles: productStyles,
             imagesStyles: imagesStyles,
             decorators: decorators,
+            buttons: buttons,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html')
             .getElementsByClassName(productStyles.block)[0];
@@ -63,15 +65,16 @@ export class ProductView extends BaseView {
             });
         });
 
-        let button = document.getElementsByClassName(productStyles.notInCartButton)[0];
+        let button = document.getElementsByClassName(buttons.mainColor)[0];
         if (!button) {
-            button = document.getElementsByClassName(productStyles.inCartButton)[0];
+            button = document.getElementsByClassName(buttons.orderColor)[0];
         }
 
         button.addEventListener('click', (evt) => {
             evt.preventDefault();
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
-            button.className = productStyles.inCartButton;
+            button.classList.remove(buttons.mainColor);
+            button.classList.add(buttons.orderColor);
             button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
         });
 
@@ -79,11 +82,12 @@ export class ProductView extends BaseView {
     }
 
     setButtonInCart = () => {
-        const button = document.getElementsByClassName(productStyles.notInCartButton)[0];
+        const button = document.getElementsByClassName(buttons.mainColor)[0];
         if (!button) {
             return;
         }
-        button.className = productStyles.inCartButton;
+        button.classList.remove(buttons.mainColor);
+        button.classList.add(buttons.orderColor);
         button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
     }
 }
