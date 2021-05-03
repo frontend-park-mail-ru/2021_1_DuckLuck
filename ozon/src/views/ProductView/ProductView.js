@@ -56,7 +56,7 @@ export class ProductView extends BaseView {
             .getElementsByClassName(productStyles.block)[0];
         this.parent.appendChild(this.cache);
 
-        const mainImage = this.cache.getElementsByClassName(imagesStyles.imgXXL)[0];
+        const mainImage = this.cache.getElementsByClassName(productStyles.preview)[0];
         Array.from(this.cache.getElementsByClassName(imagesStyles.imgXL)).forEach((image) => {
             image.addEventListener('click', () => {
                 mainImage.setAttribute('src', image.getAttribute('src'));
