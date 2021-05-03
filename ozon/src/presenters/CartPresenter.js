@@ -107,11 +107,12 @@ class CartPresenter extends BasePresenter {
     }
 
     /**
-     * @param {Responses} result
+     * @param {string} result
+     * @param {number} id
      */
-    productRemovedReaction = (result) => {
+    productRemovedReaction = (result, id = undefined) => {
         if (result === Responses.Success) {
-            this.view.show();
+            this.view.removeProduct(id);
             return;
         }
         console.error(result);

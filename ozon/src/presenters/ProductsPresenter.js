@@ -19,6 +19,7 @@ class ProductsPresenter extends BasePresenter {
         this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
         Bus.globalBus.on(Events.ProductsChangeCategory, this.changeCategory);
         Bus.globalBus.on(Events.ProductsItemAdded, this.setProductAdded);
+        Bus.globalBus.on(Events.ProductsItemNotAdded, this.setProductNotAdded);
         Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
         Bus.globalBus.on(Events.CartLoadedProductsID, this.productsCartGotIds);
     }
@@ -140,6 +141,13 @@ class ProductsPresenter extends BasePresenter {
      */
     setProductAdded = (itemID) => {
         this.view.setProductAdded(itemID);
+    }
+
+    /**
+     * @param {number} itemID
+     */
+    setProductNotAdded = (itemID) => {
+        this.view.setProductNotAdded(itemID);
     }
 }
 
