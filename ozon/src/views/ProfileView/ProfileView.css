@@ -2,15 +2,13 @@
 
 
 .block {
-    max-width: var(--max-width);
     padding: var(--padding-xs) var(--padding-l);
-    margin: 0 auto;
-    width: 100%;
+    width: 76.66%;
     box-sizing: border-box;
     font-family: var(--font);
     display: flex;
     gap: var(--margin-xxxl);
-    margin-top: var(--margin-l);
+    margin: var(--margin-l) auto 0;
 }
 
 .avatarWrapper {
@@ -34,7 +32,7 @@
 .informationBlock {
     display: flex;
     flex-direction: row;
-    width: 840px;
+    width: 57%;
     height: 310px;
     gap: var(--margin-s)
 }
@@ -114,4 +112,22 @@
 .changeText:hover {
     filter: brightness(50%);
     transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.label {
+    display: flex;
+}
+
+@media screen and (max-width: 600px) {
+    .block {
+        flex-direction: column;
+    }
+
+    .avatarWrapper {
+        margin: auto;
+    }
+
+    .exit {
+        margin: auto;
+    }
 }
