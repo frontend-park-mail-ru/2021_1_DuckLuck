@@ -97,9 +97,6 @@ export class ProfileView extends BaseView {
      * @description Using for render data after AJAX methods.
      */
     renderData = () => {
-        if (!this.cache) {
-            return;
-        }
         this.changeFirstLastName(this.presenter.getFirstName(), this.presenter.getLastName());
         this.changeEmail(this.presenter.getEmail());
         this.changeAvatar(this.presenter.getAvatar());
