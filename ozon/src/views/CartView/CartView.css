@@ -198,7 +198,6 @@
 
 .orderButtonWrapper {
     display: flex;
-    width: 455px;
     height: 152px;
     border-bottom: solid 1px;
     width: 100%;
@@ -207,7 +206,6 @@
 .orderInfo {
     display: flex;
     flex-direction: column;
-    width: 455px;
     width: 100%;
 }
 
