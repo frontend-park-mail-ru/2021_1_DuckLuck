@@ -87,6 +87,7 @@ class HeaderPresenter extends BasePresenter {
         if (result === Responses.Success) {
             this.model.swapAuthorizeState();
             this.view.changeLoginIcon(this.model.currentAuthorizeState);
+            Bus.globalBus.emit(Events.ProfileAllGetGlobal);
         } else {
             console.error('Cant load header');
         }

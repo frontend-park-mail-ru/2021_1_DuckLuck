@@ -16,8 +16,6 @@ class ProfilePresenter extends BasePresenter {
      */
     constructor(application, View, Model) {
         super(application, View, Model);
-        this.model.getProfileData(true);
-
         this.bus.on(Events.ProfileFLNameChange, this.sendFirstLastName);
         this.bus.on(Events.ProfileFLNameResult, this.firstLastNameSendProcessResult);
         this.bus.on(Events.ProfileAvatarChange, this.sendAvatar);
@@ -30,6 +28,7 @@ class ProfilePresenter extends BasePresenter {
 
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
         Bus.globalBus.on(Events.ProfileTransmitData, this.returnUserData);
+        Bus.globalBus.on(Events.ProfileAllGetGlobal, this.getAllData);
     }
 
     /**
