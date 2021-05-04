@@ -1,5 +1,5 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
-import {serverApiPath, staticServerHost, urls} from '../utils/urls/urls';
+import {serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
@@ -151,43 +151,16 @@ class ReviewModel extends BaseModel {
     /**
      * @description Loads all information about review via AJAX
      */
-    loadReview = () => {
+    loadReviewRights = () => {
         AjaxModule.getUsingFetch({
-            url: serverApiPath + '/review/rights/product/' + this.product.id,
+            url: serverApiPath + urls.reviewRights + this.product.id,
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
-            AjaxModule.getUsingFetch({
-                url: serverApiPath + urls.profileUrl,
-                body: null,
-            }).then((response) => {
-                if (response.status !== HTTPResponses.Success) {
-                    throw response.status;
-                }
-                return response.json();
-            }).then((response) => {
-                this.userName = `${response.first_name} ${response.last_name[0]}.`;
-                AjaxModule.getUsingFetch({
-                    url: `${serverApiPath}${urls.productUrl}/${this.product.id}`,
-                }).then((response) => {
-                    if (response.status !== HTTPResponses.Success) {
-                        throw response.status;
-                    }
-                    return response.json();
-                }).then((response) => {
-                    this.product = {
-                        id: response.id,
-                        category: response.category,
-                        image: `${staticServerHost}${response.images[0]}`,
-                        title: response.title,
-                        href: `/item/${this.product.id}`,
-                    };
-                    this.bus.emit(Events.ReviewLoaded, Responses.Success);
-                });
-            });
+            this.bus.emit(Events.ReviewRightsLoaded, Responses.Success);
         }).catch(() => {
-            this.bus.emit(Events.ReviewLoaded, Responses.Error);
+            this.bus.emit(Events.ReviewRightsLoaded, Responses.Error);
         });
     }
 

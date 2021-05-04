@@ -124,9 +124,13 @@ class ProfileModel extends BaseModel {
             }
             return response.json();
         }).then((response) => {
+            window.localStorage.setItem('firstName', response.first_name);
             this.#fLNameModel.firstName = response.first_name;
+            window.localStorage.setItem('lastName', response.last_name);
             this.#fLNameModel.lastName = response.last_name;
+            window.localStorage.setItem('avatarURL', response.avatar.url);
             this.#avatarModel.avatarURL = response.avatar.url;
+            window.localStorage.setItem('email', response.email);
             this.#emailModel.email = response.email;
             this.bus.emit(Events.ProfileAllResult, Responses.Success);
         }).catch((result) => {
