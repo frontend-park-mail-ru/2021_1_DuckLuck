@@ -59,7 +59,7 @@ export class CartView extends BaseView {
 
             elemList.getElementsByClassName(cartStyles.incButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
-                const count = +elemList.getElementsByClassName('count')[0].textContent;
+                const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
                     count: count - 1,
@@ -71,7 +71,7 @@ export class CartView extends BaseView {
 
             elemList.getElementsByClassName(cartStyles.decButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
-                const count = +elemList.getElementsByClassName('count')[0].textContent;
+                const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
                     count: count + 1,
@@ -121,7 +121,7 @@ export class CartView extends BaseView {
         const item = Array.from(document.getElementsByClassName(cartStyles.productsListElem)).find((elem) => {
             return +elem.getAttribute('product_id') === changedID;
         });
-        const counter = item.getElementsByClassName('count')[0];
+        const counter = item.getElementsByClassName(cartStyles.count)[0];
         counter.textContent = (+counter.textContent + diff).toString();
         if (!+counter.textContent) {
             item.remove();
