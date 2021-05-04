@@ -45,15 +45,10 @@
             <div class="{{productStyles.aboutProduct}}"></div>
             <div class="{{productStyles.buyMenu}}">
                 <div class="{{productStyles.priceBlock}}">
-<<<<<<< HEAD
-                    <span class="{{productStyles.discountPrice}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
-                    <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
-=======
                     <div class="{{productStyles.priceWrapper}}">
                         <span class="{{productStyles.discountPrice}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
                         <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
                     </div>
->>>>>>> develop
                 </div>
                 <div class="{{productStyles.buttons}}">
                     <button class="{{productStyles.notInCartButton}}">
