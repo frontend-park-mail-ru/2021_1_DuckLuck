@@ -195,16 +195,11 @@ class ReviewPresenter extends BasePresenter {
      * @param {string} result
      */
     getProductReviewsReaction = (result) => {
-        switch (result) {
-        case Responses.Success: {
+        if (result === Responses.Success) {
             Bus.globalBus.emit(Events.RenderProductReviews, this.model.reviews, this.model.paginationInfo);
-            break;
+            return;
         }
-        default: {
-            console.error(result);
-            break;
-        }
-        }
+        console.error(result);
     }
 }
 

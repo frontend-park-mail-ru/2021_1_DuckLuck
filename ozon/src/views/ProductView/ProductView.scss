@@ -218,6 +218,25 @@
     height: 100%;
 }
 
+.reviewListText {
+    margin-top: 25px;
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+}
+
+.reviewList {
+    font-size: var(--font-size-s);
+}
+
+.reviewBlock {
+    margin-top: 20px;
+}
+
+.reviewButton {
+    background: var(--colored-object-color);
+    color: var(--light-color);
+}
+
 @media screen and (max-width: $max-width-xl) {
     .block {
         width: 100%;

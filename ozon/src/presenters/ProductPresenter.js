@@ -9,9 +9,6 @@ import {staticServerHost} from '../utils/urls/urls';
  * @description Presenter for Products View and Model
  */
 class ProductsPresenter extends BasePresenter {
-    #sortKey;
-    #sortDirection;
-
     /**
      * @param {HTMLElement} application html of application
      * @param {Class} View Class of view object
@@ -41,14 +38,14 @@ class ProductsPresenter extends BasePresenter {
      * @return {string}
      */
     get sortKey() {
-        return this.#sortKey;
+        return this.model.sortKey;
     }
 
     /**
      * @return {string}
      */
     get sortDirection() {
-        return this.#sortDirection;
+        return this.model.sortDirection;
     }
 
     /**
@@ -71,14 +68,14 @@ class ProductsPresenter extends BasePresenter {
      * @param {String} sortKey
      */
     set sortKey(sortKey) {
-        this.#sortKey = sortKey;
+        this.model.sortKey = sortKey;
     }
 
     /**
      * @param {String} sortDirection
      */
     set sortDirection(sortDirection) {
-        this.#sortDirection = sortDirection;
+        this.model.sortDirection = sortDirection;
     }
 
     /**

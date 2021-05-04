@@ -210,7 +210,7 @@ class ReviewModel extends BaseModel {
         sort_direction: sortDirection,
     }) => {
         AjaxModule.postUsingFetch({
-            url: serverApiPath + urls.productReviews + '/' + productID,
+            url: serverApiPath + urls.review + '/' + productID,
             body: body,
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
@@ -224,7 +224,7 @@ class ReviewModel extends BaseModel {
                 currentPage: page,
             };
             Bus.globalBus.emit(Events.GetProductReviewsReaction, Responses.Success);
-        }).catch((err) => {
+        }).catch(() => {
             Bus.globalBus.emit(Events.GetProductReviewsReaction, Responses.Error);
         });
     }
