@@ -73,3 +73,13 @@
   filter: brightness(50%);
   transition: .2s cubic-bezier(.4,0,.2,1);
 }
+
+@media screen and (max-width: $max-width-xl) {
+  .menu {
+    position: unset;
+    width: 100%;
+    max-width: none;
+    margin: auto;
+  }
+
+}
