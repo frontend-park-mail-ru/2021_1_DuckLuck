@@ -29,3 +29,11 @@
     width: 226px;
     height: var(--height-xxxs);
 }
+
+.emptyText {
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+    margin: auto;
+    width: 50%;
+}

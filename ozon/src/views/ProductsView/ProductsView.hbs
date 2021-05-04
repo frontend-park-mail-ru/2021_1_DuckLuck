@@ -17,7 +17,14 @@
         </form>
         <div class="{{productsStyles.listWrapper}}">{{{productsList}}}</div>
     </div>
-    <div class="{{productsStyles.footer}}">
-        {{{pagination}}}
-    </div>
+
+    {{#ifEquals this.isEmpty true}}
+        <div class="{{productsStyles.emptyText}}">Не найдено ни одного товара</div>
+    {{/ifEquals}}
+
+    {{#ifEquals this.isEmpty false}}
+        <div class="{{productsStyles.footer}}">
+            {{{pagination}}}
+        </div>
+    {{/ifEquals}}
 </div>

@@ -41,6 +41,9 @@ export class ProductsView extends BaseView {
         if (!this.presenter.sortDirection) {
             this.presenter.changeSortDirection('ASC');
         }
+
+        this.presenter.dropFilter();
+        this.dropFilter();
         if (URLParams && URLParams.text) {
             this.#viewType = ProductsView.#types.search;
             this.IDs['searchText'] = URLParams.text;
@@ -68,6 +71,7 @@ export class ProductsView extends BaseView {
         const productsListHtmlString = new ListOfProducts(this.presenter.products).getHtmlString();
         const pagination = new Pagination(this.presenter.paginationInfo).getHtmlString();
         const template = productsPageTemplate({
+            isEmpty: this.presenter.products.length === 0,
             productsList: productsListHtmlString,
             pagination: pagination,
             select: [
@@ -160,7 +164,8 @@ export class ProductsView extends BaseView {
         this.parent.appendChild(this.cache);
         Bus.globalBus.emit(Events.CartGetProductsID);
 
-        document.getElementById('filtration_form').addEventListener('submit', () => {
+        document.getElementById('filtration_form').addEventListener('submit', (event) => {
+            event.preventDefault();
             this.IDs['page'] = 1;
             switch (this.#viewType) {
             case ProductsView.#types.category:
@@ -183,6 +188,8 @@ export class ProductsView extends BaseView {
                 break;
             }
         });
+
+        this.drawFilter();
     };
 
 
@@ -254,5 +261,23 @@ export class ProductsView extends BaseView {
     setButtonNotAddedStyle = (button) => {
         button.className = ListOfProductsItemStyles.notInCartButton;
         button.getElementsByTagName('span')[0].innerHTML = 'В корзину';
+    }
+
+    drawFilter = () => {
+        const filter = this.presenter.filter;
+        document.getElementById('min_price').value = filter.min_price;
+        document.getElementById('max_price').value = filter.max_price != 9999999 ? filter.max_price: '';
+        document.getElementById('is_new').checked = filter.is_new;
+        document.getElementById('is_rating').checked = filter.is_rating;
+        document.getElementById('is_discount').checked = filter.is_discount;
+    }
+
+    dropFilter = () => {
+        const form = document.getElementById('filtration_form');
+        if (!form) {
+            return;
+        }
+
+        form.remove();
     }
 }

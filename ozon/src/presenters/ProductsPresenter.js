@@ -63,6 +63,18 @@ class ProductsPresenter extends BasePresenter {
         return this.model.sortDirection;
     }
 
+
+    /**
+     * @return {Object}
+     */
+    get filter() {
+        return this.model.filter;
+    }
+
+    dropFilter = () => {
+        this.model.filter = undefined;
+    }
+
     /**
      *
      * @param {Number} id
@@ -119,7 +131,7 @@ class ProductsPresenter extends BasePresenter {
         const maxPrice = document.getElementById('max_price').value;
         this.model.filter = {
             min_price: minPrice === '' ? 0 : parseInt(minPrice),
-            max_price: maxPrice === '' ? 1e6 : parseInt(maxPrice),
+            max_price: maxPrice === '' ? 9999999 : parseInt(maxPrice),
             is_new: document.getElementById('is_new').checked,
             is_rating: document.getElementById('is_rating').checked,
             is_discount: document.getElementById('is_discount').checked,

@@ -113,10 +113,9 @@ class ProductsModel extends BaseModel {
         sort_direction: sortDirection,
         category: +category,
     }) {
-        if (this.filter) {
+        if (this.filter !== undefined) {
             body['filter'] = this.filter;
         }
-
         AjaxModule.postUsingFetch({
             url: serverApiPath + '/product',
             body: body,
