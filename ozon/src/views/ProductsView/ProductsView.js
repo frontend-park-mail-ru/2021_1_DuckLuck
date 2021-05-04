@@ -167,7 +167,7 @@ export class ProductsView extends BaseView {
     setAddedProducts = (productsInCart) => {
         for (const item of document.getElementsByClassName(ListOfProductsItemStyles.block)) {
             if (productsInCart.has(+item.getAttribute('item-id'))) {
-                this.setButtonAddedStyle(item.getElementsByTagName('button')[0]);
+                this.setButtonAdded(item);
             }
         }
     }
@@ -180,7 +180,38 @@ export class ProductsView extends BaseView {
             return +item.getAttribute('item-id') === productID;
         })[0];
         if (item) {
-            this.setButtonAddedStyle(item.getElementsByTagName('button')[0]);
+            this.setButtonAdded(item);
+        }
+    }
+
+    /**
+     * @param {HTMLElement} element
+     */
+    setButtonAdded = (element) => {
+        const newElement = element.cloneNode(true);
+        element.replaceWith(newElement);
+        this.setButtonAddedStyle(newElement.getElementsByTagName('button')[0]);
+        newElement.addEventListener('click', () => {
+            Bus.globalBus.emit(Events.CartRemoveProduct, newElement.getAttribute('item-id'));
+        });
+    }
+
+    /**
+     * @param {number} productID
+     */
+    setProductNotAdded = (productID) => {
+        const item = Array.from(document.getElementsByClassName(ListOfProductsItemStyles.block)).filter((item) => {
+            return +item.getAttribute('item-id') === +productID;
+        })[0];
+        if (item) {
+            const newItem = item.cloneNode(true);
+            item.replaceWith(newItem);
+            this.setButtonNotAddedStyle(newItem.getElementsByTagName('button')[0]);
+            newItem.addEventListener('click', () => {
+                const id = newItem.getAttribute('item-id');
+                Bus.globalBus.emit(Events.CartAddProduct, +newItem.getAttribute('item-id'), 1);
+                this.setProductAdded(id);
+            });
         }
     }
 
@@ -189,6 +220,14 @@ export class ProductsView extends BaseView {
      */
     setButtonAddedStyle = (button) => {
         button.className = ListOfProductsItemStyles.inCartButton;
-        button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
+        button.getElementsByTagName('span')[0].innerHTML = 'В корзине';
+    }
+
+    /**
+     * @param {HTMLElement} button
+     */
+    setButtonNotAddedStyle = (button) => {
+        button.className = ListOfProductsItemStyles.notInCartButton;
+        button.getElementsByTagName('span')[0].innerHTML = 'В корзину';
     }
 }

@@ -137,4 +137,16 @@ export class CartView extends BaseView {
             (parseInt(item.getElementsByClassName(cartStyles.oldPrice)[0].innerHTML) -
              parseInt(item.getElementsByClassName(cartStyles.endPrice)[0].innerHTML)).toString() + '₽';
     }
+
+    /**
+     * @param {number | string}id
+     */
+    removeProduct = (id) => {
+        const item = Array.from(document.getElementsByClassName(cartStyles.productsListElem)).filter((item) => {
+            return +item.getAttribute('product_id') === +id;
+        })[0];
+        if (item) {
+            item.remove();
+        }
+    }
 }
