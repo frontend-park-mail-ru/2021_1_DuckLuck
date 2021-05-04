@@ -1,4 +1,4 @@
-@import '../../constants.css';
+@import '../../constants.scss';
 
 .block {
     display: flex;
@@ -213,7 +213,7 @@
     height: 100%;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: $max-width-xl) {
     .block {
         width: 100%;
     }
@@ -236,7 +236,7 @@
     }
 }
 
-@media screen and (max-width: 720px) {
+@media screen and (max-width: $max-width-m) {
     .imagesBlock {
         flex-direction: column;
     }
@@ -251,7 +251,7 @@
     }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: $max-width-xs) {
     .preview {
         height: 50%;
     }

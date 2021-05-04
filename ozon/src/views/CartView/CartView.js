@@ -3,7 +3,7 @@ import cartPageTemplate from './CartView.hbs';
 import emptyCartPageTemplate from './CartViewEmpty.hbs';
 import {Bus} from '../../utils/bus/bus';
 import Events from '../../utils/bus/events';
-import cartStyles from './CartView.css';
+import cartStyles from './CartView.scss';
 import decorators from '../decorators.css';
 import Router from '../../utils/router/Router';
 

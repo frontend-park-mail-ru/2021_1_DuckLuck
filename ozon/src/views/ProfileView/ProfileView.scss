@@ -118,7 +118,7 @@
     display: flex;
 }
 
-@media screen and (max-width: var(--max-width-s)) {
+@media screen and (max-width: $max-width-s) {
     .block {
         flex-direction: column;
         padding-bottom: 120px;

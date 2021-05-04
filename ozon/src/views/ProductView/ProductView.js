@@ -3,7 +3,7 @@ import {Img} from '../Common/Img/Img.js';
 import productPageTemplate from './ProductView.hbs';
 import {fileServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
-import productStyles from './ProductView.css';
+import productStyles from './ProductView.scss';
 import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
 import imagesStyles from './../Common/Img/Img.css';

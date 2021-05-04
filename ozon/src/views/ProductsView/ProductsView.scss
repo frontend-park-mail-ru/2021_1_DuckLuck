@@ -1,4 +1,4 @@
-@import '../../constants.css';
+@import '../../constants.scss';
 
 .block {
     width: 76.66%;
@@ -33,7 +33,7 @@
     margin: auto;
 }
 
-@media screen and (max-width: 1085px) {
+@media screen and (max-width: $max-width-xl) {
     .block {
         width: 100%;
     }

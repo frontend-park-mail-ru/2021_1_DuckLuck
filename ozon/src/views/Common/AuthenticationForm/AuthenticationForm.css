@@ -1,6 +1,6 @@
 @import '../Blind/Blind.css';
 @import '../Popup/Popup.css';
-@import '../../../constants.css';
+@import '../../../constants.scss';
 
 .form-header {
     display: flex;

@@ -1,4 +1,4 @@
-@import "../../../constants.css";
+@import "../../../constants.scss";
 
 .button {
     background: rgba(51, 160, 255, 1);
