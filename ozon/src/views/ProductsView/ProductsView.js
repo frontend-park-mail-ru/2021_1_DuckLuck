@@ -42,8 +42,11 @@ export class ProductsView extends BaseView {
             this.presenter.changeSortDirection('ASC');
         }
 
-        this.presenter.dropFilter();
-        this.dropFilter();
+        if (this.IDs['dropFilter']) {
+            this.presenter.dropFilter();
+            this.dropFilter();
+        }
+
         if (URLParams && URLParams.text) {
             this.#viewType = ProductsView.#types.search;
             this.IDs['searchText'] = URLParams.text;
@@ -117,14 +120,9 @@ export class ProductsView extends BaseView {
             const sortDirection = selected.getAttribute('direction');
             this.presenter.changeSortKey(sortKey);
             this.presenter.changeSortDirection(sortDirection);
-            switch (this.#viewType) {
-            case ProductsView.#types.category:
-                Router.open(`/items/${this.IDs['category']}`);
-                break;
-            case ProductsView.#types.search:
+            this.#viewType === ProductsView.#types.category ?
+                Router.open(`/items/${this.IDs['category']}`) :
                 Router.open('/search/1/', {}, {text: this.IDs['searchText']});
-                break;
-            }
         });
 
         for (const button of this.cache.getElementsByClassName(paginatorStyles.button)) {
@@ -136,7 +134,7 @@ export class ProductsView extends BaseView {
                     Router.open(`/items/${this.IDs['category']}/${page}`);
                     break;
                 case ProductsView.#types.search:
-                    Router.open(`/search/${page}/`, {}, {text: this.IDs['searchText']});
+                    Router.open(`/search/${page}/`, {text: this.IDs['searchText']});
                     break;
                 }
             });
@@ -187,6 +185,13 @@ export class ProductsView extends BaseView {
                 );
                 break;
             }
+        });
+
+        document.getElementById('drop-filters').addEventListener('click', (event) => {
+            event.preventDefault();
+            this.presenter.dropFilter();
+            this.dropFilter();
+            this.show();
         });
 
         this.drawFilter();
@@ -265,8 +270,8 @@ export class ProductsView extends BaseView {
 
     drawFilter = () => {
         const filter = this.presenter.filter;
-        document.getElementById('min_price').value = filter.min_price;
-        document.getElementById('max_price').value = filter.max_price != 9999999 ? filter.max_price: '';
+        document.getElementById('min_price').value = filter.min_price !== undefined ? filter.min_price : '';
+        document.getElementById('max_price').value = filter.max_price !== undefined ? filter.max_price : '';
         document.getElementById('is_new').checked = filter.is_new;
         document.getElementById('is_rating').checked = filter.is_rating;
         document.getElementById('is_discount').checked = filter.is_discount;

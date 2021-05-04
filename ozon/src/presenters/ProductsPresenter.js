@@ -123,15 +123,14 @@ class ProductsPresenter extends BasePresenter {
 
     parseFiltration = () => {
         if (!document.getElementById('min_price')) {
-            this.model.filter = undefined;
             return;
         }
 
         const minPrice = document.getElementById('min_price').value;
         const maxPrice = document.getElementById('max_price').value;
         this.model.filter = {
-            min_price: minPrice === '' ? 0 : parseInt(minPrice),
-            max_price: maxPrice === '' ? 9999999 : parseInt(maxPrice),
+            min_price: minPrice === '' ? undefined : parseInt(minPrice),
+            max_price: maxPrice === '' ? undefined : parseInt(maxPrice),
             is_new: document.getElementById('is_new').checked,
             is_rating: document.getElementById('is_rating').checked,
             is_discount: document.getElementById('is_discount').checked,

@@ -114,7 +114,9 @@ class ProductsModel extends BaseModel {
         category: +category,
     }) {
         if (this.filter !== undefined) {
-            body['filter'] = this.filter;
+            body['filter'] = {...this.filter};
+            body.filter.min_price = body.filter.min_price === undefined ? 0: body.filter.min_price;
+            body.filter.max_price = body.filter.max_price === undefined ? 1e6: body.filter.max_price;
         }
         AjaxModule.postUsingFetch({
             url: serverApiPath + '/product',
@@ -171,8 +173,10 @@ class ProductsModel extends BaseModel {
         sort_direction: sortDirection,
         category: 1,
     }) {
-        if (this.filter) {
-            body['filter'] = this.filter;
+        if (this.filter !== undefined) {
+            body['filter'] = {...this.filter};
+            body.filter.min_price = body.filter.min_price === undefined ? 0: body.filter.min_price;
+            body.filter.max_price = body.filter.max_price === undefined ? 1e6: body.filter.max_price;
         }
         AjaxModule.postUsingFetch({
             url: serverApiPath + '/product/search',

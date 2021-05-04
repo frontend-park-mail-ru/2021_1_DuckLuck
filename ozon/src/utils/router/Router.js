@@ -82,8 +82,12 @@ class Router {
         }
 
         const view = route[1];
-        view.IDs = groups;
+        view.IDs = groups || {};
+        if (Object.keys(params).length) {
+            view.IDs = Object.assign(view.IDs, params);
+        }
         Object.assign(pathParams, this.parseSearch(window.location.search));
+
         view.show(pathParams);
     }
 
