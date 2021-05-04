@@ -1,4 +1,28 @@
 <div class="{{productsStyles.block}}">
+    <form id="filtration_form" class="{{filterStyles.menu}}">
+        <div class="{{filterStyles.title}}">Цена</div>
+        <div class="{{filterStyles.row}}">
+            <label for="min_price" class="{{filterStyles.label}}"> От </label> <input type="number" id="min_price" class="{{filterStyles.input}}">
+        </div>
+        <div class="{{filterStyles.row}}">
+            <label for="max_price" class="{{filterStyles.label}}"> До </label> <input type="number" id="max_price" class="{{filterStyles.input}}">
+        </div>
+        <div class="{{filterStyles.row}}">
+            <label for="is_new" class="{{filterStyles.title}}"> Новые товары </label> <input type="checkbox" id="is_new">
+        </div>
+        <div class="{{filterStyles.row}}">
+            <label for="is_rating" class="{{filterStyles.title}}"> Высокий рейтинг </label> <input type="checkbox" id="is_rating">
+        </div>
+        <div class="{{filterStyles.row}}">
+            <label for="is_discount" class="{{filterStyles.title}}"> Товары со скидкой </label> <input type="checkbox" id="is_discount">
+        </div>
+        <button class="{{filterStyles.button}}">
+            <span class="{{filterStyles.buttonText}}">Применить</span>
+        </button>
+        <button id="drop-filters" class="{{filterStyles.drop}}">
+            <span class="{{filterStyles.dropText}}">Сбросить фильтры</span>
+        </button>
+    </form>
     <div class="{{productsStyles.body}}">
         <select class="{{productsStyles.select}}">
             {{#each select}}
@@ -7,15 +31,6 @@
                 </option>
             {{/each}}
         </select>
-        <form id="filtration_form">
-            <label for="min_price"> Минимальная цена </label> <input type="number" id="min_price"> <br>
-            <label for="max_price"> Максимальная цена </label> <input type="number" id="max_price"> <br>
-            <label for="is_new"> Только новые товары </label> <input type="checkbox" id="is_new"> <br>
-            <label for="is_rating"> Только товары с высоким рейтингом </label> <input type="checkbox" id="is_rating"> <br>
-            <label for="is_discount"> Только товары со скидкой </label> <input type="checkbox" id="is_discount"> <br>
-            <button>Применить фильтрацию</button>
-        </form>
-        <button id="drop-filters">Сбросить фильтры</button>
         <div class="{{productsStyles.listWrapper}}">{{{productsList}}}</div>
     </div>
 

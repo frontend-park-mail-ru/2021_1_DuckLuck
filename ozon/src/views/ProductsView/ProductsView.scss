@@ -24,6 +24,13 @@
     padding-top: var(--padding-m);
 }
 
+.emptyText {
+    margin: auto;
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+}
+
 .select {
     width: 226px;
     height: var(--height-xxxs);
