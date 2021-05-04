@@ -129,14 +129,9 @@ export class ProductsView extends BaseView {
             button.addEventListener('click', () => {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
-                switch (this.#viewType) {
-                case ProductsView.#types.category:
-                    Router.open(`/items/${this.IDs['category']}/${page}`);
-                    break;
-                case ProductsView.#types.search:
-                    Router.open(`/search/${page}/`, {text: this.IDs['searchText']});
-                    break;
-                }
+                this.#viewType === ProductsView.#types.category ?
+                    Router.open(`/items/${this.IDs['category']}/${page}`) :
+                    Router.open(`/search/${page}/`, {}, {text: this.IDs['searchText']});
             });
         }
 
@@ -270,6 +265,9 @@ export class ProductsView extends BaseView {
 
     drawFilter = () => {
         const filter = this.presenter.filter;
+        if (!filter) {
+            return;
+        }
         document.getElementById('min_price').value = filter.min_price !== undefined ? filter.min_price : '';
         document.getElementById('max_price').value = filter.max_price !== undefined ? filter.max_price : '';
         document.getElementById('is_new').checked = filter.is_new;
