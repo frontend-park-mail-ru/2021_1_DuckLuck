@@ -214,6 +214,17 @@
     color: var(--light-color);
 }
 
+.reviewListText {
+    margin-top: 25px;
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+}
+
+.reviewList {
+    font-size: var(--font-size-s);
+}
+
+
 .preview {
     height: 100%;
 }
