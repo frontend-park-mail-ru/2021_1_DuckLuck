@@ -1,7 +1,7 @@
 import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
-import profileStyles from './ProfileView.css';
+import profileStyles from './ProfileView.scss';
 import Events from '../../utils/bus/events';
 
 /**

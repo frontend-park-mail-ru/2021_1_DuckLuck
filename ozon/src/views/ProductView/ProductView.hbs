@@ -20,41 +20,42 @@
         {{/for}}
     </div>
     <div class="{{productStyles.wrapperWrapper}}">
-    <div class="{{productStyles.wrapper}}">
-        <div class="{{productStyles.mainInformation}}">
-
-            <div class="{{productStyles.imagesBlock}}">
-                <div class="{{productStyles.images}}">
-                    {{#each images}}
-                        <div class="{{../productStyles.imageWrapper}}">
-                            <img src="{{this.src}}" class="{{../imagesStyles.imgXL}}">
-                        </div>
-                    {{/each}}
+        <div class="{{productStyles.wrapper}}">
+            <div class="{{productStyles.mainInformation}}">
+                <div class="{{productStyles.imagesBlock}}">
+                    <div class="{{productStyles.images}}">
+                        {{#each images}}
+                            <div class="{{../productStyles.imageWrapper}}">
+                                <img src="{{this.src}}" class="{{../imagesStyles.imgXL}}">
+                            </div>
+                        {{/each}}
+                    </div>
+                    <div class="{{productStyles.mainImage}}">
+                        <img src="{{images.0.src}}" alt="" class="{{imagesStyles.imgXXL}} {{productStyles.preview}}">
+                    </div>
                 </div>
-                <div class="{{productStyles.mainImage}}">
-                    <img src="{{images.0.src}}" alt="" class="{{imagesStyles.imgXXL}}">
+            </div>
+            <div class="{{productStyles.description}}">
+                <span class="{{productStyles.title}}">Описание</span>
+                <span class="{{productStyles.descriptionText}}">{{description}}</span>
+            </div>
+            <div class="{{productStyles.specifications}}"></div>
+        </div>
+        <div class="{{productStyles.menu}}">
+            <div class="{{productStyles.aboutProduct}}"></div>
+            <div class="{{productStyles.buyMenu}}">
+                <div class="{{productStyles.priceBlock}}">
+                    <div class="{{productStyles.priceWrapper}}">
+                        <span class="{{productStyles.discountPrice}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
+                        <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
+                    </div>
+                </div>
+                <div class="{{productStyles.buttons}}">
+                    <button class="{{productStyles.notInCartButton}}">
+                        <span class="{{productStyles.buttonText}}">В корзину</span>
+                    </button>
                 </div>
             </div>
         </div>
-        <div class="{{productStyles.description}}">
-            <span class="{{productStyles.title}}">Описание</span>
-            <span class="{{productStyles.descriptionText}}">{{description}}</span>
-        </div>
-        <div class="{{productStyles.specifications}}"></div>
-    </div>
-    <div class="{{productStyles.menu}}">
-        <div class="{{productStyles.aboutProduct}}"></div>
-        <div class="{{productStyles.buyMenu}}">
-            <div class="{{productStyles.priceBlock}}">
-                <span class="{{productStyles.discountPrice}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
-                <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
-            </div>
-            <div class="{{productStyles.buttons}}">
-                <button class="{{productStyles.notInCartButton}}">
-                    <span class="{{productStyles.buttonText}}">В корзину</span>
-                </button>
-            </div>
-        </div>
-    </div>
     </div>
 </div>

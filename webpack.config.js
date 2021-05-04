@@ -68,6 +68,25 @@ module.exports = (env) => {
                         },
                     ],
                 },
+                {
+                    test: /\.s[ac]ss$/,
+                    use: [
+                        "style-loader",
+                        {
+                            loader: 'css-loader',
+                            options: {
+                                modules: true,
+                            }
+                        },
+                        {
+                            loader: "sass-loader",
+                            options: {
+                                // Prefer `dart-sass`
+                                implementation: require("sass"),
+                            },
+                        },
+                    ],
+                },
             ],
         },
         plugins: [

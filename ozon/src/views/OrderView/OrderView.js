@@ -4,7 +4,7 @@ import orderTemplate from './OrderView.hbs';
 import noticeTemplate from './OrderNotice.hbs';
 import noticeStyles from './OrderNotice.css';
 import {Input} from '../Common/Input/Input';
-import orderStyles from './OrderView.css';
+import orderStyles from './OrderView.scss';
 import Router from '../../utils/router/Router';
 import {Popup} from '../Common/Popup/Popup';
 import {Blind} from '../Common/Blind/Blind';
