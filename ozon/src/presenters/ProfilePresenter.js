@@ -27,6 +27,7 @@ class ProfilePresenter extends BasePresenter {
         this.bus.on(Events.ProfileLogout, this.profileLogout);
 
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
+        Bus.globalBus.on(Events.ProfileTransmitData, this.returnUserData);
     }
 
     /**
@@ -262,6 +263,18 @@ class ProfilePresenter extends BasePresenter {
             return;
         }
         console.error(status);
+    }
+
+    /**
+     * @param {string} eventToEmit
+     */
+    returnUserData = (eventToEmit) => {
+        Bus.globalBus.emit(eventToEmit, {
+            firstName: this.model.firstName,
+            lastName: this.model.lastName,
+            email: this.model.email,
+            avatarURL: this.model.avatarURL,
+        });
     }
 }
 

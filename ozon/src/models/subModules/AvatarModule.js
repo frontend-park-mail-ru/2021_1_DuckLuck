@@ -21,6 +21,7 @@ class AvatarModule extends BaseModel {
             return;
         }
 
+        window.localStorage.setItem('avatarURL', URL);
         this.#avatarURL= URL;
     }
 

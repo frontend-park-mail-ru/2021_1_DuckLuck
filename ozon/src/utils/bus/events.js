@@ -21,12 +21,14 @@ const Events = {
     ProfileLogout: 'profile-logout',
     ProfileLogoutEmitResult: 'profile-logout-emit-result',
     ProfileIncorrectLogout: 'profile-logout-incorrect',
+    ProfileTransmitData: 'profile-transmit-user-data',
 
     ProductsLoad: 'products-load',
     ProductsLoadSearch: 'products-load-search',
     ProductsLoaded: 'products-loaded',
     ProductsChangeCategory: 'products-change-category',
     ProductsItemAdded: 'products-item-added',
+    ProductTransmitData: 'product-transmit-data',
     ProductsItemNotAdded: 'products-item-removed',
 
     ProductChangeID: 'product-changeID',
@@ -34,7 +36,6 @@ const Events = {
     ProductLoaded: 'product-loaded',
     ProductItemNotAdded: 'product-item-not-added',
     ProductItemAdded: 'product-item-added',
-
 
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',
@@ -59,10 +60,19 @@ const Events = {
     CartAddLastProduct: 'cart-add-last-product',
     CartDrop: 'cart-drop',
 
-
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
     SendOrder: 'order-send',
+
+    ReviewRightsLoad: 'review-rights-load',
+    ReviewRightsLoaded: 'review-rights-loaded',
+    ReviewUserDataLoad: 'review-user-data-load',
+    ReviewUserDataLoaded: 'review-user-data-loaded',
+    ReviewProductDataLoad: 'review-product-data-load',
+    ReviewProductDataLoaded: 'review-product-data-load',
+    ReviewOrder: 'review-send',
+
+    ChangeReviewProductId: 'change-review-product-id',
     OrderSent: 'order-sent',
 };
 

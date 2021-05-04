@@ -209,6 +209,11 @@
     font-weight: var(--bold-font)
 }
 
+.reviewButton {
+    background: var(--colored-object-color);
+    color: var(--light-color);
+}
+
 .preview {
     height: 100%;
 }

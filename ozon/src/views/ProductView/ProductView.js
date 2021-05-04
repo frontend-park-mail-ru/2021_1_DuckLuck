@@ -7,6 +7,7 @@ import productStyles from './ProductView.scss';
 import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
 import imagesStyles from './../Common/Img/Img.css';
+import Router from '../../utils/router/Router';
 
 
 /**
@@ -69,6 +70,11 @@ export class ProductView extends BaseView {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
         });
 
+        const reviewButton = this.cache.getElementsByClassName(productStyles.reviewButton)[0];
+        reviewButton.addEventListener('click', () => {
+            Bus.globalBus.emit(Events.ChangeReviewProductId, this.IDs['productID']);
+            Router.open('/review');
+        });
         Bus.globalBus.emit(Events.CartGetProductID);
     }
 
