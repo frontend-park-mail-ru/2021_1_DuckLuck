@@ -167,7 +167,7 @@ export class ProductsView extends BaseView {
     setAddedProducts = (productsInCart) => {
         for (const item of document.getElementsByClassName(ListOfProductsItemStyles.block)) {
             if (productsInCart.has(+item.getAttribute('item-id'))) {
-                this.setButtonAdded(item);
+                this.setButtonAdded(item.getElementsByTagName('button')[0], +item.getAttribute('item-id'));
             }
         }
     }
@@ -180,20 +180,23 @@ export class ProductsView extends BaseView {
             return +item.getAttribute('item-id') === productID;
         })[0];
         if (item) {
-            this.setButtonAdded(item);
+            this.setButtonAdded(item.getElementsByClassName(
+                ListOfProductsItemStyles.buttonsBlock)[0].getElementsByTagName('button')[0],
+            productID);
         }
     }
 
     /**
-     * @param {HTMLElement} element
+     * @param {HTMLElement} button
+     * @param {number} id
      */
-    setButtonAdded = (element) => {
-        const newElement = element.cloneNode(true);
-        element.replaceWith(newElement);
-        this.setButtonAddedStyle(newElement.getElementsByTagName('button')[0]);
-        newElement.addEventListener('click', () => {
-            Bus.globalBus.emit(Events.CartRemoveProduct, newElement.getAttribute('item-id'));
+    setButtonAdded = (button, id) => {
+        const newButton = button.cloneNode(true);
+        this.setButtonAddedStyle(newButton);
+        newButton.addEventListener('click', () => {
+            Bus.globalBus.emit(Events.CartRemoveProduct, id);
         });
+        button.replaceWith(newButton);
     }
 
     /**
@@ -204,14 +207,15 @@ export class ProductsView extends BaseView {
             return +item.getAttribute('item-id') === +productID;
         })[0];
         if (item) {
-            const newItem = item.cloneNode(true);
-            item.replaceWith(newItem);
-            this.setButtonNotAddedStyle(newItem.getElementsByTagName('button')[0]);
-            newItem.addEventListener('click', () => {
-                const id = newItem.getAttribute('item-id');
-                Bus.globalBus.emit(Events.CartAddProduct, +newItem.getAttribute('item-id'), 1);
-                this.setProductAdded(id);
+            const button = item.getElementsByTagName('button')[0];
+            const newButton = button.cloneNode(true);
+            this.setButtonNotAddedStyle(newButton);
+            newButton.addEventListener('click', () => {
+                const id = item.getAttribute('item-id');
+                Bus.globalBus.emit(Events.CartAddProduct, +item.getAttribute('item-id'), 1);
+                this.setProductAdded(+id);
             });
+            button.replaceWith(newButton);
         }
     }
 
