@@ -291,6 +291,18 @@
     font-size: var(--font-size-l);
 }
 
+.countField {
+    display: flex;
+    width: 20px;
+}
+
+.countMenu {
+    display: flex;
+}
+
+.count {
+    margin: auto;
+}
 
 @media screen and (max-width: $max-width-xl){
     .wrapper {
