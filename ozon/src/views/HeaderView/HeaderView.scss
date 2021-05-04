@@ -1,4 +1,4 @@
-@import "../../constants.css";
+@import "../../constants.scss";
 
 .main {
     display: flex;
@@ -6,15 +6,14 @@
 }
 
 .body {
-    max-width: var(--max-width);
     padding: var(--padding-xs) var(--padding-l);
     margin: 0 auto;
-    width: 100%;
     box-sizing: border-box;
     font-family: var(--font);
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 76%;
 }
 
 .logoBlock {
@@ -25,7 +24,6 @@
 .catalogBlock {
     flex-grow: 0;
     flex-shrink: 0;
-    flex-basis: 135px;
     cursor: pointer;
     margin-right: 16px;
     outline: none;
@@ -39,7 +37,7 @@
 }
 
 .menu {
-    display: inline-flex;
+    display: flex;
     justify-content: flex-end;
     align-items: center;
     font-size: var(--font-size-s);
@@ -119,9 +117,8 @@
 }
 
 .catalogList {
-    width: 100%;
+    width: 76%;
     height: 100%;
-    max-width: var(--max-width);
     padding: var(--padding-xs) var(--padding-m);
     margin: 0 auto;
     box-sizing: border-box;
@@ -166,13 +163,15 @@
 .catalogListBody {
     display: flex;
     flex-direction: row;
+    width: 97%;
 }
 
 .catalogListSubcategories {
-    padding-left: var(--padding-xxl);
+    margin-left: var(--margin-xxxl);
     column-count: 4;
     column-gap: var(--columns-gap);
     margin-right: var(--margin-l);
+    width: 100%;
 }
 
 .catalogItemWrapper {
@@ -196,9 +195,66 @@
 .cartItemsCounter {
     text-align: center;
     width: 20px;
-    height: 50px;
     border-radius: 90%;
     background-color: var(--discout-color);
     color: var(--light-color);
     font-family: var(--font);
+}
+
+@media screen and (max-width: $max-width-xxl) {
+    .body {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: $max-width-xl) {
+    .body {
+        padding: 0;
+        flex-direction: column;
+        gap: var(--gap-xs);
+    }
+
+    .logoBlock {
+        order: -2;
+    }
+
+    .menu {
+        position: fixed;
+        bottom: 0;
+        background-color: var(--light-color);
+        width: 100%;
+        justify-content: center;
+        z-index: 1001;
+    }
+
+    .searchBlock {
+        order: -1;
+        margin: var(--margin-xxs) auto auto;
+    }
+
+    .catalogBlock {
+        width: 100%;
+        margin-right: 0;
+    }
+
+    .cartItemsCounter {
+        position: fixed;
+        bottom: 25px;
+    }
+}
+
+@media screen and (max-width: $max-width-m) {
+    .catalogListSubcategories {
+        margin-left: var(--margin-xxl);
+        column-count: 3;
+    }
+}
+
+@media screen and (max-width: $max-width-s) {
+    .catalogListSubcategories {
+        margin-left: var(--margin-l);
+        margin-right: 0;
+        width: 80%;
+        column-count: 1;
+    }
 }

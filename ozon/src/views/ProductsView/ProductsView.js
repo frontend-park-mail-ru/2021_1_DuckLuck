@@ -3,7 +3,7 @@ import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
 import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.css';
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
-import productsStyles from './ProductsView.css';
+import productsStyles from './ProductsView.scss';
 import paginatorStyles from '../Common/Pagination/Pagination.css';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';

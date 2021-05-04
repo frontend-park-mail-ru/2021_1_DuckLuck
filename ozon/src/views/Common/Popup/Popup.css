@@ -1,10 +1,10 @@
-@import '../../../constants.css';
+@import '../../../constants.scss';
 
 .popup {
     z-index: 1003;
     left: 50%;
     top: 50%;
-    position: absolute;
+    position: fixed;
 }
 
 .popup_login, .popup_signup {

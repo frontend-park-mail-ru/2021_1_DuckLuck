@@ -3,7 +3,7 @@ import {Img} from '../Common/Img/Img.js';
 import productPageTemplate from './ProductView.hbs';
 import {fileServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
-import productStyles from './ProductView.css';
+import productStyles from './ProductView.scss';
 import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
 import imagesStyles from './../Common/Img/Img.css';
@@ -56,7 +56,7 @@ export class ProductView extends BaseView {
             .getElementsByClassName(productStyles.block)[0];
         this.parent.appendChild(this.cache);
 
-        const mainImage = this.cache.getElementsByClassName(imagesStyles.imgXXL)[0];
+        const mainImage = this.cache.getElementsByClassName(productStyles.preview)[0];
         Array.from(this.cache.getElementsByClassName(imagesStyles.imgXL)).forEach((image) => {
             image.addEventListener('click', () => {
                 mainImage.setAttribute('src', image.getAttribute('src'));
