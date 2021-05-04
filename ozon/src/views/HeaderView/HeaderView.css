@@ -117,9 +117,8 @@
 }
 
 .catalogList {
-    width: 100%;
+    width: 76%;
     height: 100%;
-    max-width: var(--max-width);
     padding: var(--padding-xs) var(--padding-m);
     margin: 0 auto;
     box-sizing: border-box;
@@ -164,13 +163,15 @@
 .catalogListBody {
     display: flex;
     flex-direction: row;
+    width: 97%;
 }
 
 .catalogListSubcategories {
-    padding-left: var(--padding-xxl);
+    margin-left: var(--margin-xxxl);
     column-count: 4;
     column-gap: var(--columns-gap);
     margin-right: var(--margin-l);
+    width: 100%;
 }
 
 .catalogItemWrapper {
@@ -239,5 +240,19 @@
     .cartItemsCounter {
         position: fixed;
         bottom: 25px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .catalogListSubcategories {
+        margin-left: var(--margin-xxl);
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .catalogListSubcategories {
+        margin-left: var(--margin-l);
+        margin-right: 0;
+        width: 80%;
     }
 }
