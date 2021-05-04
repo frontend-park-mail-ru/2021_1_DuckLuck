@@ -144,7 +144,8 @@ class ReviewPresenter extends BasePresenter {
      */
     reviewRightsLoadedReaction = (result) => {
         if (result === Responses.Success) {
-            Bus.globalBus.emit(Events.ProfileTransmitData, Events.ReviewUserDataLoaded);
+            this.model.userName =
+                `${window.localStorage.getItem('firstName')} ${window.localStorage.getItem('lastName')}`;
             Bus.globalBus.emit(Events.ProductTransmitData, Events.ReviewProductDataLoaded);
             this.view.render();
             this.view.cache.hidden = false;

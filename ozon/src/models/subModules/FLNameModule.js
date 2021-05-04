@@ -17,6 +17,7 @@ class FLNameModule extends BaseModel {
      */
     set firstName(firstName) {
         this.#firstName= firstName;
+        window.localStorage.setItem('firstName', firstName);
     }
 
     /**
@@ -24,6 +25,7 @@ class FLNameModule extends BaseModel {
      */
     set lastName(lastName) {
         this.#lastName= lastName;
+        window.localStorage.setItem('lastName', lastName);
     }
 
     /**
