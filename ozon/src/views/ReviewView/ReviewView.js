@@ -12,9 +12,10 @@ import {Bus} from '../../utils/bus/bus';
  * @extends BaseView
  * @classdesc Class for showing review
  */
-export class ReviewView extends BaseView {
+class ReviewView extends BaseView {
     show = () => {
-        this.bus.emit(Events.ReviewLoad);
+        this.presenter.rating = 0;
+        this.bus.emit(Events.ReviewRightsLoad);
     }
 
     render = () => {
@@ -56,18 +57,9 @@ export class ReviewView extends BaseView {
         const emptyRating = (event) => {
             if (!event.target.classList.contains(reviewStyles.stars) &&
                 !event.target.classList.contains(reviewStyles.star)) {
-                stars.forEach((star) => {
-                    star.setAttribute('src', emptyStarLink);
-                });
-                let i = 0;
-                while (i < 5 && i < this.presenter.rating) {
-                    stars[i].setAttribute('src', starLink);
-                    i++;
-                }
-                while (i < 5) {
-                    stars[i].setAttribute('src', emptyStarLink);
-                    i++;
-                }
+                stars.forEach((star, i) =>
+                    star.setAttribute('src', i < this.presenter.rating ? starLink : emptyStarLink),
+                );
             }
         };
 
@@ -77,14 +69,9 @@ export class ReviewView extends BaseView {
         stars.forEach((star) => {
             const currentStarValue = parseInt(star.getAttribute('value'));
             star.addEventListener('mouseover', () => {
-                let i = 0;
-                while (i < 5 && parseInt(stars[i].getAttribute('value')) <= currentStarValue) {
-                    stars[i].setAttribute('src', starLink);
-                    i++;
-                }
-                while (i < 5) {
-                    stars[i].setAttribute('src', emptyStarLink);
-                    i++;
+                for (let i = 0; i < 5; i++) {
+                    const isStar = parseInt(stars[i].getAttribute('value')) <= currentStarValue;
+                    stars[i].setAttribute('src', isStar ? starLink : emptyStarLink);
                 }
             });
             star.addEventListener('click', () => {
@@ -112,3 +99,5 @@ export class ReviewView extends BaseView {
         });
     };
 }
+
+export default ReviewView;
