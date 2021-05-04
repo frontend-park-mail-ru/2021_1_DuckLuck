@@ -135,6 +135,60 @@ class ProductsModel extends BaseModel {
             }
         });
     }
+
+
+    /**
+     * @param {String} searchData
+     * @param {Number|String} page
+     * @param {String} sortKey
+     * @param {String} sortDirection
+     * @param {Object} body Body of request
+     */
+    loadProductsSearch(searchData, page, sortKey, sortDirection, body = {
+        query_string: searchData,
+        page_num: +page,
+        count: 9,
+        sort_key: sortKey,
+        sort_direction: sortDirection,
+        category: 1,
+    }) {
+        AjaxModule.postUsingFetch({
+            url: serverApiPath + '/product/search',
+            body: body,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((parsedJson) => {
+            this.#products = parsedJson['list_preview_products'];
+            this.#paginationInfo = {
+                pagesCount: parsedJson['max_count_pages'],
+                currentPage: page,
+            };
+            this.bus.emit(Events.ProductsLoaded, Responses.Success);
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.ProductsLoaded, Responses.Unauthorized);
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.#products = [];
+                this.#paginationInfo = {
+                    pagesCount: 1,
+                    currentPage: 1,
+                };
+                this.bus.emit(Events.ProductsLoaded, Responses.Success);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.ProductsLoaded, Responses.Error);
+                break;
+            }
+            }
+        });
+    }
 }
 
 export default ProductsModel;

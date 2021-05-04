@@ -23,6 +23,8 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProductChangeID, this.changeID);
         Bus.globalBus.on(Events.CartLoadedProductID, this.productCartGotIds);
         Bus.globalBus.on(Events.RenderProductReviews, this.renderProductsReview);
+        Bus.globalBus.on(Events.ProductItemAdded, this.setProductAdded);
+        Bus.globalBus.on(Events.ProductItemNotAdded, this.setProductNotAdded);
     }
 
     /**
@@ -103,7 +105,7 @@ class ProductsPresenter extends BasePresenter {
      */
     productCartGotIds = (ids) => {
         if (ids.has(this.model.item.id)) {
-            this.view.setButtonInCart();
+            this.view.setProductAdded();
         }
     }
 
@@ -113,6 +115,14 @@ class ProductsPresenter extends BasePresenter {
      */
     renderProductsReview = (reviews, paginator) => {
         this.view.renderProductsReview(reviews, paginator);
+    }
+
+    setProductAdded = () => {
+        this.view.setProductAdded();
+    }
+
+    setProductNotAdded = () => {
+        this.view.setProductNotAdded();
     }
 }
 

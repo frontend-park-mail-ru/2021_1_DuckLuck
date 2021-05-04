@@ -32,6 +32,7 @@
     --light-color: #f2f3f5;
     --dark-color: #001a34;
     --discout-color: #f91155;
+    --old-price-color: #808080;
     --input-color: #cdd2d8;
     --order-color: #3ac267;
     --dark-order-color: #2da54f;
@@ -94,3 +95,10 @@
     --width-xxxl: 455px;
     --width-xxxxl: 903px;
 }
+
+$max-width-xs: 400px;
+$max-width-s: 600px;
+$max-width-m: 720px;
+$max-width-l: 800px;
+$max-width-xl: 1100px;
+$max-width-xxl: 1500px;

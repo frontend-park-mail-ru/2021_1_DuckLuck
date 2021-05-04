@@ -1,4 +1,4 @@
-@import '../../constants.css';
+@import '../../constants.scss';
 
 .cartWrapper {
     background: var(--neutral-background-color);
@@ -44,7 +44,7 @@
     display: flex;
     flex-direction: column;
     background: white;
-    width: 935px;
+    width: 66%;
     border-radius: var(--lower-border-radius);
 }
 
@@ -85,12 +85,12 @@
 }
 
 .deliveryBlock {
-    width: var(--width-xxxxl);
     height: var(--height-m);
     background: var(--neutral-background-color);
-    margin: var(--margin-s);
+    margin: var(--margin-s) auto;
     display: flex;
     border-radius: var(--standart-border-radius);
+    width: 96.57%;
 }
 
 .deliveryText {
@@ -126,6 +126,7 @@
 .description {
     display: flex;
     flex-direction: column;
+    width: 40%;
 }
 
 .checkbox {
@@ -154,7 +155,7 @@
 }
 
 .orderMenu {
-    width: var(--width-xxxl);
+    width: 32%;
     height: var(--height-xxxl);
     background: white;
     border-radius: var(--standart-border-radius);
@@ -163,7 +164,7 @@
 }
 
 .orderButton {
-    width: var(--width-xxl);
+    width: 89.84%;
     height: var(--height-s);
     border-radius: var(--standart-border-radius);
     border: none;
@@ -186,7 +187,7 @@
 
 .orderButtonWrapper {
     display: flex;
-    width: var(--width-xxxl);
+    width: 100%;
     height: var(--height-xl);
     border-bottom: solid 1px;
     flex-direction: column;
@@ -195,7 +196,7 @@
 .orderInfo {
     display: flex;
     flex-direction: column;
-    width: var(--width-xxxl);
+    width: 100%
 }
 
 .orderInfoTitle {
@@ -212,6 +213,7 @@
 }
 
 .orderInfoWrapper {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
@@ -222,6 +224,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--gap-s);
+    width: 100%;
 }
 
 .totalPriceBlock {
@@ -294,4 +297,35 @@
     font-family: var(--font);
     font-size: var(--font-size-s);
     color: var(--colored-object-color);
+}
+
+@media screen and (max-width: $max-width-xl){
+    .wrapper {
+        flex-direction: column;
+        gap: var(--gap-s);
+    }
+
+    .cartInfo {
+        width: 100%;
+    }
+
+    .orderMenu {
+        width: 100%;
+    }
+
+    .orderButtonWrapper {
+        order: 2;
+    }
+}
+
+@media screen and (max-width: $max-width-l){
+    .productsListElem {
+        flex-direction: column;
+        gap: var(--gap-xs);
+        align-items: flex-start;
+    }
+
+    .input {
+        width: 100%;
+    }
 }

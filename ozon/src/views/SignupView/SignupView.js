@@ -55,7 +55,7 @@ export class SignupView extends BaseView {
                             }),
                             new Input({
                                 type: 'password',
-                                name: 'repeat_password',
+                                name: 'repeatPassword',
                                 placeholder: 'Повтор пароля',
                             }),
                         ],
@@ -100,13 +100,5 @@ export class SignupView extends BaseView {
                 Router.open('/login', {replaceState: true});
             });
         this.parent.appendChild(this.cache);
-    }
-
-    invalidForm = () => {
-        for (const input of this.cache.getElementsByTagName('input')) {
-            input.value = '';
-            input.placeholder = 'Некорректные данные';
-            input.style['border-color'] = '#ff726f';
-        }
     }
 }
