@@ -2,9 +2,10 @@ import {BaseView} from '../BaseView.js';
 import {Img} from '../Common/Img/Img.js';
 import productPageTemplate from './ProductView.hbs';
 import reviewsTemplate from './ProductReviews.hbs';
-import {fileServerHost} from '../../utils/urls/urls.js';
+import {fileServerHost, staticServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
 import productStyles from './ProductView.scss';
+import reviewStyles from './ProductReview.scss';
 import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
 import imagesStyles from './../Common/Img/Img.css';
@@ -54,6 +55,7 @@ export class ProductView extends BaseView {
             description: this.presenter.item['description']['descriptionText'],
             category: this.presenter.item['description']['category'],
             productStyles: productStyles,
+            reviewStyles: reviewStyles,
             imagesStyles: imagesStyles,
             decorators: decorators,
             select: [
@@ -153,17 +155,27 @@ export class ProductView extends BaseView {
         const pagination = new Pagination(paginationInfo, true).getHtmlString();
         document.getElementById('review-pagination').innerHTML = pagination;
 
-        if (this.cache.getElementsByClassName(productStyles.reviewBlock)[0]) {
-            this.cache.getElementsByClassName(productStyles.reviewBlock)[0].innerHTML +=
+        reviews.forEach((review) => {
+            review.date_added = review.date_added.slice(0, 10);
+            review.firstChar = review.user_name[0];
+            if (review.user_avatar) {
+                review.avatar = `${staticServerHost}/${review.user_avatar}`;
+            }
+        });
+
+        if (this.cache.getElementsByClassName(reviewStyles.block)[0]) {
+            this.cache.getElementsByClassName(reviewStyles.block)[0].innerHTML +=
                 reviewsTemplate({
                     reviewsList: reviews,
                     productStyles: productStyles,
+                    reviewStyles: reviewStyles,
                 });
         } else {
             this.cache.getElementsByClassName(productStyles.reviewList)[0].innerHTML = reviewsTemplate({
                 reviewsList: reviews,
                 pagination: pagination,
                 productStyles: productStyles,
+                reviewStyles: reviewStyles,
             });
         }
         if (paginationInfo.pagesCount === paginationInfo.currentPage) {
