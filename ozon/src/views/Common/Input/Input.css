@@ -1,4 +1,4 @@
-@import "../../../constants.css";
+@import "../../../constants.scss";
 
 .form-body__input-block {
     width: 383px;

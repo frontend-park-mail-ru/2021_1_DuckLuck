@@ -1,7 +1,7 @@
-@import '../../constants.css';
+@import '../../constants.scss';
 
 .block {
-    width: var(--max-width);
+    width: 76.66%;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -9,9 +9,8 @@
 
 .body {
     display: flex;
-    max-width: 60%;
-    margin: auto;
-    width: 100%;
+    margin: var(--margin-l) auto auto;
+    width: 60%;
     flex-direction: column;
 }
 
@@ -28,4 +27,24 @@
 .select {
     width: 226px;
     height: var(--height-xxxs);
+}
+
+.listWrapper {
+    margin: auto;
+}
+
+@media screen and (max-width: $max-width-xl) {
+    .block {
+        width: 100%;
+    }
+
+    .body {
+        margin: var(--margin-l) auto auto;
+        width: 100%;
+        max-width: 70%;
+    }
+
+    .block {
+        padding-bottom: 65px;
+    }
 }

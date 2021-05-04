@@ -1,6 +1,6 @@
 @import '../Blind/Blind.css';
 @import '../Popup/Popup.css';
-@import '../../../constants.css';
+@import '../../../constants.scss';
 
 .form-header {
     display: flex;
@@ -56,6 +56,7 @@
     flex-direction: column;
     margin: var(--margin-xl);
     gap: var(--gap-s);
+    width: 80%;
 }
 
 .inputBlock {
@@ -71,6 +72,7 @@
 
 .wrapper {
     display: flex;
+    width: 100%;
 }
 
 .button {
@@ -97,7 +99,7 @@
 
 .inputWrapper {
     height: var(--height-xxs);
-    width: var(--width-l);
+    width: 100%;
 }
 
 .input {
