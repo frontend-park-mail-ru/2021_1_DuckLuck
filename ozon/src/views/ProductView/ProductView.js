@@ -3,7 +3,7 @@ import {Img} from '../Common/Img/Img.js';
 import productPageTemplate from './ProductView.hbs';
 import {fileServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
-import productStyles from './ProductView.css';
+import productStyles from './ProductView.scss';
 import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
 import imagesStyles from './../Common/Img/Img.css';
@@ -57,23 +57,17 @@ export class ProductView extends BaseView {
             .getElementsByClassName(productStyles.block)[0];
         this.parent.appendChild(this.cache);
 
-        const mainImage = this.cache.getElementsByClassName(imagesStyles.imgXXL)[0];
+        const mainImage = this.cache.getElementsByClassName(productStyles.preview)[0];
         Array.from(this.cache.getElementsByClassName(imagesStyles.imgXL)).forEach((image) => {
             image.addEventListener('click', () => {
                 mainImage.setAttribute('src', image.getAttribute('src'));
             });
         });
 
-        let button = document.getElementsByClassName(productStyles.notInCartButton)[0];
-        if (!button) {
-            button = document.getElementsByClassName(productStyles.inCartButton)[0];
-        }
 
-        button.addEventListener('click', (evt) => {
-            evt.preventDefault();
+        const button = document.getElementsByClassName(productStyles.notInCartButton)[0];
+        button.addEventListener('click', () => {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
-            button.className = productStyles.inCartButton;
-            button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
         });
 
         const reviewButton = this.cache.getElementsByClassName(productStyles.reviewButton)[0];
@@ -84,12 +78,33 @@ export class ProductView extends BaseView {
         Bus.globalBus.emit(Events.CartGetProductID);
     }
 
-    setButtonInCart = () => {
+    setProductAdded = () => {
         const button = document.getElementsByClassName(productStyles.notInCartButton)[0];
         if (!button) {
             return;
         }
-        button.className = productStyles.inCartButton;
-        button.getElementsByTagName('span')[0].innerHTML = 'Добавить +1';
+        const newButton = button.cloneNode(true);
+        button.replaceWith(newButton);
+
+        newButton.className = productStyles.inCartButton;
+        newButton.getElementsByTagName('span')[0].innerHTML = 'В корзине';
+        newButton.addEventListener('click', () => {
+            Bus.globalBus.emit(Events.CartRemoveProduct, this.IDs['productID']);
+        });
+    }
+
+    setProductNotAdded = () => {
+        const button = document.getElementsByClassName(productStyles.inCartButton)[0];
+        if (!button) {
+            return;
+        }
+        const newButton = button.cloneNode(true);
+        button.replaceWith(newButton);
+
+        newButton.getElementsByTagName('span')[0].innerHTML = 'В корзину';
+        newButton.className = productStyles.notInCartButton;
+        newButton.addEventListener('click', () => {
+            Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
+        });
     }
 }

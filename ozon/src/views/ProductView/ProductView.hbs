@@ -31,7 +31,7 @@
                         {{/each}}
                     </div>
                     <div class="{{productStyles.mainImage}}">
-                        <img src="{{images.0.src}}" alt="" class="{{imagesStyles.imgXXL}}">
+                        <img src="{{images.0.src}}" alt="" class="{{imagesStyles.imgXXL}} {{productStyles.preview}}">
                     </div>
                 </div>
             </div>
@@ -45,8 +45,10 @@
             <div class="{{productStyles.aboutProduct}}"></div>
             <div class="{{productStyles.buyMenu}}">
                 <div class="{{productStyles.priceBlock}}">
-                    <span class="{{productStyles.discountPrice}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
-                    <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
+                    <div class="{{productStyles.priceWrapper}}">
+                        <span class="{{productStyles.discountPrice}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
+                        <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
+                    </div>
                 </div>
                 <div class="{{productStyles.buttons}}">
                     <button class="{{productStyles.notInCartButton}}">

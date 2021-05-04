@@ -29,10 +29,13 @@ const Events = {
     ProductsChangeCategory: 'products-change-category',
     ProductsItemAdded: 'products-item-added',
     ProductTransmitData: 'product-transmit-data',
+    ProductsItemNotAdded: 'products-item-removed',
 
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
+    ProductItemNotAdded: 'product-item-not-added',
+    ProductItemAdded: 'product-item-added',
 
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',

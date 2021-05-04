@@ -1,5 +1,5 @@
 import {BaseView} from '../BaseView.js';
-import headerStyles from './HeaderView.css';
+import headerStyles from './HeaderView.scss';
 import buttonStyles from '../Common/Button/Button.css';
 import imgStyles from '../Common/Img/Img.css';
 import inputStyles from '../Common/Input/Input.css';

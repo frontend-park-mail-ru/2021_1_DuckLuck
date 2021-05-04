@@ -3,7 +3,7 @@ import cartPageTemplate from './CartView.hbs';
 import emptyCartPageTemplate from './CartViewEmpty.hbs';
 import {Bus} from '../../utils/bus/bus';
 import Events from '../../utils/bus/events';
-import cartStyles from './CartView.css';
+import cartStyles from './CartView.scss';
 import decorators from '../decorators.css';
 import Router from '../../utils/router/Router';
 
@@ -136,5 +136,17 @@ export class CartView extends BaseView {
         item.getElementsByClassName(cartStyles.discountPrice)[0].innerHTML = 'Скидка ' +
             (parseInt(item.getElementsByClassName(cartStyles.oldPrice)[0].innerHTML) -
              parseInt(item.getElementsByClassName(cartStyles.endPrice)[0].innerHTML)).toString() + '₽';
+    }
+
+    /**
+     * @param {number | string}id
+     */
+    removeProduct = (id) => {
+        const item = Array.from(document.getElementsByClassName(cartStyles.productsListElem)).filter((item) => {
+            return +item.getAttribute('product_id') === +id;
+        })[0];
+        if (item) {
+            item.remove();
+        }
     }
 }
