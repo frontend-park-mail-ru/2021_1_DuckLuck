@@ -7,6 +7,14 @@
                 </option>
             {{/each}}
         </select>
+        <form id="filtration_form">
+            <label for="min_price"> Минимальная цена </label> <input type="number" id="min_price"> <br>
+            <label for="max_price"> Максимальная цена </label> <input type="number" id="max_price"> <br>
+            <label for="is_new"> Только новые товары </label> <input type="checkbox" id="is_new"> <br>
+            <label for="is_rating"> Только товары с высоким рейтингом </label> <input type="checkbox" id="is_rating"> <br>
+            <label for="is_discount"> Только товары со скидкой </label> <input type="checkbox" id="is_discount"> <br>
+            <button>Применить фильтрацию</button>
+        </form>
         <div class="{{productsStyles.listWrapper}}">{{{productsList}}}</div>
     </div>
     <div class="{{productsStyles.footer}}">

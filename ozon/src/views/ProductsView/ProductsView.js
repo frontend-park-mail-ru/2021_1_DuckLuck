@@ -159,7 +159,32 @@ export class ProductsView extends BaseView {
 
         this.parent.appendChild(this.cache);
         Bus.globalBus.emit(Events.CartGetProductsID);
+
+        document.getElementById('filtration_form').addEventListener('submit', () => {
+            this.IDs['page'] = 1;
+            switch (this.#viewType) {
+            case ProductsView.#types.category:
+                this.bus.emit(
+                    Events.ProductsLoad,
+                    this.IDs['category'],
+                    this.IDs['page'],
+                    this.presenter.sortKey,
+                    this.presenter.sortDirection,
+                );
+                break;
+            case ProductsView.#types.search:
+                this.bus.emit(
+                    Events.ProductsLoadSearch,
+                    this.IDs['searchText'],
+                    this.IDs['page'],
+                    this.presenter.sortKey,
+                    this.presenter.sortDirection,
+                );
+                break;
+            }
+        });
     };
+
 
     /**
      * @param {Set} productsInCart
