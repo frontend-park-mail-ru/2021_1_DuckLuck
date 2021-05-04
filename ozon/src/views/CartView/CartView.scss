@@ -124,7 +124,6 @@
     box-sizing: border-box;
     font-family: var(--font);
     align-items: center;
-    justify-content: space-between;
     padding: 4px 28px;
     border-bottom: solid 1px;
     border-color: var(--neutral-background-color);
@@ -133,7 +132,7 @@
 .description {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 50%;
 }
 
 .checkbox {
@@ -233,6 +232,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.priceBlock {
+    width: 30%;
 }
 
 .totalPriceBlock {
