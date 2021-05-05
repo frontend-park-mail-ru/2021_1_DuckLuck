@@ -4,6 +4,7 @@ import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsIte
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.scss';
+import filterStyles from './ProductsFilter.scss';
 import paginatorStyles from '../Common/Pagination/Pagination.css';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
@@ -41,6 +42,12 @@ export class ProductsView extends BaseView {
         if (!this.presenter.sortDirection) {
             this.presenter.changeSortDirection('ASC');
         }
+
+        if (this.IDs['dropFilter']) {
+            this.presenter.dropFilter();
+            this.dropFilter();
+        }
+
         if (URLParams && URLParams.text) {
             this.#viewType = ProductsView.#types.search;
             this.IDs['searchText'] = URLParams.text;
@@ -68,6 +75,7 @@ export class ProductsView extends BaseView {
         const productsListHtmlString = new ListOfProducts(this.presenter.products).getHtmlString();
         const pagination = new Pagination(this.presenter.paginationInfo).getHtmlString();
         const template = productsPageTemplate({
+            isEmpty: this.presenter.products.length === 0,
             productsList: productsListHtmlString,
             pagination: pagination,
             select: [
@@ -102,6 +110,7 @@ export class ProductsView extends BaseView {
                 direction: this.presenter.sortDirection,
             },
             productsStyles: productsStyles,
+            filterStyles: filterStyles,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html')
             .getElementsByClassName(productsStyles.block)[0];
@@ -113,28 +122,18 @@ export class ProductsView extends BaseView {
             const sortDirection = selected.getAttribute('direction');
             this.presenter.changeSortKey(sortKey);
             this.presenter.changeSortDirection(sortDirection);
-            switch (this.#viewType) {
-            case ProductsView.#types.category:
-                Router.open(`/items/${this.IDs['category']}`);
-                break;
-            case ProductsView.#types.search:
+            this.#viewType === ProductsView.#types.category ?
+                Router.open(`/items/${this.IDs['category']}`) :
                 Router.open('/search/1/', {}, {text: this.IDs['searchText']});
-                break;
-            }
         });
 
         for (const button of this.cache.getElementsByClassName(paginatorStyles.button)) {
             button.addEventListener('click', () => {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
-                switch (this.#viewType) {
-                case ProductsView.#types.category:
-                    Router.open(`/items/${this.IDs['category']}/${page}`);
-                    break;
-                case ProductsView.#types.search:
+                this.#viewType === ProductsView.#types.category ?
+                    Router.open(`/items/${this.IDs['category']}/${page}`) :
                     Router.open(`/search/${page}/`, {}, {text: this.IDs['searchText']});
-                    break;
-                }
             });
         }
 
@@ -159,7 +158,42 @@ export class ProductsView extends BaseView {
 
         this.parent.appendChild(this.cache);
         Bus.globalBus.emit(Events.CartGetProductsID);
+
+        document.getElementById('filtration_form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            this.IDs['page'] = 1;
+            switch (this.#viewType) {
+            case ProductsView.#types.category:
+                this.bus.emit(
+                    Events.ProductsLoad,
+                    this.IDs['category'],
+                    this.IDs['page'],
+                    this.presenter.sortKey,
+                    this.presenter.sortDirection,
+                );
+                break;
+            case ProductsView.#types.search:
+                this.bus.emit(
+                    Events.ProductsLoadSearch,
+                    this.IDs['searchText'],
+                    this.IDs['page'],
+                    this.presenter.sortKey,
+                    this.presenter.sortDirection,
+                );
+                break;
+            }
+        });
+
+        document.getElementById('drop-filters').addEventListener('click', (event) => {
+            event.preventDefault();
+            this.presenter.dropFilter();
+            this.dropFilter();
+            this.show();
+        });
+
+        this.drawFilter();
     };
+
 
     /**
      * @param {Set} productsInCart
@@ -233,5 +267,26 @@ export class ProductsView extends BaseView {
     setButtonNotAddedStyle = (button) => {
         button.className = ListOfProductsItemStyles.notInCartButton;
         button.getElementsByTagName('span')[0].innerHTML = 'В корзину';
+    }
+
+    drawFilter = () => {
+        const filter = this.presenter.filter;
+        if (!filter) {
+            return;
+        }
+        document.getElementById('min_price').value = filter.min_price !== undefined ? filter.min_price : '';
+        document.getElementById('max_price').value = filter.max_price !== undefined ? filter.max_price : '';
+        document.getElementById('is_new').checked = filter.is_new;
+        document.getElementById('is_rating').checked = filter.is_rating;
+        document.getElementById('is_discount').checked = filter.is_discount;
+    }
+
+    dropFilter = () => {
+        const form = document.getElementById('filtration_form');
+        if (!form) {
+            return;
+        }
+
+        form.remove();
     }
 }

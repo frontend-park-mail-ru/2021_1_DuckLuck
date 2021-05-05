@@ -124,7 +124,7 @@ export class HeaderView extends BaseView {
             if (evt.target.hasAttribute('category')) {
                 const categoryId = parseInt(evt.target.getAttribute('category'));
                 catalogBlock.dispatchEvent(new Event('click'));
-                Router.open(`/items/${categoryId}`);
+                Router.open(`/items/${categoryId}`, {dropFilter: true});
             }
         });
 
@@ -140,7 +140,7 @@ export class HeaderView extends BaseView {
         searchForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
-            Router.open('/search/1/', {}, {text: searchInput.value});
+            Router.open('/search/1/', {dropFilter: true}, {text: searchInput.value});
         });
 
         menuItems.forEach((menuItem) => {

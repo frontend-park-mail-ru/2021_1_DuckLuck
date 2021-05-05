@@ -63,6 +63,18 @@ class ProductsPresenter extends BasePresenter {
         return this.model.sortDirection;
     }
 
+
+    /**
+     * @return {Object}
+     */
+    get filter() {
+        return this.model.filter;
+    }
+
+    dropFilter = () => {
+        this.model.filter = undefined;
+    }
+
     /**
      *
      * @param {Number} id
@@ -94,6 +106,7 @@ class ProductsPresenter extends BasePresenter {
      * @param {String} sortDirection
      */
     loadProducts = (category, page, sortKey, sortDirection) => {
+        this.parseFiltration();
         this.model.loadProducts(category, page, sortKey, sortDirection);
     }
 
@@ -104,7 +117,24 @@ class ProductsPresenter extends BasePresenter {
      * @param {String} sortDirection
      */
     loadSearchProducts = (searchData, page, sortKey, sortDirection) => {
+        this.parseFiltration();
         this.model.loadProductsSearch(searchData, page, sortKey, sortDirection);
+    }
+
+    parseFiltration = () => {
+        if (!document.getElementById('min_price')) {
+            return;
+        }
+
+        const minPrice = document.getElementById('min_price').value;
+        const maxPrice = document.getElementById('max_price').value;
+        this.model.filter = {
+            min_price: minPrice === '' ? undefined : parseInt(minPrice),
+            max_price: maxPrice === '' ? undefined : parseInt(maxPrice),
+            is_new: document.getElementById('is_new').checked,
+            is_rating: document.getElementById('is_rating').checked,
+            is_discount: document.getElementById('is_discount').checked,
+        };
     }
 
     /**
