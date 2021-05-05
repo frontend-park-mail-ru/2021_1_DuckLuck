@@ -15,7 +15,7 @@
 .nameWrapper {
   margin-top: auto;
   margin-bottom: auto;
-  width: 73%;
+  margin-right: auto;
 }
 
 .reviewHead {
@@ -23,6 +23,7 @@
   flex-direction: row;
   width: 100%;
   gap: var(--gap-s);
+  justify-content: space-between;
 }
 
 .meta {
@@ -89,4 +90,15 @@
   font-weight: var(--bold-font);
   color: var(--light-color);
   margin: auto;
+}
+
+@media screen and (max-width: $max-width-xs) {
+  .reviewHead {
+    flex-direction: column;
+  }
+
+  .body {
+    margin-top: var(--margin-s);
+    margin-left: 0;
+  }
 }
