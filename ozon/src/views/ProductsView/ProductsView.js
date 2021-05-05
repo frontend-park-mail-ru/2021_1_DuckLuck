@@ -191,6 +191,20 @@ export class ProductsView extends BaseView {
             this.show();
         });
 
+        const min_price_input = document.getElementById('min_price');
+        const max_price_input = document.getElementById('max_price');
+        min_price_input.addEventListener('keypress', (event) => {
+            if (event.key === '-') {
+                event.preventDefault();
+            }
+        });
+
+        max_price_input.addEventListener('keypress', (event) => {
+            if (event.key === '-') {
+                event.preventDefault();
+            }
+        });
+
         this.drawFilter();
     };
 
@@ -288,5 +302,13 @@ export class ProductsView extends BaseView {
         }
 
         form.remove();
+    }
+
+    drawIncorrectFilterWarning = () => {
+        document.getElementById('incorrect_filter_label').innerHTML = 'Некорректны данные для филтрации!';
+    }
+
+    dropIncorrectFilterWarning = () => {
+        document.getElementById('incorrect_filter_label').innerHTML = '';
     }
 }
