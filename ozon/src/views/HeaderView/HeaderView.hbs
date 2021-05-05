@@ -8,17 +8,15 @@
             </div>
         </div>
         <div class="{{headerStyles.catalogBlock}}">
-            <div class="{{headerStyles.buttonBlock}}">
-                <button class="{{buttonStyles.catalog}}">
-                    <div class="{{headerStyles.catalogButtonBody}}">
-                        {{#with catalog}}
-                            <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}}">
-                            <img loading="lazy" src={{img.1.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}} {{../decorators.hidden}}">
-                            <span class="{{../headerStyles.catalogText}}">{{text}}</span>
-                        {{/with}}
-                    </div>
-                </button>
-            </div>
+            <button class="{{buttonStyles.catalog}}">
+                <div class="{{headerStyles.catalogButtonBody}}">
+                    {{#with catalog}}
+                        <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}}">
+                        <img loading="lazy" src={{img.1.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}} {{../decorators.hidden}}">
+                        <span class="{{../headerStyles.catalogText}}">{{text}}</span>
+                    {{/with}}
+                </div>
+            </button>
         </div>
         <div class="{{headerStyles.searchBlock}}">
             {{#with searchBlock}}

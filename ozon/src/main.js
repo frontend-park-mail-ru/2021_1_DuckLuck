@@ -24,6 +24,10 @@ import OrderPresenter from './presenters/OrderPresenter';
 import OrderModel from './models/OrderModel';
 import HeaderModel from './models/HeaderModel';
 import HeaderPresenter from './presenters/HeaderPresenter';
+import ReviewModel from './models/ReviewModel';
+import ReviewPresenter from './presenters/ReviewPresenter';
+import ReviewView from './views/ReviewView/ReviewView';
+
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -47,6 +51,7 @@ const productsPresenter = new ProductsPresenter(application, ProductsView, Produ
 const productPresenter = new ProductPresenter(application, ProductView, ProductModel);
 const cartPresenter = new CartPresenter(application, CartView, CartModel);
 const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
+const reviewPresenter = new ReviewPresenter(application, ReviewView, ReviewModel);
 
 const header = document.getElementsByTagName('header')[0];
 const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
@@ -59,9 +64,10 @@ Router
     .register(/^\/profile$/, profilePresenter.view)
     .register(/^\/item(\/(?<productID>[0-9]*))?$/, productPresenter.view)
     .register(/^\/items(\/(?<category>[0-9]*)(\/(?<page>[0-9]*))?)?$/, productsPresenter.view)
-    .register(/^\/search\/(?<page>[0-9]*)\/\?text=(?<searchText>[А-Яа-яA-Za-z0-9\s]*)$/, productsPresenter.view)
+    .register(/^\/search\/(?<page>[0-9]*)\/$/, productsPresenter.view)
     .register(/^\/cart$/, cartPresenter.view)
     .register(/^\/offline$/, offlineView)
+    .register(/review$/, reviewPresenter.view)
     .register(/^\/order$/, orderPresenter.view);
 
 Router.start();

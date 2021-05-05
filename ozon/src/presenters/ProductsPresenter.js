@@ -20,6 +20,7 @@ class ProductsPresenter extends BasePresenter {
         this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
         Bus.globalBus.on(Events.ProductsChangeCategory, this.changeCategory);
         Bus.globalBus.on(Events.ProductsItemAdded, this.setProductAdded);
+        Bus.globalBus.on(Events.ProductsItemNotAdded, this.setProductNotAdded);
         Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
         Bus.globalBus.on(Events.CartLoadedProductsID, this.productsCartGotIds);
     }
@@ -62,6 +63,18 @@ class ProductsPresenter extends BasePresenter {
         return this.model.sortDirection;
     }
 
+
+    /**
+     * @return {Object}
+     */
+    get filter() {
+        return this.model.filter;
+    }
+
+    dropFilter = () => {
+        this.model.filter = undefined;
+    }
+
     /**
      *
      * @param {Number} id
@@ -93,15 +106,35 @@ class ProductsPresenter extends BasePresenter {
      * @param {String} sortDirection
      */
     loadProducts = (category, page, sortKey, sortDirection) => {
+        this.parseFiltration();
         this.model.loadProducts(category, page, sortKey, sortDirection);
     }
 
     /**
      * @param {string} searchData
      * @param {number} page
+     * @param {String} sortKey
+     * @param {String} sortDirection
      */
-    loadSearchProducts = (searchData, page) => {
-        this.model.loadProductsSearch(searchData, page);
+    loadSearchProducts = (searchData, page, sortKey, sortDirection) => {
+        this.parseFiltration();
+        this.model.loadProductsSearch(searchData, page, sortKey, sortDirection);
+    }
+
+    parseFiltration = () => {
+        if (!document.getElementById('min_price')) {
+            return;
+        }
+
+        const minPrice = document.getElementById('min_price').value;
+        const maxPrice = document.getElementById('max_price').value;
+        this.model.filter = {
+            min_price: minPrice === '' ? undefined : parseInt(minPrice),
+            max_price: maxPrice === '' ? undefined : parseInt(maxPrice),
+            is_new: document.getElementById('is_new').checked,
+            is_rating: document.getElementById('is_rating').checked,
+            is_discount: document.getElementById('is_discount').checked,
+        };
     }
 
     /**
@@ -149,6 +182,13 @@ class ProductsPresenter extends BasePresenter {
      */
     setProductAdded = (itemID) => {
         this.view.setProductAdded(itemID);
+    }
+
+    /**
+     * @param {number} itemID
+     */
+    setProductNotAdded = (itemID) => {
+        this.view.setProductNotAdded(itemID);
     }
 }
 

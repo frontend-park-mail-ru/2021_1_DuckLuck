@@ -1,7 +1,7 @@
 import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
-import profileStyles from './ProfileView.css';
+import profileStyles from './ProfileView.scss';
 import Events from '../../utils/bus/events';
 
 /**
@@ -11,9 +11,10 @@ import Events from '../../utils/bus/events';
  */
 export class ProfileView extends BaseView {
     /**
-     * @description redef of show method
+     * @param {Object} URLParams
+     * @description redefinition of show method
      */
-    show = () => {
+    show = (URLParams = {}) => {
         this.presenter.tryAuth();
     }
 

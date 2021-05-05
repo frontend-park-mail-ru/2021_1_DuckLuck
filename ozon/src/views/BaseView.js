@@ -1,4 +1,4 @@
-import {fieldsPlaceholders} from '../utils/validationFields/validationFields';
+import {incorrectFieldsMap} from '../utils/validationFields/validationFields';
 
 /**
  * @class BaseView
@@ -107,9 +107,10 @@ export class BaseView {
     }
 
     /**
+     * @param {Object} URLParams
      * @description Show element in HTML
      */
-    show = () => {
+    show = (URLParams = {}) => {
         this.render();
         this.#cache.hidden = false;
     }
@@ -143,7 +144,7 @@ export class BaseView {
             if (!input) {
                 break;
             }
-            BaseView.setInvalidInputPlaceholder(input, fieldsPlaceholders[`${input.name}`]);
+            BaseView.setInvalidInputPlaceholder(input, incorrectFieldsMap[`${input.name}`]);
         }
     }
 

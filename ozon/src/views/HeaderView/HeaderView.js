@@ -1,5 +1,5 @@
 import {BaseView} from '../BaseView.js';
-import headerStyles from './HeaderView.css';
+import headerStyles from './HeaderView.scss';
 import buttonStyles from '../Common/Button/Button.css';
 import imgStyles from '../Common/Img/Img.css';
 import inputStyles from '../Common/Input/Input.css';
@@ -19,7 +19,10 @@ import {Bus} from '../../utils/bus/bus';
  * @classdesc Class for Header page
  */
 export class HeaderView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = {}) => {
         this.bus.emit(Events.HeaderLoad, this.ID);
     }
 
@@ -121,7 +124,7 @@ export class HeaderView extends BaseView {
             if (evt.target.hasAttribute('category')) {
                 const categoryId = parseInt(evt.target.getAttribute('category'));
                 catalogBlock.dispatchEvent(new Event('click'));
-                Router.open(`/items/${categoryId}`);
+                Router.open(`/items/${categoryId}`, {dropFilter: true});
             }
         });
 
@@ -137,7 +140,7 @@ export class HeaderView extends BaseView {
         searchForm.addEventListener('submit', (event) => {
             event.preventDefault();
             const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
-            Router.open(`/search/1/?text=${searchInput.value}`);
+            Router.open('/search/1/', {dropFilter: true}, {text: searchInput.value});
         });
 
         menuItems.forEach((menuItem) => {

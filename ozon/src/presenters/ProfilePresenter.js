@@ -27,6 +27,7 @@ class ProfilePresenter extends BasePresenter {
         this.bus.on(Events.ProfileLogout, this.profileLogout);
 
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
+        Bus.globalBus.on(Events.ProfileTransmitData, this.returnUserData);
     }
 
     /**
@@ -157,7 +158,8 @@ class ProfilePresenter extends BasePresenter {
         }
         this.view.remove();
         Router.open('/', {replaceState: true});
-        Bus.globalBus.emit(Events.HeaderChangeCartItems, 0);
+        Bus.globalBus.emit(Events.HeaderSetCartItems, 0);
+        Bus.globalBus.emit(Events.CartDrop);
         this.model.profileLogout();
     }
 
@@ -252,6 +254,7 @@ class ProfilePresenter extends BasePresenter {
      */
     renderAllData = (status) => {
         if (status === Responses.Success) {
+            Bus.globalBus.emit(Events.CartLoadProductsAmount);
             this.view.renderData();
             return;
         }
@@ -260,6 +263,18 @@ class ProfilePresenter extends BasePresenter {
             return;
         }
         console.error(status);
+    }
+
+    /**
+     * @param {string} eventToEmit
+     */
+    returnUserData = (eventToEmit) => {
+        Bus.globalBus.emit(eventToEmit, {
+            firstName: this.model.firstName,
+            lastName: this.model.lastName,
+            email: this.model.email,
+            avatarURL: this.model.avatarURL,
+        });
     }
 }
 

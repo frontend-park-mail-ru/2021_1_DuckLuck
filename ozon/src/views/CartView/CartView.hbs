@@ -20,7 +20,7 @@
                         <div class="products-list">
                             {{#each this.productsList}}
                                 <div class="{{../cartStyles.productsListElem}}" product_id="{{this.id}}">
-                                    <input type="checkbox" name="a" value="" style="visibility: hidden;">
+                                    <input type="checkbox" name="a" value="" class="{{../decorators.hidden}}">
                                     <div class="{{../cartStyles.image}}">
                                         <img src={{this.preview_image}} alt="" class="{{../cartStyles.productImage}}">
                                     </div>
@@ -32,17 +32,19 @@
                                         </div>
                                     </div>
                                     <div class="{{../cartStyles.priceBlock}}">
-                                        <div class="{{../cartStyles.price}}">
-                                            <span class="{{../cartStyles.priceText}}"></span>
-                                        </div>
                                         <div class="{{../cartStyles.priceInfo}}">
-                                            <span class="{{../cartStyles.basePrice}}">{{this.price.base_cost}}₽</span>
-                                            <span class="{{../cartStyles.discount}}">Скидка {{this.price.discount}}%</span>
+                                            <div class="{{../cartStyles.endPrice}}">{{multiply this.price.total_cost this.count}} ₽</div>
+                                            {{#ifNotEquals this.price.total_discount 0}}
+                                                <span class="{{../cartStyles.oldPrice}}">{{multiply this.price.base_cost this.count}} ₽</span>
+                                                <span class="{{../cartStyles.discountPrice}}">Скидка {{substract (multiply this.price.base_cost this.count) (multiply this.price.total_cost this.count)}} ₽</span>
+                                            {{/ifNotEquals}}
                                         </div>
                                     </div>
                                     <div class="{{../cartStyles.countMenu}}">
                                         <button class="{{../cartStyles.incButton}}" title={{this.id}}>-</button>
-                                        <span class="count" title={{this.id}}>{{this.count}}</span>
+                                        <div class="{{../cartStyles.countField}}" title={{this.id}}>
+                                            <span class="{{../cartStyles.count}}" title={{this.id}}>{{this.count}}</span>
+                                        </div>
                                         <button class="{{../cartStyles.decButton}}" title={{this.id}}>+</button>
                                     </div>
                                 </div>

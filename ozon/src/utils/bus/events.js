@@ -21,23 +21,29 @@ const Events = {
     ProfileLogout: 'profile-logout',
     ProfileLogoutEmitResult: 'profile-logout-emit-result',
     ProfileIncorrectLogout: 'profile-logout-incorrect',
+    ProfileTransmitData: 'profile-transmit-user-data',
 
     ProductsLoad: 'products-load',
     ProductsLoadSearch: 'products-load-search',
     ProductsLoaded: 'products-loaded',
     ProductsChangeCategory: 'products-change-category',
     ProductsItemAdded: 'products-item-added',
+    RenderProductReviews: 'render-product-reviews',
+    ProductTransmitData: 'product-transmit-data',
+    ProductsItemNotAdded: 'products-item-removed',
 
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
-
+    ProductItemNotAdded: 'product-item-not-added',
+    ProductItemAdded: 'product-item-added',
 
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',
     HeaderChangeCatalogID: 'header-change-catalog-id',
     HeaderChangeCategoryID: 'header-change-category-id',
     HeaderChangeCartItems: 'header-change-cart-items',
+    HeaderSetCartItems: 'header-set-cart-items',
 
     CartAddProduct: 'cart-add-product',
     CartProductChange: 'cart-update-product',
@@ -53,11 +59,23 @@ const Events = {
     CartLoadedProductsID: 'cart-loaded-products-ids',
     CartLoadedProductID: 'cart-loaded-product-id',
     CartAddLastProduct: 'cart-add-last-product',
-
+    CartDrop: 'cart-drop',
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
     SendOrder: 'order-send',
+
+    ReviewRightsLoad: 'review-rights-load',
+    ReviewRightsLoaded: 'review-rights-loaded',
+    ReviewUserDataLoad: 'review-user-data-load',
+    ReviewUserDataLoaded: 'review-user-data-loaded',
+    ReviewProductDataLoad: 'review-product-data-load',
+    ReviewProductDataLoaded: 'review-product-data-load',
+    ReviewOrder: 'review-send',
+    GetProductReviews: 'get-product-reviews',
+    GetProductReviewsReaction: 'get-product-reviews-reaction',
+
+    ChangeReviewProductId: 'change-review-product-id',
     OrderSent: 'order-sent',
 };
 

@@ -1,0 +1,347 @@
+@import '../../constants.scss';
+
+.cartWrapper {
+    background: var(--neutral-background-color);
+    width: 100%;
+    height: 100%;
+}
+
+.body {
+    max-width: var(--max-width);
+    padding: 4px 28px;
+    margin: var(--margin-l) auto 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    display: flex;
+    flex-direction: column;
+}
+
+.titleText {
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+}
+
+.mainWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: var(--margin-l);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    justify-content: space-between;
+}
+
+.cartInfo {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: var(--lower-border-radius);
+    width: 66%;
+}
+
+.selectMenu {
+    display: flex;
+    flex-direction: row;
+    background: white;
+    max-width: var(--max-width);
+    padding: 4px 28px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    border-bottom: solid 1px;
+    height: 48px;
+    gap: 5px;
+}
+
+.selectAll {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.selectAllText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.deleteSelectedText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    margin-top: auto;
+    margin-bottom: auto;
+    color: var(--discout-color);
+}
+
+.deliveryBlock {
+    height: 61px;
+    background: var(--neutral-background-color);
+    margin: var(--margin-s) auto;
+    display: flex;
+    border-radius: var(--standart-border-radius);
+    width: 96.57%;
+}
+
+.deliveryText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    margin: var(--margin-s);
+}
+
+.image {
+    width: 92px;
+    height: 92px;
+}
+
+.productImage {
+    height: 100%;
+}
+
+.emptyCartText {
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+    margin: auto;
+}
+
+.productsListElem {
+    display: flex;
+    flex-direction: row;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    align-items: center;
+    padding: 4px 28px;
+    border-bottom: solid 1px;
+    border-color: var(--neutral-background-color);
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.checkbox {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.productMenuText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    color: var(--colored-object-color);
+    cursor: pointer;
+}
+
+.incButton, .decButton {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--colored-object-color);
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.incButton:hover, .decButton:hover {
+    background: var(--neutral-background-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.orderMenu {
+    height: 372px;
+    background: white;
+    border-radius: var(--lower-border-radius);
+    display: flex;
+    flex-direction: column;
+    width: 32%;
+}
+
+.orderButton {
+    margin: auto;
+    height: 56px;
+    border-radius: var(--standart-border-radius);
+    border: none;
+    background: var(--order-color);
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    cursor: pointer;
+    outline: none;
+    width: 89.84%;
+}
+
+.orderButton:hover {
+    background: var(--dark-order-color);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.orderSubmit {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--light-color);
+}
+
+.orderButtonWrapper {
+    display: flex;
+    height: 152px;
+    border-bottom: solid 1px;
+    width: 100%;
+}
+
+.orderInfo {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.orderInfoTitle {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+    margin-left: 20px;
+}
+
+.orderInfoText {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    margin-left: 20px;
+}
+
+.orderInfoWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.orderInfoBody {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.priceBlock {
+    width: 30%;
+}
+
+.totalPriceBlock {
+    border-top: 1px solid;
+    padding-left: 20px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+.orderTotalPriceTitle {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+}
+
+.orderInfoRow {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+.orderInfoDiscount {
+    color: var(--discout-color);
+}
+
+.discountPrice {
+    color: var(--discout-color);
+}
+
+.endPrice, .discountPrice{
+    font-weight: var(--bold-font);
+}
+
+.orderInfoPrice {
+    font-weight: var(--bold-font);
+}
+
+.oldPrice {
+    color: var(--old-price-color);
+    text-decoration: line-through;
+}
+
+.totalPriceText {
+    font-weight: var(--bold-font);
+    font-size: var(--font-size-l);
+}
+
+.countField {
+    display: flex;
+    width: 20px;
+}
+
+.countMenu {
+    display: flex;
+}
+
+.count {
+    margin: auto;
+}
+
+@media screen and (max-width: $max-width-xl){
+    .wrapper {
+        flex-direction: column;
+        gap: var(--gap-s);
+    }
+
+    .cartInfo {
+        width: 100%;
+    }
+
+    .orderMenu {
+        width: 100%;
+    }
+
+    .orderButtonWrapper {
+        order: 2;
+    }
+}
+
+@media screen and (max-width: $max-width-l){
+    .productsListElem {
+        flex-direction: column;
+        gap: var(--gap-xs);
+        align-items: flex-start;
+    }
+
+    .description {
+        width: 100%;
+    }
+
+    .priceBlock {
+        width: 100%;
+    }
+
+    .countMenu {
+        width: 100%;
+    }
+}

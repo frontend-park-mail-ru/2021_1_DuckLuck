@@ -1,0 +1,134 @@
+@import "../../constants.scss";
+
+
+.block {
+    padding: var(--padding-xs) var(--padding-l);
+    width: 76.66%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    display: flex;
+    gap: var(--margin-xxxl);
+    margin: var(--margin-l) auto 0;
+}
+
+.avatarWrapper {
+    border-radius: 50%;
+    width: var(--width-s);
+    height: var(--width-s);
+    cursor: pointer;
+}
+
+.avatarBlock {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-s);
+}
+
+.nameWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.informationBlock {
+    display: flex;
+    flex-direction: row;
+    width: 57%;
+    height: 310px;
+    gap: var(--margin-s)
+}
+
+.infoElem {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-xxs);
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-xl);
+}
+
+.titleText {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    font-weight: var(--bold-font);
+}
+
+.infoTitle {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    color: var(--neutral-color);
+}
+
+.infoText {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    background: var(--neutral-background-color);
+    border: none;
+}
+
+.infoText::placeholder {
+    color: grey;
+}
+
+.incorrectAvatar {
+    color: firebrick;
+}
+
+.change {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--colored-object-color);
+    border: none;
+    background-color: inherit;
+    cursor: pointer;
+}
+
+.fioWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--margin-xl);
+}
+
+.exit {
+    font-family: var(--font);
+    font-size: var(--font-size-s);
+    color: var(--discout-color);
+    cursor: pointer;
+}
+
+.exit:hover {
+    filter: brightness(50%);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.changeText {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--colored-object-color);
+}
+
+.changeText:hover {
+    filter: brightness(50%);
+    transition: .2s cubic-bezier(.4,0,.2,1);
+}
+
+.label {
+    display: flex;
+}
+
+@media screen and (max-width: $max-width-s) {
+    .block {
+        flex-direction: column;
+        padding-bottom: 120px;
+    }
+
+    .avatarWrapper {
+        margin: auto;
+    }
+
+    .exit {
+        margin: auto;
+    }
+}

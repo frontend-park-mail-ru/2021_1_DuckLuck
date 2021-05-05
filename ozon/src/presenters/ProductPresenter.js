@@ -3,6 +3,7 @@ import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import {Bus} from '../utils/bus/bus';
 import Router from '../utils/router/Router';
+import {staticServerHost} from '../utils/urls/urls';
 
 /**
  * @description Presenter for Products View and Model
@@ -15,10 +16,14 @@ class ProductsPresenter extends BasePresenter {
      */
     constructor(application, View, Model) {
         super(application, View, Model);
-        Bus.globalBus.on(Events.ProductChangeID, this.changeID);
         this.bus.on(Events.ProductLoad, this.loadProduct);
         this.bus.on(Events.ProductLoaded, this.productLoadedReaction);
+        Bus.globalBus.on(Events.ProductChangeID, this.changeID);
         Bus.globalBus.on(Events.CartLoadedProductID, this.productCartGotIds);
+        Bus.globalBus.on(Events.RenderProductReviews, this.renderProductsReview);
+        Bus.globalBus.on(Events.ProductTransmitData, this.returnProductData);
+        Bus.globalBus.on(Events.ProductItemAdded, this.setProductAdded);
+        Bus.globalBus.on(Events.ProductItemNotAdded, this.setProductNotAdded);
     }
 
     /**
@@ -27,6 +32,20 @@ class ProductsPresenter extends BasePresenter {
      */
     get item() {
         return this.model.item;
+    }
+
+    /**
+     * @return {string}
+     */
+    get sortKey() {
+        return this.model.sortKey;
+    }
+
+    /**
+     * @return {string}
+     */
+    get sortDirection() {
+        return this.model.sortDirection;
     }
 
     /**
@@ -43,6 +62,20 @@ class ProductsPresenter extends BasePresenter {
      */
     changeID = (id) => {
         this.view.ID = id;
+    }
+
+    /**
+     * @param {String} sortKey
+     */
+    set sortKey(sortKey) {
+        this.model.sortKey = sortKey;
+    }
+
+    /**
+     * @param {String} sortDirection
+     */
+    set sortDirection(sortDirection) {
+        this.model.sortDirection = sortDirection;
     }
 
     /**
@@ -71,8 +104,38 @@ class ProductsPresenter extends BasePresenter {
      */
     productCartGotIds = (ids) => {
         if (ids.has(this.model.item.id)) {
-            this.view.setButtonInCart();
+            this.view.setProductAdded();
         }
+    }
+
+    /**
+     * @param {Array} reviews
+     * @param {Object} paginator
+     */
+    renderProductsReview = (reviews, paginator) => {
+        this.view.renderProductsReview(reviews, paginator);
+    }
+
+    /**
+     * @param {string} eventToEmit
+     */
+    returnProductData = (eventToEmit) => {
+        const product = this.model.item;
+        Bus.globalBus.emit(eventToEmit, {
+            id: product.id,
+            category: product.description.category,
+            image: `${staticServerHost}${product.images[0]}`,
+            title: product.name,
+            href: `/item/${product.id}`,
+        });
+    }
+
+    setProductAdded = () => {
+        this.view.setProductAdded();
+    }
+
+    setProductNotAdded = () => {
+        this.view.setProductNotAdded();
     }
 }
 
