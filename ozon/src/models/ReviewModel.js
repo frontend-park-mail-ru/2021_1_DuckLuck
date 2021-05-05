@@ -174,7 +174,7 @@ class ReviewModel extends BaseModel {
             advantages: this.#advantages,
             disadvantages: this.#disadvantages,
             comment: this.#comment,
-            is_public: this.#isPublic ? this.#isPublic : true,
+            is_public: this.#isPublic !== undefined ? this.#isPublic : true,
         };
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.review,

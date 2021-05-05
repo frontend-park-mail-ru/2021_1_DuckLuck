@@ -88,7 +88,7 @@ class ReviewView extends BaseView {
 
         const isPublic = document.getElementsByName('isPublic')[0];
         isPublic.addEventListener('change', () => {
-            this.presenter.isPublic = !this.presenter.isPublic;
+            this.presenter.isPublic = !isPublic.checked;
         });
 
         const productLink = this.cache.getElementsByClassName(reviewStyles.href)[0];
