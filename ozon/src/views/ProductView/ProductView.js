@@ -58,6 +58,7 @@ export class ProductView extends BaseView {
             reviewStyles: reviewStyles,
             imagesStyles: imagesStyles,
             decorators: decorators,
+            category_path: this.presenter.item.category_path,
             select: [
                 {
                     key: 'date',
@@ -96,6 +97,12 @@ export class ProductView extends BaseView {
         Array.from(this.cache.getElementsByClassName(imagesStyles.imgXL)).forEach((image) => {
             image.addEventListener('click', () => {
                 mainImage.setAttribute('src', image.getAttribute('src'));
+            });
+        });
+
+        Array.from(this.cache.getElementsByClassName(productStyles.category_path)).forEach((category) => {
+            category.addEventListener('click', () => {
+                Router.open(`/items/${category.getAttribute('category_id')}`);
             });
         });
 

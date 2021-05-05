@@ -1,7 +1,7 @@
 <div class="{{productStyles.block}}">
     <div class="{{productStyles.categoriesBlock}}">
-        {{#each category}}
-            <span class="{{../productStyles.category}}">{{this.name}}</span>
+        {{#each category_path}}
+            <span class="{{../productStyles.category_path}}" category_id="{{this.id}}">{{this.name}}</span>
             <span> ></span>
         {{/each}}
     </div>
