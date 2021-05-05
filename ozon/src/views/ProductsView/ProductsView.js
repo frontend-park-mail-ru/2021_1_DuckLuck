@@ -305,7 +305,7 @@ export class ProductsView extends BaseView {
     }
 
     drawIncorrectFilterWarning = () => {
-        document.getElementById('incorrect_filter_label').innerHTML = 'Некорректны данные для филтрации!';
+        document.getElementById('incorrect_filter_label').innerHTML = 'Некорректные данные для фильтрации!';
     }
 
     dropIncorrectFilterWarning = () => {
