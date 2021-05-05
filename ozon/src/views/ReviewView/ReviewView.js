@@ -83,7 +83,7 @@ class ReviewView extends BaseView {
         const submitButton = this.cache.getElementsByClassName(reviewStyles.submitButton)[0];
         submitButton.addEventListener('click', () => {
             this.presenter.sendReview();
-            Router.open('/');
+            Router.open(`/item/${this.presenter.product.id}`);
         });
 
         const isPublic = document.getElementsByName('isPublic')[0];
