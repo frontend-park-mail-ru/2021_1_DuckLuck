@@ -1,4 +1,4 @@
-@import '../../constants.css';
+@import '../../constants.scss';
 
 .cartWrapper {
     background: var(--neutral-background-color);
@@ -43,10 +43,9 @@
 .cartInfo {
     display: flex;
     flex-direction: column;
-    width: 100%;
     background: white;
-    width: 935px;
     border-radius: var(--lower-border-radius);
+    width: 66%;
 }
 
 .selectMenu {
@@ -86,12 +85,12 @@
 }
 
 .deliveryBlock {
-    width: 903px;
     height: 61px;
     background: var(--neutral-background-color);
-    margin: var(--margin-s);
+    margin: var(--margin-s) auto;
     display: flex;
     border-radius: var(--standart-border-radius);
+    width: 96.57%;
 }
 
 .deliveryText {
@@ -109,6 +108,13 @@
     height: 100%;
 }
 
+.emptyCartText {
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+    margin: auto;
+}
+
 .productsListElem {
     display: flex;
     flex-direction: row;
@@ -118,7 +124,6 @@
     box-sizing: border-box;
     font-family: var(--font);
     align-items: center;
-    justify-content: space-between;
     padding: 4px 28px;
     border-bottom: solid 1px;
     border-color: var(--neutral-background-color);
@@ -127,7 +132,7 @@
 .description {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 50%;
 }
 
 .checkbox {
@@ -140,11 +145,6 @@
     font-size: var(--font-size-s);
     color: var(--colored-object-color);
     cursor: pointer;
-}
-
-.priceInfo {
-    display: flex;
-    flex-direction: column;
 }
 
 .incButton, .decButton {
@@ -162,17 +162,16 @@
 }
 
 .orderMenu {
-    width: 455px;
     height: 372px;
     background: white;
     border-radius: var(--lower-border-radius);
     display: flex;
     flex-direction: column;
+    width: 32%;
 }
 
 .orderButton {
     margin: auto;
-    width: 407px;
     height: 56px;
     border-radius: var(--standart-border-radius);
     border: none;
@@ -182,6 +181,7 @@
     margin-top: 20px;
     cursor: pointer;
     outline: none;
+    width: 89.84%;
 }
 
 .orderButton:hover {
@@ -197,15 +197,15 @@
 
 .orderButtonWrapper {
     display: flex;
-    width: 455px;
     height: 152px;
     border-bottom: solid 1px;
+    width: 100%;
 }
 
 .orderInfo {
     display: flex;
     flex-direction: column;
-    width: 455px;
+    width: 100%;
 }
 
 .orderInfoTitle {
@@ -232,6 +232,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.priceBlock {
+    width: 30%;
 }
 
 .totalPriceBlock {
@@ -268,11 +272,11 @@
     color: var(--discout-color);
 }
 
-.discount {
+.discountPrice {
     color: var(--discout-color);
 }
 
-.basePrice {
+.endPrice, .discountPrice{
     font-weight: var(--bold-font);
 }
 
@@ -280,7 +284,64 @@
     font-weight: var(--bold-font);
 }
 
+.oldPrice {
+    color: var(--old-price-color);
+    text-decoration: line-through;
+}
+
 .totalPriceText {
     font-weight: var(--bold-font);
     font-size: var(--font-size-l);
+}
+
+.countField {
+    display: flex;
+    width: 20px;
+}
+
+.countMenu {
+    display: flex;
+}
+
+.count {
+    margin: auto;
+}
+
+@media screen and (max-width: $max-width-xl){
+    .wrapper {
+        flex-direction: column;
+        gap: var(--gap-s);
+    }
+
+    .cartInfo {
+        width: 100%;
+    }
+
+    .orderMenu {
+        width: 100%;
+    }
+
+    .orderButtonWrapper {
+        order: 2;
+    }
+}
+
+@media screen and (max-width: $max-width-l){
+    .productsListElem {
+        flex-direction: column;
+        gap: var(--gap-xs);
+        align-items: flex-start;
+    }
+
+    .description {
+        width: 100%;
+    }
+
+    .priceBlock {
+        width: 100%;
+    }
+
+    .countMenu {
+        width: 100%;
+    }
 }

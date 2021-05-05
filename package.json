@@ -8,7 +8,7 @@
     "lint--fix": "eslint --fix ./",
     "build": "webpack",
     "start": "webpack && node ozon/server/index.mjs",
-    "start-dev": "webpack --watch & node ozon/server/index.mjs",
+    "start-dev": "webpack --env=dev --watch & node ozon/server/index.mjs",
     "generate-doc": "jsdoc -c jsdoc-conf.json",
     "prepare": "husky install"
   },
@@ -53,9 +53,11 @@
     "postcss-size": "^4.0.1",
     "regenerator-runtime": "^0.13.7",
     "request": "^2.88.2",
+    "sass": "^1.32.12",
+    "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
     "uuid": "^3.3.2",
-    "webpack": "^5.24.3",
+    "webpack": "^5.36.2",
     "webpack-cli": "^4.5.0"
   }
 }

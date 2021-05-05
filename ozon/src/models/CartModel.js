@@ -1,5 +1,5 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
-import {serverApiPath, urls} from '../utils/urls/urls';
+import {fileServerHost, serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
@@ -10,9 +10,11 @@ import HTTPResponses from '../utils/http-responses/httpResponses';
  * @description Model for Product in MVP Arch
  */
 class CartModel extends BaseModel {
-    #ids = []
+    #ids
     #products
+    #price
     #needsRerender;
+    #lastAddedProductID
 
     /**
      * @return {Object} item
@@ -22,7 +24,21 @@ class CartModel extends BaseModel {
     }
 
     /**
-     * @return {*[]}
+     * @return {Object} price
+     */
+    get price() {
+        return this.#price;
+    }
+
+    /**
+     * @return {number} ID of last added product (for authentication and future adding)
+     */
+    get lastAddedProduct() {
+        return this.#lastAddedProductID;
+    }
+
+    /**
+     * @return {Set}
      */
     get ids() {
         return this.#ids;
@@ -36,13 +52,21 @@ class CartModel extends BaseModel {
     }
 
     /**
+     * @description drops the cart
+     */
+    dropCart = () => {
+        this.#ids = undefined;
+        this.#products = undefined;
+        this.#lastAddedProductID = undefined;
+    }
+
+    /**
      *
      * @param {number} id id of product
      * @param {number | string} count amount of product
      */
     addProduct(id, count) {
-        Bus.globalBus.emit(Events.HeaderChangeCartItems, 1);
-
+        this.#lastAddedProductID = id;
 
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.cartProduct,
@@ -54,11 +78,16 @@ class CartModel extends BaseModel {
                 throw response.status;
             }
             return response.json();
-        }).then((parsedJson) => {
-            this.#needsRerender = true;
-            this.#ids.push(id);
+        }).then(() => {
+            Bus.globalBus.emit(Events.HeaderChangeCartItems, 1);
+            Bus.globalBus.emit(Events.ProductsItemAdded, id);
+            Bus.globalBus.emit(Events.ProductItemAdded, id);
+            (this.#products = this.products || []).push({
+                count: 1,
+                id: id,
+            });
+            this.#ids.add(+id);
         }).catch((err) => {
-            Bus.globalBus.emit(Events.HeaderChangeCartItems, -1);
             switch (err) {
             case HTTPResponses.Unauthorized: {
                 this.bus.emit(Events.CartProductAdded, Responses.Unauthorized);
@@ -81,6 +110,11 @@ class CartModel extends BaseModel {
      * @param {string} event
      */
     getIDs = (event) => {
+        if (this.#ids) {
+            Bus.globalBus.emit(event, this.#ids);
+            return;
+        }
+
         AjaxModule.getUsingFetch({
             url: serverApiPath + urls.cart,
         }).then((response) => {
@@ -89,26 +123,27 @@ class CartModel extends BaseModel {
             }
             return response.json();
         }).then((parsedJson) => {
-            this.#ids = (parsedJson.products || []).map((elem) => {
+            this.#ids = new Set((parsedJson.products || []).map((elem) => {
                 return elem.id;
-            }) || [];
+            }) || []);
             Bus.globalBus.emit(event, this.#ids);
         }).catch((err) => {
             console.error(err);
-            Bus.globalBus.emit(event, []);
+            Bus.globalBus.emit(event, new Set());
         });
     }
 
     /**
-     * @param {number} itemID
+     * @param {number | string} itemID
      * @param {number | string} count
      */
     changeCartCounter = (itemID, count) => {
         for (const product of this.#products) {
-            if (product.id === itemID) {
+            if (+product.id === +itemID) {
                 const diff = +count - this.#products[this.#products.indexOf(product)].count;
                 this.#products[this.#products.indexOf(product)].count = +count;
                 Bus.globalBus.emit(Events.HeaderChangeCartItems, diff);
+                break;
             }
         }
     }
@@ -131,7 +166,7 @@ class CartModel extends BaseModel {
                 count: +count},
         }).then((response) => {
             return response.json();
-        }).then((parsedJson) => {
+        }).then(() => {
             this.#needsRerender = true;
         }).catch((err) => {
             console.error(err);
@@ -142,7 +177,15 @@ class CartModel extends BaseModel {
      * @param {number} id id of removed product
      */
     removeProduct = (id) => {
+        if (!(this.#ids.has(+id))) {
+            return;
+        }
         this.changeCartCounter(id, 0);
+        this.#ids.delete(+id);
+        Bus.globalBus.emit(Events.CartProductRemoved, Responses.Success, id);
+        Bus.globalBus.emit(Events.ProductsItemNotAdded, id);
+        Bus.globalBus.emit(Events.ProductItemNotAdded, id);
+        this.products.splice(this.products.findIndex((elem) => +elem.id === +id), 1);
 
         AjaxModule.deleteUsingFetch({
             url: serverApiPath + urls.cartProduct,
@@ -151,11 +194,6 @@ class CartModel extends BaseModel {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
-            this.#needsRerender = true;
-            if (this.#ids.indexOf(id) !== -1) {
-                this.#ids.splice(this.#ids.indexOf(id), 1);
-            }
-            Bus.globalBus.emit(Events.CartProductRemoved, Responses.Success);
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Offline: {
@@ -183,9 +221,13 @@ class CartModel extends BaseModel {
         }).then((parsedJson) => {
             this.#needsRerender = false;
             this.#products = parsedJson.products || [];
-            this.#ids = this.#products.map((elem) => {
+            this.#price = parsedJson.price;
+            this.#ids = new Set(this.#products.map((elem) => {
                 return elem.id;
-            }) || [];
+            }) || []);
+            for (const product of this.#products) {
+                product.preview_image = fileServerHost + product.preview_image;
+            }
             this.bus.emit(Events.CartLoaded, Responses.Success);
         }).catch((err) => {
             switch (err) {
@@ -196,7 +238,7 @@ class CartModel extends BaseModel {
             case HTTPResponses.InternalError: {
                 this.#needsRerender = false;
                 this.#products = [];
-                this.#ids = [];
+                this.#ids = new Set();
                 this.bus.emit(Events.CartLoaded, Responses.Success);
                 return;
             }
@@ -215,9 +257,9 @@ class CartModel extends BaseModel {
             return response.json();
         }).then((parsedJson) => {
             this.#products = parsedJson.products || [];
-            this.#ids = this.#products.map((elem) => {
+            this.#ids = new Set(this.#products.map((elem) => {
                 return elem.id;
-            }) || [];
+            }) || []);
             let count = 0;
             for (const product of this.#products) {
                 count += product.count;

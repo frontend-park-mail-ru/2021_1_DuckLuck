@@ -1,5 +1,5 @@
 @import './ListOfProductsItem/ListOfProductsItem.css';
-@import '../../../constants.css';
+@import '../../../constants.scss';
 
 .body {
     display: flex;

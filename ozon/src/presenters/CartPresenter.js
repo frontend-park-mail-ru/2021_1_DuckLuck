@@ -27,6 +27,9 @@ class CartPresenter extends BasePresenter {
         Bus.globalBus.on(Events.CartLoadProductsAmount, this.loadProductsAmount);
         Bus.globalBus.on(Events.CartGetProductsID, this.getProductsIDs);
         Bus.globalBus.on(Events.CartGetProductID, this.getProductID);
+        Bus.globalBus.on(Events.CartAddLastProduct, this.addLastProduct);
+        Bus.globalBus.on(Events.OrderSent, this.dropCart);
+        Bus.globalBus.on(Events.CartDrop, this.dropCart);
     }
 
     /**
@@ -34,6 +37,13 @@ class CartPresenter extends BasePresenter {
      */
     get products() {
         return this.model.products;
+    }
+
+    /**
+     * @return {Object} price of users cart
+     */
+    get price() {
+        return this.model.price;
     }
 
     /**
@@ -98,11 +108,12 @@ class CartPresenter extends BasePresenter {
     }
 
     /**
-     * @param {Responses} result
+     * @param {string} result
+     * @param {number} id
      */
-    productRemovedReaction = (result) => {
+    productRemovedReaction = (result, id = undefined) => {
         if (result === Responses.Success) {
-            this.view.show();
+            this.view.removeProduct(id);
             return;
         }
         console.error(result);
@@ -139,7 +150,7 @@ class CartPresenter extends BasePresenter {
      * @param {number} count
      */
     productsAmountLoadedReaction = (count) => {
-        Bus.globalBus.emit(Events.HeaderChangeCartItems, count);
+        Bus.globalBus.emit(Events.HeaderSetCartItems, count);
     }
 
     getProductsIDs = () => {
@@ -148,6 +159,16 @@ class CartPresenter extends BasePresenter {
 
     getProductID = () => {
         this.model.getIDs(Events.CartLoadedProductID);
+    }
+
+    addLastProduct = () => {
+        if (this.model.lastAddedProduct) {
+            this.model.addProduct(this.model.lastAddedProduct, 1);
+        }
+    }
+
+    dropCart = () => {
+        this.model.dropCart();
     }
 }
 

@@ -19,6 +19,9 @@ class HeaderPresenter extends BasePresenter {
         Bus.globalBus.on(Events.SignupEmitResult, this.updateAuthorizeState);
         Bus.globalBus.on(Events.ProfileLogoutEmitResult, this.updateAuthorizeState);
         Bus.globalBus.on(Events.HeaderChangeCartItems, this.changeCartItems);
+        Bus.globalBus.on(Events.OrderSent, this.setOrDropCartItems);
+        Bus.globalBus.on(Events.HeaderSetCartItems, this.setOrDropCartItems);
+
         this.bus.on(Events.HeaderLoad, this.loadHeader);
         this.bus.on(Events.HeaderLoaded, this.headerLoadedReaction);
     }
@@ -94,6 +97,14 @@ class HeaderPresenter extends BasePresenter {
      */
     changeCartItems = (value) => {
         this.view.changeCartItems(value);
+    }
+
+    /**
+     * @param {number} value
+     * @description sets items amount in cart to new value. By default set items amount to 0
+     */
+    setOrDropCartItems = (value = 0) => {
+        this.view.setCartItems(value);
     }
 }
 

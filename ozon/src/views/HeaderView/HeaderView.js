@@ -1,5 +1,5 @@
 import {BaseView} from '../BaseView.js';
-import headerStyles from './HeaderView.css';
+import headerStyles from './HeaderView.scss';
 import buttonStyles from '../Common/Button/Button.css';
 import imgStyles from '../Common/Img/Img.css';
 import inputStyles from '../Common/Input/Input.css';
@@ -19,7 +19,10 @@ import {Bus} from '../../utils/bus/bus';
  * @classdesc Class for Header page
  */
 export class HeaderView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = {}) => {
         this.bus.emit(Events.HeaderLoad, this.ID);
     }
 
@@ -121,11 +124,25 @@ export class HeaderView extends BaseView {
             if (evt.target.hasAttribute('category')) {
                 const categoryId = parseInt(evt.target.getAttribute('category'));
                 catalogBlock.dispatchEvent(new Event('click'));
-                Router.open(`/items/${categoryId}`);
+                Router.open(`/items/${categoryId}`, {dropFilter: true});
             }
         });
 
         const menuItems = Array.from(this.cache.getElementsByClassName(headerStyles.menuItem));
+        menuItems.forEach((menuItem) => {
+            menuItem.addEventListener('click', () => {
+                const href = menuItem.getAttribute('href');
+                Router.open(href);
+            });
+        });
+
+        const searchForm = this.cache.getElementsByClassName(headerStyles.searchForm)[0];
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
+            Router.open('/search/1/', {dropFilter: true}, {text: searchInput.value});
+        });
+
         menuItems.forEach((menuItem) => {
             menuItem.addEventListener('click', () => {
                 const href = menuItem.getAttribute('href');
@@ -171,7 +188,19 @@ export class HeaderView extends BaseView {
      */
     changeCartItems = (value) => {
         const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
-        counter.innerHTML = (+counter.innerHTML + value).toString();
+        const newCounterAmount = +counter.innerHTML + value;
+        counter.innerHTML = newCounterAmount.toString();
+        counter.hidden = !newCounterAmount;
+    }
+
+    /**
+     * @param {number} value
+     * @description sets items amount in cart to 0
+     */
+    setCartItems = (value) => {
+        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        counter.innerHTML = value.toString();
+        counter.hidden = !value;
     }
 }
 

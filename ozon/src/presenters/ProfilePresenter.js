@@ -1,5 +1,5 @@
 import BasePresenter from './BasePresenter.js';
-import {isValidForm} from '../modules/Valiadtor/validator';
+import {isValidInputs} from '../modules/Valiadtor/validator';
 import Router from '../utils/router/Router';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
@@ -27,23 +27,35 @@ class ProfilePresenter extends BasePresenter {
         this.bus.on(Events.ProfileLogout, this.profileLogout);
 
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
+        Bus.globalBus.on(Events.ProfileTransmitData, this.returnUserData);
     }
 
     /**
-     *
      * @param {Object} specificTypeToCheck
-     * @return {boolean}
+     * @return {Object} contains array of invalid fields
      */
-    isFormValid = (specificTypeToCheck = []) => {
-        return isValidForm(document.getElementById('form'), specificTypeToCheck);
+    isFirstLasNameFormValid = (specificTypeToCheck = []) => {
+        return isValidInputs(document.getElementById('flname-form').getElementsByTagName('input'),
+            specificTypeToCheck);
+    }
+
+    /**
+     * @return {boolean} is dispatched file valid?
+     */
+    isAvatarValid = () => {
+        const input = document.createElement('input');
+        input.setAttribute('type', 'file');
+        input.files = document.getElementById('avatar-input').files;
+        return !!isValidInputs([input]).failedFields.length;
     }
 
     /**
      * @description Send data to model
      */
     sendFirstLastName = () => {
-        if (!this.isFormValid(['text'])) {
-            this.bus.emit(Events.ProfileIncorrectFLName);
+        const result = this.isFirstLasNameFormValid();
+        if (result.failedFields.length) {
+            this.view.invalidForm(result.failedFields);
             return;
         }
         const firstName = document.getElementsByName('firstName')[0].value.trim();
@@ -128,6 +140,10 @@ class ProfilePresenter extends BasePresenter {
      * @description get data view and send to model
      */
     sendAvatar = () => {
+        if (this.isAvatarValid()) {
+            this.view.invalidAvatar();
+            return;
+        }
         const avatarInput = document.getElementById('avatar-input');
         this.model.changeAvatar(avatarInput.files[0]);
     }
@@ -142,7 +158,8 @@ class ProfilePresenter extends BasePresenter {
         }
         this.view.remove();
         Router.open('/', {replaceState: true});
-        Bus.globalBus.emit(Events.HeaderChangeCartItems, 0);
+        Bus.globalBus.emit(Events.HeaderSetCartItems, 0);
+        Bus.globalBus.emit(Events.CartDrop);
         this.model.profileLogout();
     }
 
@@ -237,6 +254,7 @@ class ProfilePresenter extends BasePresenter {
      */
     renderAllData = (status) => {
         if (status === Responses.Success) {
+            Bus.globalBus.emit(Events.CartLoadProductsAmount);
             this.view.renderData();
             return;
         }
@@ -245,6 +263,18 @@ class ProfilePresenter extends BasePresenter {
             return;
         }
         console.error(status);
+    }
+
+    /**
+     * @param {string} eventToEmit
+     */
+    returnUserData = (eventToEmit) => {
+        Bus.globalBus.emit(eventToEmit, {
+            firstName: this.model.firstName,
+            lastName: this.model.lastName,
+            email: this.model.email,
+            avatarURL: this.model.avatarURL,
+        });
     }
 }
 
