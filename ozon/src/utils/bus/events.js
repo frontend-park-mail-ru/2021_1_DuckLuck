@@ -28,6 +28,7 @@ const Events = {
     ProductsLoaded: 'products-loaded',
     ProductsChangeCategory: 'products-change-category',
     ProductsItemAdded: 'products-item-added',
+    RenderProductReviews: 'render-product-reviews',
     ProductTransmitData: 'product-transmit-data',
     ProductsItemNotAdded: 'products-item-removed',
 
@@ -71,6 +72,8 @@ const Events = {
     ReviewProductDataLoad: 'review-product-data-load',
     ReviewProductDataLoaded: 'review-product-data-load',
     ReviewOrder: 'review-send',
+    GetProductReviews: 'get-product-reviews',
+    GetProductReviewsReaction: 'get-product-reviews-reaction',
 
     ChangeReviewProductId: 'change-review-product-id',
     OrderSent: 'order-sent',

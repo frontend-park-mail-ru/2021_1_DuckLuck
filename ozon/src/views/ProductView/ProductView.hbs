@@ -1,7 +1,7 @@
 <div class="{{productStyles.block}}">
     <div class="{{productStyles.categoriesBlock}}">
-        {{#each category}}
-            <span class="{{../productStyles.category}}">{{this.name}}</span>
+        {{#each category_path}}
+            <span class="{{../productStyles.category_path}}" category_id="{{this.id}}">{{this.name}}</span>
             <span> ></span>
         {{/each}}
     </div>
@@ -40,6 +40,16 @@
                 <span class="{{productStyles.descriptionText}}">{{description}}</span>
             </div>
             <div class="{{productStyles.specifications}}"></div>
+            <div class="{{productStyles.reviewListText}}">Отзывы: </div>
+            <select class="{{productsStyles.select}}">
+                {{#each select}}
+                    <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
+                        {{this.name}}
+                    </option>
+                {{/each}}
+            </select>
+            <div class="{{productStyles.reviewList}}"></div>
+            <div id="review-pagination"></div>
         </div>
         <div class="{{productStyles.menu}}">
             <div class="{{productStyles.aboutProduct}}"></div>
@@ -57,7 +67,7 @@
                 </div>
             </div>
             <button class="{{productStyles.reviewButton}}">
-                <span>Оставить отзыв</span>
+                <span class="{{productStyles.buttonText}}">Оставить отзыв</span>
             </button>
         </div>
     </div>

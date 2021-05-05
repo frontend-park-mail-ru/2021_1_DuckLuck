@@ -10,12 +10,42 @@ import HTTPResponses from '../utils/http-responses/httpResponses';
  */
 class ProductModel extends BaseModel {
     #item
+    #sortKey
+    #sortDirection
 
     /**
      * @return {Object} item
      */
     get item() {
         return this.#item;
+    }
+
+    /**
+     * @return {string}
+     */
+    get sortKey() {
+        return this.#sortKey;
+    }
+
+    /**
+     * @return {string}
+     */
+    get sortDirection() {
+        return this.#sortDirection;
+    }
+
+    /**
+     * @param {string} newSortKey
+     */
+    set sortKey(newSortKey) {
+        this.#sortKey = newSortKey;
+    }
+
+    /**
+     * @param {string} newSortDirection
+     */
+    set sortDirection(newSortDirection) {
+        this.#sortDirection = newSortDirection;
     }
 
     /**
@@ -49,6 +79,7 @@ class ProductModel extends BaseModel {
                 },
                 images: parsedJson['images'],
                 id: parsedJson['id'],
+                category_path: parsedJson['category_path'],
             };
             this.bus.emit(Events.ProductLoaded, Responses.Success);
         }).catch((err) => {

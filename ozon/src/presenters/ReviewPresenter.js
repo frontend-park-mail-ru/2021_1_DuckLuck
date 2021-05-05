@@ -23,6 +23,8 @@ class ReviewPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ReviewProductDataLoaded, this.reviewProductDataLoaded);
 
         Bus.globalBus.on(Events.ChangeReviewProductId, this.changeProductById);
+        Bus.globalBus.on(Events.GetProductReviews, this.getProductReviews);
+        Bus.globalBus.on(Events.GetProductReviewsReaction, this.getProductReviewsReaction);
     }
 
     /**
@@ -177,6 +179,27 @@ class ReviewPresenter extends BasePresenter {
         this.model.disadvantages = document.getElementsByName('disadvantages')[0].value.trim();
         this.model.comment = document.getElementsByName('comment')[0].value.trim();
         this.model.sendReview();
+    }
+
+    /**
+     * @param {number} productID
+     * @param {number} page
+     * @param {string} sortKey
+     * @param {string} sortDirection
+     */
+    getProductReviews = (productID, page, sortKey, sortDirection) => {
+        this.model.getProductReviews(productID, page, sortKey, sortDirection);
+    }
+
+    /**
+     * @param {string} result
+     */
+    getProductReviewsReaction = (result) => {
+        if (result === Responses.Success) {
+            Bus.globalBus.emit(Events.RenderProductReviews, this.model.reviews, this.model.paginationInfo);
+            return;
+        }
+        console.error(result);
     }
 }
 

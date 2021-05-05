@@ -5,6 +5,7 @@ import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import HTTPResponses from '../utils/http-responses/httpResponses';
 import Router from '../utils/router/Router';
+import {Bus} from '../utils/bus/bus';
 
 /**
  * @description Model for Review in MVP Arch
@@ -17,6 +18,8 @@ class ReviewModel extends BaseModel {
     #comment
     #isPublic
     #userName
+    #reviews
+    #paginationInfo
 
     /**
      * @return {Object} product
@@ -68,6 +71,21 @@ class ReviewModel extends BaseModel {
     }
 
     /**
+     * @return {Array}
+     */
+    get reviews() {
+        return this.#reviews;
+    }
+
+    /**
+     * @return {Object}
+     */
+    get paginationInfo() {
+        return this.#paginationInfo;
+    }
+
+
+    /**
      * @param {Object} product
      */
     set product(product) {
@@ -117,6 +135,20 @@ class ReviewModel extends BaseModel {
     }
 
     /**
+     * @param {Array} newReviews
+     */
+    set reviews(newReviews) {
+        this.#reviews = newReviews;
+    }
+
+    /**
+     * @param {Object} newPaginationInfo
+     */
+    set paginationInfo(newPaginationInfo) {
+        this.#paginationInfo = newPaginationInfo;
+    }
+
+    /**
      * @description Loads all information about review via AJAX
      */
     loadReviewRights = () => {
@@ -142,7 +174,7 @@ class ReviewModel extends BaseModel {
             advantages: this.#advantages,
             disadvantages: this.#disadvantages,
             comment: this.#comment,
-            isPublic: this.#isPublic ? this.#isPublic : true,
+            is_public: this.#isPublic ? this.#isPublic : true,
         };
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.review,
@@ -161,6 +193,39 @@ class ReviewModel extends BaseModel {
                 console.error('error review sending');
             }
             }
+        });
+    }
+
+    /**
+     * @param {number} productID
+     * @param {number} page
+     * @param {string} sortKey
+     * @param {string} sortDirection
+     * @param {Object} body
+     */
+    getProductReviews = (productID, page = 1, sortKey = 'date', sortDirection = 'ASC', body = {
+        page_num: +page,
+        count: 1,
+        sort_key: sortKey,
+        sort_direction: sortDirection,
+    }) => {
+        AjaxModule.postUsingFetch({
+            url: serverApiPath + urls.review + '/' + productID,
+            body: body,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((parsedJson) => {
+            this.reviews = parsedJson.list_reviews;
+            this.paginationInfo = {
+                pagesCount: parsedJson['max_count_pages'],
+                currentPage: page,
+            };
+            Bus.globalBus.emit(Events.GetProductReviewsReaction, Responses.Success);
+        }).catch(() => {
+            Bus.globalBus.emit(Events.GetProductReviewsReaction, Responses.Error);
         });
     }
 }
