@@ -63,12 +63,6 @@
   cursor: pointer;
 }
 
-.drop {
-  font-family: var(--font);
-  font-size: var(--font-size-m);
-  color: var(--colored-object-color);
-}
-
 .drop:hover {
   filter: brightness(50%);
   transition: .2s cubic-bezier(.4,0,.2,1);
