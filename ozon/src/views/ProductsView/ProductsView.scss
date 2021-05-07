@@ -7,9 +7,16 @@
     margin: 0 auto;
 }
 
+.contentWrapper {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    gap: var(--gap-s);
+    margin-top: var(--margin-l);
+}
+
 .body {
     display: flex;
-    margin: var(--margin-l) auto auto;
     width: 60%;
     flex-direction: column;
 }
@@ -36,10 +43,6 @@
     height: var(--height-xxxs);
 }
 
-.listWrapper {
-    margin: auto;
-}
-
 @media screen and (max-width: $max-width-xl) {
     .block {
         width: 100%;
@@ -49,6 +52,10 @@
         margin: var(--margin-l) auto auto;
         width: 100%;
         max-width: 70%;
+    }
+
+    .contentWrapper {
+        flex-direction: column;
     }
 
     .block {
