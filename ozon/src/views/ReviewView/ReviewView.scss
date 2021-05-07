@@ -1,7 +1,7 @@
 @import '../../constants.scss';
 
 .block {
-    width: var(--max-width);
+    width: 100%;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
@@ -9,9 +9,8 @@
 
 .body {
     display: flex;
-    max-width: 60%;
     margin: auto;
-    width: 100%;
+    width: 60%;
     flex-direction: column;
     gap: var(--gap-xl);
 }
@@ -48,6 +47,10 @@
 .impressions {
     display: flex;
     flex-direction: column;
+}
+
+.input {
+    margin-top: var(--margin-s);
 }
 
 .signature {
@@ -118,4 +121,28 @@
 
 .buttonText {
     color: var(--light-color);
+}
+
+@media screen and (max-width: $max-width-xl) {
+    .block {
+        padding-bottom: var(--padding-xxl);
+    }
+}
+
+@media screen and (max-width: $max-width-l) {
+    .body {
+        width: 90%;
+    }
+
+    .productWrapper {
+        flex-direction: column;
+    }
+
+    .submit {
+        flex-direction: column;
+    }
+
+    .submitButton {
+        width: 100%;
+    }
 }

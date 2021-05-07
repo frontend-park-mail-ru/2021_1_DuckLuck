@@ -2,7 +2,7 @@ import {BaseView} from '../BaseView.js';
 import Events from '../../utils/bus/events';
 import reviewTemplate from './ReviewView.hbs';
 import {Input} from '../Common/Input/Input';
-import reviewStyles from './ReviewView.css';
+import reviewStyles from './ReviewView.scss';
 import {staticServerHost} from '../../utils/urls/urls';
 import Router from '../../utils/router/Router';
 import {Bus} from '../../utils/bus/bus';
