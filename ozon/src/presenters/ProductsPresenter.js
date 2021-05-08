@@ -137,7 +137,6 @@ class ProductsPresenter extends BasePresenter {
             this.view.drawIncorrectFilterWarning();
             return false;
         }
-
         this.model.filter = {
             min_price: minPrice === '' ? undefined : parseInt(minPrice),
             max_price: maxPrice === '' ? undefined : parseInt(maxPrice),
@@ -203,5 +202,4 @@ class ProductsPresenter extends BasePresenter {
         this.view.setProductNotAdded(itemID);
     }
 }
-
 export default ProductsPresenter;

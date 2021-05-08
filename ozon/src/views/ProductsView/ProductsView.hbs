@@ -1,40 +1,40 @@
 <div class="{{productsStyles.block}}">
-    <form id="filtration_form" class="{{filterStyles.menu}}">
-        <div class="{{filterStyles.title}}">Цена</div>
-        <div class="{{filterStyles.row}}">
-            <label for="min_price" class="{{filterStyles.label}}"> От </label> <input type="number" min="0" id="min_price" class="{{filterStyles.input}}">
+    <div class="{{productsStyles.contentWrapper}}">
+        <form id="filtration_form" class="{{filterStyles.menu}}">
+            <div class="{{filterStyles.title}}">Цена</div>
+            <div class="{{filterStyles.row}}">
+                <label for="min_price" class="{{filterStyles.label}}"> От </label> <input type="number" id="min_price" class="{{filterStyles.input}}">
+            </div>
+            <div class="{{filterStyles.row}}">
+                <label for="max_price" class="{{filterStyles.label}}"> До </label> <input type="number" id="max_price" class="{{filterStyles.input}}">
+            </div>
+            <div class="{{filterStyles.row}}">
+                <label for="is_new" class="{{filterStyles.title}}"> Новые товары </label> <input type="checkbox" id="is_new">
+            </div>
+            <div class="{{filterStyles.row}}">
+                <label for="is_rating" class="{{filterStyles.title}}"> Высокий рейтинг </label> <input type="checkbox" id="is_rating">
+            </div>
+            <div class="{{filterStyles.row}}">
+                <label for="is_discount" class="{{filterStyles.title}}"> Товары со скидкой </label> <input type="checkbox" id="is_discount">
+            </div>
+            <button class="{{filterStyles.button}}">
+                <span class="{{filterStyles.buttonText}}">Применить</span>
+            </button>
+            <button id="drop-filters" class="{{filterStyles.drop}}">
+                <span class="{{filterStyles.dropText}}">Сбросить фильтры</span>
+            </button>
+        </form>
+        <div class="{{productsStyles.body}}">
+            <select class="{{productsStyles.select}}">
+                {{#each select}}
+                    <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
+                        {{this.name}}
+                    </option>
+                {{/each}}
+            </select>
+            <div class="{{productsStyles.listWrapper}}">{{{productsList}}}</div>
         </div>
-        <div class="{{filterStyles.row}}">
-            <label for="max_price" class="{{filterStyles.label}}"> До </label> <input type="number" min="1" id="max_price" class="{{filterStyles.input}}">
-        </div>
-        <div class="{{filterStyles.incorrectFilterLabel}}" id="incorrect_filter_label"></div>
-        <div class="{{filterStyles.row}}">
-            <label for="is_new" class="{{filterStyles.title}}"> Новые товары </label> <input type="checkbox" id="is_new">
-        </div>
-        <div class="{{filterStyles.row}}">
-            <label for="is_rating" class="{{filterStyles.title}}"> Высокий рейтинг </label> <input type="checkbox" id="is_rating">
-        </div>
-        <div class="{{filterStyles.row}}">
-            <label for="is_discount" class="{{filterStyles.title}}"> Товары со скидкой </label> <input type="checkbox" id="is_discount">
-        </div>
-        <button class="{{filterStyles.button}}">
-            <span class="{{filterStyles.buttonText}}">Применить</span>
-        </button>
-        <button id="drop-filters" class="{{filterStyles.drop}}">
-            <span class="{{filterStyles.dropText}}">Сбросить фильтры</span>
-        </button>
-    </form>
-    <div class="{{productsStyles.body}}">
-        <select class="{{productsStyles.select}}">
-            {{#each select}}
-                <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
-                    {{this.name}}
-                </option>
-            {{/each}}
-        </select>
-        <div class="{{productsStyles.listWrapper}}">{{{productsList}}}</div>
     </div>
-
     {{#ifEquals this.isEmpty true}}
         <div class="{{productsStyles.emptyText}}">Не найдено ни одного товара</div>
     {{/ifEquals}}
