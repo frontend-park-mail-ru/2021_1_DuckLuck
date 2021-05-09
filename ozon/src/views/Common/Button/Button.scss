@@ -47,10 +47,6 @@ $colors: (
     @extend %main-color;
     min-width: 76px;
     min-height: 40px;
-    background: var(--colored-object-color);
-    cursor: pointer;
     color: var(--light-color);
-    border: none;
     display: flex;
-    outline: none;
 }
