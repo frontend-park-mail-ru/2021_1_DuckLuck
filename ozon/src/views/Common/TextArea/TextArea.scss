@@ -1,0 +1,49 @@
+@import "../../../constants";
+
+%text-shared {
+  font-family: var(--font);
+  font-size: var(--font-size-s);
+}
+
+.text {
+  @extend %text-shared;
+}
+
+.title {
+  @extend %text-shared;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--bold-font);
+}
+
+.order {
+  @extend %text-shared;
+  font-size: var(--font-size-m);
+  color: var(--light-color);
+}
+
+.orderTitle {
+  @extend %text-shared;
+  font-size: var(--font-size-l);
+  font-weight: var(--bold-font);
+}
+
+.orderDiscount {
+  @extend %text-shared;
+  color: var(--discout-color);
+}
+
+.orderPrice {
+  @extend %text-shared;
+  font-weight: var(--bold-font);
+}
+
+.bold {
+  @extend %text-shared;
+  font-weight: var(--bold-font);
+}
+
+.oldPrice {
+  @extend %text-shared;
+  color: var(--old-price-color);
+  text-decoration: line-through;
+}

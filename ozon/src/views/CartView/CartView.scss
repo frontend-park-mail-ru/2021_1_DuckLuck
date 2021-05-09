@@ -17,12 +17,6 @@
     flex-direction: column;
 }
 
-.titleText {
-    font-family: var(--font);
-    font-size: var(--font-size-xxl);
-    font-weight: var(--bold-font);
-}
-
 .mainWrapper {
     display: flex;
     flex-direction: column;
@@ -70,15 +64,11 @@
 }
 
 .selectAllText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
     margin-top: auto;
     margin-bottom: auto;
 }
 
 .deleteSelectedText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
     margin-top: auto;
     margin-bottom: auto;
     color: var(--discout-color);
@@ -94,8 +84,6 @@
 }
 
 .deliveryText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
     margin: var(--margin-s);
 }
 
@@ -106,13 +94,6 @@
 
 .productImage {
     height: 100%;
-}
-
-.emptyCartText {
-    font-family: var(--font);
-    font-size: var(--font-size-xxl);
-    font-weight: var(--bold-font);
-    margin: auto;
 }
 
 .productsListElem {
@@ -141,8 +122,6 @@
 }
 
 .productMenuText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
     color: var(--colored-object-color);
     cursor: pointer;
 }
@@ -154,12 +133,6 @@
     display: flex;
     flex-direction: column;
     width: 32%;
-}
-
-.orderSubmit {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    color: var(--light-color);
 }
 
 .orderButtonWrapper {
@@ -183,15 +156,10 @@
 }
 
 .orderInfoTitle {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
     margin-left: 20px;
 }
 
 .orderInfoText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
     margin-left: 20px;
 }
 
@@ -225,12 +193,6 @@
     padding-right: 20px;
 }
 
-.orderTotalPriceTitle {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
-}
-
 .orderInfoRow {
     display: flex;
     flex-direction: row;
@@ -242,30 +204,8 @@
     padding-right: 20px;
 }
 
-.orderInfoDiscount {
-    color: var(--discout-color);
-}
-
 .discountPrice {
     color: var(--discout-color);
-}
-
-.endPrice, .discountPrice{
-    font-weight: var(--bold-font);
-}
-
-.orderInfoPrice {
-    font-weight: var(--bold-font);
-}
-
-.oldPrice {
-    color: var(--old-price-color);
-    text-decoration: line-through;
-}
-
-.totalPriceText {
-    font-weight: var(--bold-font);
-    font-size: var(--font-size-l);
 }
 
 .countField {

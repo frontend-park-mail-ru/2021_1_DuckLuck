@@ -5,6 +5,7 @@ import {Bus} from '../../utils/bus/bus';
 import Events from '../../utils/bus/events';
 import cartStyles from './CartView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
 import decorators from '../decorators.css';
 import Router from '../../utils/router/Router';
 
@@ -35,11 +36,13 @@ export class CartView extends BaseView {
                 totalCost: price.total_cost,
                 decorators: decorators,
                 buttonStyles: buttonStyles,
+                textStyles: textStyles,
             });
         } else {
             template = emptyCartPageTemplate({
                 cartStyles: cartStyles,
                 decorators: decorators,
+                textStyles: textStyles,
             });
         }
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
