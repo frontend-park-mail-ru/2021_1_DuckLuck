@@ -121,6 +121,11 @@
     margin-bottom: auto;
 }
 
+.productMenu {
+    display: flex;
+    gap: var(--gap-s);
+}
+
 .productMenuText {
     color: var(--colored-object-color);
     cursor: pointer;
