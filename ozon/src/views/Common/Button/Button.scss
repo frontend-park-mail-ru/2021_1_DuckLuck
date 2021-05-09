@@ -4,6 +4,10 @@ $colors: (
     main-color: (
         common: var(--colored-object-color),
         hover: var(--dark-colored-object-color),
+    ),
+    order-color: (
+        common: var(--order-color),
+        hover: var(--dark-order-color),
     )
 );
 
@@ -49,4 +53,12 @@ $colors: (
     min-height: 40px;
     color: var(--light-color);
     display: flex;
+}
+
+.order {
+    @extend %button-shared;
+    @extend %order-color;
+    width: 89.84%;
+    height: var(--height-s);
+    margin: var(--margin-m) auto auto;
 }

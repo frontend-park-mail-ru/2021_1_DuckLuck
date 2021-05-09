@@ -163,22 +163,6 @@
     flex-direction: column;
 }
 
-.orderButton {
-    width: 89.84%;
-    height: var(--height-s);
-    border-radius: var(--standart-border-radius);
-    border: none;
-    background: var(--order-color);
-    margin: var(--margin-m) auto auto;
-    cursor: pointer;
-    outline: none;
-}
-
-.orderButton:hover {
-    background: var(--dark-order-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
-}
-
 .orderSubmit {
     font-family: var(--font);
     font-size: var(--font-size-m);

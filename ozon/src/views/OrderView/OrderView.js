@@ -5,6 +5,7 @@ import noticeTemplate from './OrderNotice.hbs';
 import noticeStyles from './OrderNotice.css';
 import {Input} from '../Common/Input/Input';
 import orderStyles from './OrderView.scss';
+import buttonStyles from './../Common/Button/Button.scss';
 import Router from '../../utils/router/Router';
 import {Popup} from '../Common/Popup/Popup';
 import {Blind} from '../Common/Blind/Blind';
@@ -37,6 +38,7 @@ export class OrderView extends BaseView {
                 value: this.presenter.address}),
             ],
             orderStyles: orderStyles,
+            buttonStyles: buttonStyles,
             cartSize: this.presenter.products.length,
             baseCost: +this.presenter.price.total_base_cost,
             discount: +this.presenter.price.total_discount,
@@ -45,7 +47,7 @@ export class OrderView extends BaseView {
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
 
-        this.cache.getElementsByClassName(orderStyles.orderButton)[0].addEventListener('click', (evt) => {
+        this.cache.getElementsByClassName(buttonStyles.order)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.SendOrder);
             const notice = new DOMParser().parseFromString(new Popup().getHtmlString({
