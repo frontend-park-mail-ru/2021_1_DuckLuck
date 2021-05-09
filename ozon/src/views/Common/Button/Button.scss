@@ -1,25 +1,50 @@
-@import "../../../constants.scss";
+@import "../../../constants";
 
-.catalog {
-    min-height: 40px;
-    min-width: 120px;
-    background: var(--colored-object-color);
+$colors: (
+    main-color: (
+        common: var(--colored-object-color),
+        hover: var(--dark-colored-object-color),
+    )
+);
+
+%button-shared {
     cursor: pointer;
-    color: var(--light-color)5;
     border: none;
-    border-radius: 3px;
-    font-size: 16px;
-    font-weight: 700;
+    border-radius: var(--standart-border-radius);
     outline: none;
-    width: 100%;
 }
 
-.catalog:hover {
-    background: var(--dark-colored-object-color);
+%button-shared:hover {
     transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
+.button {
+    @extend %button-shared;
+}
+
+@each $key, $data in $colors {
+    %#{$key} {
+        background: map-get($data, common);
+    }
+    %#{$key}:hover {
+        background: map-get($data, hover);
+    }
+}
+
+.catalog {
+    @extend %button-shared;
+    @extend %main-color;
+    min-height: 40px;
+    min-width: 120px;
+    color: var(--light-color)5;
+    font-size: 16px;
+    font-weight: 700;
+    width: 100%;
+}
+
 .search {
+    @extend %button-shared;
+    @extend %main-color;
     min-width: 76px;
     min-height: 40px;
     background: var(--colored-object-color);
