@@ -281,6 +281,11 @@
     margin: auto;
 }
 
+.countButtonWrapper {
+    width: 20px;
+    height: 20px;
+}
+
 @media screen and (max-width: $max-width-xl){
     .wrapper {
         flex-direction: column;
