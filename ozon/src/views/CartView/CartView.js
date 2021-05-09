@@ -4,6 +4,7 @@ import emptyCartPageTemplate from './CartViewEmpty.hbs';
 import {Bus} from '../../utils/bus/bus';
 import Events from '../../utils/bus/events';
 import cartStyles from './CartView.scss';
+import buttonStyles from './../Common/Button/Button.scss';
 import decorators from '../decorators.css';
 import Router from '../../utils/router/Router';
 
@@ -33,6 +34,7 @@ export class CartView extends BaseView {
                 discount: price.total_discount,
                 totalCost: price.total_cost,
                 decorators: decorators,
+                buttonStyles: buttonStyles,
             });
         } else {
             template = emptyCartPageTemplate({
@@ -57,7 +59,7 @@ export class CartView extends BaseView {
         for (const elemList of document.getElementsByClassName(cartStyles.productsListElem)) {
             const itemId = Number(elemList.getAttribute('product_id'));
 
-            elemList.getElementsByClassName(cartStyles.incButton)[0].addEventListener('click', (evt) => {
+            elemList.getElementsByClassName(buttonStyles.increment)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
                 const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
                 Bus.globalBus.emit(Events.CartProductChange, {
@@ -69,7 +71,7 @@ export class CartView extends BaseView {
                 }
             });
 
-            elemList.getElementsByClassName(cartStyles.decButton)[0].addEventListener('click', (evt) => {
+            elemList.getElementsByClassName(buttonStyles.decrement)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
                 const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
                 Bus.globalBus.emit(Events.CartProductChange, {

@@ -8,15 +8,19 @@ $colors: (
     order-color: (
         common: var(--order-color),
         hover: var(--dark-order-color),
+    ),
+    inherit-color: (
+        common: inherit,
+        hover: var(--neutral-background-color),
     )
 );
 
 @each $key, $data in $colors {
     %#{$key} {
-        background: map-get($data, common);
+        background-color: map-get($data, common);
     }
     %#{$key}:hover {
-        background: map-get($data, hover);
+        background-color: map-get($data, hover);
     }
 }
 
@@ -61,4 +65,12 @@ $colors: (
     width: 89.84%;
     height: var(--height-s);
     margin: var(--margin-m) auto auto;
+}
+
+.increment, .decrement {
+    @extend %button-shared;
+    @extend %inherit-color;
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    color: var(--colored-object-color);
 }
