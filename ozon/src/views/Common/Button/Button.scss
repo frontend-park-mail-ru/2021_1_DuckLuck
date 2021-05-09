@@ -60,8 +60,6 @@ $colors: (
 .search {
     @extend %button-shared;
     @extend %main-color;
-    min-width: 76px;
-    min-height: 40px;
     color: var(--light-color);
     display: flex;
 }
