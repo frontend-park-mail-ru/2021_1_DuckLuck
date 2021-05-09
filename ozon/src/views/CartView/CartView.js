@@ -111,16 +111,16 @@ export class CartView extends BaseView {
         });
 
 
-        document.getElementsByClassName(cartStyles.orderInfoPrice)[0].innerHTML =
-            (parseInt(document.getElementsByClassName(cartStyles.orderInfoPrice)[0].innerHTML) +
+        document.getElementById('baseCost').innerHTML =
+            (parseInt(document.getElementById('baseCost').innerHTML) +
                 diff * product.price.base_cost).toString() + '₽';
-        document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML =
-            (parseInt(document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML) +
+        document.getElementById('totalCost').innerHTML =
+            (parseInt(document.getElementById('totalCost').innerHTML) +
                 diff * product.price.total_cost).toString() + '₽';
 
-        document.getElementsByClassName(cartStyles.orderInfoDiscount)[0].innerHTML =
-            (parseInt(document.getElementsByClassName(cartStyles.orderInfoPrice)[0].innerHTML) -
-            parseInt(document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML)).toString() + '₽';
+        document.getElementById('discount').innerHTML = '- ' +
+            (parseInt(document.getElementById('baseCost').innerHTML) -
+            parseInt(document.getElementById('totalCost').innerHTML)).toString() + '₽';
 
 
         const item = Array.from(document.getElementsByClassName(cartStyles.productsListElem)).find((elem) => {
@@ -132,15 +132,16 @@ export class CartView extends BaseView {
             item.remove();
             return;
         }
-        item.getElementsByClassName(cartStyles.endPrice)[0].innerHTML =
-            (parseInt(item.getElementsByClassName(cartStyles.endPrice)[0].innerHTML) +
+
+        document.getElementById('totalCost' + changedID.toString()).innerHTML =
+            (parseInt(document.getElementById('totalCost' + changedID.toString()).innerHTML) +
                 diff * product.price.total_cost).toString() + '₽';
-        item.getElementsByClassName(cartStyles.oldPrice)[0].innerHTML =
-            (parseInt(item.getElementsByClassName(cartStyles.oldPrice)[0].innerHTML) +
+        document.getElementById('baseCost' + changedID.toString()).innerHTML =
+            (parseInt(document.getElementById('baseCost' + changedID.toString()).innerHTML) +
                 diff * product.price.base_cost).toString() + '₽';
-        item.getElementsByClassName(cartStyles.discountPrice)[0].innerHTML = 'Скидка ' +
-            (parseInt(item.getElementsByClassName(cartStyles.oldPrice)[0].innerHTML) -
-             parseInt(item.getElementsByClassName(cartStyles.endPrice)[0].innerHTML)).toString() + '₽';
+        document.getElementById('discount' + changedID.toString()).innerHTML = 'Скидка ' +
+            (parseInt(document.getElementById('baseCost' + changedID.toString()).innerHTML) -
+             parseInt(document.getElementById('totalCost' + changedID.toString()).innerHTML)).toString() + '₽';
     }
 
     /**

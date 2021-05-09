@@ -43,10 +43,10 @@
                                     </div>
                                     <div class="{{../cartStyles.priceBlock}}">
                                         <div class="{{../cartStyles.priceInfo}}">
-                                            <div class="{{../textStyles.bold}}">{{multiply this.price.total_cost this.count}} ₽</div>
+                                            <div class="{{../textStyles.bold}}" id="totalCost{{this.id}}">{{multiply this.price.total_cost this.count}} ₽</div>
                                             {{#ifNotEquals this.price.total_discount 0}}
-                                                <span class="{{../textStyles.oldPrice}}">{{multiply this.price.base_cost this.count}} ₽</span>
-                                                <span class="{{../textStyles.bold}} {{../textStyles.orderDiscount}}">Скидка {{substract (multiply this.price.base_cost this.count) (multiply this.price.total_cost this.count)}} ₽</span>
+                                                <span class="{{../textStyles.oldPrice}}" id="baseCost{{this.id}}">{{multiply this.price.base_cost this.count}} ₽</span>
+                                                <span class="{{../textStyles.bold}} {{../textStyles.orderDiscount}}" id="discount{{this.id}}">Скидка {{substract (multiply this.price.base_cost this.count) (multiply this.price.total_cost this.count)}} ₽</span>
                                             {{/ifNotEquals}}
                                         </div>
                                     </div>
@@ -84,19 +84,19 @@
                                     <div class="{{cartStyles.orderInfoText}}">
                                         <span class="{{textStyles.text}}">Товары ({{this.cartSize}})</span>
                                     </div>
-                                    <span class="{{textStyles.orderPrice}}">{{this.baseCost}}₽</span>
+                                    <span class="{{textStyles.orderPrice}}" id="baseCost">{{this.baseCost}}₽</span>
                                 </div>
                                 <div class="{{cartStyles.orderInfoRow}}">
                                     <div class="{{cartStyles.orderInfoText}}">
                                         <span class="{{textStyles.text}}">Скидка</span>
                                     </div>
                                     <div class="{{cartStyles.orderInfoText}}">
-                                        <span class="{{textStyles.orderDiscount}}">- {{this.discount}}₽</span>
+                                        <span class="{{textStyles.orderDiscount}}" id="discount">- {{this.discount}}₽</span>
                                     </div>
                                 </div>
                                 <div class="{{cartStyles.totalPriceBlock}}">
                                     <span class="{{textStyles.smallTitle}}">Общая стоимость</span>
-                                    <span class="{{textStyles.smallTitle}}">{{this.totalCost}} ₽</span>
+                                    <span class="{{textStyles.smallTitle}}" id="totalCost">{{this.totalCost}} ₽</span>
                                 </div>
                             </div>
                         </div>
