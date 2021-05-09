@@ -12,6 +12,14 @@ $colors: (
     inherit-color: (
         common: inherit,
         hover: var(--neutral-background-color),
+    ),
+    in-cart-color: (
+        common: var(--order-color),
+        hover: var(--dark-order-color),
+    ),
+    not-in-cart-color: (
+        common: var(--colored-object-color),
+        hover: var(--dark-colored-object-color),
     )
 );
 
@@ -80,4 +88,24 @@ $colors: (
     @extend %main-color;
     display: flex;
     height: var(--height-xs);
+}
+
+.inCart {
+    @extend %button-shared;
+    @extend %in-cart-color;
+    display: flex;
+    height: var(--height-xxxs);
+    width: var(--width-s);
+    position: absolute;
+    bottom: 0;
+}
+
+.notInCart {
+    @extend %button-shared;
+    @extend %not-in-cart-color;
+    display: flex;
+    height: var(--height-xxxs);
+    width: var(--width-s);
+    position: absolute;
+    bottom: 0;
 }

@@ -4,6 +4,7 @@ import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsIte
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.scss';
+import buttonStyles from './../Common/Button/Button.scss';
 import filterStyles from './ProductsFilter.scss';
 import paginatorStyles from '../Common/Pagination/Pagination.css';
 import {Bus} from '../../utils/bus/bus';
@@ -145,9 +146,9 @@ export class ProductsView extends BaseView {
                     Router.open(`/item/${productID}`);
                 });
 
-            let item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.notInCartButton)[0];
+            let item = itemContainer.getElementsByClassName(buttonStyles.notInCart)[0];
             if (item === undefined) {
-                item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.inCartButton)[0];
+                item = itemContainer.getElementsByClassName(buttonStyles.inCart)[0];
             }
 
             item.addEventListener('click', (evt) => {
@@ -257,7 +258,7 @@ export class ProductsView extends BaseView {
      * @param {HTMLElement} button
      */
     setButtonAddedStyle = (button) => {
-        button.className = ListOfProductsItemStyles.inCartButton;
+        button.className = buttonStyles.inCart;
         button.getElementsByTagName('span')[0].innerHTML = 'В корзине';
     }
 
@@ -265,7 +266,7 @@ export class ProductsView extends BaseView {
      * @param {HTMLElement} button
      */
     setButtonNotAddedStyle = (button) => {
-        button.className = ListOfProductsItemStyles.notInCartButton;
+        button.className = buttonStyles.notInCart;
         button.getElementsByTagName('span')[0].innerHTML = 'В корзину';
     }
 
