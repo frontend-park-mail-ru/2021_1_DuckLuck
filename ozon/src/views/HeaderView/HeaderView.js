@@ -1,6 +1,6 @@
 import {BaseView} from '../BaseView.js';
 import headerStyles from './HeaderView.scss';
-import buttonStyles from '../Common/Button/Button.css';
+import buttonStyles from '../Common/Button/Button.scss';
 import imgStyles from '../Common/Img/Img.css';
 import inputStyles from '../Common/Input/Input.css';
 import decorators from '../decorators.css';
