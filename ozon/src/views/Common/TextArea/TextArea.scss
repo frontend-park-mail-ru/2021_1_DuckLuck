@@ -56,3 +56,8 @@
   @extend %text-shared;
   font-size: var(--font-size-m);
 }
+
+.menuCounter {
+  @extend %text-shared;
+  color: var(--light-color);
+}

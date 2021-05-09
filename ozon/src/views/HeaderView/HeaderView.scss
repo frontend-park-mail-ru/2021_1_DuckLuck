@@ -66,14 +66,8 @@
 .searchAreaText {
     margin-left: var(--margin-xs);
     margin-right: var(--margin-xs);
-    font-size: var(--font-size-m);
-    line-height: var(--standart-line-height);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    white-space: nowrap;
-    max-width: 170px;
 }
+
 .searchAreaPointer {
     margin-right: var(--margin-xxs);
 }
@@ -187,18 +181,11 @@
     flex-direction: column;
 }
 
-.catalogText {
-    color: var(--light-color);
-    font-family: var(--font);
-}
-
-.cartItemsCounter {
+.menuItemCounter {
     text-align: center;
     width: 20px;
     border-radius: 90%;
     background-color: var(--discout-color);
-    color: var(--light-color);
-    font-family: var(--font);
 }
 
 @media screen and (max-width: $max-width-xxl) {
@@ -237,7 +224,7 @@
         margin-right: 0;
     }
 
-    .cartItemsCounter {
+    .menuItemCounter {
         position: fixed;
         bottom: 25px;
     }

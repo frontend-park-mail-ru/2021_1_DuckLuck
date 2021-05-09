@@ -3,6 +3,7 @@ import headerStyles from './HeaderView.scss';
 import buttonStyles from '../Common/Button/Button.scss';
 import imgStyles from '../Common/Img/Img.css';
 import inputStyles from '../Common/Input/Input.css';
+import textStyles from '../Common/TextArea/TextArea.scss';
 import decorators from '../decorators.css';
 import headerTemplate from './HeaderView.hbs';
 import {staticServerHost} from '../../utils/urls/urls.js';
@@ -58,7 +59,7 @@ export class HeaderView extends BaseView {
                 href: '/cart',
                 name: 'cart',
                 additionalSpan: true,
-                additionalSpanClass: headerStyles.cartItemsCounter,
+                additionalSpanClass: headerStyles.menuItemCounter,
             },
         ];
         const catalog = {
@@ -94,6 +95,7 @@ export class HeaderView extends BaseView {
             imgStyles: imgStyles,
             inputStyles: inputStyles,
             buttonStyles: buttonStyles,
+            textStyles: textStyles,
             decorators: decorators,
         });
 
@@ -187,7 +189,7 @@ export class HeaderView extends BaseView {
      * @param {number} value
      */
     changeCartItems = (value) => {
-        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[0];
         const newCounterAmount = +counter.innerHTML + value;
         counter.innerHTML = newCounterAmount.toString();
         counter.hidden = !newCounterAmount;
@@ -198,7 +200,7 @@ export class HeaderView extends BaseView {
      * @description sets items amount in cart to 0
      */
     setCartItems = (value) => {
-        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[0];
         counter.innerHTML = value.toString();
         counter.hidden = !value;
     }

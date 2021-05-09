@@ -13,7 +13,7 @@
                     {{#with catalog}}
                         <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}}">
                         <img loading="lazy" src={{img.1.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}} {{../decorators.hidden}}">
-                        <span class="{{../headerStyles.catalogText}}">{{text}}</span>
+                        <span class="{{../textStyles.bigButton}}">{{text}}</span>
                     {{/with}}
                 </div>
             </button>
@@ -23,7 +23,9 @@
                 <form class="{{../headerStyles.searchForm}}">
                     <div class="{{../headerStyles.searchAreaBlock}}">
                         {{#with searchArea}}
-                            <span title="{{text}}" class="{{../../headerStyles.searchAreaText}}">{{text}}</span>
+                            <div title="{{text}}" class="{{../../headerStyles.searchAreaText}}">
+                                <span class="{{../../textStyles.text}}">{{text}}</span>
+                            </div>
                             <div class="{{../../headerStyles.searchAreaPointer}}">
                                 <img loading="lazy" src={{img.src}} class="{{../../imgStyles.menuImgS}}">
                             </div>
@@ -31,7 +33,7 @@
                     </div>
                     <div class="{{../headerStyles.searchInputBlock}}">
                         {{#with searchInput}}
-                            <input placeholder="{{placeholder}}" type={{type}} name={{name}} class="{{../../inputStyles.search}}">
+                            <input placeholder="{{placeholder}}" type={{type}} name={{name}} class="{{../../inputStyles.search}} {{../../textStyles.input}}">
                         {{/with}}
                     </div>
                     <div class="{{../headerStyles.searchButtonBlock}}">
@@ -51,10 +53,10 @@
                 <div class="{{../headerStyles.menuItem}} {{#ifEquals this.href "/orders"}} {{../decorators.lock}} {{/ifEquals}} {{#ifEquals this.href "/favorites"}} {{../decorators.lock}} {{/ifEquals}}" href="{{this.href}}" name="{{this.name}}">
                     {{#with this}}
                         <img src="{{img.src}}" class="{{../imgStyles.menuImgL}}">
-                        <span>{{text}}</span>
+                        <span class="{{../textStyles.text}}">{{text}}</span>
                     {{/with}}
                     {{#ifEquals this.additionalSpan true}}
-                        <span name="addSpan{{this.name}}" class="{{this.additionalSpanClass}}">0</span>
+                        <span name="addSpan{{this.name}}" class="{{this.additionalSpanClass}} {{../textStyles.menuCounter}}">0</span>
                     {{/ifEquals}}
                 </div>
             {{/each}}
