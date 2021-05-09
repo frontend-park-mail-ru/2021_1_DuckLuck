@@ -80,8 +80,6 @@ $colors: (
 .auth {
     @extend %button-shared;
     @extend %main-color;
-    display: flex;
-    height: var(--height-xs);
 }
 
 .inCart {

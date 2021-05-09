@@ -10,9 +10,11 @@
             </div>
         {{/each}}
 
-        <button class="{{buttonStyles.auth}}" type="{{formData.submitButton.type}}">
-            <span class="{{styles.buttonText}}">{{formData.submitButton.text}}</span>
-        </button>
+        <div class="{{styles.buttonWrapper}}">
+            <button class="{{buttonStyles.auth}}" type="{{formData.submitButton.type}}">
+                <span class="{{styles.buttonText}}">{{formData.submitButton.text}}</span>
+            </button>
+        </div>
         <span class="{{styles.signup}}" href="{{formData.link.href}}">{{formData.link.name}}</span>
     </form>
 </div>

@@ -60,3 +60,8 @@
     color: var(--colored-object-color);
     cursor: pointer;
 }
+
+.buttonWrapper {
+    display: flex;
+    height: var(--height-xs);
+}
