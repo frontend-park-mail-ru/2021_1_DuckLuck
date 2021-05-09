@@ -1,5 +1,5 @@
 import authenticationFormTemplate from './AuthenticationForm.hbs';
-
+import buttonStyles from '../Button/Button.scss';
 
 /**
  * @class AuthenticationForm
@@ -24,6 +24,7 @@ export class AuthenticationForm {
             formType: formType,
             formData: formData,
             styles: styles,
+            buttonStyles: buttonStyles,
         });
     };
 }

@@ -26,21 +26,6 @@
     width: 100%;
 }
 
-.button {
-    display: flex;
-    background: var(--colored-object-color);
-    border-radius: var(--standart-border-radius);
-    border: none;
-    height: var(--height-xs);
-    cursor: pointer;
-    outline: none;
-}
-
-.button:hover {
-    background: var(--dark-colored-object-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
-}
-
 .buttonText {
     font-family: var(--font);
     font-size: var(--font-size-m);

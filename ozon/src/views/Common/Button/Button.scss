@@ -74,3 +74,10 @@ $colors: (
     font-size: var(--font-size-m);
     color: var(--colored-object-color);
 }
+
+.auth {
+    @extend %button-shared;
+    @extend %main-color;
+    display: flex;
+    height: var(--height-xs);
+}

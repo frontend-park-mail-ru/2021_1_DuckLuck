@@ -9,6 +9,7 @@ import Router from '../../utils/router/Router.js';
 import Events from '../../utils/bus/events';
 import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.css';
 import decorator from '../decorators.css';
+import buttonStyles from '../Common/Button/Button.scss';
 
 /**
  * @class  SignupView
@@ -84,7 +85,7 @@ export class SignupView extends BaseView {
                 Router.return();
             });
 
-        const form = this.cache.getElementsByClassName(AuthenticationFormStyles.button)[0];
+        const form = this.cache.getElementsByClassName(buttonStyles.auth)[0];
         form.addEventListener('click', (evt) => {
             evt.preventDefault();
             body.classList.remove(decorator.noScroll);
