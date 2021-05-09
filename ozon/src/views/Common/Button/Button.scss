@@ -105,7 +105,4 @@ $colors: (
 .review {
     @extend %button-shared;
     @extend %main-color;
-    height: var(--height-s);
-    width: 86%;
-    margin: auto;
 }

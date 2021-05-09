@@ -216,6 +216,12 @@
     margin: auto;
 }
 
+.reviewButtonWrapper {
+    height: var(--height-s);
+    width: 86%;
+    margin: auto;
+}
+
 @media screen and (max-width: $max-width-xl) {
     .block {
         width: 100%;
