@@ -22,11 +22,9 @@
 }
 
 .catalogBlock {
-    flex-grow: 0;
-    flex-shrink: 0;
-    cursor: pointer;
+    height: 40px;
+    min-width: 120px;
     margin-right: 16px;
-    outline: none;
 }
 
 
