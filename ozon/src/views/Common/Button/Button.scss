@@ -95,17 +95,11 @@ $colors: (
 .inCartBig {
     @extend %button-shared;
     @extend %in-cart-color;
-    height: var(--height-s);
-    width: 86%;
-    margin: auto;
 }
 
 .notInCartBig {
     @extend %button-shared;
     @extend %not-in-cart-color;
-    height: var(--height-s);
-    width: 86%;
-    margin: auto;
 }
 
 .review {

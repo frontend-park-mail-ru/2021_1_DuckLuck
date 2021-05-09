@@ -177,7 +177,6 @@
     font-weight: var(--bold-font);
 }
 
-
 .reviewListText {
     margin-top: 25px;
     font-size: var(--font-size-l);
@@ -209,6 +208,12 @@
 
 .reviewBlock {
     margin-top: 20px;
+}
+
+.cartButtonWrapper {
+    height: var(--height-s);
+    width: 86%;
+    margin: auto;
 }
 
 @media screen and (max-width: $max-width-xl) {
