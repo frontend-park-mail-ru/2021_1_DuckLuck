@@ -96,3 +96,11 @@
     position: relative;
     height: 100%;
 }
+
+.cartButtonWrapper {
+    display: flex;
+    height: var(--height-xxxs);
+    width: var(--width-s);
+    position: absolute;
+    bottom: 0;
+}

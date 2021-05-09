@@ -85,21 +85,11 @@ $colors: (
 .inCart {
     @extend %button-shared;
     @extend %in-cart-color;
-    display: flex;
-    height: var(--height-xxxs);
-    width: var(--width-s);
-    position: absolute;
-    bottom: 0;
 }
 
 .notInCart {
     @extend %button-shared;
     @extend %not-in-cart-color;
-    display: flex;
-    height: var(--height-xxxs);
-    width: var(--width-s);
-    position: absolute;
-    bottom: 0;
 }
 
 .inCartBig {
