@@ -15,13 +15,13 @@
   font-weight: var(--bold-font);
 }
 
-.order {
+.bigButton {
   @extend %text-shared;
   font-size: var(--font-size-m);
   color: var(--light-color);
 }
 
-.orderTitle {
+.smallTitle {
   @extend %text-shared;
   font-size: var(--font-size-l);
   font-weight: var(--bold-font);
@@ -50,4 +50,9 @@
   font-size: var(--font-size-m);
   color: var(--old-price-color);
   text-decoration: line-through;
+}
+
+.input {
+  @extend %text-shared;
+  font-size: var(--font-size-m);
 }

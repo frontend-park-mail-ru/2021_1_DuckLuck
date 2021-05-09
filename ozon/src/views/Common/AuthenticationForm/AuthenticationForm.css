@@ -15,21 +15,13 @@
     flex-direction: column;
 }
 
-.title {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
-}
-
 .wrapper {
     display: flex;
     width: 100%;
 }
 
 .buttonText {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    color: var(--light-color);
+
     margin: auto;
 }
 
@@ -41,8 +33,6 @@
 .input {
     height: 100%;
     width: 100%;
-    font-family: var(--font);
-    font-size: var(--font-size-m);
     border-radius: var(--standart-border-radius);
     border: solid 1px;
     border-color: var(--input-color);
