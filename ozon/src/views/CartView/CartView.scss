@@ -163,10 +163,17 @@
 }
 
 .orderButtonWrapper {
+    width: 89.84%;
+    height: var(--height-s);
+    margin: var(--margin-m) auto auto;
+}
+
+.orderButtonBlock {
     display: flex;
-    height: 152px;
-    border-bottom: solid 1px;
     width: 100%;
+    height: var(--height-xl);
+    border-bottom: solid 1px;
+    flex-direction: column;
 }
 
 .orderInfo {

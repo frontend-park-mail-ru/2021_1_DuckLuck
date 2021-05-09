@@ -67,9 +67,6 @@ $colors: (
 .order {
     @extend %button-shared;
     @extend %order-color;
-    width: 89.84%;
-    height: var(--height-s);
-    margin: var(--margin-m) auto auto;
 }
 
 .increment, .decrement {

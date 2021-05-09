@@ -170,6 +170,12 @@
 }
 
 .orderButtonWrapper {
+    width: 89.84%;
+    height: var(--height-s);
+    margin: var(--margin-m) auto auto;
+}
+
+.orderButtonBlock {
     display: flex;
     width: 100%;
     height: var(--height-xl);
