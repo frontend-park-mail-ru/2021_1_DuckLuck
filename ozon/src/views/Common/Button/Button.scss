@@ -7,6 +7,15 @@ $colors: (
     )
 );
 
+@each $key, $data in $colors {
+    %#{$key} {
+        background: map-get($data, common);
+    }
+    %#{$key}:hover {
+        background: map-get($data, hover);
+    }
+}
+
 %button-shared {
     cursor: pointer;
     border: none;
@@ -20,15 +29,6 @@ $colors: (
 
 .button {
     @extend %button-shared;
-}
-
-@each $key, $data in $colors {
-    %#{$key} {
-        background: map-get($data, common);
-    }
-    %#{$key}:hover {
-        background: map-get($data, hover);
-    }
 }
 
 .catalog {
