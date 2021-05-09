@@ -159,38 +159,6 @@
     margin-top: var(--margin-l);
 }
 
-.inCartButton {
-    height: var(--height-s);
-    width: 86%;
-    background: var(--order-color);
-    border-radius: var(--standart-border-radius);
-    border: none;
-    margin: auto;
-    cursor: pointer;
-    outline: none;
-}
-
-.inCartButton:hover {
-    background: var(--dark-order-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
-}
-
-.notInCartButton {
-    height: var(--height-s);
-    width: 86%;
-    background: var(--colored-object-color);
-    border-radius: var(--standart-border-radius);
-    border: none;
-    margin: auto;
-    cursor: pointer;
-    outline: none;
-}
-
-.notInCartButton:hover {
-    background: var(--dark-colored-object-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
-}
-
 .buttonText {
     color: var(--light-color);
     font-family: var(--font);
@@ -207,22 +175,6 @@
 .priceWithoutDiscount {
     font-size: var(--font-size-xxl);
     font-weight: var(--bold-font);
-}
-
-.reviewButton {
-    height: var(--height-s);
-    width: 86%;
-    background: var(--colored-object-color);
-    border-radius: var(--standart-border-radius);
-    border: none;
-    margin: auto;
-    cursor: pointer;
-    outline: none;
-}
-
-.reviewButton:hover {
-    background: var(--dark-colored-object-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
 }
 
 
