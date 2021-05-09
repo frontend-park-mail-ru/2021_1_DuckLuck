@@ -92,16 +92,6 @@ $colors: (
     @extend %not-in-cart-color;
 }
 
-.inCartBig {
-    @extend %button-shared;
-    @extend %in-cart-color;
-}
-
-.notInCartBig {
-    @extend %button-shared;
-    @extend %not-in-cart-color;
-}
-
 .review {
     @extend %button-shared;
     @extend %main-color;
