@@ -2,33 +2,95 @@
 
 $colors: (
     main-color: (
-        common: var(--colored-object-color),
-        hover: var(--dark-colored-object-color),
+        common: (
+            background: var(--colored-object-color),
+            text: var(--light-color),
+        ),
+        hover: (
+            background: var(--dark-colored-object-color),
+            text: var(--light-color),
+        ),
     ),
     order-color: (
-        common: var(--order-color),
-        hover: var(--dark-order-color),
+        common: (
+            background: var(--order-color),
+            text: var(--light-color),
+        ),
+        hover: (
+            background: var(--dark-order-color),
+            text: var(--light-color),
+        ),
     ),
     inherit-color: (
-        common: inherit,
-        hover: var(--neutral-background-color),
+        common: (
+            background: inherit,
+            text: var(--colored-object-color),
+        ),
+        hover: (
+            background: var(--neutral-background-color),
+            text: var(--colored-object-color),
+        ),
     ),
     in-cart-color: (
-        common: var(--order-color),
-        hover: var(--dark-order-color),
+        common: (
+            background: var(--order-color),
+            text: var(--light-color),
+        ),
+        hover: (
+            background: var(--dark-order-color),
+            text: var(--light-color),
+        ),
     ),
     not-in-cart-color: (
-        common: var(--colored-object-color),
-        hover: var(--dark-colored-object-color),
-    )
+        common: (
+            background: var(--colored-object-color),
+            text: var(--light-color),
+        ),
+        hover: (
+            background: var(--dark-colored-object-color),
+            text: var(--light-color),
+        ),
+    ),
+    paginator-current-color: (
+        common: (
+                background: var(--colored-object-color),
+                text: var(--light-color),
+        ),
+        hover: (
+                background: var(--dark-colored-object-color),
+                text: var(--light-color),
+        ),
+    ),
+    paginator-common-color: (
+        common: (
+                background: white,
+                text: var(--colored-object-color),
+        ),
+        hover: (
+                background: var(--neutral-background-color),
+                text: var(--colored-object-color),
+        ),
+    ),
+    paginator-big-color: (
+        common: (
+            background: var(--neutral-background-color),
+            text: var(--colored-object-color),
+        ),
+        hover: (
+            background: var(--dark-neutral-background-color),
+            text: var(--colored-object-color),
+        ),
+    ),
 );
 
 @each $key, $data in $colors {
     %#{$key} {
-        background-color: map-get($data, common);
+        background-color: map-get(map-get($data, common), background);
+        color: map-get(map-get($data, common), text);
     }
     %#{$key}:hover {
-        background-color: map-get($data, hover);
+        background-color: map-get(map-get($data, hover), background);
+        color: map-get(map-get($data, hover), text);
     }
 }
 
@@ -102,4 +164,28 @@ $colors: (
 .review {
     @extend %button-shared;
     @extend %main-color;
+}
+
+
+%paginator-shared {
+    @extend %button-shared;
+}
+
+.paginator {
+    @extend %paginator-shared;
+}
+
+.paginatorCurrent {
+    @extend %paginator-shared;
+    @extend %paginator-current-color;
+}
+
+.paginatorCommon {
+    @extend %paginator-shared;
+    @extend %paginator-common-color;
+}
+
+.paginatorBig {
+    @extend %paginator-shared;
+    @extend %paginator-big-color;
 }

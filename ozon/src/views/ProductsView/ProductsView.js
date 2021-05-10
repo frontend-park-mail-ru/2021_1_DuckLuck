@@ -7,7 +7,6 @@ import productsStyles from './ProductsView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
 import filterStyles from './ProductsFilter.scss';
-import paginatorStyles from '../Common/Pagination/Pagination.css';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
@@ -131,7 +130,7 @@ export class ProductsView extends BaseView {
                 Router.open('/search/1/', {}, {text: this.IDs['searchText']});
         });
 
-        for (const button of this.cache.getElementsByClassName(paginatorStyles.button)) {
+        for (const button of this.cache.getElementsByClassName(buttonStyles.paginator)) {
             button.addEventListener('click', () => {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
