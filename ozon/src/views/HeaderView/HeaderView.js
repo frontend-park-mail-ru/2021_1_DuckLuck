@@ -5,7 +5,7 @@ import imgStyles from '../Common/Img/Img.scss';
 import inputStyles from '../Common/Input/Input.scss';
 import textStyles from '../Common/TextArea/TextArea.scss';
 import linkStyles from '../Common/Link/Link.scss';
-import decorators from '../decorators.css';
+import decorators from '../decorators.scss';
 import headerTemplate from './HeaderView.hbs';
 import {staticServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';

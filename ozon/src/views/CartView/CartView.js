@@ -6,7 +6,7 @@ import Events from '../../utils/bus/events';
 import cartStyles from './CartView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
-import decorators from '../decorators.css';
+import decorators from '../decorators.scss';
 import Router from '../../utils/router/Router';
 
 /**

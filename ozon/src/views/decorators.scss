@@ -1,15 +1,15 @@
-@import '../constants.scss';
+@import '../constants';
 
 .hidden {
     display: none;
 }
 
 .invertColor {
-    filter: invert();
+    filter: invert(100%);
 }
 
 .strikethrough:before {
-    border-bottom: 2px solid $discout-color;
+    border-bottom: 2px solid $discount-color;
     position: absolute;
     content: "";
     width: 100%;

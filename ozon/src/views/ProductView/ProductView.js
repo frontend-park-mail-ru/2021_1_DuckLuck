@@ -10,7 +10,7 @@ import buttonStyles from './../Common/Button/Button.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
 import imgStyles from './../Common/Img/Img.scss';
 import linkStyles from './../Common/Link/Link.scss';
-import decorators from './../decorators.css';
+import decorators from '../decorators.scss';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import {Pagination} from '../Common/Pagination/Pagination';

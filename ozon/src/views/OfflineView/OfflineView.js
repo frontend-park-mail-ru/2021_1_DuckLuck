@@ -3,7 +3,7 @@ import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import Router from '../../utils/router/Router.js';
 import {OfflineForm} from '../Common/OfflineForm/OfflineForm.js';
-import decorator from '../decorators.css';
+import decorator from '../decorators.scss';
 import popupStyles from '../Common/Popup/Popup.scss';
 
 /**

@@ -8,7 +8,7 @@ import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationFor
 import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.scss';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
-import decorator from '../decorators.css';
+import decorator from '../decorators.scss';
 import buttonStyles from '../Common/Button/Button.scss';
 import popupStyles from '../Common/Popup/Popup.scss';
 import linkStyles from '../Common/Link/Link.scss';

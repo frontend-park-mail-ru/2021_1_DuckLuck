@@ -12,7 +12,7 @@ import linkStyles from './../Common/Link/Link.scss';
 import Router from '../../utils/router/Router';
 import {Popup} from '../Common/Popup/Popup';
 import {Blind} from '../Common/Blind/Blind';
-import decorators from '../decorators.css';
+import decorators from '../decorators.scss';
 
 /**
  * @class ProductsView
