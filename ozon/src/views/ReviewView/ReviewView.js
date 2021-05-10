@@ -3,6 +3,8 @@ import Events from '../../utils/bus/events';
 import reviewTemplate from './ReviewView.hbs';
 import {Input} from '../Common/Input/Input';
 import reviewStyles from './ReviewView.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
+import buttonStyles from './../Common/Button/Button.scss';
 import {staticServerHost} from '../../utils/urls/urls';
 import Router from '../../utils/router/Router';
 import {Bus} from '../../utils/bus/bus';
@@ -44,6 +46,8 @@ class ReviewView extends BaseView {
                 name: 'isPublic',
             }),
             styles: reviewStyles,
+            textStyles: textStyles,
+            buttonStyles: buttonStyles,
             product: this.presenter.product,
             userName: this.presenter.userName,
         });
@@ -80,7 +84,7 @@ class ReviewView extends BaseView {
         });
 
 
-        const submitButton = this.cache.getElementsByClassName(reviewStyles.submitButton)[0];
+        const submitButton = this.cache.getElementsByClassName(buttonStyles.review)[0];
         submitButton.addEventListener('click', () => {
             this.presenter.sendReview();
             Router.open('/');

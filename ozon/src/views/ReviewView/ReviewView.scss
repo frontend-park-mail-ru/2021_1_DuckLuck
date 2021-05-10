@@ -63,27 +63,11 @@
     flex-direction: row;
 }
 
-.submitButton {
+.buttonWrapper {
     height: var(--height-xs);
     width: 192px;
-    background: var(--colored-object-color);
-    border-radius: var(--standart-border-radius);
-    border: none;
-    margin: auto;
-    cursor: pointer;
-    outline: none;
 }
 
-.submitButton:hover {
-    background: var(--dark-colored-object-color);
-    transition: .2s cubic-bezier(.4,0,.2,1);
-}
-
-.title {
-    font-size: var(--font-size-xxl);
-    font-weight: var(--bold-font);
-    font-family: var(--font);
-}
 
 .href {
     cursor: pointer;
@@ -98,9 +82,6 @@
 }
 
 .name {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
     margin-bottom: auto;
     margin-top: auto;
 }
@@ -108,15 +89,6 @@
 .noticeText {
     width: 504px;
     height: 36px;
-}
-
-.text {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-}
-
-.bold {
-    font-weight: var(--bold-font);
 }
 
 .buttonText {

@@ -98,3 +98,8 @@ $colors: (
     @extend %button-shared;
     @extend %inherit-color;
 }
+
+.review {
+    @extend %button-shared;
+    @extend %main-color;
+}

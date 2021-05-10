@@ -1,13 +1,13 @@
 <div class="{{styles.block}}" id="review-block">
     <div class="{{styles.body}}">
         <div class="{{styles.description}}">
-            <span class="{{styles.title}}">Ваш отзыв о товаре</span>
+            <span class="{{textStyles.title}}">Ваш отзыв о товаре</span>
             <span class="{{styles.href}}" href="{{product.href}}">Страница товара</span>
             <div class="{{styles.productWrapper}}">
                 <div class="{{styles.imageWrapper}}">
                     <img src="{{product.image}}" class="{{styles.productImg}}">
                 </div>
-                <span class="{{styles.name}}">{{product.title}}</span>
+                <span class="{{styles.name}} {{textStyles.smallTitle}}">{{product.title}}</span>
             </div>
     <!--        Будет добавлен позже-->
     <!--        <div class="{{styles.notice}}">-->
@@ -20,7 +20,7 @@
     <!--        </div>-->
         </div>
         <div class="{{styles.rating}}">
-            <span class="{{styles.text}}">Оцените покупку</span>
+            <span class="{{textStyles.smallTitle}}">Оцените покупку</span>
             <div class="{{styles.stars}}">
                 {{#for 0 5 1}}
                     <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" value="{{this}}" class="{{../styles.star}}">
@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="{{styles.impressions}}">
-            <span class="{{styles.text}}">Поделитесь впечатлениями о товаре</span>
+            <span class="{{textStyles.smallTitle}}">Поделитесь впечатлениями о товаре</span>
             {{#each inputFields}}
                 <input class="{{../styles.input}}" type="{{this.type}}" name="{{this.name}}" value="{{this.value}}" placeholder="{{this.placeholder}}">
             {{/each}}
@@ -37,17 +37,19 @@
     <!--        <span>Добавьте фотографии</span>-->
     <!--    </div>-->
         <div class="{{styles.signature}}">
-            <span class="{{styles.text}}">Вы оставляете отзыв как</span>
-            <span class="{{styles.text}} {{styles.bold}}">{{userName}}</span>
+            <span class="{{textStyles.smallTitle}}">Вы оставляете отзыв как</span>
+            <span class="{{textStyles.smallTitle}}">{{userName}}</span>
         </div>
         <div class="{{styles.submit}}">
             <div class="{{styles.private}}">
-                <span class="{{styles.text}}">Скрыть мои данные в отзыве</span>
+                <span class="{{textStyles.smallTitle}}">Скрыть мои данные в отзыве</span>
                 <input class="" type="{{isPublic.type}}" name="{{isPublic.name}}">
             </div>
-            <button class="{{styles.submitButton}}">
-                <span class="{{styles.text}} {{styles.buttonText}}">Отправить отзыв</span>
-            </button>
+            <div class="{{styles.buttonWrapper}}">
+                <button class="{{buttonStyles.review}}">
+                    <span class="{{textStyles.bigButton}}">Отправить отзыв</span>
+                </button>
+            </div>
         </div>
     </div>
 </div>
