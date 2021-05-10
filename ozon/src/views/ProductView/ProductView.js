@@ -12,7 +12,6 @@ import imgStyles from './../Common/Img/Img.scss';
 import linkStyles from './../Common/Link/Link.scss';
 import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
-import imagesStyles from './../Common/Img/Img.css';
 import Router from '../../utils/router/Router';
 import {Pagination} from '../Common/Pagination/Pagination';
 
@@ -100,8 +99,8 @@ export class ProductView extends BaseView {
                 this.presenter.sortDirection);
         });
 
-        const mainImage = this.cache.getElementsByClassName(productStyles.preview)[0];
-        Array.from(this.cache.getElementsByClassName(imagesStyles.imgXL)).forEach((image) => {
+        const mainImage = this.cache.getElementsByClassName(imgStyles.productMain)[0];
+        Array.from(this.cache.getElementsByClassName(imgStyles.productCommon)).forEach((image) => {
             image.addEventListener('click', () => {
                 mainImage.setAttribute('src', image.getAttribute('src'));
             });
