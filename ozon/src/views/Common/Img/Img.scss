@@ -40,7 +40,7 @@
   height: var(--img-size-m);
 }
 
-.starProductReview {
+.smallStar {
   @extend %img-shared;
   height: var(--img-size-xs);
   width: var(--img-size-xs);
@@ -69,4 +69,10 @@
   @extend %img-shared;
   height: var(--img-size-xs);
   width: var(--img-size-xs);
+}
+
+.productPreview {
+  @extend %img-shared;
+  width: var(--img-size-l);
+  height: var(--img-size-l);
 }

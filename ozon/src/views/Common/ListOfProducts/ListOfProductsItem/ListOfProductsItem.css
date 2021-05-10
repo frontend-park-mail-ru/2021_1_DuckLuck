@@ -87,11 +87,6 @@
     margin: auto;
 }
 
-.image {
-    width: var(--img-size-l);
-    height: var(--img-size-l);
-}
-
 .buttonsBlock {
     position: relative;
     height: 100%;
