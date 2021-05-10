@@ -3,6 +3,7 @@ import Events from '../../utils/bus/events';
 import orderTemplate from './OrderView.hbs';
 import noticeTemplate from './OrderNotice.hbs';
 import noticeStyles from './OrderNotice.css';
+import textStyles from './../Common/TextArea/TextArea.scss';
 import {Input} from '../Common/Input/Input';
 import orderStyles from './OrderView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
@@ -39,6 +40,7 @@ export class OrderView extends BaseView {
             ],
             orderStyles: orderStyles,
             buttonStyles: buttonStyles,
+            textStyles: textStyles,
             cartSize: this.presenter.products.length,
             baseCost: +this.presenter.price.total_base_cost,
             discount: +this.presenter.price.total_discount,
@@ -53,6 +55,7 @@ export class OrderView extends BaseView {
             const notice = new DOMParser().parseFromString(new Popup().getHtmlString({
                 popupBody: noticeTemplate({
                     styles: noticeStyles,
+                    textStyles: textStyles,
                 }),
                 background: new Blind().getHtmlString(),
                 popupType: 'signup',
