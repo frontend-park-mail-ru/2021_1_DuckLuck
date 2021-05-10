@@ -29,13 +29,13 @@
 }
 
 .discountBlock {
-    border-radius: $standart-border-radius;
+    border-radius: $standard-border-radius;
 }
 
 .discountBadge {
     height: $height-xxxxs;
     width: $width-xxs;
-    background: $discout-color;
+    background: $discount-color;
     border-radius: var(--lower-border-radius);
     display: flex;
 }
@@ -97,7 +97,7 @@
 .buyMenu {
     border: 1px solid;
     border-color: $neutral-light-color;
-    border-radius: $standart-border-radius;
+    border-radius: $standard-border-radius;
     width: 100%;
     height: $width-xl;
     display: flex;

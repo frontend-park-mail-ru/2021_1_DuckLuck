@@ -35,7 +35,7 @@
 .orderDiscount {
   @extend %text-shared;
   font-size: $font-size-m;
-  color: $discout-color;
+  color: $discount-color;
 }
 
 .orderPrice {
@@ -81,7 +81,7 @@
   @extend %text-shared;
   font-size: $font-size-xxl;
   font-weight: $bold;
-  color: $discout-color;
+  color: $discount-color;
 }
 
 .increment, .decrement {

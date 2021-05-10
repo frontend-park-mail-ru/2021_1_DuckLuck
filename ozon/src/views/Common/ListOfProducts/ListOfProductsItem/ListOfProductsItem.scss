@@ -19,13 +19,13 @@
 }
 
 .discountBlock {
-    border-radius: $standart-border-radius;
+    border-radius: $standard-border-radius;
 }
 
 .discountBadge {
     height: $height-xxxxs;
     width: $width-xxs;
-    background: $discout-color;
+    background: $discount-color;
     border-radius: var(--lower-border-radius);
     display: flex;
 }
@@ -46,7 +46,7 @@
     font-family: $font-family;
     font-size: $font-size-m;
     font-weight: $bold;
-    color: $discout-color;
+    color: $discount-color;
     margin-left: $margin-xxs;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .strikethrough:before {
-    border-bottom: 2px solid $discout-color;
+    border-bottom: 2px solid $discount-color;
     position: absolute;
     content: "";
     width: 100%;
