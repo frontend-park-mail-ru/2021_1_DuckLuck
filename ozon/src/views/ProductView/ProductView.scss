@@ -95,8 +95,7 @@
 }
 
 .buyMenu {
-    border: 1px solid;
-    border-color: $neutral-light-color;
+    border: 1px solid $neutral-light-color;
     border-radius: $standard-border-radius;
     width: 100%;
     height: $width-xl;
@@ -133,7 +132,7 @@
 }
 
 .reviewListText {
-    margin-top: 25px;
+    margin-top: $margin-l;
     font-size: $font-size-l;
     font-weight: $bold;
 }
@@ -143,7 +142,7 @@
 }
 
 .reviewBlock {
-    margin-top: 20px;
+    margin-top: $margin-m;
 }
 
 .cartButtonWrapper {

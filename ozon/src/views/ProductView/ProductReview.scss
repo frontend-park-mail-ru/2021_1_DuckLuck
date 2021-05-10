@@ -8,8 +8,8 @@
 }
 
 .avatarWrapper {
-  width: 48px;
-  height: 48px;
+  width: $height-xs;
+  height: $height-xs;
 }
 
 .nameWrapper {
@@ -54,7 +54,7 @@
 .body {
   display: flex;
   flex-direction: column;
-  margin-left: 68px;
+  margin-left: $margin-xxl;
   gap: $gap-s;
 }
 

@@ -85,15 +85,15 @@
 .logoWrapper {
     justify-content: flex-start;
     align-items: center;
-    height: 40px;
-    width: 128px;
+    height: $height-xxs;
+    width: $width-s;
 }
 
 .menuItem {
     margin-right: $margin-s;
     cursor: pointer;
     height: $height-s;
-    width: 76px;
+    width: $width-xxs;
     position: relative;
     display: flex;
     flex-direction: column;
@@ -174,7 +174,7 @@
 
 .menuItemCounter {
     text-align: center;
-    width: 20px;
+    width: $width-xxxxs;
     border-radius: 90%;
     background-color: $discount-color;
 }

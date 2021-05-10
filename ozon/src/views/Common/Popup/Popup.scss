@@ -1,7 +1,7 @@
 @import '../../../constants';
 
 .block {
-    z-index: 1003;
+    z-index: $popup-z-index;
     left: 50%;
     top: 50%;
     position: fixed;
