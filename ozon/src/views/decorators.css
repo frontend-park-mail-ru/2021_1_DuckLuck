@@ -9,7 +9,7 @@
 }
 
 .strikethrough:before {
-    border-bottom: 2px solid var(--discout-color);
+    border-bottom: 2px solid $discout-color;
     position: absolute;
     content: "";
     width: 100%;

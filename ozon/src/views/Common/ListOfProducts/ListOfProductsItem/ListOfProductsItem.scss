@@ -2,38 +2,38 @@
 
 .block {
     display: flex;
-    width: var(--img-size-l);
-    height: var(--height-xxxxl);
+    width: $img-size-l;
+    height: $height-xxxxl;
     flex-direction: column;
     border-top: solid;
-    border-color: var(--neutral-background-color);
-    padding-bottom: var(--padding-s);
-    padding-top: var(--padding-s);
+    border-color: $neutral-background-color;
+    padding-bottom: $padding-s;
+    padding-top: $padding-s;
 }
 
 .infoWrapper {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xxs);
+    gap: $gap-xxs;
     cursor: pointer;
 }
 
 .discountBlock {
-    border-radius: var(--standart-border-radius);
+    border-radius: $standart-border-radius;
 }
 
 .discountBadge {
-    height: var(--height-xxxxs);
-    width: var(--width-xxs);
-    background: var(--discout-color);
+    height: $height-xxxxs;
+    width: $width-xxs;
+    background: $discout-color;
     border-radius: var(--lower-border-radius);
     display: flex;
 }
 
 .discountText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
-    color: var(--light-color);
+    font-family: $font-family;
+    font-size: $font-size-s;
+    color: $light-color;
     margin: auto;
 }
 
@@ -43,22 +43,22 @@
 }
 
 .discountPrice {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    font-weight: var(--bold-font);
-    color: var(--discout-color);
-    margin-left: var(--margin-xxs);
+    font-family: $font-family;
+    font-size: $font-size-m;
+    font-weight: $bold;
+    color: $discout-color;
+    margin-left: $margin-xxs;
 }
 
 .price {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
-    margin-left: var(--margin-xxs);
+    font-family: $font-family;
+    font-size: $font-size-s;
+    margin-left: $margin-xxs;
     position: relative;
 }
 
 .strikethrough:before {
-    border-bottom: 2px solid var(--discout-color);
+    border-bottom: 2px solid $discout-color;
     position: absolute;
     content: "";
     width: 100%;
@@ -67,23 +67,23 @@
 }
 
 .name {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
+    font-family: $font-family;
+    font-size: $font-size-m;
     text-overflow: ellipsis;
     overflow: hidden;
-    height: var(--height-s);
+    height: $height-s;
 }
 
 .rating {
     display: flex;
     flex-direction: row;
-    margin-top: var(--margin-xs);
+    margin-top: $margin-xs;
 }
 
 .buttonText {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    color: var(--light-color);
+    font-family: $font-family;
+    font-size: $font-size-m;
+    color: $light-color;
     margin: auto;
 }
 
@@ -94,8 +94,8 @@
 
 .cartButtonWrapper {
     display: flex;
-    height: var(--height-xxxs);
-    width: var(--width-s);
+    height: $height-xxxs;
+    width: $width-s;
     position: absolute;
     bottom: 0;
 }

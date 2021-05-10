@@ -3,8 +3,8 @@
 .body {
     display: flex;
     flex-direction: column;
-    margin: var(--margin-xl);
-    gap: var(--gap-s);
+    margin: $margin-xl;
+    gap: $gap-s;
     width: 80%;
 }
 
@@ -23,32 +23,32 @@
 }
 
 .inputWrapper {
-    height: var(--height-xxs);
+    height: $height-xxs;
     width: 100%;
 }
 
 .input {
     height: 100%;
     width: 100%;
-    border-radius: var(--standart-border-radius);
+    border-radius: $standart-border-radius;
     border: solid 1px;
-    border-color: var(--input-color);
+    border-color: $input-color;
 }
 
 .fieldName {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
+    font-family: $font-family;
+    font-size: $font-size-m;
 }
 
 .signup {
     margin: auto;
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    color: var(--colored-object-color);
+    font-family: $font-family;
+    font-size: $font-size-m;
+    color: $colored-object-color;
     cursor: pointer;
 }
 
 .buttonWrapper {
     display: flex;
-    height: var(--height-xs);
+    height: $height-xs;
 }

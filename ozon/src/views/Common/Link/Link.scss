@@ -3,9 +3,9 @@
 %link-shared {
   text-decoration: none;
   cursor: pointer;
-  font-family: var(--font);
-  font-size: var(--font-size-s);
-  color: var(--colored-object-color);
+  font-family: $font-family;
+  font-size: $font-size-s;
+  color: $colored-object-color;
 }
 
 .link {
@@ -14,22 +14,22 @@
 
 .catalogCategory {
   @extend %link-shared;
-  font-weight: var(--bold-font);
-  color: var(--dark-color);
+  font-weight: $bold;
+  color: $dark-color;
 }
 
 .catalogSubCategory {
   @extend %link-shared;
-  font-weight: var(--bold-font);
-  color: var(--dark-color);
+  font-weight: $bold;
+  color: $dark-color;
 }
 
 .catalogSubSubCategory {
   @extend %link-shared;
-  color: var(--dark-color);
+  color: $dark-color;
 }
 
 .headerMenu {
   @extend %link-shared;
-  color: var(--dark-color);
+  color: $dark-color;
 }

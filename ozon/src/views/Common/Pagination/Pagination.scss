@@ -3,15 +3,15 @@
 .block {
     display: flex;
     flex-direction: row;
-    gap: var(--gap-xxs);
+    gap: $gap-xxs;
 }
 
 .buttonWrapper {
-    width: var(--height-xxxs);
-    height: var(--height-xxxs);
+    width: $height-xxxs;
+    height: $height-xxxs;
 }
 
 .buttonBigWrapper {
-    width: var(--width-xs);
-    height: var(--height-xxxs);
+    width: $width-xs;
+    height: $height-xxxs;
 }

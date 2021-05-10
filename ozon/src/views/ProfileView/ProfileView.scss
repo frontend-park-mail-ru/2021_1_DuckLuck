@@ -1,19 +1,19 @@
 @import "../../constants";
 
 .block {
-    padding: var(--padding-xs) var(--padding-l);
+    padding: $padding-xs $padding-l;
     width: 76.66%;
     box-sizing: border-box;
-    font-family: var(--font);
+    font-family: $font-family;
     display: flex;
-    gap: var(--margin-xxxl);
-    margin: var(--margin-l) auto 0;
+    gap: $margin-xxxl;
+    margin: $margin-l auto 0;
 }
 
 .avatarBlock {
     display: flex;
     flex-direction: column;
-    gap: var(--margin-s);
+    gap: $margin-s;
 }
 
 .nameWrapper {
@@ -26,23 +26,23 @@
     flex-direction: row;
     width: 57%;
     height: 310px;
-    gap: var(--margin-s)
+    gap: $margin-s
 }
 
 .infoElem {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xxs);
+    gap: $gap-xxs;
 }
 
 .info {
     display: flex;
     flex-direction: column;
-    gap: var(--margin-xl);
+    gap: $margin-xl;
 }
 
 .infoText {
-    background: var(--neutral-background-color);
+    background: $neutral-background-color;
     border: none;
 }
 
@@ -57,7 +57,7 @@
 .fioWrapper {
     display: flex;
     flex-direction: column;
-    gap: var(--margin-xl);
+    gap: $margin-xl;
 }
 
 .label {

@@ -3,11 +3,11 @@
 .block {
     display: flex;
     width: 76%;
-    padding: var(--padding-xs) var(--padding-l);
+    padding: $padding-xs $padding-l;
     box-sizing: border-box;
     justify-content: space-between;
     flex-direction: column;
-    margin: 0 auto var(--margin-xxl);
+    margin: 0 auto $margin-xxl;
 }
 
 .wrapper {
@@ -20,7 +20,7 @@
 .categoriesBlock {
     display: flex;
     flex-direction: row;
-    gap: var(--gap-xxs);
+    gap: $gap-xxs;
 }
 
 .mainInformation {
@@ -29,13 +29,13 @@
 }
 
 .discountBlock {
-    border-radius: var(--standart-border-radius);
+    border-radius: $standart-border-radius;
 }
 
 .discountBadge {
-    height: var(--height-xxxxs);
-    width: var(--width-xxs);
-    background: var(--discout-color);
+    height: $height-xxxxs;
+    width: $width-xxs;
+    background: $discout-color;
     border-radius: var(--lower-border-radius);
     display: flex;
 }
@@ -52,16 +52,16 @@
 .priceWrapper {
     display: flex;
     flex-direction: row;
-    margin: var(--margin-l) auto auto;
+    margin: $margin-l auto auto;
     width: 86%;
 }
 
 .discountPrice {
-    margin-left: var(--margin-xxs);
+    margin-left: $margin-xxs;
 }
 
 .price {
-    margin-left: var(--margin-xxs);
+    margin-left: $margin-xxs;
     position: relative;
     margin-top: auto;
     margin-bottom: auto;
@@ -70,13 +70,13 @@
 .images {
     display: flex;
     flex-direction: column;
-    gap: var(--margin-xs);
+    gap: $margin-xs;
 }
 
 .imagesBlock {
     display: flex;
     flex-direction: row;
-    gap: var(--gap-s);
+    gap: $gap-s;
 }
 
 .imageWrapper {
@@ -96,29 +96,29 @@
 
 .buyMenu {
     border: 1px solid;
-    border-color: var(--neutral-light-color);
-    border-radius: var(--standart-border-radius);
+    border-color: $neutral-light-color;
+    border-radius: $standart-border-radius;
     width: 100%;
-    height: var(--width-xl);
+    height: $width-xl;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-xl);
+    gap: $gap-xl;
 }
 
 .description {
     display: flex;
     flex-direction: column;
-    padding-top: var(--margin-l);
-    gap: var(--gap-xs);
+    padding-top: $margin-l;
+    gap: $gap-xs;
 }
 
 .wrapperWrapper {
-    padding-top: var(--margin-s);
+    padding-top: $margin-s;
     display: flex;
     flex-direction: row;
     border-top: 1px solid;
-    border-color: var(--neutral-light-color);
-    margin-top: var(--margin-l);
+    border-color: $neutral-light-color;
+    margin-top: $margin-l;
 }
 
 .buttons {
@@ -128,18 +128,18 @@
 }
 
 .priceWithoutDiscount {
-    font-size: var(--font-size-xxl);
-    font-weight: var(--bold-font);
+    font-size: $font-size-xxl;
+    font-weight: $bold;
 }
 
 .reviewListText {
     margin-top: 25px;
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
+    font-size: $font-size-l;
+    font-weight: $bold;
 }
 
 .reviewList {
-    font-size: var(--font-size-s);
+    font-size: $font-size-s;
 }
 
 .reviewBlock {
@@ -147,13 +147,13 @@
 }
 
 .cartButtonWrapper {
-    height: var(--height-s);
+    height: $height-s;
     width: 86%;
     margin: auto;
 }
 
 .reviewButtonWrapper {
-    height: var(--height-s);
+    height: $height-s;
     width: 86%;
     margin: auto;
 }
@@ -172,7 +172,7 @@
     }
 
     .menu {
-        padding-top: var(--padding-m);
+        padding-top: $padding-m;
         width: 100%;
     }
 
@@ -198,7 +198,7 @@
 
 @media screen and (max-width: $max-width-xl) {
     .reviewButton {
-        margin-top: var(--margin-m);
+        margin-top: $margin-m;
     }
 
 }

@@ -3,14 +3,14 @@
 .menu {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-xs);
+  gap: $gap-xs;
   width: 15%;
   max-width: 180px;
 }
 
 .button {
   display: flex;
-  height: var(--height-xxxxs);
+  height: $height-xxxxs;
 }
 
 .buttonText {
@@ -28,7 +28,7 @@
 }
 
 .drop {
-  height: var(--height-xxxs);
+  height: $height-xxxs;
 }
 
 @media screen and (max-width: $max-width-xl) {

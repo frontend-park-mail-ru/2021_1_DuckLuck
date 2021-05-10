@@ -1,15 +1,15 @@
 @import '../../constants';
 
 .cartWrapper {
-    background: var(--neutral-background-color);
+    background: $neutral-background-color;
     width: 100%;
     height: 100%;
 }
 
 .body {
-    max-width: var(--max-width);
-    padding: var(--padding-xs) var(--padding-l);
-    margin: var(--margin-l) auto 0;
+    max-width: $max-width;
+    padding: $padding-xs $padding-l;
+    margin: $margin-l auto 0;
     width: 100%;
     box-sizing: border-box;
     display: flex;
@@ -19,17 +19,17 @@
 .mainWrapper {
     display: flex;
     flex-direction: column;
-    margin-top: var(--margin-l);
+    margin-top: $margin-l;
 }
 
 .wrapper {
     display: flex;
     flex-direction: row;
-    max-width: var(--max-width);
+    max-width: $max-width;
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
-    font-family: var(--font);
+    font-family: $font-family;
     justify-content: space-between;
 }
 
@@ -42,21 +42,21 @@
 }
 
 .deliveryBlock {
-    height: var(--height-m);
-    background: var(--neutral-background-color);
-    margin: var(--margin-s) auto;
+    height: $height-m;
+    background: $neutral-background-color;
+    margin: $margin-s auto;
     display: flex;
-    border-radius: var(--standart-border-radius);
+    border-radius: $standart-border-radius;
     width: 96.57%;
 }
 
 .deliveryText {
-    margin: var(--margin-s);
+    margin: $margin-s;
 }
 
 .image {
-    width: var(--height-l);
-    height: var(--height-l);
+    width: $height-l;
+    height: $height-l;
 }
 
 .productImage {
@@ -66,37 +66,37 @@
 .productsListElem {
     display: flex;
     flex-direction: row;
-    max-width: var(--max-width);
+    max-width: $max-width;
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
-    font-family: var(--font);
+    font-family: $font-family;
     align-items: center;
     justify-content: space-between;
-    padding: var(--padding-xs) var(--padding-l);
+    padding: $padding-xs $padding-l;
     border-bottom: solid 1px;
-    border-color: var(--neutral-background-color);
+    border-color: $neutral-background-color;
 }
 
 .orderMenu {
     width: 32%;
-    height: var(--height-xxxl);
+    height: $height-xxxl;
     background: white;
-    border-radius: var(--standart-border-radius);
+    border-radius: $standart-border-radius;
     display: flex;
     flex-direction: column;
 }
 
 .orderButtonWrapper {
     width: 89.84%;
-    height: var(--height-s);
-    margin: var(--margin-m) auto auto;
+    height: $height-s;
+    margin: $margin-m auto auto;
 }
 
 .orderButtonBlock {
     display: flex;
     width: 100%;
-    height: var(--height-xl);
+    height: $height-xl;
     border-bottom: solid 1px;
     flex-direction: column;
 }
@@ -108,39 +108,39 @@
 }
 
 .orderInfoTitle {
-    margin-left: var(--margin-m);
+    margin-left: $margin-m;
 }
 
 .orderInfoText {
-    margin-left: var(--margin-m);
+    margin-left: $margin-m;
 }
 
 .orderInfoWrapper {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
-    margin-top: var(--margin-m);
+    gap: $gap-s;
+    margin-top: $margin-m;
 }
 
 .orderInfoBody {
     display: flex;
     flex-direction: column;
-    gap: var(--gap-s);
+    gap: $gap-s;
     width: 100%;
 }
 
 .totalPriceBlock {
     border-top: 1px solid;
-    padding-left: var(--padding-m);
-    padding-top: var(--padding-s);
+    padding-left: $padding-m;
+    padding-top: $padding-s;
     display: flex;
     flex-direction: row;
     width: 100%;
     box-sizing: border-box;
-    font-family: var(--font);
+    font-family: $font-family;
     justify-content: space-between;
-    padding-right: var(--padding-l);
+    padding-right: $padding-l;
 }
 
 .orderInfoRow {
@@ -150,25 +150,25 @@
     width: 100%;
     box-sizing: border-box;
     justify-content: space-between;
-    padding-right: var(--padding-l);
+    padding-right: $padding-l;
 }
 
 .input {
     width: 50%;
-    font-family: var(--font);
-    font-size: var(--font-size-s);
+    font-family: $font-family;
+    font-size: $font-size-s;
 }
 
 .rules {
-    margin-left: var(--margin-l);
-    margin-right: var(--margin-l);
-    margin-bottom: var(--margin-l);
+    margin-left: $margin-l;
+    margin-right: $margin-l;
+    margin-bottom: $margin-l;
 }
 
 @media screen and (max-width: $max-width-xl){
     .wrapper {
         flex-direction: column;
-        gap: var(--gap-s);
+        gap: $gap-s;
     }
 
     .cartInfo {
@@ -187,7 +187,7 @@
 @media screen and (max-width: $max-width-l){
     .productsListElem {
         flex-direction: column;
-        gap: var(--gap-xs);
+        gap: $gap-xs;
         align-items: flex-start;
     }
 

@@ -12,7 +12,7 @@
     margin: auto;
     width: 60%;
     flex-direction: column;
-    gap: var(--gap-xl);
+    gap: $gap-xl;
 }
 
 .description {
@@ -41,7 +41,7 @@
 }
 
 .star {
-    height: var(--height-xxxs);
+    height: $height-xxxs;
 }
 
 .impressions {
@@ -50,7 +50,7 @@
 }
 
 .input {
-    margin-top: var(--margin-s);
+    margin-top: $margin-s;
 }
 
 .signature {
@@ -64,7 +64,7 @@
 }
 
 .buttonWrapper {
-    height: var(--height-xs);
+    height: $height-xs;
     width: 192px;
 }
 
@@ -79,12 +79,12 @@
 }
 
 .buttonText {
-    color: var(--light-color);
+    color: $light-color;
 }
 
 @media screen and (max-width: $max-width-xl) {
     .block {
-        padding-bottom: var(--padding-xxl);
+        padding-bottom: $padding-xxl;
     }
 }
 

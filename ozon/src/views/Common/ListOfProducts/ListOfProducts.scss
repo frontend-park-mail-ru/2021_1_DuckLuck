@@ -4,5 +4,5 @@
 .body {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--gap-s);
+    gap: $gap-s;
 }

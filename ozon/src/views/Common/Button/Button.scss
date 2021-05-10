@@ -3,92 +3,92 @@
 $colors: (
     main-color: (
         common: (
-            background: var(--colored-object-color),
-            text: var(--light-color),
+            background: $colored-object-color,
+            text: $light-color,
         ),
         hover: (
-            background: var(--dark-colored-object-color),
-            text: var(--light-color),
+            background: $dark-colored-object-color,
+            text: $light-color,
         ),
     ),
     order-color: (
         common: (
-            background: var(--order-color),
-            text: var(--light-color),
+            background: $order-color,
+            text: $light-color,
         ),
         hover: (
-            background: var(--dark-order-color),
-            text: var(--light-color),
+            background: $dark-order-color,
+            text: $light-color,
         ),
     ),
     inherit-color: (
         common: (
             background: inherit,
-            text: var(--colored-object-color),
+            text: $colored-object-color,
         ),
         hover: (
-            background: var(--neutral-background-color),
-            text: var(--colored-object-color),
+            background: $neutral-background-color,
+            text: $colored-object-color,
         ),
     ),
     exit-color: (
         common: (
             background: inherit,
-            text: var(--exit-color),
+            text: $exit-color,
         ),
         hover: (
-            background: var(--neutral-background-color),
-            text: var(--exit-color),
+            background: $neutral-background-color,
+            text: $exit-color,
         ),
     ),
     in-cart-color: (
         common: (
-            background: var(--order-color),
-            text: var(--light-color),
+            background: $order-color,
+            text: $light-color,
         ),
         hover: (
-            background: var(--dark-order-color),
-            text: var(--light-color),
+            background: $dark-order-color,
+            text: $light-color,
         ),
     ),
     not-in-cart-color: (
         common: (
-            background: var(--colored-object-color),
-            text: var(--light-color),
+            background: $colored-object-color,
+            text: $light-color,
         ),
         hover: (
-            background: var(--dark-colored-object-color),
-            text: var(--light-color),
+            background: $dark-colored-object-color,
+            text: $light-color,
         ),
     ),
     paginator-current-color: (
         common: (
-                background: var(--colored-object-color),
-                text: var(--light-color),
+                background: $colored-object-color,
+                text: $light-color,
         ),
         hover: (
-                background: var(--dark-colored-object-color),
-                text: var(--light-color),
+                background: $dark-colored-object-color,
+                text: $light-color,
         ),
     ),
     paginator-common-color: (
         common: (
                 background: white,
-                text: var(--colored-object-color),
+                text: $colored-object-color,
         ),
         hover: (
-                background: var(--neutral-background-color),
-                text: var(--colored-object-color),
+                background: $neutral-background-color,
+                text: $colored-object-color,
         ),
     ),
     paginator-big-color: (
         common: (
-            background: var(--neutral-background-color),
-            text: var(--colored-object-color),
+            background: $neutral-background-color,
+            text: $colored-object-color,
         ),
         hover: (
-            background: var(--dark-neutral-background-color),
-            text: var(--colored-object-color),
+            background: $dark-neutral-background-color,
+            text: $colored-object-color,
         ),
     ),
 );
@@ -107,7 +107,7 @@ $colors: (
 %button-shared {
     cursor: pointer;
     border: none;
-    border-radius: var(--standart-border-radius);
+    border-radius: $standart-border-radius;
     outline: none;
     width: 100%;
     height: 100%;
