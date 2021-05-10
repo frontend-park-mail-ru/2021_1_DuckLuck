@@ -83,3 +83,9 @@
   font-weight: var(--bold-font);
   color: var(--discout-color);
 }
+
+.increment, .decrement {
+  @extend %text-shared;
+  font-size: var(--font-size-m);
+  color: var(--colored-object-color);
+}

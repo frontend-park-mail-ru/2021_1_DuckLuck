@@ -52,16 +52,11 @@ $colors: (
 .catalog {
     @extend %button-shared;
     @extend %main-color;
-    color: var(--light-color)5;
-    font-size: 16px;
-    font-weight: 700;
 }
 
 .search {
     @extend %button-shared;
     @extend %main-color;
-    color: var(--light-color);
-    display: flex;
 }
 
 .order {
@@ -72,9 +67,6 @@ $colors: (
 .increment, .decrement {
     @extend %button-shared;
     @extend %inherit-color;
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    color: var(--colored-object-color);
 }
 
 .auth {
