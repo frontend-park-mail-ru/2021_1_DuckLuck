@@ -49,21 +49,7 @@
     gap: var(--margin-xl);
 }
 
-.titleText {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
-}
-
-.infoTitle {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
-    color: var(--neutral-color);
-}
-
 .infoText {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
     background: var(--neutral-background-color);
     border: none;
 }

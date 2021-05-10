@@ -84,8 +84,18 @@
   color: var(--discout-color);
 }
 
-.increment, .decrement {
+.increment, .decrement, .change {
   @extend %text-shared;
   font-size: var(--font-size-m);
   color: var(--colored-object-color);
+}
+
+.profile {
+  @extend %text-shared;
+  color: var(--neutral-color);
+}
+
+.profileInput {
+  @extend %text-shared;
+  font-size: var(--font-size-m);
 }
