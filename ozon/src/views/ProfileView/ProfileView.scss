@@ -1,5 +1,4 @@
-@import "../../constants.scss";
-
+@import "../../constants";
 
 .block {
     padding: var(--padding-xs) var(--padding-l);
@@ -53,15 +52,6 @@
 
 .incorrectAvatar {
     color: firebrick;
-}
-
-.change {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    color: var(--colored-object-color);
-    border: none;
-    background-color: inherit;
-    cursor: pointer;
 }
 
 .fioWrapper {

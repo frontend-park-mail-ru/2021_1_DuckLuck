@@ -1,6 +1,6 @@
 import {BaseView} from '../BaseView.js';
 import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
-import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.css';
+import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.scss';
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.scss';

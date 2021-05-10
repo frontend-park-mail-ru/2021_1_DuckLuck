@@ -2,7 +2,7 @@ import {BaseView} from '../BaseView.js';
 import headerStyles from './HeaderView.scss';
 import buttonStyles from '../Common/Button/Button.scss';
 import imgStyles from '../Common/Img/Img.scss';
-import inputStyles from '../Common/Input/Input.css';
+import inputStyles from '../Common/Input/Input.scss';
 import textStyles from '../Common/TextArea/TextArea.scss';
 import linkStyles from '../Common/Link/Link.scss';
 import decorators from '../decorators.css';

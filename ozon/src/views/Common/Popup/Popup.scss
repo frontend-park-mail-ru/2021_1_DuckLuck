@@ -1,13 +1,13 @@
-@import '../../../constants.scss';
+@import '../../../constants';
 
-.popup {
+.block {
     z-index: 1003;
     left: 50%;
     top: 50%;
     position: fixed;
 }
 
-.popup_login, .popup_signup {
+%body-shared {
     margin-left: -208px;
     margin-top: -168px;
     width: 416px;
@@ -16,6 +16,19 @@
     background: white;
 }
 
-.popup_signup {
+.login {
+    @extend %body-shared;
+}
+
+.signup {
+    @extend %body-shared;
     height: 405px;
+}
+
+.order {
+    @extend %body-shared;
+}
+
+.offline {
+    @extend %body-shared;
 }

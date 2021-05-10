@@ -1,5 +1,5 @@
 import offlineFormTemplate from './OfflineForm.hbs';
-import offlineFormStyles from './OfflineForm.css';
+import offlineFormStyles from './OfflineForm.scss';
 
 
 /**

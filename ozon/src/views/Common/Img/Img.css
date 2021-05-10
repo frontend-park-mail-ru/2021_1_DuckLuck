@@ -1,9 +1,0 @@
-@import "../../../constants.scss";
-
-.menuImgS {
-    size: var(--img-size-xs);
-}
-
-.menuImgL {
-    size: var(--img-size-s);
-}

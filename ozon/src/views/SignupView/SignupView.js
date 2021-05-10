@@ -7,9 +7,11 @@ import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
 import Router from '../../utils/router/Router.js';
 import Events from '../../utils/bus/events';
-import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.css';
+import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.scss';
 import decorator from '../decorators.css';
 import buttonStyles from '../Common/Button/Button.scss';
+import popupStyles from '../Common/Popup/Popup.scss';
+import linkStyles from '../Common/Link/Link.scss';
 
 /**
  * @class  SignupView
@@ -72,16 +74,17 @@ export class SignupView extends BaseView {
                     styles: AuthenticationFormStyles,
                 }),
             background: new Blind().getHtmlString(),
-            popupType: 'signup',
+            popupType: popupStyles.signup,
         });
 
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
+        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup');
+        this.parent.appendChild(this.cache);
 
-        this.cache.getElementsByClassName('blind')[0]
+        document.getElementById('blind')
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
                 body.classList.remove(decorator.noScroll);
-                this.remove();
+                document.getElementById('popup').remove();
                 Router.return();
             });
 
@@ -93,13 +96,12 @@ export class SignupView extends BaseView {
         });
 
 
-        this.cache.getElementsByClassName(AuthenticationFormStyles.signup)[0]
+        this.cache.getElementsByClassName(linkStyles.link)[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
                 body.classList.remove(decorator.noScroll);
                 this.remove();
                 Router.open('/login', {replaceState: true});
             });
-        this.parent.appendChild(this.cache);
     }
 }

@@ -1,4 +1,4 @@
-@import '../../constants.scss';
+@import '../../constants';
 
 .cartWrapper {
     background: var(--neutral-background-color);
@@ -163,12 +163,6 @@
     margin-left: var(--margin-l);
     margin-right: var(--margin-l);
     margin-bottom: var(--margin-l);
-}
-
-.link {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
-    color: var(--colored-object-color);
 }
 
 @media screen and (max-width: $max-width-xl){

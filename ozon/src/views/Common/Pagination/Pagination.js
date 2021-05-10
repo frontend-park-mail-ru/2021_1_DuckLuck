@@ -1,7 +1,7 @@
 import {Button} from '../Button/Button.js';
 import paginationTemplate from './Pagination.hbs';
 import paginationOneButtonTemplate from './PaginationOneButton.hbs';
-import styles from './Pagination.css';
+import styles from './Pagination.scss';
 import buttonStyles from '../Button/Button.scss';
 import textStyles from '../TextArea/TextArea.scss';
 

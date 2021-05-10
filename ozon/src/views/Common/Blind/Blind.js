@@ -1,4 +1,5 @@
 import blindTemplate from './Blind.hbs';
+import blindStyles from './Blind.scss';
 
 /**
  * @class Blind
@@ -16,6 +17,6 @@ export class Blind {
      * @return {string} HTML string, which will generated after templating
      */
     getHtmlString = () => {
-        return blindTemplate({});
+        return blindTemplate({blindStyles});
     };
 }

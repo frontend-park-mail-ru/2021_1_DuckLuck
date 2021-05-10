@@ -1,5 +1,5 @@
 import listOFProductsItemTemplate from './ListOfProductsItem.hbs';
-import itemStyles from './ListOfProductsItem.css';
+import itemStyles from './ListOfProductsItem.scss';
 import decorators from '../../../decorators.css';
 import buttonStyles from '../../Button/Button.scss';
 import imgStyles from '../../Img/Img.scss';
