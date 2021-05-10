@@ -189,3 +189,8 @@ $colors: (
     @extend %paginator-shared;
     @extend %paginator-big-color;
 }
+
+.profileChange {
+    @extend %button-shared;
+    @extend %inherit-color;
+}
