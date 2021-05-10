@@ -9,6 +9,7 @@ import reviewStyles from './ProductReview.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
 import imgStyles from './../Common/Img/Img.scss';
+import linkStyles from './../Common/Link/Link.scss';
 import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
 import imagesStyles from './../Common/Img/Img.css';
@@ -62,6 +63,7 @@ export class ProductView extends BaseView {
             buttonStyles: buttonStyles,
             textStyles: textStyles,
             imgStyles: imgStyles,
+            linkStyles: linkStyles,
             decorators: decorators,
             category_path: this.presenter.item.category_path,
             select: [
@@ -105,7 +107,7 @@ export class ProductView extends BaseView {
             });
         });
 
-        Array.from(this.cache.getElementsByClassName(productStyles.category_path)).forEach((category) => {
+        Array.from(this.cache.getElementsByClassName(linkStyles.link)).forEach((category) => {
             category.addEventListener('click', () => {
                 Router.open(`/items/${category.getAttribute('category_id')}`);
             });

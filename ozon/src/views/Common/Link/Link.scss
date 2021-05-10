@@ -1,0 +1,12 @@
+@import '../../../constants';
+
+%link-shared {
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: var(--font-size-s);
+  color: var(--colored-object-color);
+}
+
+.link {
+  @extend %link-shared;
+}
