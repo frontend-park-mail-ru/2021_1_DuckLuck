@@ -59,7 +59,6 @@ export class ProductView extends BaseView {
             category: this.presenter.item['description']['category'],
             productStyles: productStyles,
             reviewStyles: reviewStyles,
-            imagesStyles: imagesStyles,
             buttonStyles: buttonStyles,
             textStyles: textStyles,
             imgStyles: imgStyles,
@@ -182,6 +181,7 @@ export class ProductView extends BaseView {
                     reviewsList: reviews,
                     productStyles: productStyles,
                     reviewStyles: reviewStyles,
+                    imgStyles: imgStyles,
                 });
         } else {
             this.cache.getElementsByClassName(productStyles.reviewList)[0].innerHTML = reviewsTemplate({
@@ -189,6 +189,7 @@ export class ProductView extends BaseView {
                 pagination: pagination,
                 productStyles: productStyles,
                 reviewStyles: reviewStyles,
+                imgStyles: imgStyles,
             });
         }
         if (paginationInfo.pagesCount === paginationInfo.currentPage) {

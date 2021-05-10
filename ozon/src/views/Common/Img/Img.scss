@@ -39,3 +39,16 @@
   width: var(--img-size-m);
   height: var(--img-size-m);
 }
+
+.starProductReview {
+  @extend %img-shared;
+  height: var(--img-size-xs);
+  width: var(--img-size-xs);
+}
+
+.reviewAvatar {
+  @extend %img-shared;
+  width: var(--img-size-m);
+  height: var(--img-size-m);
+  border-radius: 50%;
+}
