@@ -27,8 +27,8 @@
                             {{#each this.productsList}}
                                 <div class="{{../cartStyles.productsListElem}}" product_id="{{this.id}}">
                                     <input type="checkbox" name="a" value="" class="{{../decorators.hidden}}">
-                                    <div class="{{../cartStyles.image}}">
-                                        <img src={{this.preview_image}} alt="" class="{{../cartStyles.productImage}}">
+                                    <div class="{{../cartStyles.imageWrapper}}">
+                                        <img src={{this.preview_image}} alt="" class="{{../imgStyles.cartProduct}}">
                                     </div>
                                     <div class="{{../cartStyles.description}}">
                                         <span class="{{../cartStyles.name}}">{{this.title}}</span>

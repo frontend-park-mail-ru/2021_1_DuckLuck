@@ -76,3 +76,9 @@
   width: $img-size-l;
   height: $img-size-l;
 }
+
+.cartProduct {
+  @extend %img-shared;
+  width: $img-size-m1;
+  height: $img-size-m1;
+}

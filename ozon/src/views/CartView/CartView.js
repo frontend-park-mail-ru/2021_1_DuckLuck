@@ -6,6 +6,7 @@ import Events from '../../utils/bus/events';
 import cartStyles from './CartView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
+import imgStyles from './../Common/Img/Img.scss';
 import decorators from '../decorators.scss';
 import Router from '../../utils/router/Router';
 
@@ -37,6 +38,7 @@ export class CartView extends BaseView {
                 decorators: decorators,
                 buttonStyles: buttonStyles,
                 textStyles: textStyles,
+                imgStyles: imgStyles,
             });
         } else {
             template = emptyCartPageTemplate({
