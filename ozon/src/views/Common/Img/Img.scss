@@ -52,3 +52,21 @@
   height: var(--img-size-m);
   border-radius: 50%;
 }
+
+.logo {
+  @extend %img-shared;
+  height: 40px;
+  width: 128px;
+}
+
+.headerMenu {
+  @extend %img-shared;
+  height: var(--img-size-s);
+  width: var(--img-size-s);
+}
+
+.searchArea {
+  @extend %img-shared;
+  height: var(--img-size-xs);
+  width: var(--img-size-xs);
+}

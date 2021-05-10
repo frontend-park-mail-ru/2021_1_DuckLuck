@@ -3,7 +3,7 @@
         <div class="{{headerStyles.logoBlock}}">
             <div class="{{headerStyles.logoWrapper}}">
                 {{#with logo}}
-                    <img loading="lazy" src={{src}} class="">
+                    <img loading="lazy" src={{src}} class="{{../imgStyles.logo}}">
                 {{/with}}
             </div>
         </div>
@@ -11,8 +11,8 @@
             <button class="{{buttonStyles.catalog}} {{textStyles.bigButton}}">
                 <div class="{{headerStyles.catalogButtonBody}}">
                     {{#with catalog}}
-                        <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}}">
-                        <img loading="lazy" src={{img.1.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}} {{../decorators.hidden}}">
+                        <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.headerMenu}} {{../decorators.invertColor}}">
+                        <img loading="lazy" src={{img.1.src}} class="{{../imgStyles.headerMenu}} {{../decorators.invertColor}} {{../decorators.hidden}}">
                         <span class="{{../textStyles.bigButton}}">{{text}}</span>
                     {{/with}}
                 </div>
@@ -27,7 +27,7 @@
                                 <span class="{{../../textStyles.text}}">{{text}}</span>
                             </div>
                             <div class="{{../../headerStyles.searchAreaPointer}}">
-                                <img loading="lazy" src={{img.src}} class="{{../../imgStyles.menuImgS}}">
+                                <img loading="lazy" src={{img.src}} class="{{../../imgStyles.searchArea}}">
                             </div>
                         {{/with}}
                     </div>
@@ -40,7 +40,7 @@
                         {{#with searchButton}}
                             <button type="submit" class="{{../../buttonStyles.search}}">
                                 <div class="{{../../headerStyles.searchImgWrapper}}">
-                                    <img loading="lazy" src={{img.src}} class="{{../../imgStyles.menuImgL}} {{../../decorators.invertColor}}">
+                                    <img loading="lazy" src={{img.src}} class="{{../../imgStyles.headerMenu}} {{../../decorators.invertColor}}">
                                 </div>
                             </button>
                         {{/with}}
@@ -52,7 +52,7 @@
             {{#each headerMenu}}
                 <div class="{{../headerStyles.menuItem}} {{#ifEquals this.href "/orders"}} {{../decorators.lock}} {{/ifEquals}} {{#ifEquals this.href "/favorites"}} {{../decorators.lock}} {{/ifEquals}}" href="{{this.href}}" name="{{this.name}}">
                     {{#with this}}
-                        <img src="{{img.src}}" class="{{../imgStyles.menuImgL}}">
+                        <img src="{{img.src}}" class="{{../imgStyles.headerMenu}}">
                         <span class="{{../textStyles.text}}">{{text}}</span>
                     {{/with}}
                     {{#ifEquals this.additionalSpan true}}
