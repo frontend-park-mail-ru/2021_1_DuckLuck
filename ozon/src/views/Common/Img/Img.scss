@@ -1,1 +1,15 @@
 @import "../../../constants";
+
+%img-shared {
+  object-fit: contain;
+}
+
+.img {
+  @extend %img-shared;
+}
+
+.review {
+  @extend %img-shared;
+  height: var(--width-xs);
+  width: var(--width-xs);
+}

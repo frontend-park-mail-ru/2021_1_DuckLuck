@@ -4,6 +4,7 @@ import reviewTemplate from './ReviewView.hbs';
 import {Input} from '../Common/Input/Input';
 import reviewStyles from './ReviewView.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
+import imgStyles from './../Common/Img/Img.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import {staticServerHost} from '../../utils/urls/urls';
 import Router from '../../utils/router/Router';
@@ -48,6 +49,7 @@ class ReviewView extends BaseView {
             styles: reviewStyles,
             textStyles: textStyles,
             buttonStyles: buttonStyles,
+            imgStyles: imgStyles,
             product: this.presenter.product,
             userName: this.presenter.userName,
         });
