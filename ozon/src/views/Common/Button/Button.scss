@@ -31,6 +31,16 @@ $colors: (
             text: var(--colored-object-color),
         ),
     ),
+    exit-color: (
+        common: (
+            background: inherit,
+            text: var(--exit-color),
+        ),
+        hover: (
+            background: var(--neutral-background-color),
+            text: var(--exit-color),
+        ),
+    ),
     in-cart-color: (
         common: (
             background: var(--order-color),
@@ -193,4 +203,9 @@ $colors: (
 .profileChange {
     @extend %button-shared;
     @extend %inherit-color;
+}
+
+.profileExit {
+    @extend %button-shared;
+    @extend %exit-color;
 }
