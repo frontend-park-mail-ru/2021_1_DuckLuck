@@ -110,7 +110,7 @@ export class HeaderView extends BaseView {
         const catalogBlock = this.cache.getElementsByClassName(headerStyles.catalogBlock)[0];
         const catalogList = this.cache.getElementsByClassName(headerStyles.catalogList)[0];
         catalogBlock.addEventListener('click', () => {
-            const images = Array.from(catalogBlock.getElementsByClassName(imgStyles.menuImgL));
+            const images = Array.from(catalogBlock.getElementsByClassName(imgStyles.headerMenu));
             if (images[0].classList.contains(decorators.hidden)) {
                 images[0].classList.remove(decorators.hidden);
                 images[1].classList.add(decorators.hidden);
