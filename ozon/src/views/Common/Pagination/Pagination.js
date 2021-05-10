@@ -106,11 +106,12 @@ export class Pagination {
         }
 
         const loadMoreButton = new Button({
-            name: styles.bigButton,
+            name: buttonStyles.paginatorBig,
             value: 'Загрузить ещё',
         });
         return paginationOneButtonTemplate({
             buttons: [loadMoreButton],
+            buttonStyles: buttonStyles,
         });
     }
 }
