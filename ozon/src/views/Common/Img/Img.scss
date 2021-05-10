@@ -13,3 +13,11 @@
   height: var(--width-xs);
   width: var(--width-xs);
 }
+
+.profileAvatar {
+  @extend %img-shared;
+  width: var(--width-s);
+  height: var(--width-s);
+  cursor: pointer;
+  border-radius: 50%;
+}

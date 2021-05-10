@@ -11,13 +11,6 @@
     margin: var(--margin-l) auto 0;
 }
 
-.avatarWrapper {
-    border-radius: 50%;
-    width: var(--width-s);
-    height: var(--width-s);
-    cursor: pointer;
-}
-
 .avatarBlock {
     display: flex;
     flex-direction: column;
@@ -85,17 +78,6 @@
 }
 
 .exit:hover {
-    filter: brightness(50%);
-    transition: .2s cubic-bezier(.4,0,.2,1);
-}
-
-.changeText {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    color: var(--colored-object-color);
-}
-
-.changeText:hover {
     filter: brightness(50%);
     transition: .2s cubic-bezier(.4,0,.2,1);
 }
