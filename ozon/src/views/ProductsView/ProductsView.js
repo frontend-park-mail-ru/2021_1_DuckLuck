@@ -5,6 +5,7 @@ import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
 import filterStyles from './ProductsFilter.scss';
 import paginatorStyles from '../Common/Pagination/Pagination.css';
 import {Bus} from '../../utils/bus/bus';
@@ -111,7 +112,9 @@ export class ProductsView extends BaseView {
                 direction: this.presenter.sortDirection,
             },
             productsStyles: productsStyles,
+            buttonStyles: buttonStyles,
             filterStyles: filterStyles,
+            textStyles: textStyles,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html')
             .getElementsByClassName(productsStyles.block)[0];

@@ -96,3 +96,13 @@ $colors: (
     @extend %button-shared;
     @extend %main-color;
 }
+
+.filterSubmit {
+    @extend %button-shared;
+    @extend %main-color;
+}
+
+.filterDrop {
+    @extend %button-shared;
+    @extend %inherit-color;
+}
