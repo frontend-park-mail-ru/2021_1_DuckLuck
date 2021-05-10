@@ -2,7 +2,7 @@
     {{#ifNotEquals buttons.0.value 1}}
         <div class="{{styles.buttonBigWrapper}}">
             <button class="{{buttonStyles.paginator}} {{buttonStyles.paginatorBig}}" page="{{firstButton.value}}">
-                <span class="{{../styles.buttonText}}">В начало</span>
+                <span class="{{../textStyles.text}}">В начало</span>
             </button>
         </div>
     {{/ifNotEquals}}
@@ -16,7 +16,7 @@
     {{#ifNotEquals nextButton.value -1}}
         <div class="{{styles.buttonBigWrapper}}">
         <button class="{{buttonStyles.paginator}} {{buttonStyles.paginatorBig}}" page="{{nextButton.value}}">
-            <span class="{{styles.buttonText}}">Дальше</span>
+            <span class="{{../textStyles.text}}">Дальше</span>
         </button>
     </div>
     {{/ifNotEquals}}
