@@ -5,7 +5,6 @@
     width: 76%;
     padding: var(--padding-xs) var(--padding-l);
     box-sizing: border-box;
-    font-family: var(--font);
     justify-content: space-between;
     flex-direction: column;
     margin: 0 auto var(--margin-xxl);
@@ -35,12 +34,6 @@
     flex-direction: column;
 }
 
-.name {
-    font-family: var(--font);
-    font-size: var(--font-size-xl);
-    font-weight: var(--bold-font);
-}
-
 .discountBlock {
     border-radius: var(--standart-border-radius);
 }
@@ -54,9 +47,6 @@
 }
 
 .discountText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
-    color: var(--light-color);
     margin: auto;
 }
 
@@ -73,17 +63,10 @@
 }
 
 .discountPrice {
-    font-family: var(--font);
-    font-size: var(--font-size-xxl);
-    font-weight: var(--bold-font);
-    color: var(--discout-color);
     margin-left: var(--margin-xxs);
 }
 
 .price {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
     margin-left: var(--margin-xxs);
     position: relative;
     margin-top: auto;
@@ -139,17 +122,6 @@
     gap: var(--gap-xs);
 }
 
-.title {
-    font-family: var(--font);
-    font-size: var(--font-size-xl);
-    font-weight: var(--bold-font);
-}
-
-.descriptionText {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-}
-
 .wrapperWrapper {
     padding-top: var(--margin-s);
     display: flex;
@@ -157,13 +129,6 @@
     border-top: 1px solid;
     border-color: var(--neutral-light-color);
     margin-top: var(--margin-l);
-}
-
-.buttonText {
-    color: var(--light-color);
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    font-weight: var(--bold-font);
 }
 
 .buttons {
@@ -196,15 +161,6 @@
     color: var(--colored-object-color);
 }
 
-.reviewListText {
-    margin-top: 25px;
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
-}
-
-.reviewList {
-    font-size: var(--font-size-s);
-}
 
 .reviewBlock {
     margin-top: 20px;

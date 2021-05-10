@@ -7,6 +7,7 @@ import Events from '../../utils/bus/events';
 import productStyles from './ProductView.scss';
 import reviewStyles from './ProductReview.scss';
 import buttonStyles from './../Common/Button/Button.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
 import decorators from './../decorators.css';
 import {Bus} from '../../utils/bus/bus';
 import imagesStyles from './../Common/Img/Img.css';
@@ -59,6 +60,7 @@ export class ProductView extends BaseView {
             reviewStyles: reviewStyles,
             imagesStyles: imagesStyles,
             buttonStyles: buttonStyles,
+            textStyles: textStyles,
             decorators: decorators,
             category_path: this.presenter.item.category_path,
             select: [

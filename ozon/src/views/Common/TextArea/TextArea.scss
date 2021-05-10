@@ -71,3 +71,15 @@
   @extend %text-shared;
   color: var(--neutral-color);
 }
+
+.light {
+  @extend %text-shared;
+  color: var(--light-color);
+}
+
+.productDiscount {
+  @extend %text-shared;
+  font-size: var(--font-size-xxl);
+  font-weight: var(--bold-font);
+  color: var(--discout-color);
+}

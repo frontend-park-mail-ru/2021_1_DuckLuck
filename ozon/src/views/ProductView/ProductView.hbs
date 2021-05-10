@@ -7,10 +7,10 @@
     </div>
     <div class="{{productStyles.badges}}">
         <div class="{{productStyles.discountBadge}}" {{#ifEquals price.discount 0}} style="visibility: hidden;"{{/ifEquals}}>
-            <span class="{{productStyles.discountText}}">-{{price.discount}}%</span>
+            <span class="{{productStyles.discountText}} {{textStyles.light}}">-{{price.discount}}%</span>
         </div>
     </div>
-    <div class="{{productStyles.name}}">{{name}}</div>
+    <div class="{{textStyles.title}}">{{name}}</div>
     <div class="{{productStyles.rating}}">
         {{#for 0 rating 1}}
             <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="">
@@ -36,11 +36,11 @@
                 </div>
             </div>
             <div class="{{productStyles.description}}">
-                <span class="{{productStyles.title}}">Описание</span>
-                <span class="{{productStyles.descriptionText}}">{{description}}</span>
+                <span class="{{textStyles.title}}">Описание</span>
+                <span class="{{textStyles.big}}">{{description}}</span>
             </div>
             <div class="{{productStyles.specifications}}"></div>
-            <div class="{{productStyles.reviewListText}}">Отзывы: </div>
+            <div class="{{textStyles.title}}">Отзывы: </div>
             <select class="{{productsStyles.select}}">
                 {{#each select}}
                     <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
@@ -48,7 +48,7 @@
                     </option>
                 {{/each}}
             </select>
-            <div class="{{productStyles.reviewList}}"></div>
+            <div class="{{productStyles.reviewList}} {{textStyles.text}}"></div>
             <div id="review-pagination"></div>
         </div>
         <div class="{{productStyles.menu}}">
@@ -56,21 +56,21 @@
             <div class="{{productStyles.buyMenu}}">
                 <div class="{{productStyles.priceBlock}}">
                     <div class="{{productStyles.priceWrapper}}">
-                        <span class="{{productStyles.discountPrice}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
-                        <span class="{{productStyles.price}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
+                        <span class="{{productStyles.discountPrice}} {{textStyles.productDiscount}} {{#ifEquals price.discount 0}}{{decorators.hidden}}{{/ifEquals}}">{{price.discountPrice}}₽</span>
+                        <span class="{{productStyles.price}} {{textStyles.smallTitle}} {{#ifNotEquals price.discount 0}}{{decorators.strikethrough}}{{/ifNotEquals}} {{#ifEquals price.discount 0}} {{productStyles.priceWithoutDiscount}}{{/ifEquals}}">{{price.base}}₽</span>
                     </div>
                 </div>
                 <div class="{{productStyles.buttons}}">
                     <div class="{{productStyles.cartButtonWrapper}}">
                         <button class="{{buttonStyles.notInCart}}">
-                            <span class="{{productStyles.buttonText}}">В корзину</span>
+                            <span class="{{textStyles.bigButton}}">В корзину</span>
                         </button>
                     </div>
                 </div>
             </div>
             <div class="{{productStyles.reviewButtonWrapper}}">
                 <button class="{{buttonStyles.review}}">
-                    <span class="{{productStyles.buttonText}}">Оставить отзыв</span>
+                    <span class="{{textStyles.bigButton}}">Оставить отзыв</span>
                 </button>
             </div>
         </div>
