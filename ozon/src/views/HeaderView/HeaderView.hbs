@@ -66,7 +66,9 @@
         <div class="{{headerStyles.catalogListBody}}">
             <div class="{{headerStyles.catalogListCategories}}">
                 {{#each catalog.categories}}
-                    <span class="{{../headerStyles.category}}" category="{{this.id}}">{{this.name}}</span>
+                    <div class="{{../headerStyles.category}}">
+                        <span class="{{../linkStyles.catalogCategory}}" category="{{this.id}}">{{this.name}}</span>
+                    </div>
                 {{/each}}
             </div>
             {{#each catalog.categories}}
@@ -74,9 +76,13 @@
                     {{#each this.next}}
                         <div class="{{../../headerStyles.catalogItemWrapper}}">
                             <div class="{{../../headerStyles.catalogItemBody}}">
-                                <span class="{{../../headerStyles.subcategory}}" category="{{this.id}}">{{this.name}}</span>
+                                <div class="{{../../headerStyles.subcategory}}">
+                                    <span class="{{../../linkStyles.catalogSubCategory}}" category="{{this.id}}">{{this.name}}</span>
+                                </div>
                                 {{#each this.next}}
-                                    <span class="{{../../../headerStyles.subsubcategory}}" category="{{this.id}}">{{this.name}}</span>
+                                    <div class="{{../../../headerStyles.subsubcategory}}">
+                                        <span class="{{../../../linkStyles.catalogSubSubCategory}}" category="{{this.id}}">{{this.name}}</span>
+                                    </div>
                                 {{/each}}
                             </div>
                         </div>

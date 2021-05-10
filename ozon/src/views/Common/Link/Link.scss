@@ -10,3 +10,20 @@
 .link {
   @extend %link-shared;
 }
+
+.catalogCategory {
+  @extend %link-shared;
+  font-weight: var(--bold-font);
+  color: var(--dark-color);
+}
+
+.catalogSubCategory {
+  @extend %link-shared;
+  font-weight: var(--bold-font);
+  color: var(--dark-color);
+}
+
+.catalogSubSubCategory {
+  @extend %link-shared;
+  color: var(--dark-color);
+}

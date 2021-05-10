@@ -4,6 +4,7 @@ import buttonStyles from '../Common/Button/Button.scss';
 import imgStyles from '../Common/Img/Img.scss';
 import inputStyles from '../Common/Input/Input.css';
 import textStyles from '../Common/TextArea/TextArea.scss';
+import linkStyles from '../Common/Link/Link.scss';
 import decorators from '../decorators.css';
 import headerTemplate from './HeaderView.hbs';
 import {staticServerHost} from '../../utils/urls/urls.js';
@@ -95,6 +96,7 @@ export class HeaderView extends BaseView {
             imgStyles: imgStyles,
             inputStyles: inputStyles,
             buttonStyles: buttonStyles,
+            linkStyles: linkStyles,
             textStyles: textStyles,
             decorators: decorators,
         });
@@ -152,7 +154,7 @@ export class HeaderView extends BaseView {
             });
         });
 
-        const catalogListCategories = this.cache.getElementsByClassName(headerStyles.category);
+        const catalogListCategories = this.cache.getElementsByClassName(linkStyles.catalogCategory);
         const catalogListSubcategories = Array.from(
             this.cache.getElementsByClassName(headerStyles.catalogListSubcategories),
         );
