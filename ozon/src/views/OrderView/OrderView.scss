@@ -12,15 +12,8 @@
     margin: var(--margin-l) auto 0;
     width: 100%;
     box-sizing: border-box;
-    font-family: var(--font);
     display: flex;
     flex-direction: column;
-}
-
-.titleText {
-    font-family: var(--font);
-    font-size: var(--font-size-xxl);
-    font-weight: var(--bold-font);
 }
 
 .mainWrapper {
@@ -48,42 +41,6 @@
     border-radius: var(--lower-border-radius);
 }
 
-.selectMenu {
-    display: flex;
-    flex-direction: row;
-    background: white;
-    max-width: var(--max-width);
-    padding: var(--padding-xs) var(--padding-l);
-    margin: 0 auto;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: var(--font);
-    border-bottom: solid 1px;
-    height: var(--height-xs);
-    gap: var(--gap-xxs);
-}
-
-.selectAll {
-    display: flex;
-    flex-direction: row;
-    gap: var(--gap-xxs);
-}
-
-.selectAllText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.deleteSelectedText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
-    margin-top: auto;
-    margin-bottom: auto;
-    color: var(--discout-color);
-}
-
 .deliveryBlock {
     height: var(--height-m);
     background: var(--neutral-background-color);
@@ -94,8 +51,6 @@
 }
 
 .deliveryText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
     margin: var(--margin-s);
 }
 
@@ -123,37 +78,6 @@
     border-color: var(--neutral-background-color);
 }
 
-.description {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-}
-
-.checkbox {
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.productMenuText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
-    color: var(--colored-object-color);
-}
-
-.priceInfo {
-    display: flex;
-    flex-direction: column;
-}
-
-.countButton {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    color: var(--colored-object-color);
-    border: none;
-    background-color: inherit;
-    cursor: pointer;
-}
-
 .orderMenu {
     width: 32%;
     height: var(--height-xxxl);
@@ -161,12 +85,6 @@
     border-radius: var(--standart-border-radius);
     display: flex;
     flex-direction: column;
-}
-
-.orderSubmit {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    color: var(--light-color);
 }
 
 .orderButtonWrapper {
@@ -190,15 +108,10 @@
 }
 
 .orderInfoTitle {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
     margin-left: var(--margin-m);
 }
 
 .orderInfoText {
-    font-family: var(--font);
-    font-size: var(--font-size-s);
     margin-left: var(--margin-m);
 }
 
@@ -230,42 +143,14 @@
     padding-right: var(--padding-l);
 }
 
-.orderTotalPriceTitle {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    font-weight: var(--bold-font);
-}
-
 .orderInfoRow {
     display: flex;
     flex-direction: row;
     margin: 0 auto;
     width: 100%;
     box-sizing: border-box;
-    font-family: var(--font);
     justify-content: space-between;
     padding-right: var(--padding-l);
-}
-
-.orderInfoDiscount {
-    color: var(--discout-color);
-}
-
-.discount {
-    color: var(--discout-color);
-}
-
-.basePrice {
-    font-weight: var(--bold-font);
-}
-
-.orderInfoPrice {
-    font-weight: var(--bold-font);
-}
-
-.totalPriceText {
-    font-weight: var(--bold-font);
-    font-size: var(--font-size-l);
 }
 
 .input {
@@ -278,9 +163,6 @@
     margin-left: var(--margin-l);
     margin-right: var(--margin-l);
     margin-bottom: var(--margin-l);
-    font-family: var(--font);
-    font-size: var(--font-size-s);
-    color: var(--neutral-color);
 }
 
 .link {

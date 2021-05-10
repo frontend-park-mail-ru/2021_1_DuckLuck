@@ -61,3 +61,8 @@
   @extend %text-shared;
   color: var(--light-color);
 }
+
+.rules {
+  @extend %text-shared;
+  color: var(--neutral-color);
+}
