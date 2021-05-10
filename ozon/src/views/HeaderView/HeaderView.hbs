@@ -50,7 +50,7 @@
         </div>
         <div class="{{headerStyles.menu}}">
             {{#each headerMenu}}
-                <div class="{{../headerStyles.menuItem}} {{#ifEquals this.href "/orders"}} {{../decorators.lock}} {{/ifEquals}} {{#ifEquals this.href "/favorites"}} {{../decorators.lock}} {{/ifEquals}}" href="{{this.href}}" name="{{this.name}}">
+                <a class="{{../linkStyles.headerMenu}} {{../headerStyles.menuItem}} {{#ifEquals this.href "/orders"}} {{../decorators.lock}} {{/ifEquals}} {{#ifEquals this.href "/favorites"}} {{../decorators.lock}} {{/ifEquals}}" href="{{this.href}}" name="{{this.name}}">
                     {{#with this}}
                         <img src="{{img.src}}" class="{{../imgStyles.headerMenu}}">
                         <span class="{{../textStyles.text}}">{{text}}</span>
@@ -58,7 +58,7 @@
                     {{#ifEquals this.additionalSpan true}}
                         <span name="addSpan{{this.name}}" class="{{this.additionalSpanClass}} {{../textStyles.menuCounter}}">0</span>
                     {{/ifEquals}}
-                </div>
+                </a>
             {{/each}}
         </div>
     </div>
@@ -67,7 +67,7 @@
             <div class="{{headerStyles.catalogListCategories}}">
                 {{#each catalog.categories}}
                     <div class="{{../headerStyles.category}}">
-                        <span class="{{../linkStyles.catalogCategory}}" category="{{this.id}}">{{this.name}}</span>
+                        <a class="{{../linkStyles.catalogCategory}}" category="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
                     </div>
                 {{/each}}
             </div>
@@ -77,11 +77,11 @@
                         <div class="{{../../headerStyles.catalogItemWrapper}}">
                             <div class="{{../../headerStyles.catalogItemBody}}">
                                 <div class="{{../../headerStyles.subcategory}}">
-                                    <span class="{{../../linkStyles.catalogSubCategory}}" category="{{this.id}}">{{this.name}}</span>
+                                    <a class="{{../../linkStyles.catalogSubCategory}}" category="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
                                 </div>
                                 {{#each this.next}}
                                     <div class="{{../../../headerStyles.subsubcategory}}">
-                                        <span class="{{../../../linkStyles.catalogSubSubCategory}}" category="{{this.id}}">{{this.name}}</span>
+                                        <a class="{{../../../linkStyles.catalogSubSubCategory}}" category="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
                                     </div>
                                 {{/each}}
                             </div>
