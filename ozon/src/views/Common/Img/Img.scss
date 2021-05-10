@@ -21,3 +21,21 @@
   cursor: pointer;
   border-radius: 50%;
 }
+
+.star {
+  @extend %img-shared;
+  height: var(--img-size-s);
+  width: var(--img-size-s);
+}
+
+.productMain {
+  @extend %img-shared;
+  width: var(--img-size-xl);
+  height: var(--img-size-xl);
+}
+
+.productCommon {
+  @extend %img-shared;
+  width: var(--img-size-m);
+  height: var(--img-size-m);
+}

@@ -7,12 +7,3 @@
 .menuImgL {
     size: var(--img-size-s);
 }
-
-.imgXL {
-    height: 100%;
-}
-
-.imgXXL {
-    height: 100%;
-    margin: auto;
-}

@@ -86,14 +86,10 @@
 }
 
 .imageWrapper {
-    width: var(--img-size-m);
-    height: var(--img-size-m);
     cursor: pointer;
 }
 
 .mainImage {
-    width: var(--img-size-xl);
-    height: var(--img-size-xl);
     display: flex;
     cursor: pointer;
 }

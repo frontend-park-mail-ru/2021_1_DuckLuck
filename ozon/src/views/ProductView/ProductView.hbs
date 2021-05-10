@@ -13,10 +13,10 @@
     <div class="{{textStyles.title}}">{{name}}</div>
     <div class="{{productStyles.rating}}">
         {{#for 0 rating 1}}
-            <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="">
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="{{../imgStyles.star}}">
         {{/for}}
         {{#for rating 5 1}}
-            <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="">
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="{{../imgStyles.star}}">
         {{/for}}
     </div>
     <div class="{{productStyles.wrapperWrapper}}">
@@ -26,12 +26,12 @@
                     <div class="{{productStyles.images}}">
                         {{#each images}}
                             <div class="{{../productStyles.imageWrapper}}">
-                                <img src="{{this.src}}" class="{{../imagesStyles.imgXL}}">
+                                <img src="{{this.src}}" class="{{../imgStyles.productCommon}}">
                             </div>
                         {{/each}}
                     </div>
                     <div class="{{productStyles.mainImage}}">
-                        <img src="{{images.0.src}}" alt="" class="{{imagesStyles.imgXXL}} {{productStyles.preview}}">
+                        <img src="{{images.0.src}}" alt="" class="{{imgStyles.productMain}} {{productStyles.preview}}">
                     </div>
                 </div>
             </div>
