@@ -102,7 +102,8 @@ export class HeaderView extends BaseView {
 
         const logoButton = this.cache.getElementsByClassName(headerStyles.logoBlock)[0];
         logoButton.addEventListener('click', () => {
-            Router.open('/');
+            this.dropSearchInput();
+            Router.open('/', {dropFilter: true});
         });
 
         const catalogBlock = this.cache.getElementsByClassName(headerStyles.catalogBlock)[0];
@@ -124,6 +125,7 @@ export class HeaderView extends BaseView {
             if (evt.target.hasAttribute('category')) {
                 const categoryId = parseInt(evt.target.getAttribute('category'));
                 catalogBlock.dispatchEvent(new Event('click'));
+                this.dropSearchInput();
                 Router.open(`/items/${categoryId}`, {dropFilter: true});
             }
         });
@@ -182,6 +184,9 @@ export class HeaderView extends BaseView {
         }
     }
 
+    dropSearchInput = () => {
+        document.getElementsByClassName(inputStyles.search)[0].value = '';
+    }
 
     /**
      * @param {number} value
