@@ -47,6 +47,9 @@ export class CartView extends BaseView {
         for (const product of document.getElementsByClassName(cartStyles.productMenuText)) {
             product.addEventListener('click', (evt) => {
                 evt.preventDefault();
+                const counter = +document.querySelector(`div[product_id='${product.title}']`).
+                    getElementsByClassName(cartStyles.count)[0].innerHTML;
+                this.changeContent(+product.getAttribute('title'), -counter);
                 if (!product.title) {
                     return;
                 }
@@ -60,23 +63,21 @@ export class CartView extends BaseView {
             elemList.getElementsByClassName(cartStyles.incButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
                 const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
+                this.changeContent(itemId, -1);
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
                     count: count - 1,
                 });
-                if (count > 0) {
-                    this.changeContent(itemId, -1);
-                }
             });
 
             elemList.getElementsByClassName(cartStyles.decButton)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
                 const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
+                this.changeContent(itemId, 1);
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
                     count: count + 1,
                 });
-                this.changeContent(itemId, 1);
             });
         }
 
@@ -108,14 +109,14 @@ export class CartView extends BaseView {
 
         document.getElementsByClassName(cartStyles.orderInfoPrice)[0].innerHTML =
             (parseInt(document.getElementsByClassName(cartStyles.orderInfoPrice)[0].innerHTML) +
-                diff * product.price.base_cost).toString() + '₽';
+                diff * product.price.base_cost).toString() + ' ₽';
         document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML =
             (parseInt(document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML) +
-                diff * product.price.total_cost).toString() + '₽';
+                diff * product.price.total_cost).toString() + ' ₽';
 
         document.getElementsByClassName(cartStyles.orderInfoDiscount)[0].innerHTML =
             (parseInt(document.getElementsByClassName(cartStyles.orderInfoPrice)[0].innerHTML) -
-            parseInt(document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML)).toString() + '₽';
+            parseInt(document.getElementsByClassName(cartStyles.totalPriceText)[0].innerHTML)).toString() + ' ₽';
 
 
         const item = Array.from(document.getElementsByClassName(cartStyles.productsListElem)).find((elem) => {
