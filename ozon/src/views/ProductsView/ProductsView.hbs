@@ -37,7 +37,8 @@
         </div>
     </div>
     {{#ifEquals this.isEmpty true}}
-        <div class="{{productsStyles.emptyText}}">Не найдено ни одного товара</div>
+        <div class="{{productsStyles.emptyText}}">Не найдено ни одного товара. Попробуйте поменять фильтры или</div>
+        <a class="{{productsStyles.onMainPage}}" href="">Вернуться на главную</a>
     {{/ifEquals}}
 
     {{#ifEquals this.isEmpty false}}

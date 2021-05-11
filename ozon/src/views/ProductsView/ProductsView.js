@@ -188,7 +188,7 @@ export class ProductsView extends BaseView {
             event.preventDefault();
             this.presenter.dropFilter();
             this.dropFilter();
-            this.show();
+            this.#viewType === ProductsView.#types.search ? this.show({text: this.IDs['searchText']}) : this.show();
         });
 
         const min_price_input = document.getElementById('min_price');
@@ -204,6 +204,14 @@ export class ProductsView extends BaseView {
                 event.preventDefault();
             }
         });
+
+        const onMainElem = this.cache.getElementsByClassName(productsStyles.onMainPage)[0];
+        if (onMainElem) {
+            onMainElem.addEventListener('click', (event) => {
+                event.preventDefault();
+                Router.open('/', {dropFilter: true});
+            });
+        }
         this.drawFilter();
     };
 
@@ -300,7 +308,9 @@ export class ProductsView extends BaseView {
             return;
         }
 
-        form.remove();
+        for (const input of form.getElementsByTagName('input')) {
+            input.type === 'checkbox' ? input.checked = false : input.value = '';
+        }
     }
 
     drawIncorrectFilterWarning = () => {
