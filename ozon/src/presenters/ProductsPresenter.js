@@ -106,9 +106,8 @@ class ProductsPresenter extends BasePresenter {
      * @param {String} sortDirection
      */
     loadProducts = (category, page, sortKey, sortDirection) => {
-        if (this.parseFiltration()) {
-            this.model.loadProducts(category, page, sortKey, sortDirection);
-        }
+        this.parseFiltration();
+        this.model.loadProducts(category, page, sortKey, sortDirection);
     }
 
     /**
@@ -118,25 +117,17 @@ class ProductsPresenter extends BasePresenter {
      * @param {String} sortDirection
      */
     loadSearchProducts = (searchData, page, sortKey, sortDirection) => {
-        if (this.parseFiltration()) {
-            this.model.loadProductsSearch(searchData, page, sortKey, sortDirection);
-        }
+        this.parseFiltration();
+        this.model.loadProductsSearch(searchData, page, sortKey, sortDirection);
     }
 
-    /**
-     * @return {boolean}
-     */
     parseFiltration = () => {
         if (!document.getElementById('min_price')) {
-            return true;
+            return;
         }
 
         const minPrice = document.getElementById('min_price').value;
         const maxPrice = document.getElementById('max_price').value;
-        if (+minPrice > +maxPrice) {
-            this.view.drawIncorrectFilterWarning();
-            return false;
-        }
         this.model.filter = {
             min_price: minPrice === '' ? undefined : parseInt(minPrice),
             max_price: maxPrice === '' ? undefined : parseInt(maxPrice),
@@ -144,8 +135,6 @@ class ProductsPresenter extends BasePresenter {
             is_rating: document.getElementById('is_rating').checked,
             is_discount: document.getElementById('is_discount').checked,
         };
-        this.view.dropIncorrectFilterWarning();
-        return true;
     }
 
     /**
@@ -202,4 +191,5 @@ class ProductsPresenter extends BasePresenter {
         this.view.setProductNotAdded(itemID);
     }
 }
+
 export default ProductsPresenter;
