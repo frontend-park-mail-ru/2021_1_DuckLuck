@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: build
-          path: ./ozon/src/dist
+          path: ./ozon/src
 
   deploy:
     runs-on: ubuntu-latest
