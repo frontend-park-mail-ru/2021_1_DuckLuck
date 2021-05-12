@@ -15,11 +15,6 @@
   font-weight: $bold;
 }
 
-.big {
-  @extend %text-shared;
-  font-size: $font-size-m;
-}
-
 .bigButton {
   @extend %text-shared;
   font-size: $font-size-m;
@@ -38,13 +33,7 @@
   color: $discount-color;
 }
 
-.orderPrice {
-  @extend %text-shared;
-  font-size: $font-size-m;
-  font-weight: $bold;
-}
-
-.bold {
+.bold, .orderPrice {
   @extend %text-shared;
   font-size: $font-size-m;
   font-weight: $bold;
@@ -57,22 +46,17 @@
   text-decoration: line-through;
 }
 
-.input {
+.input, .big, .profileInput {
   @extend %text-shared;
   font-size: $font-size-m;
 }
 
-.menuCounter {
-  @extend %text-shared;
-  color: $light-color;
-}
-
-.rules {
+.rules, .profile  {
   @extend %text-shared;
   color: $neutral-color;
 }
 
-.light {
+.light, .menuCounter {
   @extend %text-shared;
   color: $light-color;
 }
@@ -84,23 +68,7 @@
   color: $discount-color;
 }
 
-.increment, .decrement {
-  @extend %text-shared;
-  font-size: $font-size-m;
-  color: $colored-object-color;
-}
-
-.profile {
-  @extend %text-shared;
-  color: $neutral-color;
-}
-
-.profileInput {
-  @extend %text-shared;
-  font-size: $font-size-m;
-}
-
-.profileChange {
+.increment, .decrement, .profileChange {
   @extend %text-shared;
   font-size: $font-size-m;
   color: $colored-object-color;
