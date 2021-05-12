@@ -81,6 +81,39 @@ class ProductsPresenter extends BasePresenter {
     }
 
     /**
+     * @param {Object} URLParams
+     */
+    setFilter = (URLParams) => {
+        /**
+         * @param {string} string
+         * @return {boolean}
+         */
+        function isStringValidBool(string) {
+            if (!string) {
+                return false;
+            }
+            string = string.toLowerCase();
+            return string === 'true' || string === 'false';
+        }
+
+        this.model.filter = {};
+
+
+        const priceMin = URLParams.priceMin;
+        const priceMax = URLParams.priceMax;
+        this.model.filter.min_price = priceMin && !isNaN(priceMin) && !isNaN(parseInt(priceMin)) && +priceMin > 0 ?
+            +priceMin : undefined;
+        this.model.filter.max_price = priceMax && !isNaN(priceMax) && !isNaN(parseInt(priceMax)) && +priceMax > 0?
+            +priceMax : undefined;
+        this.model.filter.is_new = isStringValidBool(URLParams.isNew) ?
+            JSON.parse(URLParams.isNew.toLowerCase()) : false;
+        this.model.filter.is_rating = isStringValidBool(URLParams.isRating) ?
+            JSON.parse(URLParams.isRating.toLowerCase()) : false;
+        this.model.filter.is_discount = isStringValidBool(URLParams.isDiscount) ?
+            JSON.parse(URLParams.isDiscount.toLowerCase()) : false;
+    }
+
+    /**
      *
      * @param {Number} id
      */
@@ -113,7 +146,8 @@ class ProductsPresenter extends BasePresenter {
      *            isNew: (boolean),
      *            isDiscount: (boolean)}}
      */
-    getFilterParams = () => {
+    getParams = () => {
+        this.parseFiltration();
         const filter = this.filter;
         return {
             sortKey: this.sortKey,
@@ -134,8 +168,11 @@ class ProductsPresenter extends BasePresenter {
      */
     loadProducts = (category, page, sortKey, sortDirection) => {
         if (this.parseFiltration()) {
+            this.view.dropIncorrectFilterWarning();
             this.model.loadProducts(category, page, sortKey, sortDirection);
+            return;
         }
+        this.view.drawIncorrectFilterWarning();
     }
 
     /**
@@ -146,8 +183,11 @@ class ProductsPresenter extends BasePresenter {
      */
     loadSearchProducts = (searchData, page, sortKey, sortDirection) => {
         if (this.parseFiltration()) {
+            this.view.dropIncorrectFilterWarning();
             this.model.loadProductsSearch(searchData, page, sortKey, sortDirection);
+            return;
         }
+        this.view.drawIncorrectFilterWarning();
     }
 
 
@@ -161,8 +201,7 @@ class ProductsPresenter extends BasePresenter {
 
         const minPrice = document.getElementById('min_price').value;
         const maxPrice = document.getElementById('max_price').value;
-        if (+minPrice > +maxPrice) {
-            this.view.drawIncorrectFilterWarning();
+        if (minPrice.length && maxPrice.length && +minPrice > +maxPrice) {
             return false;
         }
 
@@ -173,7 +212,6 @@ class ProductsPresenter extends BasePresenter {
             is_rating: document.getElementById('is_rating').checked,
             is_discount: document.getElementById('is_discount').checked,
         };
-        this.view.dropIncorrectFilterWarning();
         return true;
     }
 

@@ -61,6 +61,14 @@ export class ProductsView extends BaseView {
             this.presenter.changeSortDirection(URLParams.sortDirection);
         }
 
+        if (URLParams) {
+            this.presenter.setFilter(URLParams);
+        }
+
+        if (URLParams && URLParams.sortDirection) {
+            this.presenter.changeSortDirection(URLParams.sortDirection);
+        }
+
         if (URLParams && URLParams.text) {
             this.#viewType = ProductsView.#types.search;
             this.IDs['searchText'] = URLParams.text;
@@ -136,10 +144,10 @@ export class ProductsView extends BaseView {
             this.presenter.changeSortKey(sortKey);
             this.presenter.changeSortDirection(sortDirection);
             this.#viewType === ProductsView.#types.category ?
-                Router.open(`/items/${this.IDs['category']}`, {}, this.presenter.getFilterParams()) :
+                Router.open(`/items/${this.IDs['category']}`, {}, this.presenter.getParams()) :
                 Router.open('/search/1/',
                     {},
-                    Object.assign(this.presenter.getFilterParams(),
+                    Object.assign(this.presenter.getParams(),
                         {text: this.IDs['searchText']}));
         });
 
@@ -148,10 +156,10 @@ export class ProductsView extends BaseView {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
                 this.#viewType === ProductsView.#types.category ?
-                    Router.open(`/items/${this.IDs['category']}/${page}`, {}, this.presenter.getFilterParams()) :
+                    Router.open(`/items/${this.IDs['category']}/${page}`, {}, this.presenter.getParams()) :
                     Router.open(`/search/${page}/`,
                         {},
-                        Object.assign(this.presenter.getFilterParams(),
+                        Object.assign(this.presenter.getParams(),
                             {text: this.IDs['searchText']}));
             });
         }
@@ -184,12 +192,12 @@ export class ProductsView extends BaseView {
             this.IDs['page'] = 1;
             switch (this.#viewType) {
             case ProductsView.#types.category:
-                Router.open(`/items/${this.IDs['category']}/1`, {}, this.presenter.getFilterParams());
+                Router.open(`/items/${this.IDs['category']}/1`, {}, this.presenter.getParams());
                 break;
             case ProductsView.#types.search:
                 Router.open('/search/1/',
                     {},
-                    Object.assign(this.presenter.getFilterParams(),
+                    Object.assign(this.presenter.getParams(),
                         {text: this.IDs['searchText']}));
                 break;
             }
@@ -326,7 +334,6 @@ export class ProductsView extends BaseView {
 
     dropSort = () => {
         const sort = document.getElementsByClassName(productsStyles.select)[0];
-        console.log(sort);
         if (!sort) {
             return;
         }
@@ -337,10 +344,18 @@ export class ProductsView extends BaseView {
     }
 
     drawIncorrectFilterWarning = () => {
-        document.getElementById('incorrect_filter_label').innerHTML = 'Некорректные данные для фильтрации!';
+        const incorrectFilterLabel = document.getElementById('incorrect_filter_label');
+        if (!incorrectFilterLabel) {
+            return;
+        }
+        incorrectFilterLabel.innerHTML = 'Некорректные данные для фильтрации!';
     }
 
     dropIncorrectFilterWarning = () => {
-        document.getElementById('incorrect_filter_label').innerHTML = '';
+        const incorrectFilterLabel = document.getElementById('incorrect_filter_label');
+        if (!incorrectFilterLabel) {
+            return;
+        }
+        incorrectFilterLabel.innerHTML = '';
     }
 }
