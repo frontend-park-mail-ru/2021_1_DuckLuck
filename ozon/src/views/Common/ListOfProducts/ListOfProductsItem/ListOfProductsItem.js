@@ -13,7 +13,7 @@ export class ListOfProductsItem {
      * @param {number} itemRating
      * @param {Object} itemPrice
      */
-    constructor({itemImage, itemInCart = false, itemName = '', itemRating = 0,
+    constructor({itemImage, itemInCart = false, itemName = '', itemRating = 0, itemReviewsCount = 0,
         itemPrice= {discountPrice: '', base: '', discount: ''}, itemId=0} = {}) {
         this.itemInCart = itemInCart;
         this.itemImage = itemImage;
@@ -21,6 +21,7 @@ export class ListOfProductsItem {
         this.itemRating = itemRating;
         this.itemPrice = itemPrice;
         this.itemId = itemId;
+        this.itemReviewsCount = itemReviewsCount;
     }
 
 
@@ -35,6 +36,7 @@ export class ListOfProductsItem {
             itemImage: this.itemImage,
             itemName: this.itemName,
             itemRating: this.itemRating,
+            itemReviewsCount: this.itemReviewsCount,
             itemPrice: this.itemPrice,
             itemStyles: itemStyles,
             decorators: decorators,

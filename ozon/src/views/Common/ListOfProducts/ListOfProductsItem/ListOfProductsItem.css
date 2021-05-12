@@ -80,6 +80,12 @@
     margin-top: var(--margin-xs);
 }
 
+.ratingCount {
+    margin-top: var(--margin-xxs);
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+}
+
 .inCartButton {
     background: var(--order-color);
     display: flex;

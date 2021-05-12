@@ -43,6 +43,17 @@ export class ProductsView extends BaseView {
             this.presenter.changeSortDirection('ASC');
         }
 
+        if (URLParams) {
+            this.presenter.changeSortKey(URLParams.sortKey);
+            this.presenter.changeSortDirection(URLParams.sortDirection);
+            this.presenter.setFilter(URLParams);
+        } else {
+            this.presenter.dropFilter();
+            this.dropFilter();
+            this.presenter.dropSort();
+            this.dropSort();
+        }
+
         if (this.IDs['dropFilter']) {
             this.presenter.dropFilter();
             this.dropFilter();
@@ -51,22 +62,6 @@ export class ProductsView extends BaseView {
         if (this.IDs['dropSort']) {
             this.presenter.dropSort();
             this.dropSort();
-        }
-
-        if (URLParams && URLParams.sortKey) {
-            this.presenter.changeSortKey(URLParams.sortKey);
-        }
-
-        if (URLParams && URLParams.sortDirection) {
-            this.presenter.changeSortDirection(URLParams.sortDirection);
-        }
-
-        if (URLParams) {
-            this.presenter.setFilter(URLParams);
-        }
-
-        if (URLParams && URLParams.sortDirection) {
-            this.presenter.changeSortDirection(URLParams.sortDirection);
         }
 
         if (URLParams && URLParams.text) {
@@ -190,17 +185,12 @@ export class ProductsView extends BaseView {
         document.getElementById('filtration_form').addEventListener('submit', (event) => {
             event.preventDefault();
             this.IDs['page'] = 1;
-            switch (this.#viewType) {
-            case ProductsView.#types.category:
-                Router.open(`/items/${this.IDs['category']}/1`, {}, this.presenter.getParams());
-                break;
-            case ProductsView.#types.search:
+            this.#viewType === ProductsView.#types.category ?
+                Router.open(`/items/${this.IDs['category']}/1`, {}, this.presenter.getParams()) :
                 Router.open('/search/1/',
                     {},
                     Object.assign(this.presenter.getParams(),
                         {text: this.IDs['searchText']}));
-                break;
-            }
         });
 
         document.getElementById('drop-filters').addEventListener('click', (event) => {
@@ -228,7 +218,7 @@ export class ProductsView extends BaseView {
         if (onMainElem) {
             onMainElem.addEventListener('click', (event) => {
                 event.preventDefault();
-                Router.open('/', {dropFilter: true});
+                Router.open('/', {dropFilter: true, dropSort: true});
             });
         }
         this.drawFilter();
