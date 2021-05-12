@@ -55,8 +55,8 @@
 
 .logo {
   @extend %img-shared;
-  height: 40px;
-  width: 128px;
+  height: $logo-height;
+  width: $logo-width;
 }
 
 .headerMenu {
