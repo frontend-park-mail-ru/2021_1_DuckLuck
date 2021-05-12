@@ -16,19 +16,11 @@
     background: white;
 }
 
-.login {
+.login, .order, .offline {
     @extend %body-shared;
 }
 
 .signup {
     @extend %body-shared;
     height: 405px;
-}
-
-.order {
-    @extend %body-shared;
-}
-
-.offline {
-    @extend %body-shared;
 }
