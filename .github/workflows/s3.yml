@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [ develop, main ]
   push:
-    branches: [ develop, main]
+    branches: [ develop, main, s3-test]
 
 jobs:
   build:
@@ -36,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: build
-          path: ./ozon
+          path: ./ozon/src/dist
 
   deploy:
     runs-on: ubuntu-latest
