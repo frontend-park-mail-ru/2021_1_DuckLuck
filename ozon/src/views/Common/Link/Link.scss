@@ -12,24 +12,14 @@
   @extend %link-shared;
 }
 
-.catalogCategory {
+.catalogCategory, .catalogSubCategory {
   @extend %link-shared;
   font-weight: $bold;
   color: $dark-color;
 }
 
-.catalogSubCategory {
-  @extend %link-shared;
-  font-weight: $bold;
-  color: $dark-color;
-}
-
-.catalogSubSubCategory {
+.catalogSubSubCategory, .headerMenu  {
   @extend %link-shared;
   color: $dark-color;
 }
 
-.headerMenu {
-  @extend %link-shared;
-  color: $dark-color;
-}
