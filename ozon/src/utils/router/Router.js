@@ -38,7 +38,7 @@ class Router {
     /**
      * @description Return back in browse history
      */
-    return() {
+    goBack() {
         window.history.back();
     }
 

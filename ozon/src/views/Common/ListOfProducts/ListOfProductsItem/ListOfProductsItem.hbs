@@ -1,7 +1,7 @@
 <div class="{{itemStyles.block}}" item-id="{{itemId}}">
     <div class="{{itemStyles.infoWrapper}}">
         <div class="{{itemStyles.images}}">
-            <img src="{{itemImage.src}}" class="{{itemStyles.image}}">
+            <img src="{{itemImage.src}}" class="{{imgStyles.productPreview}}">
         </div>
         <div class="{{itemStyles.discountBlock}}">
             <div class="{{itemStyles.discountBadge}}" {{#ifEquals itemPrice.discount 0}} style="visibility: hidden;"{{/ifEquals}}>
@@ -14,7 +14,7 @@
             <span class="{{itemStyles.discountPrice}}  {{#ifEquals itemPrice.discount 0}} {{decorators.hidden}}{{/ifEquals}}">
                 {{itemPrice.discountPrice}}₽
             </span>
-            <span class="{{itemStyles.price}} {{#ifNotEquals itemPrice.discount 0}}{{itemStyles.strikethrough}}{{/ifNotEquals}}"  {{#ifEquals itemPrice.discount 0}} style="font-size: var(--font-size-m); font-weight: var(--bold-font)"{{/ifEquals}}>
+            <span class="{{itemStyles.price}} {{#ifNotEquals itemPrice.discount 0}}{{itemStyles.strikethrough}}{{/ifNotEquals}}"  {{#ifEquals itemPrice.discount 0}} style="font-size: $font-size-m; font-weight: $bold"{{/ifEquals}}>
                 {{itemPrice.base}}₽
             </span>
         </div>
@@ -24,21 +24,22 @@
             </div>
             <div class="{{itemStyles.rating}}">
                 {{#for 0 itemRating 1}}
-                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="">
+                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="{{../imgStyles.smallStar}}">
                 {{/for}}
                 {{#for itemRating 5 1}}
-                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="">
+                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="{{../imgStyles.smallStar}}">
                 {{/for}}
                 <span class="{{itemStyles.ratingCount}}">({{itemReviewsCount}})</span>
             </div>
         </div>
     </div>
     <div class="{{itemStyles.buttonsBlock}}">
-        <button class="{{itemStyles.notInCartButton}}">
-            <span class="{{itemStyles.buttonText}}">
-                В корзину
-            </span>
-        </button>
-
+        <div class="{{itemStyles.cartButtonWrapper}}">
+            <button class="{{buttonStyles.notInCartProducts}}">
+                <span class="{{itemStyles.buttonText}}">
+                    В корзину
+                </span>
+            </button>
+        </div>
     </div>
 </div>

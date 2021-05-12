@@ -1,7 +1,7 @@
 import {Img} from '../Img/Img';
 import {ListOfProductsItem} from './ListOfProductsItem/ListOfProductsItem';
 import listOFProductsItemTemplate from './ListOfProducts.hbs';
-import listOFProductsStyles from './ListOfProducts.css';
+import listOFProductsStyles from './ListOfProducts.scss';
 import {staticServerHost} from '../../../utils/urls/urls.js';
 
 /**

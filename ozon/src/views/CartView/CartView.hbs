@@ -1,7 +1,7 @@
 <div class="{{cartStyles.cartWrapper}}" id="products-list-block">
     <div class="{{cartStyles.body}}">
         <div class="{{cartStyles.title}}">
-            <span class="{{cartStyles.titleText}}">Корзина</span>
+            <span class="{{textStyles.title}}">Корзина</span>
         </div>
         <div class="{{cartStyles.mainWrapper}}">
             <div class="{{cartStyles.wrapper}}">
@@ -9,43 +9,57 @@
                     <div class="{{cartStyles.selectMenu}}">
                         <div class="{{cartStyles.selectAll}}" style="visibility: hidden;">
                             <input type="checkbox" name="a" value="Выбрать все" class="{{cartStyles.checkbox}}" >
-                            <span class="{{cartStyles.selectAllText}}">Выбрать все</span>
+                            <div class="{{cartStyles.selectAllText}}">
+                                <span class="{{textStyles.text}}">Выбрать все</span>
+                            </div>
                         </div>
-                        <span class="{{cartStyles.deleteSelectedText}}" style="visibility: hidden;">Удалить выбранные</span>
+                        <div class="{{cartStyles.deleteSelectedText}}" style="visibility: hidden;">
+                            <span class="{{textStyles.discount}}">Удалить выбранные</span>
+                        </div>
                     </div>
                     <div class="{{cartStyles.deliveryBlock}}">
-                        <span class="{{cartStyles.deliveryText}}">Доставка Ozon</span>
+                        <div class="{{cartStyles.deliveryText}}">
+                            <span class="{{textStyles.text}}">Доставка Ozon</span>
+                        </div>
                     </div>
                     <div class="{{cartStyles.productsListBlock}}">
                         <div class="products-list">
                             {{#each this.productsList}}
                                 <div class="{{../cartStyles.productsListElem}}" product_id="{{this.id}}">
                                     <input type="checkbox" name="a" value="" class="{{../decorators.hidden}}">
-                                    <div class="{{../cartStyles.image}}">
-                                        <img src={{this.preview_image}} alt="" class="{{../cartStyles.productImage}}">
+                                    <div class="{{../cartStyles.imageWrapper}}">
+                                        <img src={{this.preview_image}} alt="" class="{{../imgStyles.cartProduct}}">
                                     </div>
                                     <div class="{{../cartStyles.description}}">
                                         <span class="{{../cartStyles.name}}">{{this.title}}</span>
                                         <div class="{{../cartStyles.productMenu}}">
-                                            <span class="{{../cartStyles.productMenuText}} {{../decorators.lock}}">В избранное</span>
-                                            <span class="{{../cartStyles.productMenuText}}" title={{this.id}}>Удалить</span>
+                                            <div class="{{../cartStyles.productMenuText}} {{../decorators.lock}}">
+                                                <span class="{{../textStyles.text}}">В избранное</span>
+                                            </div>
+                                            <div class="{{../cartStyles.productMenuText}}" title={{this.id}}>
+                                                <span class="{{../textStyles.text}}">Удалить</span>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="{{../cartStyles.priceBlock}}">
                                         <div class="{{../cartStyles.priceInfo}}">
-                                            <div class="{{../cartStyles.endPrice}}">{{multiply this.price.total_cost this.count}} ₽</div>
+                                            <div class="{{../textStyles.bold}}" id="totalCost{{this.id}}">{{multiply this.price.total_cost this.count}} ₽</div>
                                             {{#ifNotEquals this.price.total_discount 0}}
-                                                <span class="{{../cartStyles.oldPrice}}">{{multiply this.price.base_cost this.count}} ₽</span>
-                                                <span class="{{../cartStyles.discountPrice}}">Скидка {{substract (multiply this.price.base_cost this.count) (multiply this.price.total_cost this.count)}} ₽</span>
+                                                <span class="{{../textStyles.oldPrice}}" id="baseCost{{this.id}}">{{multiply this.price.base_cost this.count}} ₽</span>
+                                                <span class="{{../textStyles.bold}} {{../textStyles.orderDiscount}}" id="discount{{this.id}}">Скидка {{substract (multiply this.price.base_cost this.count) (multiply this.price.total_cost this.count)}} ₽</span>
                                             {{/ifNotEquals}}
                                         </div>
                                     </div>
                                     <div class="{{../cartStyles.countMenu}}">
-                                        <button class="{{../cartStyles.incButton}}" title={{this.id}}>-</button>
+                                        <div class="{{../cartStyles.countButtonWrapper}}">
+                                            <button class="{{../buttonStyles.increment}} {{../textStyles.increment}}" title={{this.id}}>-</button>
+                                        </div>
                                         <div class="{{../cartStyles.countField}}" title={{this.id}}>
                                             <span class="{{../cartStyles.count}}" title={{this.id}}>{{this.count}}</span>
                                         </div>
-                                        <button class="{{../cartStyles.decButton}}" title={{this.id}}>+</button>
+                                        <div class="{{../cartStyles.countButtonWrapper}}">
+                                            <button class="{{../buttonStyles.decrement}} {{../textStyles.decrement}}" title={{this.id}}>+</button>
+                                        </div>
                                     </div>
                                 </div>
                             {{/each}}
@@ -53,26 +67,36 @@
                     </div>
                 </div>
                 <div class="{{cartStyles.orderMenu}}">
-                    <div class="{{cartStyles.orderButtonWrapper}}">
-                        <button class="{{cartStyles.orderButton}}">
-                            <span class="{{cartStyles.orderSubmit}}">Перейти к оформлению</span>
-                        </button>
+                    <div class="{{cartStyles.orderButtonBlock}}">
+                        <div class="{{cartStyles.orderButtonWrapper}}">
+                            <button class="{{buttonStyles.order}}">
+                                <span class="{{textStyles.bigButton}}">Перейти к оформлению</span>
+                            </button>
+                        </div>
                     </div>
                     <div class="{{cartStyles.orderInfo}}">
                         <div class="{{cartStyles.orderInfoWrapper}}">
-                            <span class="{{cartStyles.orderInfoTitle}}">Ваша корзина</span>
+                            <div class="{{cartStyles.orderInfoTitle}}">
+                                <span class="{{textStyles.smallTitle}}">Ваша корзина</span>
+                            </div>
                             <div class="{{cartStyles.orderInfoBody}}">
                                 <div class="{{cartStyles.orderInfoRow}}">
-                                    <span class="{{cartStyles.orderInfoText}}">Товары ({{this.cartSize}})</span>
-                                    <span class="{{cartStyles.orderInfoPrice}}">{{this.baseCost}}₽</span>
+                                    <div class="{{cartStyles.orderInfoText}}">
+                                        <span class="{{textStyles.text}}">Товары ({{this.cartSize}})</span>
+                                    </div>
+                                    <span class="{{textStyles.orderPrice}}" id="baseCost">{{this.baseCost}}₽</span>
                                 </div>
                                 <div class="{{cartStyles.orderInfoRow}}">
-                                    <span class="{{cartStyles.orderInfoText}}">Скидка</span>
-                                    <span class="{{cartStyles.orderInfoDiscount}}">- {{this.discount}}₽</span>
+                                    <div class="{{cartStyles.orderInfoText}}">
+                                        <span class="{{textStyles.text}}">Скидка</span>
+                                    </div>
+                                    <div class="{{cartStyles.orderInfoText}}">
+                                        <span class="{{textStyles.orderDiscount}}" id="discount">- {{this.discount}}₽</span>
+                                    </div>
                                 </div>
                                 <div class="{{cartStyles.totalPriceBlock}}">
-                                    <span class="{{cartStyles.orderTotalPriceTitle}}">Общая стоимость</span>
-                                    <span class="{{cartStyles.totalPriceText}}">{{this.totalCost}} ₽</span>
+                                    <span class="{{textStyles.smallTitle}}">Общая стоимость</span>
+                                    <span class="{{textStyles.smallTitle}}" id="totalCost">{{this.totalCost}} ₽</span>
                                 </div>
                             </div>
                         </div>

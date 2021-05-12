@@ -3,7 +3,8 @@ import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import Router from '../../utils/router/Router.js';
 import {OfflineForm} from '../Common/OfflineForm/OfflineForm.js';
-import decorator from '../decorators.css';
+import decorator from '../decorators.scss';
+import popupStyles from '../Common/Popup/Popup.scss';
 
 /**
  * @class  OfflineView
@@ -27,7 +28,7 @@ export class OfflineView extends BaseView {
         const template = new Popup().getHtmlString({
             popupBody: new OfflineForm().getHtmlString(),
             background: new Blind().getHtmlString(),
-            popupType: 'signup',
+            popupType: popupStyles.offline,
         });
 
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
@@ -37,7 +38,7 @@ export class OfflineView extends BaseView {
             evt.preventDefault();
             body.classList.remove(decorator.noScroll);
             this.remove();
-            Router.return();
+            Router.goBack();
         });
 
         this.parent.appendChild(this.cache);

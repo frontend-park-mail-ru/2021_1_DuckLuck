@@ -1,28 +1,28 @@
 <div class="{{productsStyles.block}}">
     <div class="{{productsStyles.contentWrapper}}">
         <form id="filtration_form" class="{{filterStyles.menu}}">
-            <div class="{{filterStyles.title}}">Цена</div>
+            <div class="{{textStyles.bold}}">Цена</div>
             <div class="{{filterStyles.row}}">
-                <label for="min_price" class="{{filterStyles.label}}"> От </label> <input type="number" min="0" id="min_price" class="{{filterStyles.input}}">
+                <label for="min_price" class="{{textStyles.big}}"> От </label> <input type="number" min="1" id="min_price" class="{{filterStyles.input}}">
             </div>
             <div class="{{filterStyles.row}}">
-                <label for="max_price" class="{{filterStyles.label}}"> До </label> <input type="number" min="1" id="max_price" class="{{filterStyles.input}}">
+                <label for="max_price" class="{{textStyles.big}}"> До </label> <input type="number" min="0" id="max_price" class="{{filterStyles.input}}">
             </div>
             <div class="{{filterStyles.incorrectFilterLabel}}" id="incorrect_filter_label"></div>
             <div class="{{filterStyles.row}}">
-                <label for="is_new" class="{{filterStyles.title}}"> Новые товары </label> <input type="checkbox" id="is_new">
+                <label for="is_new" class="{{textStyles.bold}}"> Новые товары </label> <input type="checkbox" id="is_new">
             </div>
             <div class="{{filterStyles.row}}">
-                <label for="is_rating" class="{{filterStyles.title}}"> Высокий рейтинг </label> <input type="checkbox" id="is_rating">
+                <label for="is_rating" class="{{textStyles.bold}}"> Высокий рейтинг </label> <input type="checkbox" id="is_rating">
             </div>
             <div class="{{filterStyles.row}}">
-                <label for="is_discount" class="{{filterStyles.title}}"> Товары со скидкой </label> <input type="checkbox" id="is_discount">
+                <label for="is_discount" class="{{textStyles.bold}}"> Товары со скидкой </label> <input type="checkbox" id="is_discount">
             </div>
-            <button class="{{filterStyles.button}}">
-                <span class="{{filterStyles.buttonText}}">Применить</span>
+            <button class="{{filterStyles.button}} {{buttonStyles.filterSubmit}}">
+                <span class="{{filterStyles.buttonText}} {{textStyles.bigButton}}">Применить</span>
             </button>
-            <button id="drop-filters" class="{{filterStyles.drop}}">
-                <span class="{{filterStyles.dropText}}">Сбросить фильтры</span>
+            <button id="drop-filters" class="{{filterStyles.drop}} {{buttonStyles.filterDrop}}">
+                <span class="{{filterStyles.dropText}} {{textStyles.big}}">Сбросить фильтры</span>
             </button>
         </form>
         <div class="{{productsStyles.body}}">
@@ -37,8 +37,10 @@
         </div>
     </div>
     {{#ifEquals this.isEmpty true}}
-        <div class="{{productsStyles.emptyText}}">Не найдено ни одного товара. Попробуйте поменять фильтры или</div>
-        <a class="{{productsStyles.onMainPage}}" href="">Вернуться на главную</a>
+        <div class="{{productsStyles.emptyText}}">
+            <span class="{{textStyles.title}}">Не найдено ни одного товара</span>
+            <a class="{{textStyles.title}}" href="">Вернуться на главную</a>
+        </div>
     {{/ifEquals}}
 
     {{#ifEquals this.isEmpty false}}

@@ -3,6 +3,10 @@ import Events from '../../utils/bus/events';
 import reviewTemplate from './ReviewView.hbs';
 import {Input} from '../Common/Input/Input';
 import reviewStyles from './ReviewView.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
+import imgStyles from './../Common/Img/Img.scss';
+import buttonStyles from './../Common/Button/Button.scss';
+import linkStyles from './../Common/Link/Link.scss';
 import {staticServerHost} from '../../utils/urls/urls';
 import Router from '../../utils/router/Router';
 import {Bus} from '../../utils/bus/bus';
@@ -44,6 +48,10 @@ class ReviewView extends BaseView {
                 name: 'isPublic',
             }),
             styles: reviewStyles,
+            textStyles: textStyles,
+            buttonStyles: buttonStyles,
+            imgStyles: imgStyles,
+            linkStyles: linkStyles,
             product: this.presenter.product,
             userName: this.presenter.userName,
         });
@@ -80,7 +88,7 @@ class ReviewView extends BaseView {
         });
 
 
-        const submitButton = this.cache.getElementsByClassName(reviewStyles.submitButton)[0];
+        const submitButton = this.cache.getElementsByClassName(buttonStyles.review)[0];
         submitButton.addEventListener('click', () => {
             this.presenter.sendReview();
             Router.open(`/item/${this.presenter.product.id}`);
@@ -91,7 +99,7 @@ class ReviewView extends BaseView {
             this.presenter.isPublic = !isPublic.checked;
         });
 
-        const productLink = this.cache.getElementsByClassName(reviewStyles.href)[0];
+        const productLink = this.cache.getElementsByClassName(linkStyles.link)[0];
         productLink.addEventListener('click', () => {
             const productId = this.presenter.product.id;
             Bus.globalBus.emit(Events.ProductChangeID, productId);

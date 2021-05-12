@@ -2,6 +2,9 @@ import {BaseView} from '../BaseView.js';
 import {Input} from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
 import profileStyles from './ProfileView.scss';
+import buttonStyles from '../Common/Button/Button.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
+import imgStyles from './../Common/Img/Img.scss';
 import Events from '../../utils/bus/events';
 
 /**
@@ -39,6 +42,9 @@ export class ProfileView extends BaseView {
                 placeholder: 'Адрес электронной почты', isDisabled: true}),
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),
             profileStyles: profileStyles,
+            buttonStyles: buttonStyles,
+            imgStyles: imgStyles,
+            textStyles: textStyles,
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
