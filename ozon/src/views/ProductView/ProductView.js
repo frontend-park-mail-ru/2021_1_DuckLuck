@@ -113,7 +113,7 @@ export class ProductView extends BaseView {
         });
 
 
-        const button = document.getElementsByClassName(buttonStyles.notInCart)[0];
+        const button = document.getElementsByClassName(buttonStyles.notInCartProduct)[0];
         button.addEventListener('click', () => {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
         });
@@ -130,14 +130,14 @@ export class ProductView extends BaseView {
     }
 
     setProductAdded = () => {
-        const button = document.getElementsByClassName(buttonStyles.notInCart)[0];
+        const button = this.cache.getElementsByClassName(buttonStyles.notInCartProduct)[0];
         if (!button) {
             return;
         }
         const newButton = button.cloneNode(true);
         button.replaceWith(newButton);
 
-        newButton.className = buttonStyles.inCart;
+        newButton.className = buttonStyles.inCartProduct;
         newButton.getElementsByTagName('span')[0].innerHTML = 'В корзине';
         newButton.addEventListener('click', () => {
             Bus.globalBus.emit(Events.CartRemoveProduct, this.IDs['productID']);
@@ -145,7 +145,7 @@ export class ProductView extends BaseView {
     }
 
     setProductNotAdded = () => {
-        const button = document.getElementsByClassName(buttonStyles.inCart)[0];
+        const button = document.getElementsByClassName(buttonStyles.inCartProduct)[0];
         if (!button) {
             return;
         }
@@ -153,7 +153,7 @@ export class ProductView extends BaseView {
         button.replaceWith(newButton);
 
         newButton.getElementsByTagName('span')[0].innerHTML = 'В корзину';
-        newButton.className = buttonStyles.notInCart;
+        newButton.className = buttonStyles.notInCartProduct;
         newButton.addEventListener('click', () => {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
         });

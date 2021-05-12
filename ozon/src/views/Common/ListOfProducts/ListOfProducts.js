@@ -21,6 +21,7 @@ export class ListOfProducts {
             const discountPrice = Math.ceil(base * (1 - discount * 0.01));
             this.items.push(new ListOfProductsItem({
                 itemInCart: item['inCart'],
+                itemReviewsCount: item['count_reviews'],
                 itemId: item['id'],
                 itemImage: new Img({src: staticServerHost + item['preview_image']}),
                 itemName: item['title'],

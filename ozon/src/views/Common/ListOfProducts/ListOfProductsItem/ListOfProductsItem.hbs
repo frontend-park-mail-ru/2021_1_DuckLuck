@@ -29,12 +29,13 @@
                 {{#for itemRating 5 1}}
                     <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="{{../imgStyles.smallStar}}">
                 {{/for}}
+                <span class="{{itemStyles.ratingCount}}">({{itemReviewsCount}})</span>
             </div>
         </div>
     </div>
     <div class="{{itemStyles.buttonsBlock}}">
         <div class="{{itemStyles.cartButtonWrapper}}">
-            <button class="{{buttonStyles.notInCart}}">
+            <button class="{{buttonStyles.notInCartProducts}}">
                 <span class="{{itemStyles.buttonText}}">
                     В корзину
                 </span>

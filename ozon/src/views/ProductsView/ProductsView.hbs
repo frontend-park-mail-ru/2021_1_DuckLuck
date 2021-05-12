@@ -3,11 +3,12 @@
         <form id="filtration_form" class="{{filterStyles.menu}}">
             <div class="{{textStyles.bold}}">Цена</div>
             <div class="{{filterStyles.row}}">
-                <label for="min_price" class="{{textStyles.big}}"> От </label> <input type="number" id="min_price" class="{{filterStyles.input}}">
+                <label for="min_price" class="{{textStyles.big}}"> От </label> <input type="number" min="1" id="min_price" class="{{filterStyles.input}}">
             </div>
             <div class="{{filterStyles.row}}">
-                <label for="max_price" class="{{textStyles.big}}"> До </label> <input type="number" id="max_price" class="{{filterStyles.input}}">
+                <label for="max_price" class="{{textStyles.big}}"> До </label> <input type="number" min="0" id="max_price" class="{{filterStyles.input}}">
             </div>
+            <div class="{{filterStyles.incorrectFilterLabel}}" id="incorrect_filter_label"></div>
             <div class="{{filterStyles.row}}">
                 <label for="is_new" class="{{textStyles.bold}}"> Новые товары </label> <input type="checkbox" id="is_new">
             </div>
@@ -38,6 +39,7 @@
     {{#ifEquals this.isEmpty true}}
         <div class="{{productsStyles.emptyText}}">
             <span class="{{textStyles.title}}">Не найдено ни одного товара</span>
+            <a class="{{textStyles.title}}" href="">Вернуться на главную</a>
         </div>
     {{/ifEquals}}
 

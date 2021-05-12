@@ -54,6 +54,9 @@ export class CartView extends BaseView {
         for (const product of document.getElementsByClassName(cartStyles.productMenuText)) {
             product.addEventListener('click', (evt) => {
                 evt.preventDefault();
+                const counter = +document.querySelector(`div[product_id='${product.title}']`).
+                    getElementsByClassName(cartStyles.count)[0].innerHTML;
+                this.changeContent(+product.getAttribute('title'), -counter);
                 if (!product.title) {
                     return;
                 }
@@ -67,29 +70,27 @@ export class CartView extends BaseView {
             elemList.getElementsByClassName(buttonStyles.increment)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
                 const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
+                this.changeContent(itemId, -1);
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
                     count: count - 1,
                 });
-                if (count > 0) {
-                    this.changeContent(itemId, -1);
-                }
             });
 
             elemList.getElementsByClassName(buttonStyles.decrement)[0].addEventListener('click', (evt) => {
                 evt.preventDefault();
                 const count = +elemList.getElementsByClassName(cartStyles.count)[0].textContent;
+                this.changeContent(itemId, 1);
                 Bus.globalBus.emit(Events.CartProductChange, {
                     id: itemId,
                     count: count + 1,
                 });
-                this.changeContent(itemId, 1);
             });
         }
 
         for (const itemContainer of this.cache.getElementsByClassName(cartStyles.productsListElem)) {
             const productID = parseInt(itemContainer.getAttribute('product_id'));
-            itemContainer.getElementsByClassName(cartStyles.image)[0]
+            itemContainer.getElementsByClassName(cartStyles.imageWrapper)[0]
                 .addEventListener('click', () => {
                     Bus.globalBus.emit(Events.ProductChangeID, productID);
                     Router.open(`/item/${productID}`);

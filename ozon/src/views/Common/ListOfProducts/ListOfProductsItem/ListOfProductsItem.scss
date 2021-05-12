@@ -80,6 +80,12 @@
     margin-top: $margin-xs;
 }
 
+.ratingCount {
+    margin-top: var(--margin-xxs);
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+}
+
 .buttonText {
     font-family: $font-family;
     font-size: $font-size-m;
