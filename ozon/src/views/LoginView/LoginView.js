@@ -78,7 +78,7 @@ export class LoginView extends BaseView {
                 evt.preventDefault();
                 body.classList.remove(decorator.noScroll);
                 document.getElementById('popup').remove();
-                Router.return();
+                Router.goBack();
             });
 
         const form = this.cache.getElementsByClassName(buttonStyles.auth)[0];

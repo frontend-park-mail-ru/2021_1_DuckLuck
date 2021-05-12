@@ -38,7 +38,7 @@ export class OfflineView extends BaseView {
             evt.preventDefault();
             body.classList.remove(decorator.noScroll);
             this.remove();
-            Router.return();
+            Router.goBack();
         });
 
         this.parent.appendChild(this.cache);
