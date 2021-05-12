@@ -3,17 +3,17 @@
         <div class="{{headerStyles.logoBlock}}">
             <div class="{{headerStyles.logoWrapper}}">
                 {{#with logo}}
-                    <img loading="lazy" src={{src}} class="">
+                    <img loading="lazy" src={{src}} class="{{../imgStyles.logo}}">
                 {{/with}}
             </div>
         </div>
         <div class="{{headerStyles.catalogBlock}}">
-            <button class="{{buttonStyles.catalog}}">
+            <button class="{{buttonStyles.catalog}} {{textStyles.bigButton}}">
                 <div class="{{headerStyles.catalogButtonBody}}">
                     {{#with catalog}}
-                        <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}}">
-                        <img loading="lazy" src={{img.1.src}} class="{{../imgStyles.menuImgL}} {{../decorators.invertColor}} {{../decorators.hidden}}">
-                        <span class="{{../headerStyles.catalogText}}">{{text}}</span>
+                        <img loading="lazy" src={{img.0.src}} class="{{../imgStyles.headerMenu}} {{../decorators.invertColor}}">
+                        <img loading="lazy" src={{img.1.src}} class="{{../imgStyles.headerMenu}} {{../decorators.invertColor}} {{../decorators.hidden}}">
+                        <span class="{{../textStyles.bigButton}}">{{text}}</span>
                     {{/with}}
                 </div>
             </button>
@@ -23,22 +23,24 @@
                 <form class="{{../headerStyles.searchForm}}">
                     <div class="{{../headerStyles.searchAreaBlock}}">
                         {{#with searchArea}}
-                            <span title="{{text}}" class="{{../../headerStyles.searchAreaText}}">{{text}}</span>
+                            <div title="{{text}}" class="{{../../headerStyles.searchAreaText}}">
+                                <span class="{{../../textStyles.text}}">{{text}}</span>
+                            </div>
                             <div class="{{../../headerStyles.searchAreaPointer}}">
-                                <img loading="lazy" src={{img.src}} class="{{../../imgStyles.menuImgS}}">
+                                <img loading="lazy" src={{img.src}} class="{{../../imgStyles.searchArea}}">
                             </div>
                         {{/with}}
                     </div>
                     <div class="{{../headerStyles.searchInputBlock}}">
                         {{#with searchInput}}
-                            <input placeholder="{{placeholder}}" type={{type}} name={{name}} class="{{../../inputStyles.search}}">
+                            <input placeholder="{{placeholder}}" type={{type}} name={{name}} class="{{../../inputStyles.search}} {{../../textStyles.input}}">
                         {{/with}}
                     </div>
                     <div class="{{../headerStyles.searchButtonBlock}}">
                         {{#with searchButton}}
                             <button type="submit" class="{{../../buttonStyles.search}}">
                                 <div class="{{../../headerStyles.searchImgWrapper}}">
-                                    <img loading="lazy" src={{img.src}} class="{{../../imgStyles.menuImgL}} {{../../decorators.invertColor}}">
+                                    <img loading="lazy" src={{img.src}} class="{{../../imgStyles.headerMenu}} {{../../decorators.invertColor}}">
                                 </div>
                             </button>
                         {{/with}}
@@ -48,15 +50,15 @@
         </div>
         <div class="{{headerStyles.menu}}">
             {{#each headerMenu}}
-                <div class="{{../headerStyles.menuItem}} {{#ifEquals this.href "/orders"}} {{../decorators.lock}} {{/ifEquals}} {{#ifEquals this.href "/favorites"}} {{../decorators.lock}} {{/ifEquals}}" href="{{this.href}}" name="{{this.name}}">
+                <a class="{{../linkStyles.headerMenu}} {{../headerStyles.menuItem}} {{#ifEquals this.href "/orders"}} {{../decorators.lock}} {{/ifEquals}} {{#ifEquals this.href "/favorites"}} {{../decorators.lock}} {{/ifEquals}}" href="{{this.href}}" name="{{this.name}}">
                     {{#with this}}
-                        <img src="{{img.src}}" class="{{../imgStyles.menuImgL}}">
-                        <span>{{text}}</span>
+                        <img src="{{img.src}}" class="{{../imgStyles.headerMenu}}">
+                        <span class="{{../textStyles.text}}">{{text}}</span>
                     {{/with}}
                     {{#ifEquals this.additionalSpan true}}
-                        <span name="addSpan{{this.name}}" class="{{this.additionalSpanClass}}">0</span>
+                        <span name="addSpan{{this.name}}" class="{{this.additionalSpanClass}} {{../textStyles.menuCounter}}">0</span>
                     {{/ifEquals}}
-                </div>
+                </a>
             {{/each}}
         </div>
     </div>
@@ -64,7 +66,9 @@
         <div class="{{headerStyles.catalogListBody}}">
             <div class="{{headerStyles.catalogListCategories}}">
                 {{#each catalog.categories}}
-                    <span class="{{../headerStyles.category}}" category="{{this.id}}">{{this.name}}</span>
+                    <div class="{{../headerStyles.category}}">
+                        <a class="{{../linkStyles.catalogCategory}}" category="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
+                    </div>
                 {{/each}}
             </div>
             {{#each catalog.categories}}
@@ -72,9 +76,13 @@
                     {{#each this.next}}
                         <div class="{{../../headerStyles.catalogItemWrapper}}">
                             <div class="{{../../headerStyles.catalogItemBody}}">
-                                <span class="{{../../headerStyles.subcategory}}" category="{{this.id}}">{{this.name}}</span>
+                                <div class="{{../../headerStyles.subcategory}}">
+                                    <a class="{{../../linkStyles.catalogSubCategory}}" category="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
+                                </div>
                                 {{#each this.next}}
-                                    <span class="{{../../../headerStyles.subsubcategory}}" category="{{this.id}}">{{this.name}}</span>
+                                    <div class="{{../../../headerStyles.subsubcategory}}">
+                                        <a class="{{../../../linkStyles.catalogSubSubCategory}}" category="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
+                                    </div>
                                 {{/each}}
                             </div>
                         </div>

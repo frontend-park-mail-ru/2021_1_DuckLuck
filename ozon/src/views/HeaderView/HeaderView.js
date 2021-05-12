@@ -1,9 +1,11 @@
 import {BaseView} from '../BaseView.js';
 import headerStyles from './HeaderView.scss';
-import buttonStyles from '../Common/Button/Button.css';
-import imgStyles from '../Common/Img/Img.css';
-import inputStyles from '../Common/Input/Input.css';
-import decorators from '../decorators.css';
+import buttonStyles from '../Common/Button/Button.scss';
+import imgStyles from '../Common/Img/Img.scss';
+import inputStyles from '../Common/Input/Input.scss';
+import textStyles from '../Common/TextArea/TextArea.scss';
+import linkStyles from '../Common/Link/Link.scss';
+import decorators from '../decorators.scss';
 import headerTemplate from './HeaderView.hbs';
 import {staticServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
@@ -58,7 +60,7 @@ export class HeaderView extends BaseView {
                 href: '/cart',
                 name: 'cart',
                 additionalSpan: true,
-                additionalSpanClass: headerStyles.cartItemsCounter,
+                additionalSpanClass: headerStyles.menuItemCounter,
             },
         ];
         const catalog = {
@@ -94,6 +96,8 @@ export class HeaderView extends BaseView {
             imgStyles: imgStyles,
             inputStyles: inputStyles,
             buttonStyles: buttonStyles,
+            linkStyles: linkStyles,
+            textStyles: textStyles,
             decorators: decorators,
         });
 
@@ -108,7 +112,7 @@ export class HeaderView extends BaseView {
         const catalogBlock = this.cache.getElementsByClassName(headerStyles.catalogBlock)[0];
         const catalogList = this.cache.getElementsByClassName(headerStyles.catalogList)[0];
         catalogBlock.addEventListener('click', () => {
-            const images = Array.from(catalogBlock.getElementsByClassName(imgStyles.menuImgL));
+            const images = Array.from(catalogBlock.getElementsByClassName(imgStyles.headerMenu));
             if (images[0].classList.contains(decorators.hidden)) {
                 images[0].classList.remove(decorators.hidden);
                 images[1].classList.add(decorators.hidden);
@@ -150,7 +154,7 @@ export class HeaderView extends BaseView {
             });
         });
 
-        const catalogListCategories = this.cache.getElementsByClassName(headerStyles.category);
+        const catalogListCategories = this.cache.getElementsByClassName(linkStyles.catalogCategory);
         const catalogListSubcategories = Array.from(
             this.cache.getElementsByClassName(headerStyles.catalogListSubcategories),
         );
@@ -187,7 +191,7 @@ export class HeaderView extends BaseView {
      * @param {number} value
      */
     changeCartItems = (value) => {
-        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[0];
         const newCounterAmount = +counter.innerHTML + value;
         counter.innerHTML = newCounterAmount.toString();
         counter.hidden = !newCounterAmount;
@@ -198,7 +202,7 @@ export class HeaderView extends BaseView {
      * @description sets items amount in cart to 0
      */
     setCartItems = (value) => {
-        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[0];
         counter.innerHTML = value.toString();
         counter.hidden = !value;
     }

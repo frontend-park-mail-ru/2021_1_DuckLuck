@@ -1,0 +1,75 @@
+@import "../../../constants";
+
+%text-shared {
+  font-family: $font-family;
+  font-size: $font-size-s;
+}
+
+.text {
+  @extend %text-shared;
+}
+
+.title {
+  @extend %text-shared;
+  font-size: $font-size-xxl;
+  font-weight: $bold;
+}
+
+.bigButton {
+  @extend %text-shared;
+  font-size: $font-size-m;
+  color: $light-color;
+}
+
+.smallTitle {
+  @extend %text-shared;
+  font-size: $font-size-l;
+  font-weight: $bold;
+}
+
+.orderDiscount {
+  @extend %text-shared;
+  font-size: $font-size-m;
+  color: $discount-color;
+}
+
+.bold, .orderPrice {
+  @extend %text-shared;
+  font-size: $font-size-m;
+  font-weight: $bold;
+}
+
+.oldPrice {
+  @extend %text-shared;
+  font-size: $font-size-m;
+  color: $old-price-color;
+  text-decoration: line-through;
+}
+
+.input, .big, .profileInput {
+  @extend %text-shared;
+  font-size: $font-size-m;
+}
+
+.rules, .profile  {
+  @extend %text-shared;
+  color: $neutral-color;
+}
+
+.light, .menuCounter {
+  @extend %text-shared;
+  color: $light-color;
+}
+
+.productDiscount {
+  @extend %text-shared;
+  font-size: $font-size-xxl;
+  font-weight: $bold;
+  color: $discount-color;
+}
+
+.increment, .decrement, .profileChange {
+  @extend %text-shared;
+  font-size: $font-size-m;
+  color: $colored-object-color;
+}

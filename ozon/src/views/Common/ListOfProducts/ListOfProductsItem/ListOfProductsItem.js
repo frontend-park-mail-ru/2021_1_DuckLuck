@@ -1,6 +1,8 @@
 import listOFProductsItemTemplate from './ListOfProductsItem.hbs';
-import itemStyles from './ListOfProductsItem.css';
-import decorators from '../../../decorators.css';
+import itemStyles from './ListOfProductsItem.scss';
+import decorators from '../../../decorators.scss';
+import buttonStyles from '../../Button/Button.scss';
+import imgStyles from '../../Img/Img.scss';
 
 /**
  * @class ListOfProductsItem
@@ -38,6 +40,8 @@ export class ListOfProductsItem {
             itemPrice: this.itemPrice,
             itemStyles: itemStyles,
             decorators: decorators,
+            buttonStyles: buttonStyles,
+            imgStyles: imgStyles,
         });
     }
 }

@@ -14,4 +14,4 @@ app.get(/.*$/, (request, response) => {
     response.sendFile(`${__dirnameOfProject}/src/index.html`);
 });
 
-app.listen(7777);
+app.listen(3000);

@@ -1,11 +1,12 @@
 import {BaseView} from '../BaseView.js';
 import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
-import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.css';
+import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.scss';
 import {Pagination} from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.scss';
+import buttonStyles from './../Common/Button/Button.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
 import filterStyles from './ProductsFilter.scss';
-import paginatorStyles from '../Common/Pagination/Pagination.css';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
@@ -110,7 +111,9 @@ export class ProductsView extends BaseView {
                 direction: this.presenter.sortDirection,
             },
             productsStyles: productsStyles,
+            buttonStyles: buttonStyles,
             filterStyles: filterStyles,
+            textStyles: textStyles,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html')
             .getElementsByClassName(productsStyles.block)[0];
@@ -127,7 +130,7 @@ export class ProductsView extends BaseView {
                 Router.open('/search/1/', {}, {text: this.IDs['searchText']});
         });
 
-        for (const button of this.cache.getElementsByClassName(paginatorStyles.button)) {
+        for (const button of this.cache.getElementsByClassName(buttonStyles.paginator)) {
             button.addEventListener('click', () => {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
@@ -145,9 +148,9 @@ export class ProductsView extends BaseView {
                     Router.open(`/item/${productID}`);
                 });
 
-            let item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.notInCartButton)[0];
+            let item = itemContainer.getElementsByClassName(buttonStyles.notInCart)[0];
             if (item === undefined) {
-                item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.inCartButton)[0];
+                item = itemContainer.getElementsByClassName(buttonStyles.inCart)[0];
             }
 
             item.addEventListener('click', (evt) => {
@@ -257,7 +260,7 @@ export class ProductsView extends BaseView {
      * @param {HTMLElement} button
      */
     setButtonAddedStyle = (button) => {
-        button.className = ListOfProductsItemStyles.inCartButton;
+        button.className = buttonStyles.inCart;
         button.getElementsByTagName('span')[0].innerHTML = 'В корзине';
     }
 
@@ -265,7 +268,7 @@ export class ProductsView extends BaseView {
      * @param {HTMLElement} button
      */
     setButtonNotAddedStyle = (button) => {
-        button.className = ListOfProductsItemStyles.notInCartButton;
+        button.className = buttonStyles.notInCart;
         button.getElementsByTagName('span')[0].innerHTML = 'В корзину';
     }
 
