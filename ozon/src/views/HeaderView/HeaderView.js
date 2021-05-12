@@ -103,7 +103,7 @@ export class HeaderView extends BaseView {
         const logoButton = this.cache.getElementsByClassName(headerStyles.logoBlock)[0];
         logoButton.addEventListener('click', () => {
             this.dropSearchInput();
-            Router.open('/', {dropFilter: true});
+            Router.open('/', {dropFilter: true, dropSort: true});
         });
 
         const catalogBlock = this.cache.getElementsByClassName(headerStyles.catalogBlock)[0];

@@ -75,6 +75,11 @@ class ProductsPresenter extends BasePresenter {
         this.model.filter = undefined;
     }
 
+    dropSort = () => {
+        this.model.sortKey = 'cost';
+        this.model.sortDirection = 'ASC';
+    }
+
     /**
      *
      * @param {Number} id
@@ -97,6 +102,28 @@ class ProductsPresenter extends BasePresenter {
      */
     changeSortDirection = (sortDirection) => {
         this.model.sortDirection = sortDirection;
+    }
+
+    /**
+     * @return {{priceMin: (number|undefined),
+     *            sortDirection: String,
+     *            priceMax: (number|undefined),
+     *            sortKey: String,
+     *            isRating: (boolean),
+     *            isNew: (boolean),
+     *            isDiscount: (boolean)}}
+     */
+    getFilterParams = () => {
+        const filter = this.filter;
+        return {
+            sortKey: this.sortKey,
+            sortDirection: this.sortDirection,
+            priceMin: filter ? filter.min_price : undefined,
+            priceMax: filter ? filter.max_price : undefined,
+            isNew: filter ? filter.is_new : false,
+            isRating: filter ? filter.is_rating : false,
+            isDiscount: filter ? filter.is_discount: false,
+        };
     }
 
     /**

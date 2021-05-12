@@ -50,6 +50,9 @@ class Router {
     open(path, params = {
         replaceState: false,
     }, pathParams = {}) {
+        console.log(path);
+        console.log(params);
+        console.log(pathParams);
         let route;
         let groups;
         for (const page of this.#routes) {

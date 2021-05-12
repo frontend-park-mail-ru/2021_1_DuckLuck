@@ -48,6 +48,19 @@ export class ProductsView extends BaseView {
             this.dropFilter();
         }
 
+        if (this.IDs['dropSort']) {
+            this.presenter.dropSort();
+            this.dropSort();
+        }
+
+        if (URLParams && URLParams.sortKey) {
+            this.presenter.changeSortKey(URLParams.sortKey);
+        }
+
+        if (URLParams && URLParams.sortDirection) {
+            this.presenter.changeSortDirection(URLParams.sortDirection);
+        }
+
         if (URLParams && URLParams.text) {
             this.#viewType = ProductsView.#types.search;
             this.IDs['searchText'] = URLParams.text;
@@ -123,8 +136,11 @@ export class ProductsView extends BaseView {
             this.presenter.changeSortKey(sortKey);
             this.presenter.changeSortDirection(sortDirection);
             this.#viewType === ProductsView.#types.category ?
-                Router.open(`/items/${this.IDs['category']}`) :
-                Router.open('/search/1/', {}, {text: this.IDs['searchText']});
+                Router.open(`/items/${this.IDs['category']}`, {}, this.presenter.getFilterParams()) :
+                Router.open('/search/1/',
+                    {},
+                    Object.assign(this.presenter.getFilterParams(),
+                        {text: this.IDs['searchText']}));
         });
 
         for (const button of this.cache.getElementsByClassName(paginatorStyles.button)) {
@@ -132,10 +148,14 @@ export class ProductsView extends BaseView {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
                 this.#viewType === ProductsView.#types.category ?
-                    Router.open(`/items/${this.IDs['category']}/${page}`) :
-                    Router.open(`/search/${page}/`, {}, {text: this.IDs['searchText']});
+                    Router.open(`/items/${this.IDs['category']}/${page}`, {}, this.presenter.getFilterParams()) :
+                    Router.open(`/search/${page}/`,
+                        {},
+                        Object.assign(this.presenter.getFilterParams(),
+                            {text: this.IDs['searchText']}));
             });
         }
+
 
         for (const itemContainer of this.cache.getElementsByClassName(ListOfProductsItemStyles.block)) {
             const productID = parseInt(itemContainer.getAttribute('item-id'));
@@ -164,22 +184,13 @@ export class ProductsView extends BaseView {
             this.IDs['page'] = 1;
             switch (this.#viewType) {
             case ProductsView.#types.category:
-                this.bus.emit(
-                    Events.ProductsLoad,
-                    this.IDs['category'],
-                    this.IDs['page'],
-                    this.presenter.sortKey,
-                    this.presenter.sortDirection,
-                );
+                Router.open(`/items/${this.IDs['category']}/1`, {}, this.presenter.getFilterParams());
                 break;
             case ProductsView.#types.search:
-                this.bus.emit(
-                    Events.ProductsLoadSearch,
-                    this.IDs['searchText'],
-                    this.IDs['page'],
-                    this.presenter.sortKey,
-                    this.presenter.sortDirection,
-                );
+                Router.open('/search/1/',
+                    {},
+                    Object.assign(this.presenter.getFilterParams(),
+                        {text: this.IDs['searchText']}));
                 break;
             }
         });
@@ -311,6 +322,18 @@ export class ProductsView extends BaseView {
         for (const input of form.getElementsByTagName('input')) {
             input.type === 'checkbox' ? input.checked = false : input.value = '';
         }
+    }
+
+    dropSort = () => {
+        const sort = document.getElementsByClassName(productsStyles.select)[0];
+        console.log(sort);
+        if (!sort) {
+            return;
+        }
+
+        sort.key = 'cost';
+        sort.direction = 'ASC';
+        sort.value = 'Сначала дешевые';
     }
 
     drawIncorrectFilterWarning = () => {
