@@ -121,12 +121,7 @@ $colors: (
     @extend %button-shared;
 }
 
-.catalog {
-    @extend %button-shared;
-    @extend %main-color;
-}
-
-.search {
+.catalog, .search, .auth, .review, .filterSubmit {
     @extend %button-shared;
     @extend %main-color;
 }
@@ -136,14 +131,9 @@ $colors: (
     @extend %order-color;
 }
 
-.increment, .decrement {
+.increment, .decrement, .filterDrop, .profileChange {
     @extend %button-shared;
     @extend %inherit-color;
-}
-
-.auth {
-    @extend %button-shared;
-    @extend %main-color;
 }
 
 .inCart {
@@ -154,26 +144,6 @@ $colors: (
 .notInCart {
     @extend %button-shared;
     @extend %not-in-cart-color;
-}
-
-.review {
-    @extend %button-shared;
-    @extend %main-color;
-}
-
-.filterSubmit {
-    @extend %button-shared;
-    @extend %main-color;
-}
-
-.filterDrop {
-    @extend %button-shared;
-    @extend %inherit-color;
-}
-
-.review {
-    @extend %button-shared;
-    @extend %main-color;
 }
 
 
@@ -198,11 +168,6 @@ $colors: (
 .paginatorBig {
     @extend %paginator-shared;
     @extend %paginator-big-color;
-}
-
-.profileChange {
-    @extend %button-shared;
-    @extend %inherit-color;
 }
 
 .profileExit {
