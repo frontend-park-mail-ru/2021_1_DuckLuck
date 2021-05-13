@@ -208,7 +208,8 @@ export class ProductView extends BaseView {
     /**
      */
     renderRecommendations = () => {
-        const recommendationsHtmlString = new ListOfProducts(this.presenter.recommendations).getHtmlString();
+        const recommendationsHtmlString = new ListOfProducts(this.presenter.recommendations, 'recommendations')
+            .getHtmlString();
         const recommendationsBlock = document.getElementById('recommendations');
         recommendationsBlock.innerHTML = recommendationsHtmlString;
     }

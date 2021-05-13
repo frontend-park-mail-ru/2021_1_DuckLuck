@@ -13,10 +13,14 @@ export class ListOfProductsItem {
      * @param {Object} Image of a product
      * @param {string} itemName
      * @param {number} itemRating
+     * @param {Boolean} itemInCart
      * @param {Object} itemPrice
+     * @param {Number} itemId
+     * @param {Number} itemReviewsCount
+     * @param {String} type
      */
     constructor({itemImage, itemInCart = false, itemName = '', itemRating = 0, itemReviewsCount = 0,
-        itemPrice= {discountPrice: '', base: '', discount: ''}, itemId=0} = {}) {
+        itemPrice= {discountPrice: '', base: '', discount: ''}, itemId=0, type='products'} = {}) {
         this.itemInCart = itemInCart;
         this.itemImage = itemImage;
         this.itemName = itemName;
@@ -24,6 +28,7 @@ export class ListOfProductsItem {
         this.itemPrice = itemPrice;
         this.itemId = itemId;
         this.itemReviewsCount = itemReviewsCount;
+        this.type = type;
     }
 
 
@@ -40,6 +45,7 @@ export class ListOfProductsItem {
             itemRating: this.itemRating,
             itemReviewsCount: this.itemReviewsCount,
             itemPrice: this.itemPrice,
+            type: this.type,
             itemStyles: itemStyles,
             decorators: decorators,
             buttonStyles: buttonStyles,

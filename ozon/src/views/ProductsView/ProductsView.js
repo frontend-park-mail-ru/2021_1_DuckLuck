@@ -90,7 +90,7 @@ export class ProductsView extends BaseView {
 
     render = () => {
         this.parent.innerHTML = '';
-        const productsListHtmlString = new ListOfProducts(this.presenter.products).getHtmlString();
+        const productsListHtmlString = new ListOfProducts(this.presenter.products, 'products').getHtmlString();
         const pagination = new Pagination(this.presenter.paginationInfo).getHtmlString();
         const template = productsPageTemplate({
             isEmpty: this.presenter.products.length === 0,
