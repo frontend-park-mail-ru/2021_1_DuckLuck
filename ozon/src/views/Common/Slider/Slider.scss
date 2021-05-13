@@ -1,0 +1,32 @@
+@import '../../../constants';
+
+.block {
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  transition-duration: 500ms;
+  transform: translateX(0);
+  gap: $gap-s;
+}
+
+.contentWrapper {
+  display: block;
+  overflow: hidden;
+}
+
+.left {
+  background-color: red;
+}
+
+.right {
+  background-color: yellow;
+}
+
+.btn{
+  color: wheat;
+}
+

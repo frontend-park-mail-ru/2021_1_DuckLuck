@@ -4,6 +4,10 @@
     display: none;
 }
 
+.noVisibility {
+    visibility: hidden;
+}
+
 .invertColor {
     filter: invert(100%);
 }

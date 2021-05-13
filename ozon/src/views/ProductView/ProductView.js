@@ -14,7 +14,8 @@ import decorators from '../decorators.scss';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import {Pagination} from '../Common/Pagination/Pagination';
-import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts';
+import {Slider} from '../Common/Slider/Slider';
+import {ListOfProductsItem} from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem';
 
 
 /**
@@ -208,9 +209,30 @@ export class ProductView extends BaseView {
     /**
      */
     renderRecommendations = () => {
-        const recommendationsHtmlString = new ListOfProducts(this.presenter.recommendations, 'recommendations')
-            .getHtmlString();
+        const items = [];
+
+        this.presenter.recommendations.forEach((item) => {
+            const base = item['price']['base_cost'];
+            const discount = item['price']['discount'];
+            const discountPrice = Math.ceil(base * (1 - discount * 0.01));
+            items.push(new ListOfProductsItem({
+                itemInCart: item['inCart'],
+                itemReviewsCount: item['count_reviews'],
+                itemId: item['id'],
+                itemImage: new Img({src: staticServerHost + item['preview_image']}),
+                itemName: item['title'],
+                itemRating: item['rating'],
+                itemPrice: {
+                    base: base,
+                    discount: discount,
+                    discountPrice: discountPrice,
+                },
+                type: 'recommendations',
+            }).getHtmlString());
+        });
+        const slider = new Slider(items);
         const recommendationsBlock = document.getElementById('recommendations');
-        recommendationsBlock.innerHTML = recommendationsHtmlString;
+        recommendationsBlock.appendChild(slider.render());
+        slider.checkOverflow();
     }
 }
