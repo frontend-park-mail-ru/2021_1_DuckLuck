@@ -14,10 +14,6 @@ export class Slider {
      */
     constructor(items) {
         this.items = items;
-        this.onScreen = [];
-        this.leftHidden = [];
-        this.rightHidden = [];
-        this.carousel = null;
         this.content = null;
         this.contentWrapper = null;
         this.left = null;
@@ -35,15 +31,14 @@ export class Slider {
             buttonStyles: buttonStyles,
             decorators: decorators,
         });
-        const carousel = new DOMParser().parseFromString(template, 'text/html');
-        const content = carousel.getElementsByClassName(sliderStyles.content)[0];
-        const contentWrapper = carousel.getElementsByClassName(sliderStyles.contentWrapper)[0];
-        const buttons = Array.from(carousel.getElementsByClassName(buttonStyles.slider));
-        const right = carousel.getElementById('slider-right');
-        const left = carousel.getElementById('slider-left');
+        const slider = new DOMParser().parseFromString(template, 'text/html');
+        const content = slider.getElementsByClassName(sliderStyles.content)[0];
+        const contentWrapper = slider.getElementsByClassName(sliderStyles.contentWrapper)[0];
+        const buttons = Array.from(slider.getElementsByClassName(buttonStyles.slider));
+        const right = slider.getElementById('slider-right');
+        const left = slider.getElementById('slider-left');
 
 
-        this.carousel = carousel;
         this.content = content;
         this.contentWrapper = contentWrapper;
         this.right = right;
@@ -91,7 +86,7 @@ export class Slider {
             });
         });
 
-        return carousel.getElementById('slider');
+        return slider.getElementById('slider');
     }
 
     checkOverflow = () => {
