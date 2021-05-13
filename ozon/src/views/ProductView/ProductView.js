@@ -206,7 +206,6 @@ export class ProductView extends BaseView {
     }
 
     /**
-     * @param {Array} recommendations
      */
     renderRecommendations = () => {
         const recommendationsHtmlString = new ListOfProducts(this.presenter.recommendations).getHtmlString();
