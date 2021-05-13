@@ -1,5 +1,6 @@
-import carouselTemplate from './Slider.hbs';
-import carouselStyles from './Slider.scss';
+import sliderTemplate from './Slider.hbs';
+import sliderStyles from './Slider.scss';
+import buttonStyles from './../Button/Button.scss';
 import decorators from '../../decorators.scss';
 
 /**
@@ -28,17 +29,18 @@ export class Slider {
      * @return {HTMLElement}
      */
     render = () => {
-        const template = carouselTemplate({
+        const template = sliderTemplate({
             items: this.items,
-            carouselStyles: carouselStyles,
+            sliderStyles: sliderStyles,
+            buttonStyles: buttonStyles,
             decorators: decorators,
         });
-        const carousel = new DOMParser().parseFromString(template, 'text/html').getElementById('carousel');
-        const content = carousel.getElementsByClassName(carouselStyles.content)[0];
-        const contentWrapper = carousel.getElementsByClassName(carouselStyles.contentWrapper)[0];
-        const buttons = Array.from(carousel.getElementsByClassName(carouselStyles.btn));
-        const right = carousel.getElementsByClassName(carouselStyles.right)[0];
-        const left = carousel.getElementsByClassName(carouselStyles.left)[0];
+        const carousel = new DOMParser().parseFromString(template, 'text/html');
+        const content = carousel.getElementsByClassName(sliderStyles.content)[0];
+        const contentWrapper = carousel.getElementsByClassName(sliderStyles.contentWrapper)[0];
+        const buttons = Array.from(carousel.getElementsByClassName(buttonStyles.slider));
+        const right = carousel.getElementById('slider-right');
+        const left = carousel.getElementById('slider-left');
 
 
         this.carousel = carousel;
@@ -89,7 +91,7 @@ export class Slider {
             });
         });
 
-        return carousel;
+        return carousel.getElementById('slider');
     }
 
     checkOverflow = () => {

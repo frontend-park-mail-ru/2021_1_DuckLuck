@@ -12,6 +12,10 @@
     filter: invert(100%);
 }
 
+.mirrorY {
+    transform: rotate(180deg);
+}
+
 .strikethrough:before {
     border-bottom: 2px solid $discount-color;
     position: absolute;

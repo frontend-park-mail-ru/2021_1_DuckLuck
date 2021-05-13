@@ -1,11 +1,19 @@
-<div class="{{carouselStyles.block}}" id="carousel">
-    <button class="{{carouselStyles.left}} {{carouselStyles.btn}} {{decorators.noVisibility}}"></button>
-    <div class="{{carouselStyles.contentWrapper}}">
-        <div class="{{carouselStyles.content}}">
+<div class="{{sliderStyles.block}}" id="slider">
+    <div class="{{sliderStyles.buttonWrapper}}">
+        <button class="{{buttonStyles.slider}} {{decorators.noVisibility}}" id="slider-left">
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/slider.svg" class="{{decorators.mirrorY}}">
+        </button>
+    </div>
+    <div class="{{sliderStyles.contentWrapper}}">
+        <div class="{{sliderStyles.content}}">
             {{#each items}}
                 {{{this}}}
             {{/each}}
         </div>
     </div>
-    <button class="{{carouselStyles.right}} {{carouselStyles.btn}}  {{decorators.noVisibility}}"></button>
+    <div class="{{sliderStyles.buttonWrapper}}">
+        <button class="{{buttonStyles.slider}} {{decorators.noVisibility}}" id="slider-right">
+            <img src="https://duckluckmarket.hb.bizmrg.com/svg/slider.svg">
+        </button>
+    </div>
 </div>
