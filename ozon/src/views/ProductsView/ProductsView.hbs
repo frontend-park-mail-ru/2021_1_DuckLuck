@@ -33,19 +33,19 @@
                     </option>
                 {{/each}}
             </select>
+
             <div class="{{productsStyles.listWrapper}}">{{{productsList}}}</div>
+            {{#ifEquals this.isEmpty false}}
+                <div class="{{productsStyles.footer}}">
+                    {{{pagination}}}
+                </div>
+            {{/ifEquals}}
         </div>
     </div>
     {{#ifEquals this.isEmpty true}}
         <div class="{{productsStyles.emptyText}}">
             <span class="{{textStyles.title}}">Не найдено ни одного товара</span>
             <a class="{{textStyles.title}}" href="">Вернуться на главную</a>
-        </div>
-    {{/ifEquals}}
-
-    {{#ifEquals this.isEmpty false}}
-        <div class="{{productsStyles.footer}}">
-            {{{pagination}}}
         </div>
     {{/ifEquals}}
 </div>
