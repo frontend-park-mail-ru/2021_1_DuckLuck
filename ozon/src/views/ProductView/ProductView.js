@@ -14,7 +14,7 @@ import decorators from '../decorators.scss';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import {Pagination} from '../Common/Pagination/Pagination';
-import {ListOfProducts} from '../Common/ListOfProducts/ListOfProduct';
+import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts';
 
 
 /**
