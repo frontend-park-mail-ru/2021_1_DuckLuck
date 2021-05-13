@@ -14,6 +14,7 @@ import decorators from '../decorators.scss';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import {Pagination} from '../Common/Pagination/Pagination';
+import {ListOfProducts} from "../Common/ListOfProducts/ListOfProducts";
 
 
 /**
@@ -202,5 +203,14 @@ export class ProductView extends BaseView {
                     this.presenter.sortKey,
                     this.presenter.sortDirection);
             });
+    }
+
+    /**
+     * @param {Array} recommendations
+     */
+    renderRecommendations = () => {
+        const recommendationsHtmlString = new ListOfProducts(this.presenter.recommendations).getHtmlString();
+        const recommendationsBlock = document.getElementById('recommendations');
+        recommendationsBlock.innerHTML = recommendationsHtmlString;
     }
 }
