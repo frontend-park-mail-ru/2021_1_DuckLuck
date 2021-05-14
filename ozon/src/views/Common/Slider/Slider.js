@@ -15,9 +15,11 @@ export class Slider {
     constructor(items) {
         this.items = items;
         this.content = null;
+        this.contentGap = null;
         this.contentWrapper = null;
         this.left = null;
         this.right = null;
+        this.itemWidth = null;
     };
 
     /**
@@ -50,7 +52,7 @@ export class Slider {
                 button.disabled = true;
                 const buttonTimeout = parseFloat(
                     getComputedStyle(content)
-                        .transitionDuration.match(/[0-9]+\.[0-9]+/)[0],
+                        .transitionDuration.match(/[0-9]+\.?[0-9]+/)[0],
                 ) * 1000;
                 setTimeout(() => {
                     button.disabled = false;
@@ -62,13 +64,15 @@ export class Slider {
                 let currentTranslate = parseInt(getComputedStyle(content).transform
                     .match(/matrix.*\((.+)\)/)[1].split(', ')[4]);
 
+
+                const itemWidth = this.itemWidth;
                 if (button === left) {
-                    currentTranslate += contentWrapperBox.width;
+                    currentTranslate += Math.floor(contentWrapperBox.width / itemWidth) * itemWidth;
                 } else {
-                    currentTranslate -= contentWrapperBox.width;
+                    currentTranslate -= Math.floor(contentWrapperBox.width / itemWidth) * itemWidth;
                 }
 
-                if (currentTranslate > 0) {
+                if (currentTranslate >= 0) {
                     currentTranslate = 0;
                     left.classList.add(decorators.noVisibility);
                 } else {
@@ -90,7 +94,13 @@ export class Slider {
     }
 
     checkOverflow = () => {
+        this.contentGap = parseFloat(getComputedStyle(this.content).gap.match(/[0-9]+\.?[0-9]+/)[0]);
+        this.itemWidth = this.content.children[0].getBoundingClientRect().width + this.contentGap;
         if (this.contentWrapper.scrollWidth > this.content.getBoundingClientRect().width) {
+            this.content.style.maxWidth = `${Math.floor(
+                this.content.getBoundingClientRect().width / this.itemWidth,
+            ) * this.itemWidth}px`;
+
             this.right.classList.remove(decorators.noVisibility);
         }
     }

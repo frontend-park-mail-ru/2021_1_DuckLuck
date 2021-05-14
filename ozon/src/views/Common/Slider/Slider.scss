@@ -3,6 +3,7 @@
 .block {
   display: flex;
   flex-direction: row;
+  gap: $gap-s;
 }
 
 .content {
@@ -19,7 +20,8 @@
 }
 
 .buttonWrapper {
-  margin: auto;
+  margin-top: auto;
+  margin-bottom: auto;
   height: $height-xs;
   width: $width-xxxs;
   min-width: $width-xxxs;
