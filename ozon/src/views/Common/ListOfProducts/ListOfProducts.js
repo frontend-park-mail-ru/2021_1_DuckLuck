@@ -12,8 +12,9 @@ export class ListOfProducts {
     /**
      *
      * @param {Object[]} items array of items to present on page
+     * @param {String} type
      */
-    constructor(items) {
+    constructor(items, type) {
         this.items = [];
         items.forEach((item) => {
             const base = item['price']['base_cost'];
@@ -31,6 +32,7 @@ export class ListOfProducts {
                     discount: discount,
                     discountPrice: discountPrice,
                 },
+                type: type,
             }));
         });
     };

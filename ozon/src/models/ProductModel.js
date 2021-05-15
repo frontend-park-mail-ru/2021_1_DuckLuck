@@ -10,6 +10,7 @@ import HTTPResponses from '../utils/http-responses/httpResponses';
  */
 class ProductModel extends BaseModel {
     #item
+    #recommendations
     #sortKey
     #sortDirection
 
@@ -35,6 +36,13 @@ class ProductModel extends BaseModel {
     }
 
     /**
+     * @return {Array}
+     */
+    get recommendations() {
+        return this.#recommendations;
+    }
+
+    /**
      * @param {string} newSortKey
      */
     set sortKey(newSortKey) {
@@ -46,6 +54,13 @@ class ProductModel extends BaseModel {
      */
     set sortDirection(newSortDirection) {
         this.#sortDirection = newSortDirection;
+    }
+
+    /**
+     * @param {Array} newRecommendations
+     */
+    set recommendations(newRecommendations) {
+        this.#recommendations = newRecommendations;
     }
 
     /**
@@ -82,6 +97,7 @@ class ProductModel extends BaseModel {
                 category_path: parsedJson['category_path'],
             };
             this.bus.emit(Events.ProductLoaded, Responses.Success);
+            this.bus.emit(Events.RecommendationLoad, itemId);
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
@@ -94,6 +110,43 @@ class ProductModel extends BaseModel {
             }
             default: {
                 this.bus.emit(Events.ProductLoaded, Responses.Error);
+                break;
+            }
+            }
+        });
+    }
+
+    /**
+     *
+     * @param {Number} itemId ID of item on server
+     * @description Loads recommendation IN MODEL!
+     */
+    loadRecommendations(itemId) {
+        AjaxModule.postUsingFetch({
+            url: serverApiPath + `/product/recommendations/${itemId}`,
+            body: {
+                count: 10,
+            },
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((parsedJson) => {
+            this.recommendations = parsedJson;
+            this.bus.emit(Events.RecommendationLoaded, Responses.Success);
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.RecommendationLoaded, Responses.Unauthorized);
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.RecommendationLoaded, Responses.Offline);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.RecommendationLoaded, Responses.Error);
                 break;
             }
             }

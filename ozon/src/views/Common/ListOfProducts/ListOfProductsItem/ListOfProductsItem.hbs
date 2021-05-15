@@ -22,15 +22,17 @@
             <div class="{{itemStyles.name}}">
                 {{itemName}}
             </div>
-            <div class="{{itemStyles.rating}}">
-                {{#for 0 itemRating 1}}
-                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="{{../imgStyles.smallStar}}">
-                {{/for}}
-                {{#for itemRating 5 1}}
-                    <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="{{../imgStyles.smallStar}}">
-                {{/for}}
-                <span class="{{itemStyles.ratingCount}}">({{itemReviewsCount}})</span>
-            </div>
+            {{#ifEquals type "products"}}
+                <div class="{{itemStyles.rating}}">
+                    {{#for 0 itemRating 1}}
+                        <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="{{../imgStyles.smallStar}}">
+                    {{/for}}
+                    {{#for itemRating 5 1}}
+                        <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="{{../imgStyles.smallStar}}">
+                    {{/for}}
+                    <span class="{{itemStyles.ratingCount}}">({{itemReviewsCount}})</span>
+                </div>
+            {{/ifEquals}}
         </div>
     </div>
     <div class="{{itemStyles.buttonsBlock}}">
