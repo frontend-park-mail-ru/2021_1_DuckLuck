@@ -20,6 +20,7 @@ export class Slider {
         this.left = null;
         this.right = null;
         this.itemWidth = null;
+        this.currentTranslate = 0;
     };
 
     /**
@@ -34,59 +35,46 @@ export class Slider {
             decorators: decorators,
         });
         const slider = new DOMParser().parseFromString(template, 'text/html');
-        const content = slider.getElementsByClassName(sliderStyles.content)[0];
-        const contentWrapper = slider.getElementsByClassName(sliderStyles.contentWrapper)[0];
-        const buttons = Array.from(slider.getElementsByClassName(buttonStyles.slider));
-        const right = slider.getElementById('slider-right');
-        const left = slider.getElementById('slider-left');
+        this.content = slider.getElementsByClassName(sliderStyles.content)[0];
+        this.contentWrapper = slider.getElementsByClassName(sliderStyles.contentWrapper)[0];
+        this.right = slider.getElementById('slider-right');
+        this.left = slider.getElementById('slider-left');
 
-
-        this.content = content;
-        this.contentWrapper = contentWrapper;
-        this.right = right;
-        this.left = left;
-
-
-        buttons.forEach((button) => {
+        Array.from(slider.getElementsByClassName(buttonStyles.slider)).forEach((button) => {
             button.addEventListener('click', () => {
                 button.disabled = true;
                 const buttonTimeout = parseFloat(
-                    getComputedStyle(content)
+                    getComputedStyle(this.content)
                         .transitionDuration.match(/[0-9]+\.?[0-9]+/)[0],
                 ) * 1000;
                 setTimeout(() => {
                     button.disabled = false;
                 }, buttonTimeout);
 
-                const contentWrapperBox = contentWrapper.getBoundingClientRect();
-                const contentBox = content.getBoundingClientRect();
+                const contentWrapperBox = this.contentWrapper.getBoundingClientRect();
+                const contentBox = this.content.getBoundingClientRect();
 
-                let currentTranslate = parseInt(getComputedStyle(content).transform
-                    .match(/matrix.*\((.+)\)/)[1].split(', ')[4]);
-
-
-                const itemWidth = this.itemWidth;
-                if (button === left) {
-                    currentTranslate += Math.floor(contentWrapperBox.width / itemWidth) * itemWidth;
+                if (button === this.left) {
+                    this.currentTranslate += Math.floor(contentWrapperBox.width / this.itemWidth) * this.itemWidth;
                 } else {
-                    currentTranslate -= Math.floor(contentWrapperBox.width / itemWidth) * itemWidth;
+                    this.currentTranslate -= Math.floor(contentWrapperBox.width / this.itemWidth) * this.itemWidth;
                 }
 
-                if (currentTranslate >= 0) {
-                    currentTranslate = 0;
-                    left.classList.add(decorators.noVisibility);
+                if (this.currentTranslate >= 0) {
+                    this.currentTranslate = 0;
+                    this.left.classList.add(decorators.noVisibility);
                 } else {
-                    left.classList.remove(decorators.noVisibility);
+                    this.left.classList.remove(decorators.noVisibility);
                 }
 
-                if (-currentTranslate >= content.scrollWidth - contentBox.width) {
-                    currentTranslate = contentBox.width - content.scrollWidth;
-                    right.classList.add(decorators.noVisibility);
+                if (-this.currentTranslate >= this.content.scrollWidth - contentBox.width) {
+                    this.currentTranslate = contentBox.width - this.content.scrollWidth;
+                    this.right.classList.add(decorators.noVisibility);
                 } else {
-                    right.classList.remove(decorators.noVisibility);
+                    this.right.classList.remove(decorators.noVisibility);
                 }
 
-                content.style.transform = `translateX(${currentTranslate}px)`;
+                this.content.style.transform = `translateX(${this.currentTranslate}px)`;
             });
         });
 
