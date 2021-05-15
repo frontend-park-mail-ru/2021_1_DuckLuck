@@ -263,7 +263,8 @@ export class ProductsView extends BaseView {
     setButtonAdded = (button, id) => {
         const newButton = button.cloneNode(true);
         this.setButtonAddedStyle(newButton);
-        newButton.addEventListener('click', () => {
+        newButton.addEventListener('click', (event) => {
+            event.preventDefault();
             Bus.globalBus.emit(Events.CartRemoveProduct, id);
         });
         button.replaceWith(newButton);
