@@ -136,7 +136,8 @@ export class HeaderView extends BaseView {
 
         const menuItems = Array.from(this.cache.getElementsByClassName(headerStyles.menuItem));
         menuItems.forEach((menuItem) => {
-            menuItem.addEventListener('click', () => {
+            menuItem.addEventListener('click', (event) => {
+                event.preventDefault();
                 const href = menuItem.getAttribute('href');
                 Router.open(href);
             });
@@ -147,13 +148,6 @@ export class HeaderView extends BaseView {
             event.preventDefault();
             const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
             Router.open('/search/1/', {dropFilter: true, dropSort: true}, {text: searchInput.value});
-        });
-
-        menuItems.forEach((menuItem) => {
-            menuItem.addEventListener('click', () => {
-                const href = menuItem.getAttribute('href');
-                Router.open(href);
-            });
         });
 
         const catalogListCategories = this.cache.getElementsByClassName(linkStyles.catalogCategory);

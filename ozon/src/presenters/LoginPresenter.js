@@ -43,7 +43,7 @@ class LoginPresenter extends BasePresenter {
         case Responses.Success: {
             this.view.remove();
             Bus.globalBus.emit(Events.ProfileNewUserLoggedIn);
-            Bus.globalBus.emit(Events.CartAddLastProduct);
+            Bus.globalBus.emit(Events.CartLoadProductsAmount);
             Router.goBack();
             break;
         }
