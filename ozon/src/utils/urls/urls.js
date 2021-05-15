@@ -18,4 +18,5 @@ export const urls = {
     sessionUrl: '/session',
     review: '/review/product',
     reviewRights: '/review/rights/product/',
+    promo: '/promo',
 };

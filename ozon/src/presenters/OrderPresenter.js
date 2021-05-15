@@ -18,6 +18,8 @@ class OrderPresenter extends BasePresenter {
         this.bus.on(Events.OrderLoad, this.loadOrder);
         this.bus.on(Events.OrderLoaded, this.orderLoadedReaction);
         this.bus.on(Events.SendOrder, this.sendOrder);
+        this.bus.on(Events.SendPromo, this.sendPromo);
+        this.bus.on(Events.PromoSent, this.promoSentReaction);
     }
 
     /**
@@ -49,6 +51,13 @@ class OrderPresenter extends BasePresenter {
     }
 
     /**
+     * @return {String} Promo
+     */
+    get promo() {
+        return this.model.promo;
+    }
+
+    /**
      * @description Loads all information about order from model
      */
 
@@ -71,6 +80,20 @@ class OrderPresenter extends BasePresenter {
     }
 
     /**
+     * @param {string} result
+     * @description Reaction on promo sent
+     */
+    promoSentReaction = (result) => {
+        if (result === Responses.Success) {
+            // this.view.render();
+            // this.view.cache.hidden = false;
+        } else {
+            console.error('Cant load order');
+            // Router.open('/items', {replaceState: true});
+        }
+    }
+
+    /**
      * @description Sends order form to model
      */
     sendOrder = () => {
@@ -82,6 +105,14 @@ class OrderPresenter extends BasePresenter {
         this.model.recipient = {first_name, last_name, email};
         this.model.sendOrder();
         Bus.globalBus.emit(Events.OrderSent);
+    }
+
+    /**
+     * @description Sends order form to model
+     */
+    sendPromo = () => {
+        this.model.promo = document.getElementsByName('promo')[0].value;
+        this.model.sendPromo();
     }
 }
 

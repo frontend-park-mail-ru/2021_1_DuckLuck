@@ -53,6 +53,10 @@ export class OrderView extends BaseView {
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
 
+        document.getElementById('promo-btn').addEventListener('click', () => {
+            this.bus.emit(Events.SendPromo);
+        });
+
         this.cache.getElementsByClassName(buttonStyles.order)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.SendOrder);

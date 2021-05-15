@@ -77,6 +77,9 @@ const Events = {
 
     ChangeReviewProductId: 'change-review-product-id',
     OrderSent: 'order-sent',
+
+    SendPromo: 'send-promo',
+    PromoSent: 'promo-sent',
 };
 
 
