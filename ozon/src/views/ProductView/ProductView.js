@@ -150,6 +150,9 @@ export class ProductView extends BaseView {
     }
 
     setProductNotAdded = () => {
+        if (!this.cache) {
+            return;
+        }
         const button = document.getElementsByClassName(buttonStyles.inCartProduct)[0];
         if (!button) {
             return;
