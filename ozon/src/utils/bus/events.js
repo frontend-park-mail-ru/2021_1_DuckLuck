@@ -37,6 +37,7 @@ const Events = {
     ProductLoaded: 'product-loaded',
     ProductItemNotAdded: 'product-item-not-added',
     ProductItemAdded: 'product-item-added',
+    ProductRenderReviewButton: 'product-render-review-button',
 
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',

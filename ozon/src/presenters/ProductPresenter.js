@@ -24,6 +24,7 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProductTransmitData, this.returnProductData);
         Bus.globalBus.on(Events.ProductItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.ProductItemNotAdded, this.setProductNotAdded);
+        Bus.globalBus.on(Events.ProductRenderReviewButton, this.addReviewButton);
     }
 
     /**
@@ -136,6 +137,10 @@ class ProductsPresenter extends BasePresenter {
 
     setProductNotAdded = () => {
         this.view.setProductNotAdded();
+    }
+
+    addReviewButton = () => {
+        this.view.addReviewButton();
     }
 }
 

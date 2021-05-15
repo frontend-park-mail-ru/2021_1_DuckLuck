@@ -19,7 +19,7 @@ import {Bus} from '../../utils/bus/bus';
 class ReviewView extends BaseView {
     show = () => {
         this.presenter.rating = 0;
-        this.bus.emit(Events.ReviewRightsLoad);
+        this.render();
     }
 
     render = () => {
