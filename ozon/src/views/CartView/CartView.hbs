@@ -40,6 +40,14 @@
                                                 <span class="{{../textStyles.text}}">Удалить</span>
                                             </div>
                                         </div>
+                                        <div>
+                                            {{#for 0 this.rating 1}}
+                                                <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="{{../imgStyles.star}}">
+                                            {{/for}}
+                                            {{#for this.rating 5 1}}
+                                                <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="{{../imgStyles.star}}">
+                                            {{/for}}
+                                        </div>
                                     </div>
                                     <div class="{{../cartStyles.priceBlock}}">
                                         <div class="{{../cartStyles.priceInfo}}">
