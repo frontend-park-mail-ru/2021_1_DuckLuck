@@ -120,15 +120,13 @@ export class ProductView extends BaseView {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
         });
 
-        const reviewButton = this.cache.getElementsByClassName(buttonStyles.review)[0];
-        reviewButton.addEventListener('click', () => {
-            Bus.globalBus.emit(Events.ChangeReviewProductId, this.IDs['productID']);
-            Router.open('/review');
-        });
         Bus.globalBus.emit(Events.CartGetProductID);
         Bus.globalBus.emit(Events.GetProductReviews, +this.IDs['productID'], 1,
             this.presenter.sortKey,
             this.presenter.sortDirection);
+
+        Bus.globalBus.emit(Events.ChangeReviewProductId, this.IDs['productID']);
+        Bus.globalBus.emit(Events.ReviewRightsLoad);
     }
 
     setProductAdded = () => {
@@ -166,7 +164,6 @@ export class ProductView extends BaseView {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
         });
     }
-
 
     /**
      * @param {Array} reviews
@@ -212,8 +209,19 @@ export class ProductView extends BaseView {
             });
     }
 
-    /**
-     */
+    addReviewButton = () => {
+        const reviewButton = document.createElement('button');
+        reviewButton.className = buttonStyles.review;
+        const reviewSpan = document.createElement('span');
+        reviewSpan.className = textStyles.bigButton;
+        reviewSpan.innerHTML = 'Оставить отзыв';
+        reviewButton.appendChild(reviewSpan);
+        reviewButton.addEventListener('click', () => {
+            Router.open('/review');
+        });
+        document.getElementsByClassName(productStyles.reviewButtonWrapper)[0].appendChild(reviewButton);
+    }
+
     renderRecommendations = () => {
         const items = [];
 

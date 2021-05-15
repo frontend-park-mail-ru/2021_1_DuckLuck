@@ -25,7 +25,7 @@ import decorators from '../decorators.scss';
 class ReviewView extends BaseView {
     show = () => {
         this.presenter.rating = 0;
-        this.bus.emit(Events.ReviewRightsLoad);
+        this.render();
     }
 
     render = () => {
