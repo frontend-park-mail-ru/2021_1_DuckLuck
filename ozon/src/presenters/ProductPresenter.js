@@ -18,6 +18,8 @@ class ProductsPresenter extends BasePresenter {
         super(application, View, Model);
         this.bus.on(Events.ProductLoad, this.loadProduct);
         this.bus.on(Events.ProductLoaded, this.productLoadedReaction);
+        this.bus.on(Events.RecommendationLoad, this.loadRecommendations);
+        this.bus.on(Events.RecommendationLoaded, this.recommendationsLoadedReaction);
         Bus.globalBus.on(Events.ProductChangeID, this.changeID);
         Bus.globalBus.on(Events.CartLoadedProductID, this.productCartGotIds);
         Bus.globalBus.on(Events.RenderProductReviews, this.renderProductsReview);
@@ -50,11 +52,26 @@ class ProductsPresenter extends BasePresenter {
     }
 
     /**
+     * @return {Array}
+     */
+    get recommendations() {
+        return this.model.recommendations;
+    }
+
+    /**
      *
      * @param {Number} productID
      */
     loadProduct = (productID) => {
         this.model.loadProduct(productID);
+    }
+
+    /**
+     *
+     * @param {Number} productID
+     */
+    loadRecommendations = (productID) => {
+        this.model.loadRecommendations(productID);
     }
 
     /**
@@ -87,6 +104,27 @@ class ProductsPresenter extends BasePresenter {
         switch (result) {
         case Responses.Success: {
             this.view.render();
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
+    }
+
+    /**
+     *
+     * @param {string}result
+     */
+    recommendationsLoadedReaction = (result) => {
+        switch (result) {
+        case Responses.Success: {
+            this.view.renderRecommendations();
             break;
         }
         case Responses.Offline: {

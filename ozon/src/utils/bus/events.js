@@ -78,6 +78,9 @@ const Events = {
 
     ChangeReviewProductId: 'change-review-product-id',
     OrderSent: 'order-sent',
+
+    RecommendationLoad: 'recommendation-load',
+    RecommendationLoaded: 'recommendation-loaded',
 };
 
 

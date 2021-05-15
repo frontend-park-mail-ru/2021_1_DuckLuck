@@ -91,6 +91,16 @@ $colors: (
             text: $colored-object-color,
         ),
     ),
+    slider-color: (
+        common: (
+            background: white,
+            text: black,
+        ),
+        hover: (
+            background: $colored-object-color,
+            text: $neutral-background-color,
+        ),
+    ),
 );
 
 @each $key, $data in $colors {
@@ -173,4 +183,17 @@ $colors: (
 .profileExit {
     @extend %button-shared;
     @extend %exit-color;
+}
+
+.slider {
+    @extend %button-shared;
+    @extend %slider-color;
+    border-radius: 50%;
+    box-shadow: 0px -1px 36px -2px rgb(34 60 80 / 20%);
+}
+
+.slider:hover {
+    img {
+        filter: invert(100%);
+    }
 }

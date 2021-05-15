@@ -6,7 +6,7 @@ import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
-import filterStyles from './ProductsFilter.scss';
+import {Filter} from '../Common/Filter/Filter.js';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
@@ -23,6 +23,7 @@ export class ProductsView extends BaseView {
     }
 
     #viewType
+    #filterHTML
 
     /**
      * @param {Object} URLParams
@@ -90,12 +91,14 @@ export class ProductsView extends BaseView {
 
     render = () => {
         this.parent.innerHTML = '';
-        const productsListHtmlString = new ListOfProducts(this.presenter.products).getHtmlString();
+        const productsListHtmlString = new ListOfProducts(this.presenter.products, 'products').getHtmlString();
         const pagination = new Pagination(this.presenter.paginationInfo).getHtmlString();
+        const filter = this.#filterHTML ? this.#filterHTML : Filter.getHtmlString();
         const template = productsPageTemplate({
             isEmpty: this.presenter.products.length === 0,
             productsList: productsListHtmlString,
             pagination: pagination,
+            filter: filter,
             select: [
                 {
                     key: 'cost',
@@ -129,7 +132,6 @@ export class ProductsView extends BaseView {
             },
             productsStyles: productsStyles,
             buttonStyles: buttonStyles,
-            filterStyles: filterStyles,
             textStyles: textStyles,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html')
@@ -261,7 +263,8 @@ export class ProductsView extends BaseView {
     setButtonAdded = (button, id) => {
         const newButton = button.cloneNode(true);
         this.setButtonAddedStyle(newButton);
-        newButton.addEventListener('click', () => {
+        newButton.addEventListener('click', (event) => {
+            event.preventDefault();
             Bus.globalBus.emit(Events.CartRemoveProduct, id);
         });
         button.replaceWith(newButton);
