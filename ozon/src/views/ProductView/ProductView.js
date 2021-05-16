@@ -14,6 +14,8 @@ import decorators from '../decorators.scss';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import {Pagination} from '../Common/Pagination/Pagination';
+import {Slider} from '../Common/Slider/Slider';
+import {ListOfProductsItem} from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem';
 
 
 /**
@@ -118,18 +120,19 @@ export class ProductView extends BaseView {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
         });
 
-        const reviewButton = this.cache.getElementsByClassName(buttonStyles.review)[0];
-        reviewButton.addEventListener('click', () => {
-            Bus.globalBus.emit(Events.ChangeReviewProductId, this.IDs['productID']);
-            Router.open('/review');
-        });
         Bus.globalBus.emit(Events.CartGetProductID);
         Bus.globalBus.emit(Events.GetProductReviews, +this.IDs['productID'], 1,
             this.presenter.sortKey,
             this.presenter.sortDirection);
+
+        Bus.globalBus.emit(Events.ChangeReviewProductId, this.IDs['productID']);
+        Bus.globalBus.emit(Events.ReviewRightsLoad);
     }
 
     setProductAdded = () => {
+        if (!this.cache) {
+            return;
+        }
         const button = this.cache.getElementsByClassName(buttonStyles.notInCartProduct)[0];
         if (!button) {
             return;
@@ -145,6 +148,9 @@ export class ProductView extends BaseView {
     }
 
     setProductNotAdded = () => {
+        if (!this.cache) {
+            return;
+        }
         const button = document.getElementsByClassName(buttonStyles.inCartProduct)[0];
         if (!button) {
             return;
@@ -158,7 +164,6 @@ export class ProductView extends BaseView {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
         });
     }
-
 
     /**
      * @param {Array} reviews
@@ -202,5 +207,46 @@ export class ProductView extends BaseView {
                     this.presenter.sortKey,
                     this.presenter.sortDirection);
             });
+    }
+
+    addReviewButton = () => {
+        const reviewButton = document.createElement('button');
+        reviewButton.className = buttonStyles.review;
+        const reviewSpan = document.createElement('span');
+        reviewSpan.className = textStyles.bigButton;
+        reviewSpan.innerHTML = 'Оставить отзыв';
+        reviewButton.appendChild(reviewSpan);
+        reviewButton.addEventListener('click', () => {
+            Router.open('/review');
+        });
+        document.getElementsByClassName(productStyles.reviewButtonWrapper)[0].appendChild(reviewButton);
+    }
+
+    renderRecommendations = () => {
+        const items = [];
+
+        this.presenter.recommendations.forEach((item) => {
+            const base = item['price']['base_cost'];
+            const discount = item['price']['discount'];
+            const discountPrice = Math.ceil(base * (1 - discount * 0.01));
+            items.push(new ListOfProductsItem({
+                itemInCart: item['inCart'],
+                itemReviewsCount: item['count_reviews'],
+                itemId: item['id'],
+                itemImage: new Img({src: staticServerHost + item['preview_image']}),
+                itemName: item['title'],
+                itemRating: item['rating'],
+                itemPrice: {
+                    base: base,
+                    discount: discount,
+                    discountPrice: discountPrice,
+                },
+                type: 'recommendations',
+            }).getHtmlString());
+        });
+        const slider = new Slider(items);
+        const recommendationsBlock = document.getElementById('recommendations');
+        recommendationsBlock.appendChild(slider.render());
+        slider.checkOverflow();
     }
 }

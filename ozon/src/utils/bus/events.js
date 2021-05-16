@@ -37,6 +37,7 @@ const Events = {
     ProductLoaded: 'product-loaded',
     ProductItemNotAdded: 'product-item-not-added',
     ProductItemAdded: 'product-item-added',
+    ProductRenderReviewButton: 'product-render-review-button',
 
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',
@@ -80,6 +81,8 @@ const Events = {
 
     SendPromo: 'send-promo',
     PromoSent: 'promo-sent',
+    RecommendationLoad: 'recommendation-load',
+    RecommendationLoaded: 'recommendation-loaded',
 };
 
 

@@ -4,8 +4,16 @@
     display: none;
 }
 
+.noVisibility {
+    visibility: hidden;
+}
+
 .invertColor {
     filter: invert(100%);
+}
+
+.mirrorY {
+    transform: rotate(180deg);
 }
 
 .strikethrough:before {
