@@ -151,6 +151,9 @@ class OrderModel extends BaseModel {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
+            return response.json();
+        }).then((response) => {
+            this.bus.emit(Events.OrderNewBill, response);
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Offline: {
@@ -158,7 +161,7 @@ class OrderModel extends BaseModel {
                 break;
             }
             default: {
-                console.error('error promo sending');
+                this.bus.emit(Events.OrderIncorrectPromo);
             }
             }
         });

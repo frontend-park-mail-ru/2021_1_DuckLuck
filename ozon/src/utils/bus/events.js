@@ -64,6 +64,8 @@ const Events = {
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
+    OrderNewBill: 'order-new-bill',
+    OrderIncorrectPromo: 'order-incorrect-promo',
     SendOrder: 'order-send',
 
     ReviewRightsLoad: 'review-rights-load',

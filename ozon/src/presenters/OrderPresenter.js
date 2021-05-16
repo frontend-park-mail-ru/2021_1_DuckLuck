@@ -20,6 +20,8 @@ class OrderPresenter extends BasePresenter {
         this.bus.on(Events.SendOrder, this.sendOrder);
         this.bus.on(Events.SendPromo, this.sendPromo);
         this.bus.on(Events.PromoSent, this.promoSentReaction);
+        this.bus.on(Events.OrderNewBill, this.drawNewBill);
+        this.bus.on(Events.OrderIncorrectPromo, this.drawIncorrectPromo);
     }
 
     /**
@@ -113,6 +115,17 @@ class OrderPresenter extends BasePresenter {
     sendPromo = () => {
         this.model.promo = document.getElementsByName('promo')[0].value;
         this.model.sendPromo();
+    }
+
+    /**
+     * @param {Object} newBillInfo
+     */
+    drawNewBill = (newBillInfo) => {
+        this.view.drawNewBill(newBillInfo);
+    }
+
+    drawIncorrectPromo = () => {
+        this.view.drawIncorrectPromo();
     }
 }
 

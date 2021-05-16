@@ -80,4 +80,23 @@ export class OrderView extends BaseView {
                 });
         });
     };
+
+    /**
+     * @param {Object} newBillInfo
+     */
+    drawNewBill = (newBillInfo) => {
+        const info = document.getElementsByClassName(orderStyles.orderInfo)[0];
+        info.getElementsByClassName(textStyles.orderDiscount)[0].innerHTML = `- ${newBillInfo.total_discount} ₽`;
+        info.getElementsByClassName(orderStyles.totalPriceBlock)[0].
+            getElementsByTagName('span')[1].innerHTML = `${newBillInfo.total_cost} ₽`;
+        const promoStatus = document.getElementById('promo-status');
+        promoStatus.className = orderStyles.promoStatusSuccess;
+        promoStatus.innerHTML = 'Промокод был успешно применён!';
+    }
+
+    drawIncorrectPromo = () => {
+        const promoStatus = document.getElementById('promo-status');
+        promoStatus.className = orderStyles.promoStatusFailure;
+        promoStatus.innerHTML = 'Неверный промокод!';
+    }
 }
