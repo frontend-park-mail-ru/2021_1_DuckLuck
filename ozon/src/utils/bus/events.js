@@ -81,6 +81,8 @@ const Events = {
 
     RecommendationLoad: 'recommendation-load',
     RecommendationLoaded: 'recommendation-loaded',
+
+    WebPushSubscribe: 'web-push-subscribe',
 };
 
 

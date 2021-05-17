@@ -27,6 +27,7 @@ import HeaderPresenter from './presenters/HeaderPresenter';
 import ReviewModel from './models/ReviewModel';
 import ReviewPresenter from './presenters/ReviewPresenter';
 import ReviewView from './views/ReviewView/ReviewView';
+import WebPushModel from "./models/WebPushModel";
 
 
 if ('serviceWorker' in navigator) {
@@ -52,6 +53,9 @@ const productPresenter = new ProductPresenter(application, ProductView, ProductM
 const cartPresenter = new CartPresenter(application, CartView, CartModel);
 const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
 const reviewPresenter = new ReviewPresenter(application, ReviewView, ReviewModel);
+
+// eslint-disable-next-line no-unused-vars
+const webPushModel = new WebPushModel();
 
 const header = document.getElementsByTagName('header')[0];
 const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);

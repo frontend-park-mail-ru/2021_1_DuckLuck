@@ -18,6 +18,15 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(self.clients.claim());
 });
 
+self.addEventListener('push', (e) => {
+    const data = e.data.json();
+    console.log("Push Recieved...");
+    self.registration.showNotification(data.title, {
+        body: "Notification from OZON!",
+        icon: "https://duckluckmarket.hb.bizmrg.com/svg/header/logo.svg"
+    }).catch(err => console.log(err));
+});
+
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         (async() => {

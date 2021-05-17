@@ -228,6 +228,11 @@ export class ProductsView extends BaseView {
             });
         }
         this.drawFilter();
+
+        document.getElementById('subscribe').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            Bus.globalBus.emit(Events.WebPushSubscribe);
+        });
     };
 
 
