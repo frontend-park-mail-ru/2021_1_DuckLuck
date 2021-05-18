@@ -253,6 +253,22 @@ export class ProductsView extends BaseView {
                 console.log(parsedJson);
             });
         });
+
+        document.getElementById('send-id-button').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            const id = document.getElementById('send-id-input').value;
+            console.log(id);
+
+            AjaxModule.postUsingFetch({
+                url: serverApiPath + '/admin/order/status',
+                body: {
+                    order_id: id,
+                    status: 'on the way!',
+                },
+            }).then((response) => {
+                console.log(response);
+            });
+        });
     };
 
 
