@@ -19,6 +19,7 @@ class WebPushModel extends BaseModel {
     constructor() {
         super();
         Bus.globalBus.on(Events.WebPushSubscribe, this.getPublicKey);
+        Bus.globalBus.on(Events.WebPushUnsubscribe, this.unsubscribe);
     }
     getPublicKey = () => {
         AjaxModule.getUsingFetch({
@@ -38,16 +39,22 @@ class WebPushModel extends BaseModel {
 
     async #register() {
         const register = await navigator.serviceWorker.getRegistration();
-        console.log(this.#publicKey);
         const subscription = await register.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(this.#publicKey),
         });
-        console.log(subscription);
 
         await AjaxModule.postUsingFetch({
-            url: serverApiPath + urls.notificationSubscribe,
+            url: serverApiPath + urls.notifications,
             body: subscription,
+        });
+    }
+
+    unsubscribe = () => {
+        AjaxModule.deleteUsingFetch({
+            url: serverApiPath + urls.notifications,
+        }).then((r) => {
+            console.log('Successfully unsubscribed', r);
         });
     }
 }

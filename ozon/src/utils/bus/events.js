@@ -83,6 +83,7 @@ const Events = {
     RecommendationLoaded: 'recommendation-loaded',
 
     WebPushSubscribe: 'web-push-subscribe',
+    WebPushUnsubscribe: 'web-push-unsubscribe',
 };
 
 

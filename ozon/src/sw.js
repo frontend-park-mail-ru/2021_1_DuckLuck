@@ -20,11 +20,10 @@ self.addEventListener('activate', (event) => {
 
 self.addEventListener('push', (e) => {
     const data = e.data.json();
-    console.log("Push Recieved...");
-    self.registration.showNotification(data.title, {
-        body: "Notification from OZON!",
-        icon: "https://duckluckmarket.hb.bizmrg.com/svg/header/logo.svg"
-    }).catch(err => console.log(err));
+    self.registration.showNotification('Уведомление от DuckLuck Market!', {
+        body: `Ваш заказ № ${data.order_number.number} приорбрёл новый статус: ${data.status}`,
+        icon: 'https://duckluckmarket.hb.bizmrg.com/svg/header/logo.svg',
+    });
 });
 
 self.addEventListener('fetch', (event) => {

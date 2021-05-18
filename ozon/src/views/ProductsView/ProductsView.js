@@ -231,11 +231,6 @@ export class ProductsView extends BaseView {
         }
         this.drawFilter();
 
-        document.getElementById('subscribe').addEventListener('click', (evt) => {
-            evt.preventDefault();
-            Bus.globalBus.emit(Events.WebPushSubscribe);
-        });
-
         document.getElementById('getOrders').addEventListener('click', (evt) => {
             evt.preventDefault();
             const body = {
@@ -262,7 +257,7 @@ export class ProductsView extends BaseView {
             AjaxModule.postUsingFetch({
                 url: serverApiPath + '/admin/order/status',
                 body: {
-                    order_id: id,
+                    order_id: +id,
                     status: 'on the way!',
                 },
             }).then((response) => {

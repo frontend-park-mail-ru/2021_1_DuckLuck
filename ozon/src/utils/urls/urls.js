@@ -19,5 +19,5 @@ export const urls = {
     review: '/review/product',
     reviewRights: '/review/rights/product/',
     publicKey: '/notification/key',
-    notificationSubscribe: '/notification',
+    notifications: '/notification',
 };

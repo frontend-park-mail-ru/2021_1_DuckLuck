@@ -160,6 +160,7 @@ class ProfilePresenter extends BasePresenter {
         Router.open('/', {replaceState: true});
         Bus.globalBus.emit(Events.HeaderSetCartItems, 0);
         Bus.globalBus.emit(Events.CartDrop);
+        Bus.globalBus.emit(Events.WebPushUnsubscribe);
         this.model.profileLogout();
     }
 
