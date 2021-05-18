@@ -165,6 +165,15 @@
     margin-bottom: $margin-l;
 }
 
+.promoStatusFailure {
+    font-family: $font-family;
+    color: $discount-color;
+}
+
+.promoStatusSuccess {
+    font-family: $font-family;
+    color: $dark-order-color;
+}
 @media screen and (max-width: $max-width-xl){
     .wrapper {
         flex-direction: column;

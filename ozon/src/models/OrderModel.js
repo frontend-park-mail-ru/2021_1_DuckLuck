@@ -14,6 +14,7 @@ class OrderModel extends BaseModel {
     #price
     #recipient
     #address
+    #promo
 
     /**
      *
@@ -45,6 +46,13 @@ class OrderModel extends BaseModel {
     }
 
     /**
+     * @return {string} Address of delivery
+     */
+    get promo() {
+        return this.#promo;
+    }
+
+    /**
      * @param {string} newAddress
      */
     set address(newAddress) {
@@ -58,6 +66,12 @@ class OrderModel extends BaseModel {
         this.#recipient = newRecipient;
     }
 
+    /**
+     * @param {String} newPromo
+     */
+    set promo(newPromo) {
+        this.#promo = newPromo;
+    }
 
     /**
      * @description Loads all information about order via AJAX
@@ -116,6 +130,38 @@ class OrderModel extends BaseModel {
             }
             default: {
                 console.error('error order sending');
+            }
+            }
+        });
+    }
+
+    /**
+     * @description Sends promo
+     */
+    sendPromo = () => {
+        AjaxModule.postUsingFetch({
+            url: serverApiPath + urls.promo,
+            body: {
+                products: this.products.map((product) => {
+                    return product.id;
+                }),
+                promo_code: this.promo,
+            },
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((response) => {
+            this.bus.emit(Events.PromoSent, Responses.Success, response);
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Offline: {
+                Router.open('/offline');
+                break;
+            }
+            default: {
+                this.bus.emit(Events.PromoSent, Responses.Error);
             }
             }
         });
