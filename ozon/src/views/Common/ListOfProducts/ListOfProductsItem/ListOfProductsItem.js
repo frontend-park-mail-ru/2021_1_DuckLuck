@@ -3,6 +3,7 @@ import itemStyles from './ListOfProductsItem.scss';
 import decorators from '../../../decorators.scss';
 import buttonStyles from '../../Button/Button.scss';
 import imgStyles from '../../Img/Img.scss';
+import textStyles from '../../TextArea/TextArea.scss';
 
 /**
  * @class ListOfProductsItem
@@ -24,7 +25,7 @@ export class ListOfProductsItem {
         this.itemInCart = itemInCart;
         this.itemImage = itemImage;
         this.itemName = itemName;
-        this.itemRating = itemRating;
+        this.itemRating = Math.ceil(itemRating);
         this.itemPrice = itemPrice;
         this.itemId = itemId;
         this.itemReviewsCount = itemReviewsCount;
@@ -50,6 +51,7 @@ export class ListOfProductsItem {
             decorators: decorators,
             buttonStyles: buttonStyles,
             imgStyles: imgStyles,
+            textStyles: textStyles,
         });
     }
 }

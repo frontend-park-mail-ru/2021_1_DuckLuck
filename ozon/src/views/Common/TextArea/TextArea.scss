@@ -73,3 +73,14 @@
   font-size: $font-size-m;
   color: $colored-object-color;
 }
+
+.rating {
+  @extend %text-shared;
+  font-size: $font-size-m;
+}
+
+.priceWithoutDiscount {
+  @extend %text-shared;
+  font-size: $font-size-m;
+  font-weight: $bold;
+}

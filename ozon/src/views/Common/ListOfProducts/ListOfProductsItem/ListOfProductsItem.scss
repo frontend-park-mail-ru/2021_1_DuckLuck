@@ -78,12 +78,7 @@
     display: flex;
     flex-direction: row;
     margin-top: $margin-xs;
-}
-
-.ratingCount {
-    margin-top: var(--margin-xxs);
-    font-family: var(--font);
-    font-size: var(--font-size-m);
+    gap: $gap-s;
 }
 
 .buttonText {

@@ -55,7 +55,7 @@ export class ProductView extends BaseView {
         const template = productPageTemplate({
             name: this.presenter.item['name'],
             price: this.presenter.item['price'],
-            rating: this.presenter.item['rating'],
+            rating: Math.ceil(this.presenter.item['rating']),
             images: images,
             description: this.presenter.item['description']['descriptionText'],
             category: this.presenter.item['description']['category'],
