@@ -14,7 +14,7 @@ import decorators from '../decorators.scss';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import {Pagination} from '../Common/Pagination/Pagination';
-import {Slider} from '../Common/Slider/Slider';
+// import {Slider} from '../Common/Slider/Slider';
 import {ListOfProductsItem} from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem';
 
 
@@ -244,9 +244,9 @@ export class ProductView extends BaseView {
                 type: 'recommendations',
             }).getHtmlString());
         });
-        const slider = new Slider(items);
-        const recommendationsBlock = document.getElementById('recommendations');
-        recommendationsBlock.appendChild(slider.render());
-        slider.checkOverflow();
+        // const slider = new Slider(items);
+        // const recommendationsBlock = document.getElementById('recommendations');
+        // recommendationsBlock.appendChild(slider.render());
+        // slider.checkOverflow();
     }
 }
