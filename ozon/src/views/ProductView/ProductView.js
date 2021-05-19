@@ -66,7 +66,7 @@ export class ProductView extends BaseView {
             imgStyles: imgStyles,
             linkStyles: linkStyles,
             decorators: decorators,
-            category_path: this.presenter.item.category_path.reverse(),
+            category_path: this.presenter.item.category_path,
             select: [
                 {
                     key: 'date',
