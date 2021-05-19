@@ -131,7 +131,7 @@ $colors: (
     @extend %button-shared;
 }
 
-.catalog, .search, .auth, .review, .filterSubmit {
+.catalog, .auth, .review, .filterSubmit {
     @extend %button-shared;
     @extend %main-color;
 }
@@ -196,4 +196,10 @@ $colors: (
     img {
         filter: invert(100%);
     }
+}
+
+.search {
+    @extend %button-shared;
+    @extend %main-color;
+    border-radius: 1px;
 }

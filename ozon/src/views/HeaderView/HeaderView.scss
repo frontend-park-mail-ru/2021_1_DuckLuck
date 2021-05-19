@@ -179,6 +179,11 @@
     background-color: $discount-color;
 }
 
+.searchAreaPointerCsv {
+    margin-top: 5px;
+}
+
+
 @media screen and (max-width: $max-width-xxl) {
     .body {
         width: 100%;
@@ -194,6 +199,7 @@
 
     .logoBlock {
         order: -2;
+        margin: 0;
     }
 
     .menu {
