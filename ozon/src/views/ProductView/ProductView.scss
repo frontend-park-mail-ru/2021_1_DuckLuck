@@ -160,6 +160,12 @@
     margin: auto;
 }
 
+.linkWrapper {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 @media screen and (max-width: $max-width-xl) {
     .block {
         width: 100%;

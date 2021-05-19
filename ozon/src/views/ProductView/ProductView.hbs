@@ -1,7 +1,9 @@
 <div class="{{productStyles.block}}">
     <div class="{{productStyles.categoriesBlock}}">
         {{#each category_path}}
-            <a class="{{../linkStyles.link}}" category_id="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
+            <div class="{{../productStyles.linkWrapper}}">
+                <a class="{{../linkStyles.link}}" category_id="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
+            </div>
             <span> ></span>
         {{/each}}
     </div>
