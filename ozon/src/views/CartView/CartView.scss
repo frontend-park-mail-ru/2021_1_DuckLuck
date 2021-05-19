@@ -240,6 +240,10 @@
     .orderButtonWrapper {
         order: 2;
     }
+
+    .cartWrapper {
+        padding-bottom: $padding-xxl;
+    }
 }
 
 @media screen and (max-width: $max-width-l){
