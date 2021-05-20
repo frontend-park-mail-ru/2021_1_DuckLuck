@@ -46,7 +46,7 @@ export class ProductsView extends BaseView {
             this.presenter.changeSortDirection('ASC');
         }
 
-        if (Object.keys(URLParams).length) {
+        if (Object.keys(URLParams).length > 1) {
             this.presenter.changeSortKey(URLParams.sortKey);
             this.presenter.changeSortDirection(URLParams.sortDirection);
             this.presenter.setFilter(URLParams);
