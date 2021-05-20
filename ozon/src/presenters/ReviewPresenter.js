@@ -16,7 +16,7 @@ class ReviewPresenter extends BasePresenter {
         super(application, View, Model);
         Bus.globalBus.on(Events.ReviewRightsLoad, this.loadReviewRights);
         this.bus.on(Events.ReviewRightsLoaded, this.reviewRightsLoadedReaction);
-        this.bus.on(Events.SendOrder, this.sendReview);
+        this.bus.on(Events.ReviewOrder, this.sendReview);
 
         Bus.globalBus.on(Events.ReviewUserDataLoaded, this.reviewUserDataLoaded);
         Bus.globalBus.on(Events.ReviewProductDataLoaded, this.reviewProductDataLoaded);
