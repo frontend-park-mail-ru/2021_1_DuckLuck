@@ -28,6 +28,8 @@ export class OrderView extends BaseView {
     }
 
     render = () => {
+        this.goUp();
+
         this.parent.innerHTML = '';
         const template = orderTemplate({
             productsList: this.presenter.products,

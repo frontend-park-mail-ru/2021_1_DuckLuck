@@ -90,6 +90,8 @@ export class ProductsView extends BaseView {
     }
 
     render = () => {
+        this.goUp();
+
         this.parent.innerHTML = '';
         const productsListHtmlString = new ListOfProducts(this.presenter.products, 'products').getHtmlString();
         const pagination = new Pagination(this.presenter.paginationInfo).getHtmlString();
