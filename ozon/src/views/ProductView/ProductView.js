@@ -44,6 +44,8 @@ export class ProductView extends BaseView {
      *
      */
     render = () => {
+        this.goUp();
+
         this.parent.innerHTML = '';
         const images = [];
         this.presenter.item['images'].forEach((src) => {

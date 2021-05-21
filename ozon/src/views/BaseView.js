@@ -157,6 +157,13 @@ export class BaseView {
     }
 
     /**
+     * @description Raising the user to the top
+     */
+    goUp = () => {
+        window.scrollTo(0, 0);
+    }
+
+    /**
      * Render from template
      */
     render = () => {
