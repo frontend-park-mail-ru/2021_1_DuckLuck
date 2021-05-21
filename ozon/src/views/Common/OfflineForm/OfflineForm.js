@@ -1,5 +1,6 @@
 import offlineFormTemplate from './OfflineForm.hbs';
 import offlineFormStyles from './OfflineForm.scss';
+import imageStyles from '../Img/Img.scss';
 
 
 /**
@@ -22,6 +23,7 @@ export class OfflineForm {
         return offlineFormTemplate({
             formType: this.objectType,
             styles: offlineFormStyles,
+            imageStyles: imageStyles,
         });
     };
 }
