@@ -1,4 +1,5 @@
 import popupTemplate from './Popup.hbs';
+import popupStyles from './Popup.scss';
 
 /**
  * @class Popup
@@ -20,6 +21,6 @@ export class Popup {
      * @return {string} generated HTML after templating
      */
     getHtmlString = ({popupBody, background, popupType}) => {
-        return popupTemplate({popupBody, background, popupType});
+        return popupTemplate({popupBody, background, popupType, popupStyles});
     };
 }

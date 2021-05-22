@@ -1,5 +1,5 @@
 import {AjaxModule} from '../modules/Ajax/Ajax';
-import {serverApiPath, urls} from '../utils/urls/urls';
+import {fileServerHost, serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
@@ -12,6 +12,7 @@ import HTTPResponses from '../utils/http-responses/httpResponses';
 class CartModel extends BaseModel {
     #ids
     #products
+    #price
     #needsRerender;
     #lastAddedProductID
 
@@ -23,10 +24,24 @@ class CartModel extends BaseModel {
     }
 
     /**
+     * @return {Object} price
+     */
+    get price() {
+        return this.#price;
+    }
+
+    /**
      * @return {number} ID of last added product (for authentication and future adding)
      */
     get lastAddedProduct() {
         return this.#lastAddedProductID;
+    }
+
+    /**
+     * @param {number|undefined} newProduct
+     */
+    set lastAddedProduct(newProduct) {
+        this.#lastAddedProductID = newProduct;
     }
 
     /**
@@ -58,8 +73,6 @@ class CartModel extends BaseModel {
      * @param {number | string} count amount of product
      */
     addProduct(id, count) {
-        this.#lastAddedProductID = id;
-
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id,
@@ -73,10 +86,16 @@ class CartModel extends BaseModel {
         }).then(() => {
             Bus.globalBus.emit(Events.HeaderChangeCartItems, 1);
             Bus.globalBus.emit(Events.ProductsItemAdded, id);
+            Bus.globalBus.emit(Events.ProductItemAdded, id);
+            (this.#products = this.products || []).push({
+                count: 1,
+                id: id,
+            });
             this.#ids.add(+id);
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
+                this.#lastAddedProductID = id;
                 this.bus.emit(Events.CartProductAdded, Responses.Unauthorized);
                 break;
             }
@@ -126,10 +145,11 @@ class CartModel extends BaseModel {
      */
     changeCartCounter = (itemID, count) => {
         for (const product of this.#products) {
-            if (product.id === +itemID) {
+            if (+product.id === +itemID) {
                 const diff = +count - this.#products[this.#products.indexOf(product)].count;
                 this.#products[this.#products.indexOf(product)].count = +count;
                 Bus.globalBus.emit(Events.HeaderChangeCartItems, diff);
+                break;
             }
         }
     }
@@ -152,7 +172,7 @@ class CartModel extends BaseModel {
                 count: +count},
         }).then((response) => {
             return response.json();
-        }).then((parsedJson) => {
+        }).then(() => {
             this.#needsRerender = true;
         }).catch((err) => {
             console.error(err);
@@ -163,7 +183,15 @@ class CartModel extends BaseModel {
      * @param {number} id id of removed product
      */
     removeProduct = (id) => {
+        if (!(this.#ids.has(+id))) {
+            return;
+        }
         this.changeCartCounter(id, 0);
+        this.#ids.delete(+id);
+        Bus.globalBus.emit(Events.CartProductRemoved, Responses.Success, id);
+        Bus.globalBus.emit(Events.ProductsItemNotAdded, id);
+        Bus.globalBus.emit(Events.ProductItemNotAdded, id);
+        this.products.splice(this.products.findIndex((elem) => +elem.id === +id), 1);
 
         AjaxModule.deleteUsingFetch({
             url: serverApiPath + urls.cartProduct,
@@ -172,9 +200,6 @@ class CartModel extends BaseModel {
             if (response.status !== HTTPResponses.Success) {
                 throw response.status;
             }
-            this.#needsRerender = true;
-            this.#ids.delete(id);
-            Bus.globalBus.emit(Events.CartProductRemoved, Responses.Success);
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Offline: {
@@ -202,9 +227,13 @@ class CartModel extends BaseModel {
         }).then((parsedJson) => {
             this.#needsRerender = false;
             this.#products = parsedJson.products || [];
+            this.#price = parsedJson.price;
             this.#ids = new Set(this.#products.map((elem) => {
                 return elem.id;
             }) || []);
+            for (const product of this.#products) {
+                product.preview_image = fileServerHost + product.preview_image;
+            }
             this.bus.emit(Events.CartLoaded, Responses.Success);
         }).catch((err) => {
             switch (err) {
@@ -245,6 +274,16 @@ class CartModel extends BaseModel {
         }).catch((err) => {
             this.bus.emit(Events.CartLoadedProductsAmountReaction, 0);
         });
+    }
+
+    /**
+     * @param {number|string} productID
+     * @return {boolean}
+     */
+    isCartContains = (productID) => {
+        return this.products.find((elem) => {
+            return +elem.id === +productID;
+        }) !== undefined;
     }
 }
 

@@ -1,4 +1,4 @@
-import {isValidForm} from '../modules/Valiadtor/validator.js';
+import {isValidInputs} from '../modules/Valiadtor/validator.js';
 import {Bus} from '../utils/bus/bus';
 
 /**
@@ -79,11 +79,11 @@ class BasePresenter {
     /**
      *
      * @param {Object} specificTypeToCheck
-     * @return {boolean}
+     * @return {Object} contains array of invalid fields
      */
-    isFormValid(specificTypeToCheck = []) {
-        const form = this.#view.cache.getElementsByTagName('form')[0];
-        return isValidForm(form, specificTypeToCheck);
+    isInputsValid(specificTypeToCheck = []) {
+        const inputs = this.#view.cache.getElementsByTagName('form')[0].getElementsByTagName('input');
+        return isValidInputs(inputs, specificTypeToCheck);
     }
 }
 

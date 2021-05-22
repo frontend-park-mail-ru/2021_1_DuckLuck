@@ -1,15 +1,27 @@
 <div class="{{productsStyles.block}}">
-    <div class="{{productsStyles.body}}">
-        <select class="{{productsStyles.select}}">
-            {{#each select}}
-                <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
-                    {{this.name}}
-                </option>
-            {{/each}}
-        </select>
-        <div class="{{productsStyles.listWrapper}}">{{{productsList}}}</div>
+    <div class="{{productsStyles.contentWrapper}}">
+        {{{filter}}}
+        <div class="{{productsStyles.body}}">
+            <select class="{{productsStyles.select}}">
+                {{#each select}}
+                    <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
+                        {{this.name}}
+                    </option>
+                {{/each}}
+            </select>
+
+            <div class="{{productsStyles.listWrapper}}">{{{productsList}}}</div>
+            {{#ifEquals this.isEmpty false}}
+                <div class="{{productsStyles.footer}}">
+                    {{{pagination}}}
+                </div>
+            {{/ifEquals}}
+        </div>
     </div>
-    <div class="{{productsStyles.footer}}">
-        {{{pagination}}}
-    </div>
+    {{#ifEquals this.isEmpty true}}
+        <div class="{{productsStyles.emptyText}}">
+            <span class="{{textStyles.title}}">Не найдено ни одного товара</span>
+            <a class="{{textStyles.title}}" href="">Вернуться на главную</a>
+        </div>
+    {{/ifEquals}}
 </div>

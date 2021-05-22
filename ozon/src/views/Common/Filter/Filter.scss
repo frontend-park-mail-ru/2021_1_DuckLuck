@@ -1,0 +1,48 @@
+@import '../../../constants';
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-xs;
+  width: 15%;
+  max-width: 180px;
+}
+
+.button {
+  display: flex;
+  height: $height-xxxxs;
+}
+
+.buttonText {
+  margin: auto;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.input {
+  width: 50%;
+}
+
+.drop {
+  height: $height-xxxs;
+}
+
+.incorrectFilterLabel {
+  font-family: var(--font);
+  font-size: var(--font-size-s);
+  color: var(--discout-color);
+}
+
+@media screen and (max-width: $max-width-xl) {
+  .menu {
+    position: unset;
+    width: 100%;
+    max-width: none;
+    margin: auto;
+  }
+
+}

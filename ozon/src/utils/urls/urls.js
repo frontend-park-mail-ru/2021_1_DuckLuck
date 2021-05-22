@@ -17,4 +17,7 @@ export const urls = {
     order: '/order',
     orders: '/user/order',
     sessionUrl: '/session',
+    review: '/review/product',
+    reviewRights: '/review/rights/product/',
+    promo: '/promo',
 };

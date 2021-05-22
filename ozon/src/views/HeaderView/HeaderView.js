@@ -1,9 +1,11 @@
 import {BaseView} from '../BaseView.js';
-import headerStyles from './HeaderView.css';
-import buttonStyles from '../Common/Button/Button.css';
-import imgStyles from '../Common/Img/Img.css';
-import inputStyles from '../Common/Input/Input.css';
-import decorators from '../decorators.css';
+import headerStyles from './HeaderView.scss';
+import buttonStyles from '../Common/Button/Button.scss';
+import imgStyles from '../Common/Img/Img.scss';
+import inputStyles from '../Common/Input/Input.scss';
+import textStyles from '../Common/TextArea/TextArea.scss';
+import linkStyles from '../Common/Link/Link.scss';
+import decorators from '../decorators.scss';
 import headerTemplate from './HeaderView.hbs';
 import {staticServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
@@ -19,7 +21,10 @@ import {Bus} from '../../utils/bus/bus';
  * @classdesc Class for Header page
  */
 export class HeaderView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = {}) => {
         this.bus.emit(Events.HeaderLoad, this.ID);
     }
 
@@ -55,7 +60,7 @@ export class HeaderView extends BaseView {
                 href: '/cart',
                 name: 'cart',
                 additionalSpan: true,
-                additionalSpanClass: headerStyles.cartItemsCounter,
+                additionalSpanClass: headerStyles.menuItemCounter,
             },
         ];
         const catalog = {
@@ -91,6 +96,8 @@ export class HeaderView extends BaseView {
             imgStyles: imgStyles,
             inputStyles: inputStyles,
             buttonStyles: buttonStyles,
+            linkStyles: linkStyles,
+            textStyles: textStyles,
             decorators: decorators,
         });
 
@@ -99,13 +106,14 @@ export class HeaderView extends BaseView {
 
         const logoButton = this.cache.getElementsByClassName(headerStyles.logoBlock)[0];
         logoButton.addEventListener('click', () => {
-            Router.open('/');
+            this.dropSearchInput();
+            Router.open('/', {dropFilter: true, dropSort: true});
         });
 
         const catalogBlock = this.cache.getElementsByClassName(headerStyles.catalogBlock)[0];
         const catalogList = this.cache.getElementsByClassName(headerStyles.catalogList)[0];
         catalogBlock.addEventListener('click', () => {
-            const images = Array.from(catalogBlock.getElementsByClassName(imgStyles.menuImgL));
+            const images = Array.from(catalogBlock.getElementsByClassName(imgStyles.headerMenu));
             if (images[0].classList.contains(decorators.hidden)) {
                 images[0].classList.remove(decorators.hidden);
                 images[1].classList.add(decorators.hidden);
@@ -121,19 +129,28 @@ export class HeaderView extends BaseView {
             if (evt.target.hasAttribute('category')) {
                 const categoryId = parseInt(evt.target.getAttribute('category'));
                 catalogBlock.dispatchEvent(new Event('click'));
-                Router.open(`/items/${categoryId}`);
+                this.dropSearchInput();
+                Router.open(`/items/${categoryId}`, {dropFilter: true, dropSort: true});
             }
         });
 
         const menuItems = Array.from(this.cache.getElementsByClassName(headerStyles.menuItem));
         menuItems.forEach((menuItem) => {
-            menuItem.addEventListener('click', () => {
+            menuItem.addEventListener('click', (event) => {
+                event.preventDefault();
                 const href = menuItem.getAttribute('href');
                 Router.open(href);
             });
         });
 
-        const catalogListCategories = this.cache.getElementsByClassName(headerStyles.category);
+        const searchForm = this.cache.getElementsByClassName(headerStyles.searchForm)[0];
+        searchForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+            const searchInput = this.cache.getElementsByClassName(inputStyles.search)[0];
+            Router.open('/search/1/', {dropFilter: true, dropSort: true}, {text: searchInput.value});
+        });
+
+        const catalogListCategories = this.cache.getElementsByClassName(linkStyles.catalogCategory);
         const catalogListSubcategories = Array.from(
             this.cache.getElementsByClassName(headerStyles.catalogListSubcategories),
         );
@@ -165,12 +182,15 @@ export class HeaderView extends BaseView {
         }
     }
 
+    dropSearchInput = () => {
+        document.getElementsByClassName(inputStyles.search)[0].value = '';
+    }
 
     /**
      * @param {number} value
      */
     changeCartItems = (value) => {
-        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[0];
         const newCounterAmount = +counter.innerHTML + value;
         counter.innerHTML = newCounterAmount.toString();
         counter.hidden = !newCounterAmount;
@@ -181,7 +201,7 @@ export class HeaderView extends BaseView {
      * @description sets items amount in cart to 0
      */
     setCartItems = (value) => {
-        const counter = document.getElementsByClassName(headerStyles.cartItemsCounter)[0];
+        const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[0];
         counter.innerHTML = value.toString();
         counter.hidden = !value;
     }

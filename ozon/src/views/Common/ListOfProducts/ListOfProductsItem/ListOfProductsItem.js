@@ -1,6 +1,8 @@
 import listOFProductsItemTemplate from './ListOfProductsItem.hbs';
-import itemStyles from './ListOfProductsItem.css';
-import decorators from '../../../decorators.css';
+import itemStyles from './ListOfProductsItem.scss';
+import decorators from '../../../decorators.scss';
+import buttonStyles from '../../Button/Button.scss';
+import imgStyles from '../../Img/Img.scss';
 
 /**
  * @class ListOfProductsItem
@@ -11,16 +13,22 @@ export class ListOfProductsItem {
      * @param {Object} Image of a product
      * @param {string} itemName
      * @param {number} itemRating
+     * @param {Boolean} itemInCart
      * @param {Object} itemPrice
+     * @param {Number} itemId
+     * @param {Number} itemReviewsCount
+     * @param {String} type
      */
-    constructor({itemImage, itemInCart = false, itemName = '', itemRating = 0,
-        itemPrice= {discountPrice: '', base: '', discount: ''}, itemId=0} = {}) {
+    constructor({itemImage, itemInCart = false, itemName = '', itemRating = 0, itemReviewsCount = 0,
+        itemPrice= {discountPrice: '', base: '', discount: ''}, itemId=0, type='products'} = {}) {
         this.itemInCart = itemInCart;
         this.itemImage = itemImage;
         this.itemName = itemName;
         this.itemRating = itemRating;
         this.itemPrice = itemPrice;
         this.itemId = itemId;
+        this.itemReviewsCount = itemReviewsCount;
+        this.type = type;
     }
 
 
@@ -35,9 +43,13 @@ export class ListOfProductsItem {
             itemImage: this.itemImage,
             itemName: this.itemName,
             itemRating: this.itemRating,
+            itemReviewsCount: this.itemReviewsCount,
             itemPrice: this.itemPrice,
+            type: this.type,
             itemStyles: itemStyles,
             decorators: decorators,
+            buttonStyles: buttonStyles,
+            imgStyles: imgStyles,
         });
     }
 }

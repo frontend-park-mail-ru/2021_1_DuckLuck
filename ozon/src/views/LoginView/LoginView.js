@@ -5,10 +5,13 @@ import {Link} from '../Common/Link/Link.js';
 import {Popup} from '../Common/Popup/Popup.js';
 import {Blind} from '../Common/Blind/Blind.js';
 import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
-import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.css';
+import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.scss';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
-import decorator from '../decorators.css';
+import decorator from '../decorators.scss';
+import buttonStyles from '../Common/Button/Button.scss';
+import popupStyles from '../Common/Popup/Popup.scss';
+import linkStyles from '../Common/Link/Link.scss';
 
 /**
  * @class LoginView
@@ -65,20 +68,20 @@ export class LoginView extends BaseView {
                     styles: AuthenticationFormStyles,
                 }),
             background: new Blind().getHtmlString(),
-            popupType: 'login',
+            popupType: popupStyles.login,
         });
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
+        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup');
+        this.parent.appendChild(this.cache);
 
-
-        this.cache.getElementsByClassName('blind')[0]
+        document.getElementById('blind')
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
                 body.classList.remove(decorator.noScroll);
-                this.remove();
-                Router.return();
+                document.getElementById('popup').remove();
+                Router.goBack();
             });
 
-        const form = this.cache.getElementsByClassName(AuthenticationFormStyles.button)[0];
+        const form = this.cache.getElementsByClassName(buttonStyles.auth)[0];
         form.addEventListener('click', (evt) => {
             body.classList.remove(decorator.noScroll);
             evt.preventDefault();
@@ -86,23 +89,12 @@ export class LoginView extends BaseView {
         });
 
 
-        this.cache.getElementsByClassName(AuthenticationFormStyles.signup)[0]
+        this.cache.getElementsByClassName(linkStyles.link)[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
                 body.classList.remove(decorator.noScroll);
-                this.remove();
+                document.getElementById('popup').remove();
                 Router.open('/signup', {replaceState: true});
             });
-
-
-        this.parent.appendChild(this.cache);
-    }
-
-    invalidForm = () => {
-        for (const input of this.cache.getElementsByTagName('input')) {
-            input.value = '';
-            input.placeholder = 'Некорректные данные';
-            input.style['border-color'] = '#ff726f';
-        }
     }
 }

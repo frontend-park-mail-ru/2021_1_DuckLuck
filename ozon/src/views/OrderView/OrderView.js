@@ -2,13 +2,17 @@ import {BaseView} from '../BaseView.js';
 import Events from '../../utils/bus/events';
 import orderTemplate from './OrderView.hbs';
 import noticeTemplate from './OrderNotice.hbs';
-import noticeStyles from './OrderNotice.css';
+import noticeStyles from './OrderNotice.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
 import {Input} from '../Common/Input/Input';
-import orderStyles from './OrderView.css';
+import orderStyles from './OrderView.scss';
+import buttonStyles from './../Common/Button/Button.scss';
+import popupStyles from './../Common/Popup/Popup.scss';
+import linkStyles from './../Common/Link/Link.scss';
 import Router from '../../utils/router/Router';
 import {Popup} from '../Common/Popup/Popup';
 import {Blind} from '../Common/Blind/Blind';
-import decorator from '../decorators.css';
+import decorators from '../decorators.scss';
 
 /**
  * @class ProductsView
@@ -16,7 +20,10 @@ import decorator from '../decorators.css';
  * @classdesc Class for showing product
  */
 export class OrderView extends BaseView {
-    show = () => {
+    /**
+     * @param {Object} URLParams
+     */
+    show = (URLParams = {}) => {
         this.bus.emit(Events.OrderLoad);
     }
 
@@ -34,6 +41,10 @@ export class OrderView extends BaseView {
                 value: this.presenter.address}),
             ],
             orderStyles: orderStyles,
+            buttonStyles: buttonStyles,
+            textStyles: textStyles,
+            linkStyles: linkStyles,
+            decorators: decorators,
             cartSize: this.presenter.products.length,
             baseCost: +this.presenter.price.total_base_cost,
             discount: +this.presenter.price.total_discount,
@@ -42,26 +53,50 @@ export class OrderView extends BaseView {
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
 
-        this.cache.getElementsByClassName(orderStyles.orderButton)[0].addEventListener('click', (evt) => {
+        document.getElementById('promo-btn').addEventListener('click', () => {
+            this.bus.emit(Events.SendPromo);
+        });
+
+        this.cache.getElementsByClassName(buttonStyles.order)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
             this.bus.emit(Events.SendOrder);
             const notice = new DOMParser().parseFromString(new Popup().getHtmlString({
                 popupBody: noticeTemplate({
                     styles: noticeStyles,
+                    textStyles: textStyles,
                 }),
                 background: new Blind().getHtmlString(),
-                popupType: 'signup',
-            }), 'text/html').getElementById('popup-wrapper');
+                popupType: popupStyles.order,
+            }), 'text/html').getElementById('popup');
             const body = document.getElementsByTagName('body')[0];
-            body.classList.add(decorator.noScroll);
+            body.classList.add(decorators.noScroll);
             this.parent.appendChild(notice);
-            notice.getElementsByClassName('blind')[0]
+            document.getElementById('blind')
                 .addEventListener('click', (evt) => {
                     evt.preventDefault();
-                    body.classList.remove(decorator.noScroll);
-                    this.remove();
+                    body.classList.remove(decorators.noScroll);
+                    document.getElementById('popup').remove();
                     Router.open('/', {replaceState: true});
                 });
         });
     };
+
+    /**
+     * @param {Object} newBillInfo
+     */
+    drawNewBill = (newBillInfo) => {
+        const info = document.getElementsByClassName(orderStyles.orderInfo)[0];
+        info.getElementsByClassName(textStyles.orderDiscount)[0].innerHTML = `- ${newBillInfo.total_discount} ₽`;
+        info.getElementsByClassName(orderStyles.totalPriceBlock)[0].
+            getElementsByTagName('span')[1].innerHTML = `${newBillInfo.total_cost} ₽`;
+        const promoStatus = document.getElementById('promo-status');
+        promoStatus.className = orderStyles.promoStatusSuccess;
+        promoStatus.innerHTML = 'Промокод был успешно применён!';
+    }
+
+    drawIncorrectPromo = () => {
+        const promoStatus = document.getElementById('promo-status');
+        promoStatus.className = orderStyles.promoStatusFailure;
+        promoStatus.innerHTML = 'Неверный промокод!';
+    }
 }

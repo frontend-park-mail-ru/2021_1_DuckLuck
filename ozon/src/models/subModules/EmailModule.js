@@ -16,6 +16,7 @@ class EmailModule extends BaseModel {
      */
     set email(newEmail) {
         this.#email = newEmail;
+        window.localStorage.setItem('email', newEmail);
     }
     /**
      *
