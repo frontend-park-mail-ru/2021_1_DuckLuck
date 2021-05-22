@@ -127,6 +127,7 @@ export class ProductView extends BaseView {
 
         Bus.globalBus.emit(Events.ChangeReviewProductId, this.IDs['productID']);
         Bus.globalBus.emit(Events.ReviewRightsLoad);
+        this.bus.emit(Events.ProductStarsCounterLoad);
     }
 
     setProductAdded = () => {
@@ -248,5 +249,10 @@ export class ProductView extends BaseView {
         const recommendationsBlock = document.getElementById('recommendations');
         recommendationsBlock.appendChild(slider.render());
         slider.checkOverflow();
+    }
+
+    renderStarsCounter = () => {
+        console.log(this.presenter.item);
+        console.log(this.presenter.item.stars);
     }
 }
