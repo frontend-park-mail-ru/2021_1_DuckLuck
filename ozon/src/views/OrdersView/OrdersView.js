@@ -1,11 +1,11 @@
 import {BaseView} from '../BaseView.js';
 import Events from '../../utils/bus/events';
 import ordersTemplate from './OrdersView.hbs';
-import ordersStyles from './OrdersView.css';
+import ordersStyles from './OrdersView.scss';
 import {Pagination} from '../Common/Pagination/Pagination';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
-import paginatorStyles from '../Common/Pagination/Pagination.css';
+import paginatorStyles from '../Common/Pagination/Pagination.scss';
 
 
 /**
