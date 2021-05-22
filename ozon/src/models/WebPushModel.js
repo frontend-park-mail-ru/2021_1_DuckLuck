@@ -18,10 +18,11 @@ class WebPushModel extends BaseModel {
      */
     constructor() {
         super();
-        Bus.globalBus.on(Events.WebPushSubscribe, this.getPublicKey);
+        Bus.globalBus.on(Events.WebPushSubscribe, this.register);
         Bus.globalBus.on(Events.WebPushUnsubscribe, this.unsubscribe);
     }
-    getPublicKey = () => {
+
+    register = () => {
         AjaxModule.getUsingFetch({
             url: serverApiPath + urls.publicKey,
         }).then((response) => {
@@ -31,30 +32,62 @@ class WebPushModel extends BaseModel {
             return response.json();
         }).then((response) => {
             this.#publicKey = response.key;
-            this.#register();
+            this.registerSendRequest();
         }).catch((err) => {
             console.error(err);
         });
     }
 
-    async #register() {
+    unsubscribe = () => {
+        if (this.#publicKey) {
+            this.unsubscribeSendRequest();
+            return;
+        }
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + urls.publicKey,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((response) => {
+            this.#publicKey = response.key;
+            this.unsubscribeSendRequest();
+        }).catch((err) => {
+            console.error(err);
+        });
+    }
+
+    async registerSendRequest() {
+        const register = await navigator.serviceWorker.getRegistration();
+        const subscription = await register.pushManager.subscribe({
+            userVisibleOnly: true,
+            applicationServerKey: urlBase64ToUint8Array(this.#publicKey),
+        });
+        console.log(subscription);
+
+        console.log('ok');
+        await AjaxModule.postUsingFetch({
+            url: serverApiPath + urls.notifications,
+            body: subscription,
+        }).then(resp => console.log(resp));
+    }
+
+    async unsubscribeSendRequest() {
         const register = await navigator.serviceWorker.getRegistration();
         const subscription = await register.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(this.#publicKey),
         });
 
-        await AjaxModule.postUsingFetch({
+        await AjaxModule.deleteUsingFetch({
             url: serverApiPath + urls.notifications,
             body: subscription,
-        });
-    }
-
-    unsubscribe = () => {
-        AjaxModule.deleteUsingFetch({
-            url: serverApiPath + urls.notifications,
-        }).then((r) => {
-            console.log('Successfully unsubscribed', r);
+        }).then((_) => {
+            Bus.globalBus.emit(Events.ProfileLogout);
+        }).catch((err) => {
+            console.error(err);
+            Bus.globalBus.emit(Events.ProfileLogout);
         });
     }
 }

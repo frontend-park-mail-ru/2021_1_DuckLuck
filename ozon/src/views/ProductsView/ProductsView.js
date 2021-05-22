@@ -264,6 +264,17 @@ export class ProductsView extends BaseView {
                 console.log(response);
             });
         });
+
+        document.getElementById('subscribe').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            Bus.globalBus.emit(Events.WebPushSubscribe);
+        });
+
+        document.getElementById('unsubscribe').addEventListener('click', (evt) => {
+            evt.preventDefault();
+            Bus.globalBus.emit(Events.WebPushUnsubscribe);
+        });
+
     };
 
 
