@@ -64,8 +64,9 @@ class CartModel extends BaseModel {
      *
      * @param {number} id id of product
      * @param {number | string} count amount of product
+     * @param {Events} callbackEvent
      */
-    addProduct(id, count) {
+    addProduct(id, count, callbackEvent) {
         this.#lastAddedProductID = id;
 
         AjaxModule.postUsingFetch({
@@ -80,8 +81,7 @@ class CartModel extends BaseModel {
             return response.json();
         }).then(() => {
             Bus.globalBus.emit(Events.HeaderChangeCartItems, 1);
-            Bus.globalBus.emit(Events.ProductsItemAdded, id);
-            Bus.globalBus.emit(Events.ProductItemAdded, id);
+            Bus.globalBus.emit(callbackEvent, id);
             (this.#products = this.products || []).push({
                 count: 1,
                 id: id,
@@ -175,16 +175,16 @@ class CartModel extends BaseModel {
 
     /**
      * @param {number} id id of removed product
+     * @param {Events} callbackEvent
      */
-    removeProduct = (id) => {
+    removeProduct = (id, callbackEvent) => {
         if (!(this.#ids.has(+id))) {
             return;
         }
         this.changeCartCounter(id, 0);
         this.#ids.delete(+id);
         Bus.globalBus.emit(Events.CartProductRemoved, Responses.Success, id);
-        Bus.globalBus.emit(Events.ProductsItemNotAdded, id);
-        Bus.globalBus.emit(Events.ProductItemNotAdded, id);
+        Bus.globalBus.emit(callbackEvent, id);
         this.products.splice(this.products.findIndex((elem) => +elem.id === +id), 1);
 
         AjaxModule.deleteUsingFetch({

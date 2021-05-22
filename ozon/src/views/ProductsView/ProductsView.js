@@ -179,12 +179,12 @@ export class ProductsView extends BaseView {
 
             item.addEventListener('click', (evt) => {
                 evt.preventDefault();
-                Bus.globalBus.emit(Events.CartAddProduct, productID, 1);
+                Bus.globalBus.emit(Events.CartAddProduct, productID, 1, Events.ProductsItemAdded);
             });
         }
 
         this.parent.appendChild(this.cache);
-        Bus.globalBus.emit(Events.CartGetProductsID);
+        Bus.globalBus.emit(Events.CartGetProductsID, Events.ProductsCartLoadedProductsID);
 
         document.getElementById('filtration_form').addEventListener('submit', (event) => {
             event.preventDefault();
@@ -262,7 +262,7 @@ export class ProductsView extends BaseView {
         const newButton = button.cloneNode(true);
         this.setButtonAddedStyle(newButton);
         newButton.addEventListener('click', () => {
-            Bus.globalBus.emit(Events.CartRemoveProduct, id);
+            Bus.globalBus.emit(Events.CartRemoveProduct, id, Events.ProductsItemNotAdded);
         });
         button.replaceWith(newButton);
     }
@@ -280,7 +280,7 @@ export class ProductsView extends BaseView {
             this.setButtonNotAddedStyle(newButton);
             newButton.addEventListener('click', () => {
                 const id = item.getAttribute('item-id');
-                Bus.globalBus.emit(Events.CartAddProduct, +item.getAttribute('item-id'), 1);
+                Bus.globalBus.emit(Events.CartAddProduct, +item.getAttribute('item-id'), 1, Events.ProductsItemAdded);
                 this.setProductAdded(+id);
             });
             button.replaceWith(newButton);
