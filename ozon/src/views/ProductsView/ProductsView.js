@@ -10,8 +10,6 @@ import {Filter} from '../Common/Filter/Filter.js';
 import {Bus} from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
-import {AjaxModule} from "../../modules/Ajax/Ajax";
-import {serverApiPath} from "../../utils/urls/urls";
 
 /**
  * @class ProductsView
@@ -230,51 +228,6 @@ export class ProductsView extends BaseView {
             });
         }
         this.drawFilter();
-
-        document.getElementById('getOrders').addEventListener('click', (evt) => {
-            evt.preventDefault();
-            const body = {
-                page_num: 1,
-                count: 3,
-                sort_key: 'date',
-                sort_direction: 'DESC',
-            };
-            AjaxModule.postUsingFetch({
-                url: serverApiPath + '/user/order',
-                body: body,
-            }).then((response) => {
-                return response.json();
-            }).then((parsedJson) => {
-                console.log(parsedJson);
-            });
-        });
-
-        document.getElementById('send-id-button').addEventListener('click', (evt) => {
-            evt.preventDefault();
-            const id = document.getElementById('send-id-input').value;
-            console.log(id);
-
-            AjaxModule.postUsingFetch({
-                url: serverApiPath + '/admin/order/status',
-                body: {
-                    order_id: +id,
-                    status: 'on the way!',
-                },
-            }).then((response) => {
-                console.log(response);
-            });
-        });
-
-        document.getElementById('subscribe').addEventListener('click', (evt) => {
-            evt.preventDefault();
-            Bus.globalBus.emit(Events.WebPushSubscribe);
-        });
-
-        document.getElementById('unsubscribe').addEventListener('click', (evt) => {
-            evt.preventDefault();
-            Bus.globalBus.emit(Events.WebPushUnsubscribe);
-        });
-
     };
 
 

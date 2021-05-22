@@ -3,8 +3,8 @@ import {serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import HTTPResponses from '../utils/http-responses/httpResponses';
 import urlBase64ToUint8Array from '../utils/urlBase64ToUint8Array/urlBase64ToUint8Array';
-import {Bus} from "../utils/bus/bus";
-import Events from "../utils/bus/events";
+import {Bus} from '../utils/bus/bus';
+import Events from '../utils/bus/events';
 
 /**
  * @description Model for Header in MVP Arch
@@ -58,21 +58,25 @@ class WebPushModel extends BaseModel {
         });
     }
 
+    /**
+     * @return {Promise<void>}
+     */
     async registerSendRequest() {
         const register = await navigator.serviceWorker.getRegistration();
         const subscription = await register.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: urlBase64ToUint8Array(this.#publicKey),
         });
-        console.log(subscription);
 
-        console.log('ok');
         await AjaxModule.postUsingFetch({
             url: serverApiPath + urls.notifications,
             body: subscription,
-        }).then(resp => console.log(resp));
+        });
     }
 
+    /**
+     * @return {Promise<void>}
+     */
     async unsubscribeSendRequest() {
         const register = await navigator.serviceWorker.getRegistration();
         const subscription = await register.pushManager.subscribe({
