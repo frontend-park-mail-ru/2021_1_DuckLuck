@@ -228,6 +228,9 @@ export class ProductsView extends BaseView {
             });
         }
         this.drawFilter();
+        if (this.IDs['category'] !== undefined && this.IDs['category'] !== 1 && !this.IDs['searchText']) {
+            this.bus.emit(Events.ProductsLoadSubCategories, this.IDs['category']);
+        }
     };
 
 
@@ -327,6 +330,9 @@ export class ProductsView extends BaseView {
         for (const input of form.getElementsByTagName('input')) {
             input.type === 'checkbox' ? input.checked = false : input.value = '';
         }
+
+        document.getElementById('filter_sub_categories_info').innerHTML = '';
+        document.getElementById('filter_sub_categories_list').innerHTML = '';
     }
 
     dropSort = () => {
@@ -354,5 +360,19 @@ export class ProductsView extends BaseView {
             return;
         }
         incorrectFilterLabel.innerHTML = '';
+    }
+
+    drawFilterSubCategories = () => {
+        document.getElementById('filter_sub_categories_info').innerHTML = 'Дочерние категории:';
+        const subCategoriesList = document.getElementById('filter_sub_categories_list');
+        this.presenter.subCategories.forEach((subCategory) => {
+            const element = document.createElement('div');
+            element.innerHTML = subCategory.name;
+            element.addEventListener('click', (event) => {
+                event.preventDefault();
+                Router.open(`/items/${subCategory.id}`, {dropFilter: true, dropSort: true});
+            });
+            subCategoriesList.appendChild(element);
+        });
     }
 }

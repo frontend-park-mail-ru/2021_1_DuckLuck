@@ -18,6 +18,8 @@ class ProductsPresenter extends BasePresenter {
         this.bus.on(Events.ProductsLoad, this.loadProducts);
         this.bus.on(Events.ProductsLoadSearch, this.loadSearchProducts);
         this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
+        this.bus.on(Events.ProductsLoadSubCategories, this.productsLoadSubCategories);
+        this.bus.on(Events.ProductsSubCategoriesLoaded, this.productsSubCategoriesLoaded);
         Bus.globalBus.on(Events.ProductsChangeCategory, this.changeCategory);
         Bus.globalBus.on(Events.ProductsItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.ProductsItemNotAdded, this.setProductNotAdded);
@@ -69,6 +71,13 @@ class ProductsPresenter extends BasePresenter {
      */
     get filter() {
         return this.model.filter;
+    }
+
+    /**
+     * @return {Array}
+     */
+    get subCategories() {
+        return this.model.subCategories;
     }
 
     dropFilter = () => {
@@ -267,6 +276,20 @@ class ProductsPresenter extends BasePresenter {
      */
     setProductNotAdded = (itemID) => {
         this.view.setProductNotAdded(itemID);
+    }
+
+    /**
+     * @param {number} categoryID
+     */
+    productsLoadSubCategories = (categoryID) => {
+        this.model.loadSubCategories(categoryID);
+    }
+
+    /**
+     * @param {number} categoryID
+     */
+    productsSubCategoriesLoaded = (categoryID) => {
+        this.view.drawFilterSubCategories();
     }
 }
 

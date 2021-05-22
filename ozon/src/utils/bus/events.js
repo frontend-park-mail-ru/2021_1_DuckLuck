@@ -31,6 +31,8 @@ const Events = {
     RenderProductReviews: 'render-product-reviews',
     ProductTransmitData: 'product-transmit-data',
     ProductsItemNotAdded: 'products-item-removed',
+    ProductsLoadSubCategories: 'products-load-sub-categories',
+    ProductsSubCategoriesLoaded: 'products-sub-categories-loaded',
 
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',

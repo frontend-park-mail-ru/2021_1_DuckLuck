@@ -15,6 +15,7 @@ class ProductsModel extends BaseModel {
     #sortKey
     #sortDirection
     #filter
+    #subCategories
 
     /**
      *
@@ -61,6 +62,13 @@ class ProductsModel extends BaseModel {
     }
 
     /**
+     * @return {Array}
+     */
+    get subCategories() {
+        return this.#subCategories;
+    }
+
+    /**
      *
      * @param {String} sortKey
      */
@@ -97,6 +105,13 @@ class ProductsModel extends BaseModel {
      */
     set filter(newFilter) {
         this.#filter = newFilter;
+    }
+
+    /**
+     * @param {Array} newSubCategories
+     */
+    set subCategories(newSubCategories) {
+        this.#subCategories = newSubCategories;
     }
 
     /**
@@ -210,6 +225,38 @@ class ProductsModel extends BaseModel {
             }
             default: {
                 this.bus.emit(Events.ProductsLoaded, Responses.Error);
+                break;
+            }
+            }
+        });
+    }
+
+    /**
+     * @param {number} categoryID
+     */
+    loadSubCategories = (categoryID) => {
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + `/category/${categoryID}`,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((parsedJson) => {
+            this.subCategories = parsedJson;
+            this.bus.emit(Events.ProductsSubCategoriesLoaded, Responses.Success);
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.ProductsSubCategoriesLoaded, Responses.Unauthorized);
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.ProductsSubCategoriesLoaded, Responses.Success);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.ProductsSubCategoriesLoaded, Responses.Error);
                 break;
             }
             }
