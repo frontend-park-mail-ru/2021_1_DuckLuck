@@ -10,6 +10,12 @@ import linkStyles from './../Common/Link/Link.scss';
 import {staticServerHost} from '../../utils/urls/urls';
 import Router from '../../utils/router/Router';
 import {Bus} from '../../utils/bus/bus';
+import {Popup} from '../Common/Popup/Popup';
+import noticeTemplate from './ReviewNotice.hbs';
+import noticeStyles from './ReviewNotice.scss';
+import {Blind} from '../Common/Blind/Blind';
+import popupStyles from '../Common/Popup/Popup.scss';
+import decorators from '../decorators.scss';
 
 /**
  * @class ReviewView
@@ -19,7 +25,7 @@ import {Bus} from '../../utils/bus/bus';
 class ReviewView extends BaseView {
     show = () => {
         this.presenter.rating = 0;
-        this.bus.emit(Events.ReviewRightsLoad);
+        this.render();
     }
 
     render = () => {
@@ -87,11 +93,28 @@ class ReviewView extends BaseView {
             });
         });
 
-
         const submitButton = this.cache.getElementsByClassName(buttonStyles.review)[0];
-        submitButton.addEventListener('click', () => {
-            this.presenter.sendReview();
-            Router.open(`/item/${this.presenter.product.id}`);
+        submitButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            this.bus.emit(Events.SendOrder);
+            const notice = new DOMParser().parseFromString(new Popup().getHtmlString({
+                popupBody: noticeTemplate({
+                    styles: noticeStyles,
+                    textStyles: textStyles,
+                }),
+                background: new Blind().getHtmlString(),
+                popupType: popupStyles.order,
+            }), 'text/html').getElementById('popup');
+            const body = document.getElementsByTagName('body')[0];
+            body.classList.add(decorators.noScroll);
+            this.parent.appendChild(notice);
+            document.getElementById('blind')
+                .addEventListener('click', (evt) => {
+                    evt.preventDefault();
+                    body.classList.remove(decorators.noScroll);
+                    document.getElementById('popup').remove();
+                    Router.open(`/item/${this.presenter.product.id}`, {replaceState: true});
+                });
         });
 
         const isPublic = document.getElementsByName('isPublic')[0];

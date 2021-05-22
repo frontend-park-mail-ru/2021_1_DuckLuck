@@ -153,6 +153,7 @@ class CartPresenter extends BasePresenter {
      */
     productsAmountLoadedReaction = (count) => {
         Bus.globalBus.emit(Events.HeaderSetCartItems, count);
+        this.addLastProduct();
     }
 
     /**
@@ -167,9 +168,11 @@ class CartPresenter extends BasePresenter {
     }
 
     addLastProduct = () => {
-        if (this.model.lastAddedProduct) {
-            this.model.addProduct(this.model.lastAddedProduct, 1);
+        if (this.model.lastAddedProduct === undefined || this.model.isCartContains(this.model.lastAddedProduct)) {
+            return;
         }
+        this.model.addProduct(this.model.lastAddedProduct, 1);
+        this.model.lastAddedProduct = undefined;
     }
 
     dropCart = () => {

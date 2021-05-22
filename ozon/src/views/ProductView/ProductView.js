@@ -128,13 +128,21 @@ export class ProductView extends BaseView {
                 Router.open('/review');
             });
         }
+
         Bus.globalBus.emit(Events.CartGetProductID);
         Bus.globalBus.emit(Events.GetProductReviews, +this.IDs['productID'], 1,
             this.presenter.sortKey,
             this.presenter.sortDirection);
+
+        Bus.globalBus.emit(Events.ChangeReviewProductId, this.IDs['productID']);
+        Bus.globalBus.emit(Events.ReviewRightsLoad);
     }
 
-    setPageProductAdded = () => {
+
+    setProductAdded = () => {
+        if (!this.cache) {
+            return;
+        }
         const button = this.cache.getElementsByClassName(buttonStyles.notInCartProduct)[0];
         if (!button) {
             return;
@@ -149,7 +157,10 @@ export class ProductView extends BaseView {
         });
     }
 
-    setPageProductNotAdded = () => {
+    setProductNotAdded = () => {
+        if (!this.cache) {
+            return;
+        }
         const button = document.getElementsByClassName(buttonStyles.inCartProduct)[0];
         if (!button) {
             return;
@@ -163,7 +174,6 @@ export class ProductView extends BaseView {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1, Events.ProductItemAdded);
         });
     }
-
 
     /**
      * @param {Array} reviews
@@ -212,8 +222,19 @@ export class ProductView extends BaseView {
         }
     }
 
-    /**
-     */
+    addReviewButton = () => {
+        const reviewButton = document.createElement('button');
+        reviewButton.className = buttonStyles.review;
+        const reviewSpan = document.createElement('span');
+        reviewSpan.className = textStyles.bigButton;
+        reviewSpan.innerHTML = 'Оставить отзыв';
+        reviewButton.appendChild(reviewSpan);
+        reviewButton.addEventListener('click', () => {
+            Router.open('/review');
+        });
+        document.getElementsByClassName(productStyles.reviewButtonWrapper)[0].appendChild(reviewButton);
+    }
+
     renderRecommendations = () => {
         const items = [];
 

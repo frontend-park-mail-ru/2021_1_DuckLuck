@@ -38,6 +38,13 @@ class CartModel extends BaseModel {
     }
 
     /**
+     * @param {number|undefined} newProduct
+     */
+    set lastAddedProduct(newProduct) {
+        this.#lastAddedProductID = newProduct;
+    }
+
+    /**
      * @return {Set}
      */
     get ids() {
@@ -66,9 +73,7 @@ class CartModel extends BaseModel {
      * @param {number | string} count amount of product
      * @param {Events} callbackEvent
      */
-    addProduct(id, count, callbackEvent) {
-        this.#lastAddedProductID = id;
-
+    addProduct(id, count) {
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id,
@@ -90,6 +95,7 @@ class CartModel extends BaseModel {
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
+                this.#lastAddedProductID = id;
                 this.bus.emit(Events.CartProductAdded, Responses.Unauthorized);
                 break;
             }
@@ -268,6 +274,16 @@ class CartModel extends BaseModel {
         }).catch((err) => {
             this.bus.emit(Events.CartLoadedProductsAmountReaction, 0);
         });
+    }
+
+    /**
+     * @param {number|string} productID
+     * @return {boolean}
+     */
+    isCartContains = (productID) => {
+        return this.products.find((elem) => {
+            return +elem.id === +productID;
+        }) !== undefined;
     }
 }
 

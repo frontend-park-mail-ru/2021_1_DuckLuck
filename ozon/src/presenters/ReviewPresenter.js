@@ -1,7 +1,6 @@
 import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
-import Router from '../utils/router/Router';
 import {Bus} from '../utils/bus/bus';
 
 /**
@@ -15,7 +14,7 @@ class ReviewPresenter extends BasePresenter {
      */
     constructor(application, View, Model) {
         super(application, View, Model);
-        this.bus.on(Events.ReviewRightsLoad, this.loadReviewRights);
+        Bus.globalBus.on(Events.ReviewRightsLoad, this.loadReviewRights);
         this.bus.on(Events.ReviewRightsLoaded, this.reviewRightsLoadedReaction);
         this.bus.on(Events.SendOrder, this.sendReview);
 
@@ -149,11 +148,7 @@ class ReviewPresenter extends BasePresenter {
             this.model.userName =
                 `${window.localStorage.getItem('firstName')} ${window.localStorage.getItem('lastName')}`;
             Bus.globalBus.emit(Events.ProductTransmitData, Events.ReviewProductDataLoaded);
-            this.view.render();
-            this.view.cache.hidden = false;
-        } else {
-            console.error('Cant load review');
-            Router.open('/items', {replaceState: true});
+            Bus.globalBus.emit(Events.ProductRenderReviewButton);
         }
     }
 

@@ -39,6 +39,7 @@ const Events = {
     ProductItemNotAdded: 'product-item-not-added',
     ProductItemAdded: 'product-item-added',
     ProductCartLoadedProductsID: 'product-cart-loaded-products-ids',
+    ProductRenderReviewButton: 'product-render-review-button',
 
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',
@@ -65,6 +66,8 @@ const Events = {
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
+    OrderNewBill: 'order-new-bill',
+    OrderIncorrectPromo: 'order-incorrect-promo',
     SendOrder: 'order-send',
 
     ReviewRightsLoad: 'review-rights-load',
@@ -80,6 +83,8 @@ const Events = {
     ChangeReviewProductId: 'change-review-product-id',
     OrderSent: 'order-sent',
 
+    SendPromo: 'send-promo',
+    PromoSent: 'promo-sent',
     RecommendationLoad: 'recommendation-load',
     RecommendationLoaded: 'recommendation-loaded',
 };

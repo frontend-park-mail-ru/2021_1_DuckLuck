@@ -254,7 +254,6 @@ class ProfilePresenter extends BasePresenter {
      */
     renderAllData = (status) => {
         if (status === Responses.Success) {
-            Bus.globalBus.emit(Events.CartLoadProductsAmount);
             this.view.renderData();
             return;
         }

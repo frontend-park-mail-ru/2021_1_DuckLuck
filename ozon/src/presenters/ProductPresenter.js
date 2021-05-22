@@ -27,6 +27,7 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProductItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.ProductItemNotAdded, this.setProductNotAdded);
         Bus.globalBus.on(Events.ProductCartLoadedProductsID, this.recommendationsCartGotIds);
+        Bus.globalBus.on(Events.ProductRenderReviewButton, this.addReviewButton);
     }
 
     /**
@@ -184,6 +185,10 @@ class ProductsPresenter extends BasePresenter {
         if (ids.size) {
             this.view.recommendationSetAddedProducts(ids);
         }
+    }
+
+    addReviewButton = () => {
+        this.view.addReviewButton();
     }
 }
 
