@@ -2,7 +2,7 @@
  * @class Button
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class Button {
+class Button {
     /**
      *
      * @param {string} name name of button
@@ -18,3 +18,5 @@ export class Button {
         this.text = text;
     }
 }
+
+export default Button;

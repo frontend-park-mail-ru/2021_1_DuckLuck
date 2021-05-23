@@ -4,7 +4,7 @@ import {incorrectFieldsMap} from '../utils/validationFields/validationFields';
  * @class BaseView
  * @classdesc Base class for all other views
  */
-export class BaseView {
+class BaseView {
     #parent
     #cache
     #presenter
@@ -163,3 +163,5 @@ export class BaseView {
 
     }
 }
+
+export default BaseView;

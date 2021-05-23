@@ -1,5 +1,5 @@
 import {isValidInputs} from '../modules/Valiadtor/validator.js';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 
 /**
  * @description Base Presenter class

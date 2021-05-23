@@ -1,7 +1,7 @@
-import {BaseView} from '../BaseView.js';
+import BaseView from '../BaseView.js';
 import cartPageTemplate from './CartView.hbs';
 import emptyCartPageTemplate from './CartViewEmpty.hbs';
-import {Bus} from '../../utils/bus/bus';
+import Bus from '../../utils/bus/bus';
 import Events from '../../utils/bus/events';
 import cartStyles from './CartView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
@@ -15,7 +15,7 @@ import Router from '../../utils/router/Router';
  * @extends BaseView
  * @classdesc Class for showing product
  */
-export class CartView extends BaseView {
+class CartView extends BaseView {
     /**
      * @param {Object} URLParams
      */
@@ -159,3 +159,5 @@ export class CartView extends BaseView {
         }
     }
 }
+
+export default CartView;

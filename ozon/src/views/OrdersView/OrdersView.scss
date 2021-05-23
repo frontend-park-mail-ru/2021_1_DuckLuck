@@ -1,0 +1,76 @@
+@import '../../constants.scss';
+
+.ordersWrapper {
+    background: var(--neutral-background-color);
+    width: 100%;
+    height: 100%;
+}
+
+.body {
+    max-width: var(--max-width);
+    padding: var(--padding-xs) var(--padding-l);
+    margin: var(--margin-l) auto 0;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: var(--font);
+    display: flex;
+    flex-direction: column;
+}
+
+.footer {
+    display: flex;
+    max-width: 60%;
+    margin: auto;
+    width: 100%;
+    border-top: solid;
+    border-color: var(--neutral-background-color);
+    padding-top: var(--padding-m);
+}
+
+.select {
+    width: 226px;
+    height: var(--height-xxxs);
+}
+
+.titleText {
+    font-family: var(--font);
+    font-size: var(--font-size-xxl);
+    font-weight: var(--bold-font);
+}
+
+.dateText {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.costText, .payStatusText {
+    font-family: var(--font);
+    font-size: var(--font-size-l);
+    margin-top: auto;
+    margin-bottom: auto;
+    float: right;
+}
+
+.addressText {
+    font-family: var(--font);
+    font-size: var(--font-size-m);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.order {
+    margin-top: 20px;
+}
+
+.image {
+    display: inline-block;
+    width: 92px;
+    height: 92px;
+    margin-top: 10px;
+}
+
+.productImage {
+    height: 100%;
+}

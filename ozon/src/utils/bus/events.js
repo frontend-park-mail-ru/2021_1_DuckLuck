@@ -70,6 +70,8 @@ const Events = {
     OrderIncorrectPromo: 'order-incorrect-promo',
     SendOrder: 'order-send',
 
+    OrdersLoad: 'orders-load',
+    OrdersLoaded: 'orders-loaded',
     ReviewRightsLoad: 'review-rights-load',
     ReviewRightsLoaded: 'review-rights-loaded',
     ReviewUserDataLoad: 'review-user-data-load',

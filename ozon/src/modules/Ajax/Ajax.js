@@ -14,7 +14,7 @@ const millisecondsInSecond = 1e3;
 /**
  * @description AJAX interaction class
  */
-export class AjaxModule {
+class AjaxModule {
     static #csrfToken;
 
     /**
@@ -116,3 +116,5 @@ export class AjaxModule {
         return fetch(ajaxArgs.url, init);
     }
 }
+
+export default AjaxModule;
