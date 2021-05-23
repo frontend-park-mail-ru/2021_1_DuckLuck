@@ -1,5 +1,5 @@
-import {BaseView} from '../BaseView.js';
-import {Img} from '../Common/Img/Img.js';
+import BaseView from '../BaseView.js';
+import Img from '../Common/Img/Img.js';
 import productPageTemplate from './ProductView.hbs';
 import reviewsTemplate from './ProductReviews.hbs';
 import {fileServerHost, staticServerHost} from '../../utils/urls/urls.js';
@@ -11,11 +11,11 @@ import textStyles from './../Common/TextArea/TextArea.scss';
 import imgStyles from './../Common/Img/Img.scss';
 import linkStyles from './../Common/Link/Link.scss';
 import decorators from '../decorators.scss';
-import {Bus} from '../../utils/bus/bus';
+import Bus from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
-import {Pagination} from '../Common/Pagination/Pagination';
-import {Slider} from '../Common/Slider/Slider';
-import {ListOfProductsItem} from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem';
+import Pagination from '../Common/Pagination/Pagination';
+import Slider from '../Common/Slider/Slider';
+import ListOfProductsItem from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem';
 
 
 /**
@@ -23,7 +23,7 @@ import {ListOfProductsItem} from '../Common/ListOfProducts/ListOfProductsItem/Li
  * @extends BaseView
  * @classdesc Class for Product page
  */
-export class ProductView extends BaseView {
+class ProductView extends BaseView {
     /**
      * @param {Object} URLParams
      */
@@ -250,3 +250,5 @@ export class ProductView extends BaseView {
         slider.checkOverflow();
     }
 }
+
+export default ProductView;

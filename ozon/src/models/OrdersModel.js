@@ -1,4 +1,4 @@
-import {AjaxModule} from '../modules/Ajax/Ajax';
+import AjaxModule from '../modules/Ajax/Ajax';
 import {fileServerHost, serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';

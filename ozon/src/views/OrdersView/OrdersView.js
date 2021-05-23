@@ -1,9 +1,9 @@
-import {BaseView} from '../BaseView.js';
+import BaseView from '../BaseView.js';
 import Events from '../../utils/bus/events';
 import ordersTemplate from './OrdersView.hbs';
 import ordersStyles from './OrdersView.scss';
-import {Pagination} from '../Common/Pagination/Pagination';
-import {Bus} from '../../utils/bus/bus';
+import Pagination from '../Common/Pagination/Pagination';
+import Bus from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import paginatorStyles from '../Common/Pagination/Pagination.scss';
 
@@ -13,7 +13,7 @@ import paginatorStyles from '../Common/Pagination/Pagination.scss';
  * @extends BaseView
  * @classdesc Class for showing orderS
  */
-export class OrdersView extends BaseView {
+class OrdersView extends BaseView {
     show = () => {
         if (!this.IDs) {
             this.IDs = {};
@@ -92,3 +92,5 @@ export class OrdersView extends BaseView {
         }
     }
 }
+
+export default OrdersView;

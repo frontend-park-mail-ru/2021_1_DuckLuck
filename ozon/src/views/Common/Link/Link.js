@@ -2,7 +2,7 @@
  * @class Link
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class Link {
+class Link {
     /**
      *
      * @param {string} href link where to go
@@ -18,3 +18,5 @@ export class Link {
         this.type = type;
     }
 }
+
+export default Link;

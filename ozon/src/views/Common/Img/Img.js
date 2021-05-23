@@ -3,7 +3,7 @@
  * @class Img
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class Img {
+class Img {
     /**
      * @param {string} URL source of an image
      */
@@ -13,3 +13,5 @@ export class Img {
         this.src = src;
     }
 }
+
+export default Img;
