@@ -22,7 +22,7 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProductsItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.ProductsItemNotAdded, this.setProductNotAdded);
         Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
-        Bus.globalBus.on(Events.CartLoadedProductsID, this.productsCartGotIds);
+        Bus.globalBus.on(Events.ProductsCartLoadedProductsID, this.productsCartGotIds);
     }
 
     /**
