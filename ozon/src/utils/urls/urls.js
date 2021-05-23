@@ -19,4 +19,5 @@ export const urls = {
     review: '/review/product',
     reviewRights: '/review/rights/product/',
     promo: '/promo',
+    favorites: '/favorites',
 };

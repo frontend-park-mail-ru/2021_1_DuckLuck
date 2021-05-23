@@ -1,0 +1,22 @@
+<div class="{{favoritesStyles.block}}">
+    <select class="{{favoritesStyles.select}}">
+        {{#each select}}
+            <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
+                {{this.name}}
+            </option>
+        {{/each}}
+    </select>
+
+    <div class="{{favoritesStyles.listWrapper}}">{{{productsList}}}</div>
+    {{#ifEquals this.isEmpty false}}
+        <div class="{{favoritesStyles.footer}}">
+            {{{pagination}}}
+        </div>
+    {{/ifEquals}}
+    {{#ifEquals this.isEmpty true}}
+        <div class="{{favoritesStyles.emptyText}}">
+            <span class="{{favoritesStyles.title}}">Не найдено ни одного товара</span>
+            <a class="{{favoritesStyles.title}}" href="">Вернуться на главную</a>
+        </div>
+    {{/ifEquals}}
+</div>

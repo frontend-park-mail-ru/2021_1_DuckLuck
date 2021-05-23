@@ -183,10 +183,21 @@ export class ProductsView extends BaseView {
                 evt.preventDefault();
                 Bus.globalBus.emit(Events.CartAddProduct, productID, 1);
             });
+
+            item = itemContainer.getElementsByClassName(buttonStyles.notInFavoriteProducts)[0];
+            if (item === undefined) {
+                item = itemContainer.getElementsByClassName(buttonStyles.inFavoriteProducts)[0];
+            }
+
+            item.addEventListener('click', (evt) => {
+                evt.preventDefault();
+                Bus.globalBus.emit(Events.FavoritesAddProduct, productID);
+            });
         }
 
         this.parent.appendChild(this.cache);
         Bus.globalBus.emit(Events.CartGetProductsID);
+        Bus.globalBus.emit(Events.FavoritesGetProductsID);
 
         document.getElementById('filtration_form').addEventListener('submit', (event) => {
             event.preventDefault();
@@ -354,5 +365,79 @@ export class ProductsView extends BaseView {
             return;
         }
         incorrectFilterLabel.innerHTML = '';
+    }
+
+    /**
+     * @param {Set} productsInCart
+     */
+    setFavoriteProducts = (productsInCart) => {
+        for (const item of document.getElementsByClassName(ListOfProductsItemStyles.block)) {
+            if (productsInCart.has(+item.getAttribute('item-id'))) {
+                this.setButtonFavorite(item.getElementsByTagName('button')[1], +item.getAttribute('item-id'));
+            }
+        }
+    }
+
+    /**
+     * @param {number} productID
+     */
+    setProductFavorite = (productID) => {
+        const item = Array.from(document.getElementsByClassName(ListOfProductsItemStyles.block)).filter((item) => {
+            return +item.getAttribute('item-id') === productID;
+        })[0];
+        if (item) {
+            this.setButtonFavorite(item.getElementsByClassName(
+                ListOfProductsItemStyles.buttonsBlock)[0].getElementsByTagName('button')[1], productID);
+        }
+    }
+
+    /**
+     * @param {HTMLElement} button
+     * @param {number} id
+     */
+    setButtonFavorite = (button, id) => {
+        const newButton = button.cloneNode(true);
+        this.setButtonFavoriteStyle(newButton);
+        newButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            Bus.globalBus.emit(Events.FavoritesRemoveProduct, id);
+        });
+        button.replaceWith(newButton);
+    }
+
+    /**
+     * @param {number} productID
+     */
+    setProductNotFavorite = (productID) => {
+        const item = Array.from(document.getElementsByClassName(ListOfProductsItemStyles.block)).filter((item) => {
+            return +item.getAttribute('item-id') === +productID;
+        })[0];
+        if (item) {
+            const button = item.getElementsByTagName('button')[1];
+            const newButton = button.cloneNode(true);
+            this.setButtonNotFavoriteStyle(newButton);
+            newButton.addEventListener('click', () => {
+                const id = item.getAttribute('item-id');
+                Bus.globalBus.emit(Events.FavoritesAddProduct, +item.getAttribute('item-id'));
+                this.setProductFavorite(+id);
+            });
+            button.replaceWith(newButton);
+        }
+    }
+
+    /**
+     * @param {HTMLElement} button
+     */
+    setButtonFavoriteStyle = (button) => {
+        button.className = buttonStyles.inCartProducts;
+        button.getElementsByTagName('span')[0].innerHTML = 'В Избранном';
+    }
+
+    /**
+     * @param {HTMLElement} button
+     */
+    setButtonNotFavoriteStyle = (button) => {
+        button.className = buttonStyles.notInCartProducts;
+        button.getElementsByTagName('span')[0].innerHTML = 'В Избранное';
     }
 }

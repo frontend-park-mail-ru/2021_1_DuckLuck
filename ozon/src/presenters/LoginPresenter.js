@@ -44,6 +44,7 @@ class LoginPresenter extends BasePresenter {
             this.view.remove();
             Bus.globalBus.emit(Events.ProfileNewUserLoggedIn);
             Bus.globalBus.emit(Events.CartLoadProductsAmount);
+            Bus.globalBus.emit(Events.FavoritesLoadProductsAmount);
             Router.goBack();
             break;
         }

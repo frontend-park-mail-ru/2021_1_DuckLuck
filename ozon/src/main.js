@@ -27,6 +27,9 @@ import HeaderPresenter from './presenters/HeaderPresenter';
 import ReviewModel from './models/ReviewModel';
 import ReviewPresenter from './presenters/ReviewPresenter';
 import ReviewView from './views/ReviewView/ReviewView';
+import FavoritesPresenter from './presenters/FavoritesPresenter';
+import FavoritesModel from './models/FavoritesModel';
+import {FavoritesView} from './views/FavoritesView/FavoritesView';
 
 
 if ('serviceWorker' in navigator) {
@@ -52,6 +55,7 @@ const productPresenter = new ProductPresenter(application, ProductView, ProductM
 const cartPresenter = new CartPresenter(application, CartView, CartModel);
 const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
 const reviewPresenter = new ReviewPresenter(application, ReviewView, ReviewModel);
+const favoritesPresenter = new FavoritesPresenter(application, FavoritesView, FavoritesModel);
 
 const header = document.getElementsByTagName('header')[0];
 const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
@@ -68,6 +72,7 @@ Router
     .register(/^\/cart$/, cartPresenter.view)
     .register(/^\/offline$/, offlineView)
     .register(/review$/, reviewPresenter.view)
-    .register(/^\/order$/, orderPresenter.view);
+    .register(/^\/order$/, orderPresenter.view)
+    .register(/^\/favorites(\/(?<page>[0-9]*))?$/, favoritesPresenter.view);
 
 Router.start();

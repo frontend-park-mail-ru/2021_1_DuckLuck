@@ -77,7 +77,7 @@ export class BaseView {
 
     /**
      *
-     * @param {HTMLElement} cache Cache of View
+     * @param {Document} cache Cache of View
      */
     set cache(cache) {
         this.#cache = cache;

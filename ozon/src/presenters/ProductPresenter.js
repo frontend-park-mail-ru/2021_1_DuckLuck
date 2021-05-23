@@ -22,11 +22,14 @@ class ProductsPresenter extends BasePresenter {
         this.bus.on(Events.RecommendationLoaded, this.recommendationsLoadedReaction);
         Bus.globalBus.on(Events.ProductChangeID, this.changeID);
         Bus.globalBus.on(Events.CartLoadedProductID, this.productCartGotIds);
+        Bus.globalBus.on(Events.FavoritesLoadedProductID, this.productFavoriteGotIds);
         Bus.globalBus.on(Events.RenderProductReviews, this.renderProductsReview);
         Bus.globalBus.on(Events.ProductTransmitData, this.returnProductData);
         Bus.globalBus.on(Events.ProductItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.ProductItemNotAdded, this.setProductNotAdded);
+        Bus.globalBus.on(Events.ProductItemFavoriteAdded, this.setProductFavorite);
         Bus.globalBus.on(Events.ProductRenderReviewButton, this.addReviewButton);
+        Bus.globalBus.on(Events.ProductItemFavoriteRemoved, this.setProductNotFavorite);
     }
 
     /**
@@ -148,6 +151,15 @@ class ProductsPresenter extends BasePresenter {
     }
 
     /**
+     * @param {Set} ids
+     */
+    productFavoriteGotIds = (ids) => {
+        if (ids.has(this.model.item.id)) {
+            this.view.setProductFavorite();
+        }
+    }
+
+    /**
      * @param {Array} reviews
      * @param {Object} paginator
      */
@@ -173,8 +185,16 @@ class ProductsPresenter extends BasePresenter {
         this.view.setProductAdded();
     }
 
+    setProductFavorite = () => {
+        this.view.setProductFavorite();
+    }
+
     setProductNotAdded = () => {
         this.view.setProductNotAdded();
+    }
+
+    setProductNotFavorite = () => {
+        this.view.setProductNotFavorite();
     }
 
     addReviewButton = () => {

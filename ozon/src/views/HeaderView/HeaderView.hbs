@@ -50,7 +50,7 @@
         </div>
         <div class="{{headerStyles.menu}}">
             {{#each headerMenu}}
-                <a class="{{../linkStyles.headerMenu}} {{../headerStyles.menuItem}} {{#ifEquals this.href "/orders"}} {{../decorators.lock}} {{/ifEquals}} {{#ifEquals this.href "/favorites"}} {{../decorators.lock}} {{/ifEquals}}" href="{{this.href}}" name="{{this.name}}">
+                <a class="{{../linkStyles.headerMenu}} {{../headerStyles.menuItem}} {{#ifEquals this.href "/orders"}} {{../decorators.lock}} {{/ifEquals}}" href="{{this.href}}" name="{{this.name}}">
                     {{#with this}}
                         <img src="{{img.src}}" class="{{../imgStyles.headerMenu}}">
                         <span class="{{../textStyles.text}}">{{text}}</span>

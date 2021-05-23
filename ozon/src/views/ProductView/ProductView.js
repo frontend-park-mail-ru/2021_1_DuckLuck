@@ -115,12 +115,18 @@ export class ProductView extends BaseView {
         });
 
 
-        const button = document.getElementsByClassName(buttonStyles.notInCartProduct)[0];
+        let button = document.getElementsByClassName(buttonStyles.notInCartProduct)[0];
         button.addEventListener('click', () => {
             Bus.globalBus.emit(Events.CartAddProduct, this.IDs['productID'], 1);
         });
 
+        button = document.getElementsByClassName(buttonStyles.notInFavoriteProduct)[0];
+        button.addEventListener('click', () => {
+            Bus.globalBus.emit(Events.FavoritesAddProduct, this.IDs['productID']);
+        });
+
         Bus.globalBus.emit(Events.CartGetProductID);
+        Bus.globalBus.emit(Events.FavoritesGetProductID);
         Bus.globalBus.emit(Events.GetProductReviews, +this.IDs['productID'], 1,
             this.presenter.sortKey,
             this.presenter.sortDirection);
@@ -248,5 +254,41 @@ export class ProductView extends BaseView {
         const recommendationsBlock = document.getElementById('recommendations');
         recommendationsBlock.appendChild(slider.render());
         slider.checkOverflow();
+    }
+
+    setProductFavorite = () => {
+        if (!this.cache) {
+            return;
+        }
+        const button = this.cache.getElementsByClassName(buttonStyles.notInFavoriteProduct)[0];
+        if (!button) {
+            return;
+        }
+        const newButton = button.cloneNode(true);
+        button.replaceWith(newButton);
+
+        newButton.className = buttonStyles.inFavoriteProduct;
+        newButton.getElementsByTagName('span')[0].innerHTML = 'В избранном';
+        newButton.addEventListener('click', () => {
+            Bus.globalBus.emit(Events.FavoritesRemoveProduct, this.IDs['productID']);
+        });
+    }
+
+    setProductNotFavorite = () => {
+        if (!this.cache) {
+            return;
+        }
+        const button = document.getElementsByClassName(buttonStyles.inFavoriteProduct)[0];
+        if (!button) {
+            return;
+        }
+        const newButton = button.cloneNode(true);
+        button.replaceWith(newButton);
+
+        newButton.getElementsByTagName('span')[0].innerHTML = 'В избранное';
+        newButton.className = buttonStyles.notInFavoriteProduct;
+        newButton.addEventListener('click', () => {
+            Bus.globalBus.emit(Events.FavoritesAddProduct, this.IDs['productID']);
+        });
     }
 }

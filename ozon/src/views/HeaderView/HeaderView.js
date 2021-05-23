@@ -53,6 +53,8 @@ export class HeaderView extends BaseView {
                 button: new Button(),
                 href: '/favorites',
                 name: 'favorites',
+                additionalSpan: true,
+                additionalSpanClass: headerStyles.menuItemCounter,
             }, {
                 text: 'Корзина',
                 img: new Img({src: staticServerHost + '/svg/header/cart.svg'}),
@@ -165,6 +167,7 @@ export class HeaderView extends BaseView {
         });
         this.parent.appendChild(this.cache);
         Bus.globalBus.emit(Events.CartLoadProductsAmount);
+        Bus.globalBus.emit(Events.FavoritesLoadProductsAmount);
     }
 
     /**
@@ -190,6 +193,16 @@ export class HeaderView extends BaseView {
      * @param {number} value
      */
     changeCartItems = (value) => {
+        const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[1];
+        const newCounterAmount = +counter.innerHTML + value;
+        counter.innerHTML = newCounterAmount.toString();
+        counter.hidden = !newCounterAmount;
+    }
+
+    /**
+     * @param {number} value
+     */
+    changeFavoriteItems = (value) => {
         const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[0];
         const newCounterAmount = +counter.innerHTML + value;
         counter.innerHTML = newCounterAmount.toString();
@@ -201,6 +214,16 @@ export class HeaderView extends BaseView {
      * @description sets items amount in cart to 0
      */
     setCartItems = (value) => {
+        const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[1];
+        counter.innerHTML = value.toString();
+        counter.hidden = !value;
+    }
+
+    /**
+     * @param {number} value
+     * @description sets items amount in favorite to 0
+     */
+    setFavoriteItems = (value) => {
         const counter = document.getElementsByClassName(headerStyles.menuItemCounter)[0];
         counter.innerHTML = value.toString();
         counter.hidden = !value;

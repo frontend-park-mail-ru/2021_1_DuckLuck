@@ -146,12 +146,12 @@ $colors: (
     @extend %inherit-color;
 }
 
-.inCartProduct, .inCartProducts {
+.inCartProduct, .inCartProducts, .inFavoriteProducts, .inFavoriteProduct {
     @extend %button-shared;
     @extend %in-cart-color;
 }
 
-.notInCartProduct, .notInCartProducts {
+.notInCartProduct, .notInCartProducts, .notInFavoriteProducts, .notInFavoriteProduct {
     @extend %button-shared;
     @extend %not-in-cart-color;
 }

@@ -28,16 +28,21 @@ const Events = {
     ProductsLoaded: 'products-loaded',
     ProductsChangeCategory: 'products-change-category',
     ProductsItemAdded: 'products-item-added',
-    RenderProductReviews: 'render-product-reviews',
-    ProductTransmitData: 'product-transmit-data',
     ProductsItemNotAdded: 'products-item-removed',
+    ProductsItemFavoriteAdded: 'products-item-favorite',
+    ProductsItemFavoriteRemoved: 'products-item-favorite-removed',
 
-    ProductChangeID: 'product-changeID',
+
     ProductLoad: 'product-load',
+    ProductChangeID: 'product-changeID',
     ProductLoaded: 'product-loaded',
     ProductItemNotAdded: 'product-item-not-added',
     ProductItemAdded: 'product-item-added',
     ProductRenderReviewButton: 'product-render-review-button',
+    RenderProductReviews: 'render-product-reviews',
+    ProductTransmitData: 'product-transmit-data',
+    ProductItemFavoriteAdded: 'product-item-favorite',
+    ProductItemFavoriteRemoved: 'product-item-favorite-removed',
 
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',
@@ -45,6 +50,8 @@ const Events = {
     HeaderChangeCategoryID: 'header-change-category-id',
     HeaderChangeCartItems: 'header-change-cart-items',
     HeaderSetCartItems: 'header-set-cart-items',
+    HeaderSetFavoriteItems: 'header-set-favorite-items',
+    HeaderChangeFavoriteItems: 'header-change-favorite-items',
 
     CartAddProduct: 'cart-add-product',
     CartProductChange: 'cart-update-product',
@@ -85,6 +92,19 @@ const Events = {
     PromoSent: 'promo-sent',
     RecommendationLoad: 'recommendation-load',
     RecommendationLoaded: 'recommendation-loaded',
+
+    FavoritesLoadProducts: 'favorites-load-products',
+    FavoritesAddProduct: 'favorites-add-product',
+    FavoritesRemoveProduct: 'favorites-remove-product',
+    FavoritesProductsLoaded: 'favorites-products-loaded',
+    FavoritesGetProductsID: 'favorites-get-products-id',
+    FavoritesGetProductID: 'favorites-get-product-id',
+    FavoritesLoadedProductsIDs: 'favorites-loaded-products-ids',
+    FavoritesLoadedProductID: 'favorites-loaded-product-id',
+    FavoritesProductAdded: 'favorites=product-added',
+    FavoritesLoadedProductsAmountReaction: 'favorites-loaded-products-amount-reaction',
+    FavoritesLoadProductsAmount: 'favorites-load-products-amount',
+    FavoritesProductRemoved: 'favorites-product-removed',
 };
 
 

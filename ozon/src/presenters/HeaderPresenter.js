@@ -21,6 +21,9 @@ class HeaderPresenter extends BasePresenter {
         Bus.globalBus.on(Events.HeaderChangeCartItems, this.changeCartItems);
         Bus.globalBus.on(Events.OrderSent, this.setOrDropCartItems);
         Bus.globalBus.on(Events.HeaderSetCartItems, this.setOrDropCartItems);
+        Bus.globalBus.on(Events.HeaderChangeFavoriteItems, this.changeFavoriteItems);
+        Bus.globalBus.on(Events.HeaderSetFavoriteItems, this.setOrDropFavoriteItems);
+
 
         this.bus.on(Events.HeaderLoad, this.loadHeader);
         this.bus.on(Events.HeaderLoaded, this.headerLoadedReaction);
@@ -101,10 +104,25 @@ class HeaderPresenter extends BasePresenter {
 
     /**
      * @param {number} value
+     */
+    changeFavoriteItems = (value) => {
+        this.view.changeFavoriteItems(value);
+    }
+
+    /**
+     * @param {number} value
      * @description sets items amount in cart to new value. By default set items amount to 0
      */
     setOrDropCartItems = (value = 0) => {
         this.view.setCartItems(value);
+    }
+
+    /**
+     * @param {number} value
+     * @description sets items amount in favorites to new value. By default set items amount to 0
+     */
+    setOrDropFavoriteItems = (value = 0) => {
+        this.view.setFavoriteItems(value);
     }
 }
 

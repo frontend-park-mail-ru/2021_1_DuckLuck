@@ -20,9 +20,12 @@ class ProductsPresenter extends BasePresenter {
         this.bus.on(Events.ProductsLoaded, this.productLoadedReaction);
         Bus.globalBus.on(Events.ProductsChangeCategory, this.changeCategory);
         Bus.globalBus.on(Events.ProductsItemAdded, this.setProductAdded);
+        Bus.globalBus.on(Events.ProductsItemFavoriteAdded, this.setProductFavorite);
         Bus.globalBus.on(Events.ProductsItemNotAdded, this.setProductNotAdded);
+        Bus.globalBus.on(Events.ProductsItemFavoriteRemoved, this.setProductNotFavorite);
         Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
         Bus.globalBus.on(Events.CartLoadedProductsID, this.productsCartGotIds);
+        Bus.globalBus.on(Events.FavoritesLoadedProductsIDs, this.productsFavoriteGotIds);
     }
 
     /**
@@ -265,8 +268,31 @@ class ProductsPresenter extends BasePresenter {
     /**
      * @param {number} itemID
      */
+    setProductFavorite = (itemID) => {
+        this.view.setProductFavorite(itemID);
+    }
+
+    /**
+     * @param {number} itemID
+     */
     setProductNotAdded = (itemID) => {
         this.view.setProductNotAdded(itemID);
+    }
+
+    /**
+     * @param {number} itemID
+     */
+    setProductNotFavorite = (itemID) => {
+        this.view.setProductNotFavorite(itemID);
+    }
+
+    /**
+     * @param {set} ids
+     */
+    productsFavoriteGotIds = (ids) => {
+        if (ids.size) {
+            this.view.setFavoriteProducts(ids);
+        }
     }
 }
 
