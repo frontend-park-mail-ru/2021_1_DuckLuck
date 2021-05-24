@@ -1,5 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+
 
 module.exports = (env) => {
     const envConfig = {FILE_SERVER_HOST: 'https://duckluckmarket.xyz',
@@ -15,6 +17,9 @@ module.exports = (env) => {
     return {
         entry: ["regenerator-runtime/runtime.js", "./ozon/src/main.js"],
         mode: "development",
+        optimization: {
+            minimizer: [new UglifyJsPlugin()],
+        },
         output: {
             filename: "bundle.js",
             path: path.resolve(__dirname, './ozon/src/dist'),
@@ -51,6 +56,7 @@ module.exports = (env) => {
                             loader: 'css-loader',
                             options: {
                                 modules: true,
+                                minimize: true,
                             }
                         },
                         {
