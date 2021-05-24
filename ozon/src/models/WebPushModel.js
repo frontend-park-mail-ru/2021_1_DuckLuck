@@ -1,9 +1,9 @@
-import {AjaxModule} from '../modules/Ajax/Ajax';
+import AjaxModule from '../modules/Ajax/Ajax';
 import {serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import HTTPResponses from '../utils/http-responses/httpResponses';
 import urlBase64ToUint8Array from '../utils/urlBase64ToUint8Array/urlBase64ToUint8Array';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 import Events from '../utils/bus/events';
 
 /**
