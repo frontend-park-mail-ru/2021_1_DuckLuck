@@ -29,6 +29,13 @@ export class ListOfProductsItem {
         this.itemPrice = itemPrice;
         this.itemId = itemId;
         this.itemReviewsCount = itemReviewsCount;
+        if (this.itemReviewsCount === 1) {
+            this.itemReviewsCountTitle = 'оценка';
+        } else if (this.itemReviewsCount > 1 && this.itemReviewsCount > 4) {
+            this.itemReviewsCountTitle = 'оценки';
+        } else if (this.itemReviewsCount > 3 || this.itemReviewsCount === 0) {
+            this.itemReviewsCountTitle = 'оценок';
+        }
         this.type = type;
     }
 
@@ -45,6 +52,7 @@ export class ListOfProductsItem {
             itemName: this.itemName,
             itemRating: this.itemRating,
             itemReviewsCount: this.itemReviewsCount,
+            itemReviewsCountTitle: this.itemReviewsCountTitle,
             itemPrice: this.itemPrice,
             type: this.type,
             itemStyles: itemStyles,
