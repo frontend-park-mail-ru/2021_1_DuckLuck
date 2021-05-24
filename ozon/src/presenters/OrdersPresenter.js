@@ -50,6 +50,13 @@ class OrdersPresenter extends BasePresenter {
     }
 
     /**
+     * @param {Object} newPaginationInfo
+     */
+    set paginationInfo(newPaginationInfo) {
+        this.model.paginationInfo = newPaginationInfo;
+    }
+
+    /**
      * @param {HTMLElement} application html of application
      * @param {Class} View Class of view object
      * @param {Class} Model Class of model object
@@ -59,6 +66,8 @@ class OrdersPresenter extends BasePresenter {
 
         this.bus.on(Events.OrdersLoad, this.loadOrders);
         this.bus.on(Events.OrdersLoaded, this.ordersLoadedReaction);
+        this.bus.on(Events.OrdersLoadMoreOrders, this.loadMoreOrders);
+        this.bus.on(Events.OrdersMoreOrdersLoaded, this.moreOrdersLoadedReaction);
     }
 
     /**
@@ -72,12 +81,54 @@ class OrdersPresenter extends BasePresenter {
     }
 
     /**
-     * @param {string} result
+     * @param {string} sortKey
+     * @param {string} sortDirection
      */
-    ordersLoadedReaction = (result) => {
+    loadMoreOrders = (sortKey, sortDirection) => {
+        if (+this.paginationInfo.pagesCount === +this.paginationInfo.currentPage) {
+            return;
+        }
+        this.model.loadOrders(+this.paginationInfo.currentPage + 1,
+            sortKey,
+            sortDirection,
+            Events.OrdersMoreOrdersLoaded);
+    }
+
+    /**
+     * @param {string} result
+     * @param {Object} paginationInfo
+     */
+    ordersLoadedReaction = (result, paginationInfo = null) => {
         switch (result) {
         case Responses.Success: {
             this.view.render();
+            this.paginationInfo = paginationInfo;
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline');
+            break;
+        }
+        case Responses.Unauthorized: {
+            Router.open('/login', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
+    }
+
+    /**
+     * @param {string} result
+     * @param {Object} paginationInfo
+     */
+    moreOrdersLoadedReaction = (result, paginationInfo = null) => {
+        switch (result) {
+        case Responses.Success: {
+            this.view.renderMoreOrders();
+            this.paginationInfo = paginationInfo;
             break;
         }
         case Responses.Offline: {
