@@ -156,7 +156,8 @@ class ReviewPresenter extends BasePresenter {
      * @param {Object} profileData
      */
     reviewUserDataLoaded = (profileData) => {
-        this.model.userName = `${profileData.firstName} ${profileData.lastName}`;
+        this.model.userName = (profileData.firstName === null ? 'Имя не указано' : profileData.firstName) +
+            (profileData.lastName === null ? 'Фамилия не указана' : profileData.lastName);
     }
 
     /**
