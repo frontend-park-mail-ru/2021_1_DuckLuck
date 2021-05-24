@@ -73,7 +73,7 @@ class CartModel extends BaseModel {
      * @param {number | string} count amount of product
      * @param {Events} callbackEvent
      */
-    addProduct(id, count) {
+    addProduct(id, count, callbackEvent) {
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id,
