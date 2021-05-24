@@ -29,11 +29,11 @@ export class ListOfProductsItem {
         this.itemPrice = itemPrice;
         this.itemId = itemId;
         this.itemReviewsCount = itemReviewsCount;
-        if (this.itemReviewsCount == 1) {
-            this.itemReviewCountTitle = 'оценка';
+        if (this.itemReviewsCount === 1) {
+            this.itemReviewsCountTitle = 'оценка';
         } else if (this.itemReviewsCount > 1 && this.itemReviewsCount > 4) {
             this.itemReviewsCountTitle = 'оценки';
-        } else if (this.itemReviewsCount > 3) {
+        } else if (this.itemReviewsCount > 3 || this.itemReviewsCount === 0) {
             this.itemReviewsCountTitle = 'оценок';
         }
         this.type = type;
