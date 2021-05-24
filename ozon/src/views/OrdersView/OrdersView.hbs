@@ -1,5 +1,8 @@
 <div class="{{ordersStyles.ordersWrapper}}" id="orders-list-block">
     <div class="{{ordersStyles.body}}">
+        <div class="{{ordersStyles.title}}">
+            <span class="{{textStyles.title}}">Ваши заказы</span>
+        </div>
         <select class="{{ordersStyles.select}}">
             {{#each select}}
                 <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
@@ -7,25 +10,32 @@
                 </option>
             {{/each}}
         </select>
-        <div class="{{ordersStyles.title}}">
-            <span class="{{ordersStyles.titleText}}">Ваши заказы</span>
-        </div>
-        {{#each this.orderList}}
-            <div class="{{../ordersStyles.order}}">
-                <span class="{{../ordersStyles.dateText}}">Заказ от {{this.date_added}}</span>
-                <span class="{{../ordersStyles.payStatusText}}">{{this.pay_status}}</span>
-                <span class="{{../ordersStyles.costText}}">{{this.total_cost}} ₽&nbsp</span>
-                <div>{{this.order_number.number}}</div>
-                <div class="{{../ordersStyles.addressText}}">Адрес доставки: {{this.address.address}}</div>
-
-
-                {{#each this.product_images}}
-                    <div class="{{../../ordersStyles.image}}" item-id="{{this.id}}">
-                        <img src="{{this.preview_image}}" alt="Product image" class="{{../../ordersStyles.productImage}}">
+        <div class="{{ordersStyles.orders}}">
+            {{#each this.orderList}}
+                <div class="{{../ordersStyles.order}}">
+                    <div class="{{../ordersStyles.orderHead}}">
+                        <div class="{{../ordersStyles.headTop}}">
+                            <span class="{{../textStyles.bold}}">Заказ от {{this.date_added}}</span>
+                            <span class="{{../textStyles.text}}">{{this.pay_status}}</span>
+                            <div>
+                                <span class="{{../textStyles.ordersPrice}}">{{this.total_cost}} ₽</span>
+                                <span class="{{../textStyles.text}}">оплачено</span>
+                            </div>
+                        </div>
+                        <div class="{{../ordersStyles.orderIdWrapper}}">
+                            <span class="{{../textStyles.orderId}}">{{this.order_number.number}}</span>
+                        </div>
                     </div>
-                {{/each}}
-            </div>
-        {{/each}}
+                    <div class="{{../ordersStyles.orderBody}}">
+                        <div class="{{../ordersStyles.address}}">
+                            <span class="{{../textStyles.bold}} {{../ordersStyles.text}}">Адрес доставки: </span>
+                            <span class="{{../textStyles.ordersAddress}} {{../ordersStyles.text}}">{{this.address.address}}</span>
+                        </div>
+                        <div class="{{../ordersStyles.images}}"></div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
         {{#ifEquals this.isEmpty true}}
             <div>Вы пока не сделали ни одного заказа :(</div>
         {{/ifEquals}}
