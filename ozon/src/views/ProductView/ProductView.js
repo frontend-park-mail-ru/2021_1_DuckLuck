@@ -16,6 +16,8 @@ import Router from '../../utils/router/Router';
 import {Pagination} from '../Common/Pagination/Pagination';
 import {Slider} from '../Common/Slider/Slider';
 import {ListOfProductsItem} from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem';
+import starsTemplate from './ProductStars.hbs';
+import starsStyles from './ProductStars.scss';
 
 
 /**
@@ -252,7 +254,30 @@ export class ProductView extends BaseView {
     }
 
     renderStarsCounter = () => {
-        console.log(this.presenter.item);
-        console.log(this.presenter.item.stars);
+        const starsInfo = [];
+        const titles = ['1 звезда', '2 звезды', '3 звезды', '4 звезды', '5 звезд'];
+        const stars = this.presenter.item.stars;
+        let allStarsCount = stars.reduce((a, b) => {
+            return a + b;
+        });
+        if (allStarsCount === 0) {
+            allStarsCount = Number.MAX_SAFE_INTEGER;
+        }
+        for (let i = 0; i < stars.length; i++) {
+            starsInfo.push({
+                title: titles[i],
+                count: stars[i],
+                width: stars[i] / allStarsCount * 100,
+            });
+        }
+        const starsBlock = document.getElementById('rating-stars');
+        starsBlock.innerHTML = starsTemplate({
+            rating: this.presenter.item.rating.toFixed(2),
+            width: this.presenter.item.rating.toFixed(2) / 5 * 100,
+            stars: starsInfo.reverse(),
+            starsStyles: starsStyles,
+            textStyles: textStyles,
+            imgStyles: imgStyles,
+        });
     }
 }

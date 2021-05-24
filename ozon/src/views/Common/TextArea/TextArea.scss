@@ -51,7 +51,7 @@
   font-size: $font-size-m;
 }
 
-.rules, .profile  {
+.rules, .profile, .ratingBlockTitle  {
   @extend %text-shared;
   color: $neutral-color;
 }
@@ -72,4 +72,10 @@
   @extend %text-shared;
   font-size: $font-size-m;
   color: $colored-object-color;
+}
+
+.ratingBig {
+  @extend %text-shared;
+  font-size: $font-size-xl;
+  font-weight: $bold;
 }

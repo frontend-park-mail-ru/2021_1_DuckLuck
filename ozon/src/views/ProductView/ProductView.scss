@@ -157,6 +157,13 @@
     margin: auto;
 }
 
+.reviewMenu {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-s;
+    margin-top: $margin-xxxl;
+}
+
 @media screen and (max-width: $max-width-xl) {
     .block {
         width: 100%;
