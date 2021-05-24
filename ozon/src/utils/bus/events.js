@@ -18,6 +18,7 @@ const Events = {
     ProfileCheckAuthResult: 'profile-check-auth-result',
     ProfileAllResult: 'profile-all-result',
     ProfileAllGet: 'profile-all-get',
+    ProfileLogoutPrepare: 'profile-logout-prepare',
     ProfileLogout: 'profile-logout',
     ProfileLogoutEmitResult: 'profile-logout-emit-result',
     ProfileIncorrectLogout: 'profile-logout-incorrect',
@@ -89,6 +90,9 @@ const Events = {
     PromoSent: 'promo-sent',
     RecommendationLoad: 'recommendation-load',
     RecommendationLoaded: 'recommendation-loaded',
+
+    WebPushSubscribe: 'web-push-subscribe',
+    WebPushUnsubscribe: 'web-push-unsubscribe',
 };
 
 

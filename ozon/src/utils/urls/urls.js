@@ -20,4 +20,6 @@ export const urls = {
     review: '/review/product',
     reviewRights: '/review/rights/product/',
     promo: '/promo',
+    publicKey: '/notification/key',
+    notifications: '/notification',
 };

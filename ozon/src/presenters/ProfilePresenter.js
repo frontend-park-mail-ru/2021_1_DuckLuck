@@ -24,10 +24,12 @@ class ProfilePresenter extends BasePresenter {
         this.bus.on(Events.ProfileCheckAuthResult, this.tryAuthProcessResult);
         this.bus.on(Events.ProfileAllGet, this.getAllData);
         this.bus.on(Events.ProfileAllResult, this.renderAllData);
-        this.bus.on(Events.ProfileLogout, this.profileLogout);
+        this.bus.on(Events.ProfileLogoutPrepare, this.profileLogoutPrepare);
 
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
         Bus.globalBus.on(Events.ProfileTransmitData, this.returnUserData);
+        Bus.globalBus.on(Events.ProfileTransmitData, this.returnUserData);
+        Bus.globalBus.on(Events.ProfileLogout, this.profileLogout);
     }
 
     /**
@@ -151,7 +153,7 @@ class ProfilePresenter extends BasePresenter {
     /**
      * @description logout from profile
      */
-    profileLogout = () => {
+    profileLogoutPrepare = () => {
         if (!navigator.onLine) {
             Router.open('/offline');
             return;
@@ -160,8 +162,12 @@ class ProfilePresenter extends BasePresenter {
         Router.open('/', {replaceState: true});
         Bus.globalBus.emit(Events.HeaderSetCartItems, 0);
         Bus.globalBus.emit(Events.CartDrop);
+        Bus.globalBus.emit(Events.WebPushUnsubscribe);
+    }
+    profileLogout = () => {
         this.model.profileLogout();
     }
+
 
     /**
      *
