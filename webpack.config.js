@@ -9,7 +9,7 @@ module.exports = (env) => {
     if (env.dev) {
         envConfig['SERVER_HOST'] = 'http://localhost:8080';
     } else {
-        envConfig['SERVER_HOST'] = 'https://duckluckmarket.xyz';
+        envConfig['SERVER_HOST'] = 'https://duckluckbreakout.xyz';
     }
 
     return {
