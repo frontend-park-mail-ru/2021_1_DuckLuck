@@ -2,7 +2,7 @@
  * @class Input
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class Input {
+class Input {
     /**
      *
      * @param {string} type type of input (email, password, etc...)
@@ -24,3 +24,5 @@ export class Input {
         this.isDisabled = isDisabled;
     }
 }
+
+export default Input;

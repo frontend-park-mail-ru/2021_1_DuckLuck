@@ -1,13 +1,13 @@
-import {BaseView} from '../BaseView.js';
-import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
+import BaseView from '../BaseView.js';
+import ListOfProducts from '../Common/ListOfProducts/ListOfProducts.js';
 import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.scss';
-import {Pagination} from '../Common/Pagination/Pagination';
+import Pagination from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
-import {Filter} from '../Common/Filter/Filter.js';
-import {Bus} from '../../utils/bus/bus';
+import Filter from '../Common/Filter/Filter.js';
+import Bus from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
 
@@ -16,7 +16,7 @@ import Events from '../../utils/bus/events';
  * @extends BaseView
  * @classdesc Class for showing product
  */
-export class ProductsView extends BaseView {
+class ProductsView extends BaseView {
     static #types = {
         search: 'search',
         category: 'category',
@@ -183,12 +183,12 @@ export class ProductsView extends BaseView {
 
             item.addEventListener('click', (evt) => {
                 evt.preventDefault();
-                Bus.globalBus.emit(Events.CartAddProduct, productID, 1);
+                Bus.globalBus.emit(Events.CartAddProduct, productID, 1, Events.ProductsItemAdded);
             });
         }
 
         this.parent.appendChild(this.cache);
-        Bus.globalBus.emit(Events.CartGetProductsID);
+        Bus.globalBus.emit(Events.CartGetProductsID, Events.ProductsCartLoadedProductsID);
 
         document.getElementById('filtration_form').addEventListener('submit', (event) => {
             event.preventDefault();
@@ -265,9 +265,8 @@ export class ProductsView extends BaseView {
     setButtonAdded = (button, id) => {
         const newButton = button.cloneNode(true);
         this.setButtonAddedStyle(newButton);
-        newButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            Bus.globalBus.emit(Events.CartRemoveProduct, id);
+        newButton.addEventListener('click', () => {
+            Bus.globalBus.emit(Events.CartRemoveProduct, id, Events.ProductsItemNotAdded);
         });
         button.replaceWith(newButton);
     }
@@ -285,7 +284,7 @@ export class ProductsView extends BaseView {
             this.setButtonNotAddedStyle(newButton);
             newButton.addEventListener('click', () => {
                 const id = item.getAttribute('item-id');
-                Bus.globalBus.emit(Events.CartAddProduct, +item.getAttribute('item-id'), 1);
+                Bus.globalBus.emit(Events.CartAddProduct, +item.getAttribute('item-id'), 1, Events.ProductsItemAdded);
                 this.setProductAdded(+id);
             });
             button.replaceWith(newButton);
@@ -358,3 +357,5 @@ export class ProductsView extends BaseView {
         incorrectFilterLabel.innerHTML = '';
     }
 }
+
+export default ProductsView;

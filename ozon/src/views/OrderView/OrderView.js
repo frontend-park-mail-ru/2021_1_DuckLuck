@@ -1,17 +1,17 @@
-import {BaseView} from '../BaseView.js';
+import BaseView from '../BaseView.js';
 import Events from '../../utils/bus/events';
 import orderTemplate from './OrderView.hbs';
 import noticeTemplate from './OrderNotice.hbs';
 import noticeStyles from './OrderNotice.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
-import {Input} from '../Common/Input/Input';
+import Input from '../Common/Input/Input';
 import orderStyles from './OrderView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import popupStyles from './../Common/Popup/Popup.scss';
 import linkStyles from './../Common/Link/Link.scss';
 import Router from '../../utils/router/Router';
-import {Popup} from '../Common/Popup/Popup';
-import {Blind} from '../Common/Blind/Blind';
+import Popup from '../Common/Popup/Popup';
+import Blind from '../Common/Blind/Blind';
 import decorators from '../decorators.scss';
 
 /**
@@ -19,7 +19,7 @@ import decorators from '../decorators.scss';
  * @extends BaseView
  * @classdesc Class for showing product
  */
-export class OrderView extends BaseView {
+class OrderView extends BaseView {
     /**
      * @param {Object} URLParams
      */
@@ -102,3 +102,5 @@ export class OrderView extends BaseView {
     //     promoStatus.innerHTML = 'Неверный промокод!';
     // }
 }
+
+export default OrderView;

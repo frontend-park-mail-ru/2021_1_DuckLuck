@@ -1,8 +1,8 @@
-import {BaseView} from '../BaseView.js';
-import {Popup} from '../Common/Popup/Popup.js';
-import {Blind} from '../Common/Blind/Blind.js';
+import BaseView from '../BaseView.js';
+import Popup from '../Common/Popup/Popup.js';
+import Blind from '../Common/Blind/Blind.js';
 import Router from '../../utils/router/Router.js';
-import {OfflineForm} from '../Common/OfflineForm/OfflineForm.js';
+import OfflineForm from '../Common/OfflineForm/OfflineForm.js';
 import decorator from '../decorators.scss';
 import popupStyles from '../Common/Popup/Popup.scss';
 
@@ -11,7 +11,7 @@ import popupStyles from '../Common/Popup/Popup.scss';
  * @extends BaseView
  * @classdesc Class for offline view (when user doesn't have internet connection)
  */
-export class OfflineView extends BaseView {
+class OfflineView extends BaseView {
     /**
      *
      * @return {void} rendered page
@@ -45,3 +45,5 @@ export class OfflineView extends BaseView {
         // this.parent.appendChild(this.cache);
     }
 }
+
+export default OfflineView;

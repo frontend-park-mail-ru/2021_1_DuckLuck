@@ -2,7 +2,7 @@
  * @class TextArea
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class TextArea {
+class TextArea {
     /**
      *
      * @param {string} name name of a text area
@@ -21,3 +21,5 @@ export class TextArea {
         this.cols = cols;
     }
 }
+
+export default TextArea;

@@ -1,5 +1,5 @@
-import {Img} from '../Img/Img';
-import {ListOfProductsItem} from './ListOfProductsItem/ListOfProductsItem';
+import Img from '../Img/Img';
+import ListOfProductsItem from './ListOfProductsItem/ListOfProductsItem';
 import listOFProductsItemTemplate from './ListOfProducts.hbs';
 import listOFProductsStyles from './ListOfProducts.scss';
 import {staticServerHost} from '../../../utils/urls/urls.js';
@@ -8,7 +8,7 @@ import {staticServerHost} from '../../../utils/urls/urls.js';
  * @class ListOfProducts
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class ListOfProducts {
+class ListOfProducts {
     /**
      *
      * @param {Object[]} items array of items to present on page
@@ -53,3 +53,5 @@ export class ListOfProducts {
         });
     };
 }
+
+export default ListOfProducts;

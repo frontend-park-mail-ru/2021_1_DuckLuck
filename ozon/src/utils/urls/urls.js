@@ -15,6 +15,7 @@ export const urls = {
     cart: '/cart',
     cartProduct: '/cart/product',
     order: '/order',
+    orders: '/user/order',
     sessionUrl: '/session',
     review: '/review/product',
     reviewRights: '/review/rights/product/',
