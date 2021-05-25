@@ -6,9 +6,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 
 module.exports = (env) => {
-    const envConfig = {
-        STATIC_SERVER_HOST: 'https://duckluckbreakout.xyz',
-    };
+    const envConfig = {};
 
     if (env.dev) {
         envConfig['SERVER_HOST'] = 'http://localhost:8080';
@@ -101,7 +99,6 @@ module.exports = (env) => {
         plugins: [
             new webpack.EnvironmentPlugin({
                 SERVER_HOST: envConfig.SERVER_HOST,
-                STATIC_SERVER_HOST: envConfig.STATIC_SERVER_HOST,
             }),
             new MiniCssExtractPlugin(),
             new CssMinimizerPlugin(),
