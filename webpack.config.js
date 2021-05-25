@@ -101,7 +101,6 @@ module.exports = (env) => {
         plugins: [
             new webpack.EnvironmentPlugin({
                 SERVER_HOST: envConfig.SERVER_HOST,
-                FILE_SERVER_HOST: envConfig.FILE_SERVER_HOST,
                 STATIC_SERVER_HOST: envConfig.STATIC_SERVER_HOST,
             }),
             new MiniCssExtractPlugin(),
