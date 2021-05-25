@@ -1,5 +1,6 @@
 import {isValidInputs} from '../modules/Valiadtor/validator.js';
 import Bus from '../utils/bus/bus';
+import Events from '../utils/bus/events';
 
 /**
  * @description Base Presenter class
@@ -23,6 +24,7 @@ class BasePresenter {
         this.#bus = new Bus();
         this.#view = new View(application, this, this.#bus);
         this.#model = new Model(this.#bus);
+        Bus.globalBus.on(Events.DummyEvent, this.dummy);
     }
 
     /**
@@ -85,6 +87,8 @@ class BasePresenter {
         const inputs = this.#view.cache.getElementsByTagName('form')[0].getElementsByTagName('input');
         return isValidInputs(inputs, specificTypeToCheck);
     }
+
+    dummy = () => { }
 }
 
 export default BasePresenter;
