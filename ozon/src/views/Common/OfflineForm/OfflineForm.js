@@ -6,7 +6,7 @@ import offlineFormStyles from './OfflineForm.scss';
  * @class OfflineForm
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class OfflineForm {
+class OfflineForm {
     /**
      * A default constructor for OfflineForm
      */
@@ -25,3 +25,5 @@ export class OfflineForm {
         });
     };
 }
+
+export default OfflineForm;

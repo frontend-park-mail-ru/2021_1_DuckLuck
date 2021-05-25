@@ -8,7 +8,7 @@ import linkStyles from '../Link/Link.scss';
  * @class AuthenticationForm
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class AuthenticationForm {
+class AuthenticationForm {
     /**
      * A default constructor for AuthenticationForm
      */
@@ -33,3 +33,5 @@ export class AuthenticationForm {
         });
     };
 }
+
+export default AuthenticationForm;

@@ -8,7 +8,7 @@ import imgStyles from '../../Img/Img.scss';
  * @class ListOfProductsItem
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class ListOfProductsItem {
+class ListOfProductsItem {
     /**
      * @param {Object} Image of a product
      * @param {string} itemName
@@ -53,3 +53,5 @@ export class ListOfProductsItem {
         });
     }
 }
+
+export default ListOfProductsItem;

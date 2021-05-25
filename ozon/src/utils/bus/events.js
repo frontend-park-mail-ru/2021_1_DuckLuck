@@ -32,12 +32,14 @@ const Events = {
     RenderProductReviews: 'render-product-reviews',
     ProductTransmitData: 'product-transmit-data',
     ProductsItemNotAdded: 'products-item-removed',
+    ProductsCartLoadedProductsID: 'products-cart-loaded-products-ids',
 
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
     ProductItemNotAdded: 'product-item-not-added',
     ProductItemAdded: 'product-item-added',
+    ProductCartLoadedProductsID: 'product-cart-loaded-products-ids',
     ProductRenderReviewButton: 'product-render-review-button',
 
     HeaderLoad: 'product-load',
@@ -58,15 +60,19 @@ const Events = {
     CartLoadedProductsAmountReaction: 'cart-loaded-products-amount-reaction',
     CartGetProductsID: 'cart-get-products-ids',
     CartGetProductID: 'cart-get-product-id',
-    CartLoadedProductsID: 'cart-loaded-products-ids',
     CartLoadedProductID: 'cart-loaded-product-id',
     CartAddLastProduct: 'cart-add-last-product',
     CartDrop: 'cart-drop',
+    CartCheckRecommendationsInCart: 'cart-check-recommendations-in-cart',
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
+    OrderNewBill: 'order-new-bill',
+    OrderIncorrectPromo: 'order-incorrect-promo',
     SendOrder: 'order-send',
 
+    OrdersLoad: 'orders-load',
+    OrdersLoaded: 'orders-loaded',
     ReviewRightsLoad: 'review-rights-load',
     ReviewRightsLoaded: 'review-rights-loaded',
     ReviewUserDataLoad: 'review-user-data-load',
@@ -80,6 +86,8 @@ const Events = {
     ChangeReviewProductId: 'change-review-product-id',
     OrderSent: 'order-sent',
 
+    SendPromo: 'send-promo',
+    PromoSent: 'promo-sent',
     RecommendationLoad: 'recommendation-load',
     RecommendationLoaded: 'recommendation-loaded',
 

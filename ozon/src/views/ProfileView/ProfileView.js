@@ -1,5 +1,5 @@
-import {BaseView} from '../BaseView.js';
-import {Input} from '../Common/Input/Input.js';
+import BaseView from '../BaseView.js';
+import Input from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
 import profileStyles from './ProfileView.scss';
 import buttonStyles from '../Common/Button/Button.scss';
@@ -12,7 +12,7 @@ import Events from '../../utils/bus/events';
  * @extends BaseView
  * @classdesc Class for showing profile of a user
  */
-export class ProfileView extends BaseView {
+class ProfileView extends BaseView {
     /**
      * @param {Object} URLParams
      * @description redefinition of show method
@@ -112,3 +112,5 @@ export class ProfileView extends BaseView {
         document.getElementById('invalid-avatar-span').innerHTML = 'Некорретный файл';
     }
 }
+
+export default ProfileView;

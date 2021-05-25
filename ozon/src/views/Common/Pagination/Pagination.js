@@ -1,4 +1,4 @@
-import {Button} from '../Button/Button.js';
+import Button from '../Button/Button.js';
 import paginationTemplate from './Pagination.hbs';
 import paginationOneButtonTemplate from './PaginationOneButton.hbs';
 import styles from './Pagination.scss';
@@ -9,7 +9,7 @@ import textStyles from '../TextArea/TextArea.scss';
  * @class Pagination
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class Pagination {
+class Pagination {
     /**
      * @param {number} pagesCount maximum amount of page
      * @param {boolean} isOneButton
@@ -115,3 +115,5 @@ export class Pagination {
         });
     }
 }
+
+export default Pagination;

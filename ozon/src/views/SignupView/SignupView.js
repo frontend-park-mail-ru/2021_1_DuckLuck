@@ -1,10 +1,10 @@
-import {BaseView} from '../BaseView.js';
-import {Input} from '../Common/Input/Input.js';
-import {Button} from '../Common/Button/Button.js';
-import {Link} from '../Common/Link/Link.js';
-import {Popup} from '../Common/Popup/Popup.js';
-import {Blind} from '../Common/Blind/Blind.js';
-import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
+import BaseView from '../BaseView.js';
+import Input from '../Common/Input/Input.js';
+import Button from '../Common/Button/Button.js';
+import Link from '../Common/Link/Link.js';
+import Popup from '../Common/Popup/Popup.js';
+import Blind from '../Common/Blind/Blind.js';
+import AuthenticationForm from '../Common/AuthenticationForm/AuthenticationForm.js';
 import Router from '../../utils/router/Router.js';
 import Events from '../../utils/bus/events';
 import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.scss';
@@ -18,7 +18,7 @@ import linkStyles from '../Common/Link/Link.scss';
  * @extends BaseView
  * @classdesc Class for signup page
  */
-export class SignupView extends BaseView {
+class SignupView extends BaseView {
     /**
      *
      * @return {void} rendered page
@@ -105,3 +105,5 @@ export class SignupView extends BaseView {
             });
     }
 }
+
+export default SignupView;
