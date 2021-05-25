@@ -294,20 +294,6 @@ class ProductView extends BaseView {
     }
 
     /**
-     * @param {number} productID
-     */
-    setProductAdded = (productID) => {
-        const item = Array.from(document.getElementsByClassName(ListOfProductsItemStyles.block)).filter((item) => {
-            return +item.getAttribute('item-id') === productID;
-        })[0];
-        if (item) {
-            this.setButtonAdded(item.getElementsByClassName(
-                ListOfProductsItemStyles.buttonsBlock)[0].getElementsByTagName('button')[0],
-            productID);
-        }
-    }
-
-    /**
      * @param {HTMLElement} button
      * @param {number} id
      */
@@ -318,26 +304,6 @@ class ProductView extends BaseView {
             Bus.globalBus.emit(Events.CartRemoveProduct, id, Events.ProductsItemNotAdded);
         });
         button.replaceWith(newButton);
-    }
-
-    /**
-     * @param {number} productID
-     */
-    setProductNotAdded = (productID) => {
-        const item = Array.from(document.getElementsByClassName(ListOfProductsItemStyles.block)).filter((item) => {
-            return +item.getAttribute('item-id') === +productID;
-        })[0];
-        if (item) {
-            const button = item.getElementsByTagName('button')[0];
-            const newButton = button.cloneNode(true);
-            this.setButtonNotAddedStyle(newButton);
-            newButton.addEventListener('click', () => {
-                const id = item.getAttribute('item-id');
-                Bus.globalBus.emit(Events.CartAddProduct, +item.getAttribute('item-id'), 1, Events.ProductsItemAdded);
-                this.setProductAdded(+id);
-            });
-            button.replaceWith(newButton);
-        }
     }
 
     /**
