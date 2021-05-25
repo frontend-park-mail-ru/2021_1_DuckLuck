@@ -7,7 +7,6 @@ import textStyles from './../Common/TextArea/TextArea.scss';
 import imgStyles from './../Common/Img/Img.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import linkStyles from './../Common/Link/Link.scss';
-import {staticServerHost} from '../../utils/urls/urls';
 import Router from '../../utils/router/Router';
 import Bus from '../../utils/bus/bus';
 import Popup from '../Common/Popup/Popup';
@@ -16,6 +15,7 @@ import noticeStyles from './ReviewNotice.scss';
 import Blind from '../Common/Blind/Blind';
 import popupStyles from '../Common/Popup/Popup.scss';
 import decorators from '../decorators.scss';
+import Img from '../Common/Img/Img';
 
 /**
  * @class ReviewView
@@ -61,12 +61,13 @@ class ReviewView extends BaseView {
             linkStyles: linkStyles,
             product: this.presenter.product,
             userName: this.presenter.userName,
+            ratingStar: new Img({src: '/svg/empty_star.svg'}),
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('review-block');
         this.parent.appendChild(this.cache);
 
-        const emptyStarLink = staticServerHost + '/svg/empty_star.svg';
-        const starLink = staticServerHost + '/svg/star.svg';
+        const emptyStarLink = '/svg/empty_star.svg';
+        const starLink = '/svg/star.svg';
         const stars = Array.from(this.cache.getElementsByClassName(reviewStyles.stars)[0].children);
 
         const emptyRating = (event) => {

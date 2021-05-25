@@ -2,6 +2,7 @@ import sliderTemplate from './Slider.hbs';
 import sliderStyles from './Slider.scss';
 import buttonStyles from './../Button/Button.scss';
 import decorators from '../../decorators.scss';
+import Img from '../Img/Img';
 
 /**
  * @class Slider
@@ -33,6 +34,7 @@ class Slider {
             sliderStyles: sliderStyles,
             buttonStyles: buttonStyles,
             decorators: decorators,
+            buttonSvg: new Img({src: '/svg/slider.svg'}),
         });
         const slider = new DOMParser().parseFromString(template, 'text/html');
         this.content = slider.getElementsByClassName(sliderStyles.content)[0];
@@ -77,7 +79,6 @@ class Slider {
                 this.content.style.transform = `translateX(${this.currentTranslate}px)`;
             });
         });
-
         return slider.getElementById('slider');
     }
 

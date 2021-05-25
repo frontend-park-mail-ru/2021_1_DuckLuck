@@ -1,5 +1,5 @@
 import AjaxModule from '../modules/Ajax/Ajax';
-import {fileServerHost, serverApiPath, urls} from '../utils/urls/urls';
+import {serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
@@ -232,7 +232,7 @@ class CartModel extends BaseModel {
                 return elem.id;
             }) || []);
             for (const product of this.#products) {
-                product.preview_image = fileServerHost + product.preview_image;
+                product.preview_image = product.preview_image;
             }
             this.bus.emit(Events.CartLoaded, Responses.Success);
         }).catch((err) => {

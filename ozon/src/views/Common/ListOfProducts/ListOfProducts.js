@@ -2,7 +2,6 @@ import Img from '../Img/Img';
 import ListOfProductsItem from './ListOfProductsItem/ListOfProductsItem';
 import listOFProductsItemTemplate from './ListOfProducts.hbs';
 import listOFProductsStyles from './ListOfProducts.scss';
-import {staticServerHost} from '../../../utils/urls/urls.js';
 
 /**
  * @class ListOfProducts
@@ -24,7 +23,7 @@ class ListOfProducts {
                 itemInCart: item['inCart'],
                 itemReviewsCount: item['count_reviews'],
                 itemId: item['id'],
-                itemImage: new Img({src: staticServerHost + item['preview_image']}),
+                itemImage: new Img({src: item['preview_image']}),
                 itemName: item['title'],
                 itemRating: item['rating'],
                 itemPrice: {

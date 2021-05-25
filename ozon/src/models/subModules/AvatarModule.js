@@ -3,7 +3,7 @@ import BaseModel from '../BaseModel';
 import Events from '../../utils/bus/events';
 import Responses from '../../utils/bus/responses';
 import HTTPResponses from '../../utils/http-responses/httpResponses';
-import {serverApiPath, staticServerHost, urls} from '../../utils/urls/urls';
+import {serverApiPath, urls} from '../../utils/urls/urls';
 
 /**
  * @description Model for Avatar Loading/Uploading in MVP Arch
@@ -16,8 +16,8 @@ class AvatarModule extends BaseModel {
      * @param {string} URL New URL for avatar
      */
     set avatarURL(URL) {
-        if (URL === '' || URL === staticServerHost + '/') {
-            this.#avatarURL = staticServerHost + urls.defaultAvatar;
+        if (!URL.includes('avatar')) {
+            this.#avatarURL = urls.defaultAvatar;
             return;
         }
 
@@ -43,7 +43,7 @@ class AvatarModule extends BaseModel {
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
-        return staticServerHost + urls.defaultAvatar;
+        return urls.defaultAvatar;
     }
 
     /**

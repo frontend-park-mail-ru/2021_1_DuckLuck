@@ -6,6 +6,7 @@ import buttonStyles from '../Common/Button/Button.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
 import imgStyles from './../Common/Img/Img.scss';
 import Events from '../../utils/bus/events';
+import Img from '../Common/Img/Img';
 
 /**
  * @class  ProfileView
@@ -47,6 +48,7 @@ class ProfileView extends BaseView {
             buttonStyles: buttonStyles,
             imgStyles: imgStyles,
             textStyles: textStyles,
+            smileSvg: new Img({src: '/svg/header/smile.svg'}),
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
