@@ -78,6 +78,7 @@ class OrdersModel extends BaseModel {
             }
             return response.json();
         }).then((parsedJson) => {
+            console.log(parsedJson);
             this.#paginationInfo = {
                 pagesCount: parsedJson['max_count_pages'],
                 currentPage: page,
