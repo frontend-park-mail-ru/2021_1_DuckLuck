@@ -6,7 +6,7 @@ import buttonStyles from '../Button/Button.scss';
 /**
  * @description Filter form template
  */
-export class Filter {
+class Filter {
     /**
      *
      * @return {string} generated HTML after templating
@@ -19,3 +19,5 @@ export class Filter {
         });
     }
 }
+
+export default Filter;

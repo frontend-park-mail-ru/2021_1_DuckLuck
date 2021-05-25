@@ -1,7 +1,7 @@
 import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 import Router from '../utils/router/Router';
 
 /**
@@ -88,12 +88,13 @@ class CartPresenter extends BasePresenter {
      *
      * @param {number} id
      * @param {number|string} count
+     * @param {Events} callbackEvent
      */
-    addProduct = (id, count) => {
+    addProduct = (id, count, callbackEvent) => {
         if (count < 0 || id < 0) {
             return;
         }
-        this.model.addProduct(id, count);
+        this.model.addProduct(id, count, callbackEvent);
     }
 
     changeProduct = ({id, count}) => {
@@ -102,9 +103,10 @@ class CartPresenter extends BasePresenter {
 
     /**
      * @param {number} id
+     * @param {Events} callbackEvent
      */
-    removeProduct = (id) => {
-        this.model.removeProduct(id);
+    removeProduct = (id, callbackEvent) => {
+        this.model.removeProduct(id, callbackEvent);
     }
 
     /**
@@ -154,8 +156,11 @@ class CartPresenter extends BasePresenter {
         this.addLastProduct();
     }
 
-    getProductsIDs = () => {
-        this.model.getIDs(Events.CartLoadedProductsID);
+    /**
+     * @param {string} eventToEmit
+     */
+    getProductsIDs = (eventToEmit) => {
+        this.model.getIDs(eventToEmit);
     }
 
     getProductID = () => {

@@ -1,11 +1,11 @@
-import {AjaxModule} from '../modules/Ajax/Ajax';
+import AjaxModule from '../modules/Ajax/Ajax';
 import {serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import HTTPResponses from '../utils/http-responses/httpResponses';
 import Router from '../utils/router/Router';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 
 /**
  * @description Model for Review in MVP Arch

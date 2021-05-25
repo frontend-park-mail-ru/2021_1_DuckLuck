@@ -1,7 +1,7 @@
-import {BaseView} from '../BaseView.js';
+import BaseView from '../BaseView.js';
 import Events from '../../utils/bus/events';
 import reviewTemplate from './ReviewView.hbs';
-import {Input} from '../Common/Input/Input';
+import Input from '../Common/Input/Input';
 import reviewStyles from './ReviewView.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
 import imgStyles from './../Common/Img/Img.scss';
@@ -9,11 +9,11 @@ import buttonStyles from './../Common/Button/Button.scss';
 import linkStyles from './../Common/Link/Link.scss';
 import {staticServerHost} from '../../utils/urls/urls';
 import Router from '../../utils/router/Router';
-import {Bus} from '../../utils/bus/bus';
-import {Popup} from '../Common/Popup/Popup';
+import Bus from '../../utils/bus/bus';
+import Popup from '../Common/Popup/Popup';
 import noticeTemplate from './ReviewNotice.hbs';
 import noticeStyles from './ReviewNotice.scss';
-import {Blind} from '../Common/Blind/Blind';
+import Blind from '../Common/Blind/Blind';
 import popupStyles from '../Common/Popup/Popup.scss';
 import decorators from '../decorators.scss';
 

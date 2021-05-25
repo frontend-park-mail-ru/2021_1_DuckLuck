@@ -5,7 +5,7 @@ import popupStyles from './Popup.scss';
  * @class Popup
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class Popup {
+class Popup {
     /**
      * @description Default constructor
      */
@@ -24,3 +24,5 @@ export class Popup {
         return popupTemplate({popupBody, background, popupType, popupStyles});
     };
 }
+
+export default Popup;

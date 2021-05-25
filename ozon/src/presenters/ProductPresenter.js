@@ -1,7 +1,7 @@
 import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 import Router from '../utils/router/Router';
 import {staticServerHost} from '../utils/urls/urls';
 
@@ -28,6 +28,7 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProductTransmitData, this.returnProductData);
         Bus.globalBus.on(Events.ProductItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.ProductItemNotAdded, this.setProductNotAdded);
+        Bus.globalBus.on(Events.ProductCartLoadedProductsID, this.recommendationsCartGotIds);
         Bus.globalBus.on(Events.ProductRenderReviewButton, this.addReviewButton);
     }
 
@@ -145,7 +146,7 @@ class ProductsPresenter extends BasePresenter {
      */
     productCartGotIds = (ids) => {
         if (ids.has(this.model.item.id)) {
-            this.view.setProductAdded();
+            this.view.setPageProductAdded();
         }
     }
 
@@ -172,11 +173,20 @@ class ProductsPresenter extends BasePresenter {
     }
 
     setProductAdded = () => {
-        this.view.setProductAdded();
+        this.view.setPageProductAdded();
     }
 
     setProductNotAdded = () => {
-        this.view.setProductNotAdded();
+        this.view.setPageProductNotAdded();
+    }
+
+    /**
+     * @param {Set} ids
+     */
+    recommendationsCartGotIds = (ids) => {
+        if (ids.size) {
+            this.view.recommendationSetAddedProducts(ids);
+        }
     }
 
     addReviewButton = () => {

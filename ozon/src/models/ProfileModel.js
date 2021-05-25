@@ -3,12 +3,12 @@ import AvatarModule from './subModules/AvatarModule';
 import EmailModule from './subModules/EmailModule';
 import CheckAuthModule from './subModules/CheckAuthModule';
 import BaseModel from './BaseModel';
-import {AjaxModule} from '../modules/Ajax/Ajax';
+import AjaxModule from '../modules/Ajax/Ajax';
 import {serverApiPath, urls} from '../utils/urls/urls';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import HTTPResponses from '../utils/http-responses/httpResponses';
-import {Bus} from '../utils/bus/bus.js';
+import Bus from '../utils/bus/bus.js';
 
 /**
  * @description Model for Profile in MVP Arch. THIS IS A FACADE!

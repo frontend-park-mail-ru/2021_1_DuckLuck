@@ -1,7 +1,7 @@
 /**
  * @description Simple Bus class which provider "Mediator" pattern through all application.
  */
-export class Bus {
+class Bus {
     /**
      * @description Simple constructor
      */
@@ -60,3 +60,4 @@ export class Bus {
     }
 }
 
+export default Bus;
