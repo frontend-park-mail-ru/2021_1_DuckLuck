@@ -1,4 +1,6 @@
 const Events = {
+    DummyEvent: 'dummy-event',
+
     LoginSendData: 'login-send-data',
     LoginEmitResult: 'login-emit-result',
     LoginIncorrectForm: 'login-incorrect-form',
