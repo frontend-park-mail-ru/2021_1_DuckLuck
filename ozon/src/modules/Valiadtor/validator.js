@@ -92,6 +92,7 @@ const passwordValidation = (input, result, userInfo) => {
 const passwordRepeatValidation = (input, result, password) => {
     if (result.failedFields.includes(fields.passwordTooLong) ||
         result.failedFields.includes(fields.passwordTooShort)) {
+        result.failedFields.push(fields.repeatPasswordDrop);
         return;
     }
 

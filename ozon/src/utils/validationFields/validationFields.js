@@ -31,6 +31,10 @@ export const fields = {
         fieldName: 'repeatPassword',
         errorMessage: 'Пароль слишком длинный',
     },
+    repeatPasswordDrop: {
+        fieldName: 'repeatPassword',
+        errorMessage: '',
+    },
     incorrectFile: {
         fieldName: 'file',
         errorMessage: 'Некоррекный файл',
