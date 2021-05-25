@@ -7,7 +7,7 @@ const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = (env) => {
     const envConfig = {FILE_SERVER_HOST: 'https://duckluckbreakout.xyz',
-                       STATIC_SERVER_HOST: 'https://duckluckmarket.hb.bizmrg.com',
+                       STATIC_SERVER_HOST: 'https://duckluckbreakout.xyz',
     };
 
     if (env.dev) {
