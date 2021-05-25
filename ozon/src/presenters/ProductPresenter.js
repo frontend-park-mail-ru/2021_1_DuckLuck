@@ -20,6 +20,8 @@ class ProductsPresenter extends BasePresenter {
         this.bus.on(Events.ProductLoaded, this.productLoadedReaction);
         this.bus.on(Events.RecommendationLoad, this.loadRecommendations);
         this.bus.on(Events.RecommendationLoaded, this.recommendationsLoadedReaction);
+        this.bus.on(Events.ProductStarsCounterLoad, this.loadStarsCounter);
+        this.bus.on(Events.ProductStarsCounterLoaded, this.starsCounterLoaded);
         Bus.globalBus.on(Events.ProductChangeID, this.changeID);
         Bus.globalBus.on(Events.CartLoadedProductID, this.productCartGotIds);
         Bus.globalBus.on(Events.RenderProductReviews, this.renderProductsReview);
@@ -189,6 +191,31 @@ class ProductsPresenter extends BasePresenter {
 
     addReviewButton = () => {
         this.view.addReviewButton();
+    }
+
+    loadStarsCounter = () => {
+        this.model.loadStarsCounter();
+    }
+
+    /**
+     *
+     * @param {string}result
+     */
+    starsCounterLoaded = (result) => {
+        switch (result) {
+        case Responses.Success: {
+            this.view.renderStarsCounter();
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
     }
 }
 

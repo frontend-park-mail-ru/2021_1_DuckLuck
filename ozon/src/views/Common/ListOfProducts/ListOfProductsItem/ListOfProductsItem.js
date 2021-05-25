@@ -43,6 +43,7 @@ class ListOfProductsItem {
             itemImage: this.itemImage,
             itemName: this.itemName,
             itemRating: this.itemRating,
+            width: this.itemRating / 5 * 100,
             itemReviewsCount: this.itemReviewsCount,
             itemPrice: this.itemPrice,
             type: this.type,

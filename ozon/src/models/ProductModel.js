@@ -116,6 +116,35 @@ class ProductModel extends BaseModel {
         });
     }
 
+    loadStarsCounter = () => {
+        AjaxModule.getUsingFetch({
+            url: serverApiPath + `/review/statistics/product/${this.item.id}`,
+        }).then((response) => {
+            if (response.status !== HTTPResponses.Success) {
+                throw response.status;
+            }
+            return response.json();
+        }).then((response) => {
+            Object.assign(this.item, {stars: response.stars});
+            this.bus.emit(Events.ProductStarsCounterLoaded, Responses.Success);
+        }).catch((err) => {
+            switch (err) {
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.ProductStarsCounterLoaded, Responses.Unauthorized);
+                break;
+            }
+            case HTTPResponses.Offline: {
+                this.bus.emit(Events.ProductStarsCounterLoaded, Responses.Offline);
+                break;
+            }
+            default: {
+                this.bus.emit(Events.ProductStarsCounterLoaded, Responses.Error);
+                break;
+            }
+            }
+        });
+    }
+
     /**
      *
      * @param {Number} itemId ID of item on server
