@@ -1,76 +1,84 @@
-@import '../../constants.scss';
+@import '../../constants';
 
 .ordersWrapper {
-    background: var(--neutral-background-color);
-    width: 100%;
-    height: 100%;
+  width: 100%;
 }
 
 .body {
-    max-width: var(--max-width);
-    padding: var(--padding-xs) var(--padding-l);
-    margin: var(--margin-l) auto 0;
-    width: 100%;
-    box-sizing: border-box;
-    font-family: var(--font);
-    display: flex;
-    flex-direction: column;
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-s;
 }
 
-.footer {
-    display: flex;
-    max-width: 60%;
-    margin: auto;
-    width: 100%;
-    border-top: solid;
-    border-color: var(--neutral-background-color);
-    padding-top: var(--padding-m);
-}
-
-.select {
-    width: 226px;
-    height: var(--height-xxxs);
-}
-
-.titleText {
-    font-family: var(--font);
-    font-size: var(--font-size-xxl);
-    font-weight: var(--bold-font);
-}
-
-.dateText {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.costText, .payStatusText {
-    font-family: var(--font);
-    font-size: var(--font-size-l);
-    margin-top: auto;
-    margin-bottom: auto;
-    float: right;
-}
-
-.addressText {
-    font-family: var(--font);
-    font-size: var(--font-size-m);
-    margin-top: auto;
-    margin-bottom: auto;
+.orders {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-s;
 }
 
 .order {
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $neutral-background-color;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
+.images {
+  max-width: 70%;
+  margin-top: $margin-s;
+  margin-bottom: $margin-s;
 }
 
 .image {
-    display: inline-block;
-    width: 92px;
-    height: 92px;
-    margin-top: 10px;
+  display: block;
+  cursor: pointer;
 }
 
-.productImage {
-    height: 100%;
+.select {
+  display: block;
+  width: $width-s;
+}
+
+.orderHead {
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: $neutral-background-color;
+  min-height: $height-s;
+  gap: $gap-xxs;
+}
+
+.headTop {
+  display: flex;
+  justify-content: space-between;
+  margin-top: $margin-s;
+  margin-left: $margin-s;
+  margin-right: $margin-s;
+}
+
+.orderIdWrapper {
+  margin-left: $margin-s;
+  margin-bottom: $margin-s;
+}
+
+.orderBody {
+  display: flex;
+  flex-direction: row;
+  min-height: $height-l;
+}
+
+.address {
+  margin-top: $margin-s;
+  min-width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-xxs;
+}
+
+.text {
+  margin-left: $margin-s;
 }

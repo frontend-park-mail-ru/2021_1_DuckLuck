@@ -64,7 +64,7 @@ class ProfileView extends BaseView {
         const logout = document.getElementById('logout');
         logout.addEventListener('click', (evt) => {
             evt.preventDefault();
-            this.bus.emit(Events.ProfileLogout);
+            this.bus.emit(Events.ProfileLogoutPrepare);
         });
 
         this.bus.emit(Events.ProfileAllGet);

@@ -57,15 +57,23 @@ class OrdersModel extends BaseModel {
     }
 
     /**
+     * @param {Object} newPaginationInfo
+     */
+    set paginationInfo(newPaginationInfo) {
+        return this.#paginationInfo = newPaginationInfo;
+    }
+
+    /**
      *
      * @param {number} page
      * @param {string} sortKey
      * @param {string} sortDirection
+     * @param {Events} callbackEvent
      * @param {Object} body
      */
-    loadOrders = (page, sortKey, sortDirection, body = {
+    loadOrders = (page, sortKey, sortDirection, callbackEvent = Events.OrdersLoaded, body = {
         page_num: +page,
-        count: 3,
+        count: 4,
         sort_key: sortKey,
         sort_direction: sortDirection,
     }) => {
@@ -89,15 +97,18 @@ class OrdersModel extends BaseModel {
                     image.preview_image = fileServerHost + image.preview_image;
                 }
             }
-            this.bus.emit(Events.OrdersLoaded, Responses.Success);
+            this.bus.emit(callbackEvent, Responses.Success, {
+                pagesCount: parsedJson['max_count_pages'],
+                currentPage: page,
+            });
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
-                this.bus.emit(Events.OrdersLoaded, Responses.Unauthorized);
+                this.bus.emit(callbackEvent, Responses.Unauthorized);
                 break;
             }
             case HTTPResponses.Offline: {
-                this.bus.emit(Events.OrdersLoaded, Responses.Offline);
+                this.bus.emit(callbackEvent, Responses.Offline);
                 break;
             }
             default: {
