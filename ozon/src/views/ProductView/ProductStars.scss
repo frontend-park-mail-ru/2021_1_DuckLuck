@@ -88,3 +88,14 @@
   background-size: 24px 24px;
   background-repeat: repeat-x;
 }
+
+@media screen and (max-width: $max-width-m) {
+  .block {
+    width: 305px;
+  }
+
+  .countLine, .countColor {
+    min-width: 195px;
+    max-width: 195px;
+  }
+}
