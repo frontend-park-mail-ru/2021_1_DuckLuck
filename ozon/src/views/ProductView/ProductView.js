@@ -2,7 +2,7 @@ import BaseView from '../BaseView.js';
 import Img from '../Common/Img/Img.js';
 import productPageTemplate from './ProductView.hbs';
 import reviewsTemplate from './ProductReviews.hbs';
-import {fileServerHost, staticServerHost} from '../../utils/urls/urls.js';
+import {fileServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
 import productStyles from './ProductView.scss';
 import reviewStyles from './ProductReview.scss';
@@ -192,7 +192,7 @@ class ProductView extends BaseView {
             review.user_name = (review.user_name !== '') ? review.user_name : 'Анонимный пользователь';
             review.firstChar = review.user_name[0];
             if (review.user_avatar) {
-                review.avatar = `${staticServerHost}/${review.user_avatar}`;
+                review.avatar = `/${review.user_avatar}`;
             }
         });
 
@@ -203,8 +203,8 @@ class ProductView extends BaseView {
                     productStyles: productStyles,
                     reviewStyles: reviewStyles,
                     imgStyles: imgStyles,
-                    emptyStarSvg: new Img({src: staticServerHost + '/svg/empty_star.svg'}),
-                    starSvg: new Img({src: staticServerHost + '/svg/star.svg'}),
+                    emptyStarSvg: new Img({src: '/svg/empty_star.svg'}),
+                    starSvg: new Img({src: '/svg/star.svg'}),
                 });
         } else {
             this.cache.getElementsByClassName(productStyles.reviewList)[0].innerHTML = reviewsTemplate({
@@ -213,8 +213,8 @@ class ProductView extends BaseView {
                 productStyles: productStyles,
                 reviewStyles: reviewStyles,
                 imgStyles: imgStyles,
-                emptyStarSvg: new Img({src: staticServerHost + '/svg/empty_star.svg'}),
-                starSvg: new Img({src: staticServerHost + '/svg/star.svg'}),
+                emptyStarSvg: new Img({src: '/svg/empty_star.svg'}),
+                starSvg: new Img({src: '/svg/star.svg'}),
             });
         }
         if (paginationInfo.pagesCount === paginationInfo.currentPage) {
@@ -254,7 +254,7 @@ class ProductView extends BaseView {
                 itemInCart: item['inCart'],
                 itemReviewsCount: item['count_reviews'],
                 itemId: item['id'],
-                itemImage: new Img({src: staticServerHost + item['preview_image']}),
+                itemImage: new Img({src: item['preview_image']}),
                 itemName: item['title'],
                 itemRating: item['rating'],
                 itemPrice: {

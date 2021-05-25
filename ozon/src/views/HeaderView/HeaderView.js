@@ -7,7 +7,6 @@ import textStyles from '../Common/TextArea/TextArea.scss';
 import linkStyles from '../Common/Link/Link.scss';
 import decorators from '../decorators.scss';
 import headerTemplate from './HeaderView.hbs';
-import {staticServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
 import Img from '../Common/Img/Img';
 import Button from '../Common/Button/Button';
@@ -33,29 +32,29 @@ class HeaderView extends BaseView {
      */
     render = () => {
         this.parent.innerHTML = '';
-        const logo = new Img({src: staticServerHost + '/svg/header/logo.svg'});
+        const logo = new Img({src: '/svg/header/logo.svg'});
         const headerMenu = [
             {
                 text: 'Войти',
-                img: new Img({src: staticServerHost + '/svg/header/smile.svg'}),
+                img: new Img({src: '/svg/header/smile.svg'}),
                 button: new Button(),
                 href: '/login',
                 name: 'login',
             }, {
                 text: 'Заказы',
-                img: new Img({src: staticServerHost + '/svg/header/orders.svg'}),
+                img: new Img({src: '/svg/header/orders.svg'}),
                 button: new Button(),
                 href: '/orders',
                 name: 'orders',
             }, {
                 text: 'Избранное',
-                img: new Img({src: staticServerHost + '/svg/header/favorites.svg'}),
+                img: new Img({src: '/svg/header/favorites.svg'}),
                 button: new Button(),
                 href: '/favorites',
                 name: 'favorites',
             }, {
                 text: 'Корзина',
-                img: new Img({src: staticServerHost + '/svg/header/cart.svg'}),
+                img: new Img({src: '/svg/header/cart.svg'}),
                 button: new Button(),
                 href: '/cart',
                 name: 'cart',
@@ -66,15 +65,15 @@ class HeaderView extends BaseView {
         const catalog = {
             text: 'Каталог',
             img: [
-                new Img({src: staticServerHost + '/svg/header/catalog.svg'}),
-                new Img({src: staticServerHost + '/svg/header/catalog_close.svg'}),
+                new Img({src: '/svg/header/catalog.svg'}),
+                new Img({src: '/svg/header/catalog_close.svg'}),
             ],
             categories: this.presenter.categories,
         };
         const searchBlock = {
             searchButton: {
                 button: new Button(),
-                img: new Img({src: staticServerHost + '/svg/header/search.svg'}),
+                img: new Img({src: '/svg/header/search.svg'}),
             },
             searchInput: new Input({
                 placeholder: 'Искать на Ozon',
@@ -83,7 +82,7 @@ class HeaderView extends BaseView {
             }),
             searchArea: {
                 text: 'Везде',
-                img: new Img({src: staticServerHost + '/svg/header/area.svg'}),
+                img: new Img({src: '/svg/header/area.svg'}),
             },
         };
         const template = headerTemplate({

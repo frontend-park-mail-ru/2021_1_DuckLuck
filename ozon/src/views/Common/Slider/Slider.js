@@ -2,7 +2,6 @@ import sliderTemplate from './Slider.hbs';
 import sliderStyles from './Slider.scss';
 import buttonStyles from './../Button/Button.scss';
 import decorators from '../../decorators.scss';
-import {staticServerHost} from '../../../utils/urls/urls';
 import Img from '../Img/Img';
 
 /**
@@ -35,7 +34,7 @@ class Slider {
             sliderStyles: sliderStyles,
             buttonStyles: buttonStyles,
             decorators: decorators,
-            buttonSvg: new Img({src: staticServerHost + '/svg/slider.svg'}),
+            buttonSvg: new Img({src: '/svg/slider.svg'}),
         });
         const slider = new DOMParser().parseFromString(template, 'text/html');
         this.content = slider.getElementsByClassName(sliderStyles.content)[0];
