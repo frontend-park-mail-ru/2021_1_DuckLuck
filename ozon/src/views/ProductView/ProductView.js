@@ -14,10 +14,11 @@ import decorators from '../decorators.scss';
 import Bus from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Pagination from '../Common/Pagination/Pagination';
+import starsTemplate from './ProductStars.hbs';
+import starsStyles from './ProductStars.scss';
 import Slider from '../Common/Slider/Slider';
 import ListOfProductsItem from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem';
 import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.scss';
-
 
 /**
  * @class ProductView
@@ -58,7 +59,8 @@ class ProductView extends BaseView {
         const template = productPageTemplate({
             name: this.presenter.item['name'],
             price: this.presenter.item['price'],
-            rating: Math.ceil(this.presenter.item['rating']),
+            rating: this.presenter.item['rating'],
+            width: this.presenter.item['rating'] / 5 * 100,
             images: images,
             description: this.presenter.item['description']['descriptionText'],
             category: this.presenter.item['description']['category'],
@@ -138,6 +140,7 @@ class ProductView extends BaseView {
 
         Bus.globalBus.emit(Events.ChangeReviewProductId, this.IDs['productID']);
         Bus.globalBus.emit(Events.ReviewRightsLoad);
+        this.bus.emit(Events.ProductStarsCounterLoad);
     }
 
 
@@ -283,6 +286,34 @@ class ProductView extends BaseView {
         }
         Bus.globalBus.emit(Events.CartGetProductsID, Events.ProductCartLoadedProductsID);
         slider.checkOverflow();
+    }
+
+    renderStarsCounter = () => {
+        const starsInfo = [];
+        const rowTitles = ['1 звезда', '2 звезды', '3 звезды', '4 звезды', '5 звезд'];
+        const starsCounts = this.presenter.item.stars;
+        let starsCountsSum = starsCounts.reduce((accumulator, currentStarCount) => {
+            return accumulator + currentStarCount;
+        });
+        if (starsCountsSum === 0) {
+            starsCountsSum = Number.MAX_SAFE_INTEGER;
+        }
+        for (let i = 0; i < starsCounts.length; i++) {
+            starsInfo.push({
+                title: rowTitles[i],
+                count: starsCounts[i],
+                width: starsCounts[i] / starsCountsSum * 100,
+            });
+        }
+        const starsBlock = document.getElementById('rating-stars');
+        starsBlock.innerHTML = starsTemplate({
+            rating: this.presenter.item.rating.toFixed(2),
+            width: this.presenter.item.rating.toFixed(2) / 5 * 100,
+            stars: starsInfo.reverse(),
+            starsStyles: starsStyles,
+            textStyles: textStyles,
+            imgStyles: imgStyles,
+        });
     }
 
     /**

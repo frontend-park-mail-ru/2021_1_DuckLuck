@@ -100,3 +100,22 @@
     position: absolute;
     bottom: 0;
 }
+
+.starsWrapper {
+    width: 80px;
+}
+
+.stars {
+    overflow: hidden;
+    height: 16px;
+    background:  url("https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg");
+    background-size: 16px 16px;
+    width: 80px;
+}
+
+.colorStars {
+    background: url("https://duckluckmarket.hb.bizmrg.com/svg/star.svg");
+    height: 16px;
+    background-size: 16px 16px;
+    background-repeat: repeat-x;
+}

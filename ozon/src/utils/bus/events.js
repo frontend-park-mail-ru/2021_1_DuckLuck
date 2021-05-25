@@ -34,7 +34,10 @@ const Events = {
     RenderProductReviews: 'render-product-reviews',
     ProductTransmitData: 'product-transmit-data',
     ProductsItemNotAdded: 'products-item-removed',
+    ProductStarsCounterLoad: 'product-stars-counter-load',
+    ProductStarsCounterLoaded: 'product-stars-counter-loaded',
     ProductsCartLoadedProductsID: 'products-cart-loaded-products-ids',
+
 
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
