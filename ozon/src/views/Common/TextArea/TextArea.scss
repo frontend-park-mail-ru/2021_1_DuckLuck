@@ -73,3 +73,19 @@
   font-size: $font-size-m;
   color: $colored-object-color;
 }
+
+.orderId {
+  @extend %text-shared;
+  color: $colored-object-color;
+}
+
+.ordersPrice {
+  @extend %text-shared;
+  font-weight: $bold;
+  font-size: $font-size-m;
+}
+
+.ordersAddress {
+  @extend %text-shared;
+  font-size: $font-size-m;
+}

@@ -1,0 +1,26 @@
+<div id="new-orders-list">
+    {{#each this.orderList}}
+        <div class="{{../ordersStyles.order}}">
+            <div class="{{../ordersStyles.orderHead}}">
+                <div class="{{../ordersStyles.headTop}}">
+                    <span class="{{../textStyles.bold}}">Заказ от {{this.date_added}}</span>
+                    <span class="{{../textStyles.text}}">{{this.pay_status}}</span>
+                    <div>
+                        <span class="{{../textStyles.ordersPrice}}">{{this.total_cost}} ₽</span>
+                        <span class="{{../textStyles.text}}">оплачено</span>
+                    </div>
+                </div>
+                <div class="{{../ordersStyles.orderIdWrapper}}">
+                    <span class="{{../textStyles.orderId}}">{{this.order_number.number}}</span>
+                </div>
+            </div>
+            <div class="{{../ordersStyles.orderBody}}">
+                <div class="{{../ordersStyles.address}}">
+                    <span class="{{../textStyles.bold}} {{../ordersStyles.text}}">Адрес доставки: </span>
+                    <span class="{{../textStyles.ordersAddress}} {{../ordersStyles.text}}">{{this.address.address}}</span>
+                </div>
+                <div class="{{../ordersStyles.images}}"></div>
+            </div>
+        </div>
+    {{/each}}
+</div>

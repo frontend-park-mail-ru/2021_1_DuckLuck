@@ -74,6 +74,8 @@ const Events = {
     SendOrder: 'order-send',
 
     OrdersLoad: 'orders-load',
+    OrdersLoadMoreOrders: 'orders-load-more-orders',
+    OrdersMoreOrdersLoaded: 'orders-more-orders-loaded',
     OrdersLoaded: 'orders-loaded',
     ReviewRightsLoad: 'review-rights-load',
     ReviewRightsLoaded: 'review-rights-loaded',

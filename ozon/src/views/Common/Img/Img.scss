@@ -82,3 +82,9 @@
   width: $img-size-m1;
   height: $img-size-m1;
 }
+
+.orderPreview {
+  @extend %img-shared;
+  width: $img-size-m1;
+  height: $img-size-m1;
+}
