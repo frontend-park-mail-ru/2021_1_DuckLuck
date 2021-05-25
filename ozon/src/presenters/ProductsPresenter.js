@@ -2,7 +2,7 @@ import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import Router from '../utils/router/Router';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 
 /**
  * @description Presenter for Product View and Model
@@ -22,7 +22,7 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProductsItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.ProductsItemNotAdded, this.setProductNotAdded);
         Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
-        Bus.globalBus.on(Events.CartLoadedProductsID, this.productsCartGotIds);
+        Bus.globalBus.on(Events.ProductsCartLoadedProductsID, this.productsCartGotIds);
     }
 
     /**

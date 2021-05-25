@@ -1,4 +1,4 @@
-import {BaseView} from '../BaseView.js';
+import BaseView from '../BaseView.js';
 import headerStyles from './HeaderView.scss';
 import buttonStyles from '../Common/Button/Button.scss';
 import imgStyles from '../Common/Img/Img.scss';
@@ -9,18 +9,18 @@ import decorators from '../decorators.scss';
 import headerTemplate from './HeaderView.hbs';
 import {staticServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
-import {Img} from '../Common/Img/Img';
-import {Button} from '../Common/Button/Button';
-import {Input} from '../Common/Input/Input';
+import Img from '../Common/Img/Img';
+import Button from '../Common/Button/Button';
+import Input from '../Common/Input/Input';
 import Router from '../../utils/router/Router';
-import {Bus} from '../../utils/bus/bus';
+import Bus from '../../utils/bus/bus';
 
 /**
  * @class HeaderView
  * @extends BaseView
  * @classdesc Class for Header page
  */
-export class HeaderView extends BaseView {
+class HeaderView extends BaseView {
     /**
      * @param {Object} URLParams
      */
@@ -207,4 +207,4 @@ export class HeaderView extends BaseView {
     }
 }
 
-
+export default HeaderView;

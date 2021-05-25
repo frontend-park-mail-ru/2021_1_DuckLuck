@@ -7,7 +7,7 @@ import decorators from '../../decorators.scss';
  * @class Slider
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class Slider {
+class Slider {
     /**
      *
      * @param {Object[]} items
@@ -93,3 +93,5 @@ export class Slider {
         }
     }
 }
+
+export default Slider;
