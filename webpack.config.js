@@ -1,6 +1,8 @@
 const path = require('path')
 const webpack = require('webpack')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 
 module.exports = (env) => {
@@ -18,7 +20,8 @@ module.exports = (env) => {
         entry: ["regenerator-runtime/runtime.js", "./ozon/src/main.js"],
         mode: "development",
         optimization: {
-            minimizer: [new UglifyJsPlugin()],
+            minimizer: [new UglifyJsPlugin({ test: /\.js(\?.*)?$/i,}),
+                        new CssMinimizerPlugin()],
         },
         output: {
             filename: "bundle.js",
@@ -51,7 +54,7 @@ module.exports = (env) => {
                 {
                     test: /\.css$/,
                     use: [
-                        'style-loader',
+                        MiniCssExtractPlugin.loader,
                         {
                             loader: 'css-loader',
                             options: {
@@ -101,6 +104,8 @@ module.exports = (env) => {
                 FILE_SERVER_HOST: envConfig.FILE_SERVER_HOST,
                 STATIC_SERVER_HOST: envConfig.STATIC_SERVER_HOST,
             }),
+            new MiniCssExtractPlugin(),
+            new CssMinimizerPlugin(),
         ]
     }
 }
