@@ -117,6 +117,7 @@ class OrderModel extends BaseModel {
             url: serverApiPath + urls.order,
             body: {address: {address: this.#address},
                 recipient: this.#recipient,
+                promo_code: this.promo ? this.promo : '',
             },
         }).then((response) => {
             if (response.status !== HTTPResponses.Success) {
@@ -133,6 +134,7 @@ class OrderModel extends BaseModel {
             }
             }
         });
+        this.promo = null;
     }
 
     /**

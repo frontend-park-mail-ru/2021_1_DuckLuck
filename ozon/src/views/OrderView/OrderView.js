@@ -83,15 +83,16 @@ class OrderView extends BaseView {
 
     /**
      * @param {Object} newBillInfo
+     * @param {String} promocode
      */
-    drawNewBill = (newBillInfo) => {
+    drawNewBill = (newBillInfo, promocode) => {
         const info = document.getElementsByClassName(orderStyles.orderInfo)[0];
         info.getElementsByClassName(textStyles.orderDiscount)[0].innerHTML = `- ${newBillInfo.total_discount} ₽`;
         info.getElementsByClassName(orderStyles.totalPriceBlock)[0].
             getElementsByTagName('span')[1].innerHTML = `${newBillInfo.total_cost} ₽`;
         const promoStatus = document.getElementById('promo-status');
         promoStatus.className = orderStyles.promoStatusSuccess;
-        promoStatus.innerHTML = 'Промокод был успешно применён!';
+        promoStatus.innerHTML = `Промокод ${promocode} был успешно применён!`;
     }
 
     drawIncorrectPromo = () => {
