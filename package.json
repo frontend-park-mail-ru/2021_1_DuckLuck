@@ -24,7 +24,8 @@
     "morgan": "^1.10.0",
     "require": "^2.4.20",
     "style-loader": "^2.0.0",
-    "uuid4": "^2.0.2"
+    "uuid4": "^2.0.2",
+    "web-push": "^3.4.4"
   },
   "devDependencies": {
     "@babel/core": "^7.13.8",

@@ -19,5 +19,7 @@ export const urls = {
     sessionUrl: '/session',
     review: '/review/product',
     reviewRights: '/review/rights/product/',
+    publicKey: '/notification/key',
+    notifications: '/notification',
     promo: '/promo',
 };
