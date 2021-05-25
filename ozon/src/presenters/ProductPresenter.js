@@ -144,7 +144,7 @@ class ProductsPresenter extends BasePresenter {
      */
     productCartGotIds = (ids) => {
         if (ids.has(this.model.item.id)) {
-            this.view.setPageProductAdded();
+            this.view.setProductAdded();
         }
     }
 
@@ -171,11 +171,11 @@ class ProductsPresenter extends BasePresenter {
     }
 
     setProductAdded = () => {
-        this.view.setPageProductAdded();
+        this.view.setProductAdded();
     }
 
     setProductNotAdded = () => {
-        this.view.setPageProductNotAdded();
+        this.view.setProductNotAdded();
     }
 
     /**

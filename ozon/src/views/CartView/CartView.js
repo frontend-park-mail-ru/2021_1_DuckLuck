@@ -62,7 +62,7 @@ class CartView extends BaseView {
                 if (!product.title) {
                     return;
                 }
-                Bus.globalBus.emit(Events.CartRemoveProduct, product.title);
+                Bus.globalBus.emit(Events.CartRemoveProduct, product.title, Events.ProductsItemNotAdded);
             });
         }
 

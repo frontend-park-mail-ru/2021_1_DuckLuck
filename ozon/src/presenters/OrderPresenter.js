@@ -58,6 +58,13 @@ class OrderPresenter extends BasePresenter {
     }
 
     /**
+     * @param {String} newPromo
+     */
+    set promo(newPromo) {
+        this.model.promo = newPromo;
+    }
+
+    /**
      * @description Loads all information about order from model
      */
 
@@ -86,8 +93,9 @@ class OrderPresenter extends BasePresenter {
      */
     promoSentReaction = (result, newBillInfo = null) => {
         if (result === Responses.Success) {
-            this.view.drawNewBill(newBillInfo);
+            this.view.drawNewBill(newBillInfo, this.promo);
         } else {
+            this.promo = null;
             this.view.drawIncorrectPromo();
         }
     }
@@ -110,7 +118,7 @@ class OrderPresenter extends BasePresenter {
      * @description Sends order form to model
      */
     sendPromo = () => {
-        this.model.promo = document.getElementsByName('promo')[0].value;
+        this.promo = document.getElementsByName('promo')[0].value;
         this.model.sendPromo();
     }
 }

@@ -1,4 +1,6 @@
 const Events = {
+    DummyEvent: 'dummy-event',
+
     LoginSendData: 'login-send-data',
     LoginEmitResult: 'login-emit-result',
     LoginIncorrectForm: 'login-incorrect-form',
@@ -18,6 +20,7 @@ const Events = {
     ProfileCheckAuthResult: 'profile-check-auth-result',
     ProfileAllResult: 'profile-all-result',
     ProfileAllGet: 'profile-all-get',
+    ProfileLogoutPrepare: 'profile-logout-prepare',
     ProfileLogout: 'profile-logout',
     ProfileLogoutEmitResult: 'profile-logout-emit-result',
     ProfileIncorrectLogout: 'profile-logout-incorrect',
@@ -71,6 +74,8 @@ const Events = {
     SendOrder: 'order-send',
 
     OrdersLoad: 'orders-load',
+    OrdersLoadMoreOrders: 'orders-load-more-orders',
+    OrdersMoreOrdersLoaded: 'orders-more-orders-loaded',
     OrdersLoaded: 'orders-loaded',
     ReviewRightsLoad: 'review-rights-load',
     ReviewRightsLoaded: 'review-rights-loaded',
@@ -89,6 +94,9 @@ const Events = {
     PromoSent: 'promo-sent',
     RecommendationLoad: 'recommendation-load',
     RecommendationLoaded: 'recommendation-loaded',
+
+    WebPushSubscribe: 'web-push-subscribe',
+    WebPushUnsubscribe: 'web-push-unsubscribe',
 };
 
 
