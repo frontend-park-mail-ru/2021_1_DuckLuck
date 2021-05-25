@@ -46,6 +46,8 @@ class ProductView extends BaseView {
      *
      */
     render = () => {
+        this.goUp();
+
         this.parent.innerHTML = '';
         const images = [];
         this.presenter.item['images'].forEach((src) => {
@@ -185,9 +187,9 @@ class ProductView extends BaseView {
     renderProductsReview = (reviews, paginationInfo) => {
         const pagination = new Pagination(paginationInfo, true).getHtmlString();
         document.getElementById('review-pagination').innerHTML = pagination;
-
         reviews.forEach((review) => {
             review.date_added = review.date_added.slice(0, 10);
+            review.user_name = (review.user_name !== '') ? review.user_name : 'Анонимный пользователь';
             review.firstChar = review.user_name[0];
             if (review.user_avatar) {
                 review.avatar = `${staticServerHost}/${review.user_avatar}`;
@@ -260,6 +262,7 @@ class ProductView extends BaseView {
                 type: 'recommendations',
             }).getHtmlString());
         });
+
         const slider = new Slider(items);
         const recommendationsBlock = document.getElementById('recommendations');
         recommendationsBlock.appendChild(slider.render());

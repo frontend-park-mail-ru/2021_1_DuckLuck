@@ -25,6 +25,7 @@ import decorators from '../decorators.scss';
 class ReviewView extends BaseView {
     show = () => {
         this.presenter.rating = 0;
+        this.presenter.isPublic = true;
         this.render();
     }
 
@@ -96,7 +97,8 @@ class ReviewView extends BaseView {
         const submitButton = this.cache.getElementsByClassName(buttonStyles.review)[0];
         submitButton.addEventListener('click', (event) => {
             event.preventDefault();
-            this.bus.emit(Events.SendOrder);
+            this.presenter.isPublic = !document.getElementsByName('isPublic')[0].checked;
+            this.bus.emit(Events.ReviewOrder);
             const notice = new DOMParser().parseFromString(new Popup().getHtmlString({
                 popupBody: noticeTemplate({
                     styles: noticeStyles,
@@ -115,11 +117,6 @@ class ReviewView extends BaseView {
                     document.getElementById('popup').remove();
                     Router.open(`/item/${this.presenter.product.id}`, {replaceState: true});
                 });
-        });
-
-        const isPublic = document.getElementsByName('isPublic')[0];
-        isPublic.addEventListener('change', () => {
-            this.presenter.isPublic = !isPublic.checked;
         });
 
         const productLink = this.cache.getElementsByClassName(linkStyles.link)[0];

@@ -74,6 +74,15 @@
   color: $colored-object-color;
 }
 
+.rating {
+  @extend %text-shared;
+  color: $neutral-color;
+}
+
+.priceWithoutDiscount {
+  @extend %text-shared;
+  font-size: $font-size-m;
+}
 
 .ratingBig {
   @extend %text-shared;

@@ -24,6 +24,8 @@ class CartView extends BaseView {
     }
 
     render = () => {
+        this.goUp();
+
         this.parent.innerHTML = '';
         const price = this.presenter.price;
         let template;

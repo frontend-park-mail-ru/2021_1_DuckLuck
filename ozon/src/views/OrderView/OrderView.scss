@@ -189,7 +189,23 @@
     }
 
     .orderButtonWrapper {
+        margin-left: $margin-m;
+        margin-top: auto;
+        margin-bottom: auto;
         order: 2;
+    }
+
+    .cartWrapper {
+        padding-bottom: $padding-xxl;
+    }
+
+    .productsListBlock {
+        min-height: $height-xxl;
+    }
+
+    .rules {
+        margin-bottom: 0;
+        margin-top: $margin-l;
     }
 }
 

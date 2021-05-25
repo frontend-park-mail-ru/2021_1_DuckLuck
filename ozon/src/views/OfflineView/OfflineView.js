@@ -31,17 +31,15 @@ class OfflineView extends BaseView {
             popupType: popupStyles.offline,
         });
 
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
+        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup');
+        this.parent.appendChild(this.cache);
 
-        const blind = this.cache.getElementsByClassName('blind')[0];
-        blind.addEventListener('click', (evt) => {
+        document.getElementById('blind').addEventListener('click', (evt) => {
             evt.preventDefault();
             body.classList.remove(decorator.noScroll);
             this.remove();
             Router.goBack();
         });
-
-        this.parent.appendChild(this.cache);
     }
 }
 

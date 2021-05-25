@@ -8,6 +8,8 @@
     justify-content: space-between;
     flex-direction: column;
     margin: 0 auto $margin-xxl;
+    gap: $gap-xs;
+    margin-top: $margin-l;
 }
 
 .wrapper {
@@ -15,6 +17,7 @@
     display: flex;
     flex-direction: column;
     width: 74.69%;
+    gap: $gap-xs;
 }
 
 .categoriesBlock {
@@ -157,6 +160,13 @@
     margin: auto;
 }
 
+
+.linkWrapper {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 .reviewMenu {
     display: flex;
     flex-direction: column;
@@ -203,6 +213,10 @@
 
     .mainImage {
         width: 100%;
+    }
+
+    .reviewButtonWrapper {
+        margin-top: $margin-l;
     }
 }
 

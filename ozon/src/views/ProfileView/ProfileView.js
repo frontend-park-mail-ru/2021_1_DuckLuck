@@ -26,6 +26,8 @@ class ProfileView extends BaseView {
      * @return {void} rendered page
      */
     render = () => {
+        this.goUp();
+
         this.parent.innerHTML = '';
         if (this.cache !== '') {
             this.parent.appendChild(this.cache);

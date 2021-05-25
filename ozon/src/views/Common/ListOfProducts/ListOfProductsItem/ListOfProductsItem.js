@@ -3,6 +3,7 @@ import itemStyles from './ListOfProductsItem.scss';
 import decorators from '../../../decorators.scss';
 import buttonStyles from '../../Button/Button.scss';
 import imgStyles from '../../Img/Img.scss';
+import textStyles from '../../TextArea/TextArea.scss';
 
 /**
  * @class ListOfProductsItem
@@ -24,10 +25,17 @@ class ListOfProductsItem {
         this.itemInCart = itemInCart;
         this.itemImage = itemImage;
         this.itemName = itemName;
-        this.itemRating = itemRating;
+        this.itemRating = Math.ceil(itemRating);
         this.itemPrice = itemPrice;
         this.itemId = itemId;
         this.itemReviewsCount = itemReviewsCount;
+        if (this.itemReviewsCount === 1) {
+            this.itemReviewsCountTitle = 'оценка';
+        } else if (this.itemReviewsCount > 1 && this.itemReviewsCount > 4) {
+            this.itemReviewsCountTitle = 'оценки';
+        } else if (this.itemReviewsCount > 3 || this.itemReviewsCount === 0) {
+            this.itemReviewsCountTitle = 'оценок';
+        }
         this.type = type;
     }
 
@@ -45,12 +53,14 @@ class ListOfProductsItem {
             itemRating: this.itemRating,
             width: this.itemRating / 5 * 100,
             itemReviewsCount: this.itemReviewsCount,
+            itemReviewsCountTitle: this.itemReviewsCountTitle,
             itemPrice: this.itemPrice,
             type: this.type,
             itemStyles: itemStyles,
             decorators: decorators,
             buttonStyles: buttonStyles,
             imgStyles: imgStyles,
+            textStyles: textStyles,
         });
     }
 }

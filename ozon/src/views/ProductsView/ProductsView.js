@@ -46,7 +46,7 @@ class ProductsView extends BaseView {
             this.presenter.changeSortDirection('ASC');
         }
 
-        if (Object.keys(URLParams).length) {
+        if (Object.keys(URLParams).length > 1) {
             this.presenter.changeSortKey(URLParams.sortKey);
             this.presenter.changeSortDirection(URLParams.sortDirection);
             this.presenter.setFilter(URLParams);
@@ -90,6 +90,8 @@ class ProductsView extends BaseView {
     }
 
     render = () => {
+        this.goUp();
+
         this.parent.innerHTML = '';
         const productsListHtmlString = new ListOfProducts(this.presenter.products, 'products').getHtmlString();
         const pagination = new Pagination(this.presenter.paginationInfo).getHtmlString();
