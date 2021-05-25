@@ -164,6 +164,25 @@
     margin-top: $margin-xxxl;
 }
 
+.starsWrapper {
+    width: 120px;
+}
+
+.stars {
+    overflow: hidden;
+    height: 24px;
+    background:  url("https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg");
+    background-size: 24px 24px;
+    width: 120px;
+}
+
+.colorStars {
+    background: url("https://duckluckmarket.hb.bizmrg.com/svg/star.svg");
+    height: 24px;
+    background-size: 24px 24px;
+    background-repeat: repeat-x;
+}
+
 @media screen and (max-width: $max-width-xl) {
     .block {
         width: 100%;

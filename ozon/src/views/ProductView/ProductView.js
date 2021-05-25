@@ -58,6 +58,7 @@ export class ProductView extends BaseView {
             name: this.presenter.item['name'],
             price: this.presenter.item['price'],
             rating: this.presenter.item['rating'],
+            width: this.presenter.item['rating'] / 5 * 100,
             images: images,
             description: this.presenter.item['description']['descriptionText'],
             category: this.presenter.item['description']['category'],

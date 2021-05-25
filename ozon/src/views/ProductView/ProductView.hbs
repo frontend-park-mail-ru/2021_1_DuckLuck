@@ -12,12 +12,11 @@
     </div>
     <div class="{{textStyles.title}}">{{name}}</div>
     <div class="{{productStyles.rating}}">
-        {{#for 0 rating 1}}
-            <img src="https://duckluckmarket.hb.bizmrg.com/svg/star.svg" alt="" class="{{../imgStyles.star}}">
-        {{/for}}
-        {{#for rating 5 1}}
-            <img src="https://duckluckmarket.hb.bizmrg.com/svg/empty_star.svg" alt="" class="{{../imgStyles.star}}">
-        {{/for}}
+        <div class="{{productStyles.starsWrapper}}">
+            <div class="{{productStyles.stars}}">
+                <div class="{{productStyles.colorStars}}" style="width: {{width}}%;"></div>
+            </div>
+        </div>
     </div>
     <div class="{{productStyles.wrapperWrapper}}">
         <div class="{{productStyles.wrapper}}">
