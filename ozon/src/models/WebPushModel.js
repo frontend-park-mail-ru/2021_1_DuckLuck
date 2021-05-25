@@ -7,14 +7,14 @@ import Bus from '../utils/bus/bus';
 import Events from '../utils/bus/events';
 
 /**
- * @description Model for Header in MVP Arch
+ * @description Model for WebPush notification from server
+ * Attention! This model does not have a presenter. Events from the global bus are handled by it itself
  */
 class WebPushModel extends BaseModel {
     #publicKey;
 
     /**
      * @description simple constructor.
-     * Attention! This model does not have a presenter. Events from the global bus are handled by it itself
      */
     constructor() {
         super();

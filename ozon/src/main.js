@@ -57,8 +57,7 @@ const orderPresenter = new OrderPresenter(application, OrderView, OrderModel);
 const ordersPresenter = new OrdersPresenter(application, OrdersView, OrdersModel);
 const reviewPresenter = new ReviewPresenter(application, ReviewView, ReviewModel);
 
-// eslint-disable-next-line no-unused-vars
-const webPushModel = new WebPushModel();
+new WebPushModel();
 
 const header = document.getElementsByTagName('header')[0];
 const headerPresenter = new HeaderPresenter(header, HeaderView, HeaderModel);
