@@ -171,7 +171,8 @@ class CartPresenter extends BasePresenter {
         if (this.model.lastAddedProduct === undefined || this.model.isCartContains(this.model.lastAddedProduct)) {
             return;
         }
-        this.model.addProduct(this.model.lastAddedProduct, 1);
+        this.model.addProduct(this.model.lastAddedProduct, 1, Events.ProductsItemAdded);
+        this.model.addProduct(this.model.lastAddedProduct, 0, Events.ProductItemAdded);
         this.model.lastAddedProduct = undefined;
     }
 

@@ -97,6 +97,12 @@ class LoginView extends BaseView {
                 Router.open('/signup', {replaceState: true});
             });
     }
+
+    incorrectEmailOrPassword = () => {
+        for (const input of this.cache.getElementsByTagName('input')) {
+            BaseView.setInvalidInputPlaceholder(input, 'Неверные входные данные');
+        }
+    }
 }
 
 export default LoginView;

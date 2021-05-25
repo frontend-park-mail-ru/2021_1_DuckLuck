@@ -52,6 +52,10 @@ class LoginPresenter extends BasePresenter {
             Router.open('/offline', {replaceState: true});
             break;
         }
+        case Responses.Unauthorized: {
+            this.view.incorrectEmailOrPassword();
+            break;
+        }
         default: {
             console.error(result);
         }

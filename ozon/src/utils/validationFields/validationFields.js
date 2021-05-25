@@ -1,17 +1,38 @@
 export const fields = {
-    firstName: 'firstName',
-    lastName: 'lastName',
-    email: 'email',
-    password: 'password',
-    repeatPassword: 'repeatPassword',
-    file: 'file',
-};
-
-export const incorrectFieldsMap = {
-    firstName: 'Некорр. новое имя',
-    lastName: 'Некорр. новая фамилия',
-    email: 'Некорректная электронная почта',
-    password: 'Некорректный пароль',
-    repeatPassword: 'Пароли не совпадают',
-    file: 'Некоррекный файл',
+    incorrectFirstName: {
+        fieldName: 'firstName',
+        errorMessage: 'Некорр. новое имя',
+    },
+    incorrectLastName: {
+        fieldName: 'lastName',
+        errorMessage: 'Некорр. новая фамилия',
+    },
+    incorrectEmail: {
+        fieldName: 'email',
+        errorMessage: 'Некорректная электронная почта',
+    },
+    passwordTooShort: {
+        fieldName: 'password',
+        errorMessage: 'Пароль слишком короткий',
+    },
+    passwordTooLong: {
+        fieldName: 'password',
+        errorMessage: 'Пароль слишком длинный',
+    },
+    repeatPasswordUnmatched: {
+        fieldName: 'repeatPassword',
+        errorMessage: 'Пароли не совпадают',
+    },
+    repeatPasswordTooShort: {
+        fieldName: 'repeatPassword',
+        errorMessage: 'Пароль слишком короткий',
+    },
+    repeatPasswordTooLong: {
+        fieldName: 'repeatPassword',
+        errorMessage: 'Пароль слишком длинный',
+    },
+    incorrectFile: {
+        fieldName: 'file',
+        errorMessage: 'Некоррекный файл',
+    },
 };
