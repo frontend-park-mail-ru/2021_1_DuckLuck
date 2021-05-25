@@ -107,6 +107,7 @@ class ProductsPresenter extends BasePresenter {
         switch (result) {
         case Responses.Success: {
             this.view.render();
+            this.loadRecommendations(this.view.ID);
             break;
         }
         case Responses.Offline: {

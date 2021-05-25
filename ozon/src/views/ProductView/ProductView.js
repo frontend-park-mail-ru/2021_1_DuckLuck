@@ -246,7 +246,6 @@ class ProductView extends BaseView {
 
     renderRecommendations = () => {
         const items = [];
-
         this.presenter.recommendations.forEach((item) => {
             const base = item['price']['base_cost'];
             const discount = item['price']['discount'];

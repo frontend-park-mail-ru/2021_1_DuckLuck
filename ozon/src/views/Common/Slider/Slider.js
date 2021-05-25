@@ -3,6 +3,7 @@ import sliderStyles from './Slider.scss';
 import buttonStyles from './../Button/Button.scss';
 import decorators from '../../decorators.scss';
 import {staticServerHost} from '../../../utils/urls/urls';
+import Img from '../Img/Img';
 
 /**
  * @class Slider
@@ -79,7 +80,6 @@ class Slider {
                 this.content.style.transform = `translateX(${this.currentTranslate}px)`;
             });
         });
-
         return slider.getElementById('slider');
     }
 
