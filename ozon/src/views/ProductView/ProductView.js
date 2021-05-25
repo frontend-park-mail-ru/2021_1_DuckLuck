@@ -2,7 +2,6 @@ import BaseView from '../BaseView.js';
 import Img from '../Common/Img/Img.js';
 import productPageTemplate from './ProductView.hbs';
 import reviewsTemplate from './ProductReviews.hbs';
-import {fileServerHost} from '../../utils/urls/urls.js';
 import Events from '../../utils/bus/events';
 import productStyles from './ProductView.scss';
 import reviewStyles from './ProductReview.scss';
@@ -52,7 +51,7 @@ class ProductView extends BaseView {
         const images = [];
         this.presenter.item['images'].forEach((src) => {
             images.push(new Img({
-                src: fileServerHost + src,
+                src: src,
             }));
         });
 

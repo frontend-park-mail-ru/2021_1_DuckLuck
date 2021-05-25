@@ -1,5 +1,5 @@
 import AjaxModule from '../modules/Ajax/Ajax';
-import {fileServerHost, serverApiPath, urls} from '../utils/urls/urls';
+import {serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
@@ -94,7 +94,7 @@ class OrdersModel extends BaseModel {
             for (const order of this.#orders) {
                 order.date_added = order.date_added.substring(0, order.date_added.indexOf('T'));
                 for (const image of order.product_images) {
-                    image.preview_image = fileServerHost + image.preview_image;
+                    image.preview_image = image.preview_image;
                 }
             }
             this.bus.emit(callbackEvent, Responses.Success, {
