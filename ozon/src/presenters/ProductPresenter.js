@@ -3,7 +3,6 @@ import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import Bus from '../utils/bus/bus';
 import Router from '../utils/router/Router';
-import {staticServerHost} from '../utils/urls/urls';
 
 /**
  * @description Presenter for Products View and Model
@@ -167,7 +166,7 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.emit(eventToEmit, {
             id: product.id,
             category: product.description.category,
-            image: `${staticServerHost}${product.images[0]}`,
+            image: product.images[0],
             title: product.name,
             href: `/item/${product.id}`,
         });

@@ -17,7 +17,7 @@ class AvatarModule extends BaseModel {
      */
     set avatarURL(URL) {
         if (URL === '' || URL === staticServerHost + '/') {
-            this.#avatarURL = staticServerHost + urls.defaultAvatar;
+            this.#avatarURL = urls.defaultAvatar;
             return;
         }
 
@@ -43,7 +43,7 @@ class AvatarModule extends BaseModel {
         }).catch(() => {
             this.bus.emit(Events.ProfileAvatarResult, Responses.Error);
         });
-        return staticServerHost + urls.defaultAvatar;
+        return urls.defaultAvatar;
     }
 
     /**
