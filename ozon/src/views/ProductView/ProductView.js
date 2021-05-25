@@ -287,19 +287,19 @@ class ProductView extends BaseView {
 
     renderStarsCounter = () => {
         const starsInfo = [];
-        const titles = ['1 звезда', '2 звезды', '3 звезды', '4 звезды', '5 звезд'];
-        const stars = this.presenter.item.stars;
-        let allStarsCount = stars.reduce((a, b) => {
-            return a + b;
+        const rowTitles = ['1 звезда', '2 звезды', '3 звезды', '4 звезды', '5 звезд'];
+        const starsCounts = this.presenter.item.stars;
+        let starsCountsSum = starsCounts.reduce((accumulator, currentStarCount) => {
+            return accumulator + currentStarCount;
         });
-        if (allStarsCount === 0) {
-            allStarsCount = Number.MAX_SAFE_INTEGER;
+        if (starsCountsSum === 0) {
+            starsCountsSum = Number.MAX_SAFE_INTEGER;
         }
-        for (let i = 0; i < stars.length; i++) {
+        for (let i = 0; i < starsCounts.length; i++) {
             starsInfo.push({
-                title: titles[i],
-                count: stars[i],
-                width: stars[i] / allStarsCount * 100,
+                title: rowTitles[i],
+                count: starsCounts[i],
+                width: starsCounts[i] / starsCountsSum * 100,
             });
         }
         const starsBlock = document.getElementById('rating-stars');
