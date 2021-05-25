@@ -16,7 +16,6 @@ import Router from '../../utils/router/Router';
 import Pagination from '../Common/Pagination/Pagination';
 import starsTemplate from './ProductStars.hbs';
 import starsStyles from './ProductStars.scss';
-import Pagination from '../Common/Pagination/Pagination';
 import Slider from '../Common/Slider/Slider';
 import ListOfProductsItem from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem';
 import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.scss';
@@ -312,6 +311,7 @@ class ProductView extends BaseView {
             textStyles: textStyles,
             imgStyles: imgStyles,
         });
+    }
 
     /**
      * @param {Set} productsInCart
