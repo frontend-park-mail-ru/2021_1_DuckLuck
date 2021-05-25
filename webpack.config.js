@@ -1,5 +1,9 @@
 const path = require('path')
 const webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+
 
 module.exports = (env) => {
     const envConfig = {FILE_SERVER_HOST: 'https://duckluckbreakout.xyz',
@@ -15,6 +19,10 @@ module.exports = (env) => {
     return {
         entry: ["regenerator-runtime/runtime.js", "./ozon/src/main.js"],
         mode: "development",
+        optimization: {
+            minimizer: [new UglifyJsPlugin({ test: /\.js(\?.*)?$/i,}),
+                        new CssMinimizerPlugin()],
+        },
         output: {
             filename: "bundle.js",
             path: path.resolve(__dirname, './ozon/src/dist'),
@@ -46,11 +54,12 @@ module.exports = (env) => {
                 {
                     test: /\.css$/,
                     use: [
-                        'style-loader',
+                        MiniCssExtractPlugin.loader,
                         {
                             loader: 'css-loader',
                             options: {
                                 modules: true,
+                                minimize: true,
                             }
                         },
                         {
@@ -95,6 +104,8 @@ module.exports = (env) => {
                 FILE_SERVER_HOST: envConfig.FILE_SERVER_HOST,
                 STATIC_SERVER_HOST: envConfig.STATIC_SERVER_HOST,
             }),
+            new MiniCssExtractPlugin(),
+            new CssMinimizerPlugin(),
         ]
     }
 }
