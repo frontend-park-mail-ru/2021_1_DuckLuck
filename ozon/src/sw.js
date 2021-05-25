@@ -1,3 +1,5 @@
+import {staticServerHost} from './utils/urls/urls';
+
 const CACHE_NAME = 'OZON-CACHE-v1';
 
 
@@ -21,8 +23,8 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('push', (e) => {
     const data = e.data.json();
     self.registration.showNotification('Уведомление от DuckLuck Market!', {
-        body: `Ваш заказ № ${data.order_number.number} приорбрёл новый статус: ${data.status}`,
-        icon: 'https://duckluckmarket.hb.bizmrg.com/svg/header/logo.svg',
+        body: `Ваш заказ № ${data.order_number.number} приобрёл новый статус: ${data.status}`,
+        icon: staticServerHost + '/svg/header/logo.svg',
     });
 });
 

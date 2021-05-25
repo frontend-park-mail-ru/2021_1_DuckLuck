@@ -203,6 +203,8 @@ class ProductView extends BaseView {
                     productStyles: productStyles,
                     reviewStyles: reviewStyles,
                     imgStyles: imgStyles,
+                    emptyStarSvg: new Img({src: staticServerHost + '/svg/empty_star.svg'}),
+                    starSvg: new Img({src: staticServerHost + '/svg/star.svg'}),
                 });
         } else {
             this.cache.getElementsByClassName(productStyles.reviewList)[0].innerHTML = reviewsTemplate({
@@ -211,6 +213,8 @@ class ProductView extends BaseView {
                 productStyles: productStyles,
                 reviewStyles: reviewStyles,
                 imgStyles: imgStyles,
+                emptyStarSvg: new Img({src: staticServerHost + '/svg/empty_star.svg'}),
+                starSvg: new Img({src: staticServerHost + '/svg/star.svg'}),
             });
         }
         if (paginationInfo.pagesCount === paginationInfo.currentPage) {

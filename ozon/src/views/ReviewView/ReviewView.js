@@ -16,6 +16,7 @@ import noticeStyles from './ReviewNotice.scss';
 import Blind from '../Common/Blind/Blind';
 import popupStyles from '../Common/Popup/Popup.scss';
 import decorators from '../decorators.scss';
+import Img from '../Common/Img/Img';
 
 /**
  * @class ReviewView
@@ -61,6 +62,7 @@ class ReviewView extends BaseView {
             linkStyles: linkStyles,
             product: this.presenter.product,
             userName: this.presenter.userName,
+            ratingStar: new Img({src: staticServerHost + '/svg/empty_star.svg'}),
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('review-block');
         this.parent.appendChild(this.cache);
