@@ -54,10 +54,10 @@ class OrderView extends BaseView {
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
-        //
-        // document.getElementById('promo-btn').addEventListener('click', () => {
-        //     this.bus.emit(Events.SendPromo);
-        // });
+
+        document.getElementById('promo-btn').addEventListener('click', () => {
+            this.bus.emit(Events.SendPromo);
+        });
 
         this.cache.getElementsByClassName(buttonStyles.order)[0].addEventListener('click', (evt) => {
             evt.preventDefault();
@@ -82,25 +82,25 @@ class OrderView extends BaseView {
                 });
         });
     };
-    //
-    // /**
-    //  * @param {Object} newBillInfo
-    //  */
-    // drawNewBill = (newBillInfo) => {
-    //     const info = document.getElementsByClassName(orderStyles.orderInfo)[0];
-    //     info.getElementsByClassName(textStyles.orderDiscount)[0].innerHTML = `- ${newBillInfo.total_discount} ₽`;
-    //     info.getElementsByClassName(orderStyles.totalPriceBlock)[0].
-    //         getElementsByTagName('span')[1].innerHTML = `${newBillInfo.total_cost} ₽`;
-    //     const promoStatus = document.getElementById('promo-status');
-    //     promoStatus.className = orderStyles.promoStatusSuccess;
-    //     promoStatus.innerHTML = 'Промокод был успешно применён!';
-    // }
-    //
-    // drawIncorrectPromo = () => {
-    //     const promoStatus = document.getElementById('promo-status');
-    //     promoStatus.className = orderStyles.promoStatusFailure;
-    //     promoStatus.innerHTML = 'Неверный промокод!';
-    // }
+
+    /**
+     * @param {Object} newBillInfo
+     */
+    drawNewBill = (newBillInfo) => {
+        const info = document.getElementsByClassName(orderStyles.orderInfo)[0];
+        info.getElementsByClassName(textStyles.orderDiscount)[0].innerHTML = `- ${newBillInfo.total_discount} ₽`;
+        info.getElementsByClassName(orderStyles.totalPriceBlock)[0].
+            getElementsByTagName('span')[1].innerHTML = `${newBillInfo.total_cost} ₽`;
+        const promoStatus = document.getElementById('promo-status');
+        promoStatus.className = orderStyles.promoStatusSuccess;
+        promoStatus.innerHTML = 'Промокод был успешно применён!';
+    }
+
+    drawIncorrectPromo = () => {
+        const promoStatus = document.getElementById('promo-status');
+        promoStatus.className = orderStyles.promoStatusFailure;
+        promoStatus.innerHTML = 'Неверный промокод!';
+    }
 }
 
 export default OrderView;

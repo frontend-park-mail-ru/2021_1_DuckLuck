@@ -34,15 +34,12 @@ class OfflineView extends BaseView {
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup');
         this.parent.appendChild(this.cache);
 
-        // const blind = this.cache.getElementsByClassName('blind')[0];
         document.getElementById('blind').addEventListener('click', (evt) => {
             evt.preventDefault();
             body.classList.remove(decorator.noScroll);
             this.remove();
             Router.goBack();
         });
-
-        // this.parent.appendChild(this.cache);
     }
 }
 
