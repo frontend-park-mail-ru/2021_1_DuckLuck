@@ -25,13 +25,13 @@ class ListOfProductsItem {
         this.itemInCart = itemInCart;
         this.itemImage = itemImage;
         this.itemName = itemName;
-        this.itemRating = Math.ceil(itemRating);
+        this.itemRating = itemRating;
         this.itemPrice = itemPrice;
         this.itemId = itemId;
         this.itemReviewsCount = itemReviewsCount;
         if (this.itemReviewsCount === 1) {
             this.itemReviewsCountTitle = 'оценка';
-        } else if (this.itemReviewsCount > 1 && this.itemReviewsCount > 4) {
+        } else if (this.itemReviewsCount > 1 && this.itemReviewsCount < 4) {
             this.itemReviewsCountTitle = 'оценки';
         } else if (this.itemReviewsCount > 3 || this.itemReviewsCount === 0) {
             this.itemReviewsCountTitle = 'оценок';
