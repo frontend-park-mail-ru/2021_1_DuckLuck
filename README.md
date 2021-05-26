@@ -1,6 +1,7 @@
 # DuckLuck
 [![Build And Deploy Status](https://github.com/frontend-park-mail-ru/2021_1_DuckLuck/actions/workflows/s3.yml/badge.svg)](https://github.com/frontend-park-mail-ru/2021_1_DuckLuck/actions/workflows/s3.yml)
 [![Linter](https://github.com/frontend-park-mail-ru/2021_1_DuckLuck/actions/workflows/linter.yml/badge.svg)](https://github.com/frontend-park-mail-ru/2021_1_DuckLuck/actions/workflows/linter.yml)
+[![Commit activity](https://img.shields.io/github/commit-activity/m/frontend-park-mail-ru/2021_1_DuckLuck)](https://github.com/frontend-park-mail-ru/2021_1_DuckLuck/pulse)
 
 Frontend репозиторий команды DuckLuck
 
