@@ -203,3 +203,8 @@ $colors: (
     @extend %main-color;
     border-radius: 1px;
 }
+
+.promo {
+    @extend %button-shared;
+    @extend %main-color;
+}

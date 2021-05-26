@@ -15,7 +15,7 @@
                         {{#each this.inputFields}}
                             <div class="{{../orderStyles.productsListElem}}">
                                 <div class="">{{this.placeholder}}</div>
-                                <input class="{{../orderStyles.input}}" type="{{this.type}}" name="{{this.name}}" value="{{this.value}}">
+                                <input class="{{../orderStyles.input}} {{../inputStyles.order}}" type="{{this.type}}" name="{{this.name}}" value="{{this.value}}">
                             </div>
                         {{/each}}
                     </div>
@@ -50,10 +50,18 @@
                                 </div>
                             </div>
                             <div class="{{orderStyles.promo}}">
-                                <div class="">Промокод</div>
-                                <input class="{{orderStyles.input}}" type="text" name="promo" value="">
-                                <button class="" id="promo-btn">Применить</button>
-                                <div id="promo-status"></div>
+                                <div class="{{textStyles.bold}}">Промокод</div>
+                                <div class="{{orderStyles.inputWrapper}}">
+                                    <input class="{{orderStyles.input}} {{inputStyles.promo}}" type="text" name="promo" value="">
+                                </div>
+                                <div class="{{orderStyles.promoButtonWrapper}}">
+                                    <button class="{{buttonStyles.promo}}" id="promo-btn">
+                                        <span class="{{textStyles.bigButton}}">Применить</span>
+                                    </button>
+                                </div>
+                                <div class="{{orderStyles.promoStatusWrapper}}">
+                                    <div id="promo-status"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -5,6 +5,7 @@ import noticeTemplate from './OrderNotice.hbs';
 import noticeStyles from './OrderNotice.scss';
 import textStyles from './../Common/TextArea/TextArea.scss';
 import Input from '../Common/Input/Input';
+import inputStyles from '../Common/Input/Input.scss';
 import orderStyles from './OrderView.scss';
 import buttonStyles from './../Common/Button/Button.scss';
 import popupStyles from './../Common/Popup/Popup.scss';
@@ -46,6 +47,7 @@ class OrderView extends BaseView {
             buttonStyles: buttonStyles,
             textStyles: textStyles,
             linkStyles: linkStyles,
+            inputStyles: inputStyles,
             decorators: decorators,
             cartSize: this.presenter.products.length,
             baseCost: +this.presenter.price.total_base_cost,
