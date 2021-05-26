@@ -46,6 +46,12 @@
 
 .input {
     margin-top: $margin-s;
+    height: 32px;
+    width: 80%;
+    border-radius: $standard-border-radius;
+    border: 1px solid $input-color;
+    box-sizing: border-box;
+    padding-left: $padding-s;
 }
 
 .signature {
