@@ -1,12 +1,13 @@
 import offlineFormTemplate from './OfflineForm.hbs';
-import offlineFormStyles from './OfflineForm.css';
+import offlineFormStyles from './OfflineForm.scss';
+import imageStyles from '../Img/Img.scss';
 
 
 /**
  * @class OfflineForm
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class OfflineForm {
+class OfflineForm {
     /**
      * A default constructor for OfflineForm
      */
@@ -22,6 +23,9 @@ export class OfflineForm {
         return offlineFormTemplate({
             formType: this.objectType,
             styles: offlineFormStyles,
+            imageStyles: imageStyles,
         });
     };
 }
+
+export default OfflineForm;

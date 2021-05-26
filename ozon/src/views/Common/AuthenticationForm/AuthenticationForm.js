@@ -1,11 +1,14 @@
 import authenticationFormTemplate from './AuthenticationForm.hbs';
+import buttonStyles from '../Button/Button.scss';
+import textStyles from '../TextArea/TextArea.scss';
+import linkStyles from '../Link/Link.scss';
 
 
 /**
  * @class AuthenticationForm
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class AuthenticationForm {
+class AuthenticationForm {
     /**
      * A default constructor for AuthenticationForm
      */
@@ -24,6 +27,11 @@ export class AuthenticationForm {
             formType: formType,
             formData: formData,
             styles: styles,
+            buttonStyles: buttonStyles,
+            textStyles: textStyles,
+            linkStyles: linkStyles,
         });
     };
 }
+
+export default AuthenticationForm;

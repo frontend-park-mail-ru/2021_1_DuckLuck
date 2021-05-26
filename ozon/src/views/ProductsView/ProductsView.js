@@ -1,12 +1,13 @@
-import {BaseView} from '../BaseView.js';
-import {ListOfProducts} from '../Common/ListOfProducts/ListOfProducts.js';
-import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.css';
-import {Pagination} from '../Common/Pagination/Pagination';
+import BaseView from '../BaseView.js';
+import ListOfProducts from '../Common/ListOfProducts/ListOfProducts.js';
+import ListOfProductsItemStyles from '../Common/ListOfProducts/ListOfProductsItem/ListOfProductsItem.scss';
+import Pagination from '../Common/Pagination/Pagination';
 import productsPageTemplate from './ProductsView.hbs';
 import productsStyles from './ProductsView.scss';
-import filterStyles from './ProductsFilter.scss';
-import paginatorStyles from '../Common/Pagination/Pagination.css';
-import {Bus} from '../../utils/bus/bus';
+import buttonStyles from './../Common/Button/Button.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
+import Filter from '../Common/Filter/Filter.js';
+import Bus from '../../utils/bus/bus';
 import Router from '../../utils/router/Router';
 import Events from '../../utils/bus/events';
 
@@ -15,13 +16,14 @@ import Events from '../../utils/bus/events';
  * @extends BaseView
  * @classdesc Class for showing product
  */
-export class ProductsView extends BaseView {
+class ProductsView extends BaseView {
     static #types = {
         search: 'search',
         category: 'category',
     }
 
     #viewType
+    #filterHTML
 
     /**
      * @param {Object} URLParams
@@ -36,6 +38,7 @@ export class ProductsView extends BaseView {
         if (!this.IDs['category']) {
             this.IDs['category'] = 1;
         }
+
         if (!this.presenter.sortKey) {
             this.presenter.changeSortKey('cost');
         }
@@ -43,9 +46,25 @@ export class ProductsView extends BaseView {
             this.presenter.changeSortDirection('ASC');
         }
 
+        if (Object.keys(URLParams).length > 1) {
+            this.presenter.changeSortKey(URLParams.sortKey);
+            this.presenter.changeSortDirection(URLParams.sortDirection);
+            this.presenter.setFilter(URLParams);
+        } else {
+            this.presenter.dropFilter();
+            this.dropFilter();
+            this.presenter.dropSort();
+            this.dropSort();
+        }
+
         if (this.IDs['dropFilter']) {
             this.presenter.dropFilter();
             this.dropFilter();
+        }
+
+        if (this.IDs['dropSort']) {
+            this.presenter.dropSort();
+            this.dropSort();
         }
 
         if (URLParams && URLParams.text) {
@@ -71,13 +90,17 @@ export class ProductsView extends BaseView {
     }
 
     render = () => {
+        this.goUp();
+
         this.parent.innerHTML = '';
-        const productsListHtmlString = new ListOfProducts(this.presenter.products).getHtmlString();
+        const productsListHtmlString = new ListOfProducts(this.presenter.products, 'products').getHtmlString();
         const pagination = new Pagination(this.presenter.paginationInfo).getHtmlString();
+        const filter = this.#filterHTML ? this.#filterHTML : Filter.getHtmlString();
         const template = productsPageTemplate({
             isEmpty: this.presenter.products.length === 0,
             productsList: productsListHtmlString,
             pagination: pagination,
+            filter: filter,
             select: [
                 {
                     key: 'cost',
@@ -110,7 +133,8 @@ export class ProductsView extends BaseView {
                 direction: this.presenter.sortDirection,
             },
             productsStyles: productsStyles,
-            filterStyles: filterStyles,
+            buttonStyles: buttonStyles,
+            textStyles: textStyles,
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html')
             .getElementsByClassName(productsStyles.block)[0];
@@ -123,19 +147,26 @@ export class ProductsView extends BaseView {
             this.presenter.changeSortKey(sortKey);
             this.presenter.changeSortDirection(sortDirection);
             this.#viewType === ProductsView.#types.category ?
-                Router.open(`/items/${this.IDs['category']}`) :
-                Router.open('/search/1/', {}, {text: this.IDs['searchText']});
+                Router.open(`/items/${this.IDs['category']}`, {}, this.presenter.getParams()) :
+                Router.open('/search/1/',
+                    {},
+                    Object.assign(this.presenter.getParams(),
+                        {text: this.IDs['searchText']}));
         });
 
-        for (const button of this.cache.getElementsByClassName(paginatorStyles.button)) {
+        for (const button of this.cache.getElementsByClassName(buttonStyles.paginator)) {
             button.addEventListener('click', () => {
                 const page = parseInt(button.getAttribute('page'));
                 this.ID = page;
                 this.#viewType === ProductsView.#types.category ?
-                    Router.open(`/items/${this.IDs['category']}/${page}`) :
-                    Router.open(`/search/${page}/`, {}, {text: this.IDs['searchText']});
+                    Router.open(`/items/${this.IDs['category']}/${page}`, {}, this.presenter.getParams()) :
+                    Router.open(`/search/${page}/`,
+                        {},
+                        Object.assign(this.presenter.getParams(),
+                            {text: this.IDs['searchText']}));
             });
         }
+
 
         for (const itemContainer of this.cache.getElementsByClassName(ListOfProductsItemStyles.block)) {
             const productID = parseInt(itemContainer.getAttribute('item-id'));
@@ -145,52 +176,59 @@ export class ProductsView extends BaseView {
                     Router.open(`/item/${productID}`);
                 });
 
-            let item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.notInCartButton)[0];
+            let item = itemContainer.getElementsByClassName(buttonStyles.notInCartProducts)[0];
             if (item === undefined) {
-                item = itemContainer.getElementsByClassName(ListOfProductsItemStyles.inCartButton)[0];
+                item = itemContainer.getElementsByClassName(buttonStyles.inCartProducts)[0];
             }
 
             item.addEventListener('click', (evt) => {
                 evt.preventDefault();
-                Bus.globalBus.emit(Events.CartAddProduct, productID, 1);
+                Bus.globalBus.emit(Events.CartAddProduct, productID, 1, Events.ProductsItemAdded);
             });
         }
 
         this.parent.appendChild(this.cache);
-        Bus.globalBus.emit(Events.CartGetProductsID);
+        Bus.globalBus.emit(Events.CartGetProductsID, Events.ProductsCartLoadedProductsID);
 
         document.getElementById('filtration_form').addEventListener('submit', (event) => {
             event.preventDefault();
             this.IDs['page'] = 1;
-            switch (this.#viewType) {
-            case ProductsView.#types.category:
-                this.bus.emit(
-                    Events.ProductsLoad,
-                    this.IDs['category'],
-                    this.IDs['page'],
-                    this.presenter.sortKey,
-                    this.presenter.sortDirection,
-                );
-                break;
-            case ProductsView.#types.search:
-                this.bus.emit(
-                    Events.ProductsLoadSearch,
-                    this.IDs['searchText'],
-                    this.IDs['page'],
-                    this.presenter.sortKey,
-                    this.presenter.sortDirection,
-                );
-                break;
-            }
+            this.#viewType === ProductsView.#types.category ?
+                Router.open(`/items/${this.IDs['category']}/1`, {}, this.presenter.getParams()) :
+                Router.open('/search/1/',
+                    {},
+                    Object.assign(this.presenter.getParams(),
+                        {text: this.IDs['searchText']}));
         });
 
         document.getElementById('drop-filters').addEventListener('click', (event) => {
             event.preventDefault();
             this.presenter.dropFilter();
             this.dropFilter();
-            this.show();
+            this.#viewType === ProductsView.#types.search ? this.show({text: this.IDs['searchText']}) : this.show();
         });
 
+        const min_price_input = document.getElementById('min_price');
+        const max_price_input = document.getElementById('max_price');
+        min_price_input.addEventListener('keypress', (event) => {
+            if (event.key === '-') {
+                event.preventDefault();
+            }
+        });
+
+        max_price_input.addEventListener('keypress', (event) => {
+            if (event.key === '-') {
+                event.preventDefault();
+            }
+        });
+
+        const onMainElem = this.cache.getElementsByClassName(productsStyles.onMainPage)[0];
+        if (onMainElem) {
+            onMainElem.addEventListener('click', (event) => {
+                event.preventDefault();
+                Router.open('/', {dropFilter: true, dropSort: true});
+            });
+        }
         this.drawFilter();
     };
 
@@ -228,7 +266,7 @@ export class ProductsView extends BaseView {
         const newButton = button.cloneNode(true);
         this.setButtonAddedStyle(newButton);
         newButton.addEventListener('click', () => {
-            Bus.globalBus.emit(Events.CartRemoveProduct, id);
+            Bus.globalBus.emit(Events.CartRemoveProduct, id, Events.ProductsItemNotAdded);
         });
         button.replaceWith(newButton);
     }
@@ -246,7 +284,7 @@ export class ProductsView extends BaseView {
             this.setButtonNotAddedStyle(newButton);
             newButton.addEventListener('click', () => {
                 const id = item.getAttribute('item-id');
-                Bus.globalBus.emit(Events.CartAddProduct, +item.getAttribute('item-id'), 1);
+                Bus.globalBus.emit(Events.CartAddProduct, +item.getAttribute('item-id'), 1, Events.ProductsItemAdded);
                 this.setProductAdded(+id);
             });
             button.replaceWith(newButton);
@@ -257,7 +295,7 @@ export class ProductsView extends BaseView {
      * @param {HTMLElement} button
      */
     setButtonAddedStyle = (button) => {
-        button.className = ListOfProductsItemStyles.inCartButton;
+        button.className = buttonStyles.inCartProducts;
         button.getElementsByTagName('span')[0].innerHTML = 'В корзине';
     }
 
@@ -265,7 +303,7 @@ export class ProductsView extends BaseView {
      * @param {HTMLElement} button
      */
     setButtonNotAddedStyle = (button) => {
-        button.className = ListOfProductsItemStyles.notInCartButton;
+        button.className = buttonStyles.notInCartProducts;
         button.getElementsByTagName('span')[0].innerHTML = 'В корзину';
     }
 
@@ -287,6 +325,37 @@ export class ProductsView extends BaseView {
             return;
         }
 
-        form.remove();
+        for (const input of form.getElementsByTagName('input')) {
+            input.type === 'checkbox' ? input.checked = false : input.value = '';
+        }
+    }
+
+    dropSort = () => {
+        const sort = document.getElementsByClassName(productsStyles.select)[0];
+        if (!sort) {
+            return;
+        }
+
+        sort.key = 'cost';
+        sort.direction = 'ASC';
+        sort.value = 'Сначала дешевые';
+    }
+
+    drawIncorrectFilterWarning = () => {
+        const incorrectFilterLabel = document.getElementById('incorrect_filter_label');
+        if (!incorrectFilterLabel) {
+            return;
+        }
+        incorrectFilterLabel.innerHTML = 'Некорректные данные для фильтрации!';
+    }
+
+    dropIncorrectFilterWarning = () => {
+        const incorrectFilterLabel = document.getElementById('incorrect_filter_label');
+        if (!incorrectFilterLabel) {
+            return;
+        }
+        incorrectFilterLabel.innerHTML = '';
     }
 }
+
+export default ProductsView;

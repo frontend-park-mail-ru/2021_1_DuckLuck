@@ -1,10 +1,11 @@
 import popupTemplate from './Popup.hbs';
+import popupStyles from './Popup.scss';
 
 /**
  * @class Popup
  * @classdesc This class is using for construct html via templates. One of the common views
  */
-export class Popup {
+class Popup {
     /**
      * @description Default constructor
      */
@@ -20,6 +21,8 @@ export class Popup {
      * @return {string} generated HTML after templating
      */
     getHtmlString = ({popupBody, background, popupType}) => {
-        return popupTemplate({popupBody, background, popupType});
+        return popupTemplate({popupBody, background, popupType, popupStyles});
     };
 }
+
+export default Popup;

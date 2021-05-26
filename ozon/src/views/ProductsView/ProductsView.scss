@@ -1,4 +1,4 @@
-@import '../../constants.scss';
+@import '../../constants';
 
 .block {
     width: 76.66%;
@@ -7,37 +7,36 @@
     margin: 0 auto;
 }
 
+.contentWrapper {
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    gap: $gap-s;
+    margin-top: $margin-l;
+}
+
 .body {
     display: flex;
-    margin: var(--margin-l) auto auto;
     width: 60%;
     flex-direction: column;
 }
 
 .footer {
     display: flex;
-    max-width: 60%;
     margin: auto;
     width: 100%;
     border-top: solid;
-    border-color: var(--neutral-background-color);
-    padding-top: var(--padding-m);
+    border-color: $neutral-background-color;
+    padding-top: $padding-m;
 }
 
-.emptyText {
+.emptyText, .onMainPage {
     margin: auto;
-    font-family: var(--font);
-    font-size: var(--font-size-xxl);
-    font-weight: var(--bold-font);
 }
 
 .select {
     width: 226px;
-    height: var(--height-xxxs);
-}
-
-.listWrapper {
-    margin: auto;
+    height: $height-xxxs;
 }
 
 @media screen and (max-width: $max-width-xl) {
@@ -46,9 +45,13 @@
     }
 
     .body {
-        margin: var(--margin-l) auto auto;
+        margin: $margin-l auto auto;
         width: 100%;
         max-width: 70%;
+    }
+
+    .contentWrapper {
+        flex-direction: column;
     }
 
     .block {

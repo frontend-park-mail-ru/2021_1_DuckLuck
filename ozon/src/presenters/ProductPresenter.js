@@ -1,9 +1,8 @@
 import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 import Router from '../utils/router/Router';
-import {staticServerHost} from '../utils/urls/urls';
 
 /**
  * @description Presenter for Products View and Model
@@ -18,12 +17,18 @@ class ProductsPresenter extends BasePresenter {
         super(application, View, Model);
         this.bus.on(Events.ProductLoad, this.loadProduct);
         this.bus.on(Events.ProductLoaded, this.productLoadedReaction);
+        this.bus.on(Events.RecommendationLoad, this.loadRecommendations);
+        this.bus.on(Events.RecommendationLoaded, this.recommendationsLoadedReaction);
+        this.bus.on(Events.ProductStarsCounterLoad, this.loadStarsCounter);
+        this.bus.on(Events.ProductStarsCounterLoaded, this.starsCounterLoaded);
         Bus.globalBus.on(Events.ProductChangeID, this.changeID);
         Bus.globalBus.on(Events.CartLoadedProductID, this.productCartGotIds);
         Bus.globalBus.on(Events.RenderProductReviews, this.renderProductsReview);
         Bus.globalBus.on(Events.ProductTransmitData, this.returnProductData);
         Bus.globalBus.on(Events.ProductItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.ProductItemNotAdded, this.setProductNotAdded);
+        Bus.globalBus.on(Events.ProductCartLoadedProductsID, this.recommendationsCartGotIds);
+        Bus.globalBus.on(Events.ProductRenderReviewButton, this.addReviewButton);
     }
 
     /**
@@ -49,11 +54,26 @@ class ProductsPresenter extends BasePresenter {
     }
 
     /**
+     * @return {Array}
+     */
+    get recommendations() {
+        return this.model.recommendations;
+    }
+
+    /**
      *
      * @param {Number} productID
      */
     loadProduct = (productID) => {
         this.model.loadProduct(productID);
+    }
+
+    /**
+     *
+     * @param {Number} productID
+     */
+    loadRecommendations = (productID) => {
+        this.model.loadRecommendations(productID);
     }
 
     /**
@@ -86,6 +106,28 @@ class ProductsPresenter extends BasePresenter {
         switch (result) {
         case Responses.Success: {
             this.view.render();
+            this.loadRecommendations(this.item.id);
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
+    }
+
+    /**
+     *
+     * @param {string}result
+     */
+    recommendationsLoadedReaction = (result) => {
+        switch (result) {
+        case Responses.Success: {
+            this.view.renderRecommendations();
             break;
         }
         case Responses.Offline: {
@@ -124,7 +166,7 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.emit(eventToEmit, {
             id: product.id,
             category: product.description.category,
-            image: `${staticServerHost}${product.images[0]}`,
+            image: product.images[0],
             title: product.name,
             href: `/item/${product.id}`,
         });
@@ -136,6 +178,44 @@ class ProductsPresenter extends BasePresenter {
 
     setProductNotAdded = () => {
         this.view.setProductNotAdded();
+    }
+
+    /**
+     * @param {Set} ids
+     */
+    recommendationsCartGotIds = (ids) => {
+        if (ids.size) {
+            this.view.recommendationSetAddedProducts(ids);
+        }
+    }
+
+    addReviewButton = () => {
+        this.view.addReviewButton();
+    }
+
+    loadStarsCounter = () => {
+        this.model.loadStarsCounter();
+    }
+
+    /**
+     *
+     * @param {string}result
+     */
+    starsCounterLoaded = (result) => {
+        switch (result) {
+        case Responses.Success: {
+            this.view.renderStarsCounter();
+            break;
+        }
+        case Responses.Offline: {
+            Router.open('/offline', {replaceState: true});
+            break;
+        }
+        default: {
+            console.error(result);
+            break;
+        }
+        }
     }
 }
 

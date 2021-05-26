@@ -1,9 +1,9 @@
-import {AjaxModule} from '../modules/Ajax/Ajax';
-import {fileServerHost, serverApiPath, urls} from '../utils/urls/urls';
+import AjaxModule from '../modules/Ajax/Ajax';
+import {serverApiPath, urls} from '../utils/urls/urls';
 import BaseModel from './BaseModel';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 import HTTPResponses from '../utils/http-responses/httpResponses';
 
 /**
@@ -38,6 +38,13 @@ class CartModel extends BaseModel {
     }
 
     /**
+     * @param {number|undefined} newProduct
+     */
+    set lastAddedProduct(newProduct) {
+        this.#lastAddedProductID = newProduct;
+    }
+
+    /**
      * @return {Set}
      */
     get ids() {
@@ -64,10 +71,9 @@ class CartModel extends BaseModel {
      *
      * @param {number} id id of product
      * @param {number | string} count amount of product
+     * @param {Events} callbackEvent
      */
-    addProduct(id, count) {
-        this.#lastAddedProductID = id;
-
+    addProduct(id, count, callbackEvent) {
         AjaxModule.postUsingFetch({
             url: serverApiPath + urls.cartProduct,
             body: {product_id: +id,
@@ -79,9 +85,8 @@ class CartModel extends BaseModel {
             }
             return response.json();
         }).then(() => {
-            Bus.globalBus.emit(Events.HeaderChangeCartItems, 1);
-            Bus.globalBus.emit(Events.ProductsItemAdded, id);
-            Bus.globalBus.emit(Events.ProductItemAdded, id);
+            Bus.globalBus.emit(Events.HeaderChangeCartItems, count);
+            Bus.globalBus.emit(callbackEvent, id);
             (this.#products = this.products || []).push({
                 count: 1,
                 id: id,
@@ -90,6 +95,7 @@ class CartModel extends BaseModel {
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
+                this.#lastAddedProductID = id;
                 this.bus.emit(Events.CartProductAdded, Responses.Unauthorized);
                 break;
             }
@@ -175,16 +181,16 @@ class CartModel extends BaseModel {
 
     /**
      * @param {number} id id of removed product
+     * @param {Events} callbackEvent
      */
-    removeProduct = (id) => {
+    removeProduct = (id, callbackEvent = Events.DummyEvent) => {
         if (!(this.#ids.has(+id))) {
             return;
         }
         this.changeCartCounter(id, 0);
         this.#ids.delete(+id);
         Bus.globalBus.emit(Events.CartProductRemoved, Responses.Success, id);
-        Bus.globalBus.emit(Events.ProductsItemNotAdded, id);
-        Bus.globalBus.emit(Events.ProductItemNotAdded, id);
+        Bus.globalBus.emit(callbackEvent, id);
         this.products.splice(this.products.findIndex((elem) => +elem.id === +id), 1);
 
         AjaxModule.deleteUsingFetch({
@@ -226,7 +232,7 @@ class CartModel extends BaseModel {
                 return elem.id;
             }) || []);
             for (const product of this.#products) {
-                product.preview_image = fileServerHost + product.preview_image;
+                product.preview_image = product.preview_image;
             }
             this.bus.emit(Events.CartLoaded, Responses.Success);
         }).catch((err) => {
@@ -268,6 +274,16 @@ class CartModel extends BaseModel {
         }).catch((err) => {
             this.bus.emit(Events.CartLoadedProductsAmountReaction, 0);
         });
+    }
+
+    /**
+     * @param {number|string} productID
+     * @return {boolean}
+     */
+    isCartContains = (productID) => {
+        return this.products.find((elem) => {
+            return +elem.id === +productID;
+        }) !== undefined;
     }
 }
 

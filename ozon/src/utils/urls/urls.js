@@ -1,6 +1,4 @@
 export const serverHost = process.env.SERVER_HOST;
-export const fileServerHost = process.env.FILE_SERVER_HOST;
-export const staticServerHost = process.env.STATIC_SERVER_HOST;
 export const serverApiPath = `${serverHost}/api/v1`;
 
 export const urls = {
@@ -15,7 +13,11 @@ export const urls = {
     cart: '/cart',
     cartProduct: '/cart/product',
     order: '/order',
+    orders: '/user/order',
     sessionUrl: '/session',
     review: '/review/product',
     reviewRights: '/review/rights/product/',
+    publicKey: '/notification/key',
+    notifications: '/notification',
+    promo: '/promo',
 };

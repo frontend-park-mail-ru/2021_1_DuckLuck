@@ -2,7 +2,7 @@ import BasePresenter from './BasePresenter.js';
 import Router from '../utils/router/Router';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 
 /**
  * @description Presenter for Login View and Model
@@ -43,12 +43,17 @@ class LoginPresenter extends BasePresenter {
         case Responses.Success: {
             this.view.remove();
             Bus.globalBus.emit(Events.ProfileNewUserLoggedIn);
-            Bus.globalBus.emit(Events.CartAddLastProduct);
-            Router.open('/profile', {replaceState: true});
+            Bus.globalBus.emit(Events.CartLoadProductsAmount);
+            Bus.globalBus.emit(Events.WebPushSubscribe);
+            Router.goBack();
             break;
         }
         case Responses.Offline: {
             Router.open('/offline', {replaceState: true});
+            break;
+        }
+        case Responses.Unauthorized: {
+            this.view.incorrectEmailOrPassword();
             break;
         }
         default: {

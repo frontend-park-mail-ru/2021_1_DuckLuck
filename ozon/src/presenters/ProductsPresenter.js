@@ -2,7 +2,7 @@ import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
 import Router from '../utils/router/Router';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 
 /**
  * @description Presenter for Product View and Model
@@ -22,7 +22,7 @@ class ProductsPresenter extends BasePresenter {
         Bus.globalBus.on(Events.ProductsItemAdded, this.setProductAdded);
         Bus.globalBus.on(Events.ProductsItemNotAdded, this.setProductNotAdded);
         Bus.globalBus.on(Events.HeaderChangeCategoryID, this.changeCategoryId);
-        Bus.globalBus.on(Events.CartLoadedProductsID, this.productsCartGotIds);
+        Bus.globalBus.on(Events.ProductsCartLoadedProductsID, this.productsCartGotIds);
     }
 
     /**
@@ -75,6 +75,44 @@ class ProductsPresenter extends BasePresenter {
         this.model.filter = undefined;
     }
 
+    dropSort = () => {
+        this.model.sortKey = 'cost';
+        this.model.sortDirection = 'ASC';
+    }
+
+    /**
+     * @param {Object} URLParams
+     */
+    setFilter = (URLParams) => {
+        /**
+         * @param {string} string
+         * @return {boolean}
+         */
+        function isStringValidBool(string) {
+            if (!string) {
+                return false;
+            }
+            string = string.toLowerCase();
+            return string === 'true' || string === 'false';
+        }
+
+        this.model.filter = {};
+
+
+        const priceMin = URLParams.priceMin;
+        const priceMax = URLParams.priceMax;
+        this.model.filter.min_price = priceMin && !isNaN(priceMin) && !isNaN(parseInt(priceMin)) && +priceMin > 0 ?
+            +priceMin : undefined;
+        this.model.filter.max_price = priceMax && !isNaN(priceMax) && !isNaN(parseInt(priceMax)) && +priceMax > 0?
+            +priceMax : undefined;
+        this.model.filter.is_new = isStringValidBool(URLParams.isNew) ?
+            JSON.parse(URLParams.isNew.toLowerCase()) : false;
+        this.model.filter.is_rating = isStringValidBool(URLParams.isRating) ?
+            JSON.parse(URLParams.isRating.toLowerCase()) : false;
+        this.model.filter.is_discount = isStringValidBool(URLParams.isDiscount) ?
+            JSON.parse(URLParams.isDiscount.toLowerCase()) : false;
+    }
+
     /**
      *
      * @param {Number} id
@@ -100,14 +138,41 @@ class ProductsPresenter extends BasePresenter {
     }
 
     /**
+     * @return {{priceMin: (number|undefined),
+     *            sortDirection: String,
+     *            priceMax: (number|undefined),
+     *            sortKey: String,
+     *            isRating: (boolean),
+     *            isNew: (boolean),
+     *            isDiscount: (boolean)}}
+     */
+    getParams = () => {
+        this.parseFiltration();
+        const filter = this.filter;
+        return {
+            sortKey: this.sortKey,
+            sortDirection: this.sortDirection,
+            priceMin: filter ? filter.min_price : undefined,
+            priceMax: filter ? filter.max_price : undefined,
+            isNew: filter ? filter.is_new : false,
+            isRating: filter ? filter.is_rating : false,
+            isDiscount: filter ? filter.is_discount: false,
+        };
+    }
+
+    /**
      * @param {Number} category
      * @param {Number} page
      * @param {String} sortKey
      * @param {String} sortDirection
      */
     loadProducts = (category, page, sortKey, sortDirection) => {
-        this.parseFiltration();
-        this.model.loadProducts(category, page, sortKey, sortDirection);
+        if (this.parseFiltration()) {
+            this.view.dropIncorrectFilterWarning();
+            this.model.loadProducts(category, page, sortKey, sortDirection);
+            return;
+        }
+        this.view.drawIncorrectFilterWarning();
     }
 
     /**
@@ -117,17 +182,29 @@ class ProductsPresenter extends BasePresenter {
      * @param {String} sortDirection
      */
     loadSearchProducts = (searchData, page, sortKey, sortDirection) => {
-        this.parseFiltration();
-        this.model.loadProductsSearch(searchData, page, sortKey, sortDirection);
+        if (this.parseFiltration()) {
+            this.view.dropIncorrectFilterWarning();
+            this.model.loadProductsSearch(searchData, page, sortKey, sortDirection);
+            return;
+        }
+        this.view.drawIncorrectFilterWarning();
     }
 
+
+    /**
+     * @return {boolean}
+     */
     parseFiltration = () => {
         if (!document.getElementById('min_price')) {
-            return;
+            return true;
         }
 
         const minPrice = document.getElementById('min_price').value;
         const maxPrice = document.getElementById('max_price').value;
+        if (minPrice.length && maxPrice.length && +minPrice > +maxPrice) {
+            return false;
+        }
+
         this.model.filter = {
             min_price: minPrice === '' ? undefined : parseInt(minPrice),
             max_price: maxPrice === '' ? undefined : parseInt(maxPrice),
@@ -135,6 +212,7 @@ class ProductsPresenter extends BasePresenter {
             is_rating: document.getElementById('is_rating').checked,
             is_discount: document.getElementById('is_discount').checked,
         };
+        return true;
     }
 
     /**

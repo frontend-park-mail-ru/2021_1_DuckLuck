@@ -3,7 +3,7 @@ import {isValidInputs} from '../modules/Valiadtor/validator';
 import Router from '../utils/router/Router';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 
 /**
  * @description Presenter for Profile View and Model
@@ -24,10 +24,11 @@ class ProfilePresenter extends BasePresenter {
         this.bus.on(Events.ProfileCheckAuthResult, this.tryAuthProcessResult);
         this.bus.on(Events.ProfileAllGet, this.getAllData);
         this.bus.on(Events.ProfileAllResult, this.renderAllData);
-        this.bus.on(Events.ProfileLogout, this.profileLogout);
+        this.bus.on(Events.ProfileLogoutPrepare, this.profileLogoutPrepare);
 
         Bus.globalBus.on(Events.ProfileNewUserLoggedIn, this.removeData);
         Bus.globalBus.on(Events.ProfileTransmitData, this.returnUserData);
+        Bus.globalBus.on(Events.ProfileLogout, this.profileLogout);
     }
 
     /**
@@ -151,17 +152,22 @@ class ProfilePresenter extends BasePresenter {
     /**
      * @description logout from profile
      */
-    profileLogout = () => {
+    profileLogoutPrepare = () => {
         if (!navigator.onLine) {
             Router.open('/offline');
             return;
         }
         this.view.remove();
-        Router.open('/', {replaceState: true});
         Bus.globalBus.emit(Events.HeaderSetCartItems, 0);
         Bus.globalBus.emit(Events.CartDrop);
-        this.model.profileLogout();
+        Bus.globalBus.emit(Events.WebPushUnsubscribe);
     }
+
+    profileLogout = () => {
+        this.model.profileLogout();
+        Router.open('/', {replaceState: true});
+    }
+
 
     /**
      *
@@ -254,7 +260,6 @@ class ProfilePresenter extends BasePresenter {
      */
     renderAllData = (status) => {
         if (status === Responses.Success) {
-            Bus.globalBus.emit(Events.CartLoadProductsAmount);
             this.view.renderData();
             return;
         }

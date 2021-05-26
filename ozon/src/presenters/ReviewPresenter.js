@@ -1,8 +1,7 @@
 import BasePresenter from './BasePresenter.js';
 import Events from '../utils/bus/events';
 import Responses from '../utils/bus/responses';
-import Router from '../utils/router/Router';
-import {Bus} from '../utils/bus/bus';
+import Bus from '../utils/bus/bus';
 
 /**
  * @description Presenter for Review View and Model
@@ -15,9 +14,9 @@ class ReviewPresenter extends BasePresenter {
      */
     constructor(application, View, Model) {
         super(application, View, Model);
-        this.bus.on(Events.ReviewRightsLoad, this.loadReviewRights);
+        Bus.globalBus.on(Events.ReviewRightsLoad, this.loadReviewRights);
         this.bus.on(Events.ReviewRightsLoaded, this.reviewRightsLoadedReaction);
-        this.bus.on(Events.SendOrder, this.sendReview);
+        this.bus.on(Events.ReviewOrder, this.sendReview);
 
         Bus.globalBus.on(Events.ReviewUserDataLoaded, this.reviewUserDataLoaded);
         Bus.globalBus.on(Events.ReviewProductDataLoaded, this.reviewProductDataLoaded);
@@ -149,11 +148,7 @@ class ReviewPresenter extends BasePresenter {
             this.model.userName =
                 `${window.localStorage.getItem('firstName')} ${window.localStorage.getItem('lastName')}`;
             Bus.globalBus.emit(Events.ProductTransmitData, Events.ReviewProductDataLoaded);
-            this.view.render();
-            this.view.cache.hidden = false;
-        } else {
-            console.error('Cant load review');
-            Router.open('/items', {replaceState: true});
+            Bus.globalBus.emit(Events.ProductRenderReviewButton);
         }
     }
 
@@ -161,7 +156,8 @@ class ReviewPresenter extends BasePresenter {
      * @param {Object} profileData
      */
     reviewUserDataLoaded = (profileData) => {
-        this.model.userName = `${profileData.firstName} ${profileData.lastName}`;
+        this.model.userName = (profileData.firstName === null ? 'Имя не указано' : profileData.firstName) +
+            (profileData.lastName === null ? 'Фамилия не указана' : profileData.lastName);
     }
 
     /**

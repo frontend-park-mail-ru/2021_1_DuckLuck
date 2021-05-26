@@ -1,10 +1,8 @@
-import {incorrectFieldsMap} from '../utils/validationFields/validationFields';
-
 /**
  * @class BaseView
  * @classdesc Base class for all other views
  */
-export class BaseView {
+class BaseView {
     #parent
     #cache
     #presenter
@@ -139,12 +137,12 @@ export class BaseView {
         const inputs = Array.from(this.cache.getElementsByTagName('input'));
         for (const field of invalidFields) {
             const input = inputs.find((input) => {
-                return field === input.name;
+                return field.fieldName === input.name;
             });
             if (!input) {
                 break;
             }
-            BaseView.setInvalidInputPlaceholder(input, incorrectFieldsMap[`${input.name}`]);
+            BaseView.setInvalidInputPlaceholder(input, field.errorMessage);
         }
     }
 
@@ -157,9 +155,18 @@ export class BaseView {
     }
 
     /**
+     * @description Raising the user to the top
+     */
+    goUp = () => {
+        window.scrollTo(0, 0);
+    }
+
+    /**
      * Render from template
      */
     render = () => {
 
     }
 }
+
+export default BaseView;

@@ -18,6 +18,14 @@ self.addEventListener('activate', (event) => {
     event.waitUntil(self.clients.claim());
 });
 
+self.addEventListener('push', (e) => {
+    const data = e.data.json();
+    self.registration.showNotification('Уведомление от DuckLuck Market!', {
+        body: `Ваш заказ № ${data.order_number.number} приобрёл новый статус: ${data.status}`,
+        icon: '/svg/header/logo.svg',
+    });
+});
+
 self.addEventListener('fetch', (event) => {
     event.respondWith(
         (async() => {

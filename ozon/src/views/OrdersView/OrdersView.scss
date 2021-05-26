@@ -1,0 +1,84 @@
+@import '../../constants';
+
+.ordersWrapper {
+  width: 100%;
+}
+
+.body {
+  width: 60%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-s;
+}
+
+.orders {
+  display: flex;
+  flex-direction: column;
+  gap: $gap-s;
+}
+
+.order {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $neutral-background-color;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px rgba(34, 60, 80, 0.2);
+}
+
+.images {
+  max-width: 70%;
+  margin-top: $margin-s;
+  margin-bottom: $margin-s;
+}
+
+.image {
+  display: block;
+  cursor: pointer;
+}
+
+.select {
+  display: block;
+  width: $width-s;
+}
+
+.orderHead {
+  display: flex;
+  flex-direction: column;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  background-color: $neutral-background-color;
+  min-height: $height-s;
+  gap: $gap-xxs;
+}
+
+.headTop {
+  display: flex;
+  justify-content: space-between;
+  margin-top: $margin-s;
+  margin-left: $margin-s;
+  margin-right: $margin-s;
+}
+
+.orderIdWrapper {
+  margin-left: $margin-s;
+  margin-bottom: $margin-s;
+}
+
+.orderBody {
+  display: flex;
+  flex-direction: row;
+  min-height: $height-l;
+}
+
+.address {
+  margin-top: $margin-s;
+  min-width: 30%;
+  display: flex;
+  flex-direction: column;
+  gap: $gap-xxs;
+}
+
+.text {
+  margin-left: $margin-s;
+}

@@ -1,0 +1,25 @@
+@import '../../../constants';
+
+%link-shared {
+  text-decoration: none;
+  cursor: pointer;
+  font-family: $font-family;
+  font-size: $font-size-s;
+  color: $colored-object-color;
+}
+
+.link {
+  @extend %link-shared;
+}
+
+.catalogCategory, .catalogSubCategory {
+  @extend %link-shared;
+  font-weight: $bold;
+  color: $dark-color;
+}
+
+.catalogSubSubCategory, .headerMenu  {
+  @extend %link-shared;
+  color: $dark-color;
+}
+

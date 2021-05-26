@@ -1,11 +1,21 @@
-import {BaseView} from '../BaseView.js';
+import BaseView from '../BaseView.js';
 import Events from '../../utils/bus/events';
 import reviewTemplate from './ReviewView.hbs';
-import {Input} from '../Common/Input/Input';
-import reviewStyles from './ReviewView.css';
-import {staticServerHost} from '../../utils/urls/urls';
+import Input from '../Common/Input/Input';
+import reviewStyles from './ReviewView.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
+import imgStyles from './../Common/Img/Img.scss';
+import buttonStyles from './../Common/Button/Button.scss';
+import linkStyles from './../Common/Link/Link.scss';
 import Router from '../../utils/router/Router';
-import {Bus} from '../../utils/bus/bus';
+import Bus from '../../utils/bus/bus';
+import Popup from '../Common/Popup/Popup';
+import noticeTemplate from './ReviewNotice.hbs';
+import noticeStyles from './ReviewNotice.scss';
+import Blind from '../Common/Blind/Blind';
+import popupStyles from '../Common/Popup/Popup.scss';
+import decorators from '../decorators.scss';
+import Img from '../Common/Img/Img';
 
 /**
  * @class ReviewView
@@ -15,7 +25,8 @@ import {Bus} from '../../utils/bus/bus';
 class ReviewView extends BaseView {
     show = () => {
         this.presenter.rating = 0;
-        this.bus.emit(Events.ReviewRightsLoad);
+        this.presenter.isPublic = true;
+        this.render();
     }
 
     render = () => {
@@ -44,14 +55,19 @@ class ReviewView extends BaseView {
                 name: 'isPublic',
             }),
             styles: reviewStyles,
+            textStyles: textStyles,
+            buttonStyles: buttonStyles,
+            imgStyles: imgStyles,
+            linkStyles: linkStyles,
             product: this.presenter.product,
             userName: this.presenter.userName,
+            ratingStar: new Img({src: '/svg/empty_star.svg'}),
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('review-block');
         this.parent.appendChild(this.cache);
 
-        const emptyStarLink = staticServerHost + '/svg/empty_star.svg';
-        const starLink = staticServerHost + '/svg/star.svg';
+        const emptyStarLink = '/svg/empty_star.svg';
+        const starLink = '/svg/star.svg';
         const stars = Array.from(this.cache.getElementsByClassName(reviewStyles.stars)[0].children);
 
         const emptyRating = (event) => {
@@ -79,19 +95,32 @@ class ReviewView extends BaseView {
             });
         });
 
-
-        const submitButton = this.cache.getElementsByClassName(reviewStyles.submitButton)[0];
-        submitButton.addEventListener('click', () => {
-            this.presenter.sendReview();
-            Router.open('/');
+        const submitButton = this.cache.getElementsByClassName(buttonStyles.review)[0];
+        submitButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            this.presenter.isPublic = !document.getElementsByName('isPublic')[0].checked;
+            this.bus.emit(Events.ReviewOrder);
+            const notice = new DOMParser().parseFromString(new Popup().getHtmlString({
+                popupBody: noticeTemplate({
+                    styles: noticeStyles,
+                    textStyles: textStyles,
+                }),
+                background: new Blind().getHtmlString(),
+                popupType: popupStyles.order,
+            }), 'text/html').getElementById('popup');
+            const body = document.getElementsByTagName('body')[0];
+            body.classList.add(decorators.noScroll);
+            this.parent.appendChild(notice);
+            document.getElementById('blind')
+                .addEventListener('click', (evt) => {
+                    evt.preventDefault();
+                    body.classList.remove(decorators.noScroll);
+                    document.getElementById('popup').remove();
+                    Router.open(`/item/${this.presenter.product.id}`, {replaceState: true});
+                });
         });
 
-        const isPublic = document.getElementsByName('isPublic')[0];
-        isPublic.addEventListener('change', () => {
-            this.presenter.isPublic = !this.presenter.isPublic;
-        });
-
-        const productLink = this.cache.getElementsByClassName(reviewStyles.href)[0];
+        const productLink = this.cache.getElementsByClassName(linkStyles.link)[0];
         productLink.addEventListener('click', () => {
             const productId = this.presenter.product.id;
             Bus.globalBus.emit(Events.ProductChangeID, productId);

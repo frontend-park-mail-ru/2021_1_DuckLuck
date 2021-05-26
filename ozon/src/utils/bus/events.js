@@ -1,4 +1,6 @@
 const Events = {
+    DummyEvent: 'dummy-event',
+
     LoginSendData: 'login-send-data',
     LoginEmitResult: 'login-emit-result',
     LoginIncorrectForm: 'login-incorrect-form',
@@ -18,6 +20,7 @@ const Events = {
     ProfileCheckAuthResult: 'profile-check-auth-result',
     ProfileAllResult: 'profile-all-result',
     ProfileAllGet: 'profile-all-get',
+    ProfileLogoutPrepare: 'profile-logout-prepare',
     ProfileLogout: 'profile-logout',
     ProfileLogoutEmitResult: 'profile-logout-emit-result',
     ProfileIncorrectLogout: 'profile-logout-incorrect',
@@ -31,12 +34,18 @@ const Events = {
     RenderProductReviews: 'render-product-reviews',
     ProductTransmitData: 'product-transmit-data',
     ProductsItemNotAdded: 'products-item-removed',
+    ProductStarsCounterLoad: 'product-stars-counter-load',
+    ProductStarsCounterLoaded: 'product-stars-counter-loaded',
+    ProductsCartLoadedProductsID: 'products-cart-loaded-products-ids',
+
 
     ProductChangeID: 'product-changeID',
     ProductLoad: 'product-load',
     ProductLoaded: 'product-loaded',
     ProductItemNotAdded: 'product-item-not-added',
     ProductItemAdded: 'product-item-added',
+    ProductCartLoadedProductsID: 'product-cart-loaded-products-ids',
+    ProductRenderReviewButton: 'product-render-review-button',
 
     HeaderLoad: 'product-load',
     HeaderLoaded: 'product-loaded',
@@ -56,15 +65,21 @@ const Events = {
     CartLoadedProductsAmountReaction: 'cart-loaded-products-amount-reaction',
     CartGetProductsID: 'cart-get-products-ids',
     CartGetProductID: 'cart-get-product-id',
-    CartLoadedProductsID: 'cart-loaded-products-ids',
     CartLoadedProductID: 'cart-loaded-product-id',
     CartAddLastProduct: 'cart-add-last-product',
     CartDrop: 'cart-drop',
+    CartCheckRecommendationsInCart: 'cart-check-recommendations-in-cart',
 
     OrderLoad: 'order-load',
     OrderLoaded: 'order-loaded',
+    OrderNewBill: 'order-new-bill',
+    OrderIncorrectPromo: 'order-incorrect-promo',
     SendOrder: 'order-send',
 
+    OrdersLoad: 'orders-load',
+    OrdersLoadMoreOrders: 'orders-load-more-orders',
+    OrdersMoreOrdersLoaded: 'orders-more-orders-loaded',
+    OrdersLoaded: 'orders-loaded',
     ReviewRightsLoad: 'review-rights-load',
     ReviewRightsLoaded: 'review-rights-loaded',
     ReviewUserDataLoad: 'review-user-data-load',
@@ -77,6 +92,14 @@ const Events = {
 
     ChangeReviewProductId: 'change-review-product-id',
     OrderSent: 'order-sent',
+
+    SendPromo: 'send-promo',
+    PromoSent: 'promo-sent',
+    RecommendationLoad: 'recommendation-load',
+    RecommendationLoaded: 'recommendation-loaded',
+
+    WebPushSubscribe: 'web-push-subscribe',
+    WebPushUnsubscribe: 'web-push-unsubscribe',
 };
 
 

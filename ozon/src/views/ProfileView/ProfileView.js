@@ -1,15 +1,19 @@
-import {BaseView} from '../BaseView.js';
-import {Input} from '../Common/Input/Input.js';
+import BaseView from '../BaseView.js';
+import Input from '../Common/Input/Input.js';
 import profileTemplate from './ProfileView.hbs';
 import profileStyles from './ProfileView.scss';
+import buttonStyles from '../Common/Button/Button.scss';
+import textStyles from './../Common/TextArea/TextArea.scss';
+import imgStyles from './../Common/Img/Img.scss';
 import Events from '../../utils/bus/events';
+import Img from '../Common/Img/Img';
 
 /**
  * @class  ProfileView
  * @extends BaseView
  * @classdesc Class for showing profile of a user
  */
-export class ProfileView extends BaseView {
+class ProfileView extends BaseView {
     /**
      * @param {Object} URLParams
      * @description redefinition of show method
@@ -23,6 +27,8 @@ export class ProfileView extends BaseView {
      * @return {void} rendered page
      */
     render = () => {
+        this.goUp();
+
         this.parent.innerHTML = '';
         if (this.cache !== '') {
             this.parent.appendChild(this.cache);
@@ -39,6 +45,10 @@ export class ProfileView extends BaseView {
                 placeholder: 'Адрес электронной почты', isDisabled: true}),
             avatarUpload: new Input({type: 'file', name: 'avatar', placeholder: 'Upload new Avatar'}),
             profileStyles: profileStyles,
+            buttonStyles: buttonStyles,
+            imgStyles: imgStyles,
+            textStyles: textStyles,
+            smileSvg: new Img({src: '/svg/header/smile.svg'}),
         });
 
         this.cache = new DOMParser().parseFromString(htmlTemplate, 'text/html').getElementById('profile-page');
@@ -58,7 +68,7 @@ export class ProfileView extends BaseView {
         const logout = document.getElementById('logout');
         logout.addEventListener('click', (evt) => {
             evt.preventDefault();
-            this.bus.emit(Events.ProfileLogout);
+            this.bus.emit(Events.ProfileLogoutPrepare);
         });
 
         this.bus.emit(Events.ProfileAllGet);
@@ -106,3 +116,5 @@ export class ProfileView extends BaseView {
         document.getElementById('invalid-avatar-span').innerHTML = 'Некорретный файл';
     }
 }
+
+export default ProfileView;

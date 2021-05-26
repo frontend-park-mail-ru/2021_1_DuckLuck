@@ -1,0 +1,27 @@
+name: Linter
+
+on:
+  pull_request:
+    branches: [ main, develop ]
+  push:
+    branches: [ main, develop ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install deps
+        run: npm i
+
+      - name: Linter
+        run: npm run lint

@@ -1,0 +1,17 @@
+@import '../../../constants';
+
+.block {
+    display: flex;
+    flex-direction: row;
+    gap: $gap-xxs;
+}
+
+.buttonWrapper {
+    width: $height-xxxs;
+    height: $height-xxxs;
+}
+
+.buttonBigWrapper {
+    width: $width-xs;
+    height: $height-xxxs;
+}

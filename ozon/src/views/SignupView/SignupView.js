@@ -1,21 +1,24 @@
-import {BaseView} from '../BaseView.js';
-import {Input} from '../Common/Input/Input.js';
-import {Button} from '../Common/Button/Button.js';
-import {Link} from '../Common/Link/Link.js';
-import {Popup} from '../Common/Popup/Popup.js';
-import {Blind} from '../Common/Blind/Blind.js';
-import {AuthenticationForm} from '../Common/AuthenticationForm/AuthenticationForm.js';
+import BaseView from '../BaseView.js';
+import Input from '../Common/Input/Input.js';
+import Button from '../Common/Button/Button.js';
+import Link from '../Common/Link/Link.js';
+import Popup from '../Common/Popup/Popup.js';
+import Blind from '../Common/Blind/Blind.js';
+import AuthenticationForm from '../Common/AuthenticationForm/AuthenticationForm.js';
 import Router from '../../utils/router/Router.js';
 import Events from '../../utils/bus/events';
-import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.css';
-import decorator from '../decorators.css';
+import AuthenticationFormStyles from '../Common/AuthenticationForm/AuthenticationForm.scss';
+import decorator from '../decorators.scss';
+import buttonStyles from '../Common/Button/Button.scss';
+import popupStyles from '../Common/Popup/Popup.scss';
+import linkStyles from '../Common/Link/Link.scss';
 
 /**
  * @class  SignupView
  * @extends BaseView
  * @classdesc Class for signup page
  */
-export class SignupView extends BaseView {
+class SignupView extends BaseView {
     /**
      *
      * @return {void} rendered page
@@ -71,20 +74,21 @@ export class SignupView extends BaseView {
                     styles: AuthenticationFormStyles,
                 }),
             background: new Blind().getHtmlString(),
-            popupType: 'signup',
+            popupType: popupStyles.signup,
         });
 
-        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup-wrapper');
+        this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('popup');
+        this.parent.appendChild(this.cache);
 
-        this.cache.getElementsByClassName('blind')[0]
+        document.getElementById('blind')
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
                 body.classList.remove(decorator.noScroll);
-                this.remove();
-                Router.return();
+                document.getElementById('popup').remove();
+                Router.goBack();
             });
 
-        const form = this.cache.getElementsByClassName(AuthenticationFormStyles.button)[0];
+        const form = this.cache.getElementsByClassName(buttonStyles.auth)[0];
         form.addEventListener('click', (evt) => {
             evt.preventDefault();
             body.classList.remove(decorator.noScroll);
@@ -92,13 +96,25 @@ export class SignupView extends BaseView {
         });
 
 
-        this.cache.getElementsByClassName(AuthenticationFormStyles.signup)[0]
+        this.cache.getElementsByClassName(linkStyles.link)[0]
             .addEventListener('click', (evt) => {
                 evt.preventDefault();
                 body.classList.remove(decorator.noScroll);
                 this.remove();
                 Router.open('/login', {replaceState: true});
             });
-        this.parent.appendChild(this.cache);
+
+        for (const input of this.cache.getElementsByTagName('input')) {
+            input.addEventListener('change', () => {
+                input.style['border-color'] = '';
+            });
+        }
+    }
+
+    drawConflictEmails = () => {
+        const emailInput = this.cache.getElementsByTagName('input')[0];
+        BaseView.setInvalidInputPlaceholder(emailInput, 'Пользователь с таким e-mail уже существует!');
     }
 }
+
+export default SignupView;
