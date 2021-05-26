@@ -97,7 +97,6 @@ class ProductModel extends BaseModel {
                 category_path: parsedJson['category_path'],
             };
             this.bus.emit(Events.ProductLoaded, Responses.Success);
-            this.bus.emit(Events.RecommendationLoad, itemId);
         }).catch((err) => {
             switch (err) {
             case HTTPResponses.Unauthorized: {
