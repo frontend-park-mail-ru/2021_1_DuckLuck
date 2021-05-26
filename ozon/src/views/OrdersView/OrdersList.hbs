@@ -3,8 +3,9 @@
         <div class="{{../ordersStyles.order}}">
             <div class="{{../ordersStyles.orderHead}}">
                 <div class="{{../ordersStyles.headTop}}">
-                    <span class="{{../textStyles.bold}}">Заказ от {{this.date_added}}</span>
-                    <span class="{{../textStyles.text}}">{{this.pay_status}}</span>
+                    <div>
+                        <span class="{{../textStyles.bold}}">Заказ от {{this.date_added}}</span>
+                    </div>
                     <div>
                         <span class="{{../textStyles.ordersPrice}}">{{this.total_cost}} ₽</span>
                         <span class="{{../textStyles.text}}">оплачено</span>
@@ -16,7 +17,12 @@
             </div>
             <div class="{{../ordersStyles.orderBody}}">
                 <div class="{{../ordersStyles.address}}">
-                    <span class="{{../textStyles.bold}} {{../ordersStyles.text}}">Адрес доставки: </span>
+                    <div class="{{../ordersStyles.bodyWrapper}}">
+                        <span class="{{../textStyles.bold}} {{../ordersStyles.text}}">Адрес доставки: </span>
+                        <div class="{{../ordersStyles.statusBadge}}">
+                            <span class="{{../textStyles.text}} {{../ordersStyles.status}}">{{this.status}}</span>
+                        </div>
+                    </div>
                     <span class="{{../textStyles.ordersAddress}} {{../ordersStyles.text}}">{{this.address.address}}</span>
                 </div>
                 <div class="{{../ordersStyles.images}}"></div>
