@@ -8,3 +8,17 @@
     outline: none;
     background: transparent;
 }
+
+.promo {
+    height: 86%;
+    width: 98.5%;
+    border-radius: $standard-border-radius;
+    border: 1px solid $input-color;
+}
+
+.order {
+    height: 100%;
+    width: 50%;
+    border-radius: $standard-border-radius;
+    border: 1px solid $input-color;
+}

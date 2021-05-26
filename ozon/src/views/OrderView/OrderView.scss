@@ -80,7 +80,6 @@
 
 .orderMenu {
     width: 32%;
-    height: $height-xxxl;
     background: white;
     border-radius: $standard-border-radius;
     display: flex;
@@ -154,9 +153,14 @@
 }
 
 .input {
-    width: 50%;
     font-family: $font-family;
     font-size: $font-size-s;
+}
+
+.inputWrapper {
+    max-height: 28px;
+    min-height: 28px;
+
 }
 
 .rules {
@@ -170,10 +174,28 @@
     color: $discount-color;
 }
 
+.promoButtonWrapper {
+    width: 100%;
+    height: $height-xxxs;
+}
+
 .promoStatusSuccess {
     font-family: $font-family;
     color: $dark-order-color;
 }
+
+.promo {
+    display: flex;
+    flex-direction: column;
+    gap: $gap-xxs;
+    margin-left: $margin-m;
+    margin-right: $margin-m;
+}
+
+.promoStatusWrapper {
+    padding-bottom: $padding-l;
+}
+
 @media screen and (max-width: $max-width-xl){
     .wrapper {
         flex-direction: column;
