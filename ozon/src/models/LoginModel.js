@@ -30,6 +30,10 @@ class LoginModel extends BaseModel {
                 this.bus.emit(Events.LoginEmitResult, Responses.Offline);
                 break;
             }
+            case HTTPResponses.Unauthorized: {
+                this.bus.emit(Events.LoginEmitResult, Responses.Unauthorized);
+                break;
+            }
             default: {
                 throw Responses.Error;
             }

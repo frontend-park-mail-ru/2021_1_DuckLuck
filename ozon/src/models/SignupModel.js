@@ -31,6 +31,10 @@ class SignupModel extends BaseModel {
                 this.bus.emit(Events.SignupEmitResult, Responses.Offline);
                 break;
             }
+            case HTTPResponses.Conflict: {
+                this.bus.emit(Events.SignupEmitResult, Responses.Conflict);
+                break;
+            }
             default: {
                 throw Responses.Error;
             }

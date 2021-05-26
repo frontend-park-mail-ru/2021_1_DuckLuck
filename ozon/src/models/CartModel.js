@@ -85,7 +85,7 @@ class CartModel extends BaseModel {
             }
             return response.json();
         }).then(() => {
-            Bus.globalBus.emit(Events.HeaderChangeCartItems, 1);
+            Bus.globalBus.emit(Events.HeaderChangeCartItems, count);
             Bus.globalBus.emit(callbackEvent, id);
             (this.#products = this.products || []).push({
                 count: 1,

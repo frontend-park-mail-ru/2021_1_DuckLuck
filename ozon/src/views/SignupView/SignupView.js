@@ -103,6 +103,17 @@ class SignupView extends BaseView {
                 this.remove();
                 Router.open('/login', {replaceState: true});
             });
+
+        for (const input of this.cache.getElementsByTagName('input')) {
+            input.addEventListener('change', () => {
+                input.style['border-color'] = '';
+            });
+        }
+    }
+
+    drawConflictEmails = () => {
+        const emailInput = this.cache.getElementsByTagName('input')[0];
+        BaseView.setInvalidInputPlaceholder(emailInput, 'Пользователь с таким e-mail уже существует!');
     }
 }
 

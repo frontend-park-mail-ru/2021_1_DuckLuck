@@ -51,6 +51,10 @@ class SignupPresenter extends BasePresenter {
             Router.open('/offline', {replaceState: true});
             break;
         }
+        case Responses.Conflict: {
+            this.view.drawConflictEmails();
+            break;
+        }
         default: {
             console.error(result);
             break;

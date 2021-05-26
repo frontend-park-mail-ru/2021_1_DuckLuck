@@ -1,5 +1,3 @@
-import {incorrectFieldsMap} from '../utils/validationFields/validationFields';
-
 /**
  * @class BaseView
  * @classdesc Base class for all other views
@@ -139,12 +137,12 @@ class BaseView {
         const inputs = Array.from(this.cache.getElementsByTagName('input'));
         for (const field of invalidFields) {
             const input = inputs.find((input) => {
-                return field === input.name;
+                return field.fieldName === input.name;
             });
             if (!input) {
                 break;
             }
-            BaseView.setInvalidInputPlaceholder(input, incorrectFieldsMap[`${input.name}`]);
+            BaseView.setInvalidInputPlaceholder(input, field.errorMessage);
         }
     }
 
