@@ -39,6 +39,8 @@ $order-color: #3ac267;
 $dark-order-color: #2da54f;
 $order-status-color: #a1abb4;
 $order-head-color: #ebf0f3;
+$catalog-color: #f6f6f6;
+$subcategory-color: #3d5165;
 
 $button-content-gap: 5px;
 
@@ -107,8 +109,11 @@ $max-width-l: 800px;
 $max-width-xl: 1100px;
 $max-width-xxl: 1500px;
 
-$blind-z-index: 1002;
-$popup-z-index: 1002;
+$blind-z-index: 2002;
+$popup-z-index: 2002;
+$catalog-background-left-z-index: 1003;
+$catalog-background-right-z-index: 1004;
+$catalog-z-index: 1005;
 
 $logo-width: 120px;
 $logo-height: 40px;

@@ -104,27 +104,37 @@ class HeaderView extends BaseView {
             .getElementsByClassName(headerStyles.main)[0];
 
         const logoButton = this.cache.getElementsByClassName(headerStyles.logoBlock)[0];
-        logoButton.addEventListener('click', () => {
+        logoButton.addEventListener('click', (evt) => {
+            evt.preventDefault();
             this.dropSearchInput();
             Router.open('/', {dropFilter: true, dropSort: true});
         });
 
         const catalogBlock = this.cache.getElementsByClassName(headerStyles.catalogBlock)[0];
         const catalogList = this.cache.getElementsByClassName(headerStyles.catalogList)[0];
+        const catalogLeftBackground = this.cache.getElementsByClassName(headerStyles.catalogLeftBackground)[0];
+        const catalogRightBackground = this.cache.getElementsByClassName(headerStyles.catalogRightBackground)[0];
         catalogBlock.addEventListener('click', () => {
             const images = Array.from(catalogBlock.getElementsByClassName(imgStyles.headerMenu));
             if (images[0].classList.contains(decorators.hidden)) {
                 images[0].classList.remove(decorators.hidden);
                 images[1].classList.add(decorators.hidden);
                 catalogList.classList.add(decorators.hidden);
+                catalogLeftBackground.classList.add(decorators.hidden);
+                catalogRightBackground.classList.add(decorators.hidden);
             } else {
                 images[1].classList.remove(decorators.hidden);
                 images[0].classList.add(decorators.hidden);
                 catalogList.classList.remove(decorators.hidden);
+                catalogLeftBackground.classList.remove(decorators.hidden);
+                catalogLeftBackground.style.height = `${catalogList.getBoundingClientRect().height}px`;
+                catalogRightBackground.classList.remove(decorators.hidden);
+                catalogRightBackground.style.height = `${catalogList.getBoundingClientRect().height}px`;
             }
         });
 
         this.cache.addEventListener('click', (evt) => {
+            evt.preventDefault();
             if (evt.target.hasAttribute('category')) {
                 const categoryId = parseInt(evt.target.getAttribute('category'));
                 catalogBlock.dispatchEvent(new Event('click'));
@@ -149,15 +159,21 @@ class HeaderView extends BaseView {
             Router.open('/search/1/', {dropFilter: true, dropSort: true}, {text: searchInput.value});
         });
 
-        const catalogListCategories = this.cache.getElementsByClassName(linkStyles.catalogCategory);
-        const catalogListSubcategories = Array.from(
-            this.cache.getElementsByClassName(headerStyles.catalogListSubcategories),
+        const catalogListCategories = Array.from(this.cache.getElementsByClassName(headerStyles.category));
+        const catalogListSubcategoriesWrapper = Array.from(
+            this.cache.getElementsByClassName(headerStyles.catalogListSubcategoriesWrapper),
         );
-        Array.from(catalogListCategories).forEach((category, i) => {
+        catalogListCategories.forEach((category, i) => {
             category.addEventListener('mouseover', () => {
                 if (i !== this.presenter.currentCategoryIndex) {
-                    catalogListSubcategories[i].classList.remove(decorators.hidden);
-                    catalogListSubcategories[this.presenter.currentCategoryIndex].classList.add(decorators.hidden);
+                    category.style.backgroundColor = 'white';
+                    category.getElementsByClassName(linkStyles.catalogCategory)[0].style.color = '#005bff';
+                    catalogListSubcategoriesWrapper[i].classList.remove(decorators.hidden);
+                    catalogListSubcategoriesWrapper[this.presenter.currentCategoryIndex]
+                        .classList.add(decorators.hidden);
+                    catalogListCategories[this.presenter.currentCategoryIndex].removeAttribute('style');
+                    catalogListCategories[this.presenter.currentCategoryIndex]
+                        .getElementsByClassName(linkStyles.catalogCategory)[0].style.color = '#001a34';
                     this.presenter.currentCategoryIndex = i;
                 }
             });
