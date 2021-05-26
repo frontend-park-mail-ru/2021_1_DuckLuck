@@ -92,11 +92,19 @@ class OrderPresenter extends BasePresenter {
      * @description Reaction on promo sent
      */
     promoSentReaction = (result, newBillInfo = null) => {
-        if (result === Responses.Success) {
+        switch (result) {
+        case Responses.Success: {
             this.view.drawNewBill(newBillInfo, this.promo);
-        } else {
-            this.promo = null;
-            this.view.drawIncorrectPromo();
+            break;
+        }
+        case Responses.PromocodeNoPromoProducts: {
+            this.view.drawNoPromoProducts(this.promo);
+            break;
+        }
+        case Responses.PromocodeIncorrectPromo: {
+            this.view.drawIncorrectPromo(this.promo);
+            break;
+        }
         }
     }
 

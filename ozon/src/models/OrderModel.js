@@ -158,6 +158,15 @@ class OrderModel extends BaseModel {
             this.bus.emit(Events.PromoSent, Responses.Success, response);
         }).catch((err) => {
             switch (err) {
+            case HTTPResponses.PromocodeNoPromoProducts: {
+                this.bus.emit(Events.PromoSent, Responses.PromocodeNoPromoProducts);
+                break;
+            }
+            case HTTPResponses.InternalError:
+            case HTTPResponses.PromocodeIncorrectPromo: {
+                this.bus.emit(Events.PromoSent, Responses.PromocodeIncorrectPromo);
+                break;
+            }
             case HTTPResponses.Offline: {
                 Router.open('/offline');
                 break;
