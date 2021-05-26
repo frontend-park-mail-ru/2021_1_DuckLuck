@@ -21,7 +21,7 @@ class ListOfProductsItem {
      * @param {String} type
      */
     constructor({itemImage, itemInCart = false, itemName = '', itemRating = 0, itemReviewsCount = 0,
-                    itemPrice= {discountPrice: '', base: '', discount: ''}, itemId=0, type='products'} = {}) {
+        itemPrice= {discountPrice: '', base: '', discount: ''}, itemId=0, type='products'} = {}) {
         this.itemInCart = itemInCart;
         this.itemImage = itemImage;
         this.itemName = itemName;
