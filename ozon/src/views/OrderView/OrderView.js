@@ -17,6 +17,7 @@ import decorators from '../decorators.scss';
 import Slider from '../Common/Slider/Slider';
 import productTemplate from './OrderProduct.hbs';
 import imgStyles from '../Common/Img/Img.scss';
+import Bus from '../../utils/bus/bus';
 
 
 /**
@@ -72,6 +73,15 @@ class OrderView extends BaseView {
         const slider = new Slider(items);
         const recommendationsBlock = document.getElementsByClassName(orderStyles.images)[0];
         recommendationsBlock.appendChild(slider.render());
+        slider.checkOverflow();
+
+        for (const itemContainer of this.cache.getElementsByClassName(orderStyles.image)) {
+            const productID = parseInt(itemContainer.getAttribute('item-id'));
+            itemContainer.addEventListener('click', () => {
+                Bus.globalBus.emit(Events.ProductChangeID, productID);
+                Router.open(`/item/${productID}`);
+            });
+        }
 
         document.getElementById('promo-btn').addEventListener('click', () => {
             this.bus.emit(Events.SendPromo);
