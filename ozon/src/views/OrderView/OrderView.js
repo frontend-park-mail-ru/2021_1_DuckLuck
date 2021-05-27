@@ -114,7 +114,7 @@ class OrderView extends BaseView {
     drawNoPromoProducts = (promocode) => {
         const promoStatus = document.getElementById('promo-status');
         promoStatus.className = orderStyles.promoStatusFailure;
-        promoStatus.innerHTML = `В вашем заказен нет товаров для которых применим промокод ${promocode}!`;
+        promoStatus.innerHTML = `В вашем заказе нет товаров для которых применим промокод ${promocode}!`;
     }
 }
 
