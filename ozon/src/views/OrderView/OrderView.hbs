@@ -5,7 +5,8 @@
         </div>
         <div class="{{orderStyles.mainWrapper}}">
             <div class="{{orderStyles.wrapper}}">
-                <div class="{{orderStyles.cartInfo}}">
+                <div class="{{orderStyles.left}}">
+                    <div class="{{orderStyles.cartInfo}}">
                     <div class="{{orderStyles.deliveryBlock}}">
                         <div class="{{orderStyles.deliveryText}}">
                             <span class="{{textStyles.text}}">Доставка Ozon</span>
@@ -18,6 +19,11 @@
                                 <input class="{{../orderStyles.input}} {{../inputStyles.order}}" type="{{this.type}}" name="{{this.name}}" value="{{this.value}}">
                             </div>
                         {{/each}}
+                    </div>
+
+                </div>
+                    <div class="{{orderStyles.cartInfo}}">
+                        <div class="{{orderStyles.images}}"></div>
                     </div>
                 </div>
                 <div class="{{orderStyles.orderMenu}}">

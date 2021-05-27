@@ -14,6 +14,10 @@ import Router from '../../utils/router/Router';
 import Popup from '../Common/Popup/Popup';
 import Blind from '../Common/Blind/Blind';
 import decorators from '../decorators.scss';
+import Slider from '../Common/Slider/Slider';
+import productTemplate from './OrderProduct.hbs';
+import imgStyles from '../Common/Img/Img.scss';
+
 
 /**
  * @class ProductsView
@@ -30,7 +34,6 @@ class OrderView extends BaseView {
 
     render = () => {
         this.goUp();
-
         this.parent.innerHTML = '';
         const template = orderTemplate({
             productsList: this.presenter.products,
@@ -56,6 +59,19 @@ class OrderView extends BaseView {
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('products-list-block');
         this.parent.appendChild(this.cache);
+
+        const items = [];
+        this.presenter.products.forEach((product) => {
+            items.push(productTemplate({
+                src: product.preview_image,
+                id: product.id,
+                orderStyles: orderStyles,
+                imgStyles: imgStyles,
+            }));
+        });
+        const slider = new Slider(items);
+        const recommendationsBlock = document.getElementsByClassName(orderStyles.images)[0];
+        recommendationsBlock.appendChild(slider.render());
 
         document.getElementById('promo-btn').addEventListener('click', () => {
             this.bus.emit(Events.SendPromo);
