@@ -111,18 +111,21 @@
 
 .catalogList {
     width: 76%;
-    height: 100%;
     padding: $padding-xs $padding-m;
     margin: 0 auto;
     box-sizing: border-box;
     font-family: $font-family;
     align-items: center;
     justify-content: space-between;
+    z-index: $catalog-z-index;
+    position: absolute;
+    left: 10%;
 }
 
 .category {
-    margin-top: $margin-xxs;
-    margin-bottom: $margin-xxs;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
 }
 
 .subcategory {
@@ -143,6 +146,7 @@
 .catalogListCategories {
     display: flex;
     flex-direction: column;
+    width: 20%;
 }
 
 .catalogListBody {
@@ -152,10 +156,10 @@
 }
 
 .catalogListSubcategories {
-    margin-left: $margin-xxxl;
     column-count: 4;
     column-gap: $columns-gap;
     margin-right: $margin-l;
+    margin-left: $margin-l;
     width: 100%;
 }
 
@@ -183,6 +187,38 @@
     margin-top: 5px;
 }
 
+.catalogWrapper {
+    width: 100%;
+    background-color: $catalog-color;
+    border-top: solid 1px $dark-neutral-background-color;
+    box-shadow: 0px 5px 5px -5px rgba(34, 60, 80, 0.6);
+}
+
+.catalogListSubcategoriesWrapper {
+    //margin-left: $margin-xxxl;
+    margin-right: $margin-l;
+    width: (0.8 * 0.7) * 100%;
+    background-color: white;
+    margin-top: -4px;
+    margin-bottom: -4px;
+}
+
+.catalogLeftBackground {
+    position: absolute;
+    width: 100%;
+    background-color: $catalog-color;
+    z-index: $catalog-background-left-z-index;
+    border-bottom: solid 1px $dark-neutral-background-color;
+}
+
+.catalogRightBackground {
+    z-index: $catalog-background-right-z-index;
+    position: absolute;
+    width: 75%;
+    left: 25%;
+    background-color: white;
+    border-bottom: solid 1px $dark-neutral-background-color;
+}
 
 @media screen and (max-width: $max-width-xxl) {
     .body {

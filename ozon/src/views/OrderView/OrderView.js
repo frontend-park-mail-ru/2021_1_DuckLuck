@@ -106,7 +106,7 @@ class OrderView extends BaseView {
                     evt.preventDefault();
                     body.classList.remove(decorators.noScroll);
                     document.getElementById('popup').remove();
-                    Router.open('/', {replaceState: true});
+                    Router.open('/orders', {replaceState: true});
                 });
         });
     };
