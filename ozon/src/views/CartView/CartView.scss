@@ -38,7 +38,7 @@
     display: flex;
     flex-direction: column;
     background: white;
-    border-radius: var(--lower-border-radius);
+    border-radius: $standard-border-radius;
     width: 66%;
 }
 
@@ -131,7 +131,7 @@
 .orderMenu {
     height: 372px;
     background: white;
-    border-radius: var(--lower-border-radius);
+    border-radius: $standard-border-radius;
     display: flex;
     flex-direction: column;
     width: 32%;
@@ -181,6 +181,14 @@
 .priceBlock {
     width: 30%;
     margin-left: $margin-s;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: $neutral-background-color;
+    z-index: -1;
 }
 
 .totalPriceBlock {
