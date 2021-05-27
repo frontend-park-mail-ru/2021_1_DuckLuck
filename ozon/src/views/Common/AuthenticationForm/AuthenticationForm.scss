@@ -28,11 +28,13 @@
 }
 
 .input {
-    height: 100%;
+    height: $height-xs;
     width: 100%;
     border-radius: $standard-border-radius;
     border: solid 1px;
     border-color: $input-color;
+    box-sizing: border-box;
+    padding-left: $padding-s;
 }
 
 .fieldName {
