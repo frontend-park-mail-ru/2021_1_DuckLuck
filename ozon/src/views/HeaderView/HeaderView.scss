@@ -113,13 +113,13 @@
     width: 76%;
     padding: $padding-xs $padding-m;
     margin: 0 auto;
-    box-sizing: border-box;
     font-family: $font-family;
     align-items: center;
     justify-content: space-between;
     z-index: $catalog-z-index;
     position: absolute;
     left: 10%;
+    overflow: scroll;
 }
 
 .category {
@@ -168,7 +168,7 @@
     width: 100%;
     line-height: $standart-line-height;
     box-sizing: border-box;
-    margin-bottom: $margin-xl;
+    margin-bottom: $margin-xxl;
 }
 
 .catalogItemBody {
@@ -215,7 +215,7 @@
     z-index: $catalog-background-right-z-index;
     position: absolute;
     width: 75%;
-    left: 25%;
+    left: 25.5%;
     background-color: white;
     border-bottom: solid 1px $dark-neutral-background-color;
 }

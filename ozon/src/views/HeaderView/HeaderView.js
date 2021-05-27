@@ -127,9 +127,11 @@ class HeaderView extends BaseView {
                 images[0].classList.add(decorators.hidden);
                 catalogList.classList.remove(decorators.hidden);
                 catalogLeftBackground.classList.remove(decorators.hidden);
-                catalogLeftBackground.style.height = `${catalogList.getBoundingClientRect().height}px`;
+                const catalogListHeight = catalogList.getBoundingClientRect().height + 40;
+                catalogLeftBackground.style.height = `${catalogListHeight}px`;
                 catalogRightBackground.classList.remove(decorators.hidden);
-                catalogRightBackground.style.height = `${catalogList.getBoundingClientRect().height}px`;
+                catalogRightBackground.style.height = `${catalogListHeight}px`;
+                catalogList.style.height = `${catalogListHeight}px`;
             }
         });
 
