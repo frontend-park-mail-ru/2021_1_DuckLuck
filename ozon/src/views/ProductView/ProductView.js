@@ -70,7 +70,7 @@ class ProductView extends BaseView {
             imgStyles: imgStyles,
             linkStyles: linkStyles,
             decorators: decorators,
-            category_path: this.presenter.item.category_path,
+            category_path: this.presenter.item.category_path.reverse(),
             select: [
                 {
                     key: 'date',
