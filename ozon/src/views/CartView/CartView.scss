@@ -90,6 +90,7 @@
 .imageWrapper {
     width: $img-size-m1;
     height: $img-size-m1;
+    margin-right: $margin-s;
 }
 
 .productsListElem {
@@ -179,6 +180,7 @@
 
 .priceBlock {
     width: 30%;
+    margin-left: $margin-s;
 }
 
 .totalPriceBlock {
