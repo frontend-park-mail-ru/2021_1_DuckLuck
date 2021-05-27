@@ -134,8 +134,8 @@ class HeaderView extends BaseView {
         });
 
         this.cache.addEventListener('click', (evt) => {
-            evt.preventDefault();
             if (evt.target.hasAttribute('category')) {
+                evt.preventDefault();
                 const categoryId = parseInt(evt.target.getAttribute('category'));
                 catalogBlock.dispatchEvent(new Event('click'));
                 this.dropSearchInput();
