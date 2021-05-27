@@ -105,7 +105,7 @@ class OrderView extends BaseView {
     drawIncorrectPromo = (promocode) => {
         const promoStatus = document.getElementById('promo-status');
         promoStatus.className = orderStyles.promoStatusFailure;
-        promoStatus.innerHTML = `Промокод ${promocode} не существует!`;
+        promoStatus.innerHTML = `Промокода ${promocode} не существует!`;
     }
 
     /**
