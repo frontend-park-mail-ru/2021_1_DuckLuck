@@ -99,10 +99,22 @@ class OrderView extends BaseView {
         promoStatus.innerHTML = `Промокод ${promocode} был успешно применён!`;
     }
 
-    drawIncorrectPromo = () => {
+    /**
+     * @param {string} promocode
+     */
+    drawIncorrectPromo = (promocode) => {
         const promoStatus = document.getElementById('promo-status');
         promoStatus.className = orderStyles.promoStatusFailure;
-        promoStatus.innerHTML = 'Неверный промокод!';
+        promoStatus.innerHTML = `Промокода ${promocode} не существует!`;
+    }
+
+    /**
+     * @param {string} promocode
+     */
+    drawNoPromoProducts = (promocode) => {
+        const promoStatus = document.getElementById('promo-status');
+        promoStatus.className = orderStyles.promoStatusFailure;
+        promoStatus.innerHTML = `В вашем заказе нет товаров для которых применим промокод ${promocode}!`;
     }
 }
 
