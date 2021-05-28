@@ -2,6 +2,8 @@
 
 .ordersWrapper {
   width: 100%;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
 .body {
@@ -69,11 +71,13 @@
   display: flex;
   flex-direction: row;
   min-height: $height-l;
+  gap: 20px;
 }
 
 .address {
   margin-top: $margin-s;
   min-width: 30%;
+  max-width: 30%;
   display: flex;
   flex-direction: column;
   gap: $gap-xxs;
@@ -81,6 +85,12 @@
 
 .text {
   margin-left: $margin-s;
+}
+
+.addressText {
+  margin-left: $margin-s;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .statusBadge {
@@ -101,7 +111,7 @@
 .bodyWrapper {
   display: flex;
   flex-direction: row;
-  gap: $gap-xxs;
+  gap: $gap-s;
 }
 
 .select {
