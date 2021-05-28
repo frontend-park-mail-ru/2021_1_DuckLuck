@@ -21,7 +21,7 @@
     {{#ifEquals this.isEmpty true}}
         <div class="{{productsStyles.emptyText}}">
             <span class="{{textStyles.title}}">Не найдено ни одного товара</span>
-            <a class="{{textStyles.title}}" href="">Вернуться на главную</a>
+            <a class="{{textStyles.title}} {{productsStyles.toMainLink}}" href="/">вернуться на главную</a>
         </div>
     {{/ifEquals}}
 </div>

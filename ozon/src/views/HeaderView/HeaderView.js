@@ -47,12 +47,6 @@ class HeaderView extends BaseView {
                 href: '/orders',
                 name: 'orders',
             }, {
-                text: 'Избранное',
-                img: new Img({src: '/svg/header/favorites.svg'}),
-                button: new Button(),
-                href: '/favorites',
-                name: 'favorites',
-            }, {
                 text: 'Корзина',
                 img: new Img({src: '/svg/header/cart.svg'}),
                 button: new Button(),

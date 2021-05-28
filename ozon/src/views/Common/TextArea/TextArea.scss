@@ -138,3 +138,8 @@
   border-bottom: 1px dotted $properties-name-color;
   overflow: hidden;
 }
+
+.delete {
+  @extend %text-shared;
+  color: $colored-object-color;
+}

@@ -1,5 +1,10 @@
 @import '../../constants';
 
+.next {
+    height: 14px;
+    margin-top: 3px;
+}
+
 .block {
     display: flex;
     width: 76%;
@@ -11,6 +16,12 @@
     gap: $gap-xs;
     margin-top: $margin-l;
     margin-bottom: 24px;
+}
+
+.reviewPagination {
+    display: flex;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .wrapper {

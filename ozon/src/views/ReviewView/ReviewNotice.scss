@@ -6,6 +6,13 @@
 }
 
 .text {
+  display: flex;
   margin: auto;
-  text-align: center;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.img {
+  width: 35%;
+  margin: auto;
 }

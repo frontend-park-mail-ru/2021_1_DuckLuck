@@ -4,7 +4,7 @@
             <div class="{{../productStyles.linkWrapper}}">
                 <a class="{{../linkStyles.link}}" category_id="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
             </div>
-            <span> ></span>
+            <img src="/svg/slider.svg" class="{{../productStyles.next}}" alt="">
         {{/each}}
     </div>
     <div class="{{productStyles.badges}}">
@@ -100,7 +100,7 @@
                     {{/each}}
                 </select>
                 <div class="{{productStyles.reviewList}} {{textStyles.text}}"></div>
-                <div id="review-pagination"></div>
+                <div id="review-pagination" class="{{productStyles.reviewPagination}}"></div>
             </div>
         </div>
 

@@ -37,6 +37,15 @@
 
 .emptyText, .onMainPage {
     margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.toMainLink {
+    text-decoration: none;
+
+    color: $colored-object-color;
+    margin: auto;
 }
 
 .select {
