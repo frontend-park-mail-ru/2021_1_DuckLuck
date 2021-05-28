@@ -7,9 +7,9 @@
         </div>
     {{/ifNotEquals}}
     {{#each buttons}}
-        <div class="{{../styles.buttonWrapper}}">
+        <div class="{{../styles.buttonWrapper}} {{../textStyles.text}}">
             <button class="{{../buttonStyles.paginator}} {{this.name}}" page="{{this.value}}">
-                <span class="{{../textStyles.text}}">{{this.value}}</span>
+                <span class="">{{this.value}}</span>
             </button>
         </div>
     {{/each}}
