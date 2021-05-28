@@ -3,6 +3,7 @@
 .main {
     display: flex;
     flex-direction: column;
+    margin-top: 3px;
 }
 
 .body {
@@ -191,6 +192,7 @@
 }
 
 .catalogWrapper {
+    margin-top: 3px;
     width: 100%;
     background-color: $catalog-color;
     border-top: solid 1px $dark-neutral-background-color;

@@ -99,6 +99,12 @@ class ProductView extends BaseView {
             descriptionBlock.classList.add(decorators.hidden);
         }
 
+        const propertiesBlock = this.cache.getElementsByClassName(productStyles.properties)[0];
+        if (Object.keys(this.presenter.item['properties']).length === 0) {
+            propertiesBlock.className = '';
+            propertiesBlock.classList.add(decorators.hidden);
+        }
+
         const select = document.getElementsByTagName('select')[0];
         select.addEventListener('change', () => {
             const selected = select.selectedOptions[0];
@@ -192,10 +198,12 @@ class ProductView extends BaseView {
      */
     renderProductsReview = (reviews, paginationInfo) => {
         if (reviews.length === 0 && paginationInfo.pagesCount === 0) {
-            const reviewsBlock = this.cache.getElementsByClassName(productStyles.reviewsBlock)[0];
-            reviewsBlock.className = '';
-            reviewsBlock.classList.add(decorators.hidden);
+            const reviewsWrapper = this.cache.getElementsByClassName(productStyles.reviewsWrapper)[0];
+            reviewsWrapper.className = '';
+            reviewsWrapper.classList.add(productStyles.zeroReviews);
+            reviewsWrapper.innerHTML = 'Пользователи не оставили отзывов для данного товара';
         }
+
         const pagination = new Pagination(paginationInfo, true).getHtmlString();
         document.getElementById('review-pagination').innerHTML = pagination;
         reviews.forEach((review) => {

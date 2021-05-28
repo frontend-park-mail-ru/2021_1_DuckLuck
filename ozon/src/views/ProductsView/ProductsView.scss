@@ -21,11 +21,15 @@
     flex-direction: column;
 }
 
+.listWrapper {
+    margin-top: $margin-s;
+}
+
 .footer {
     display: flex;
     margin: auto;
     width: 100%;
-    border-top: solid;
+    border-top: solid 3px;
     border-color: $neutral-background-color;
     padding-top: $padding-m;
 }
