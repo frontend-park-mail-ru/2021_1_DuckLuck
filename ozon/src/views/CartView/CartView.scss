@@ -85,8 +85,23 @@
     width: 96.57%;
 }
 
+.deliveryItems {
+    display: flex;
+    flex-direction: row;
+    gap: $gap-xl;
+}
+
+.deliveryItemText {
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
 .deliveryText {
     margin: $margin-s;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .imageWrapper {
@@ -107,6 +122,8 @@
     padding: $padding-xs $padding-l;
     border-bottom: solid 1px;
     border-color: $dark-neutral-background-color;
+    padding-top: 15px;
+    padding-bottom: 15px;
 }
 
 .description {
@@ -192,6 +209,12 @@
     position: fixed;
     background-color: $neutral-background-color;
     z-index: -1;
+}
+
+.deliveryItem {
+    display: flex;
+    flex-direction: row;
+    gap: $gap-xs;
 }
 
 .totalPriceBlock {

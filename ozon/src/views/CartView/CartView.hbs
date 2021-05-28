@@ -20,7 +20,17 @@
                     </div>
                     <div class="{{cartStyles.deliveryBlock}}">
                         <div class="{{cartStyles.deliveryText}}">
-                            <span class="{{textStyles.text}}">Доставка Ozon</span>
+                            <span class="{{textStyles.text}} {{cartStyles.deliveryItemText}}">Доставка Ozon</span>
+                            <div class="{{cartStyles.deliveryItems}}">
+                                <div class="{{cartStyles.deliveryItem}}">
+                                    <img src="/svg/delivery.svg" alt="">
+                                    <span class="{{textStyles.text}} {{cartStyles.deliveryItemText}}">Курьером</span>
+                                </div>
+                                <div class="{{cartStyles.deliveryItem}}">
+                                    <img src="/svg/geo.svg" alt="">
+                                    <span class="{{textStyles.text}} {{cartStyles.deliveryItemText}}">Самовывоз</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="{{cartStyles.productsListBlock}}">
@@ -34,9 +44,9 @@
                                     <div class="{{../cartStyles.description}}">
                                         <span class="{{../cartStyles.name}}">{{this.title}}</span>
                                         <div class="{{../cartStyles.productMenu}}">
-                                            <div class="{{../cartStyles.productMenuText}} {{../decorators.lock}}">
-                                                <span class="{{../textStyles.text}}">В избранное</span>
-                                            </div>
+<!--                                            <div class="{{../cartStyles.productMenuText}} {{../decorators.lock}}">-->
+<!--                                                <span class="{{../textStyles.text}}">В избранное</span>-->
+<!--                                            </div>-->
                                             <div class="{{../cartStyles.productMenuText}}" title={{this.id}}>
                                                 <span class="{{../textStyles.text}}">Удалить</span>
                                             </div>
