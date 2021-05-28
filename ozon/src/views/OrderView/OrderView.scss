@@ -216,6 +216,8 @@
     gap: $gap-xs;
     margin-left: $margin-m;
     margin-right: $margin-m;
+    max-height: 180px;
+    min-height: 180px;
 }
 
 .promoTitleBlock {
@@ -238,6 +240,8 @@
 .images {
     margin-top: $margin-s;
     margin-bottom: $margin-s;
+    margin-left: 16px;
+    margin-right: 16px;
 }
 
 .background {
