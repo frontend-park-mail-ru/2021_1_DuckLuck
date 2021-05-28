@@ -46,7 +46,6 @@ class ProductView extends BaseView {
      */
     render = () => {
         this.goUp();
-
         this.parent.innerHTML = '';
         const images = [];
         this.presenter.item['images'].forEach((src) => {
@@ -71,6 +70,8 @@ class ProductView extends BaseView {
             linkStyles: linkStyles,
             decorators: decorators,
             category_path: this.presenter.item.category_path.reverse(),
+            properties: this.presenter.item['properties'],
+            propertiesMain: this.presenter.item['properties']['Общие'],
             select: [
                 {
                     key: 'date',

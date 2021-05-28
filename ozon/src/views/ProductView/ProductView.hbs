@@ -40,6 +40,28 @@
                 <span class="{{textStyles.title}}">Описание</span>
                 <span class="{{textStyles.big}}">{{description}}</span>
             </div>
+            <div class="{{productStyles.properties}}">
+                <span class="{{textStyles.title}}">Характеристики</span>
+                {{#each properties}}
+                    <div class="{{../productStyles.property}}">
+                        <span class="{{../textStyles.propertiesTitle}}">{{@key}}</span>
+                        <div class="{{../productStyles.propertiesBlock}}">
+                            {{#with this}}
+                                {{#each this}}
+                                    <div class="{{../../productStyles.propertiesBlockRow}}">
+                                        <span class="{{../../textStyles.propertiesName}}">{{@key}}</span>
+                                        <div class="{{../../productStyles.propertiesBlockValueWrapper}}">
+                                            <span class="{{../../textStyles.propertiesValue}}">{{this}}</span>
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            {{/with}}
+                        </div>
+                    </div>
+                {{/each}}
+
+                <!--                <span class="{{textStyles.text}}"></span>-->
+            </div>
             <div class="{{productStyles.specifications}}"></div>
             <div class="{{productStyles.recommendationsWrapper}}">
                 <span class="{{textStyles.title}}">С этим товаром покупают</span>

@@ -106,3 +106,35 @@
   @extend %text-shared;
   font-size: $font-size-m;
 }
+
+.propertiesName {
+  @extend %text-shared;
+  color: $properties-name-color;
+  font-size: $font-size-s;
+  width: 100%;
+  overflow: hidden;
+}
+
+.propertiesTitle {
+  @extend %text-shared;
+  font-size: $font-size-s;
+  font-weight: $bold;
+}
+
+.propertiesValue {
+  @extend %text-shared;
+  font-size: $font-size-s;
+  white-space: nowrap;
+  border-bottom: 1px solid white;
+}
+
+.propertiesName:after {
+  content:"";
+  display: inline-block;
+  height: 0.5em;
+  vertical-align: bottom;
+  width: 100%;
+  margin-right: -100%;
+  border-bottom: 1px dotted $properties-name-color;
+  overflow: hidden;
+}
