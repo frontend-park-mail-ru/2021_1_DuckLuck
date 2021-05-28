@@ -193,6 +193,14 @@
     background-repeat: repeat-x;
 }
 
+.recommendationsWrapper {
+    display: block;
+}
+
+.reviewsBlock {
+    display: block;
+}
+
 @media screen and (max-width: $max-width-xl) {
     .block {
         width: 100%;

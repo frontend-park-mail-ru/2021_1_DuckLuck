@@ -92,6 +92,12 @@ class ProductView extends BaseView {
             .getElementsByClassName(productStyles.block)[0];
         this.parent.appendChild(this.cache);
 
+        const descriptionBlock = this.cache.getElementsByClassName(productStyles.description)[0];
+        if (this.presenter.item['description']['descriptionText'] === '') {
+            descriptionBlock.className = '';
+            descriptionBlock.classList.add(decorators.hidden);
+        }
+
         const select = document.getElementsByTagName('select')[0];
         select.addEventListener('change', () => {
             const selected = select.selectedOptions[0];
@@ -184,6 +190,11 @@ class ProductView extends BaseView {
      * @param {Object} paginationInfo
      */
     renderProductsReview = (reviews, paginationInfo) => {
+        if (reviews.length === 0 && paginationInfo.pagesCount === 0) {
+            const reviewsBlock = this.cache.getElementsByClassName(productStyles.reviewsBlock)[0];
+            reviewsBlock.className = '';
+            reviewsBlock.classList.add(decorators.hidden);
+        }
         const pagination = new Pagination(paginationInfo, true).getHtmlString();
         document.getElementById('review-pagination').innerHTML = pagination;
         reviews.forEach((review) => {
@@ -244,6 +255,13 @@ class ProductView extends BaseView {
     }
 
     renderRecommendations = () => {
+        if (this.presenter.recommendations.length === 0) {
+            const recommendationsBlock = this.cache.getElementsByClassName(productStyles.recommendationsWrapper)[0];
+            recommendationsBlock.className = '';
+            recommendationsBlock.classList.add(decorators.hidden);
+            return;
+        }
+
         const items = [];
         this.presenter.recommendations.forEach((item) => {
             const base = item['price']['base_cost'];
