@@ -9,7 +9,8 @@
 .body {
     max-width: $max-width;
     padding: 4px 28px;
-    margin: $margin-l auto 0;
+    margin-left: auto;
+    margin-right: auto;
     width: 100%;
     box-sizing: border-box;
     font-family: $font-family;
@@ -53,6 +54,7 @@
     box-sizing: border-box;
     font-family: $font-family;
     border-bottom: solid 1px;
+    border-color: $dark-neutral-background-color;
     height: $height-xs;
     gap: $gap-xxs;
 }
@@ -104,7 +106,7 @@
     align-items: center;
     padding: $padding-xs $padding-l;
     border-bottom: solid 1px;
-    border-color: $neutral-background-color;
+    border-color: $dark-neutral-background-color;
 }
 
 .description {
@@ -148,6 +150,7 @@
     width: 100%;
     height: $height-xl;
     border-bottom: solid 1px;
+    border-color: $dark-neutral-background-color;
     flex-direction: column;
 }
 
@@ -193,6 +196,7 @@
 
 .totalPriceBlock {
     border-top: 1px solid;
+    border-color: $dark-neutral-background-color;
     padding-left: $padding-m;
     padding-top: $padding-s;
     display: flex;

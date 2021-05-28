@@ -80,7 +80,7 @@
     justify-content: space-between;
     padding: $padding-xs $padding-l;
     border-bottom: solid 1px;
-    border-color: $neutral-background-color;
+    border-color: $dark-neutral-background-color;
 }
 
 .orderMenu {
@@ -102,6 +102,7 @@
     width: 100%;
     height: $height-xl;
     border-bottom: solid 1px;
+    border-color: $dark-neutral-background-color;
     flex-direction: column;
 }
 
@@ -136,6 +137,7 @@
 
 .totalPriceBlock {
     border-top: 1px solid;
+    border-color: $dark-neutral-background-color;
     padding-left: $padding-m;
     padding-top: $padding-s;
     display: flex;
@@ -187,6 +189,11 @@
 .promoStatusSuccess {
     font-family: $font-family;
     color: $dark-order-color;
+}
+
+.space {
+    min-height: $margin-l;
+    background-color: $neutral-background-color;
 }
 
 .promo {
