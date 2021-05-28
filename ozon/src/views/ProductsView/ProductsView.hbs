@@ -4,7 +4,7 @@
         <div class="{{productsStyles.body}}">
             <select class="{{productsStyles.select}}">
                 {{#each select}}
-                    <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
+                    <option class="{{../textStyles.title}}" key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
                         {{this.name}}
                     </option>
                 {{/each}}

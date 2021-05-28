@@ -47,7 +47,7 @@
             </div>
             <div class="{{productStyles.reviewsBlock}}">
                 <div class="{{textStyles.title}}">Отзывы: </div>
-                <select class="{{productsStyles.select}}">
+                <select class="{{productStyles.select}}">
                     {{#each select}}
                         <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
                             {{this.name}}
