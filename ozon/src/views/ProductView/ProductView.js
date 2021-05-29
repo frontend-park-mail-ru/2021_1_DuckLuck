@@ -205,7 +205,10 @@ class ProductView extends BaseView {
         }
 
         const pagination = new Pagination(paginationInfo, true).getHtmlString();
-        document.getElementById('review-pagination').innerHTML = pagination;
+        if (document.getElementById('review-pagination') !== undefined &&
+            document.getElementById('review-pagination') !== null) {
+            document.getElementById('review-pagination').innerHTML = pagination;
+        }
         reviews.forEach((review) => {
             review.date_added = review.date_added.slice(0, 10);
             review.user_name = (review.user_name !== '') ? review.user_name : 'Анонимный пользователь';
