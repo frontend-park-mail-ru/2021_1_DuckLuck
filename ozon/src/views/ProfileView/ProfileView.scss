@@ -10,6 +10,11 @@
     margin: $margin-l auto 0;
 }
 
+.exitButtonWrapper {
+    max-height: 28px;
+    min-height: 28px;
+}
+
 .avatarBlock {
     display: flex;
     flex-direction: column;
