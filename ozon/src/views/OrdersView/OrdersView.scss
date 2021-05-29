@@ -2,14 +2,27 @@
 
 .ordersWrapper {
   width: 100%;
+  margin-top: 24px;
+  margin-bottom: 24px;
 }
 
 .body {
-  width: 60%;
-  margin: auto;
+  max-width: $max-width;
+  padding: 4px 28px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  box-sizing: border-box;
+  font-family: $font-family;
   display: flex;
   flex-direction: column;
   gap: $gap-s;
+}
+
+.emptyCartText {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
 }
 
 .orders {
@@ -30,6 +43,7 @@
   max-width: 70%;
   margin-top: $margin-s;
   margin-bottom: $margin-s;
+  margin-right: 20px;
 }
 
 .image {
@@ -69,11 +83,13 @@
   display: flex;
   flex-direction: row;
   min-height: $height-l;
+  gap: 20px;
 }
 
 .address {
   margin-top: $margin-s;
   min-width: 30%;
+  max-width: 30%;
   display: flex;
   flex-direction: column;
   gap: $gap-xxs;
@@ -81,6 +97,12 @@
 
 .text {
   margin-left: $margin-s;
+}
+
+.addressText {
+  margin-left: $margin-s;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .statusBadge {
@@ -101,5 +123,22 @@
 .bodyWrapper {
   display: flex;
   flex-direction: row;
-  gap: $gap-xxs;
+  gap: $gap-s;
+}
+
+.select {
+  width: 226px;
+  height: $height-xxxs;
+  border-radius: 6px;
+  border: 2px solid $select-color;
+  font-family: $font-family;
+  cursor: pointer;
+}
+
+.select:hover {
+  border-color: $select-active-color;
+}
+
+.select:focus {
+  outline: 0;
 }

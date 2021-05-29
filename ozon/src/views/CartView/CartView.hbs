@@ -1,4 +1,5 @@
 <div class="{{cartStyles.cartWrapper}}" id="products-list-block">
+    <div class="{{cartStyles.background}}"></div>
     <div class="{{cartStyles.body}}">
         <div class="{{cartStyles.title}}">
             <span class="{{textStyles.title}}">Корзина</span>
@@ -19,25 +20,35 @@
                     </div>
                     <div class="{{cartStyles.deliveryBlock}}">
                         <div class="{{cartStyles.deliveryText}}">
-                            <span class="{{textStyles.text}}">Доставка Ozon</span>
+                            <span class="{{textStyles.text}} {{cartStyles.deliveryItemText}}">Доставка Ozon</span>
+                            <div class="{{cartStyles.deliveryItems}}">
+                                <div class="{{cartStyles.deliveryItem}}">
+                                    <img src="/svg/delivery.svg" alt="">
+                                    <span class="{{textStyles.text}} {{cartStyles.deliveryItemText}}">Курьером</span>
+                                </div>
+                                <div class="{{cartStyles.deliveryItem}}">
+                                    <img src="/svg/geo.svg" alt="">
+                                    <span class="{{textStyles.text}} {{cartStyles.deliveryItemText}}">Самовывоз</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="{{cartStyles.productsListBlock}}">
                         <div class="products-list">
                             {{#each this.productsList}}
                                 <div class="{{../cartStyles.productsListElem}}" product_id="{{this.id}}">
-                                    <input type="checkbox" name="a" value="" class="{{../decorators.hidden}}">
+                                    <input type="" name="a" value="" class="{{../decorators.hidden}}">
                                     <div class="{{../cartStyles.imageWrapper}}">
                                         <img src={{this.preview_image}} alt="" class="{{../imgStyles.cartProduct}}">
                                     </div>
                                     <div class="{{../cartStyles.description}}">
                                         <span class="{{../cartStyles.name}}">{{this.title}}</span>
                                         <div class="{{../cartStyles.productMenu}}">
-                                            <div class="{{../cartStyles.productMenuText}} {{../decorators.lock}}">
-                                                <span class="{{../textStyles.text}}">В избранное</span>
-                                            </div>
+<!--                                            <div class="{{../cartStyles.productMenuText}} {{../decorators.lock}}">-->
+<!--                                                <span class="{{../textStyles.text}}">В избранное</span>-->
+<!--                                            </div>-->
                                             <div class="{{../cartStyles.productMenuText}}" title={{this.id}}>
-                                                <span class="{{../textStyles.text}}">Удалить</span>
+                                                <span class="{{../textStyles.delete}}">Удалить</span>
                                             </div>
                                         </div>
                                     </div>

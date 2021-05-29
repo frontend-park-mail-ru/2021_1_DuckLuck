@@ -112,6 +112,7 @@ class Pagination {
         return paginationOneButtonTemplate({
             buttons: [loadMoreButton],
             buttonStyles: buttonStyles,
+            styles: styles,
         });
     }
 }

@@ -12,14 +12,36 @@
   @extend %link-shared;
 }
 
-.catalogCategory, .catalogSubCategory {
+.catalogCategory {
+  @extend %link-shared;
+  color: $dark-color;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: $margin-s;
+}
+
+.catalogSubCategory {
   @extend %link-shared;
   font-weight: $bold;
   color: $dark-color;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
-.catalogSubSubCategory, .headerMenu  {
+.catalogSubCategory:hover {
+  color: $dark-colored-object-color;
+}
+
+.headerMenu  {
   @extend %link-shared;
   color: $dark-color;
 }
 
+.catalogSubSubCategory {
+  @extend %link-shared;
+  color: $subcategory-color;
+}
+
+.catalogSubSubCategory:hover {
+  color: $colored-object-color;
+}

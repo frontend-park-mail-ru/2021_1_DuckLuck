@@ -10,6 +10,7 @@ import imgStyles from '../Common/Img/Img.scss';
 import textStyles from '../Common/TextArea/TextArea.scss';
 import Slider from '../Common/Slider/Slider';
 import buttonStyles from '../Common/Button/Button.scss';
+import decorators from '../decorators.scss';
 
 
 /**
@@ -76,6 +77,11 @@ class OrdersView extends BaseView {
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('orders-list-block');
         this.parent.appendChild(this.cache);
+        const selectBlock = this.cache.getElementsByClassName(ordersStyles.select)[0];
+        if (this.presenter.orders.length === 0) {
+            selectBlock.className = '';
+            selectBlock.classList.add(decorators.hidden);
+        }
 
         const images = [];
         orders.forEach((order) => {

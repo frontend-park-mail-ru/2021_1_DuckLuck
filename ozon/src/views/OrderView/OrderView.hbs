@@ -1,24 +1,42 @@
 <div class="{{orderStyles.cartWrapper}}" id="products-list-block">
+    <div class="{{orderStyles.background}}"></div>
     <div class="{{orderStyles.body}}">
         <div class="{{orderStyles.title}}">
             <span class="{{textStyles.title}}">Оформление заказа</span>
         </div>
         <div class="{{orderStyles.mainWrapper}}">
             <div class="{{orderStyles.wrapper}}">
-                <div class="{{orderStyles.cartInfo}}">
-                    <div class="{{orderStyles.deliveryBlock}}">
-                        <div class="{{orderStyles.deliveryText}}">
-                            <span class="{{textStyles.text}}">Доставка Ozon</span>
+                <div class="{{orderStyles.left}}">
+                    <div class="{{orderStyles.cartInfo}} {{orderStyles.addressBlock}}">
+                        <div class="{{orderStyles.deliveryBlock}}">
+                            <div class="{{orderStyles.deliveryText}}">
+                                <img src="https://duckluckmarket.hb.bizmrg.com/svg/header/smile.svg" alt="">
+                                <span class="{{textStyles.text}} {{textStyles.bold}} {{orderStyles.deliveryTitle}}">Данные получателя</span>
+                            </div>
+                        </div>
+                        <div class="{{orderStyles.productsListBlock}}">
+                            {{#each this.inputFields}}
+                                <div class="{{../orderStyles.productsListElem}}">
+                                    <div class="">{{this.placeholder}}</div>
+                                    <input class="{{../orderStyles.input}} {{../inputStyles.order}}" type="{{this.type}}" name="{{this.name}}" value="{{this.value}}">
+                                </div>
+                            {{/each}}
                         </div>
                     </div>
-                    <div class="{{orderStyles.productsListBlock}}">
-                        {{#each this.inputFields}}
-                            <div class="{{../orderStyles.productsListElem}}">
-                                <div class="">{{this.placeholder}}</div>
-                                <input class="{{../orderStyles.input}} {{../inputStyles.order}}" type="{{this.type}}" name="{{this.name}}" value="{{this.value}}">
+                    <div class="{{orderStyles.cartInfo}} {{orderStyles.addressBlock}}">
+                        <div class="{{orderStyles.deliveryBlock}}">
+                            <div class="{{orderStyles.deliveryText}}">
+                                <img src="/svg/storage.svg" alt="">
+                                <span class="{{textStyles.text}} {{textStyles.bold}} {{orderStyles.deliveryTitle}}">Будут доставлены</span>
                             </div>
-                        {{/each}}
+                        </div>
+                        <div class="{{orderStyles.productsListBlock}}">
+                            <div class="{{orderStyles.cartInfo}}">
+                                <div class="{{orderStyles.images}}"></div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
                 <div class="{{orderStyles.orderMenu}}">
                     <div class="{{orderStyles.orderButtonBlock}}">
@@ -49,8 +67,12 @@
                                     <span class="{{textStyles.smallTitle}}">{{this.totalCost}} ₽</span>
                                 </div>
                             </div>
+                            <div class="{{orderStyles.space}}"></div>
                             <div class="{{orderStyles.promo}}">
-                                <div class="{{textStyles.bold}}">Промокод</div>
+                                <div class="{{orderStyles.promoTitleBlock}}">
+                                    <img src="/svg/percent.svg" alt="">
+                                    <div class="{{textStyles.bold}} {{orderStyles.promoTitle}}">Промокод</div>
+                                </div>
                                 <div class="{{orderStyles.inputWrapper}}">
                                     <input class="{{orderStyles.input}} {{inputStyles.promo}}" type="text" name="promo" value="">
                                 </div>

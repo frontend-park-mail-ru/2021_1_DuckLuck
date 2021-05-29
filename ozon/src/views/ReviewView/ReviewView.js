@@ -31,6 +31,12 @@ class ReviewView extends BaseView {
 
     render = () => {
         this.parent.innerHTML = '';
+        const userName = this.presenter.userName === '' ||
+                         this.presenter.userName === ' ' ||
+                         this.presenter.userName === 'null null' ||
+                         this.presenter.userName === undefined ?
+            'Анонимный пользователь' :
+            this.presenter.userName;
         const template = reviewTemplate({
             inputFields: [
                 new Input({
@@ -60,7 +66,7 @@ class ReviewView extends BaseView {
             imgStyles: imgStyles,
             linkStyles: linkStyles,
             product: this.presenter.product,
-            userName: this.presenter.userName,
+            userName: userName,
             ratingStar: new Img({src: '/svg/empty_star.svg'}),
         });
         this.cache = new DOMParser().parseFromString(template, 'text/html').getElementById('review-block');
@@ -126,6 +132,14 @@ class ReviewView extends BaseView {
             Bus.globalBus.emit(Events.ProductChangeID, productId);
             Router.open(`/item/${productId}`);
         });
+
+        if (this.presenter.userName === '' ||
+            this.presenter.userName === ' ' ||
+            this.presenter.userName === 'null null' ||
+            this.presenter.userName === undefined) {
+            document.getElementsByName('isPublic')[0].checked = true;
+            document.getElementsByClassName(reviewStyles.private)[0].style.display = 'none';
+        }
     };
 }
 

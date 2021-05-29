@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    margin-top: 24px;
 }
 
 .body {
@@ -18,11 +19,19 @@
 .description {
     display: flex;
     flex-direction: column;
+    gap: 20px;
 }
 
 .productWrapper {
     display: flex;
     flex-direction: row;
+    gap: $gap-s;
+}
+
+.signatureTitle {
+    display: flex;
+    flex-direction: row;
+    gap: $gap-s;
 }
 
 .rating {
@@ -46,16 +55,30 @@
 
 .input {
     margin-top: $margin-s;
+    height: $height-xxxs;
+    width: 80%;
+    border-radius: $standard-border-radius;
+    border: 1px solid $input-color;
+    box-sizing: border-box;
+    padding-left: $padding-s;
 }
 
 .signature {
     display: flex;
     flex-direction: column;
+    gap: $gap-s;
 }
 
 .submit {
     display: flex;
+    flex-direction: column;
+    gap: $gap-s;
+}
+
+.private {
+    display: flex;
     flex-direction: row;
+    gap: $gap-s;
 }
 
 .buttonWrapper {
@@ -66,6 +89,10 @@
 .name {
     margin-bottom: auto;
     margin-top: auto;
+}
+
+.nameText {
+    color: $properties-name-color;
 }
 
 .buttonText {

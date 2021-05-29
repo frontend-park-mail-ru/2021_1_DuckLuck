@@ -25,14 +25,16 @@
             {{/each}}
         </div>
         <div class="{{styles.signature}}">
-            <span class="{{textStyles.smallTitle}}">Вы оставляете отзыв как</span>
-            <span class="{{textStyles.smallTitle}}">{{userName}}</span>
-        </div>
-        <div class="{{styles.submit}}">
+            <div class="{{styles.signatureTitle}}">
+                <span class="{{textStyles.smallTitle}}">Вы оставляете отзыв как</span>
+                <span class="{{textStyles.smallTitle}} {{styles.nameText}}">{{userName}}</span>
+            </div>
             <div class="{{styles.private}}">
                 <span class="{{textStyles.smallTitle}}">Скрыть мои данные в отзыве</span>
                 <input class="" type="{{isPublic.type}}" name="{{isPublic.name}}">
             </div>
+        </div>
+        <div class="{{styles.submit}}">
             <div class="{{styles.buttonWrapper}}">
                 <button class="{{buttonStyles.review}}">
                     <span class="{{textStyles.bigButton}}">Отправить отзыв</span>

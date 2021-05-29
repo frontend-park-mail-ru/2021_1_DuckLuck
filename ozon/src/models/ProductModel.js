@@ -92,6 +92,7 @@ class ProductModel extends BaseModel {
                     descriptionText: parsedJson['description'],
                     category: parsedJson['category'],
                 },
+                properties: JSON.parse(parsedJson['properties']),
                 images: parsedJson['images'],
                 id: parsedJson['id'],
                 category_path: parsedJson['category_path'],

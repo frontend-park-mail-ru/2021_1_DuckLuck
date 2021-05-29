@@ -4,7 +4,7 @@
             <div class="{{../productStyles.linkWrapper}}">
                 <a class="{{../linkStyles.link}}" category_id="{{this.id}}" href="/items/{{this.id}}">{{this.name}}</a>
             </div>
-            <span> ></span>
+            <img src="/svg/slider.svg" class="{{../productStyles.next}}" alt="">
         {{/each}}
     </div>
     <div class="{{productStyles.badges}}">
@@ -37,24 +37,37 @@
                 </div>
             </div>
             <div class="{{productStyles.description}}">
-                <span class="{{textStyles.title}}">Описание</span>
+                <div class="{{productStyles.descriptionWrapper}}">
+                    <span class="{{textStyles.title}}">Описание</span>
+                </div>
                 <span class="{{textStyles.big}}">{{description}}</span>
             </div>
-            <div class="{{productStyles.specifications}}"></div>
+            <div class="{{productStyles.properties}}">
+                <div class="{{productStyles.titleWrapper}}">
+                    <span class="{{textStyles.title}}">Характеристики</span>
+                </div>
+                {{#each properties}}
+                    <div class="{{../productStyles.property}}">
+                        <span class="{{../textStyles.propertiesTitle}}">{{@key}}</span>
+                        <div class="{{../productStyles.propertiesBlock}}">
+                            {{#with this}}
+                                {{#each this}}
+                                    <div class="{{../../productStyles.propertiesBlockRow}}">
+                                        <span class="{{../../textStyles.propertiesName}}">{{@key}}</span>
+                                        <div class="{{../../productStyles.propertiesBlockValueWrapper}}">
+                                            <span class="{{../../textStyles.propertiesValue}}">{{this}}</span>
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            {{/with}}
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
             <div class="{{productStyles.recommendationsWrapper}}">
                 <span class="{{textStyles.title}}">С этим товаром покупают</span>
                 <div id="recommendations"></div>
             </div>
-            <div class="{{textStyles.title}}">Отзывы: </div>
-            <select class="{{productsStyles.select}}">
-                {{#each select}}
-                    <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
-                        {{this.name}}
-                    </option>
-                {{/each}}
-            </select>
-            <div class="{{productStyles.reviewList}} {{textStyles.text}}"></div>
-            <div id="review-pagination"></div>
         </div>
         <div class="{{productStyles.menu}}">
             <div class="{{productStyles.aboutProduct}}"></div>
@@ -73,10 +86,27 @@
                     </div>
                 </div>
             </div>
-            <div class="{{productStyles.reviewMenu}}">
-                <div id="rating-stars"></div>
-                <div class="{{productStyles.reviewButtonWrapper}}"></div>
+        </div>
+    </div>
+    <div class="{{productStyles.reviewsBlock}}">
+        <div class="{{productStyles.reviewsBody}}">
+            <div class="{{textStyles.title}}">Отзывы </div>
+            <div class="{{productStyles.reviewsWrapper}}">
+                <select class="{{productStyles.select}}">
+                    {{#each select}}
+                        <option key="{{this.key}}" direction="{{this.direction}}" {{#ifEquals this.key ../sort.key}}{{#ifEquals this.direction ../sort.direction}}selected{{/ifEquals}}{{/ifEquals}}>
+                            {{this.name}}
+                        </option>
+                    {{/each}}
+                </select>
+                <div class="{{productStyles.reviewList}} {{textStyles.text}}"></div>
+                <div id="review-pagination" class="{{productStyles.reviewPagination}}"></div>
             </div>
+        </div>
+
+        <div class="{{productStyles.reviewMenu}}">
+            <div id="rating-stars"></div>
+            <div class="{{productStyles.reviewButtonWrapper}}"></div>
         </div>
     </div>
 </div>

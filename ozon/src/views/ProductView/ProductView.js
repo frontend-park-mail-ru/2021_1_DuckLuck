@@ -46,7 +46,6 @@ class ProductView extends BaseView {
      */
     render = () => {
         this.goUp();
-
         this.parent.innerHTML = '';
         const images = [];
         this.presenter.item['images'].forEach((src) => {
@@ -70,7 +69,9 @@ class ProductView extends BaseView {
             imgStyles: imgStyles,
             linkStyles: linkStyles,
             decorators: decorators,
-            category_path: this.presenter.item.category_path,
+            category_path: this.presenter.item.category_path.reverse(),
+            properties: this.presenter.item['properties'],
+            propertiesMain: this.presenter.item['properties']['Общие'],
             select: [
                 {
                     key: 'date',
@@ -91,6 +92,18 @@ class ProductView extends BaseView {
         this.cache = new DOMParser().parseFromString(template, 'text/html')
             .getElementsByClassName(productStyles.block)[0];
         this.parent.appendChild(this.cache);
+
+        const descriptionBlock = this.cache.getElementsByClassName(productStyles.description)[0];
+        if (this.presenter.item['description']['descriptionText'] === '') {
+            descriptionBlock.className = '';
+            descriptionBlock.classList.add(decorators.hidden);
+        }
+
+        const propertiesBlock = this.cache.getElementsByClassName(productStyles.properties)[0];
+        if (Object.keys(this.presenter.item['properties']).length === 0) {
+            propertiesBlock.className = '';
+            propertiesBlock.classList.add(decorators.hidden);
+        }
 
         const select = document.getElementsByTagName('select')[0];
         select.addEventListener('change', () => {
@@ -184,8 +197,18 @@ class ProductView extends BaseView {
      * @param {Object} paginationInfo
      */
     renderProductsReview = (reviews, paginationInfo) => {
+        if (reviews.length === 0 && paginationInfo.pagesCount === 0) {
+            const reviewsWrapper = this.cache.getElementsByClassName(productStyles.reviewsWrapper)[0];
+            reviewsWrapper.className = '';
+            reviewsWrapper.classList.add(productStyles.zeroReviews);
+            reviewsWrapper.innerHTML = 'Пользователи не оставили отзывов для данного товара';
+        }
+
         const pagination = new Pagination(paginationInfo, true).getHtmlString();
-        document.getElementById('review-pagination').innerHTML = pagination;
+        if (document.getElementById('review-pagination') !== undefined &&
+            document.getElementById('review-pagination') !== null) {
+            document.getElementById('review-pagination').innerHTML = pagination;
+        }
         reviews.forEach((review) => {
             review.date_added = review.date_added.slice(0, 10);
             review.user_name = (review.user_name !== '') ? review.user_name : 'Анонимный пользователь';
@@ -244,6 +267,13 @@ class ProductView extends BaseView {
     }
 
     renderRecommendations = () => {
+        if (this.presenter.recommendations.length === 0) {
+            const recommendationsBlock = this.cache.getElementsByClassName(productStyles.recommendationsWrapper)[0];
+            recommendationsBlock.className = '';
+            recommendationsBlock.classList.add(decorators.hidden);
+            return;
+        }
+
         const items = [];
         this.presenter.recommendations.forEach((item) => {
             const base = item['price']['base_cost'];

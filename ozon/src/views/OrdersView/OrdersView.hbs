@@ -14,7 +14,7 @@
             {{{this.ordersListHtmlString}}}
         </div>
         {{#ifEquals this.isEmpty true}}
-            <div>Вы пока не сделали ни одного заказа :(</div>
+            <span class="{{textStyles.title}} {{ordersStyles.emptyCartText}}">Вы пока не сделали ни одного заказа :(</span>
         {{/ifEquals}}
     </div>
 </div>
